@@ -101,6 +101,7 @@
   "extras": {
     "title": "Extras opcionales",
     "perBooking": "/ reserva",
+    "included": "Incluido",
     "airport_transfer": "Traslado aeropuerto (ida y vuelta)",
     "bicycle": "Bicicleta",
     "grocery": "Compra de alimentos antes salida",

@@ -101,6 +101,7 @@
   "extras": {
     "title": "Optionele extra's",
     "perBooking": "/ boeking",
+    "included": "Inbegrepen",
     "airport_transfer": "Transfer luchthaven (heen/terug)",
     "bicycle": "Fiets",
     "grocery": "Boodschappen vóór vertrek",

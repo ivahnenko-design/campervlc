@@ -101,6 +101,7 @@
   "extras": {
     "title": "Optional extras",
     "perBooking": "/ booking",
+    "included": "Included",
     "airport_transfer": "Airport transfer (round trip)",
     "bicycle": "Bicycle",
     "grocery": "Pre-departure grocery shopping",
