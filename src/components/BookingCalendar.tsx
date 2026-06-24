@@ -190,21 +190,28 @@ export function BookingCalendar() {
               <div className="max-h-72 overflow-y-auto pr-1 space-y-1.5">
                 {EXTRAS.map((e) => {
                   const active = selectedExtras.has(e.id);
+                  const isMandatory = !!e.mandatory;
                   return (
                     <button
                       key={e.id}
                       onClick={() => toggleExtra(e.id)}
+                      disabled={isMandatory}
                       className={`flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition ${
                         active
                           ? "border-primary/60 bg-primary/10 text-foreground"
                           : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
-                      }`}
+                      } ${isMandatory ? "cursor-default" : ""}`}
                     >
                       <span className="flex items-center gap-2">
                         <span className={`grid h-4 w-4 place-items-center rounded border ${active ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
-                          {active ? "✓" : ""}
+                          {active ? (isMandatory ? <Lock className="h-3 w-3" /> : "✓") : ""}
                         </span>
                         {t(`extras.${e.id}`)}
+                        {isMandatory && (
+                          <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                            {t("extras.included")}
+                          </span>
+                        )}
                       </span>
                       <span className="font-mono-num text-xs text-foreground">{e.price} €</span>
                     </button>
