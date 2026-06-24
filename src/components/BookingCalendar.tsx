@@ -91,6 +91,8 @@ export function BookingCalendar() {
     : null;
 
   const toggleExtra = (id: ExtraId) => {
+    const extra = EXTRAS.find((e) => e.id === id);
+    if (extra?.mandatory) return;
     setSelectedExtras((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id); else next.add(id);
