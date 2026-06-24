@@ -49,7 +49,13 @@ export const AVAILABILITY: Availability[] = [
   },
 ];
 
-export const EXTRAS = [
+export interface ExtraItem {
+  id: string;
+  price: number;
+  mandatory?: boolean;
+}
+
+export const EXTRAS: readonly ExtraItem[] = [
   { id: "airport_transfer", price: 90 },
   { id: "bicycle", price: 90 },
   { id: "grocery", price: 30 },
@@ -59,7 +65,7 @@ export const EXTRAS = [
   { id: "bedding", price: 20 },
   { id: "bbq", price: 15 },
   { id: "pet", price: 80 },
-  { id: "cleaning_fee", price: 50 },
+  { id: "cleaning_fee", price: 50, mandatory: true },
   { id: "welcome_kit", price: 10 },
   { id: "kitchen_kit", price: 10 },
   { id: "board_games", price: 10 },
