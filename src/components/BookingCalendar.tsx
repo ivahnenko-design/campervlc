@@ -40,7 +40,9 @@ export function BookingCalendar() {
   const today = startOfDay(new Date());
   const [monthBase, setMonthBase] = useState<Date>(startOfMonth(today));
   const [range, setRange] = useState<Range>({ start: null, end: null });
-  const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(new Set());
+  const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(
+    () => new Set(EXTRAS.filter((e) => e.mandatory).map((e) => e.id))
+  );
 
   const months = [monthBase, addMonths(monthBase, 1)];
 
