@@ -101,6 +101,7 @@
   "extras": {
     "title": "Optionale Extras",
     "perBooking": "/ Buchung",
+    "included": "Inklusive",
     "airport_transfer": "Flughafentransfer (hin und zurück)",
     "bicycle": "Fahrrad",
     "grocery": "Lebensmitteleinkauf vor Abreise",
