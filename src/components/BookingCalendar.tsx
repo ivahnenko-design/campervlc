@@ -76,11 +76,15 @@ export function BookingCalendar() {
 
   const extrasTotal = useMemo(
     () =>
-      EXTRAS.filter((e) => selectedExtras.has(e.id)).reduce((s, e) => s + e.price, 0),
+      EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce((s, e) => s + e.price, 0),
     [selectedExtras]
   );
+  const mandatoryTotal = useMemo(
+    () => EXTRAS.filter((e) => e.mandatory).reduce((s, e) => s + e.price, 0),
+    []
+  );
 
-  const finalTotal = (price?.total ?? 0) + extrasTotal;
+  const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
 
   const minNights = range.start ? MIN_NIGHTS[getSeason(range.start)] : null;
   const nights = price?.nights ?? 0;
