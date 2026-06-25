@@ -13,7 +13,7 @@ import {
   startOfMonth,
   startOfDay,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, Lock, MessageCircle, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import { calculatePrice, getSeason, MIN_NIGHTS } from "@/utils/pricing";
@@ -76,11 +76,15 @@ export function BookingCalendar() {
 
   const extrasTotal = useMemo(
     () =>
-      EXTRAS.filter((e) => selectedExtras.has(e.id)).reduce((s, e) => s + e.price, 0),
+      EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce((s, e) => s + e.price, 0),
     [selectedExtras]
   );
+  const mandatoryTotal = useMemo(
+    () => EXTRAS.filter((e) => e.mandatory).reduce((s, e) => s + e.price, 0),
+    []
+  );
 
-  const finalTotal = (price?.total ?? 0) + extrasTotal;
+  const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
 
   const minNights = range.start ? MIN_NIGHTS[getSeason(range.start)] : null;
   const nights = price?.nights ?? 0;
@@ -188,30 +192,23 @@ export function BookingCalendar() {
             <div className="mt-6">
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
               <div className="max-h-72 overflow-y-auto pr-1 space-y-1.5">
-                {EXTRAS.map((e) => {
+                {EXTRAS.filter((e) => !e.mandatory).map((e) => {
                   const active = selectedExtras.has(e.id);
-                  const isMandatory = !!e.mandatory;
                   return (
                     <button
                       key={e.id}
                       onClick={() => toggleExtra(e.id)}
-                      disabled={isMandatory}
                       className={`flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition ${
                         active
                           ? "border-primary/60 bg-primary/10 text-foreground"
                           : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
-                      } ${isMandatory ? "cursor-default" : ""}`}
+                      }`}
                     >
                       <span className="flex items-center gap-2">
                         <span className={`grid h-4 w-4 place-items-center rounded border ${active ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
-                          {active ? (isMandatory ? <Lock className="h-3 w-3" /> : "✓") : ""}
+                          {active ? "✓" : ""}
                         </span>
                         {t(`extras.${e.id}`)}
-                        {isMandatory && (
-                          <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                            {t("extras.included")}
-                          </span>
-                        )}
                       </span>
                       <span className="font-mono-num text-xs text-foreground">{e.price} €</span>
                     </button>
@@ -229,7 +226,11 @@ export function BookingCalendar() {
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
                   )}
                   <Row label={t("booking.extras")} value={`${extrasTotal} €`} />
+                  <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
                 </>
+              )}
+              {!price && (
+                <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
               )}
             </div>
 

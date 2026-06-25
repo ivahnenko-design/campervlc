@@ -96,7 +96,8 @@
     "cta": "Boeking aanvragen via WhatsApp",
     "alt_contact": "Je kunt ons ook direct op Instagram berichten {{handle}}",
     "wa_message": "Hoi, ik wil graag de McLouis Yearling 89G huren.\nData: {{start}} – {{end}} ({{nights}} nachten)\nExtra's: {{extras}}\nGeschatte totaal: €{{total}}",
-    "none": "geen"
+    "none": "geen",
+    "cleaning": "Schoonmaak"
   },
   "extras": {
     "title": "Optionele extra's",
@@ -116,7 +117,8 @@
     "kitchen_kit": "Keukenset",
     "board_games": "Bordspellen",
     "towels": "Badhanddoeken",
-    "extra_driver": "Extra bestuurder"
+    "extra_driver": "Extra bestuurder",
+    "festival": "Festival"
   },
   "routes": {
     "title": "Populaire routes vanuit Valencia",
