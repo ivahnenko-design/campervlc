@@ -226,6 +226,12 @@ export function BookingCalendar() {
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
                   )}
                   <Row label={t("booking.extras")} value={`${extrasTotal} €`} />
+                  <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
+                </>
+              )}
+              {!price && (
+                <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
+              )}
                 </>
               )}
             </div>
