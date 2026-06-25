@@ -96,7 +96,8 @@
     "cta": "Заказать через WhatsApp",
     "alt_contact": "Также можно написать в Instagram {{handle}}",
     "wa_message": "Здравствуйте! Хочу арендовать McLouis Yearling 89G.\nДаты: {{start}} – {{end}} ({{nights}} ночей)\nОпции: {{extras}}\nПримерный итог: {{total}} €",
-    "none": "нет"
+    "none": "нет",
+    "cleaning": "Уборка"
   },
   "extras": {
     "title": "Дополнительные опции",
@@ -116,7 +117,8 @@
     "kitchen_kit": "Кухонный набор",
     "board_games": "Настольные игры",
     "towels": "Полотенца",
-    "extra_driver": "Дополнительный водитель"
+    "extra_driver": "Дополнительный водитель",
+    "festival": "Фестиваль"
   },
   "routes": {
     "title": "Популярные маршруты из Валенсии",

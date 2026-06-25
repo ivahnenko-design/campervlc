@@ -96,7 +96,8 @@
     "cta": "Solicitar reserva vía WhatsApp",
     "alt_contact": "También puedes escribirnos directamente en Instagram {{handle}}",
     "wa_message": "Hola, me interesa alquilar la McLouis Yearling 89G.\nFechas: {{start}} – {{end}} ({{nights}} noches)\nExtras: {{extras}}\nTotal estimado: {{total}} €",
-    "none": "ninguno"
+    "none": "ninguno",
+    "cleaning": "Limpieza"
   },
   "extras": {
     "title": "Extras opcionales",
@@ -116,7 +117,8 @@
     "kitchen_kit": "Kit de cocina",
     "board_games": "Juegos de mesa",
     "towels": "Toallas de baño",
-    "extra_driver": "Conductor suplementario"
+    "extra_driver": "Conductor suplementario",
+    "festival": "Festival"
   },
   "routes": {
     "title": "Rutas Populares desde Valencia",

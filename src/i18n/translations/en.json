@@ -96,7 +96,8 @@
     "cta": "Request booking via WhatsApp",
     "alt_contact": "You can also message us directly on Instagram {{handle}}",
     "wa_message": "Hi, I'd like to rent the McLouis Yearling 89G.\nDates: {{start}} – {{end}} ({{nights}} nights)\nExtras: {{extras}}\nEstimated total: €{{total}}",
-    "none": "none"
+    "none": "none",
+    "cleaning": "Cleaning"
   },
   "extras": {
     "title": "Optional extras",
@@ -116,7 +117,8 @@
     "kitchen_kit": "Kitchen kit",
     "board_games": "Board games",
     "towels": "Bath towels",
-    "extra_driver": "Additional driver"
+    "extra_driver": "Additional driver",
+    "festival": "Festival"
   },
   "routes": {
     "title": "Popular Routes from Valencia",
