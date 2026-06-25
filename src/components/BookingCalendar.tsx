@@ -13,7 +13,7 @@ import {
   startOfMonth,
   startOfDay,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, Lock, MessageCircle, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import { calculatePrice, getSeason, MIN_NIGHTS } from "@/utils/pricing";
