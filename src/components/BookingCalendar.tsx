@@ -232,8 +232,6 @@ export function BookingCalendar() {
               {!price && (
                 <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
               )}
-                </>
-              )}
             </div>
 
             <AnimatePresence mode="wait">
