@@ -1,23 +1,26 @@
 import { differenceInCalendarDays, addDays } from "date-fns";
 
-export type Season = "low" | "mid" | "high";
+export type Season = "low" | "mid" | "high" | "super";
 
 export const PRICES: Record<Season, number> = {
-  low: 100,  // Nov–Mar
-  mid: 140,  // Apr, May, Oct
-  high: 170, // Jun–Sep
+  low: 105,   // Jan, Feb, Mar, Nov, Dec
+  mid: 125,   // Apr, May, Jun, Oct
+  high: 155,  // Jul, Sep
+  super: 169, // Aug
 };
 
 export const MIN_NIGHTS: Record<Season, number> = {
   low: 3,
   mid: 4,
   high: 5,
+  super: 5,
 };
 
 export function getSeason(date: Date): Season {
   const m = date.getMonth() + 1;
-  if ([6, 7, 8, 9].includes(m)) return "high";
-  if ([4, 5, 10].includes(m)) return "mid";
+  if (m === 8) return "super";
+  if ([7, 9].includes(m)) return "high";
+  if ([4, 5, 6, 10].includes(m)) return "mid";
   return "low";
 }
 
