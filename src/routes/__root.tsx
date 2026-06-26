@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -78,15 +79,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Camper Retreat VLC — Alquiler de autocaravana en Valencia" },
-      { name: "description", content: "Alquila la McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva por WhatsApp." },
+      { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
+      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 100€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { name: "author", content: "Camper Retreat VLC" },
-      { property: "og:title", content: "Camper Retreat VLC — Alquiler de autocaravana en Valencia" },
-      { property: "og:description", content: "Alquila la McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva por WhatsApp." },
+      { property: "og:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
+      { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 100€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Camper Retreat VLC — Alquiler de autocaravana en Valencia" },
-      { name: "twitter:description", content: "Alquila la McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva por WhatsApp." },
+      { name: "twitter:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
+      { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 100€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
     ],
@@ -171,6 +172,31 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const title = t("meta.title");
+    const description = t("meta.description");
+
+    document.title = title;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", description);
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", description);
+
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute("content", title);
+
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute("content", description);
+
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language, t]);
 
   return (
     <QueryClientProvider client={queryClient}>

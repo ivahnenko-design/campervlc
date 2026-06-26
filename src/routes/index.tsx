@@ -13,8 +13,8 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Camper Retreat VLC — Alquiler de autocaravana en Valencia" },
-      { name: "description", content: "McLouis Yearling 89G para hasta 5 personas. Reserva por WhatsApp en minutos." },
+      { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
+      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 100€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
     ],
   }),
   component: Index,
