@@ -149,11 +149,17 @@ const GALLERY_IMAGES = [
 
 function GallerySlider({ name }: { name: string }) {
   const [idx, setIdx] = useState(0);
+  const [isPortrait, setIsPortrait] = useState(false);
   const total = GALLERY_IMAGES.length;
   const touchStartX = useRef<number | null>(null);
 
-  const prev = useCallback(() => setIdx((i) => (i - 1 + total) % total), [total]);
-  const next = useCallback(() => setIdx((i) => (i + 1) % total), [total]);
+  const prev = useCallback(() => { setIsPortrait(false); setIdx((i) => (i - 1 + total) % total); }, [total]);
+  const next = useCallback(() => { setIsPortrait(false); setIdx((i) => (i + 1) % total); }, [total]);
+
+  const onImgLoad = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    setIsPortrait(naturalHeight > naturalWidth);
+  }, []);
 
   const onTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -177,7 +183,8 @@ function GallerySlider({ name }: { name: string }) {
         key={idx}
         src={GALLERY_IMAGES[idx]}
         alt={`${name} — photo ${idx + 1}`}
-        className="h-full w-full object-cover"
+        onLoad={onImgLoad}
+        className={`h-full w-full ${isPortrait ? "object-cover" : "object-contain bg-black"}`}
       />
 
       {/* Prev / Next */}
