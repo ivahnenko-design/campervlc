@@ -34,9 +34,13 @@ function useBookedSet(camperId: string) {
   const { data } = useQuery({
     queryKey: ["yescapa-ical"],
     queryFn: () => fetchYescapaBookedDates(),
-    staleTime: 5 * 60_000,
-    refetchOnWindowFocus: false,
+    staleTime: 30 * 60_000,
+    refetchInterval: 30 * 60_000,
+    refetchIntervalInBackground: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
+
 
   return useMemo(() => {
     const set = new Set<string>(local);
