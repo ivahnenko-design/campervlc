@@ -84,6 +84,9 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
 }
 
 const GALLERY_IMAGES = [
+  "/images/IMG_9452.jpg",
+  "/images/IMG_9453.jpg",
+  "/images/IMG_9456.jpg",
   "/images/McLouis Yearling 83 004_c1800x900.jpg",
   "/images/McLouis Yearling 83 005_c1800x900.jpg",
   "/images/McLouis Yearling 83 012_c1800x900.jpg",
