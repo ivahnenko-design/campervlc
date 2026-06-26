@@ -169,8 +169,7 @@ function GallerySlider({ name }: { name: string }) {
 
   return (
     <div
-      className="relative w-full bg-black"
-      style={{ height: 400 }}
+      className="relative w-full h-screen md:h-[400px]"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -178,7 +177,7 @@ function GallerySlider({ name }: { name: string }) {
         key={idx}
         src={GALLERY_IMAGES[idx]}
         alt={`${name} — photo ${idx + 1}`}
-        className="h-full w-full object-contain"
+        className="h-full w-full object-cover"
       />
 
       {/* Prev / Next */}
