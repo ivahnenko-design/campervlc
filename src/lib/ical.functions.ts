@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const ICAL_URL =
-  "https://www.yescapa.es/ical/xSqLp9AFgxkt4tuxKhsOkVE_dUttqO8l-4__qnei4Ki3kkmlB7plh-YL29aXUxqO/export/";
+const ICAL_URL = process.env.YESCAPA_ICS_URL;
+if (!ICAL_URL) throw new Error("Missing required environment variable: YESCAPA_ICS_URL");
 
 function toIsoDay(yyyymmdd: string): string {
   // "20260704" -> "2026-07-04"
