@@ -4,114 +4,114 @@
 
   <!-- Default (Spanish) -->
   <url>
-    <loc>https://campervlc.vercel.app/</loc>
+    <loc>https://campervlc.com/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- English -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=en</loc>
+    <loc>https://campervlc.com/?lang=en</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- German -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=de</loc>
+    <loc>https://campervlc.com/?lang=de</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- Italian -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=it</loc>
+    <loc>https://campervlc.com/?lang=it</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- Dutch -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=nl</loc>
+    <loc>https://campervlc.com/?lang=nl</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- Russian -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=ru</loc>
+    <loc>https://campervlc.com/?lang=ru</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
   <!-- Ukrainian -->
   <url>
-    <loc>https://campervlc.vercel.app/?lang=uk</loc>
+    <loc>https://campervlc.com/?lang=uk</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.vercel.app/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.vercel.app/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.vercel.app/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.vercel.app/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.vercel.app/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.vercel.app/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
 </urlset>
