@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin } from "lucide-react";
+import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
 
 export function Fleet() {
@@ -83,6 +83,126 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
   );
 }
 
+const GALLERY_IMAGES = [
+  "/images/McLouis Yearling 83 004_c1800x900.jpg",
+  "/images/McLouis Yearling 83 005_c1800x900.jpg",
+  "/images/McLouis Yearling 83 012_c1800x900.jpg",
+  "/images/231030203657_mclouis-yearling-83-001-copy.jpg",
+  "/images/231030203657_mclouis-yearling-83-002-copy.jpg",
+  "/images/231030203657_mclouis-yearling-83-003-copy.jpg",
+  "/images/231030203657_mclouis-yearling-83-008-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-024-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-025-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-026-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-027-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-029-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-032-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-033-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-034-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-035-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-036-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-037-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-039-copy.jpg",
+  "/images/231030205257_mclouis-yearling-83-040-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-041-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-042-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-043-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-044-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-045-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-047-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-048-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-049-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-050-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-051-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-052-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-053-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-054-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-055-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-056-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-057-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-058-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-059-copy.jpg",
+  "/images/231030201158_mclouis-yearling-83-060-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-061-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-062-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-063-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-064-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-065-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-066-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-069-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-070-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-071-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-072-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-073-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-075-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-076-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-077-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-078-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-079-copy.jpg",
+  "/images/231030203958_mclouis-yearling-83-080-copy.jpg",
+  "/images/879-PIANTA-GIORNO(con-letto-basculante)_h0x300.png",
+];
+
+function GallerySlider({ name }: { name: string }) {
+  const [idx, setIdx] = useState(0);
+  const total = GALLERY_IMAGES.length;
+
+  const prev = useCallback(() => setIdx((i) => (i - 1 + total) % total), [total]);
+  const next = useCallback(() => setIdx((i) => (i + 1) % total), [total]);
+
+  return (
+    <div className="relative w-full" style={{ height: 400 }}>
+      <img
+        key={idx}
+        src={GALLERY_IMAGES[idx]}
+        alt={`${name} — photo ${idx + 1}`}
+        className="h-full w-full object-cover"
+      />
+
+      {/* Prev / Next */}
+      <button
+        onClick={prev}
+        aria-label="Previous photo"
+        className="absolute left-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-background/70 text-foreground backdrop-blur hover:bg-background/90 transition"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={next}
+        aria-label="Next photo"
+        className="absolute right-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-background/70 text-foreground backdrop-blur hover:bg-background/90 transition"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Counter */}
+      <div className="absolute top-3 left-3 rounded-full bg-background/70 px-2.5 py-1 text-xs font-mono-num text-foreground backdrop-blur">
+        {idx + 1} / {total}
+      </div>
+
+      {/* Dots — show max 9 centered around current */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+        {Array.from({ length: Math.min(total, 9) }, (_, i) => {
+          const offset = Math.max(0, Math.min(total - 9, idx - 4));
+          const dotIdx = offset + i;
+          return (
+            <button
+              key={dotIdx}
+              onClick={() => setIdx(dotIdx)}
+              aria-label={`Photo ${dotIdx + 1}`}
+              className={`rounded-full transition-all ${
+                dotIdx === idx
+                  ? "w-4 h-2 bg-primary"
+                  : "w-2 h-2 bg-white/60 hover:bg-white/90"
+              }`}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void }) {
   const { t } = useTranslation();
   const sections: Array<[string, string[]]> = [
@@ -101,11 +221,11 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
         onClick={(e) => e.stopPropagation()}
         className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-surface shadow-2xl"
       >
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <img src={camper.image} alt={camper.name} className="h-full w-full object-cover" />
+        <div className="relative overflow-hidden">
+          <GallerySlider name={camper.name} />
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur"
+            className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur z-10"
             aria-label={t("fleet.close")}
           >
             <X className="h-4 w-4" />
