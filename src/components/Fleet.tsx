@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
@@ -150,12 +150,30 @@ const GALLERY_IMAGES = [
 function GallerySlider({ name }: { name: string }) {
   const [idx, setIdx] = useState(0);
   const total = GALLERY_IMAGES.length;
+  const touchStartX = useRef<number | null>(null);
 
   const prev = useCallback(() => setIdx((i) => (i - 1 + total) % total), [total]);
   const next = useCallback(() => setIdx((i) => (i + 1) % total), [total]);
 
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const onTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) next();
+    else if (diff < -50) prev();
+    touchStartX.current = null;
+  }, [next, prev]);
+
   return (
-    <div className="relative w-full bg-black" style={{ height: 400 }}>
+    <div
+      className="relative w-full bg-black"
+      style={{ height: 400 }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <img
         key={idx}
         src={GALLERY_IMAGES[idx]}
