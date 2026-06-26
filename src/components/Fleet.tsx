@@ -154,12 +154,12 @@ function GallerySlider({ name }: { name: string }) {
   const next = useCallback(() => setIdx((i) => (i + 1) % total), [total]);
 
   return (
-    <div className="relative w-full" style={{ height: 400 }}>
+    <div className="relative w-full bg-black" style={{ height: 400 }}>
       <img
         key={idx}
         src={GALLERY_IMAGES[idx]}
         alt={`${name} — photo ${idx + 1}`}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-contain"
       />
 
       {/* Prev / Next */}
