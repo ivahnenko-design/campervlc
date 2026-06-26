@@ -90,6 +90,55 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": ["LocalBusiness", "RentalCarDealer"],
+              "@id": "https://campervlc.vercel.app/#business",
+              name: "Camper Retreat VLC",
+              url: "https://campervlc.vercel.app/",
+              logo: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
+              image: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
+              description:
+                "Alquiler de autocaravana McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva por WhatsApp.",
+              telephone: "+34624038085",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Valencia",
+                addressRegion: "Comunitat Valenciana",
+                addressCountry: "ES",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 39.4699,
+                longitude: -0.3763,
+              },
+              sameAs: ["https://www.instagram.com/camper.retreat.vlc"],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "reservations",
+                telephone: "+34624038085",
+                contactOption: "TollFree",
+                availableLanguage: ["Spanish", "English", "German", "Italian", "Dutch", "Russian", "Ukrainian"],
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                opens: "08:00",
+                closes: "21:00",
+              },
+              priceRange: "€€",
+              currenciesAccepted: "EUR",
+              paymentAccepted: "Cash, Credit Card, Bank Transfer",
+            },
+          ],
+        }),
+      },
+    ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
