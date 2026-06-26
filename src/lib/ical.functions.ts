@@ -20,6 +20,11 @@ function parseIcsDate(value: string): string | null {
   return m ? toIsoDay(m[1]) : null;
 }
 
+function isAllDay(line: string): boolean {
+  // "DTSTART;VALUE=DATE:20240620" vs "DTSTART;TZID=Europe/Madrid:20241021T140000"
+  return /VALUE=DATE(?!-TIME)/i.test(line) || !/T\d{6}/.test(line);
+}
+
 function parseIcs(text: string): string[] {
   // Unfold lines (RFC 5545): continuation lines start with space/tab
   const unfolded = text.replace(/\r?\n[ \t]/g, "");
@@ -29,20 +34,23 @@ function parseIcs(text: string): string[] {
   let inEvent = false;
   let start: string | null = null;
   let end: string | null = null;
+  let endAllDay = false;
 
   for (const line of lines) {
     if (line === "BEGIN:VEVENT") {
       inEvent = true;
       start = null;
       end = null;
+      endAllDay = false;
       continue;
     }
     if (line === "END:VEVENT") {
       if (start) {
-        // DTEND is exclusive for all-day events. If missing, treat as 1-day.
-        const last = end ? addDaysIso(end, -1) : start;
+        // For all-day events (VALUE=DATE) DTEND is exclusive — subtract 1.
+        // For timed events (DTEND has a time component, e.g. return at 20:00)
+        // the end day IS occupied — keep as-is.
+        const last = end ? (endAllDay ? addDaysIso(end, -1) : end) : start;
         let cursor = start;
-        // safety bound
         for (let i = 0; i < 366 && cursor <= last; i++) {
           dates.add(cursor);
           cursor = addDaysIso(cursor, 1);
@@ -57,7 +65,10 @@ function parseIcs(text: string): string[] {
       if (v) start = parseIcsDate(v);
     } else if (line.startsWith("DTEND")) {
       const v = line.split(":")[1];
-      if (v) end = parseIcsDate(v);
+      if (v) {
+        end = parseIcsDate(v);
+        endAllDay = isAllDay(line);
+      }
     }
   }
   return Array.from(dates).sort();
