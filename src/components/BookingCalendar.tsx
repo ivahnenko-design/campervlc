@@ -18,17 +18,33 @@ import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import { calculatePrice, getSeason, MIN_NIGHTS } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
+import { fetchYescapaBookedDates } from "@/lib/ical.functions";
+import { useQuery } from "@tanstack/react-query";
 
 function isoDay(d: Date) {
   return format(d, "yyyy-MM-dd");
 }
 
 function useBookedSet(camperId: string) {
-  return useMemo(() => {
+  const local = useMemo(() => {
     const a = AVAILABILITY.find((x) => x.camperId === camperId);
-    return new Set(a?.bookedDates ?? []);
+    return a?.bookedDates ?? [];
   }, [camperId]);
+
+  const { data } = useQuery({
+    queryKey: ["yescapa-ical"],
+    queryFn: () => fetchYescapaBookedDates(),
+    staleTime: 5 * 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return useMemo(() => {
+    const set = new Set<string>(local);
+    for (const d of data?.dates ?? []) set.add(d);
+    return set;
+  }, [local, data]);
 }
+
 
 interface Range { start: Date | null; end: Date | null }
 
