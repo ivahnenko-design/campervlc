@@ -98,7 +98,9 @@
     "alt_contact": "Je kunt ons ook direct op Instagram berichten {{handle}}",
     "wa_message": "Hoi, ik wil graag de McLouis Yearling 89G huren.\nData: {{start}} – {{end}} ({{nights}} nachten)\nExtra's: {{extras}}\nGeschatte totaal: €{{total}}",
     "none": "geen",
-    "cleaning": "Schoonmaak"
+    "cleaning": "Schoonmaak",
+    "iva": "+ btw (21%)",
+    "total_with_iva": "incl. btw"
   },
   "extras": {
     "title": "Optionele extra's",

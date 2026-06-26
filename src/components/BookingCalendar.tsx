@@ -16,7 +16,7 @@ import {
 import { ChevronLeft, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
-import { calculatePrice, getSeason, MIN_NIGHTS } from "@/utils/pricing";
+import { calculatePrice, getSeason, MIN_NIGHTS, withIva } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -105,6 +105,7 @@ export function BookingCalendar() {
   );
 
   const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
+  const finalTotalWithIva = withIva(finalTotal);
 
   const minNights = range.start ? MIN_NIGHTS[getSeason(range.start)] : null;
   const nights = price?.nights ?? 0;
@@ -241,7 +242,7 @@ export function BookingCalendar() {
             <div className="mt-6 space-y-1.5 text-sm">
               {price && (
                 <>
-                  <Row label={t("booking.subtotal")} value={`${price.subtotal} €`} />
+                  <Row label={t("booking.subtotal")} value={`${price.subtotal} €`} iva={t("booking.iva")} />
                   {price.discountPct > 0 && (
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
                   )}
@@ -259,12 +260,20 @@ export function BookingCalendar() {
                 key={finalTotal}
                 initial={{ scale: 0.98, opacity: 0.6 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="mt-5 flex items-end justify-between border-t border-border/60 pt-4"
+                className="mt-5 border-t border-border/60 pt-4"
               >
-                <span className="text-sm text-muted-foreground">{t("booking.total")}</span>
-                <span className="font-mono-num text-3xl font-bold text-primary">
-                  {finalTotal} €
-                </span>
+                <div className="flex items-end justify-between">
+                  <span className="text-sm text-muted-foreground">{t("booking.total")}</span>
+                  <div className="text-right">
+                    <span className="font-mono-num text-3xl font-bold text-primary">
+                      {finalTotal} €
+                    </span>
+                    <span className="ml-1.5 text-xs text-muted-foreground">{t("booking.iva")}</span>
+                  </div>
+                </div>
+                <p className="mt-1 text-right text-xs text-muted-foreground">
+                  {finalTotalWithIva} € {t("booking.total_with_iva")}
+                </p>
               </motion.div>
             </AnimatePresence>
 
@@ -311,11 +320,14 @@ function DateBox({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Row({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+function Row({ label, value, accent, iva }: { label: string; value: string; accent?: boolean; iva?: string }) {
   return (
     <div className="flex items-center justify-between">
       <span className="text-muted-foreground">{label}</span>
-      <span className={`font-mono-num ${accent ? "text-coral" : "text-foreground"}`}>{value}</span>
+      <span className={`font-mono-num ${accent ? "text-coral" : "text-foreground"}`}>
+        {value}
+        {iva && <span className="ml-1 text-xs text-muted-foreground">{iva}</span>}
+      </span>
     </div>
   );
 }

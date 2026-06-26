@@ -98,7 +98,9 @@
     "alt_contact": "Також можеш написати в Instagram {{handle}}",
     "wa_message": "Вітаю! Хочу орендувати McLouis Yearling 89G.\nДати: {{start}} – {{end}} ({{nights}} ночей)\nДодатки: {{extras}}\nОрієнтовна сума: {{total}} €",
     "none": "немає",
-    "cleaning": "Прибирання"
+    "cleaning": "Прибирання",
+    "iva": "+ ПДВ (21%)",
+    "total_with_iva": "вкл. ПДВ"
   },
   "extras": {
     "title": "Додаткові опції",

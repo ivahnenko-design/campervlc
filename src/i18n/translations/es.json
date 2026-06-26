@@ -98,7 +98,9 @@
     "alt_contact": "También puedes escribirnos directamente en Instagram {{handle}}",
     "wa_message": "Hola, me interesa alquilar la McLouis Yearling 89G.\nFechas: {{start}} – {{end}} ({{nights}} noches)\nExtras: {{extras}}\nTotal estimado: {{total}} €",
     "none": "ninguno",
-    "cleaning": "Limpieza"
+    "cleaning": "Limpieza",
+    "iva": "+ IVA (21%)",
+    "total_with_iva": "incl. IVA"
   },
   "extras": {
     "title": "Extras opcionales",

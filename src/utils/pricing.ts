@@ -1,5 +1,10 @@
 import { differenceInCalendarDays, addDays } from "date-fns";
 
+export const IVA_RATE = 0.21;
+export function withIva(amount: number): number {
+  return Math.round(amount * (1 + IVA_RATE));
+}
+
 export type Season = "low" | "mid" | "high" | "super";
 
 export const PRICES: Record<Season, number> = {
@@ -34,6 +39,7 @@ export interface PriceBreakdown {
   discountPct: number;
   discountAmount: number;
   total: number;
+  totalWithIva: number;
   perNightAvg: number;
 }
 
@@ -55,6 +61,7 @@ export function calculatePrice(start: Date, end: Date): PriceBreakdown {
     discountPct,
     discountAmount,
     total,
+    totalWithIva: withIva(total),
     perNightAvg: nights > 0 ? Math.round(total / nights) : 0,
   };
 }

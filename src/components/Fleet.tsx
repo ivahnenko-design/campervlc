@@ -55,6 +55,7 @@ export function Fleet() {
                     <div className="text-xs text-muted-foreground">{t("fleet.from")}</div>
                     <div className="font-mono-num text-2xl text-primary">
                       {c.priceFrom} €<span className="text-sm text-muted-foreground">{t("fleet.perNight")}</span>
+                      <span className="ml-1 text-xs text-muted-foreground">{t("booking.iva")}</span>
                     </div>
                   </div>
                   <button
