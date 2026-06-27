@@ -94,6 +94,10 @@ export function BookingCalendar() {
     return null;
   }, [range]);
 
+  const minNights = range.start ? getMinNights(range.start) : null;
+  const nights = price?.nights ?? 0;
+  const meetsMin = !minNights || nights >= minNights;
+
   const extrasTotal = useMemo(
     () =>
       EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce(
@@ -109,10 +113,6 @@ export function BookingCalendar() {
 
   const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
   const finalTotalWithIva = withIva(finalTotal);
-
-  const minNights = range.start ? getMinNights(range.start) : null;
-  const nights = price?.nights ?? 0;
-  const meetsMin = !minNights || nights >= minNights;
 
   const seasonLabel = range.start
     ? t(`booking.season_${getSeason(range.start)}` as const)
