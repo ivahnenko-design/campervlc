@@ -88,11 +88,8 @@ const GALLERY_IMAGES = [
   // Hero shots
   "/images/IMG_9452.jpg",
   "/images/IMG_9453.jpg",
-  "/images/IMG_9456.jpg",
   // New lifestyle photos
   "/images/Camper Retreat .jpg",
-  "/images/Camper Retreat 6.jpg",
-  "/images/Camper Retreat accion.jpg",
   "/images/Camper Retreat cafe.jpg",
   "/images/Camper Retreat cafee.jpg",
   "/images/Camper Retreat jugo.jpg",
@@ -101,7 +98,6 @@ const GALLERY_IMAGES = [
   "/images/JUL00938.jpg",
   "/images/JUL00949.jpg",
   "/images/JUL00950.jpg",
-  "/images/JUL00952.jpg",
   // Interior & detail series
   "/images/231030205257_mclouis-yearling-83-025-copy.jpg",
   "/images/231030205257_mclouis-yearling-83-029-copy.jpg",
