@@ -85,6 +85,10 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
 }
 
 const GALLERY_IMAGES = [
+  // Hero shots
+  "/images/IMG_9452.jpg",
+  "/images/IMG_9453.jpg",
+  "/images/IMG_9456.jpg",
   // New lifestyle photos
   "/images/Camper Retreat .jpg",
   "/images/Camper Retreat 6.jpg",
@@ -98,10 +102,6 @@ const GALLERY_IMAGES = [
   "/images/JUL00949.jpg",
   "/images/JUL00950.jpg",
   "/images/JUL00952.jpg",
-  // Hero shots
-  "/images/IMG_9452.jpg",
-  "/images/IMG_9453.jpg",
-  "/images/IMG_9456.jpg",
   // Interior & detail series
   "/images/231030205257_mclouis-yearling-83-025-copy.jpg",
   "/images/231030205257_mclouis-yearling-83-029-copy.jpg",
