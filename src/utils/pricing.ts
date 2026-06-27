@@ -21,6 +21,25 @@ export const MIN_NIGHTS: Record<Season, number> = {
   super: 5,
 };
 
+const MIN_NIGHTS_BY_MONTH: Record<number, number> = {
+  1: 3,  // Jan — low
+  2: 3,  // Feb — low
+  3: 3,  // Mar — low
+  4: 4,  // Apr — mid
+  5: 4,  // May — mid
+  6: 4,  // Jun — mid
+  7: 4,  // Jul — high (was 5)
+  8: 5,  // Aug — super
+  9: 3,  // Sep — high (was 5)
+  10: 3, // Oct — mid (was 4)
+  11: 3, // Nov — low
+  12: 3, // Dec — low
+};
+
+export function getMinNights(date: Date): number {
+  return MIN_NIGHTS_BY_MONTH[date.getMonth() + 1];
+}
+
 export function getSeason(date: Date): Season {
   const m = date.getMonth() + 1;
   if (m === 8) return "super";

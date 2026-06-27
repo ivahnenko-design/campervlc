@@ -16,7 +16,7 @@ import {
 import { ChevronLeft, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
-import { calculatePrice, getSeason, MIN_NIGHTS, withIva } from "@/utils/pricing";
+import { calculatePrice, getSeason, getMinNights, withIva } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -107,7 +107,7 @@ export function BookingCalendar() {
   const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
   const finalTotalWithIva = withIva(finalTotal);
 
-  const minNights = range.start ? MIN_NIGHTS[getSeason(range.start)] : null;
+  const minNights = range.start ? getMinNights(range.start) : null;
   const nights = price?.nights ?? 0;
   const meetsMin = !minNights || nights >= minNights;
 
