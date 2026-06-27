@@ -105,6 +105,7 @@
   "extras": {
     "title": "Optionele extra's",
     "perBooking": "/ boeking",
+    "perNight": "/ nacht",
     "included": "Inbegrepen",
     "airport_transfer": "Transfer luchthaven (heen/terug)",
     "bicycle": "Fiets",
@@ -121,7 +122,11 @@
     "board_games": "Bordspellen",
     "towels": "Badhanddoeken",
     "extra_driver": "Extra bestuurder",
-    "festival": "Festival"
+    "festival": "Festival",
+    "km_200": "200 km/dag inbegrepen",
+    "km_unlimited": "Onbeperkte kilometers",
+    "sup_board": "SUP-board",
+    "reduced_deductible": "Verlaagd eigen risico (€600)"
   },
   "routes": {
     "title": "Populaire routes vanuit Valencia",

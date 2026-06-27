@@ -49,25 +49,28 @@ export interface ExtraItem {
   id: string;
   price: number;
   mandatory?: boolean;
+  perNight?: boolean;
 }
 
 export const EXTRAS: readonly ExtraItem[] = [
-  { id: "airport_transfer", price: 90 },
-  { id: "bicycle", price: 90 },
-  { id: "grocery", price: 30 },
-  { id: "baby_seat", price: 40 },
-  { id: "ext_cleaning", price: 20 },
-  { id: "int_cleaning", price: 40 },
-  { id: "bedding", price: 20 },
-  { id: "bbq", price: 15 },
-  { id: "pet", price: 80 },
-  { id: "cleaning_fee", price: 50, mandatory: true },
-  { id: "festival", price: 150 },
-  { id: "welcome_kit", price: 10 },
-  { id: "kitchen_kit", price: 10 },
-  { id: "board_games", price: 10 },
-  { id: "towels", price: 15 },
-  { id: "extra_driver", price: 50 },
+  { id: "airport_transfer",      price: 90                   },
+  { id: "bicycle",               price: 90                   },
+  { id: "grocery",               price: 30                   },
+  { id: "baby_seat",             price: 40                   },
+  { id: "bedding",               price: 20                   },
+  { id: "bbq",                   price: 15                   },
+  { id: "pet",                   price: 80                   },
+  { id: "cleaning_fee",          price: 50, mandatory: true  },
+  { id: "festival",              price: 150                  },
+  { id: "welcome_kit",           price: 10                   },
+  { id: "kitchen_kit",           price: 10                   },
+  { id: "board_games",           price: 10                   },
+  { id: "towels",                price: 15                   },
+  { id: "extra_driver",          price: 50                   },
+  { id: "km_200",                price: 20, perNight: true   },
+  { id: "km_unlimited",          price: 40, perNight: true   },
+  { id: "sup_board",             price: 90                   },
+  { id: "reduced_deductible",    price: 60                   },
 ] as const;
 
 export type ExtraId = (typeof EXTRAS)[number]["id"];

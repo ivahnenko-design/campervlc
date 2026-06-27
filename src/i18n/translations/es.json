@@ -105,6 +105,7 @@
   "extras": {
     "title": "Extras opcionales",
     "perBooking": "/ reserva",
+    "perNight": "/ noche",
     "included": "Incluido",
     "airport_transfer": "Traslado aeropuerto (ida y vuelta)",
     "bicycle": "Bicicleta",
@@ -121,7 +122,11 @@
     "board_games": "Juegos de mesa",
     "towels": "Toallas de baño",
     "extra_driver": "Conductor suplementario",
-    "festival": "Festival"
+    "festival": "Festival",
+    "km_200": "200 km/día incluidos",
+    "km_unlimited": "Kilómetros ilimitados",
+    "sup_board": "Tabla SUP",
+    "reduced_deductible": "Franquicia reducida (600 €)"
   },
   "routes": {
     "title": "Rutas Populares desde Valencia",

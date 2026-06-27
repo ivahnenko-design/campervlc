@@ -96,8 +96,11 @@ export function BookingCalendar() {
 
   const extrasTotal = useMemo(
     () =>
-      EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce((s, e) => s + e.price, 0),
-    [selectedExtras]
+      EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce(
+        (s, e) => s + (e.perNight ? e.price * nights : e.price),
+        0
+      ),
+    [selectedExtras, nights]
   );
   const mandatoryTotal = useMemo(
     () => EXTRAS.filter((e) => e.mandatory).reduce((s, e) => s + e.price, 0),
@@ -231,7 +234,12 @@ export function BookingCalendar() {
                         </span>
                         {t(`extras.${e.id}`)}
                       </span>
-                      <span className="font-mono-num text-xs text-foreground">{e.price} €</span>
+                      <span className="font-mono-num text-xs text-foreground">
+                        {e.price} €
+                        <span className="ml-0.5 text-muted-foreground">
+                          {e.perNight ? t("extras.perNight") : t("extras.perBooking")}
+                        </span>
+                      </span>
                     </button>
                   );
                 })}
