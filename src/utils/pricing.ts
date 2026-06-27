@@ -7,31 +7,15 @@ export function withIva(amount: number): number {
 
 export type Season = "low" | "mid" | "high" | "super";
 
-// Season kept for UI labels; price is now determined by date range below.
 export const MIN_NIGHTS: Record<Season, number> = {
-  low: 3,
-  mid: 4,
-  high: 5,
-  super: 5,
-};
-
-const MIN_NIGHTS_BY_MONTH: Record<number, number> = {
-  1: 3,  // Jan
-  2: 3,  // Feb
-  3: 3,  // Mar
-  4: 4,  // Apr
-  5: 4,  // May
-  6: 4,  // Jun
-  7: 4,  // Jul
-  8: 5,  // Aug
-  9: 3,  // Sep
-  10: 3, // Oct
-  11: 3, // Nov
-  12: 3, // Dec
+  low: 3,   // Baja
+  mid: 4,   // Medio
+  high: 4,  // Alta
+  super: 5, // Super Alta
 };
 
 export function getMinNights(date: Date): number {
-  return MIN_NIGHTS_BY_MONTH[date.getMonth() + 1];
+  return MIN_NIGHTS[getSeason(date)];
 }
 
 // Date ranges encoded as MMDD integers for fast comparison.
