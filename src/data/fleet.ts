@@ -53,17 +53,21 @@ export interface ExtraItem {
 }
 
 export const EXTRAS: readonly ExtraItem[] = [
-  { id: "airport_transfer",      price: 90                   },
+  // Always included (mandatory, free)
+  { id: "welcome_kit",           price: 0,  mandatory: true  },
+  { id: "kitchen_kit",           price: 0,  mandatory: true  },
+  { id: "outdoor_set",           price: 0,  mandatory: true  },
+  // Mandatory paid
+  { id: "cleaning_fee",          price: 50, mandatory: true  },
+  // Optional extras
+  { id: "airport_transfer",      price: 80                   },
   { id: "bicycle",               price: 90                   },
   { id: "grocery",               price: 30                   },
-  { id: "baby_seat",             price: 40                   },
+  { id: "baby_seat",             price: 20                   },
   { id: "bedding",               price: 20                   },
   { id: "bbq",                   price: 15                   },
   { id: "pet",                   price: 80                   },
-  { id: "cleaning_fee",          price: 50, mandatory: true  },
   { id: "festival",              price: 150                  },
-  { id: "welcome_kit",           price: 10                   },
-  { id: "kitchen_kit",           price: 10                   },
   { id: "board_games",           price: 10                   },
   { id: "towels",                price: 15                   },
   { id: "extra_driver",          price: 50                   },

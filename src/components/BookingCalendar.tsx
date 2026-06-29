@@ -212,8 +212,27 @@ export function BookingCalendar() {
               <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
             )}
 
-            {/* Extras */}
+            {/* Always included */}
             <div className="mt-6">
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.included_items")}</div>
+              <div className="space-y-1.5">
+                {EXTRAS.filter((e) => e.mandatory && e.price === 0).map((e) => (
+                  <div
+                    key={e.id}
+                    className="flex w-full items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm"
+                  >
+                    <span className="flex items-center gap-2 text-foreground">
+                      <span className="grid h-4 w-4 place-items-center rounded border border-emerald-500 bg-emerald-500 text-white text-[10px]">✓</span>
+                      {t(`extras.${e.id}`)}
+                    </span>
+                    <span className="text-xs font-medium text-emerald-500">{t("extras.included")}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Extras */}
+            <div className="mt-4">
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
               <div className="max-h-72 overflow-y-auto pr-1 space-y-1.5">
                 {EXTRAS.filter((e) => !e.mandatory).map((e) => {
