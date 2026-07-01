@@ -100,7 +100,20 @@
     "none": "nessuno",
     "cleaning": "Pulizia",
     "iva": "+ IVA (21%)",
-    "total_with_iva": "IVA incl."
+    "total_with_iva": "IVA incl.",
+    "deposit_note": "Il restante 50% si paga al ritiro del camper.",
+    "cta_deposit": "Paga l'acconto (50%) online",
+    "cta_whatsapp": "Oppure prenota via WhatsApp",
+    "form_title": "Dati del viaggiatore",
+    "form_first": "Nome",
+    "form_last": "Cognome",
+    "form_email": "Email",
+    "form_phone": "Telefono / WhatsApp",
+    "form_adults": "Adulti",
+    "form_children": "Bambini",
+    "form_message": "Messaggio (opzionale)",
+    "form_submit": "Vai al pagamento →",
+    "form_required": "Questo campo è obbligatorio"
   },
   "extras": {
     "title": "Extra opzionali",

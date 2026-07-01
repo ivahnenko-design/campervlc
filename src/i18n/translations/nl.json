@@ -100,7 +100,20 @@
     "none": "geen",
     "cleaning": "Schoonmaak",
     "iva": "+ btw (21%)",
-    "total_with_iva": "incl. btw"
+    "total_with_iva": "incl. btw",
+    "deposit_note": "De resterende 50% wordt betaald bij ophalen van de camper.",
+    "cta_deposit": "Aanbetaling (50%) online betalen",
+    "cta_whatsapp": "Of boeken via WhatsApp",
+    "form_title": "Reizigersgegevens",
+    "form_first": "Voornaam",
+    "form_last": "Achternaam",
+    "form_email": "E-mailadres",
+    "form_phone": "Telefoon / WhatsApp",
+    "form_adults": "Volwassenen",
+    "form_children": "Kinderen",
+    "form_message": "Bericht (optioneel)",
+    "form_submit": "Doorgaan naar betaling →",
+    "form_required": "Dit veld is verplicht"
   },
   "extras": {
     "title": "Optionele extra's",

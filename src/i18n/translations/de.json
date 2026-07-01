@@ -100,7 +100,20 @@
     "none": "keine",
     "cleaning": "Reinigung",
     "iva": "+ MwSt. (21%)",
-    "total_with_iva": "inkl. MwSt."
+    "total_with_iva": "inkl. MwSt.",
+    "deposit_note": "Die restlichen 50 % werden bei der Abholung des Wohnmobils bezahlt.",
+    "cta_deposit": "Anzahlung (50 %) online bezahlen",
+    "cta_whatsapp": "Oder per WhatsApp buchen",
+    "form_title": "Reisende Angaben",
+    "form_first": "Vorname",
+    "form_last": "Nachname",
+    "form_email": "E-Mail-Adresse",
+    "form_phone": "Telefon / WhatsApp",
+    "form_adults": "Erwachsene",
+    "form_children": "Kinder",
+    "form_message": "Nachricht (optional)",
+    "form_submit": "Weiter zur Zahlung →",
+    "form_required": "Dieses Feld ist erforderlich"
   },
   "extras": {
     "title": "Optionale Extras",

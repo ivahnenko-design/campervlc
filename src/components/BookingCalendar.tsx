@@ -13,13 +13,14 @@ import {
   startOfMonth,
   startOfDay,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import { calculatePrice, getSeason, getMinNights, withIva } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
+import { GuestForm, type GuestData } from "./GuestForm";
 
 function isoDay(d: Date) {
   return format(d, "yyyy-MM-dd");
@@ -142,6 +143,36 @@ export function BookingCalendar() {
   });
 
   const canSubmit = range.start && range.end && meetsMin;
+
+  const [showForm, setShowForm] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  const handleGuestSubmit = async (guest: GuestData) => {
+    if (!range.start || !range.end) return;
+    setCheckoutLoading(true);
+    setCheckoutError(null);
+    try {
+      const res = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          startDate: format(range.start, "yyyy-MM-dd"),
+          endDate: format(range.end, "yyyy-MM-dd"),
+          nights,
+          extraIds: EXTRAS.filter((e) => selectedExtras.has(e.id)).map((e) => e.id),
+          totalWithIva: finalTotalWithIva,
+          guest,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Payment error");
+      window.location.href = data.url;
+    } catch (err: unknown) {
+      setCheckoutError(err instanceof Error ? err.message : "Unknown error");
+      setCheckoutLoading(false);
+    }
+  };
 
   return (
     <section id="booking" className="relative py-24 sm:py-32 border-t border-border/40">
@@ -304,20 +335,52 @@ export function BookingCalendar() {
               </motion.div>
             </AnimatePresence>
 
+            {/* Deposit note */}
+            <p className="mt-4 text-center text-xs text-muted-foreground">
+              {t("booking.deposit_note")}
+            </p>
+
+            {/* Guest form (shown after "Pay deposit" click) */}
+            {showForm && canSubmit && (
+              <>
+                <GuestForm onSubmit={handleGuestSubmit} isLoading={checkoutLoading} />
+                {checkoutError && (
+                  <p className="mt-2 text-center text-xs text-rose-500">{checkoutError}</p>
+                )}
+              </>
+            )}
+
+            {/* Primary CTA: Pay deposit */}
+            {!showForm && (
+              <button
+                disabled={!canSubmit}
+                onClick={() => setShowForm(true)}
+                className={`mt-4 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition ${
+                  canSubmit
+                    ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
+                    : "bg-border/60 text-muted-foreground cursor-not-allowed"
+                }`}
+              >
+                <CreditCard className="h-4 w-4" />
+                {t("booking.cta_deposit")}
+              </button>
+            )}
+
+            {/* Secondary: WhatsApp */}
             <a
               href={canSubmit ? buildWhatsAppLink(waMessage) : undefined}
               target="_blank"
               rel="noopener noreferrer"
               aria-disabled={!canSubmit}
               onClick={(e) => { if (!canSubmit) e.preventDefault(); }}
-              className={`mt-5 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition ${
+              className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition ${
                 canSubmit
-                  ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
-                  : "bg-border/60 text-muted-foreground cursor-not-allowed"
+                  ? "border-border/60 text-muted-foreground hover:text-foreground hover:border-border"
+                  : "border-border/30 text-muted-foreground/50 cursor-not-allowed"
               }`}
             >
               <MessageCircle className="h-4 w-4" />
-              {t("booking.cta")} →
+              {t("booking.cta_whatsapp")}
             </a>
             <p className="mt-3 text-center text-xs text-muted-foreground">
               {t("booking.alt_contact", { handle: INSTAGRAM_HANDLE })}

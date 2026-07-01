@@ -100,7 +100,20 @@
     "none": "немає",
     "cleaning": "Прибирання",
     "iva": "+ ПДВ (21%)",
-    "total_with_iva": "вкл. ПДВ"
+    "total_with_iva": "вкл. ПДВ",
+    "deposit_note": "Решта 50% сплачується при отриманні автобудинку.",
+    "cta_deposit": "Сплатити завдаток (50%) онлайн",
+    "cta_whatsapp": "Або забронювати через WhatsApp",
+    "form_title": "Дані мандрівника",
+    "form_first": "Ім'я",
+    "form_last": "Прізвище",
+    "form_email": "Електронна пошта",
+    "form_phone": "Телефон / WhatsApp",
+    "form_adults": "Дорослі",
+    "form_children": "Діти",
+    "form_message": "Повідомлення (необов'язково)",
+    "form_submit": "Перейти до оплати →",
+    "form_required": "Це поле є обов'язковим"
   },
   "extras": {
     "title": "Додаткові опції",

@@ -100,7 +100,20 @@
     "none": "ninguno",
     "cleaning": "Limpieza",
     "iva": "+ IVA (21%)",
-    "total_with_iva": "incl. IVA"
+    "total_with_iva": "incl. IVA",
+    "deposit_note": "El 50% restante se paga al recoger la autocaravana.",
+    "cta_deposit": "Pagar señal (50%) online",
+    "cta_whatsapp": "O reservar por WhatsApp",
+    "form_title": "Datos del viajero",
+    "form_first": "Nombre",
+    "form_last": "Apellidos",
+    "form_email": "Correo electrónico",
+    "form_phone": "Teléfono / WhatsApp",
+    "form_adults": "Adultos",
+    "form_children": "Niños",
+    "form_message": "Mensaje (opcional)",
+    "form_submit": "Continuar al pago →",
+    "form_required": "Este campo es obligatorio"
   },
   "extras": {
     "title": "Extras opcionales",

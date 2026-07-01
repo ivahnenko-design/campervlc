@@ -100,7 +100,20 @@
     "none": "none",
     "cleaning": "Cleaning",
     "iva": "+ VAT (21%)",
-    "total_with_iva": "incl. VAT"
+    "total_with_iva": "incl. VAT",
+    "deposit_note": "Remaining 50% is paid on pickup of the campervan.",
+    "cta_deposit": "Pay deposit (50%) online",
+    "cta_whatsapp": "Or book via WhatsApp instead",
+    "form_title": "Traveller details",
+    "form_first": "First name",
+    "form_last": "Last name",
+    "form_email": "Email address",
+    "form_phone": "Phone / WhatsApp",
+    "form_adults": "Adults",
+    "form_children": "Children",
+    "form_message": "Message (optional)",
+    "form_submit": "Continue to payment →",
+    "form_required": "This field is required"
   },
   "extras": {
     "title": "Optional extras",

@@ -100,7 +100,20 @@
     "none": "нет",
     "cleaning": "Уборка",
     "iva": "+ НДС (21%)",
-    "total_with_iva": "вкл. НДС"
+    "total_with_iva": "вкл. НДС",
+    "deposit_note": "Оставшиеся 50% оплачиваются при получении автодома.",
+    "cta_deposit": "Оплатить задаток (50%) онлайн",
+    "cta_whatsapp": "Или забронировать через WhatsApp",
+    "form_title": "Данные путешественника",
+    "form_first": "Имя",
+    "form_last": "Фамилия",
+    "form_email": "Электронная почта",
+    "form_phone": "Телефон / WhatsApp",
+    "form_adults": "Взрослые",
+    "form_children": "Дети",
+    "form_message": "Сообщение (необязательно)",
+    "form_submit": "Перейти к оплате →",
+    "form_required": "Это поле обязательно"
   },
   "extras": {
     "title": "Дополнительные опции",
