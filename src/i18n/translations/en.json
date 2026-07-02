@@ -111,6 +111,7 @@
     "form_phone": "Phone / WhatsApp",
     "form_adults": "Adults",
     "form_children": "Children",
+    "form_max_capacity": "Maximum 5 people total",
     "form_message": "Message (optional)",
     "form_submit": "Continue to payment →",
     "form_required": "This field is required"

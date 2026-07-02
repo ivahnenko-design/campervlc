@@ -111,6 +111,7 @@
     "form_phone": "Телефон / WhatsApp",
     "form_adults": "Взрослые",
     "form_children": "Дети",
+    "form_max_capacity": "Максимум 5 человек всего",
     "form_message": "Сообщение (необязательно)",
     "form_submit": "Перейти к оплате →",
     "form_required": "Это поле обязательно"

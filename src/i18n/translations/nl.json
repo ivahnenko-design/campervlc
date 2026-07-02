@@ -111,6 +111,7 @@
     "form_phone": "Telefoon / WhatsApp",
     "form_adults": "Volwassenen",
     "form_children": "Kinderen",
+    "form_max_capacity": "Maximaal 5 personen in totaal",
     "form_message": "Bericht (optioneel)",
     "form_submit": "Doorgaan naar betaling →",
     "form_required": "Dit veld is verplicht"

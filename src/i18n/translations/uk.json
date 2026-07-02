@@ -111,6 +111,7 @@
     "form_phone": "Телефон / WhatsApp",
     "form_adults": "Дорослі",
     "form_children": "Діти",
+    "form_max_capacity": "Максимум 5 осіб загалом",
     "form_message": "Повідомлення (необов'язково)",
     "form_submit": "Перейти до оплати →",
     "form_required": "Це поле є обов'язковим"
