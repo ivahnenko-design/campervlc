@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -344,6 +345,11 @@ export function BookingCalendar() {
             {/* Deposit note */}
             <p className="mt-4 text-center text-xs text-muted-foreground">
               {t("booking.deposit_note")}
+            </p>
+            <p className="mt-1 text-center text-xs text-muted-foreground">
+              <Link to="/cancellation-policy" className="underline hover:text-foreground transition">
+                {t("booking.see_cancellation_policy")}
+              </Link>
             </p>
 
             {/* Guest form (shown after "Pay deposit" click) */}

@@ -49,12 +49,13 @@ export default async function handler(req, res) {
 
   try {
     const { blobs } = await list({ prefix: "campervlc-bookings/" });
-    const bookings = await Promise.all(
+    const allBookings = await Promise.all(
       blobs.map(async (blob) => {
         const r = await fetch(blob.url);
         return r.json();
       })
     );
+    const bookings = allBookings.filter((b) => b.status !== "cancelled");
 
     const ical = generateIcal(bookings);
 

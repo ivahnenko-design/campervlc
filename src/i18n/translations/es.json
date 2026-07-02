@@ -116,7 +116,8 @@
     "form_max_capacity": "Máximo 5 personas en total",
     "form_message": "Mensaje (opcional)",
     "form_submit": "Continuar al pago →",
-    "form_required": "Este campo es obligatorio"
+    "form_required": "Este campo es obligatorio",
+    "see_cancellation_policy": "Ver nuestra política de cancelación"
   },
   "extras": {
     "title": "Extras opcionales",
@@ -210,6 +211,46 @@
     "privacy": "Política de privacidad",
     "terms": "Términos y condiciones",
     "cookies": "Cookies",
+    "cancellationPolicy": "Política de cancelación",
     "rights": "© 2025 Camper Retreat VLC. Todos los derechos reservados."
+  },
+  "cancellationPolicy": {
+    "title": "Política de cancelación",
+    "intro": "Sabemos que los planes cambian. Esto es exactamente lo que ocurre si necesitas cancelar tu reserva.",
+    "tier1_title": "Cancela dentro de las 24 horas posteriores a la reserva",
+    "tier1_body": "Si cancelas dentro de las 24 horas posteriores a la reserva, y la fecha de inicio de tu viaje está a más de 48 horas, recibirás un reembolso del 100% de tu depósito.",
+    "tier2_title": "Cancela con 30 días o más de antelación",
+    "tier2_body": "Las cancelaciones realizadas 30 días o más antes de tu fecha de inicio se reembolsan al 95% del depósito.",
+    "tier3_title": "Cancela con menos de 30 días de antelación",
+    "tier3_body": "Las cancelaciones realizadas con menos de 30 días de antelación no tienen derecho a reembolso del depósito. Tu reserva se cancelará igualmente y las fechas quedarán liberadas — no intentaremos cobrar el importe restante.",
+    "tier4_title": "Fuerza mayor",
+    "tier4_body": "Las circunstancias excepcionales (emergencias médicas, catástrofes naturales, etc.) se gestionan caso por caso. Contacta con nosotros directamente.",
+    "cta_cancel": "¿Necesitas cancelar una reserva?",
+    "cta_cancel_link": "Ir a la página de cancelación"
+  },
+  "cancelBooking": {
+    "title": "Cancela tu reserva",
+    "intro": "Introduce tu referencia de reserva y apellido, o tu email y apellido, para buscar tu reserva.",
+    "form_ref": "Referencia de reserva",
+    "form_ref_placeholder": "CVLC-XXXX",
+    "form_or": "o",
+    "form_email": "Email",
+    "form_lastname": "Apellido",
+    "form_submit": "Buscar reserva",
+    "form_required": "Introduce tu referencia de reserva o email, además de tu apellido",
+    "error_not_found": "No se ha encontrado ninguna reserva. Comprueba tu referencia o datos.",
+    "error_ambiguous": "Hemos encontrado varias reservas con ese email. Usa tu referencia de reserva.",
+    "error_already_cancelled": "Esta reserva ya ha sido cancelada.",
+    "error_refund_failed": "No hemos podido procesar el reembolso ahora mismo. Inténtalo de nuevo o contacta con nosotros.",
+    "error_generic": "Algo ha ido mal. Inténtalo de nuevo.",
+    "quote_title": "Confirmar cancelación",
+    "quote_refund_full": "Se te reembolsará el {{pct}}% (€{{amount}}) de tu depósito.",
+    "quote_refund_zero": "Tu depósito no es reembolsable en esta etapa, pero tu reserva será cancelada y las fechas quedarán liberadas.",
+    "quote_confirm": "Confirmar cancelación",
+    "quote_back": "No, volver atrás",
+    "quote_processing": "Procesando…",
+    "done_title": "Reserva cancelada",
+    "done_body": "Tu reserva ha sido cancelada. Recibirás un email de confirmación en breve — los reembolsos suelen tardar entre 5 y 10 días hábiles.",
+    "back_home": "Volver al inicio"
   }
 }

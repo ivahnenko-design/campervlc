@@ -116,7 +116,8 @@
     "form_max_capacity": "Maximum 5 people total",
     "form_message": "Message (optional)",
     "form_submit": "Continue to payment →",
-    "form_required": "This field is required"
+    "form_required": "This field is required",
+    "see_cancellation_policy": "See our cancellation policy"
   },
   "extras": {
     "title": "Optional extras",
@@ -210,6 +211,46 @@
     "privacy": "Privacy policy",
     "terms": "Terms and conditions",
     "cookies": "Cookies",
+    "cancellationPolicy": "Cancellation Policy",
     "rights": "© 2025 Camper Retreat VLC. All rights reserved."
+  },
+  "cancellationPolicy": {
+    "title": "Cancellation Policy",
+    "intro": "We know plans change. Here's exactly what happens if you need to cancel your booking.",
+    "tier1_title": "Cancel within 24 hours of booking",
+    "tier1_body": "If you cancel within 24 hours of making your booking, and your trip start date is more than 48 hours away, you'll receive a 100% refund of your deposit.",
+    "tier2_title": "Cancel 30+ days before departure",
+    "tier2_body": "Cancellations made 30 or more days before your start date are refunded 95% of the deposit.",
+    "tier3_title": "Cancel less than 30 days before departure",
+    "tier3_body": "Cancellations made less than 30 days before your start date are not eligible for a deposit refund. Your booking will still be cancelled and the dates released — we will not attempt to charge the remaining balance.",
+    "tier4_title": "Force majeure",
+    "tier4_body": "Exceptional circumstances (medical emergencies, natural disasters, etc.) are handled on a case-by-case basis. Please contact us directly.",
+    "cta_cancel": "Need to cancel a booking?",
+    "cta_cancel_link": "Go to the cancellation page"
+  },
+  "cancelBooking": {
+    "title": "Cancel Your Booking",
+    "intro": "Enter your booking reference and last name, or your email and last name, to look up your reservation.",
+    "form_ref": "Booking reference",
+    "form_ref_placeholder": "CVLC-XXXX",
+    "form_or": "or",
+    "form_email": "Email",
+    "form_lastname": "Last name",
+    "form_submit": "Look up booking",
+    "form_required": "Enter your booking reference or email, plus your last name",
+    "error_not_found": "No matching booking found. Double-check your reference or details.",
+    "error_ambiguous": "We found multiple bookings for that email. Please use your booking reference instead.",
+    "error_already_cancelled": "This booking has already been cancelled.",
+    "error_refund_failed": "We couldn't process the refund right now. Please try again or contact us.",
+    "error_generic": "Something went wrong. Please try again.",
+    "quote_title": "Confirm Cancellation",
+    "quote_refund_full": "You will be refunded {{pct}}% (€{{amount}}) of your deposit.",
+    "quote_refund_zero": "Your deposit is non-refundable at this stage, but your booking will be cancelled and the dates released.",
+    "quote_confirm": "Confirm cancellation",
+    "quote_back": "Never mind, go back",
+    "quote_processing": "Processing…",
+    "done_title": "Booking cancelled",
+    "done_body": "Your booking has been cancelled. A confirmation email is on its way — refunds typically arrive within 5–10 business days.",
+    "back_home": "Back to homepage"
   }
 }

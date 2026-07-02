@@ -116,7 +116,8 @@
     "form_max_capacity": "Maximal 5 Personen insgesamt",
     "form_message": "Nachricht (optional)",
     "form_submit": "Weiter zur Zahlung →",
-    "form_required": "Dieses Feld ist erforderlich"
+    "form_required": "Dieses Feld ist erforderlich",
+    "see_cancellation_policy": "Unsere Stornierungsbedingungen ansehen"
   },
   "extras": {
     "title": "Optionale Extras",
@@ -210,6 +211,46 @@
     "privacy": "Datenschutz",
     "terms": "AGB",
     "cookies": "Cookies",
+    "cancellationPolicy": "Stornierungsbedingungen",
     "rights": "© 2025 Camper Retreat VLC. Alle Rechte vorbehalten."
+  },
+  "cancellationPolicy": {
+    "title": "Stornierungsbedingungen",
+    "intro": "Wir wissen, dass sich Pläne ändern. Hier erfährst du genau, was passiert, wenn du deine Buchung stornieren musst.",
+    "tier1_title": "Stornierung innerhalb von 24 Stunden nach Buchung",
+    "tier1_body": "Wenn du innerhalb von 24 Stunden nach der Buchung stornierst und dein Reisestart noch mehr als 48 Stunden entfernt ist, erhältst du eine 100%ige Rückerstattung deiner Anzahlung.",
+    "tier2_title": "Stornierung 30+ Tage vor Abreise",
+    "tier2_body": "Stornierungen, die 30 Tage oder mehr vor deinem Startdatum erfolgen, werden zu 95% der Anzahlung erstattet.",
+    "tier3_title": "Stornierung weniger als 30 Tage vor Abreise",
+    "tier3_body": "Stornierungen weniger als 30 Tage vor deinem Startdatum berechtigen nicht zur Rückerstattung der Anzahlung. Deine Buchung wird dennoch storniert und die Termine werden freigegeben — wir werden nicht versuchen, den Restbetrag einzuziehen.",
+    "tier4_title": "Höhere Gewalt",
+    "tier4_body": "Außergewöhnliche Umstände (medizinische Notfälle, Naturkatastrophen usw.) werden individuell behandelt. Bitte kontaktiere uns direkt.",
+    "cta_cancel": "Musst du eine Buchung stornieren?",
+    "cta_cancel_link": "Zur Stornierungsseite"
+  },
+  "cancelBooking": {
+    "title": "Buchung stornieren",
+    "intro": "Gib deine Buchungsreferenz und deinen Nachnamen ein, oder deine E-Mail und deinen Nachnamen, um deine Buchung zu finden.",
+    "form_ref": "Buchungsreferenz",
+    "form_ref_placeholder": "CVLC-XXXX",
+    "form_or": "oder",
+    "form_email": "E-Mail",
+    "form_lastname": "Nachname",
+    "form_submit": "Buchung suchen",
+    "form_required": "Gib deine Buchungsreferenz oder E-Mail sowie deinen Nachnamen ein",
+    "error_not_found": "Keine passende Buchung gefunden. Überprüfe deine Referenz oder Angaben.",
+    "error_ambiguous": "Wir haben mehrere Buchungen für diese E-Mail gefunden. Bitte nutze deine Buchungsreferenz.",
+    "error_already_cancelled": "Diese Buchung wurde bereits storniert.",
+    "error_refund_failed": "Wir konnten die Rückerstattung gerade nicht verarbeiten. Bitte versuche es erneut oder kontaktiere uns.",
+    "error_generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "quote_title": "Stornierung bestätigen",
+    "quote_refund_full": "Dir werden {{pct}}% (€{{amount}}) deiner Anzahlung erstattet.",
+    "quote_refund_zero": "Deine Anzahlung ist derzeit nicht erstattungsfähig, aber deine Buchung wird storniert und die Termine werden freigegeben.",
+    "quote_confirm": "Stornierung bestätigen",
+    "quote_back": "Nein, zurück",
+    "quote_processing": "Wird verarbeitet…",
+    "done_title": "Buchung storniert",
+    "done_body": "Deine Buchung wurde storniert. Eine Bestätigungs-E-Mail ist unterwegs — Rückerstattungen dauern in der Regel 5–10 Werktage.",
+    "back_home": "Zur Startseite"
   }
 }

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
 import { INSTAGRAM_URL, buildWhatsAppLink } from "@/lib/constants";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -19,6 +20,7 @@ export function Footer() {
             <li><a href="#" className="hover:text-foreground transition-colors">{t("footer.privacy")}</a></li>
             <li><a href="#" className="hover:text-foreground transition-colors">{t("footer.terms")}</a></li>
             <li><a href="#" className="hover:text-foreground transition-colors">{t("footer.cookies")}</a></li>
+            <li><Link to="/cancellation-policy" className="hover:text-foreground transition-colors">{t("footer.cancellationPolicy")}</Link></li>
           </ul>
           <div className="flex flex-col items-start gap-4 md:items-end">
             <div className="flex gap-3">

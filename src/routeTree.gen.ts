@@ -9,54 +9,86 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
+import { Route as CancelBookingRouteImport } from './routes/cancel-booking'
 import { Route as BookingSuccessRouteImport } from './routes/booking-success'
+import { Route as IndexRouteImport } from './routes/index'
 
+const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
+  id: '/cancellation-policy',
+  path: '/cancellation-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CancelBookingRoute = CancelBookingRouteImport.update({
+  id: '/cancel-booking',
+  path: '/cancel-booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingSuccessRoute = BookingSuccessRouteImport.update({
+  id: '/booking-success',
+  path: '/booking-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
-const BookingSuccessRoute = BookingSuccessRouteImport.update({
-  id: '/booking-success',
-  path: '/booking-success',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
+  '/cancel-booking': typeof CancelBookingRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
+  '/cancel-booking': typeof CancelBookingRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
+  '/cancel-booking': typeof CancelBookingRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/booking-success'
+  fullPaths:
+    '/' | '/booking-success' | '/cancel-booking' | '/cancellation-policy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/booking-success'
-  id: '__root__' | '/' | '/booking-success'
+  to: '/' | '/booking-success' | '/cancel-booking' | '/cancellation-policy'
+  id:
+    | '__root__'
+    | '/'
+    | '/booking-success'
+    | '/cancel-booking'
+    | '/cancellation-policy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingSuccessRoute: typeof BookingSuccessRoute
+  CancelBookingRoute: typeof CancelBookingRoute
+  CancellationPolicyRoute: typeof CancellationPolicyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/cancellation-policy': {
+      id: '/cancellation-policy'
+      path: '/cancellation-policy'
+      fullPath: '/cancellation-policy'
+      preLoaderRoute: typeof CancellationPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cancel-booking': {
+      id: '/cancel-booking'
+      path: '/cancel-booking'
+      fullPath: '/cancel-booking'
+      preLoaderRoute: typeof CancelBookingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/booking-success': {
@@ -66,13 +98,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookingSuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingSuccessRoute: BookingSuccessRoute,
+  CancelBookingRoute: CancelBookingRoute,
+  CancellationPolicyRoute: CancellationPolicyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

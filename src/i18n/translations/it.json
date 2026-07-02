@@ -116,7 +116,8 @@
     "form_max_capacity": "Massimo 5 persone in totale",
     "form_message": "Messaggio (opzionale)",
     "form_submit": "Vai al pagamento →",
-    "form_required": "Questo campo è obbligatorio"
+    "form_required": "Questo campo è obbligatorio",
+    "see_cancellation_policy": "Consulta la nostra politica di cancellazione"
   },
   "extras": {
     "title": "Extra opzionali",
@@ -210,6 +211,46 @@
     "privacy": "Privacy",
     "terms": "Termini e condizioni",
     "cookies": "Cookie",
+    "cancellationPolicy": "Politica di cancellazione",
     "rights": "© 2025 Camper Retreat VLC. Tutti i diritti riservati."
+  },
+  "cancellationPolicy": {
+    "title": "Politica di cancellazione",
+    "intro": "Sappiamo che i piani cambiano. Ecco esattamente cosa succede se devi cancellare la tua prenotazione.",
+    "tier1_title": "Cancella entro 24 ore dalla prenotazione",
+    "tier1_body": "Se cancelli entro 24 ore dalla prenotazione e la data di inizio del viaggio è ancora a più di 48 ore, riceverai un rimborso del 100% della caparra.",
+    "tier2_title": "Cancella con 30+ giorni di anticipo",
+    "tier2_body": "Le cancellazioni effettuate con 30 o più giorni di anticipo rispetto alla data di inizio vengono rimborsate al 95% della caparra.",
+    "tier3_title": "Cancella con meno di 30 giorni di anticipo",
+    "tier3_body": "Le cancellazioni effettuate con meno di 30 giorni di anticipo non danno diritto al rimborso della caparra. La prenotazione verrà comunque cancellata e le date liberate — non tenteremo di addebitare l'importo restante.",
+    "tier4_title": "Causa di forza maggiore",
+    "tier4_body": "Le circostanze eccezionali (emergenze mediche, calamità naturali, ecc.) vengono gestite caso per caso. Contattaci direttamente.",
+    "cta_cancel": "Devi cancellare una prenotazione?",
+    "cta_cancel_link": "Vai alla pagina di cancellazione"
+  },
+  "cancelBooking": {
+    "title": "Cancella la tua prenotazione",
+    "intro": "Inserisci il codice di prenotazione e il cognome, oppure l'email e il cognome, per cercare la tua prenotazione.",
+    "form_ref": "Codice di prenotazione",
+    "form_ref_placeholder": "CVLC-XXXX",
+    "form_or": "oppure",
+    "form_email": "Email",
+    "form_lastname": "Cognome",
+    "form_submit": "Cerca prenotazione",
+    "form_required": "Inserisci il codice di prenotazione o l'email, oltre al cognome",
+    "error_not_found": "Nessuna prenotazione trovata. Controlla il codice o i dati inseriti.",
+    "error_ambiguous": "Abbiamo trovato più prenotazioni per questa email. Usa il codice di prenotazione.",
+    "error_already_cancelled": "Questa prenotazione è già stata cancellata.",
+    "error_refund_failed": "Non siamo riusciti a elaborare il rimborso in questo momento. Riprova o contattaci.",
+    "error_generic": "Qualcosa è andato storto. Riprova.",
+    "quote_title": "Conferma cancellazione",
+    "quote_refund_full": "Ti verrà rimborsato il {{pct}}% (€{{amount}}) della caparra.",
+    "quote_refund_zero": "La tua caparra non è rimborsabile in questa fase, ma la prenotazione verrà cancellata e le date liberate.",
+    "quote_confirm": "Conferma cancellazione",
+    "quote_back": "No, torna indietro",
+    "quote_processing": "Elaborazione…",
+    "done_title": "Prenotazione cancellata",
+    "done_body": "La tua prenotazione è stata cancellata. A breve riceverai un'email di conferma — i rimborsi richiedono generalmente 5–10 giorni lavorativi.",
+    "back_home": "Torna alla home"
   }
 }

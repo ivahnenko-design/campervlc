@@ -151,13 +151,13 @@ export function GuestForm({ onSubmit, isLoading }: GuestFormProps) {
   );
 }
 
-function inputCls(hasError: boolean) {
+export function inputCls(hasError: boolean) {
   return `w-full rounded-lg border px-3 py-2 text-sm bg-background/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary ${
     hasError ? "border-rose-500" : "border-border/60"
   }`;
 }
 
-function Field({
+export function Field({
   label,
   error,
   children,

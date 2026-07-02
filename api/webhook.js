@@ -1,9 +1,31 @@
 import Stripe from "stripe";
 import { list, put, get } from "@vercel/blob";
+import { randomInt } from "node:crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
 });
+
+// No 0/O/1/I — avoids visually ambiguous characters in a human-typed reference.
+const REF_CHARSET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+
+function generateBookingRef() {
+  let code = "";
+  for (let i = 0; i < 4; i++) {
+    code += REF_CHARSET[randomInt(REF_CHARSET.length)];
+  }
+  return `CVLC-${code}`;
+}
+
+async function getUniqueBookingRef(existingBookings) {
+  const taken = new Set(existingBookings.map((b) => b.bookingRef));
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const ref = generateBookingRef();
+    if (!taken.has(ref)) return ref;
+  }
+  // Astronomically unlikely at this booking volume — fall back to a longer code.
+  return `CVLC-${generateBookingRef().slice(5)}${generateBookingRef().slice(5)}`;
+}
 
 // Disable body parsing — Stripe signature verification needs the raw body
 export const config = { api: { bodyParser: false } };
@@ -52,7 +74,10 @@ async function sendGuestEmail(booking) {
     depositAmount,
     remainingAmount,
     totalWithIva,
+    bookingRef,
   } = booking;
+
+  const siteUrl = process.env.SITE_URL || "https://campervlc.com";
 
   const body = {
     from: "Camper Retreat VLC <onboarding@resend.dev>",
@@ -66,6 +91,9 @@ async function sendGuestEmail(booking) {
       <p><strong>Total (incl. IVA 21%):</strong> €${totalWithIva}</p>
       <p><strong>Deposit paid (50%):</strong> €${depositAmount} ✅</p>
       <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in Valencia.</p>
+      <hr />
+      <p><strong>Booking reference:</strong> ${bookingRef}</p>
+      <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using this reference and your last name. See our <a href="${siteUrl}/cancellation-policy">cancellation policy</a> for refund terms.</p>
       <hr />
       <p>We'll be in touch to confirm pickup details. Questions? Reply to this email or WhatsApp us.</p>
       <p>— Camper Retreat VLC team</p>
@@ -154,8 +182,12 @@ export default async function handler(req, res) {
     const session = event.data.object;
     const m = session.metadata;
 
+    const existingBookings = await loadBookings();
+    const bookingRef = await getUniqueBookingRef(existingBookings);
+
     const booking = {
       id: session.id,
+      bookingRef,
       status: "confirmed",
       createdAt: new Date().toISOString(),
       startDate: m.startDate,
@@ -173,6 +205,11 @@ export default async function handler(req, res) {
       children: Number(m.children),
       message: m.message,
       stripeSessionId: session.id,
+      paymentIntentId: session.payment_intent,
+      cancelledAt: null,
+      refundPct: null,
+      refundAmount: null,
+      refundId: null,
     };
 
     await Promise.all([

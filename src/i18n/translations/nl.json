@@ -116,7 +116,8 @@
     "form_max_capacity": "Maximaal 5 personen in totaal",
     "form_message": "Bericht (optioneel)",
     "form_submit": "Doorgaan naar betaling →",
-    "form_required": "Dit veld is verplicht"
+    "form_required": "Dit veld is verplicht",
+    "see_cancellation_policy": "Bekijk ons annuleringsbeleid"
   },
   "extras": {
     "title": "Optionele extra's",
@@ -210,6 +211,46 @@
     "privacy": "Privacybeleid",
     "terms": "Voorwaarden",
     "cookies": "Cookies",
+    "cancellationPolicy": "Annuleringsbeleid",
     "rights": "© 2025 Camper Retreat VLC. Alle rechten voorbehouden."
+  },
+  "cancellationPolicy": {
+    "title": "Annuleringsbeleid",
+    "intro": "We weten dat plannen veranderen. Dit is precies wat er gebeurt als je je boeking moet annuleren.",
+    "tier1_title": "Annuleren binnen 24 uur na boeking",
+    "tier1_body": "Als je binnen 24 uur na het boeken annuleert, en je vertrekdatum is nog meer dan 48 uur weg, ontvang je een volledige (100%) terugbetaling van je aanbetaling.",
+    "tier2_title": "Annuleren 30+ dagen voor vertrek",
+    "tier2_body": "Annuleringen die 30 dagen of meer voor je startdatum worden gedaan, worden voor 95% van de aanbetaling terugbetaald.",
+    "tier3_title": "Annuleren minder dan 30 dagen voor vertrek",
+    "tier3_body": "Annuleringen minder dan 30 dagen voor je startdatum komen niet in aanmerking voor terugbetaling van de aanbetaling. Je boeking wordt alsnog geannuleerd en de data worden vrijgegeven — we proberen niet het resterende bedrag in rekening te brengen.",
+    "tier4_title": "Overmacht",
+    "tier4_body": "Uitzonderlijke omstandigheden (medische noodgevallen, natuurrampen, enz.) worden per geval behandeld. Neem rechtstreeks contact met ons op.",
+    "cta_cancel": "Moet je een boeking annuleren?",
+    "cta_cancel_link": "Ga naar de annuleringspagina"
+  },
+  "cancelBooking": {
+    "title": "Annuleer je boeking",
+    "intro": "Vul je boekingsreferentie en achternaam in, of je e-mail en achternaam, om je boeking op te zoeken.",
+    "form_ref": "Boekingsreferentie",
+    "form_ref_placeholder": "CVLC-XXXX",
+    "form_or": "of",
+    "form_email": "E-mail",
+    "form_lastname": "Achternaam",
+    "form_submit": "Boeking opzoeken",
+    "form_required": "Vul je boekingsreferentie of e-mail in, plus je achternaam",
+    "error_not_found": "Geen bijpassende boeking gevonden. Controleer je referentie of gegevens.",
+    "error_ambiguous": "We hebben meerdere boekingen gevonden voor dit e-mailadres. Gebruik je boekingsreferentie.",
+    "error_already_cancelled": "Deze boeking is al geannuleerd.",
+    "error_refund_failed": "We konden de terugbetaling nu niet verwerken. Probeer het opnieuw of neem contact met ons op.",
+    "error_generic": "Er is iets misgegaan. Probeer het opnieuw.",
+    "quote_title": "Annulering bevestigen",
+    "quote_refund_full": "Je krijgt {{pct}}% (€{{amount}}) van je aanbetaling terug.",
+    "quote_refund_zero": "Je aanbetaling is op dit moment niet terugbetaalbaar, maar je boeking wordt geannuleerd en de data worden vrijgegeven.",
+    "quote_confirm": "Annulering bevestigen",
+    "quote_back": "Nee, ga terug",
+    "quote_processing": "Bezig met verwerken…",
+    "done_title": "Boeking geannuleerd",
+    "done_body": "Je boeking is geannuleerd. Er is een bevestigingsmail onderweg — terugbetalingen duren meestal 5–10 werkdagen.",
+    "back_home": "Terug naar home"
   }
 }
