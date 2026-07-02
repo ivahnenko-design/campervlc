@@ -90,6 +90,8 @@
     "legend_booked": "Belegt",
     "legend_selected": "Ausgewählt",
     "summary": "Zusammenfassung",
+    "price_breakdown_one": "{{price}} € × {{count}} Nacht",
+    "price_breakdown_other": "{{price}} € × {{count}} Nächte",
     "subtotal": "Zwischensumme",
     "discount": "Rabatt ({{pct}}%)",
     "extras": "Extras",

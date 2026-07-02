@@ -90,6 +90,8 @@
     "legend_booked": "Prenotato",
     "legend_selected": "Selezionato",
     "summary": "Riepilogo",
+    "price_breakdown_one": "{{price}} € × {{count}} notte",
+    "price_breakdown_other": "{{price}} € × {{count}} notti",
     "subtotal": "Subtotale",
     "discount": "Sconto ({{pct}}%)",
     "extras": "Extra",

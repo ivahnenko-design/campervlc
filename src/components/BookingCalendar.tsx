@@ -16,7 +16,7 @@ import {
 import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
-import { calculatePrice, getSeason, getMinNights, withIva } from "@/utils/pricing";
+import { calculatePrice, getSeason, getMinNights, getPriceForDate, withIva } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -118,6 +118,8 @@ export function BookingCalendar() {
   const seasonLabel = range.start
     ? t(`booking.season_${getSeason(range.start)}` as const)
     : null;
+
+  const perNightRate = range.start ? getPriceForDate(range.start) : 0;
 
   const toggleExtra = (id: ExtraId) => {
     const extra = EXTRAS.find((e) => e.id === id);
@@ -300,6 +302,10 @@ export function BookingCalendar() {
             <div className="mt-6 space-y-1.5 text-sm">
               {price && (
                 <>
+                  <Row
+                    label={t("booking.price_breakdown", { price: perNightRate, count: nights })}
+                    value={`${price.subtotal} €`}
+                  />
                   <Row label={t("booking.subtotal")} value={`${price.subtotal} €`} iva={t("booking.iva")} />
                   {price.discountPct > 0 && (
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />

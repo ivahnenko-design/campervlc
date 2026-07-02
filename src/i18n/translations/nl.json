@@ -90,6 +90,8 @@
     "legend_booked": "Geboekt",
     "legend_selected": "Geselecteerd",
     "summary": "Samenvatting",
+    "price_breakdown_one": "{{price}} € × {{count}} nacht",
+    "price_breakdown_other": "{{price}} € × {{count}} nachten",
     "subtotal": "Subtotaal",
     "discount": "Korting ({{pct}}%)",
     "extras": "Extra's",

@@ -90,6 +90,8 @@
     "legend_booked": "Reservado",
     "legend_selected": "Seleccionado",
     "summary": "Resumen",
+    "price_breakdown_one": "{{price}} € × {{count}} noche",
+    "price_breakdown_other": "{{price}} € × {{count}} noches",
     "subtotal": "Subtotal",
     "discount": "Descuento ({{pct}}%)",
     "extras": "Extras",
