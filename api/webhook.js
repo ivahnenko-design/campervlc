@@ -50,7 +50,8 @@ async function loadBookings() {
       bookings.push(booking);
     }
     return bookings;
-  } catch {
+  } catch (err) {
+    console.error("loadBookings failed:", err.message);
     return [];
   }
 }
@@ -86,14 +87,15 @@ async function sendGuestEmail(booking) {
     subject: `Booking confirmed – ${startDate} → ${endDate}`,
     html: `
       <h2>Hi ${guestFirstName}! Your booking is confirmed 🎉</h2>
+      <p style="font-size:18px"><strong>Booking reference: ${bookingRef}</strong></p>
+      <p style="color:#666">Save this reference — you'll need it (along with your last name) if you ever need to cancel.</p>
       <p><strong>Dates:</strong> ${startDate} → ${endDate} (${nights} nights)</p>
       <hr />
       <p><strong>Total (incl. IVA 21%):</strong> €${totalWithIva}</p>
       <p><strong>Deposit paid (50%):</strong> €${depositAmount} ✅</p>
       <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in Valencia.</p>
       <hr />
-      <p><strong>Booking reference:</strong> ${bookingRef}</p>
-      <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using this reference and your last name. See our <a href="${siteUrl}/cancellation-policy">cancellation policy</a> for refund terms.</p>
+      <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using your booking reference and last name. See our <a href="${siteUrl}/cancellation-policy">cancellation policy</a> for refund terms.</p>
       <hr />
       <p>We'll be in touch to confirm pickup details. Questions? Reply to this email or WhatsApp us.</p>
       <p>— Camper Retreat VLC team</p>
@@ -126,14 +128,16 @@ async function sendOwnerEmail(booking) {
     remainingAmount,
     totalWithIva,
     extraIds,
+    bookingRef,
   } = booking;
 
   const body = {
     from: "Booking System <onboarding@resend.dev>",
     to: process.env.OWNER_EMAIL,
-    subject: `New booking: ${guestFirstName} ${guestLastName} · ${startDate}–${endDate}`,
+    subject: `New booking: ${guestFirstName} ${guestLastName} · ${bookingRef} · ${startDate}–${endDate}`,
     html: `
       <h2>New booking received</h2>
+      <p style="font-size:18px"><strong>Booking reference: ${bookingRef}</strong></p>
       <p><strong>Guest:</strong> ${guestFirstName} ${guestLastName}</p>
       <p><strong>Email:</strong> ${guestEmail}</p>
       <p><strong>WhatsApp/Phone:</strong> ${guestPhone}</p>
@@ -212,13 +216,24 @@ export default async function handler(req, res) {
       refundId: null,
     };
 
-    await Promise.all([
+    const results = await Promise.allSettled([
       saveBooking(booking),
       sendGuestEmail(booking),
       sendOwnerEmail(booking),
     ]);
 
-    console.log("Booking saved:", booking.id);
+    const [saveResult, guestEmailResult, ownerEmailResult] = results;
+    if (saveResult.status === "rejected") {
+      console.error("saveBooking FAILED for", booking.id, "bookingRef", booking.bookingRef, "-", saveResult.reason);
+    } else {
+      console.log("Booking saved:", booking.id, booking.bookingRef);
+    }
+    if (guestEmailResult.status === "rejected") {
+      console.error("sendGuestEmail failed for", booking.id, "-", guestEmailResult.reason);
+    }
+    if (ownerEmailResult.status === "rejected") {
+      console.error("sendOwnerEmail failed for", booking.id, "-", ownerEmailResult.reason);
+    }
   }
 
   return res.status(200).json({ received: true });

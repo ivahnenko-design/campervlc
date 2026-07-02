@@ -16,7 +16,8 @@ async function loadBookings() {
       bookings.push(booking);
     }
     return bookings;
-  } catch {
+  } catch (err) {
+    console.error("loadBookings failed:", err.message);
     return [];
   }
 }
@@ -134,15 +135,25 @@ function findBooking(bookings, { bookingRef, email, lastName }) {
 
   if (email) {
     const emailNorm = email.trim().toLowerCase();
-    const matches = bookings.filter(
+    const allMatches = bookings.filter(
       (b) =>
         (b.guestEmail || "").trim().toLowerCase() === emailNorm &&
-        (b.guestLastName || "").trim().toLowerCase() === lastNameNorm &&
-        b.status !== "cancelled"
+        (b.guestLastName || "").trim().toLowerCase() === lastNameNorm
     );
-    if (matches.length === 0) return { error: "not_found" };
-    if (matches.length > 1) return { error: "ambiguous" };
-    return { booking: matches[0] };
+    if (allMatches.length === 0) return { error: "not_found" };
+
+    // Disambiguate only among active bookings — a guest with one cancelled and
+    // one active booking under the same email shouldn't hit "ambiguous".
+    const activeMatches = allMatches.filter((b) => b.status !== "cancelled");
+    if (activeMatches.length > 1) return { error: "ambiguous" };
+    if (activeMatches.length === 1) return { booking: activeMatches[0] };
+
+    // No active bookings — surface the most recently cancelled one so the
+    // caller gets "already_cancelled" instead of a misleading "not_found".
+    const mostRecentCancelled = [...allMatches].sort(
+      (a, b) => new Date(b.cancelledAt || b.createdAt) - new Date(a.cancelledAt || a.createdAt)
+    )[0];
+    return { booking: mostRecentCancelled };
   }
 
   return { error: "not_found" };
