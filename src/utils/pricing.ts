@@ -21,10 +21,10 @@ export function getMinNights(date: Date): number {
 // Date ranges encoded as MMDD integers for fast comparison.
 // Dec 25 – Jan 4 (SUPER ALTA) wraps the year boundary and is handled separately.
 const RANGES: Array<{ from: number; to: number; price: number; season: Season }> = [
-  // BAJA — TEMP 50 €/night for payment testing (was 105 €/night)
-  { from: 112,  to: 315,  price: 50, season: "low"   }, // Jan 12 – Mar 15
-  { from: 323,  to: 329,  price: 50, season: "low"   }, // Mar 23 – Mar 29
-  { from: 1019, to: 1206, price: 50, season: "low"   }, // Oct 19 – Dec 6
+  // BAJA — 105 €/night
+  { from: 112,  to: 315,  price: 105, season: "low"   }, // Jan 12 – Mar 15
+  { from: 323,  to: 329,  price: 105, season: "low"   }, // Mar 23 – Mar 29
+  { from: 1019, to: 1206, price: 105, season: "low"   }, // Oct 19 – Dec 6
   // MEDIO — 125 €/night
   { from: 413,  to: 426,  price: 125, season: "mid"   }, // Apr 13 – Apr 26
   { from: 504,  to: 531,  price: 125, season: "mid"   }, // May 4  – May 31
@@ -52,7 +52,7 @@ export function getPriceForDate(date: Date): number {
   for (const r of RANGES) {
     if (mmdd >= r.from && mmdd <= r.to) return r.price;
   }
-  return 50; // TEMP default BAJA for any uncovered date (e.g. Jan 5–11) — was 105
+  return 105; // default BAJA for any uncovered date (e.g. Jan 5–11)
 }
 
 export function getSeason(date: Date): Season {
