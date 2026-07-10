@@ -14,14 +14,18 @@ import {
   startOfMonth,
   startOfDay,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles, Tag } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import { calculatePrice, getSeason, getMinNights, getPriceForDate, withIva } from "@/utils/pricing";
-import { buildWhatsAppLink, INSTAGRAM_HANDLE } from "@/lib/constants";
+import { buildWhatsAppLink, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
+
+const PROMO_CODES: Record<string, number> = { CAMPER10: 10 };
+const PREPAYMENT_DISCOUNT_PCT = 5;
+type PrepaymentOption = "deposit" | "full";
 
 function isoDay(d: Date) {
   return format(d, "yyyy-MM-dd");
@@ -65,6 +69,10 @@ export function BookingCalendar() {
   const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(
     () => new Set(EXTRAS.filter((e) => e.mandatory).map((e) => e.id))
   );
+  const [prepaymentOption, setPrepaymentOption] = useState<PrepaymentOption>("deposit");
+  const [promoInput, setPromoInput] = useState("");
+  const [promoStatus, setPromoStatus] = useState<"idle" | "valid" | "invalid">("idle");
+  const [appliedPromoCode, setAppliedPromoCode] = useState<string | null>(null);
 
   const months = [monthBase, addMonths(monthBase, 1)];
 
@@ -113,8 +121,33 @@ export function BookingCalendar() {
     []
   );
 
-  const finalTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
+  const preDiscountTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
+
+  const promoDiscountPct = appliedPromoCode ? PROMO_CODES[appliedPromoCode] : 0;
+  const promoDiscountAmount = Math.round(preDiscountTotal * (promoDiscountPct / 100));
+  const afterPromoTotal = preDiscountTotal - promoDiscountAmount;
+
+  const prepaymentDiscountAmount =
+    prepaymentOption === "full" ? Math.round(afterPromoTotal * (PREPAYMENT_DISCOUNT_PCT / 100)) : 0;
+
+  const finalTotal = afterPromoTotal - prepaymentDiscountAmount;
   const finalTotalWithIva = withIva(finalTotal);
+
+  const depositAmount =
+    prepaymentOption === "full" ? finalTotalWithIva : Math.round(finalTotalWithIva * 0.5);
+  const remainingAmount = finalTotalWithIva - depositAmount;
+
+  const handleApplyPromo = () => {
+    const code = promoInput.trim().toUpperCase();
+    if (!code) return;
+    if (PROMO_CODES[code]) {
+      setAppliedPromoCode(code);
+      setPromoStatus("valid");
+    } else {
+      setAppliedPromoCode(null);
+      setPromoStatus("invalid");
+    }
+  };
 
   const seasonLabel = range.start
     ? t(`booking.season_${getSeason(range.start)}` as const)
@@ -166,6 +199,8 @@ export function BookingCalendar() {
           extraIds: EXTRAS.filter((e) => selectedExtras.has(e.id)).map((e) => e.id),
           totalWithIva: finalTotalWithIva,
           guest,
+          prepaymentOption,
+          promoCode: appliedPromoCode,
         }),
       });
       const data = await res.json();
@@ -299,6 +334,77 @@ export function BookingCalendar() {
               </div>
             </div>
 
+            {/* Promo code */}
+            <div className="mt-4">
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.promo_label")}</div>
+              <div className="flex gap-2">
+                <input
+                  value={promoInput}
+                  onChange={(e) => {
+                    setPromoInput(e.target.value);
+                    setPromoStatus("idle");
+                  }}
+                  placeholder={t("booking.promo_placeholder")}
+                  className="w-full rounded-lg border border-border/60 bg-background/40 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyPromo}
+                  className="shrink-0 rounded-lg border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition"
+                >
+                  {t("booking.promo_apply")}
+                </button>
+              </div>
+              {promoStatus === "valid" && appliedPromoCode && (
+                <p className="mt-1.5 flex items-center gap-1 text-xs text-emerald-500">
+                  <Tag className="h-3 w-3" />
+                  {t("booking.promo_success", { pct: PROMO_CODES[appliedPromoCode] })}
+                </p>
+              )}
+              {promoStatus === "invalid" && (
+                <p className="mt-1.5 text-xs text-rose-500">{t("booking.promo_invalid")}</p>
+              )}
+            </div>
+
+            {/* Prepayment option */}
+            <div className="mt-4">
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.prepayment_title")}</div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPrepaymentOption("deposit")}
+                  className={`rounded-lg border px-3 py-2 text-left text-sm transition ${
+                    prepaymentOption === "deposit"
+                      ? "border-primary/60 bg-primary/10 text-foreground"
+                      : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <span className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "deposit" ? "border-primary bg-primary" : "border-border"}`}>
+                      {prepaymentOption === "deposit" && <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />}
+                    </span>
+                    {t("booking.prepayment_deposit")}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPrepaymentOption("full")}
+                  className={`rounded-lg border px-3 py-2 text-left text-sm transition ${
+                    prepaymentOption === "full"
+                      ? "border-primary/60 bg-primary/10 text-foreground"
+                      : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <span className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "full" ? "border-primary bg-primary" : "border-border"}`}>
+                      {prepaymentOption === "full" && <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />}
+                    </span>
+                    {t("booking.prepayment_full")}
+                  </span>
+                </button>
+              </div>
+            </div>
+
             {/* Price breakdown */}
             <div className="mt-6 space-y-1.5 text-sm">
               {price && (
@@ -313,6 +419,16 @@ export function BookingCalendar() {
                   )}
                   <Row label={t("booking.extras")} value={`${extrasTotal} €`} />
                   <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
+                  {promoDiscountAmount > 0 && (
+                    <Row
+                      label={t("booking.promo_discount_row", { code: appliedPromoCode })}
+                      value={`-${promoDiscountAmount} €`}
+                      accent
+                    />
+                  )}
+                  {prepaymentDiscountAmount > 0 && (
+                    <Row label={t("booking.prepayment_discount")} value={`-${prepaymentDiscountAmount} €`} accent />
+                  )}
                 </>
               )}
               {!price && (
@@ -344,7 +460,7 @@ export function BookingCalendar() {
 
             {/* Deposit note */}
             <p className="mt-4 text-center text-xs text-muted-foreground">
-              {t("booking.deposit_note")}
+              {prepaymentOption === "full" ? t("booking.full_payment_note") : t("booking.deposit_note")}
             </p>
             <p className="mt-1 text-center text-xs text-muted-foreground">
               <Link to="/cancellation-policy" className="underline hover:text-foreground transition">
@@ -374,7 +490,7 @@ export function BookingCalendar() {
                 }`}
               >
                 <CreditCard className="h-4 w-4" />
-                {t("booking.cta_deposit")}
+                {prepaymentOption === "full" ? t("booking.cta_full_payment") : t("booking.cta_deposit")}
               </button>
             )}
 
@@ -395,7 +511,15 @@ export function BookingCalendar() {
               {t("booking.cta_whatsapp")}
             </a>
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              {t("booking.alt_contact", { handle: INSTAGRAM_HANDLE })}
+              {t("booking.alt_contact", { handle: "" })}
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground transition"
+              >
+                {INSTAGRAM_HANDLE}
+              </a>
             </p>
           </div>
         </div>

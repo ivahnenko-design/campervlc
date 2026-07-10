@@ -76,9 +76,21 @@ async function sendGuestEmail(booking) {
     remainingAmount,
     totalWithIva,
     bookingRef,
+    prepaymentOption,
+    promoCode,
   } = booking;
 
   const siteUrl = process.env.SITE_URL || "https://campervlc.com";
+  const isFullPayment = prepaymentOption === "full";
+
+  const paymentLine = isFullPayment
+    ? `<p><strong>Paid in full:</strong> €${depositAmount} ✅ — nothing due on pickup.</p>`
+    : `<p><strong>Deposit paid (50%):</strong> €${depositAmount} ✅</p>
+      <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in Valencia.</p>`;
+
+  const promoLine = promoCode
+    ? `<p><strong>Promo code applied:</strong> ${promoCode}</p>`
+    : "";
 
   const body = {
     from: "Camper Retreat VLC <onboarding@resend.dev>",
@@ -92,8 +104,8 @@ async function sendGuestEmail(booking) {
       <p><strong>Dates:</strong> ${startDate} → ${endDate} (${nights} nights)</p>
       <hr />
       <p><strong>Total (incl. IVA 21%):</strong> €${totalWithIva}</p>
-      <p><strong>Deposit paid (50%):</strong> €${depositAmount} ✅</p>
-      <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in Valencia.</p>
+      ${promoLine}
+      ${paymentLine}
       <hr />
       <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using your booking reference and last name. See our <a href="${siteUrl}/cancellation-policy">cancellation policy</a> for refund terms.</p>
       <hr />
@@ -129,7 +141,11 @@ async function sendOwnerEmail(booking) {
     totalWithIva,
     extraIds,
     bookingRef,
+    prepaymentOption,
+    promoCode,
   } = booking;
+
+  const isFullPayment = prepaymentOption === "full";
 
   const body = {
     from: "Booking System <onboarding@resend.dev>",
@@ -146,8 +162,10 @@ async function sendOwnerEmail(booking) {
       <p><strong>Extras:</strong> ${extraIds || "none"}</p>
       <p><strong>Message:</strong> ${message || "—"}</p>
       <hr />
+      <p><strong>Payment option:</strong> ${isFullPayment ? "100% paid now" : "50% deposit"}</p>
+      <p><strong>Promo code used:</strong> ${promoCode || "none"}</p>
       <p><strong>Total (incl. IVA):</strong> €${totalWithIva}</p>
-      <p><strong>Deposit received:</strong> €${depositAmount}</p>
+      <p><strong>Amount received:</strong> €${depositAmount}</p>
       <p><strong>Balance due on pickup:</strong> €${remainingAmount}</p>
     `,
   };
@@ -201,6 +219,8 @@ export default async function handler(req, res) {
       totalWithIva: Number(m.totalWithIva),
       depositAmount: Number(m.depositAmount),
       remainingAmount: Number(m.remainingAmount),
+      prepaymentOption: m.prepaymentOption === "full" ? "full" : "deposit",
+      promoCode: m.promoCode || null,
       guestFirstName: m.guestFirstName,
       guestLastName: m.guestLastName,
       guestEmail: m.guestEmail,

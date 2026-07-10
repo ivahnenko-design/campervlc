@@ -117,7 +117,19 @@
     "form_message": "Message (optional)",
     "form_submit": "Continue to payment →",
     "form_required": "This field is required",
-    "see_cancellation_policy": "See our cancellation policy"
+    "see_cancellation_policy": "See our cancellation policy",
+    "prepayment_title": "Payment option",
+    "prepayment_deposit": "50% deposit",
+    "prepayment_full": "100% now (save 5%)",
+    "prepayment_discount": "Prepayment discount (-5%)",
+    "cta_full_payment": "Pay in full online",
+    "full_payment_note": "Paid in full — nothing due on pickup.",
+    "promo_label": "Promo code",
+    "promo_placeholder": "Enter code",
+    "promo_apply": "Apply",
+    "promo_success": "Code applied: -{{pct}}%",
+    "promo_invalid": "Invalid promo code",
+    "promo_discount_row": "Promo code ({{code}})"
   },
   "extras": {
     "title": "Optional extras",

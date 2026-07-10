@@ -119,7 +119,19 @@
     "form_message": "Сообщение (необязательно)",
     "form_submit": "Перейти к оплате →",
     "form_required": "Это поле обязательно",
-    "see_cancellation_policy": "Посмотреть условия отмены"
+    "see_cancellation_policy": "Посмотреть условия отмены",
+    "prepayment_title": "Вариант оплаты",
+    "prepayment_deposit": "Депозит 50%",
+    "prepayment_full": "100% сейчас (скидка 5%)",
+    "prepayment_discount": "Скидка за предоплату (-5%)",
+    "cta_full_payment": "Оплатить полностью онлайн",
+    "full_payment_note": "Оплачено полностью — доплата при получении не требуется.",
+    "promo_label": "Промокод",
+    "promo_placeholder": "Введите код",
+    "promo_apply": "Применить",
+    "promo_success": "Код применён: -{{pct}}%",
+    "promo_invalid": "Недействительный промокод",
+    "promo_discount_row": "Промокод ({{code}})"
   },
   "extras": {
     "title": "Дополнительные опции",

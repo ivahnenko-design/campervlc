@@ -117,7 +117,19 @@
     "form_message": "Nachricht (optional)",
     "form_submit": "Weiter zur Zahlung →",
     "form_required": "Dieses Feld ist erforderlich",
-    "see_cancellation_policy": "Unsere Stornierungsbedingungen ansehen"
+    "see_cancellation_policy": "Unsere Stornierungsbedingungen ansehen",
+    "prepayment_title": "Zahlungsoption",
+    "prepayment_deposit": "50% Anzahlung",
+    "prepayment_full": "100% jetzt (5% sparen)",
+    "prepayment_discount": "Vorauszahlungsrabatt (-5%)",
+    "cta_full_payment": "Vollständig online bezahlen",
+    "full_payment_note": "Vollständig bezahlt — bei Abholung ist nichts mehr fällig.",
+    "promo_label": "Gutscheincode",
+    "promo_placeholder": "Code eingeben",
+    "promo_apply": "Anwenden",
+    "promo_success": "Code angewendet: -{{pct}}%",
+    "promo_invalid": "Ungültiger Gutscheincode",
+    "promo_discount_row": "Gutscheincode ({{code}})"
   },
   "extras": {
     "title": "Optionale Extras",

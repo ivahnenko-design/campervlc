@@ -17,13 +17,16 @@ export default async function handler(req, res) {
       extraIds,
       totalWithIva,
       guest,
+      prepaymentOption,
+      promoCode,
     } = req.body;
 
     if (!totalWithIva || !startDate || !endDate || !guest?.email) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const depositAmount = Math.round(totalWithIva * 0.5);
+    const isFullPayment = prepaymentOption === "full";
+    const depositAmount = isFullPayment ? totalWithIva : Math.round(totalWithIva * 0.5);
     const remainingAmount = totalWithIva - depositAmount;
 
     const origin =
@@ -39,8 +42,12 @@ export default async function handler(req, res) {
           price_data: {
             currency: "eur",
             product_data: {
-              name: "Camper Retreat VLC — Deposit (50%)",
-              description: `${startDate} → ${endDate} · ${nights} nights. Remaining €${remainingAmount} due on pickup.`,
+              name: isFullPayment
+                ? "Camper Retreat VLC — Full payment"
+                : "Camper Retreat VLC — Deposit (50%)",
+              description: isFullPayment
+                ? `${startDate} → ${endDate} · ${nights} nights. Paid in full, nothing due on pickup.`
+                : `${startDate} → ${endDate} · ${nights} nights. Remaining €${remainingAmount} due on pickup.`,
             },
             unit_amount: depositAmount * 100,
           },
@@ -57,6 +64,8 @@ export default async function handler(req, res) {
         totalWithIva: String(totalWithIva),
         depositAmount: String(depositAmount),
         remainingAmount: String(remainingAmount),
+        prepaymentOption: isFullPayment ? "full" : "deposit",
+        promoCode: promoCode || "",
         guestFirstName: guest.firstName,
         guestLastName: guest.lastName,
         guestEmail: guest.email,

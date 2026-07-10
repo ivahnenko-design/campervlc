@@ -117,7 +117,19 @@
     "form_message": "Bericht (optioneel)",
     "form_submit": "Doorgaan naar betaling →",
     "form_required": "Dit veld is verplicht",
-    "see_cancellation_policy": "Bekijk ons annuleringsbeleid"
+    "see_cancellation_policy": "Bekijk ons annuleringsbeleid",
+    "prepayment_title": "Betaalopties",
+    "prepayment_deposit": "50% aanbetaling",
+    "prepayment_full": "100% nu (bespaar 5%)",
+    "prepayment_discount": "Vooruitbetalingskorting (-5%)",
+    "cta_full_payment": "Volledig online betalen",
+    "full_payment_note": "Volledig betaald — niets meer te betalen bij ophalen.",
+    "promo_label": "Kortingscode",
+    "promo_placeholder": "Voer code in",
+    "promo_apply": "Toepassen",
+    "promo_success": "Code toegepast: -{{pct}}%",
+    "promo_invalid": "Ongeldige kortingscode",
+    "promo_discount_row": "Kortingscode ({{code}})"
   },
   "extras": {
     "title": "Optionele extra's",

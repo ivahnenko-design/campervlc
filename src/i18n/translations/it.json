@@ -117,7 +117,19 @@
     "form_message": "Messaggio (opzionale)",
     "form_submit": "Vai al pagamento →",
     "form_required": "Questo campo è obbligatorio",
-    "see_cancellation_policy": "Consulta la nostra politica di cancellazione"
+    "see_cancellation_policy": "Consulta la nostra politica di cancellazione",
+    "prepayment_title": "Opzione di pagamento",
+    "prepayment_deposit": "Caparra del 50%",
+    "prepayment_full": "100% ora (risparmia il 5%)",
+    "prepayment_discount": "Sconto per pagamento anticipato (-5%)",
+    "cta_full_payment": "Paga l'intero importo online",
+    "full_payment_note": "Pagato per intero — nulla da saldare al ritiro.",
+    "promo_label": "Codice promozionale",
+    "promo_placeholder": "Inserisci il codice",
+    "promo_apply": "Applica",
+    "promo_success": "Codice applicato: -{{pct}}%",
+    "promo_invalid": "Codice promozionale non valido",
+    "promo_discount_row": "Codice promozionale ({{code}})"
   },
   "extras": {
     "title": "Extra opzionali",
