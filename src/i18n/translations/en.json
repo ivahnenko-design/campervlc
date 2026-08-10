@@ -47,7 +47,8 @@
       "ac": "A/C",
       "solar": "Solar",
       "tv": "Smart TV 24\"",
-      "wc": "Shower/WC"
+      "wc": "Shower/WC",
+      "pet": "Pet Friendly"
     },
     "specs": {
       "bed1": "Fixed double bed (190×150 cm)",
@@ -145,7 +146,6 @@
     "int_cleaning": "Interior cleaning",
     "bedding": "Bedding",
     "bbq": "Barbecue",
-    "pet": "Pet",
     "cleaning_fee": "Cleaning fee",
     "welcome_kit": "Welcome kit (paper, coffee, soap…)",
     "pillows_blankets": "Pillows and blankets",
@@ -198,7 +198,7 @@
     "q4": "Where is the motorhome picked up and returned?",
     "a4": "In Valencia city. We offer transfer to Valencia airport as an add-on (€90).",
     "q5": "Can I bring pets?",
-    "a5": "Yes, with the pet supplement (€80).",
+    "a5": "Yes, we are pet friendly. There is no extra fee for pets.",
     "q6": "How many kilometers are included?",
     "a6": "100 km/day included. Additional km: €0.30/km (to be confirmed).",
     "q7": "What's the minimum stay?",

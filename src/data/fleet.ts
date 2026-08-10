@@ -67,7 +67,6 @@ export const EXTRAS: readonly ExtraItem[] = [
   { id: "bedding",               price: 20                   },
   { id: "towels",                price: 15                   },
   { id: "bbq",                   price: 15                   },
-  { id: "pet",                   price: 80                   },
   { id: "festival",              price: 150                  },
   { id: "extra_driver",          price: 50                   },
   { id: "km_200",                price: 20, perNight: true   },

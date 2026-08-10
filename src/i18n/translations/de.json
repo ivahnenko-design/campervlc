@@ -47,7 +47,8 @@
       "ac": "Klima",
       "solar": "Solar",
       "tv": "Smart TV 24\"",
-      "wc": "Dusche/WC"
+      "wc": "Dusche/WC",
+      "pet": "Haustiere willkommen"
     },
     "specs": {
       "bed1": "Festes Doppelbett (190×150 cm)",
@@ -145,7 +146,6 @@
     "int_cleaning": "Innenreinigung",
     "bedding": "Bettwäsche",
     "bbq": "Grill",
-    "pet": "Haustier",
     "cleaning_fee": "Reinigungspauschale",
     "welcome_kit": "Willkommenspaket (Papier, Kaffee, Seife…)",
     "pillows_blankets": "Kissen und Decken",
@@ -198,7 +198,7 @@
     "q4": "Wo Abholung und Rückgabe?",
     "a4": "In der Stadt Valencia. Flughafentransfer optional (90 €).",
     "q5": "Sind Haustiere erlaubt?",
-    "a5": "Ja, mit Haustierzuschlag (80 €).",
+    "a5": "Ja, wir sind haustierfreundlich. Es wird kein Haustierzuschlag berechnet.",
     "q6": "Wie viele Kilometer sind inkl.?",
     "a6": "100 km/Tag inklusive. Zusätzlich: 0,30 €/km (vorbehaltlich).",
     "q7": "Mindestaufenthalt?",

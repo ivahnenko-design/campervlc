@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin, ChevronLeft, ChevronRight, PawPrint } from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
 
 export function Fleet() {
@@ -48,6 +48,7 @@ export function Fleet() {
                   <Chip icon={<Sun className="h-3 w-3" />}>{t("fleet.features.solar")}</Chip>
                   <Chip icon={<Tv className="h-3 w-3" />}>{t("fleet.features.tv")}</Chip>
                   <Chip icon={<Bath className="h-3 w-3" />}>{t("fleet.features.wc")}</Chip>
+                  <Chip icon={<PawPrint className="h-3 w-3" />}>{t("fleet.features.pet")}</Chip>
                 </ul>
 
                 <div className="mt-5 flex items-end justify-between">

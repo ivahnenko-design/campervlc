@@ -47,7 +47,8 @@
       "ac": "A/C",
       "solar": "Solar",
       "tv": "Smart TV 24\"",
-      "wc": "Douche/WC"
+      "wc": "Douche/WC",
+      "pet": "Huisdier welkom"
     },
     "specs": {
       "bed1": "Vast tweepersoonsbed (190×150 cm)",
@@ -145,7 +146,6 @@
     "int_cleaning": "Binnenreiniging",
     "bedding": "Beddengoed",
     "bbq": "Barbecue",
-    "pet": "Huisdier",
     "cleaning_fee": "Schoonmaakkosten",
     "welcome_kit": "Welkomstpakket (papier, koffie, zeep…)",
     "pillows_blankets": "Kussens en dekens",
@@ -198,7 +198,7 @@
     "q4": "Waar ophalen en inleveren?",
     "a4": "In de stad Valencia. We bieden transfer naar/van Valencia Airport aan als optie (€90).",
     "q5": "Mag ik huisdieren meenemen?",
-    "a5": "Ja, met de huisdiertoeslag (€80).",
+    "a5": "Ja, wij zijn huisdiervriendelijk. Er wordt geen extra toeslag voor huisdieren gevraagd.",
     "q6": "Hoeveel kilometers zijn inbegrepen?",
     "a6": "100 km/dag inbegrepen. Extra: €0,30/km (te bevestigen).",
     "q7": "Minimumverblijf?",

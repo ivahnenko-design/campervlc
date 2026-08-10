@@ -47,7 +47,8 @@
       "ac": "A/C",
       "solar": "Solar",
       "tv": "Smart TV 24\"",
-      "wc": "Ducha/WC"
+      "wc": "Ducha/WC",
+      "pet": "Pet Friendly"
     },
     "specs": {
       "bed1": "Cama doble fija (190×150 cm)",
@@ -145,7 +146,6 @@
     "int_cleaning": "Limpieza interior",
     "bedding": "Ropa de cama",
     "bbq": "Barbacoa",
-    "pet": "Animal de compañía",
     "cleaning_fee": "Costes de limpieza",
     "welcome_kit": "Kit de bienvenida (papel, café, jabón…)",
     "pillows_blankets": "Almohadas y mantas",
@@ -198,7 +198,7 @@
     "q4": "¿Dónde se recoge y entrega la autocaravana?",
     "a4": "En Valencia ciudad. Ofrecemos traslado al aeropuerto de Valencia como opción adicional (90 €).",
     "q5": "¿Puedo llevar mascotas?",
-    "a5": "Sí, con el suplemento de mascota (80 €).",
+    "a5": "Sí, somos pet friendly. No cobramos ningún suplemento por mascotas.",
     "q6": "¿Cuántos kilómetros están incluidos?",
     "a6": "100 km/día incluidos. Kilómetros adicionales: 0,3 €/km (por confirmar).",
     "q7": "¿Cuál es la estancia mínima?",
