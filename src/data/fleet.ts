@@ -53,11 +53,6 @@ export interface ExtraItem {
 }
 
 export const EXTRAS: readonly ExtraItem[] = [
-  // Always included (mandatory, free)
-  { id: "welcome_kit",           price: 0,  mandatory: true  },
-  { id: "pillows_blankets",      price: 0,  mandatory: true  },
-  { id: "kitchen_kit",           price: 0,  mandatory: true  },
-  { id: "outdoor_set",           price: 0,  mandatory: true  },
   // Mandatory paid
   { id: "cleaning_fee",          price: 50, mandatory: true  },
   // Optional extras
