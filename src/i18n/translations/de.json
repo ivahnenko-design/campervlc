@@ -23,7 +23,8 @@
     "checkout": "Rückgabe",
     "nights": "Nächte",
     "estimated": "Geschätzt",
-    "cta": "Verfügbarkeit prüfen"
+    "cta": "Verfügbarkeit prüfen",
+    "priceFrom": "ab 105 €/Nacht"
   },
   "fleet": {
     "title": "Unsere Flotte",

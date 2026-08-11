@@ -88,7 +88,7 @@ export function Hero() {
           <div className="hidden sm:block h-10 w-px bg-border" />
           <div className="hidden sm:block">
             <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{t("hero.estimated")}</div>
-            <div className="font-mono-num text-lg text-primary">desde 100 €/n</div>
+            <div className="font-mono-num text-lg text-primary">{t("hero.priceFrom")}</div>
           </div>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground glow-amber whitespace-nowrap">

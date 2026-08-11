@@ -4,10 +4,10 @@ import { ArrowRight, Clock } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 
 const ROUTES = [
-  { id: "r1", emoji: "🏖️", gradient: "from-amber-500/30 to-rose-500/20" },
-  { id: "r2", emoji: "🏰", gradient: "from-coral/40 to-primary/20" },
-  { id: "r3", emoji: "⛰️", gradient: "from-violet-500/30 to-indigo-500/20" },
-  { id: "r4", emoji: "🦩", gradient: "from-pink-400/30 to-cyan-500/20" },
+  { id: "r1", gradient: "from-amber-500/30 to-rose-500/20" },
+  { id: "r2", gradient: "from-coral/40 to-primary/20" },
+  { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20" },
+  { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20" },
 ] as const;
 
 export function Routes() {
@@ -27,8 +27,7 @@ export function Routes() {
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className={`relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br ${r.gradient} bg-surface p-6 sm:p-8`}
             >
-              <div className="text-6xl">{r.emoji}</div>
-              <div className="mt-4 flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 <h3 className="font-display text-2xl text-foreground">{t(`routes.${r.id}_name`)}</h3>
                 <span className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2.5 py-0.5 text-xs text-foreground/80">
                   <Clock className="h-3 w-3" />{t(`routes.${r.id}_dur`)} {t("routes.days")}

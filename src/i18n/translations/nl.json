@@ -23,7 +23,8 @@
     "checkout": "Inleveren",
     "nights": "nachten",
     "estimated": "Geschat",
-    "cta": "Bekijk beschikbaarheid"
+    "cta": "Bekijk beschikbaarheid",
+    "priceFrom": "vanaf €105/nacht"
   },
   "fleet": {
     "title": "Onze vloot",

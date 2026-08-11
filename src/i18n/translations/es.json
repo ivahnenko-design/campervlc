@@ -23,7 +23,8 @@
     "checkout": "Llegada",
     "nights": "noches",
     "estimated": "Estimado",
-    "cta": "Ver disponibilidad"
+    "cta": "Ver disponibilidad",
+    "priceFrom": "desde 105 €/noche"
   },
   "fleet": {
     "title": "Nuestra Flota",

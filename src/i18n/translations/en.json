@@ -23,7 +23,8 @@
     "checkout": "Check-out",
     "nights": "nights",
     "estimated": "Estimated",
-    "cta": "Check availability"
+    "cta": "Check availability",
+    "priceFrom": "from €105/night"
   },
   "fleet": {
     "title": "Our Fleet",

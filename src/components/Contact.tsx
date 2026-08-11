@@ -48,14 +48,12 @@ export function Contact() {
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-dashed border-primary/40 bg-gradient-to-br from-primary/5 via-surface to-coral/5 p-7 sm:p-9 flex flex-col justify-center">
-            <h3 className="font-display text-2xl text-foreground">{t("contact.soon_title")}</h3>
-            <p className="mt-3 text-muted-foreground">{t("contact.soon_desc")}</p>
+          <div className="rounded-2xl border border-border/60 bg-surface p-7 sm:p-9 flex flex-col justify-center gap-4">
             <a
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 transition"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-semibold text-[#0a0e1a] hover:brightness-110 transition"
             >
               <MessageCircle className="h-4 w-4" />
               {t("contact.whatsapp")}

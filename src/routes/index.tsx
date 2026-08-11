@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 100€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 105€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
     ],
   }),
   component: Index,
