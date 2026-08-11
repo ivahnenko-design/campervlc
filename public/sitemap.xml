@@ -114,4 +114,21 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/"/>
   </url>
 
+
+  <!-- Route: Costa Blanca Norte -->
+  <url>
+    <loc>https://campervlc.com/rutas/costa-blanca</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/costa-blanca"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/costa-blanca?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/costa-blanca?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/costa-blanca?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/costa-blanca?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/costa-blanca?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/costa-blanca?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/costa-blanca"/>
+  </url>
+
 </urlset>
