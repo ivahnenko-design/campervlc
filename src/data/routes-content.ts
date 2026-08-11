@@ -4,6 +4,8 @@ export interface RouteDay {
   title: Record<Lang, string>;
   text: Record<Lang, string>;
   photoSlot: string;
+  image?: string;
+  altText?: Record<Lang, string>;
 }
 
 export interface RouteTip {
@@ -16,6 +18,7 @@ export interface RouteContent {
   metaDescription: Record<Lang, string>;
   heroTitle: Record<Lang, string>;
   heroSubtitle: Record<Lang, string>;
+  heroImage?: string;
   intro: Record<Lang, string>;
   days: RouteDay[];
   tips: RouteTip[];
@@ -58,6 +61,8 @@ const costaBlanca: RouteContent = {
     uk: "Маршрут на автодімі по Коста-Бланці: з Валенсії до Аліканте за 5 днів",
   },
 
+  heroImage: "/images/routes/costa-blanca-hero.jpg",
+
   heroSubtitle: {
     es: "El itinerario costero perfecto para viajar en autocaravana por primera vez: calas escondidas, pueblos blancos, mercados de pescado fresco y los mejores atardeceres del Mediterráneo.",
     en: "The perfect coastal itinerary for your first campervan trip: hidden coves, white villages, fresh fish markets and the best sunsets in the Mediterranean.",
@@ -81,6 +86,16 @@ const costaBlanca: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-cullera",
+      image: "/images/routes/dia-1-cullera.jpg",
+      altText: {
+        es: "Faro de Cullera al amanecer — ruta autocaravana Costa Blanca",
+        en: "Cullera lighthouse at sunrise — Costa Blanca campervan route",
+        de: "Leuchtturm von Cullera im Morgenlicht — Wohnmobil-Route Costa Blanca",
+        it: "Faro di Cullera all'alba — itinerario camper Costa Blanca",
+        nl: "Vuurtoren van Cullera bij zonsopgang — camperroute Costa Blanca",
+        ru: "Маяк Кульеры на рассвете — маршрут на автодоме по Коста-Бланке",
+        uk: "Маяк Кульєри на світанку — маршрут на автодімі по Коста-Бланці",
+      },
       title: {
         es: "Día 1: Valencia → Cullera → Gandía (60 km)",
         en: "Day 1: Valencia → Cullera → Gandía (60 km)",
@@ -102,6 +117,16 @@ const costaBlanca: RouteContent = {
     },
     {
       photoSlot: "dia-2-denia-javea",
+      image: "/images/routes/dia-2-denia-javea.jpg",
+      altText: {
+        es: "Cabo de Sant Antoni, Jávea — ruta autocaravana Costa Blanca",
+        en: "Cape Sant Antoni, Javea — Costa Blanca campervan route",
+        de: "Kap Sant Antoni, Javea — Wohnmobil-Route Costa Blanca",
+        it: "Capo Sant Antoni, Javea — itinerario camper Costa Blanca",
+        nl: "Kaap Sant Antoni, Javea — camperroute Costa Blanca",
+        ru: "Мыс Сант-Антони, Хавеа — маршрут на автодоме по Коста-Бланке",
+        uk: "Мис Сант-Антоні, Хавея — маршрут на автодімі по Коста-Бланці",
+      },
       title: {
         es: "Día 2: Gandía → Dénia → Jávea (50 km)",
         en: "Day 2: Gandía → Dénia → Jávea (50 km)",
@@ -123,6 +148,16 @@ const costaBlanca: RouteContent = {
     },
     {
       photoSlot: "dia-3-calpe-altea",
+      image: "/images/routes/dia-3-calpe-altea.jpg",
+      altText: {
+        es: "Peñón de Ifach, Calpe — ruta autocaravana Costa Blanca",
+        en: "Penon de Ifach rising from the sea, Calpe — Costa Blanca campervan route",
+        de: "Penon de Ifach, Calpe — Wohnmobil-Route Costa Blanca",
+        it: "Penon de Ifach, Calpe — itinerario camper Costa Blanca",
+        nl: "Penon de Ifach, Calpe — camperroute Costa Blanca",
+        ru: "Пеньон-де-Ифач, Кальпе — маршрут на автодоме по Коста-Бланке",
+        uk: "Пеньон-де-Іфач, Кальпе — маршрут на автодімі по Коста-Бланці",
+      },
       title: {
         es: "Día 3: Jávea → Calpe → Altea (40 km)",
         en: "Day 3: Jávea → Calpe → Altea (40 km)",
@@ -144,6 +179,16 @@ const costaBlanca: RouteContent = {
     },
     {
       photoSlot: "dia-4-raco-villajoyosa",
+      image: "/images/routes/dia-4-raco-villajoyosa.jpg",
+      altText: {
+        es: "Casas de colores de Villajoyosa junto al mar — ruta autocaravana Costa Blanca",
+        en: "Colourful seafront houses, Villajoyosa — Costa Blanca campervan route",
+        de: "Bunte Haeuser am Meer, Villajoyosa — Wohnmobil-Route Costa Blanca",
+        it: "Case colorate sul mare, Villajoyosa — itinerario camper Costa Blanca",
+        nl: "Kleurrijke huizen aan zee, Villajoyosa — camperroute Costa Blanca",
+        ru: "Разноцветные дома у моря в Вильяхойосе — маршрут на автодоме по Коста-Бланке",
+        uk: "Різнобарвні будинки біля моря у Вільяхойосі — маршрут на автодімі по Коста-Бланці",
+      },
       title: {
         es: "Día 4: Altea → Racó de Conill → Villajoyosa (25 km)",
         en: "Day 4: Altea → Racó de Conill → Villajoyosa (25 km)",
@@ -165,6 +210,16 @@ const costaBlanca: RouteContent = {
     },
     {
       photoSlot: "dia-5-alicante",
+      image: "/images/routes/dia-5-alicante.jpg",
+      altText: {
+        es: "Castillo de Santa Bárbara sobre Alicante — ruta autocaravana Costa Blanca",
+        en: "Santa Barbara castle over Alicante bay — Costa Blanca campervan route",
+        de: "Burg Santa Barbara ueber Alicante — Wohnmobil-Route Costa Blanca",
+        it: "Castello di Santa Barbara su Alicante — itinerario camper Costa Blanca",
+        nl: "Kasteel Santa Barbara boven Alicante — camperroute Costa Blanca",
+        ru: "Замок Санта-Барбара над Аликанте — маршрут на автодоме по Коста-Бланке",
+        uk: "Замок Санта-Барбара над Аліканте — маршрут на автодімі по Коста-Бланці",
+      },
       title: {
         es: "Día 5: Villajoyosa → Alicante → Valencia (180 km)",
         en: "Day 5: Villajoyosa → Alicante → Valencia (180 km)",

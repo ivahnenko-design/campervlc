@@ -104,13 +104,27 @@ function RoutePageComponent() {
         </div>
       </section>
 
-      {/* Hero photo placeholder */}
-      <div
-        className="route-photo-placeholder w-full aspect-[16/6] bg-surface border-b border-border/40 flex items-center justify-center text-muted-foreground/30 text-sm"
-        data-photo="hero-costa-blanca"
-      >
-        [ foto principal ]
-      </div>
+      {/* Hero photo */}
+      {route.heroImage ? (
+        <div className="w-full aspect-[16/6] overflow-hidden border-b border-border/40">
+          <img
+            src={route.heroImage}
+            alt={t(route.heroTitle)}
+            width={1920}
+            height={720}
+            loading="eager"
+            fetchPriority="high"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ) : (
+        <div
+          className="route-photo-placeholder w-full aspect-[16/6] bg-surface border-b border-border/40 flex items-center justify-center text-muted-foreground/30 text-sm"
+          data-photo={`hero-${route.slug}`}
+        >
+          [ foto principal ]
+        </div>
+      )}
 
       <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
 
@@ -127,12 +141,25 @@ function RoutePageComponent() {
                 {t(day.title)}
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">{t(day.text)}</p>
-              <div
-                className="route-photo-placeholder w-full aspect-[16/7] rounded-2xl bg-surface border border-border/60 flex items-center justify-center text-muted-foreground/30 text-sm"
-                data-photo={day.photoSlot}
-              >
-                [ foto: {day.photoSlot} ]
-              </div>
+              {day.image ? (
+                <div className="w-full aspect-[16/7] overflow-hidden rounded-2xl border border-border/60">
+                  <img
+                    src={day.image}
+                    alt={day.altText ? t(day.altText) : t(day.title)}
+                    width={1200}
+                    height={525}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : (
+                <div
+                  className="route-photo-placeholder w-full aspect-[16/7] rounded-2xl bg-surface border border-border/60 flex items-center justify-center text-muted-foreground/30 text-sm"
+                  data-photo={day.photoSlot}
+                >
+                  [ foto: {day.photoSlot} ]
+                </div>
+              )}
             </section>
           ))}
         </div>
