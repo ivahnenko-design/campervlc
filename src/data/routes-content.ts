@@ -212,7 +212,7 @@ const costaBlanca: RouteContent = {
       tip: {
         es: "Temporada alta (julio-agosto): reserva el Wecamp Jávea y los campings con 2-3 semanas de antelación. Las áreas públicas son de libre acceso — llega antes de las 12:00 para asegurar plaza.",
         en: "High season (July–August): book Wecamp Jávea and campsites 2–3 weeks in advance. Public stopovers are first-come first-served — arrive before noon to secure a spot.",
-        de: "Hauptsaison (Juli–August): Wecamp Jávea und Campingplätze 2–3 Wochen im Voraus buchen. Öffentliche Stellplätze funktionieren nach dem Prinzip „Wer zuerst kommt" — vor 12 Uhr ankommen.",
+        de: "Hauptsaison (Juli–August): Wecamp Jávea und Campingplätze 2–3 Wochen im Voraus buchen. Öffentliche Stellplätze funktionieren nach dem Prinzip 'Wer zuerst kommt' — vor 12 Uhr ankommen.",
         it: "Alta stagione (luglio-agosto): prenotate Wecamp Jávea e i campeggi con 2-3 settimane di anticipo. Le aree pubbliche sono a disponibilità libera — arrivate prima di mezzogiorno per assicurarvi un posto.",
         nl: "Hoogseizoen (juli-augustus): boek Wecamp Jávea en campings 2-3 weken van tevoren. Publieke camperplaatsen zijn op volgorde van binnenkomst — kom voor 12 uur aan om zeker een plek te hebben.",
         ru: "Высокий сезон (июль-август): бронируйте Wecamp Jávea и кемпинги за 2-3 недели. Публичные площадки — в порядке живой очереди; приезжайте до 12:00, чтобы занять место.",
