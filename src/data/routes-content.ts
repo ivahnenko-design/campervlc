@@ -264,7 +264,249 @@ const costaBlanca: RouteContent = {
   },
 };
 
-export const ROUTE_PAGES: RouteContent[] = [costaBlanca];
+// ─── Valencia → Barcelona ─────────────────────────────────────────────────────
+
+const valenciaBarcalona: RouteContent = {
+  slug: "valencia-barcelona",
+
+  metaTitle: {
+    es: "Ruta Autocaravana Valencia Barcelona: Delta del Ebro y Costa Dorada en 5 Días | Camper Retreat VLC",
+    en: "Valencia to Barcelona Campervan Route: Northern Coast in 4-5 Days | Camper Retreat VLC",
+    de: "Wohnmobil-Route Valencia–Barcelona: Nordküste in 4-5 Tagen | Camper Retreat VLC",
+    it: "Itinerario Camper Valencia–Barcellona: Costa Nord in 4-5 Giorni | Camper Retreat VLC",
+    nl: "Camperroute Valencia–Barcelona: Noordkust in 4-5 Dagen | Camper Retreat VLC",
+    ru: "Маршрут на автодоме Валенсия–Барселона: северное побережье за 4-5 дней | Camper Retreat VLC",
+    uk: "Маршрут на автодімі Валенсія–Барселона: північне узбережжя за 4-5 днів | Camper Retreat VLC",
+  },
+
+  metaDescription: {
+    es: "Ruta autocaravana Valencia Barcelona en 5 días: Peñíscola, delta del ebro autocaravana, Tarragona, Sitges y Barcelona. Viajar en autocaravana costa dorada desde 105 €/noche. Guía completa con áreas de servicio.",
+    en: "Valencia to Barcelona campervan route in 5 days: Peñíscola, Ebro Delta, Tarragona, Sitges and Barcelona. Complete guide with motorhome stopovers, practical tips and budget breakdown.",
+    de: "Wohnmobil-Route Valencia–Barcelona in 5 Tagen: Peñíscola, Ebro-Delta, Tarragona, Sitges und Barcelona. Vollständiger Guide mit Stellplätzen, Tipps und Kostenübersicht.",
+    it: "Itinerario camper Valencia–Barcellona in 5 giorni: Peñíscola, Delta dell'Ebro, Tarragona, Sitges e Barcellona. Guida completa con aree di sosta e consigli pratici.",
+    nl: "Camperroute Valencia–Barcelona in 5 dagen: Peñíscola, Ebrodelta, Tarragona, Sitges en Barcelona. Complete gids met camperplaatsen, tips en budget.",
+    ru: "Маршрут на автодоме из Валенсии в Барселону за 5 дней: Пеньискола, дельта Эбро, Таррагона, Ситжес и Барселона. Полный гид с площадками и советами.",
+    uk: "Маршрут на автодімі з Валенсії до Барселони за 5 днів: Пеньіскола, дельта Ебро, Таррагона, Сітжес та Барселона. Повний гід з майданчиками та порадами.",
+  },
+
+  heroTitle: {
+    es: "Ruta autocaravana Valencia–Barcelona: delta del Ebro y Costa Dorada en 5 días",
+    en: "Valencia to Barcelona Campervan Route: Northern Coast in 4-5 Days",
+    de: "Wohnmobil-Route Valencia–Barcelona: Nordküste in 4-5 Tagen",
+    it: "Itinerario Camper Valencia–Barcellona: Costa Nord in 4-5 Giorni",
+    nl: "Camperroute Valencia–Barcelona: Noordkust in 4-5 Dagen",
+    ru: "Путешествие на автодоме из Валенсии в Барселону: северное побережье за 4-5 дней",
+    uk: "Подорож на автодімі з Валенсії до Барселони: північне узбережжя за 4-5 днів",
+  },
+
+  heroSubtitle: {
+    es: "Fortalezas medievales, el Delta del Ebro con flamencos rosas, las cimas de Sitges y el final en la capital catalana — un itinerario en que cada día es completamente distinto.",
+    en: "Medieval fortresses, the Ebro Delta with pink flamingos, the coves of Sitges and a grand finale in the Catalan capital — an itinerary where every day is completely different.",
+    de: "Mittelalterliche Festungen, das Ebro-Delta mit rosa Flamingos, die Buchten von Sitges und das Finale in der katalanischen Hauptstadt — eine Route, bei der jeder Tag voellig anders ist.",
+    it: "Fortezze medievali, il Delta dell'Ebro con fenicotteri rosa, le calette di Sitges e il gran finale nella capitale catalana — un itinerario in cui ogni giorno e' completamente diverso.",
+    nl: "Middeleeuwse vestingen, de Ebrodelta met roze flamingo's, de baaien van Sitges en het slotakkoord in de Catalaanse hoofdstad — een route waarbij elke dag compleet anders is.",
+    ru: "Античные крепости, дельта Эбро с розовыми фламинго, винные бухты Ситжеса и финал в столице Каталонии — маршрут, в котором каждый день не похож на предыдущий.",
+    uk: "Античні фортеці, дельта Ебро з рожевими фламінго, бухти Сітжеса та фінал у столиці Каталонії — маршрут, де кожен день не схожий на попередній.",
+  },
+
+  intro: {
+    es: "La carretera al norte desde Valencia es pura diversidad. En 4-5 días descubrirás una ciudad medieval encaramada en una roca, la mayor zona arrocera de España, una de las joyas naturales más impresionantes del Mediterráneo — el delta del Ebro — y cerrarás el viaje en Barcelona. Esta ruta autocaravana Valencia Barcelona está diseñada para que el último tramo de vuelta se haga en una sola mañana por la AP-7, ahora gratuita. Es también uno de los más económicos: casi todas las noches son posibles en áreas municipales gratuitas o de bajo coste. Viajar en autocaravana costa dorada es una experiencia única que combina naturaleza, historia y gastronomía. Distancia: ~700 km. Mejor época: abril-junio y septiembre-octubre.",
+    en: "The road north from Valencia is pure variety. In 4-5 days you'll discover a medieval city perched on a rock, Spain's largest rice-growing region, one of the Mediterranean's greatest natural gems — the Ebro Delta — and cap it all off in Barcelona. The route is designed so the final leg home takes just one morning along the now toll-free AP-7. It's also one of the most budget-friendly itineraries: almost every overnight is possible at free or low-cost municipal stopovers. Distance: ~700 km. Best time: April–June and September–October.",
+    de: "Die Strecke nach Norden aus Valencia ist pure Abwechslung. In 4-5 Tagen entdeckst du eine auf einem Fels thronende mittelalterliche Stadt, Spaniens groesstes Reisanbaugebiet, eines der bedeutendsten Naturjuwele des Mittelmeers — das Ebro-Delta — und schliessst die Reise in Barcelona ab. Die Route ist so geplant, dass die Rueckfahrt in einem einzigen Morgen auf der inzwischen mautfreien AP-7 bewaeltigt werden kann. Es ist auch eine der preiswertesten Routen: Fast alle Uebernachtungen sind auf kostenlosen oder guenstigen Kommunalstellplaetzen moeglich. Strecke: ca. 700 km. Beste Reisezeit: April bis Juni und September bis Oktober.",
+    it: "La strada verso nord da Valencia e' pura varieta'. In 4-5 giorni scoprirete una citta' medievale arroccata su una roccia, la piu' grande zona di produzione del riso in Spagna, una delle piu' grandi gemme naturali del Mediterraneo — il Delta dell'Ebro — e chiuderete il viaggio a Barcellona. Il percorso e' pensato affinche' l'ultima tappa di ritorno si percorra in una sola mattinata sull'AP-7, ora gratuita. E' anche uno degli itinerari piu' economici: quasi tutte le notti sono possibili in aree di sosta municipali gratuite o a basso costo. Distanza: circa 700 km. Periodo migliore: aprile-giugno e settembre-ottobre.",
+    nl: "De weg naar het noorden vanuit Valencia is pure variatie. In 4-5 dagen ontdek je een middeleeuwse stad op een rots, Spanje's grootste rijstgebied, een van de grootste natuurparels van de Middellandse Zee — de Ebrodelta — en sluit je de reis af in Barcelona. De route is zo ontworpen dat de laatste etappe terug een ochtend kost over de inmiddels tolvrije AP-7. Het is ook een van de voordeligste routes: bijna alle overnachtingen zijn mogelijk op gratis of goedkope gemeentelijke camperplaatsen. Afstand: ca. 700 km. Beste reistijd: april-juni en september-oktober.",
+    ru: "Дорога на север из Валенсии — это разнообразие. За 4-5 дней вы увидите средневековый город на скале, крупнейший рисовый регион Испании, одну из главных природных жемчужин Средиземноморья — дельту реки Эбро — и завершите путешествие в Барселоне. Маршрут построен так, что финальный перегон обратно занимает одно утро по бесплатной AP-7. Это один из самых экономичных маршрутов: почти все ночёвки возможны на бесплатных или недорогих муниципальных площадках. Дистанция: ~700 км. Лучшее время: апрель-июнь и сентябрь-октябрь.",
+    uk: "Дорога на північ з Валенсії — це різноманіття. За 4-5 днів ви побачите середньовічне місто на скелі, найбільший рисовий регіон Іспанії, одну з головних природних перлин Середземномор'я — дельту ріки Ебро — і завершите подорож у Барселоні. Маршрут побудований так, що фінальний переїзд назад займає один ранок по безкоштовному AP-7. Це один з найекономічніших маршрутів: майже всі ночівлі можливі на безкоштовних або дешевих муніципальних майданчиках. Відстань: ~700 км. Найкращий час: квітень-червень та вересень-жовтень.",
+  },
+
+  days: [
+    {
+      photoSlot: "dia-1-peniscola",
+      title: {
+        es: "Día 1: Valencia → Sagunto → Peñíscola (150 km)",
+        en: "Day 1: Valencia → Sagunto → Peñíscola (150 km)",
+        de: "Tag 1: Valencia → Sagunto → Peniscola (150 km)",
+        it: "Giorno 1: Valencia → Sagunto → Peniscola (150 km)",
+        nl: "Dag 1: Valencia → Sagunto → Peniscola (150 km)",
+        ru: "День 1: Валенсия → Сагунто → Пеньискола (150 км)",
+        uk: "День 1: Валенсія → Сагунто → Пеньіскола (150 км)",
+      },
+      text: {
+        es: "Primera parada a 30 minutos de Valencia: Sagunto, con su teatro romano y una fortaleza de un kilómetro de largo en lo alto del cerro — acceso gratuito y vistas sobre los naranjales hasta el mar. Luego, hora y veinte por la AP-7 hasta Peñíscola. El casco antiguo sobre la roca, rodeado de mar por tres lados, es conocido como el Gibraltar Valenciano. El castillo de los Templarios — escenario de Juego de Tronos —, las callejuelas encaladas y la playa junto a las murallas son parada obligatoria. La vista sobre el casco antiguo desde la playa norte es la postal clásica, especialmente al atardecer. Noche: área de autocaravanas de Peñíscola — amplia, a 10 minutos a pie de la playa, con agua y vaciado.",
+        en: "First stop, 30 minutes from Valencia: Sagunto, with its Roman theatre and a kilometre-long hilltop fortress — free to visit, with views over orange groves all the way to the sea. Then an hour and twenty minutes up the AP-7 to Peniscola. The old town on its rock, surrounded by sea on three sides, is known as the Gibraltar of Valencia. The Knights Templar castle — a Game of Thrones filming location —, whitewashed lanes and a beach beside the walls are unmissable. The view over the old town from the north beach is the classic postcard shot, especially at sunset. Overnight: the Peniscola motorhome area — spacious, 10 minutes' walk to the beach, with water and waste disposal.",
+        de: "Erste Station, 30 Minuten von Valencia entfernt: Sagunto mit seinem roemischen Theater und einer kilometerlangen Burganlage auf dem Huegelkamm — kostenlos zu besichtigen, mit Blick ueber Orangenhaine bis zum Meer. Dann eineinhalb Stunden auf der AP-7 bis Peniscola. Die Altstadt auf dem Fels, von drei Seiten vom Meer umgeben, wird als das Gibraltar Valencias bezeichnet. Die Templerburg — Drehort fuer Game of Thrones —, die weiss getuenchten Gassen und der Strand an den Stadtmauern sind ein Muss. Der Blick auf die Altstadt vom Nordstrand aus ist die klassische Ansichtskarte, besonders im Abendlicht. Uebernachtung: Wohnmobilstellplatz Peniscola — weitlaeu fig, 10 Gehminuten zum Strand, mit Wasser und Entsorgung.",
+        it: "Prima tappa, a 30 minuti da Valencia: Sagunto, con il suo teatro romano e una fortezza di un chilometro in cima alla collina — ingresso gratuito, con viste sugli agrumeti fino al mare. Poi un'ora e venti sull'AP-7 fino a Peniscola. Il centro storico sulla roccia, circondato dal mare su tre lati, e' noto come la Gibilterra valenciana. Il castello dei Templari — location di Game of Thrones —, i vicoli imbiancati a calce e la spiaggia accanto alle mura sono imperdibili. La vista sul centro storico dalla spiaggia nord e' la cartolina classica, soprattutto al tramonto. Pernottamento: area camper di Peniscola — ampia, a 10 minuti a piedi dalla spiaggia, con acqua e scarico.",
+        nl: "Eerste stop, 30 minuten van Valencia: Sagunto, met zijn Romeins theater en een kilometerslange vesting op de heuvelrug — gratis te bezoeken, met uitzicht over sinaasappelgaarden tot aan de zee. Daarna anderhalf uur over de AP-7 naar Peniscola. De oude stad op de rots, aan drie kanten omgeven door zee, staat bekend als het Gibraltar van Valencia. Het kasteel van de Tempeliers — een filmlocatie van Game of Thrones —, de gekalkte straatjes en het strand bij de stadsmuren zijn een must. Het uitzicht op de oude stad vanaf het noordstrand is de klassieke ansichtkaart, zeker bij zonsondergang. Overnachting: camperplaats Peniscola — ruim, 10 minuten lopen van het strand, met water en afvoer.",
+        ru: "Первая остановка в 30 минутах от Валенсии — Сагунто: римский театр и километровая крепость на хребте холма, бесплатный подъём и виды на апельсиновые плантации до моря. Дальше — час двадцать по AP-7 до Пеньисколы. Старый город на скале, окружённый морем с трёх сторон, называют Гибралтаром Валенсии. Замок тамплиеров, где снимали Игру престолов, белёные улочки и пляж у крепостных стен. Вид на старый город с северного пляжа — классическая открытка, особенно на закате. Ночёвка: área de autocaravanas Peñíscola — большая площадка в 10 минутах пешком от пляжа, с водой и сливом.",
+        uk: "Перша зупинка за 30 хвилин від Валенсії — Сагунто: римський театр і кілометрова фортеця на хребті пагорба, безкоштовний підйом і краєвиди на апельсинові плантації до моря. Далі — година двадцять по AP-7 до Пеньісколи. Старе місто на скелі, оточене морем з трьох боків, називають Гібралтаром Валенсії. Замок тамплієрів, де знімали Гру престолів, побілені вулички і пляж біля фортечних мурів. Вид на старе місто з північного пляжу — класична листівка, особливо на заході сонця. Ночівля: área de autocaravanas Peñíscola — великий майданчик за 10 хвилин пішки від пляжу, з водою та зливом.",
+      },
+    },
+    {
+      photoSlot: "dia-2-delta-ebro",
+      title: {
+        es: "Día 2: Peñíscola → Delta del Ebro (80 km)",
+        en: "Day 2: Peniscola → Ebro Delta (80 km)",
+        de: "Tag 2: Peniscola → Ebro-Delta (80 km)",
+        it: "Giorno 2: Peniscola → Delta dell'Ebro (80 km)",
+        nl: "Dag 2: Peniscola → Ebrodelta (80 km)",
+        ru: "День 2: Пеньискола → Дельта Эбро (80 км)",
+        uk: "День 2: Пеньіскола → Дельта Ебро (80 км)",
+      },
+      text: {
+        es: "Una hora de trayecto y el paisaje cambia radicalmente: arrozales hasta el horizonte, canales, garzas y flamencos rosas. El Delta del Ebro es el segundo mayor humedal del Mediterráneo occidental — un paraíso para la delta del ebro autocaravana. Qué hacer: pedalear en bici por los diques entre los arrozales, llegar caminando al faro del Fangar a través de las dunas, probar el arroz local en los restaurantes de Poble Nou del Delta. Al atardecer, ve a la laguna de la Encanyissada, donde se alimentan los flamencos: siluetas rosas en agua dorada — el mejor plano de todo el itinerario. Noche: área en Deltebre o Sant Jaume d'Enveja. Tranquilo, oscuro; por la mañana solo te despiertan los pájaros.",
+        en: "One hour of driving and the landscape changes completely: rice paddies to the horizon, canals, herons and pink flamingos. The Ebro Delta is the second-largest wetland in the western Mediterranean. Things to do: cycle along the dykes between the rice fields, walk to the Fangar lighthouse through the dunes, try the local rice at restaurants in Poble Nou del Delta. At sunset, head to the Encanyissada lagoon where flamingos feed: pink silhouettes against golden water — the best shot of the whole trip. Overnight: stopover in Deltebre or Sant Jaume d'Enveja. Quiet, dark; in the morning only birdsong wakes you.",
+        de: "Eine Stunde Fahrt und die Landschaft aendert sich schlagartig: Reisfelder bis zum Horizont, Kanaele, Reiher und rosa Flamingos. Das Ebro-Delta ist das zweitgroesste Feuchtgebiet im westlichen Mittelmeer. Aktivitaeten: Radfahren auf den Daemmen zwischen den Reisfeldern, zu Fuss zum Leuchtturm Fangar durch die Duenen, lokalen Reis in den Restaurants von Poble Nou del Delta probieren. Bei Sonnenuntergang zur Lagune Encanyissada fahren, wo Flamingos fressen: rosa Silhouetten im goldenen Wasser — der schoenste Schnappschuss der ganzen Tour. Uebernachtung: Stellplatz in Deltebre oder Sant Jaume d'Enveja. Ruhig, dunkel; morgens wecken nur Voegel.",
+        it: "Un'ora di guida e il paesaggio cambia radicalmente: risaie a perdita d'occhio, canali, aironi e fenicotteri rosa. Il Delta dell'Ebro e' la seconda zona umida piu' grande del Mediterraneo occidentale. Cosa fare: pedalare sugli argini tra le risaie, raggiungere a piedi il faro del Fangar attraverso le dune, assaggiare il riso locale nei ristoranti di Poble Nou del Delta. Al tramonto, dirigetevi alla laguna dell'Encanyissada, dove si nutrono i fenicotteri: sagome rosa sull'acqua dorata — lo scatto piu' bello di tutto l'itinerario. Pernottamento: area a Deltebre o Sant Jaume d'Enveja. Silenzio, buio; al mattino vi svegliano solo gli uccelli.",
+        nl: "Een uur rijden en het landschap verandert volledig: rijstvelden tot aan de horizon, kanalen, reigers en roze flamingo's. De Ebrodelta is het op een na grootste waterrijke gebied in de westelijke Middellandse Zee. Wat te doen: fietsen over de dijken tussen de rijstvelden, wandelen naar de vuurtoren van Fangar door de duinen, lokale rijst proeven in de restaurants van Poble Nou del Delta. Bij zonsondergang naar de lagune Encanyissada, waar flamingo's foerageren: roze silhouetten tegen gouden water — de mooiste foto van de hele trip. Overnachting: camperplaats in Deltebre of Sant Jaume d'Enveja. Stil, donker; 's ochtends wekken alleen vogels je.",
+        ru: "Час пути — и пейзаж меняется радикально: рисовые поля до горизонта, каналы, цапли и розовые фламинго. Дельта Эбро — второй по величине водно-болотный заповедник Западного Средиземноморья. Что делать: прокатиться на велосипедах по дамбам между рисовых полей, дойти до маяка Fangar через дюны, попробовать местный рис в ресторанах Poble Nou del Delta. На закате — к лагуне Encanyissada, где кормятся фламинго: розовые силуэты в золотой воде — лучший кадр всего маршрута. Ночёвка: área в Deltebre или Sant Jaume d'Enveja. Тихо, темно, утром будят только птицы.",
+        uk: "Година шляху — і пейзаж змінюється кардинально: рисові поля до горизонту, канали, чаплі та рожеві фламінго. Дельта Ебро — другий за величиною водно-болотний заповідник Західного Середземномор'я. Що робити: прокататись на велосипеді по дамбах між рисовими полями, дійти до маяка Fangar через дюни, скуштувати місцевий рис у ресторанах Poble Nou del Delta. На заході сонця — до лагуни Encanyissada, де годуються фламінго: рожеві силуети в золотій воді — найкращий кадр всього маршруту. Ночівля: área в Deltebre або Sant Jaume d'Enveja. Тихо, темно, вранці будять тільки птахи.",
+      },
+    },
+    {
+      photoSlot: "dia-3-tarragona-sitges",
+      title: {
+        es: "Día 3: Delta del Ebro → Tarragona → Sitges (120 km)",
+        en: "Day 3: Ebro Delta → Tarragona → Sitges (120 km)",
+        de: "Tag 3: Ebro-Delta → Tarragona → Sitges (120 km)",
+        it: "Giorno 3: Delta dell'Ebro → Tarragona → Sitges (120 km)",
+        nl: "Dag 3: Ebrodelta → Tarragona → Sitges (120 km)",
+        ru: "День 3: Дельта Эбро → Таррагона → Ситжес (120 км)",
+        uk: "День 3: Дельта Ебро → Таррагона → Сітжес (120 км)",
+      },
+      text: {
+        es: "Por la mañana, Tarragona, capital romana de Hispania: el anfiteatro sobre el mar, el acueducto de Les Ferreres y la catedral gótica. Para el almuerzo, el Mercado Central: marisco a la mitad del precio de Barcelona. Al caer la tarde, 40 minutos hasta Sitges, el pueblo más elegante de la costa catalana: casas blancas, 17 playas, galerías de arte y un paseo con palmeras. La iglesia de Sant Bartomeu sobre la roca es el símbolo de Sitges. Noche: Camping Sitges — a pie del centro, abierto todo el año; en verano reserva con antelación.",
+        en: "Morning in Tarragona, Roman capital of Hispania: the amphitheatre above the sea, the Les Ferreres aqueduct and the Gothic cathedral. Lunch at the Mercat Central: seafood at half the Barcelona price. In the late afternoon, 40 minutes to Sitges, the chicest town on the Catalan coast: white houses, 17 beaches, art galleries and a palm-lined promenade. The church of Sant Bartomeu on the rock is the symbol of Sitges. Overnight: Camping Sitges — walking distance from the centre, open year-round; book ahead in summer.",
+        de: "Morgens Tarragona, die antike Hauptstadt der roemischen Hispania: das Amphitheater ueber dem Meer, das Aquaedukt Les Ferreres und die gotische Kathedrale. Mittagessen auf dem Mercado Central: Meeresfruechte zur Haelfte des Barceloneser Preises. Am Nachmittag 40 Minuten bis Sitges, dem schicksten Ort der katalanischen Kueste: weisse Haeuser, 17 Straende, Kunstgalerien und eine Palmenpromenade. Die Kirche Sant Bartomeu auf dem Fels ist das Wahrzeichen von Sitges. Uebernachtung: Camping Sitges, zu Fuss ins Zentrum, ganzjaehrig geoeffnet — im Sommer im Voraus buchen.",
+        it: "Mattinata a Tarragona, capitale romana dell'Hispania: l'anfiteatro sul mare, l'acquedotto di Les Ferreres e la cattedrale gotica. Pranzo al Mercat Central: frutti di mare a meta' del prezzo di Barcellona. Nel tardo pomeriggio, 40 minuti fino a Sitges, il paese piu' elegante della costa catalana: case bianche, 17 spiagge, gallerie d'arte e un lungomare con palme. La chiesa di Sant Bartomeu sulla roccia e' il simbolo di Sitges. Pernottamento: Camping Sitges, a piedi dal centro, aperto tutto l'anno — prenotate in anticipo d'estate.",
+        nl: "Ochtend in Tarragona, de Romeinse hoofdstad van Hispania: het amfitheater boven zee, het aquaduct van Les Ferreres en de gotische kathedraal. Lunch op de Mercat Central: zeevruchten voor de helft van de Barcelonese prijs. In de middag, 40 minuten naar Sitges, het chicste stadje van de Catalaanse kust: witte huizen, 17 stranden, kunstgalerijen en een palmboulevard. De kerk Sant Bartomeu op de rots is het symbool van Sitges. Overnachting: Camping Sitges, op loopafstand van het centrum, het hele jaar geopend — in de zomer van tevoren boeken.",
+        ru: "Утром — Таррагона, античная столица римской Испании: амфитеатр над морем, акведук Les Ferreres, готический собор. На обед — рынок Central: морепродукты вдвое дешевле барселонских. К вечеру — 40 минут до Ситжеса, самого стильного городка каталонского побережья: белые дома, 17 пляжей, арт-галереи, набережная с пальмами. Церковь Sant Bartomeu на скале над пляжем — символ Ситжеса. Ночёвка: Camping Sitges — пешком до центра, работает круглый год; летом бронируйте заранее.",
+        uk: "Вранці — Таррагона, антична столиця римської Іспанії: амфітеатр над морем, акведук Les Ferreres, готичний собор. На обід — ринок Central: морепродукти вдвічі дешевші за барселонські. Ввечері — 40 хвилин до Сітжеса, найстильнішого містечка каталонського узбережжя: білі будинки, 17 пляжів, арт-галереї, набережна з пальмами. Церква Sant Bartomeu на скелі над пляжем — символ Сітжеса. Ночівля: Camping Sitges — пішки до центру, працює цілий рік; влітку бронюйте заздалегідь.",
+      },
+    },
+    {
+      photoSlot: "dia-4-barcelona",
+      title: {
+        es: "Día 4: Sitges → Barcelona (40 km)",
+        en: "Day 4: Sitges → Barcelona (40 km)",
+        de: "Tag 4: Sitges → Barcelona (40 km)",
+        it: "Giorno 4: Sitges → Barcellona (40 km)",
+        nl: "Dag 4: Sitges → Barcelona (40 km)",
+        ru: "День 4: Ситжес → Барселона (40 км)",
+        uk: "День 4: Сітжес → Барселона (40 км)",
+      },
+      text: {
+        es: "Media hora por la pintoresca C-32 costera y estás en Barcelona. ¿Dónde dejar el autocaravana? En el Área de Autocaravanas de Barcelona (zona Fòrum) — aparcamiento vigilado con servicios completos, 20 minutos en metro hasta el centro. Lo imprescindible: la Sagrada Família (entradas online con antelación), el Barrio Gótico, La Rambla y el Mercat de la Boqueria, la Barceloneta. Panorámica desde Montjuïc o el Parque Güell — al atardecer la ciudad se vuelve dorada. Consejo: no dejes la visita para el último día — pasea hoy, duerme en el área y sal tranquilo por la mañana.",
+        en: "Half an hour along the scenic coastal C-32 and you're in Barcelona. Where to leave the motorhome? The Area de Autocaravanas de Barcelona (Forum district) — a supervised parking area with full services, 20 minutes by metro to the centre. Essentials: the Sagrada Familia (book online in advance!), the Gothic Quarter, La Rambla and Mercat de la Boqueria, Barceloneta beach. Panoramic views from Montjuic or Park Guell — at sunset the city turns golden. Tip: don't leave sightseeing to the last day — explore today, sleep at the stopover and leave calmly in the morning.",
+        de: "Eine halbe Stunde auf der malerischen Kuestenstras se C-32 und du bist in Barcelona. Wo das Wohnmobil abstellen? Im Area de Autocaravanas de Barcelona (Forum-Viertel) — bewachter Stellplatz mit Vollservice, 20 Minuten mit der Metro ins Zentrum. Pflichtprogramm: Sagrada Familia (Tickets unbedingt online vorbuchen!), Gotisches Viertel, La Rambla und Mercat de la Boqueria, Barceloneta-Strand. Panorama von Montjuic oder Park Guell — bei Sonnenuntergang erstrahlt die Stadt golden. Tipp: Den Stadtbesuch nicht auf den letzten Tag verschieben — heute erkunden, am Stellplatz schlafen und morgen frueh entspannt losfahren.",
+        it: "Mezz'ora sulla panoramica C-32 costiera e siete a Barcellona. Dove lasciare il camper? All'Area de Autocaravanas de Barcelona (zona Forum) — parcheggio sorvegliato con servizi completi, 20 minuti in metro dal centro. L'essenziale: la Sagrada Familia (biglietti online in anticipo!), il Quartiere Gotico, La Rambla e il Mercat de la Boqueria, la Barceloneta. Panorama da Montjuic o da Park Guell — al tramonto la citta' si tinge d'oro. Consiglio: non lasciate la visita all'ultimo giorno — girate oggi, dormite in area e partite sereni domani mattina.",
+        nl: "Een halfuur over de schilderachtige kustweg C-32 en je bent in Barcelona. Waar de camper parkeren? Op de Area de Autocaravanas de Barcelona (Forum-wijk) — beveiligd terrein met volledige diensten, 20 minuten met de metro naar het centrum. Niet missen: de Sagrada Familia (kaartjes online vooruit boeken!), de Gotische Wijk, La Rambla en de Mercat de la Boqueria, strand Barceloneta. Panorama vanaf Montjuic of Park Guell — bij zonsondergang kleurt de stad goud. Tip: laat het stadsbezoek niet voor de laatste dag — verken vandaag, slaap op de camperplaats en vertrek morgenochtend ontspannen.",
+        ru: "Полчаса по живописной прибрежной C-32 — и вы в Барселоне. Главный вопрос: где оставить автодом? Área de Autocaravanas de Barcelona (район Форум) — охраняемая площадка с сервисами, 20 минут на метро до центра. Классика: Саграда Фамилия (билеты онлайн заранее!), Готический квартал, Рамбла и рынок Бокерия, Барселонета. Панорама города с Монжуика или из парка Гуэля — на закате город становится золотым. Совет: не оставляйте осмотр города на последний день — погуляйте сегодня, переночуйте на площадке и спокойно выезжайте утром.",
+        uk: "Пів години по мальовничій прибережній C-32 — і ви в Барселоні. Головне питання: де залишити автодім? Área de Autocaravanas de Barcelona (район Форум) — охоронювана стоянка з сервісами, 20 хвилин на метро до центру. Класика: Саграда Фаміліа (квитки онлайн заздалегідь!), Готичний квартал, Рамбла та ринок Бокерія, Барселонета. Панорама міста з Монжуіка або парку Гуєль — на заході сонця місто стає золотим. Порада: не залишайте огляд на останній день — гуляйте сьогодні, переночуйте на майданчику і спокійно виїжджайте вранці.",
+      },
+    },
+    {
+      photoSlot: "dia-5-regreso",
+      title: {
+        es: "Día 5: Barcelona → Valencia (350 km)",
+        en: "Day 5: Barcelona → Valencia (350 km)",
+        de: "Tag 5: Barcelona → Valencia (350 km)",
+        it: "Giorno 5: Barcellona → Valencia (350 km)",
+        nl: "Dag 5: Barcelona → Valencia (350 km)",
+        ru: "День 5: Барселона → Валенсия (350 км)",
+        uk: "День 5: Барселона → Валенсія (350 км)",
+      },
+      text: {
+        es: "El tramo de vuelta por la AP-7 — 3,5 horas de conducción suave. La autopista es gratuita. Por el camino, comida en Peñíscola o Castellón, o sin paradas — y llegarás a tiempo para el último baño en la playa de la Malvarrosa de Valencia.",
+        en: "The return leg via the AP-7 — 3.5 hours of easy driving. The motorway is toll-free. Stop for lunch in Peniscola or Castellon along the way, or drive straight through — you'll be back in time for a last swim at Valencia's Malvarrosa beach.",
+        de: "Die Rueckfahrt auf der AP-7 — 3,5 Stunden angenehmes Fahren. Die Autobahn ist mautfrei. Unterwegs Mittagspause in Peniscola oder Castellon, oder ohne Zwischenstopp — und du kommst noch rechtzeitig zum letzten Bad am Strand von Valencia an.",
+        it: "Il rientro sull'AP-7 — 3,5 ore di guida tranquilla. L'autostrada e' gratuita. Lungo la strada, pranzo a Peniscola o Castellon, oppure senza soste — e arriverete in tempo per l'ultimo bagno alla Malvarrosa di Valencia.",
+        nl: "De terugreis over de AP-7 — 3,5 uur rustig rijden. De snelweg is tolvrij. Onderweg lunchen in Peniscola of Castellon, of rechtstreeks doorrijden — en je bent op tijd voor het laatste bad aan het Malvarrosa-strand van Valencia.",
+        ru: "Обратный перегон по AP-7 — 3,5 часа чистой езды. Автострада бесплатная. По пути — обед в Пеньисколе или Кастельоне, или без остановок — и успеете на последнее купание на городском пляже Малварроса в Валенсии.",
+        uk: "Зворотний переїзд по AP-7 — 3,5 години комфортної їзди. Автострада безкоштовна. По дорозі — обід у Пеньісколі або Кастельоні, або без зупинок — і встигнете на останнє купання на міському пляжі Малварроса у Валенсії.",
+      },
+    },
+  ],
+
+  tips: [
+    {
+      tip: {
+        es: "Presupuesto: alquiler desde 105 €/noche + combustible ~90 € para 700 km + áreas ~60 €. Más barato que hotel más coche de alquiler, y con una libertad incomparable.",
+        en: "Budget: hire from 105 EUR/night + fuel approx. 90 EUR for 700 km + stopovers approx. 60 EUR. Cheaper than a hotel plus rental car, and with incomparably more freedom.",
+        de: "Budget: Miete ab 105 Euro pro Nacht + Kraftstoff ca. 90 Euro fuer 700 km + Stellplaetze ca. 60 Euro. Guenstiger als Hotel plus Mietwagen — und mit unvergleichlich mehr Freiheit.",
+        it: "Budget: noleggio da 105 euro a notte + carburante circa 90 euro per 700 km + aree di sosta circa 60 euro. Piu' economico di hotel piu' auto a noleggio, con una liberta' incomparabile.",
+        nl: "Budget: huur vanaf 105 euro per nacht + brandstof ca. 90 euro voor 700 km + camperplaatsen ca. 60 euro. Goedkoper dan hotel plus huurauto, en met onvergelijkbaar veel meer vrijheid.",
+        ru: "Бюджет: аренда от 105 €/ночь + топливо ~90 € на 700 км + площадки ~60 €. Дешевле, чем отель + аренда машины, а свободы несравнимо больше.",
+        uk: "Бюджет: оренда від 105 €/ніч + паливо ~90 € на 700 км + майданчики ~60 €. Дешевше, ніж готель + оренда авто, а свободи незрівнянно більше.",
+      },
+    },
+    {
+      tip: {
+        es: "Agua y vaciado: las áreas de Peñíscola, Deltebre y Barcelona tienen servicio completo. Entre ellas, gasolineras Repsol con puntos de servicio (filtra 'servicios' en Park4Night).",
+        en: "Water and waste disposal: the stopovers in Peniscola, Deltebre and Barcelona offer full service. In between, Repsol fuel stations have service points (filter by 'services' in Park4Night).",
+        de: "Wasser und Entsorgung: Die Stellplaetze in Peniscola, Deltebre und Barcelona haben Vollservice. Dazwischen: Repsol-Tankstellen mit Servicepunkten (in Park4Night nach 'Entsorgung' filtern).",
+        it: "Acqua e scarico: le aree di Peniscola, Deltebre e Barcellona hanno servizio completo. Nel mezzo, le stazioni Repsol con punti di servizio (filtrate 'servizi' su Park4Night).",
+        nl: "Water en afvoer: de camperplaatsen in Peniscola, Deltebre en Barcelona bieden volledige service. Daartussenin: Repsol-tankstations met servicepunten (filter op 'services' in Park4Night).",
+        ru: "Вода и слив: площадки в Пеньисколе, Deltebre и Барселоне имеют полный сервис. Между ними — заправки Repsol с точками обслуживания (фильтр 'servicios' в Park4Night).",
+        uk: "Вода та злив: майданчики в Пеньісколі, Deltebre та Барселоні мають повний сервіс. Між ними — заправки Repsol з точками обслуговування (фільтр 'servicios' у Park4Night).",
+      },
+    },
+    {
+      tip: {
+        es: "Apps: Park4Night es el compañero indispensable del viajero en autocaravana en España — todas las áreas del itinerario están con reseñas actualizadas.",
+        en: "Apps: Park4Night is the essential companion for campervanning in Spain — every stopover on this route is listed with up-to-date reviews.",
+        de: "Apps: Park4Night ist der unverzichtbare Begleiter fuer Wohnmobilisten in Spanien — alle Stellplaetze dieser Route sind dort mit Bewertungen eingetragen.",
+        it: "App: Park4Night e' il compagno indispensabile del camperista in Spagna — tutte le aree dell'itinerario sono censite con recensioni aggiornate.",
+        nl: "Apps: Park4Night is de onmisbare reisgenoot voor camperaars in Spanje — alle plaatsen op deze route staan er met actuele beoordelingen in.",
+        ru: "Приложения: Park4Night — главный помощник в путешествии на автодоме по Испании, все площадки маршрута там с отзывами.",
+        uk: "Застосунки: Park4Night — головний помічник кемперів в Іспанії, всі майданчики маршруту там з відгуками.",
+      },
+    },
+    {
+      tip: {
+        es: "Temporada alta: Camping Sitges y el área de Barcelona se llenan en verano — reserva con antelación y llega pronto.",
+        en: "High season: Camping Sitges and the Barcelona stopover fill up in summer — book ahead and arrive early.",
+        de: "Hauptsaison: Camping Sitges und der Stellplatz in Barcelona sind im Sommer schnell ausgebucht — fruehzeitig buchen und frueh anreisen.",
+        it: "Alta stagione: Camping Sitges e l'area di Barcellona si esauriscono in estate — prenotate in anticipo e arrivate presto.",
+        nl: "Hoogseizoen: Camping Sitges en de camperplaats in Barcelona zijn in de zomer snel vol — boek van tevoren en kom vroeg aan.",
+        ru: "Высокий сезон: Camping Sitges и площадка в Барселоне летом заполняются — бронируйте заранее и приезжайте пораньше.",
+        uk: "Високий сезон: Camping Sitges та майданчик у Барселоні влітку швидко заповнюються — бронюйте заздалегідь і приїжджайте раніше.",
+      },
+    },
+    {
+      tip: {
+        es: "Viento en el Delta del Ebro: en primavera y otoño puede soplar una fuerte tramontana. Consulta la previsión — si hay rachas superiores a 60 km/h, mejor quedarse un día más.",
+        en: "Wind in the Ebro Delta: strong Tramontana winds are common in spring and autumn. Check the forecast — if gusts exceed 60 km/h, it's better to stay put for an extra day.",
+        de: "Wind im Ebro-Delta: Im Fruehjahr und Herbst kann die Tramontana kraeftig blasen. Wettervorhersage checken — bei Boeen ueber 60 km/h besser einen Tag laenger bleiben.",
+        it: "Vento nel Delta dell'Ebro: in primavera e autunno puo' soffiare forte la Tramontana. Controllate le previsioni — con raffiche superiori a 60 km/h, meglio restare fermi un giorno in piu'.",
+        nl: "Wind in de Ebrodelta: in voor- en najaar kan de Tramontana hard blazen. Controleer de weersvoorspelling — bij windstoten boven 60 km/u kun je beter een dag extra ter plaatse blijven.",
+        ru: "Ветер в дельте Эбро: весной и осенью бывает сильный северный ветер. Проверяйте прогноз — при порывах выше 60 км/ч лучше переждать день на месте.",
+        uk: "Вітер у дельті Ебро: навесні та восени буває сильний північний вітер. Перевіряйте прогноз — при поривах понад 60 км/год краще пережити день на місці.",
+      },
+    },
+  ],
+
+  ctaText: {
+    es: "Nuestro McLouis Yearling 89G está hecho para rutas como esta ruta autocaravana Valencia Barcelona: diésel eficiente para los traslados, aire acondicionado, una cocina completa para preparar arroz del delta del Ebro junto a los arrozales, y cocina de gas exterior para cenar bajo las estrellas.",
+    en: "Our McLouis Yearling 89G is built for trips like this: efficient diesel for the longer hauls, air conditioning, a full kitchen to cook Ebro Delta rice right beside the rice paddies, and an outdoor gas stove for dinners under the stars.",
+    de: "Unser McLouis Yearling 89G ist fuer genau solche Routen gemacht: sparsamer Diesel fuer die langen Strecken, Klimaanlage, eine vollstaendige Kueche, um Ebro-Delta-Reis direkt an den Reisfeldern zuzubereiten, und ein Outdoor-Gaskocher fuer Abende unter dem Sternenhimmel.",
+    it: "Il nostro McLouis Yearling 89G e' fatto per itinerari come questo: diesel efficiente per i trasferimenti, aria condizionata, una cucina completa per cucinare il riso del Delta dell'Ebro proprio in mezzo alle risaie, e un fornello a gas da esterno per le cene sotto le stelle.",
+    nl: "Onze McLouis Yearling 89G is gemaakt voor routes als deze: zuinige diesel voor de langere ritten, airconditioning, een volledige keuken om Ebrorijst pal naast de rijstvelden te koken, en een outdoor gaskookplaat voor avonden onder de sterren.",
+    ru: "Наш McLouis Yearling 89G создан для таких маршрутов: экономичный дизель для перегонов, кондиционер, полноценная кухня, чтобы готовить рис из дельты Эбро прямо у рисовых полей, и уличная газовая плита для ужинов под звёздами.",
+    uk: "Наш McLouis Yearling 89G створений для таких маршрутів: економічний дизель для переїздів, кондиціонер, повноцінна кухня, щоб готувати рис з дельти Ебро прямо біля рисових полів, і вулична газова плита для вечерь під зорями.",
+  },
+
+  ctaButton: {
+    es: "Reservar fechas",
+    en: "Book your dates",
+    de: "Termine buchen",
+    it: "Prenota le date",
+    nl: "Boek je data",
+    ru: "Забронировать даты",
+    uk: "Забронювати дати",
+  },
+};
+
+export const ROUTE_PAGES: RouteContent[] = [costaBlanca, valenciaBarcalona];
 
 export function getRouteBySlug(slug: string): RouteContent | undefined {
   return ROUTE_PAGES.find((r) => r.slug === slug);

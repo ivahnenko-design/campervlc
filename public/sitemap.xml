@@ -131,4 +131,21 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/costa-blanca"/>
   </url>
 
+
+  <!-- Route: Valencia → Barcelona -->
+  <url>
+    <loc>https://campervlc.com/rutas/valencia-barcelona</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/valencia-barcelona"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/valencia-barcelona?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/valencia-barcelona?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/valencia-barcelona?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/valencia-barcelona?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/valencia-barcelona?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/valencia-barcelona?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/valencia-barcelona"/>
+  </url>
+
 </urlset>
