@@ -25,7 +25,7 @@ export const FLEET: Camper[] = [
       "https://images.unsplash.com/photo-1519400197429-404ae3e0ee7e?w=1200",
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
     ],
-    priceFrom: 105,
+    priceFrom: 99,
     available: true,
   },
 ];
