@@ -24,7 +24,7 @@
     "nights": "nachten",
     "estimated": "Geschat",
     "cta": "Bekijk beschikbaarheid",
-    "priceFrom": "vanaf €99/nacht"
+    "priceFrom": "vanaf €105/nacht"
   },
   "fleet": {
     "title": "Onze vloot",
@@ -41,7 +41,8 @@
       "autonomy": "Autonomie",
       "kitchen": "Keuken",
       "exterior": "Buiten",
-      "note": "Festivaltoeslag €150. Overdracht met volledige uitleg."
+      "note": "Festivaltoeslag €150. Overdracht met volledige uitleg.",
+      "driving": "Rijden"
     },
     "features": {
       "bed": "Vast tweepersoonsbed",
@@ -65,7 +66,8 @@
       "kit3": "Zout, kruiden, koffie en basics inbegrepen",
       "ext1": "Luifel, kampeertafel en stoelen",
       "ext2": "3 strandstoelen",
-      "ext3": "Outdoor gaskookplaat"
+      "ext3": "Outdoor gaskookplaat",
+      "transmission": "Handgeschakeld"
     }
   },
   "how": {

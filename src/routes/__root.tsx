@@ -80,14 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 105€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { name: "author", content: "Camper Retreat VLC" },
       { property: "og:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 105€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 105€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
       { name: "theme-color", content: "#0f1b2d" },
@@ -144,6 +144,102 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               priceRange: "€€",
               currenciesAccepted: "EUR",
               paymentAccepted: "Cash, Credit Card, Bank Transfer",
+            },
+            {
+              "@type": "Product",
+              name: "McLouis Yearling 89G - Alquiler autocaravana Valencia",
+              image: [
+                "https://yescapa.twic.pics/rental/picture/b21e5a9f-a4d1-446d-b92c-c86a11a0e037_1728652498",
+              ],
+              description:
+                "Alquiler de autocaravana para 5 personas en Valencia. A/C, ducha, cocina completa, panel solar, pet friendly.",
+              brand: { "@type": "Brand", name: "McLouis" },
+              offers: {
+                "@type": "AggregateOffer",
+                priceCurrency: "EUR",
+                lowPrice: "99",
+                highPrice: "169",
+                offerCount: "4",
+                availability: "https://schema.org/InStock",
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "5.0",
+                reviewCount: "47",
+              },
+            },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "¿Qué documentación necesito?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Carné de conducir B válido (mínimo 2 años de antigüedad), DNI o pasaporte.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Cuál es el depósito de garantía?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Se solicita una fianza de 900 € (por confirmar), reembolsable al finalizar el alquiler sin incidencias.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Está incluido el seguro?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Sí, seguro a todo riesgo incluido en el precio base. Opcionalmente puedes reducir la franquicia.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Dónde se recoge y entrega la autocaravana?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "En Valencia ciudad. Ofrecemos traslado al aeropuerto de Valencia como opción adicional (90 €).",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Puedo llevar mascotas?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Sí, somos pet friendly. No cobramos ningún suplemento por mascotas.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Cuántos kilómetros están incluidos?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "100 km/día incluidos. Kilómetros adicionales: 0,3 €/km (por confirmar).",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Cuál es la estancia mínima?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Temporada baja (nov–mar): 3 noches. Temporada media (abr–may, oct): 4 noches. Temporada alta (jun–sep): 5 noches.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Puedo pagar con tarjeta?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Aceptamos tarjeta, bizum y transferencia bancaria.",
+              },
             },
           ],
         }),

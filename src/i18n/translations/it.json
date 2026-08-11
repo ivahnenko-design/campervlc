@@ -24,7 +24,7 @@
     "nights": "notti",
     "estimated": "Stimato",
     "cta": "Verifica disponibilità",
-    "priceFrom": "da 99 €/notte"
+    "priceFrom": "da 105 €/notte"
   },
   "fleet": {
     "title": "La nostra flotta",
@@ -41,7 +41,8 @@
       "autonomy": "Autonomia",
       "kitchen": "Cucina",
       "exterior": "Esterno",
-      "note": "Supplemento festival 150 €. Consegna con spiegazione completa."
+      "note": "Supplemento festival 150 €. Consegna con spiegazione completa.",
+      "driving": "Guida"
     },
     "features": {
       "bed": "Letto matrimoniale fisso",
@@ -65,7 +66,8 @@
       "kit3": "Sale, spezie, caffè e basi inclusi",
       "ext1": "Tendalino, tavolo e sedie da campeggio",
       "ext2": "3 sedie da spiaggia",
-      "ext3": "Fornello a gas da esterno"
+      "ext3": "Fornello a gas da esterno",
+      "transmission": "Cambio manuale"
     }
   },
   "how": {

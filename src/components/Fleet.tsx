@@ -218,6 +218,7 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
     [t("fleet.sections.autonomy"), [t("fleet.specs.auto1"), t("fleet.specs.auto2")]],
     [t("fleet.sections.kitchen"), [t("fleet.specs.kit1"), t("fleet.specs.kit2"), t("fleet.specs.kit3")]],
     [t("fleet.sections.exterior"), [t("fleet.specs.ext1"), t("fleet.specs.ext2"), t("fleet.specs.ext3")]],
+    [t("fleet.sections.driving"), [t("fleet.specs.transmission")]],
   ];
 
   return (

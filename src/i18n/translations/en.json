@@ -24,7 +24,7 @@
     "nights": "nights",
     "estimated": "Estimated",
     "cta": "Check availability",
-    "priceFrom": "from €99/night"
+    "priceFrom": "from €105/night"
   },
   "fleet": {
     "title": "Our Fleet",
@@ -41,7 +41,8 @@
       "autonomy": "Autonomy",
       "kitchen": "Kitchen",
       "exterior": "Exterior",
-      "note": "Festival surcharge €150. Handover with full walk-through."
+      "note": "Festival surcharge €150. Handover with full walk-through.",
+      "driving": "Driving"
     },
     "features": {
       "bed": "Fixed double bed",
@@ -65,7 +66,8 @@
       "kit3": "Salt, spices, coffee and basics included",
       "ext1": "Awning, camping table and chairs",
       "ext2": "3 beach chairs",
-      "ext3": "Outdoor gas stove"
+      "ext3": "Outdoor gas stove",
+      "transmission": "Manual transmission"
     }
   },
   "how": {

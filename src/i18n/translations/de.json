@@ -24,7 +24,7 @@
     "nights": "Nächte",
     "estimated": "Geschätzt",
     "cta": "Verfügbarkeit prüfen",
-    "priceFrom": "ab 99 €/Nacht"
+    "priceFrom": "ab 105 €/Nacht"
   },
   "fleet": {
     "title": "Unsere Flotte",
@@ -41,7 +41,8 @@
       "autonomy": "Autarkie",
       "kitchen": "Küche",
       "exterior": "Außen",
-      "note": "Festivalzuschlag 150 €. Übergabe mit ausführlicher Einweisung."
+      "note": "Festivalzuschlag 150 €. Übergabe mit ausführlicher Einweisung.",
+      "driving": "Fahren"
     },
     "features": {
       "bed": "Festes Doppelbett",
@@ -65,7 +66,8 @@
       "kit3": "Salz, Gewürze, Kaffee und Basics inklusive",
       "ext1": "Markise, Campingtisch und -stühle",
       "ext2": "3 Strandstühle",
-      "ext3": "Outdoor-Gaskocher"
+      "ext3": "Outdoor-Gaskocher",
+      "transmission": "Schaltgetriebe (manuell)"
     }
   },
   "how": {
