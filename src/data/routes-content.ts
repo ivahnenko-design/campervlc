@@ -20,6 +20,7 @@ export interface RouteContent {
   days: RouteDay[];
   tips: RouteTip[];
   ctaText: Record<Lang, string>;
+  ctaButton: Record<Lang, string>;
 }
 
 // ─── Costa Blanca Norte ──────────────────────────────────────────────────────
@@ -244,13 +245,22 @@ const costaBlanca: RouteContent = {
   ],
 
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G es ideal para esta ruta autocaravana Costa Blanca: compacto para las carreteras costeras, con aire acondicionado, equipado con todo lo necesario — incluyendo 3 sillas de playa y cocina de gas exterior para cenar junto al mar. Reservar fechas →",
-    en: "Our McLouis Yearling 89G is perfect for this route: compact enough for coastal roads, air-conditioned and fully equipped — including 3 beach chairs and an outdoor gas stove for dinner by the sea. Book your dates →",
-    de: "Unser McLouis Yearling 89G ist perfekt für diese Route: kompakt genug für Küstenstraßen, klimatisiert und komplett ausgestattet — inklusive 3 Strandstühlen und einem Outdoor-Gaskocher für das Abendessen am Meer. Reisedaten buchen →",
-    it: "Il nostro McLouis Yearling 89G è perfetto per questo itinerario: compatto per le strade costiere, con aria condizionata e dotato di tutto — incluse 3 sedie da spiaggia e un fornello a gas da esterno per la cena in riva al mare. Prenota le tue date →",
-    nl: "Onze McLouis Yearling 89G is ideaal voor deze route: compact genoeg voor kustroutes, met airconditioning en volledig uitgerust — inclusief 3 strandstoelen en een outdoor gaskookplaat voor een diner aan zee. Boek je data →",
-    ru: "Наш McLouis Yearling 89G идеален для этого маршрута: компактный для прибрежных дорог, с кондиционером, укомплектован всем — включая 3 пляжных кресла и уличную газовую плиту для ужина у моря. Забронировать даты →",
-    uk: "Наш McLouis Yearling 89G ідеальний для цього маршруту: компактний для прибережних доріг, з кондиціонером, укомплектований усім — включаючи 3 пляжних крісла та вуличну газову плиту для вечері біля моря. Забронювати дати →",
+    es: "Nuestro McLouis Yearling 89G es ideal para esta ruta autocaravana Costa Blanca: compacto para las carreteras costeras, con aire acondicionado, equipado con todo lo necesario — incluyendo 3 sillas de playa y cocina de gas exterior para cenar junto al mar.",
+    en: "Our McLouis Yearling 89G is perfect for this route: compact enough for coastal roads, air-conditioned and fully equipped — including 3 beach chairs and an outdoor gas stove for dinner by the sea.",
+    de: "Unser McLouis Yearling 89G ist perfekt für diese Route: kompakt genug für Küstenstraßen, klimatisiert und komplett ausgestattet — inklusive 3 Strandstühlen und einem Outdoor-Gaskocher für das Abendessen am Meer.",
+    it: "Il nostro McLouis Yearling 89G è perfetto per questo itinerario: compatto per le strade costiere, con aria condizionata e dotato di tutto — incluse 3 sedie da spiaggia e un fornello a gas da esterno per la cena in riva al mare.",
+    nl: "Onze McLouis Yearling 89G is ideaal voor deze route: compact genoeg voor kustroutes, met airconditioning en volledig uitgerust — inclusief 3 strandstoelen en een outdoor gaskookplaat voor een diner aan zee.",
+    ru: "Наш McLouis Yearling 89G идеален для этого маршрута: компактный для прибрежных дорог, с кондиционером, укомплектован всем — включая 3 пляжных кресла и уличную газовую плиту для ужина у моря.",
+    uk: "Наш McLouis Yearling 89G ідеальний для цього маршруту: компактний для прибережних доріг, з кондиціонером, укомплектований усім — включаючи 3 пляжних крісла та вуличну газову плиту для вечері біля моря.",
+  },
+  ctaButton: {
+    es: "Reservar fechas",
+    en: "Book your dates",
+    de: "Termine buchen",
+    it: "Prenota le date",
+    nl: "Boek je data",
+    ru: "Забронировать даты",
+    uk: "Забронювати дати",
   },
 };
 
