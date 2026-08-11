@@ -11,6 +11,8 @@ export const Route = createFileRoute("/rutas/$slug")({
     if (!route) return { meta: [{ title: "Ruta no encontrada" }] };
     const base = "https://campervlc.com";
     const langs: Lang[] = ["es", "en", "de", "it", "nl", "ru", "uk"];
+    const ogImage = `${base}/images/routes/${params.slug}-hero.jpg`;
+    const ogUrl = `${base}/rutas/${params.slug}`;
     return {
       meta: [
         { title: route.metaTitle.es },
@@ -18,6 +20,15 @@ export const Route = createFileRoute("/rutas/$slug")({
         { property: "og:title", content: route.metaTitle.es },
         { property: "og:description", content: route.metaDescription.es },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: ogUrl },
+        { property: "og:image", content: ogImage },
+        { property: "og:image:width", content: "1920" },
+        { property: "og:image:height", content: "720" },
+        { property: "og:site_name", content: "Camper Retreat VLC" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: route.metaTitle.es },
+        { name: "twitter:description", content: route.metaDescription.es },
+        { name: "twitter:image", content: ogImage },
         ...langs.map((l) => ({
           property: "og:locale:alternate",
           content: l,

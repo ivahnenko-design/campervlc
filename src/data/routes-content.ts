@@ -42,7 +42,7 @@ const costaBlanca: RouteContent = {
   },
 
   metaDescription: {
-    es: "Ruta autocaravana Costa Blanca en 5 días desde Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea y Alicante. Alquiler autocaravana Valencia desde 105 €/noche. Guía completa con áreas de servicio y consejos.",
+    es: "Ruta autocaravana Costa Blanca en 5 días desde Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea y Alicante. Alquiler autocaravana Valencia desde 99 €/noche. Guía completa con áreas de servicio y consejos.",
     en: "Costa Blanca campervan route in 5 days from Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea and Alicante. Complete guide with motorhome stopovers and practical tips.",
     de: "Wohnmobil-Route Costa Blanca in 5 Tagen ab Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea und Alicante. Vollständiger Guide mit Stellplätzen und praktischen Tipps.",
     it: "Itinerario camper Costa Blanca in 5 giorni da Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea e Alicante. Guida completa con aree di sosta e consigli pratici.",
@@ -335,7 +335,7 @@ const valenciaBarcalona: RouteContent = {
   },
 
   metaDescription: {
-    es: "Ruta autocaravana Valencia Barcelona en 5 días: Peñíscola, delta del ebro autocaravana, Tarragona, Sitges y Barcelona. Viajar en autocaravana costa dorada desde 105 €/noche. Guía completa con áreas de servicio.",
+    es: "Ruta autocaravana Valencia Barcelona en 5 días: Peñíscola, delta del ebro autocaravana, Tarragona, Sitges y Barcelona. Viajar en autocaravana costa dorada desde 99 €/noche. Guía completa con áreas de servicio.",
     en: "Valencia to Barcelona campervan route in 5 days: Peñíscola, Ebro Delta, Tarragona, Sitges and Barcelona. Complete guide with motorhome stopovers, practical tips and budget breakdown.",
     de: "Wohnmobil-Route Valencia–Barcelona in 5 Tagen: Peñíscola, Ebro-Delta, Tarragona, Sitges und Barcelona. Vollständiger Guide mit Stellplätzen, Tipps und Kostenübersicht.",
     it: "Itinerario camper Valencia–Barcellona in 5 giorni: Peñíscola, Delta dell'Ebro, Tarragona, Sitges e Barcellona. Guida completa con aree di sosta e consigli pratici.",
