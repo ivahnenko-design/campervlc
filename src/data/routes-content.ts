@@ -485,13 +485,13 @@ const valenciaBarcalona: RouteContent = {
   tips: [
     {
       tip: {
-        es: "Presupuesto: alquiler desde 105 €/noche + combustible ~90 € para 700 km + áreas ~60 €. Más barato que hotel más coche de alquiler, y con una libertad incomparable.",
-        en: "Budget: hire from 105 EUR/night + fuel approx. 90 EUR for 700 km + stopovers approx. 60 EUR. Cheaper than a hotel plus rental car, and with incomparably more freedom.",
-        de: "Budget: Miete ab 105 Euro pro Nacht + Kraftstoff ca. 90 Euro fuer 700 km + Stellplaetze ca. 60 Euro. Guenstiger als Hotel plus Mietwagen — und mit unvergleichlich mehr Freiheit.",
-        it: "Budget: noleggio da 105 euro a notte + carburante circa 90 euro per 700 km + aree di sosta circa 60 euro. Piu' economico di hotel piu' auto a noleggio, con una liberta' incomparabile.",
-        nl: "Budget: huur vanaf 105 euro per nacht + brandstof ca. 90 euro voor 700 km + camperplaatsen ca. 60 euro. Goedkoper dan hotel plus huurauto, en met onvergelijkbaar veel meer vrijheid.",
-        ru: "Бюджет: аренда от 105 €/ночь + топливо ~90 € на 700 км + площадки ~60 €. Дешевле, чем отель + аренда машины, а свободы несравнимо больше.",
-        uk: "Бюджет: оренда від 105 €/ніч + паливо ~90 € на 700 км + майданчики ~60 €. Дешевше, ніж готель + оренда авто, а свободи незрівнянно більше.",
+        es: "Presupuesto: alquiler desde 99 €/noche + combustible ~90 € para 700 km + áreas ~60 €. Más barato que hotel más coche de alquiler, y con una libertad incomparable.",
+        en: "Budget: hire from 99 EUR/night + fuel approx. 90 EUR for 700 km + stopovers approx. 60 EUR. Cheaper than a hotel plus rental car, and with incomparably more freedom.",
+        de: "Budget: Miete ab 99 Euro pro Nacht + Kraftstoff ca. 90 Euro fuer 700 km + Stellplaetze ca. 60 Euro. Guenstiger als Hotel plus Mietwagen — und mit unvergleichlich mehr Freiheit.",
+        it: "Budget: noleggio da 99 euro a notte + carburante circa 90 euro per 700 km + aree di sosta circa 60 euro. Piu' economico di hotel piu' auto a noleggio, con una liberta' incomparabile.",
+        nl: "Budget: huur vanaf 99 euro per nacht + brandstof ca. 90 euro voor 700 km + camperplaatsen ca. 60 euro. Goedkoper dan hotel plus huurauto, en met onvergelijkbaar veel meer vrijheid.",
+        ru: "Бюджет: аренда от 99 €/ночь + топливо ~90 € на 700 км + площадки ~60 €. Дешевле, чем отель + аренда машины, а свободы несравнимо больше.",
+        uk: "Бюджет: оренда від 99 €/ніч + паливо ~90 € на 700 км + майданчики ~60 €. Дешевше, ніж готель + оренда авто, а свободи незрівнянно більше.",
       },
     },
     {
