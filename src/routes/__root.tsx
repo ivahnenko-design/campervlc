@@ -88,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
       { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 105€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp" },
+      { property: "og:image", content: "https://campervlc.com/images/og-home.jpg" },
+      { name: "twitter:image", content: "https://campervlc.com/images/og-home.jpg" },
       { name: "theme-color", content: "#0f1b2d" },
     ],
     scripts: [
