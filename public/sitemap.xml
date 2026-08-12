@@ -148,4 +148,21 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/valencia-barcelona"/>
   </url>
 
+
+  <!-- Route: Pais Vasco -->
+  <url>
+    <loc>https://campervlc.com/rutas/pais-vasco</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/pais-vasco"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/pais-vasco?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/pais-vasco?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/pais-vasco?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/pais-vasco?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/pais-vasco?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/pais-vasco?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/pais-vasco"/>
+  </url>
+
 </urlset>
