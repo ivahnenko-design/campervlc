@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { buildWhatsAppLink } from "@/lib/constants";
 
@@ -43,20 +44,20 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <a href="#top" className="flex items-center gap-2 text-foreground">
+          <Link to="/" className="flex items-center gap-2 text-foreground">
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
               <CamperIcon className="h-5 w-5" />
             </span>
             <span className="font-display text-lg leading-none">
               Camper Retreat <span className="text-primary">VLC</span>
             </span>
-          </a>
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-7">
             {SECTIONS.map((s) => (
               <a
                 key={s}
-                href={`#${s}`}
+                href={`/#${s}`}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {t(`nav.${s}`)}
@@ -89,7 +90,7 @@ export function Navbar() {
             {SECTIONS.map((s) => (
               <a
                 key={s}
-                href={`#${s}`}
+                href={`/#${s}`}
                 onClick={() => setMobileOpen(false)}
                 className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface/70"
               >
