@@ -7,7 +7,7 @@ import { SectionHeader } from "./Fleet";
 const ROUTES = [
   { id: "r1", gradient: "from-amber-500/30 to-rose-500/20", slug: "costa-blanca" },
   { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco" },
-  { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: null },
+  { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia" },
   { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona" },
 ] as const;
 
