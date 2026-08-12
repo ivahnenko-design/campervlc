@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { name: "description", content: "Alquiler de autocaravanas en Valencia desde 99€/noche. McLouis Yearling 89G para hasta 5 personas. Todo incluido. Reserva por WhatsApp en minutos." },
       { name: "author", content: "Camper Retreat VLC" },
       { property: "og:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
       { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
@@ -239,6 +239,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               acceptedAnswer: {
                 "@type": "Answer",
                 text: "Aceptamos tarjeta, bizum y transferencia bancaria.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "¿Cómo alquilar una autocaravana en Valencia?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Elige tus fechas en el calculador de precio, escríbenos por WhatsApp y te confirmamos disponibilidad en minutos. Para reservar se paga un depósito del 50% (o el 100% con un 5% de descuento). El resto antes de la recogida.",
               },
             },
           ],

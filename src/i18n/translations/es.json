@@ -11,7 +11,7 @@
   "hero": {
     "line1": "Tu hogar sobre ruedas.",
     "line2": "La carretera, tu destino.",
-    "subheadline": "Alquila nuestra autocaravana premium McLouis Yearling 89G en Valencia. Hasta 5 personas. Todo incluido.",
+    "subheadline": "¿Quieres alquilar una autocaravana en Valencia? Nuestra McLouis Yearling 89G tiene espacio para 5 personas. Todo incluido.",
     "badges": {
       "rating": "5.0 en Yescapa",
       "capacity": "Hasta 5 personas",
@@ -208,7 +208,9 @@
     "q7": "¿Cuál es la estancia mínima?",
     "a7": "Temporada baja (nov–mar): 3 noches. Temporada media (abr–may, oct): 4 noches. Temporada alta (jun–sep): 5 noches.",
     "q8": "¿Puedo pagar con tarjeta?",
-    "a8": "Aceptamos tarjeta, bizum y transferencia bancaria."
+    "a8": "Aceptamos tarjeta, bizum y transferencia bancaria.",
+    "q9": "¿Cómo alquilar una autocaravana en Valencia?",
+    "a9": "Elige tus fechas en el calculador de precio, escríbenos por WhatsApp y te confirmamos disponibilidad en minutos. Para reservar se paga un depósito del 50% (o el 100% con un 5% de descuento). El resto antes de la recogida."
   },
   "contact": {
     "title": "Contáctanos",
