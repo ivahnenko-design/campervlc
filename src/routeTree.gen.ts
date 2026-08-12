@@ -9,11 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
 import { Route as CancelBookingRouteImport } from './routes/cancel-booking'
 import { Route as BookingSuccessRouteImport } from './routes/booking-success'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RutasSlugRouteImport } from './routes/rutas.$slug'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
   id: '/cancellation-policy',
   path: '/cancellation-policy',
@@ -34,18 +53,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RutasSlugRoute = RutasSlugRouteImport.update({
+  id: '/rutas/$slug',
+  path: '/rutas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/cancel-booking': typeof CancelBookingRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/rutas/$slug': typeof RutasSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking-success': typeof BookingSuccessRoute
   '/cancel-booking': typeof CancelBookingRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/rutas/$slug': typeof RutasSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,19 +85,42 @@ export interface FileRoutesById {
   '/booking-success': typeof BookingSuccessRoute
   '/cancel-booking': typeof CancelBookingRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/rutas/$slug': typeof RutasSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/booking-success' | '/cancel-booking' | '/cancellation-policy'
+    | '/'
+    | '/booking-success'
+    | '/cancel-booking'
+    | '/cancellation-policy'
+    | '/cookies'
+    | '/privacy'
+    | '/terms'
+    | '/rutas/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/booking-success' | '/cancel-booking' | '/cancellation-policy'
+  to:
+    | '/'
+    | '/booking-success'
+    | '/cancel-booking'
+    | '/cancellation-policy'
+    | '/cookies'
+    | '/privacy'
+    | '/terms'
+    | '/rutas/$slug'
   id:
     | '__root__'
     | '/'
     | '/booking-success'
     | '/cancel-booking'
     | '/cancellation-policy'
+    | '/cookies'
+    | '/privacy'
+    | '/terms'
+    | '/rutas/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -73,10 +128,35 @@ export interface RootRouteChildren {
   BookingSuccessRoute: typeof BookingSuccessRoute
   CancelBookingRoute: typeof CancelBookingRoute
   CancellationPolicyRoute: typeof CancellationPolicyRoute
+  CookiesRoute: typeof CookiesRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
+  RutasSlugRoute: typeof RutasSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cancellation-policy': {
       id: '/cancellation-policy'
       path: '/cancellation-policy'
@@ -105,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rutas/$slug': {
+      id: '/rutas/$slug'
+      path: '/rutas/$slug'
+      fullPath: '/rutas/$slug'
+      preLoaderRoute: typeof RutasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -113,6 +200,10 @@ const rootRouteChildren: RootRouteChildren = {
   BookingSuccessRoute: BookingSuccessRoute,
   CancelBookingRoute: CancelBookingRoute,
   CancellationPolicyRoute: CancellationPolicyRoute,
+  CookiesRoute: CookiesRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
+  RutasSlugRoute: RutasSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

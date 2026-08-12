@@ -12,7 +12,7 @@ export function Contact() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader title={t("contact.title")} />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="mt-12 max-w-lg">
           <div className="rounded-2xl border border-border/60 bg-surface p-7 sm:p-9">
             <ul className="space-y-5">
               <li className="flex items-start gap-3">
@@ -46,18 +46,6 @@ export function Contact() {
                 <span>{t("contact.hours")}</span>
               </li>
             </ul>
-          </div>
-
-          <div className="rounded-2xl border border-border/60 bg-surface p-7 sm:p-9 flex flex-col justify-center gap-4">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-semibold text-[#0a0e1a] hover:brightness-110 transition"
-            >
-              <MessageCircle className="h-4 w-4" />
-              {t("contact.whatsapp")}
-            </a>
           </div>
         </div>
       </div>
