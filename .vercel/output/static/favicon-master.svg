@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <rect width="220" height="220" fill="#0f1b2d" />
+  <g fill="none" stroke="#f5a623" stroke-width="12" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Van silhouette: roof -> rear -> bottom -> hood -> windshield (closing diagonal) -->
+    <path d="M85,53 L195,53 L195,138 L25,138 L45,88 Z" />
+    <!-- Window -->
+    <rect x="140" y="73" width="32" height="32" />
+    <!-- Wheels -->
+    <circle cx="60" cy="146" r="20" />
+    <circle cx="165" cy="146" r="20" />
+    <!-- Baseline connecting the wheels -->
+    <line x1="15" y1="166" x2="205" y2="166" />
+  </g>
+</svg>

@@ -32,13 +32,13 @@ const costaBlanca: RouteContent = {
   slug: "costa-blanca",
 
   metaTitle: {
-    es: "Ruta Autocaravana Costa Blanca: Valencia a Alicante en 5 Días | Camper Retreat VLC",
-    en: "Costa Blanca Campervan Route: Valencia to Alicante in 5 Days | Camper Retreat VLC",
-    de: "Wohnmobil-Route Costa Blanca: Valencia nach Alicante in 5 Tagen | Camper Retreat VLC",
-    it: "Itinerario Camper Costa Blanca: Da Valencia ad Alicante in 5 Giorni | Camper Retreat VLC",
-    nl: "Camperroute Costa Blanca: Van Valencia naar Alicante in 5 Dagen | Camper Retreat VLC",
-    ru: "Маршрут на автодоме Коста-Бланка: из Валенсии в Аликанте за 5 дней | Camper Retreat VLC",
-    uk: "Маршрут на автодімі Коста-Бланка: з Валенсії до Аліканте за 5 днів | Camper Retreat VLC",
+    es: "Ruta Autocaravana Costa Blanca: Valencia a Alicante en 3-5 Días | Camper Retreat VLC",
+    en: "Costa Blanca Campervan Route: Valencia to Alicante in 3-5 Days | Camper Retreat VLC",
+    de: "Wohnmobil-Route Costa Blanca: Valencia nach Alicante in 3-5 Tagen | Camper Retreat VLC",
+    it: "Itinerario Camper Costa Blanca: Da Valencia ad Alicante in 3-5 Giorni | Camper Retreat VLC",
+    nl: "Camperroute Costa Blanca: Van Valencia naar Alicante in 3-5 Dagen | Camper Retreat VLC",
+    ru: "Маршрут на автодоме Коста-Бланка: из Валенсии в Аликанте за 3-5 дней | Camper Retreat VLC",
+    uk: "Маршрут на автодімі Коста-Бланка: з Валенсії до Аліканте за 3-5 днів | Camper Retreat VLC",
   },
 
   metaDescription: {
@@ -52,13 +52,13 @@ const costaBlanca: RouteContent = {
   },
 
   heroTitle: {
-    es: "Ruta autocaravana Costa Blanca: de Valencia a Alicante en 5 días",
-    en: "Costa Blanca Campervan Route: Valencia to Alicante in 5 Days",
-    de: "Wohnmobil-Route Costa Blanca: Von Valencia nach Alicante in 5 Tagen",
-    it: "Itinerario Camper Costa Blanca: Da Valencia ad Alicante in 5 Giorni",
-    nl: "Camperroute Costa Blanca: Van Valencia naar Alicante in 5 Dagen",
-    ru: "Маршрут на автодоме по Коста-Бланке: из Валенсии в Аликанте за 5 дней",
-    uk: "Маршрут на автодімі по Коста-Бланці: з Валенсії до Аліканте за 5 днів",
+    es: "Ruta autocaravana Costa Blanca: de Valencia a Alicante en 3-5 días",
+    en: "Costa Blanca Campervan Route: Valencia to Alicante in 3-5 Days",
+    de: "Wohnmobil-Route Costa Blanca: Von Valencia nach Alicante in 3-5 Tagen",
+    it: "Itinerario Camper Costa Blanca: Da Valencia ad Alicante in 3-5 Giorni",
+    nl: "Camperroute Costa Blanca: Van Valencia naar Alicante in 3-5 Dagen",
+    ru: "Маршрут на автодоме по Коста-Бланке: из Валенсии в Аликанте за 3-5 дней",
+    uk: "Маршрут на автодімі по Коста-Бланці: з Валенсії до Аліканте за 3-5 днів",
   },
 
   heroImage: "/images/routes/costa-blanca-hero.jpg",
@@ -74,13 +74,13 @@ const costaBlanca: RouteContent = {
   },
 
   intro: {
-    es: "La Costa Blanca es el destino más práctico para el alquiler autocaravana desde Valencia. En apenas 200 kilómetros de litoral tienes playas urbanas con toda la infraestructura, calas salvajes donde amanecer a solas con el mar y una red de áreas de servicio, campings abiertos todo el año y puntos de agua cada pocos kilómetros. Esta ruta autocaravana Costa Blanca está diseñada para 4-5 días tranquilos, sin madrugones ni etapas agotadoras. Ningún tramo supera la hora de conducción. Perfecta para familias con niños, parejas y para quienes viajar en autocaravana sea algo nuevo. Distancia total: ~380 km ida y vuelta. Mejor época: todo el año.",
-    en: "The Costa Blanca is the most practical base for a campervan trip from Valencia. In 200 kilometres of coastline you have urban beaches with full facilities, wild coves for a private sunrise by the sea, and a solid network of motorhome stopovers, year-round campsites and water points every few kilometres. This route is designed for 4-5 relaxed days, with no early alarms or exhausting driving legs. No single stage exceeds one hour behind the wheel. Perfect for families with children, couples and first-time campervanners. Total distance: ~380 km return. Best time to go: year-round.",
-    de: "Die Costa Blanca ist der praktischste Ausgangspunkt für eine Wohnmobilreise ab Valencia. Auf 200 Küstenkilometern gibt es Stadtstrände mit vollständiger Infrastruktur, wilde Buchten für einen ruhigen Sonnenaufgang allein am Meer und ein gut ausgebautes Netz aus Stellplätzen, ganzjährig geöffneten Campingplätzen und Wasserpunkten alle paar Kilometer. Die Route ist auf 4–5 entspannte Tage ausgelegt, ohne frühe Aufstehzeiten und erschöpfende Fahretappen. Keine Etappe überschreitet eine Stunde Fahrzeit. Ideal für Familien mit Kindern, Paare und alle, die zum ersten Mal im Wohnmobil unterwegs sind. Gesamtstrecke: ~380 km Hin- und Rückfahrt. Beste Reisezeit: ganzjährig.",
-    it: "La Costa Blanca è la meta più pratica per un viaggio in camper da Valencia. In 200 chilometri di costa si trovano spiagge urbane con ogni infrastruttura, calette selvagge per vivere l'alba in solitudine con il mare e una rete solida di aree di sosta, campeggi aperti tutto l'anno e punti d'acqua ogni pochi chilometri. L'itinerario è pensato per 4-5 giorni rilassati, senza sveglie mattutine né tappe estenuanti. Nessuna tappa supera l'ora di guida. Ideale per famiglie con bambini, coppie e per chi noleggia un camper per la prima volta. Distanza totale: ~380 km andata e ritorno. Periodo migliore: tutto l'anno.",
-    nl: "De Costa Blanca is de meest praktische bestemming voor een camperreis vanuit Valencia. In 200 kilometer kustlijn vind je stadsstranden met alle faciliteiten, wilde baaien voor een stille zonsopkomst met de zee, en een goed ontwikkeld netwerk van camperplaatsen, het hele jaar geopende campings en waterplaatsen elke paar kilometer. De route is ontworpen voor 4-5 ontspannen dagen, zonder vroeg opstaan of vermoeiende ritten. Geen etappe duurt langer dan een uur rijden. Ideaal voor gezinnen met kinderen, stellen en wie voor het eerst in een camper reist. Totale afstand: ~380 km heen en terug. Beste reistijd: het hele jaar.",
-    ru: "Коста-Бланка — самый практичный старт для путешествия на автодоме из Валенсии. На 200 километрах побережья есть городские пляжи со всей инфраструктурой, дикие бухты для одиноких рассветов у моря и плотная сеть площадок для автодомов, кемпингов и точек набора воды каждые несколько километров. Маршрут рассчитан на 4-5 спокойных дней, без ранних подъёмов и утомительных перегонов. Ни один участок не превышает часа за рулём. Идеально для семей с детьми, пар и для тех, кто арендует автодом впервые. Дистанция: ~380 км туда-обратно. Лучшее время: круглый год.",
-    uk: "Коста-Бланка — найпрактичніший старт для подорожі на автодімі з Валенсії. На 200 кілометрах узбережжя є міські пляжі з повною інфраструктурою, дикі бухти для одиноких світанків біля моря і щільна мережа майданчиків для автодімів, кемпінгів і точок набору води кожні кілька кілометрів. Маршрут розрахований на 4-5 спокійних днів, без ранніх підйомів і виснажливих перегонів. Жодна ділянка не перевищує години за кермом. Ідеально для сімей з дітьми, пар і для тих, хто орендує автодім вперше. Відстань: ~380 км туди-назад. Найкращий час: цілий рік.",
+    es: "La Costa Blanca es el destino más práctico para el alquiler autocaravana desde Valencia. En apenas 200 kilómetros de litoral tienes playas urbanas con toda la infraestructura, calas salvajes donde amanecer a solas con el mar y una red de áreas de servicio, campings abiertos todo el año y puntos de agua cada pocos kilómetros. Esta ruta autocaravana Costa Blanca está diseñada para 3-5 días tranquilos, sin madrugones ni etapas agotadoras. Ningún tramo supera la hora de conducción. Perfecta para familias con niños, parejas y para quienes viajar en autocaravana sea algo nuevo. Distancia total: ~380 km ida y vuelta. Mejor época: todo el año.",
+    en: "The Costa Blanca is the most practical base for a campervan trip from Valencia. In 200 kilometres of coastline you have urban beaches with full facilities, wild coves for a private sunrise by the sea, and a solid network of motorhome stopovers, year-round campsites and water points every few kilometres. This route is designed for 3-5 relaxed days, with no early alarms or exhausting driving legs. No single stage exceeds one hour behind the wheel. Perfect for families with children, couples and first-time campervanners. Total distance: ~380 km return. Best time to go: year-round.",
+    de: "Die Costa Blanca ist der praktischste Ausgangspunkt für eine Wohnmobilreise ab Valencia. Auf 200 Küstenkilometern gibt es Stadtstrände mit vollständiger Infrastruktur, wilde Buchten für einen ruhigen Sonnenaufgang allein am Meer und ein gut ausgebautes Netz aus Stellplätzen, ganzjährig geöffneten Campingplätzen und Wasserpunkten alle paar Kilometer. Die Route ist auf 3-5 entspannte Tage ausgelegt, ohne frühe Aufstehzeiten und erschöpfende Fahretappen. Keine Etappe überschreitet eine Stunde Fahrzeit. Ideal für Familien mit Kindern, Paare und alle, die zum ersten Mal im Wohnmobil unterwegs sind. Gesamtstrecke: ~380 km Hin- und Rückfahrt. Beste Reisezeit: ganzjährig.",
+    it: "La Costa Blanca è la meta più pratica per un viaggio in camper da Valencia. In 200 chilometri di costa si trovano spiagge urbane con ogni infrastruttura, calette selvagge per vivere l'alba in solitudine con il mare e una rete solida di aree di sosta, campeggi aperti tutto l'anno e punti d'acqua ogni pochi chilometri. L'itinerario è pensato per 3-5 giorni rilassati, senza sveglie mattutine né tappe estenuanti. Nessuna tappa supera l'ora di guida. Ideale per famiglie con bambini, coppie e per chi noleggia un camper per la prima volta. Distanza totale: ~380 km andata e ritorno. Periodo migliore: tutto l'anno.",
+    nl: "De Costa Blanca is de meest praktische bestemming voor een camperreis vanuit Valencia. In 200 kilometer kustlijn vind je stadsstranden met alle faciliteiten, wilde baaien voor een stille zonsopkomst met de zee, en een goed ontwikkeld netwerk van camperplaatsen, het hele jaar geopende campings en waterplaatsen elke paar kilometer. De route is ontworpen voor 3-5 ontspannen dagen, zonder vroeg opstaan of vermoeiende ritten. Geen etappe duurt langer dan een uur rijden. Ideaal voor gezinnen met kinderen, stellen en wie voor het eerst in een camper reist. Totale afstand: ~380 km heen en terug. Beste reistijd: het hele jaar.",
+    ru: "Коста-Бланка — самый практичный старт для путешествия на автодоме из Валенсии. На 200 километрах побережья есть городские пляжи со всей инфраструктурой, дикие бухты для одиноких рассветов у моря и плотная сеть площадок для автодомов, кемпингов и точек набора воды каждые несколько километров. Маршрут рассчитан на 3-5 спокойных дней, без ранних подъёмов и утомительных перегонов. Ни один участок не превышает часа за рулём. Идеально для семей с детьми, пар и для тех, кто арендует автодом впервые. Дистанция: ~380 км туда-обратно. Лучшее время: круглый год.",
+    uk: "Коста-Бланка — найпрактичніший старт для подорожі на автодімі з Валенсії. На 200 кілометрах узбережжя є міські пляжі з повною інфраструктурою, дикі бухти для одиноких світанків біля моря і щільна мережа майданчиків для автодімів, кемпінгів і точок набору води кожні кілька кілометрів. Маршрут розрахований на 3-5 спокійних днів, без ранніх підйомів і виснажливих перегонів. Жодна ділянка не перевищує години за кермом. Ідеально для сімей з дітьми, пар і для тих, хто орендує автодім вперше. Відстань: ~380 км туди-назад. Найкращий час: цілий рік.",
   },
 
   days: [
