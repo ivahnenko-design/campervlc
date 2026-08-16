@@ -1,9 +1,14 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, MapPin, Lightbulb, ChevronLeft } from "lucide-react";
+import { ArrowRight, MapPin, Lightbulb, ChevronLeft, BadgeCheck } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { getRouteBySlug, type Lang } from "@/data/routes-content";
+import {
+  getRouteBySlug,
+  ROUTE_BYLINE,
+  ROUTE_DATE_MODIFIED,
+  type Lang,
+} from "@/data/routes-content";
 
 export const Route = createFileRoute("/rutas/$slug")({
   head: ({ params }) => {
@@ -51,7 +56,12 @@ export const Route = createFileRoute("/rutas/$slug")({
             "@type": "Article",
             headline: route.heroTitle.es,
             description: route.metaDescription.es,
-            author: { "@type": "Organization", name: "Camper Retreat VLC" },
+            author: {
+              "@type": "Organization",
+              name: "Camper Retreat VLC",
+              url: base,
+            },
+            dateModified: ROUTE_DATE_MODIFIED,
             publisher: {
               "@type": "Organization",
               name: "Camper Retreat VLC",
@@ -112,6 +122,11 @@ function RoutePageComponent() {
             {t(route.heroTitle)}
           </h1>
           <p className="mt-5 text-lg text-muted-foreground">{t(route.heroSubtitle)}</p>
+
+          <p className="mt-5 flex items-start gap-1.5 text-xs text-muted-foreground/70">
+            <BadgeCheck className="h-3.5 w-3.5 shrink-0 mt-px text-primary/60" aria-hidden="true" />
+            <span>{ROUTE_BYLINE[lang] ?? ROUTE_BYLINE.es}</span>
+          </p>
         </div>
       </section>
 
