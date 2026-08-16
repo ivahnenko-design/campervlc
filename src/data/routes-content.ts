@@ -1097,6 +1097,17 @@ const andalucia: RouteContent = {
     },
     {
       tip: {
+        es: "Invierno: hicimos esta ruta en diciembre y fue un descubrimiento: 17-19 grados junto al mar de día, la Alhambra y Ronda sin colas, las áreas medio vacías. Andalucía en invierno es la misma ruta, pero solo para ti. Único aviso: en la Alpujarra las noches rondan los cero grados, la calefacción se agradece (nuestra autocaravana la tiene).",
+        en: "Winter: we ran this route in December and it was a revelation: 17-19 degrees by the sea during the day, the Alhambra and Ronda without the queues, the stopovers half empty. Andalusia in winter is the same route, but all to yourself. One caveat: nights in the Alpujarra hover around zero, so the heating earns its keep (our campervan has it).",
+        de: "Winter: Wir sind diese Route im Dezember gefahren, und sie war eine Entdeckung: tagsüber 17-19 Grad am Meer, die Alhambra und Ronda ohne Schlangen, die Stellplätze halb leer. Andalusien im Winter ist dieselbe Route, nur ganz für dich allein. Ein Hinweis: In der Alpujarra liegen die Nächte um null Grad, da zahlt sich die Heizung aus (unser Wohnmobil hat eine).",
+        it: "Inverno: abbiamo percorso questo itinerario a dicembre ed è stata una scoperta: 17-19 gradi sul mare di giorno, l'Alhambra e Ronda senza code, le aree mezze vuote. L'Andalusia d'inverno è lo stesso itinerario, ma tutto per te. Un solo avviso: in Alpujarra le notti sfiorano lo zero, il riscaldamento fa comodo (il nostro camper ce l'ha).",
+        nl: "Winter: we reden deze route in december en dat was een openbaring: overdag 17-19 graden aan zee, de Alhambra en Ronda zonder rijen, de camperplaatsen halfleeg. Andalusië in de winter is dezelfde route, maar dan helemaal voor jou. Eén kanttekening: in de Alpujarra zakt het 's nachts naar het vriespunt, verwarming is dan welkom (onze camper heeft die).",
+        ru: "Зима: мы проходили этот маршрут в декабре — и это открытие: днём у моря +17-19, Альгамбра и Ронда без толп, площадки полупустые. Андалусия зимой — это тот же маршрут, но только для вас. Единственное: в Альпухарре ночью около нуля, пригодится отопление (в нашем автодоме оно есть).",
+        uk: "Зима: ми проходили цей маршрут у грудні — і це відкриття: удень біля моря +17-19, Альгамбра і Ронда без натовпів, майданчики напівпорожні. Андалусія взимку — це той самий маршрут, але тільки для вас. Єдине: в Альпухаррі вночі близько нуля, знадобиться опалення (у нашому автодомі воно є).",
+      },
+    },
+    {
+      tip: {
         es: "Reservas anticipadas: Alhambra con 2-4 semanas de antelación (imprescindible), campings de Cabo de Gata en agosto.",
         en: "Book in advance: Alhambra 2-4 weeks ahead (essential), Cabo de Gata campsites in August.",
         de: "Vorausbuchungen: Alhambra 2-4 Wochen im Voraus (unbedingt erforderlich), Campingplätze in Cabo de Gata im August.",
