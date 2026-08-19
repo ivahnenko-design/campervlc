@@ -41,10 +41,10 @@ export const Route = createFileRoute("/rutas/$slug")({
       ],
       links: [
         { rel: "canonical", href: `${base}/rutas/${params.slug}` },
-        { rel: "alternate", hreflang: "x-default", href: `${base}/rutas/${params.slug}` },
+        { rel: "alternate", hrefLang: "x-default", href: `${base}/rutas/${params.slug}` },
         ...langs.map((l) => ({
           rel: "alternate",
-          hreflang: l,
+          hrefLang: l,
           href: `${base}/rutas/${params.slug}?lang=${l}`,
         })),
       ],

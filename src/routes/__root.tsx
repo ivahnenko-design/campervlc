@@ -7,12 +7,19 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useMemo, type ReactNode } from "react";
+import { I18nextProvider, useTranslation } from "react-i18next";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import "../i18n";
+import {
+  getI18nForLanguage,
+  LANGUAGE_QUERY_PARAM,
+  normalizeLanguage,
+  persistLanguage,
+  readStoredLanguage,
+  resolveLanguage,
+} from "../i18n";
 
 function NotFoundComponent() {
   return (
@@ -276,8 +283,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  // Resolved from the request on the server and from <html lang> on the client,
+  // so the server markup and the first client render always agree.
+  const lang = resolveLanguage();
+
   return (
-    <html lang="es">
+    <html lang={lang}>
       <head>
         <HeadContent />
       </head>
@@ -291,7 +302,41 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const lang = resolveLanguage();
+  // Server: a per-request clone. Client: the shared singleton.
+  const i18nInstance = useMemo(() => getI18nForLanguage(lang), [lang]);
+
+  return (
+    <I18nextProvider i18n={i18nInstance}>
+      <QueryClientProvider client={queryClient}>
+        <RootHead />
+        <Outlet />
+      </QueryClientProvider>
+    </I18nextProvider>
+  );
+}
+
+function RootHead() {
   const { t, i18n } = useTranslation();
+
+  // Existing visitors kept their choice in localStorage, which the server cannot
+  // read. Adopt it once, after hydration, and mirror it into the cookie so every
+  // later request is server-rendered in the right language. An explicit ?lang=
+  // in the URL always wins.
+  useEffect(() => {
+    const hasExplicitLang = new URLSearchParams(window.location.search).has(
+      LANGUAGE_QUERY_PARAM,
+    );
+    if (hasExplicitLang) return;
+    const stored = readStoredLanguage();
+    if (stored && stored !== i18n.language) void i18n.changeLanguage(stored);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const lang = normalizeLanguage(i18n.language);
+    if (lang) persistLanguage(lang);
+  }, [i18n.language]);
 
   useEffect(() => {
     const title = t("meta.title");
@@ -314,12 +359,7 @@ function RootComponent() {
     const twDesc = document.querySelector('meta[name="twitter:description"]');
     if (twDesc) twDesc.setAttribute("content", description);
 
-    document.documentElement.lang = i18n.language;
   }, [i18n.language, t]);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-    </QueryClientProvider>
-  );
+  return null;
 }

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Globe, Check } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { LANGUAGES } from "@/i18n";
+import { LANGUAGES, persistLanguage } from "@/i18n";
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -34,7 +34,10 @@ export function LanguageSwitcher() {
             <button
               key={l.code}
               onClick={() => {
-                i18n.changeLanguage(l.code);
+                void i18n.changeLanguage(l.code);
+                // Mirror into the cookie right away so the next SSR render of any
+                // page already comes back in this language.
+                persistLanguage(l.code);
                 setOpen(false);
               }}
               className="flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-background/60"

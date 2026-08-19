@@ -17,7 +17,7 @@ export const PRICES: Record<Season, number> = {
 
 export const MIN_NIGHTS: Record<Season, number> = {
   low: 3,   // Baja
-  mid: 4,   // Medio
+  mid: 3,   // Medio
   high: 4,  // Alta
   super: 5, // Super Alta
 };
