@@ -8,6 +8,7 @@ import {
   differenceInCalendarDays,
   endOfMonth,
   format,
+  isAfter,
   isBefore,
   isSameDay,
   isWithinInterval,
@@ -17,7 +18,14 @@ import {
 import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles, Tag } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
-import { calculatePrice, getSeason, getMinNights, getPriceForDate, withIva } from "@/utils/pricing";
+import {
+  calculatePrice,
+  getSeason,
+  getMinNights,
+  getPriceForDate,
+  withIva,
+  BOOKING_MAX_DATE,
+} from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -240,7 +248,13 @@ export function BookingCalendar() {
               </div>
               <button
                 onClick={() => setMonthBase(addMonths(monthBase, 1))}
-                className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground"
+                disabled={
+                  !isBefore(
+                    startOfMonth(addMonths(monthBase, 1)),
+                    startOfMonth(BOOKING_MAX_DATE),
+                  )
+                }
+                className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground disabled:opacity-30"
                 aria-label="next month"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -574,12 +588,13 @@ function MonthGrid({
         {days.map((d, idx) => {
           if (!d) return <div key={idx} />;
           const past = isBefore(d, today);
+          const beyondMax = isAfter(d, BOOKING_MAX_DATE);
           const iso = isoDay(d);
           const isBooked = booked.has(iso);
           const isStart = range.start && isSameDay(d, range.start);
           const isEnd = range.end && isSameDay(d, range.end);
           const within = inRange(d);
-          const disabled = past || isBooked;
+          const disabled = past || beyondMax || isBooked;
 
           let cls = "aspect-square w-full rounded-md text-sm font-mono-num transition-colors ";
           if (disabled) {
