@@ -37,7 +37,10 @@ export function getMinNights(date: Date): number {
  * Ranges are inclusive and may span a year boundary.
  */
 const DATED_RANGES: Array<{ from: number; to: number; season: Season }> = [
-  // ── 2026: Christmas period widened to Dec 22 – Jan 6 ──
+  // ── 2026: October puente, then Christmas widened to Dec 22 – Jan 6 ──
+  { from: 20261005, to: 20261007, season: "mid" },   // Oct 5 – Oct 7
+  { from: 20261008, to: 20261018, season: "high" },  // puente Comunitat Valenciana + Fiesta Nacional
+  { from: 20261019, to: 20261206, season: "low" },   // Oct 19 – Dec 6
   { from: 20261207, to: 20261218, season: "mid" },   // Dec 7 – Dec 18
   { from: 20261219, to: 20261221, season: "high" },  // Dec 19 – Dec 21
   { from: 20261222, to: 20270106, season: "super" }, // Dec 22 – Jan 6 (covers 2027 Jan 1–6)
@@ -49,15 +52,15 @@ const DATED_RANGES: Array<{ from: number; to: number; season: Season }> = [
   { from: 20270315, to: 20270321, season: "high" },  // Fallas
   { from: 20270322, to: 20270324, season: "low" },   // Mar 22 – Mar 24
   { from: 20270325, to: 20270405, season: "high" },  // Semana Santa
-  { from: 20270406, to: 20270429, season: "mid" },   // Apr 6 – Apr 29
-  { from: 20270430, to: 20270502, season: "high" },  // Apr 30 – May 2
-  { from: 20270503, to: 20270531, season: "mid" },   // May 3 – May 31
+  { from: 20270406, to: 20270428, season: "mid" },   // Apr 6 – Apr 28
+  { from: 20270429, to: 20270503, season: "high" },  // Apr 29 – May 3 (Rocanrola)
+  { from: 20270504, to: 20270531, season: "mid" },   // May 4 – May 31
   { from: 20270601, to: 20270731, season: "high" },  // Jun 1 – Jul 31
   { from: 20270801, to: 20270831, season: "super" }, // Aug 1 – Aug 31
   { from: 20270901, to: 20270912, season: "high" },  // Sep 1 – Sep 12
   { from: 20270913, to: 20271007, season: "mid" },   // Sep 13 – Oct 7
-  { from: 20271008, to: 20271012, season: "high" },  // puente Comunitat Valenciana + Fiesta Nacional
-  { from: 20271013, to: 20271028, season: "low" },   // Oct 13 – Oct 28
+  { from: 20271008, to: 20271018, season: "high" },  // puente Comunitat Valenciana + Fiesta Nacional
+  { from: 20271019, to: 20271028, season: "low" },   // Oct 19 – Oct 28
   { from: 20271029, to: 20271101, season: "high" },  // Todos los Santos
   { from: 20271102, to: 20271202, season: "low" },   // Nov 2 – Dec 2
   { from: 20271203, to: 20271208, season: "high" },  // puente de diciembre
