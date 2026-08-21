@@ -19,6 +19,8 @@ export interface RouteContent {
   heroTitle: Record<Lang, string>;
   heroSubtitle: Record<Lang, string>;
   heroImage?: string;
+  /** Placeholder id for the hero photo while no image file exists yet. */
+  heroPhotoSlot?: string;
   intro: Record<Lang, string>;
   days: RouteDay[];
   tips: RouteTip[];
@@ -1160,7 +1162,282 @@ const andalucia: RouteContent = {
   },
 };
 
-export const ROUTE_PAGES: RouteContent[] = [costaBlanca, valenciaBarcalona, paisVasco, andalucia];
+// ─── Festivales 2027 ─────────────────────────────────────────────────────────
+
+const festivales2027: RouteContent = {
+  slug: "festivales-2027",
+
+  metaTitle: {
+    es: "Festivales en Autocaravana cerca de Valencia: Guía 2027 | Camper Retreat VLC",
+    en: "Festivals by Campervan near Valencia: 2027 Guide | Camper Retreat VLC",
+    de: "Festivals im Wohnmobil bei Valencia: Guide 2027 | Camper Retreat VLC",
+    it: "Festival in Camper vicino a Valencia: Guida 2027 | Camper Retreat VLC",
+    nl: "Festivals met de Camper bij Valencia: Gids 2027 | Camper Retreat VLC",
+    ru: "Фестивали в автодоме рядом с Валенсией: гид на 2027 год | Camper Retreat VLC",
+    uk: "Фестивалі в автодомі поруч з Валенсією: гід на 2027 рік | Camper Retreat VLC",
+  },
+
+  metaDescription: {
+    es: "Festivales en autocaravana en 200 km alrededor de Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola y Low Festival. Guía de festivales Valencia 2027 con zonas camper, fechas y precios. Camper festival España desde 99 €/noche.",
+    en: "Festivals by campervan within 200 km of Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola and Low Festival. 2027 dates, camper zones and honest caveats. Campervan rental in Valencia from 99 €/night.",
+    de: "Festivals im Wohnmobil im Umkreis von 200 km um Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola und Low Festival. Termine 2027, Camper-Zonen und ehrliche Hinweise. Wohnmobilmiete ab 99 €/Nacht.",
+    it: "Festival in camper entro 200 km da Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola e Low Festival. Date 2027, aree camper e avvertenze oneste. Noleggio camper a Valencia da 99 €/notte.",
+    nl: "Festivals met de camper binnen 200 km van Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola en Low Festival. Data 2027, camperzones en eerlijke kanttekeningen. Camperhuur vanaf 99 €/nacht.",
+    ru: "Фестивали в автодоме в радиусе 200 км от Валенсии: Medusa, Rototom, FIB, Arenal Sound, Rocanrola и Low Festival. Даты 2027, кемпер-зоны и честные оговорки. Аренда автодома от 99 €/сутки.",
+    uk: "Фестивалі в автодомі в радіусі 200 км від Валенсії: Medusa, Rototom, FIB, Arenal Sound, Rocanrola і Low Festival. Дати 2027, кемпер-зони та чесні застереження. Оренда автодома від 99 €/добу.",
+  },
+
+  heroTitle: {
+    es: "Festivales en autocaravana cerca de Valencia: guía 2027",
+    en: "Festivals by campervan near Valencia: the 2027 guide",
+    de: "Festivals im Wohnmobil rund um Valencia: der Guide für 2027",
+    it: "Festival in camper vicino a Valencia: la guida 2027",
+    nl: "Festivals met de camper bij Valencia: de gids voor 2027",
+    ru: "Фестивали в автодоме рядом с Валенсией: гид на 2027 год",
+    uk: "Фестивалі в автодомі поруч з Валенсією: гід на 2027 рік",
+  },
+
+  heroSubtitle: {
+    es: "Seis festivales en un radio de 200 kilómetros donde duermes en tu propia autocaravana y no en una tienda plantada sobre las piedras.",
+    en: "Six festivals within 200 kilometres where you sleep in your own campervan instead of a tent pitched on stones.",
+    de: "Sechs Festivals im Umkreis von 200 Kilometern, bei denen du im eigenen Wohnmobil schläfst statt im Zelt auf Steinen.",
+    it: "Sei festival in un raggio di 200 chilometri dove dormi nel tuo camper e non in una tenda piantata sui sassi.",
+    nl: "Zes festivals binnen 200 kilometer waar je in je eigen camper slaapt in plaats van in een tent op de stenen.",
+    ru: "Шесть фестивалей в радиусе 200 километров, где можно спать в своём автодоме, а не в палатке на камнях.",
+    uk: "Шість фестивалів у радіусі 200 кілометрів, де можна спати у своєму автодомі, а не в наметі на камінні.",
+  },
+
+  heroPhotoSlot: "festivales-2027-hero",
+
+  intro: {
+    es: "Un festival en autocaravana es otro festival. Tu propia cama en vez del saco, ducha en vez de cola, agua fría en la nevera en un agosto de cuarenta grados y la opción de irte a dormir cuando quieras y no cuando salga el último autobús. En la Comunitat Valenciana la mayoría de los grandes recintos hace tiempo que lo entendió y mantiene zonas camper propias. Hemos reunido seis festivales en autocaravana de 2027 en un radio de 200 km de Valencia, con fechas, condiciones para autocaravanas y advertencias honestas allí donde los organizadores todavía no lo han anunciado todo. Para quien busca camper festival España sin salir del Mediterráneo, la Comunitat Valenciana concentra casi todo. Las fechas, los precios y las normas se concretan a lo largo de la temporada, así que consulta las webs oficiales antes de comprar el abono.",
+    en: "A festival in a campervan is a different festival. Your own bed instead of a sleeping bag, a shower instead of a queue, cold water in the fridge through a forty-degree August, and the option to go to bed when you feel like it rather than when the last bus leaves. Most of the big sites in the Valencia region worked this out long ago and keep dedicated camper zones. We have gathered six festivals of 2027 within 200 km of Valencia, with dates, campervan conditions and honest caveats wherever the organisers have not announced everything yet. Dates, prices and rules firm up over the course of the season, so check the official sites before you buy a pass.",
+    de: "Ein Festival im Wohnmobil ist ein anderes Festival. Das eigene Bett statt Schlafsack, Dusche statt Schlange, kaltes Wasser im Kühlschrank in einem Vierzig-Grad-August und die Möglichkeit, schlafen zu gehen, wann du willst, und nicht, wenn der letzte Bus fährt. Die meisten großen Gelände in der Region Valencia haben das längst verstanden und halten eigene Camper-Zonen bereit. Wir haben sechs Festivals des Jahres 2027 im Umkreis von 200 km um Valencia zusammengestellt, mit Terminen, Bedingungen für Wohnmobile und ehrlichen Hinweisen dort, wo die Veranstalter noch nicht alles bekannt gegeben haben. Termine, Preise und Regeln werden im Lauf der Saison konkreter, prüfe also vor dem Kauf eines Tickets die offiziellen Seiten.",
+    it: "Un festival in camper è un altro festival. Il tuo letto al posto del sacco a pelo, la doccia al posto della coda, acqua fredda in frigo in un agosto da quaranta gradi e la possibilità di andare a dormire quando vuoi, non quando parte l'ultimo autobus. Nella Comunitat Valenciana la maggior parte dei grandi spazi lo ha capito da tempo e tiene aree camper dedicate. Abbiamo raccolto sei festival del 2027 entro 200 km da Valencia, con date, condizioni per i camper e avvertenze oneste dove gli organizzatori non hanno ancora annunciato tutto. Date, prezzi e regole si definiscono nel corso della stagione, quindi controllate i siti ufficiali prima di comprare l'abbonamento.",
+    nl: "Een festival met de camper is een ander festival. Je eigen bed in plaats van een slaapzak, een douche in plaats van een rij, koud water in de koelkast in een augustus van veertig graden en de mogelijkheid om te gaan slapen wanneer je wilt en niet wanneer de laatste bus vertrekt. De meeste grote terreinen in de Valenciaanse regio hebben dat allang begrepen en houden eigen camperzones aan. We hebben zes festivals van 2027 verzameld binnen 200 km van Valencia, met data, voorwaarden voor campers en eerlijke kanttekeningen waar de organisatie nog niet alles heeft aangekondigd. Data, prijzen en regels worden gedurende het seizoen concreter, dus check de officiële sites voordat je een pas koopt.",
+    ru: "Фестиваль в автодоме — это другой фестиваль. Своя кровать вместо спальника, душ вместо очереди, холодная вода в холодильнике в сорокаградусный август и возможность уехать спать, когда захочется, а не когда уйдёт последний автобус. В Валенсийском сообществе большинство крупных площадок это давно поняли и держат отдельные кемпер-зоны. Мы собрали шесть фестивалей 2027 года в радиусе 200 км от Валенсии — с датами, условиями для автодомов и честными оговорками там, где организаторы ещё не всё объявили. Даты, цены и правила уточняются в течение сезона, поэтому перед покупкой абонемента сверяйтесь с официальными сайтами.",
+    uk: "Фестиваль в автодомі — це інший фестиваль. Своє ліжко замість спальника, душ замість черги, холодна вода в холодильнику в сорокаградусному серпні і можливість поїхати спати, коли захочеться, а не коли піде останній автобус. У Валенсійському суспільстві більшість великих майданчиків це давно зрозуміли і тримають окремі кемпер-зони. Ми зібрали шість фестивалів 2027 року в радіусі 200 км від Валенсії — з датами, умовами для автодомів і чесними застереженнями там, де організатори ще не все оголосили. Дати, ціни та правила уточнюються протягом сезону, тому перед купівлею абонемента звіряйтеся з офіційними сайтами.",
+  },
+
+  days: [
+    {
+      photoSlot: "medusa-cullera",
+      title: {
+        es: "Medusa Sunbeach — Cullera, 40 km",
+        en: "Medusa Sunbeach — Cullera, 40 km",
+        de: "Medusa Sunbeach — Cullera, 40 km",
+        it: "Medusa Sunbeach — Cullera, 40 km",
+        nl: "Medusa Sunbeach — Cullera, 40 km",
+        ru: "Medusa Sunbeach — Куллера, 40 км",
+        uk: "Medusa Sunbeach — Кульєра, 40 км",
+      },
+      text: {
+        es: "El más cercano y el más multitudinario: 185.000 personas en cuatro días en 2026. La decimotercera edición se celebra del 12 al 16 de agosto de 2027 en la playa de Cullera. Música electrónica, nueve escenarios y sesiones hasta el amanecer. Para autocaravanas existe una opción aparte, el Área Camper: en 2026 costaba 120 € por plaza y exigía además el abono y un suplemento por la zona de descanso. Detalle importante: a la zona River Town Resort no se entra con autocaravana, la parcela camper es independiente. Antes de comprar, confirma qué incluye tu paquete. Desde Valencia, 40 minutos por la AP-7. Web: medusasunbeach.com",
+        en: "The closest and the biggest: 185,000 people over four days in 2026. The thirteenth edition runs from 12 to 16 August 2027 on Cullera beach. Electronic music, nine stages, sets until sunrise. Campervans have a separate option, the Área Camper: in 2026 it cost 120 € per pitch and also required the festival pass plus a supplement for the rest area. One important detail: campervans are not allowed into the River Town Resort area itself, the camper ground is separate. Confirm what your package covers before you buy. Forty minutes from Valencia on the AP-7. Web: medusasunbeach.com",
+        de: "Das nächstgelegene und größte: 185.000 Menschen an vier Tagen im Jahr 2026. Die dreizehnte Ausgabe läuft vom 12. bis 16. August 2027 am Strand von Cullera. Elektronische Musik, neun Bühnen, Sets bis zum Sonnenaufgang. Für Wohnmobile gibt es eine eigene Option, die Área Camper: 2026 kostete sie 120 € pro Stellplatz und setzte zusätzlich das Festivalticket sowie einen Aufschlag für die Ruhezone voraus. Wichtiges Detail: In die Zone River Town Resort selbst darf man nicht mit dem Wohnmobil, der Camper-Platz liegt getrennt. Kläre vor dem Kauf, was dein Paket enthält. Von Valencia 40 Minuten über die AP-7. Web: medusasunbeach.com",
+        it: "Il più vicino e il più affollato: 185.000 persone in quattro giorni nel 2026. La tredicesima edizione si tiene dal 12 al 16 agosto 2027 sulla spiaggia di Cullera. Musica elettronica, nove palchi, set fino all'alba. Per i camper c'è un'opzione a parte, l'Área Camper: nel 2026 costava 120 € a piazzola e richiedeva anche l'abbonamento e un supplemento per la zona relax. Dettaglio importante: nell'area River Town Resort non si entra in camper, la piazzola camper è separata. Prima di comprare, verificate cosa comprende il vostro pacchetto. Da Valencia 40 minuti sulla AP-7. Sito: medusasunbeach.com",
+        nl: "Het dichtstbijzijnde en het drukste: 185.000 mensen in vier dagen in 2026. De dertiende editie loopt van 12 tot 16 augustus 2027 op het strand van Cullera. Elektronische muziek, negen podia, sets tot zonsopgang. Voor campers is er een aparte optie, de Área Camper: in 2026 kostte die 120 € per plaats en vereiste daarnaast het festivalticket en een toeslag voor de rustzone. Belangrijk detail: het River Town Resort zelf mag je niet op met een camper, het camperterrein ligt apart. Controleer voor het boeken wat je pakket omvat. Vanuit Valencia 40 minuten over de AP-7. Site: medusasunbeach.com",
+        ru: "Ближайший и самый массовый: 185 000 человек за четыре дня в 2026-м. Тринадцатая эдиция пройдёт 12-16 августа 2027 года на пляже Куллеры. Электронная музыка, девять сцен, сеты до рассвета. Для автодомов есть отдельная опция Área Camper — в 2026-м она стоила 120 € за место и требовала отдельно абонемент и доплату за зону отдыха. Важная деталь: в саму зону River Town Resort автодома не пускают, кемпер-площадка отдельная. Перед покупкой уточните, что входит в ваш пакет. От Валенсии 40 минут по AP-7. Сайт: medusasunbeach.com",
+        uk: "Найближчий і наймасовіший: 185 000 людей за чотири дні у 2026-му. Тринадцята едиція пройде 12-16 серпня 2027 року на пляжі Кульєри. Електронна музика, дев'ять сцен, сети до світанку. Для автодомів є окрема опція Área Camper — у 2026-му вона коштувала 120 € за місце і вимагала окремо абонемент та доплату за зону відпочинку. Важлива деталь: у саму зону River Town Resort автодоми не пускають, кемпер-майданчик окремий. Перед купівлею уточніть, що входить у ваш пакет. Від Валенсії 40 хвилин по AP-7. Сайт: medusasunbeach.com",
+      },
+    },
+    {
+      photoSlot: "rototom-benicassim",
+      title: {
+        es: "Rototom Sunsplash — Benicàssim, 90 km",
+        en: "Rototom Sunsplash — Benicàssim, 90 km",
+        de: "Rototom Sunsplash — Benicàssim, 90 km",
+        it: "Rototom Sunsplash — Benicàssim, 90 km",
+        nl: "Rototom Sunsplash — Benicàssim, 90 km",
+        ru: "Rototom Sunsplash — Беникассим, 90 км",
+        uk: "Rototom Sunsplash — Бенікассім, 90 км",
+      },
+      text: {
+        es: "El mayor festival de reggae de Europa y el más familiar de esta lista. En 2026 se celebró del 16 al 22 de agosto; las fechas de 2027 suelen anunciarse en invierno. Aquí están las mejores condiciones para autocaravanas de la región: hay Zona Camper y Zona Camper Familia con plazas equipadas. Una semana de música, talleres, programa infantil y playa a diez minutos. Logística: salidas 45 o 46 de la AP-7, aparcamiento gratuito. Web: rototomsunsplash.com",
+        en: "Europe's biggest reggae festival and the most family-friendly on this list. In 2026 it ran from 16 to 22 August; the 2027 dates are usually announced in winter. This site has the best campervan facilities in the region: there is a Zona Camper and a Zona Camper Familia with serviced pitches. A week of music, workshops, a children's programme and the beach ten minutes away. Logistics: exits 45 or 46 off the AP-7, parking is free. Web: rototomsunsplash.com",
+        de: "Europas größtes Reggae-Festival und das familienfreundlichste dieser Liste. 2026 lief es vom 16. bis 22. August; die Termine für 2027 geben die Veranstalter meist im Winter bekannt. Hier gibt es die besten Bedingungen für Wohnmobile in der Region: eine Zona Camper und eine Zona Camper Familia mit ausgestatteten Stellplätzen. Eine Woche Musik, Workshops, Kinderprogramm und der Strand in zehn Minuten. Logistik: Ausfahrt 45 oder 46 der AP-7, Parken kostenlos. Web: rototomsunsplash.com",
+        it: "Il più grande festival reggae d'Europa e il più adatto alle famiglie di questa lista. Nel 2026 si è svolto dal 16 al 22 agosto; le date del 2027 di solito vengono annunciate in inverno. Qui ci sono le condizioni migliori della regione per i camper: ci sono una Zona Camper e una Zona Camper Familia con piazzole attrezzate. Una settimana di musica, laboratori, programma per bambini e la spiaggia a dieci minuti. Logistica: uscite 45 o 46 della AP-7, parcheggio gratuito. Sito: rototomsunsplash.com",
+        nl: "Het grootste reggaefestival van Europa en het meest gezinsvriendelijke uit deze lijst. In 2026 liep het van 16 tot 22 augustus; de data voor 2027 worden meestal in de winter aangekondigd. Hier vind je de beste campervoorzieningen van de regio: er is een Zona Camper en een Zona Camper Familia met uitgeruste plaatsen. Een week muziek, workshops, een kinderprogramma en het strand op tien minuten. Logistiek: afrit 45 of 46 van de AP-7, gratis parkeren. Site: rototomsunsplash.com",
+        ru: "Крупнейший реггей-фестиваль Европы и самый семейный из всех в списке. В 2026-м прошёл 16-22 августа; даты 2027-го организаторы обычно объявляют зимой. Здесь лучшие условия для автодомов в регионе: есть Zona Camper и Zona Camper Familia с оборудованными местами. Неделя музыки, воркшопы, детская программа, пляж в десяти минутах. Логистика: съезды 45 или 46 с AP-7, парковка бесплатная. Сайт: rototomsunsplash.com",
+        uk: "Найбільший реггі-фестиваль Європи і найсімейніший з усіх у списку. У 2026-му пройшов 16-22 серпня; дати 2027-го організатори зазвичай оголошують взимку. Тут найкращі умови для автодомів у регіоні: є Zona Camper і Zona Camper Familia з обладнаними місцями. Тиждень музики, воркшопи, дитяча програма, пляж за десять хвилин. Логістика: з'їзди 45 або 46 з AP-7, парковка безкоштовна. Сайт: rototomsunsplash.com",
+      },
+    },
+    {
+      photoSlot: "fib-benicassim",
+      title: {
+        es: "FIB — Benicàssim, 90 km",
+        en: "FIB — Benicàssim, 90 km",
+        de: "FIB — Benicàssim, 90 km",
+        it: "FIB — Benicàssim, 90 km",
+        nl: "FIB — Benicàssim, 90 km",
+        ru: "FIB — Беникассим, 90 км",
+        uk: "FIB — Бенікассім, 90 км",
+      },
+      text: {
+        es: "Un clásico del indie español desde 1995. La trigésima primera edición se celebra del 15 al 17 de julio de 2027 y los abonos ya están a la venta. El festival tiene zonas de camping con suplemento para autocaravanas. Si no consigues plaza dentro, en el propio Benicàssim funcionan áreas privadas para autocaravanas junto a la playa. Recomendamos esta opción incluso a quien ha conseguido sitio dentro: dormir lejos del escenario después de tres días de festival es un lujo aparte. Web: fiberfib.com",
+        en: "A Spanish indie classic since 1995. The thirty-first edition runs from 15 to 17 July 2027 and passes are already on sale. The festival has camping areas with a supplement for campervans. If you miss out on a pitch inside, Benicàssim itself has private campervan areas near the beach. We recommend that option even to people who did get a spot inside: sleeping away from the stage after three days of festival is a luxury of its own. Web: fiberfib.com",
+        de: "Ein Klassiker des spanischen Indie seit 1995. Die einunddreißigste Ausgabe läuft vom 15. bis 17. Juli 2027, die Tickets sind bereits im Verkauf. Das Festival hat Campingzonen mit Aufpreis für Wohnmobile. Wenn du drinnen keinen Platz bekommst: In Benicàssim selbst gibt es private Wohnmobilplätze in Strandnähe. Wir empfehlen diese Variante auch denen, die drinnen einen Platz haben: fern der Bühne zu schlafen ist nach drei Festivaltagen ein eigener Luxus. Web: fiberfib.com",
+        it: "Un classico dell'indie spagnolo dal 1995. La trentunesima edizione si tiene dal 15 al 17 luglio 2027 e gli abbonamenti sono già in vendita. Il festival ha zone di campeggio con supplemento per i camper. Se non trovate posto all'interno, a Benicàssim funzionano aree private per camper vicino alla spiaggia. Consigliamo questa opzione anche a chi ha preso posto dentro: dormire lontano dal palco dopo tre giorni di festival è un lusso a sé. Sito: fiberfib.com",
+        nl: "Een klassieker van de Spaanse indie sinds 1995. De eenendertigste editie loopt van 15 tot 17 juli 2027 en de passen zijn al te koop. Het festival heeft campingzones met toeslag voor campers. Kom je binnen niet aan een plek, dan zijn er in Benicàssim zelf private camperterreinen vlak bij het strand. We raden die optie ook aan wie binnen wel een plek heeft: ver van het podium slapen is na drie festivaldagen een luxe op zich. Site: fiberfib.com",
+        ru: "Классика испанского инди с 1995 года. Тридцать первая эдиция пройдёт 15-17 июля 2027, абонементы уже в продаже. У фестиваля есть зоны кемпинга с доплатой для жилых автомобилей. Если место внутри не досталось — в самом Беникассиме работают частные площадки для автодомов рядом с пляжем. Мы советуем этот вариант даже тем, кто взял место внутри: спать вдали от сцены после трёх дней фестиваля — отдельная роскошь. Сайт: fiberfib.com",
+        uk: "Класика іспанського інді з 1995 року. Тридцять перша едиція пройде 15-17 липня 2027, абонементи вже в продажу. У фестивалю є зони кемпінгу з доплатою для житлових автомобілів. Якщо місце всередині не дісталося — у самому Бенікассімі працюють приватні майданчики для автодомів поруч із пляжем. Ми радимо цей варіант навіть тим, хто взяв місце всередині: спати подалі від сцени після трьох днів фестивалю — окрема розкіш. Сайт: fiberfib.com",
+      },
+    },
+    {
+      photoSlot: "arenal-sound-burriana",
+      title: {
+        es: "Arenal Sound — Burriana, 65 km",
+        en: "Arenal Sound — Burriana, 65 km",
+        de: "Arenal Sound — Burriana, 65 km",
+        it: "Arenal Sound — Burriana, 65 km",
+        nl: "Arenal Sound — Burriana, 65 km",
+        ru: "Arenal Sound — Бурриана, 65 км",
+        uk: "Arenal Sound — Бурріана, 65 км",
+      },
+      text: {
+        es: "Del 29 de julio al 1 de agosto de 2027. El festival ocupa el puerto y la playa de Burriana por completo. No hay zona camper oficial, pero el ayuntamiento suele habilitar aparcamientos disuasorios donde se permite pernoctar. Alternativa a diez minutos: el camping Camí de les Serratellers, en Nules, que en años anteriores costaba desde 4,5 € por caravana y tenía autobús hasta el recinto. Práctico: el sol de agosto en Castellón no perdona, coloca el aislante en claraboyas y ventanas desde el primer día. Web: arenalsound.com, Instagram @arenal_sound",
+        en: "29 July to 1 August 2027. The festival takes over the port and the whole beach of Burriana. There is no official camper zone, but the town hall usually opens park-and-ride lots where overnight stays are allowed. An alternative ten minutes away: the Camí de les Serratellers campsite in Nules, which in past years started at 4.5 € per caravan and ran a bus to the site. Practical note: the August sun in Castellón is merciless, put blackout covers on the skylights and windows from day one. Web: arenalsound.com, Instagram @arenal_sound",
+        de: "29. Juli bis 1. August 2027. Das Festival belegt den Hafen und den gesamten Strand von Burriana. Eine offizielle Camper-Zone gibt es nicht, aber die Stadt öffnet üblicherweise Park-and-ride-Flächen, auf denen Übernachten erlaubt ist. Alternative in zehn Minuten: der Campingplatz Camí de les Serratellers in Nules, in den Vorjahren ab 4,5 € pro Wohnwagen und mit Bus zum Gelände. Praktisch: Die Augustsonne in Castellón kennt keine Gnade, bring Verdunkelung für Dachluken und Fenster vom ersten Tag an an. Web: arenalsound.com, Instagram @arenal_sound",
+        it: "Dal 29 luglio al 1 agosto 2027. Il festival occupa il porto e tutta la spiaggia di Burriana. Non c'è un'area camper ufficiale, ma il comune di solito apre parcheggi scambiatori dove è consentito pernottare. Alternativa a dieci minuti: il campeggio Camí de les Serratellers a Nules, negli anni scorsi da 4,5 € a caravan e con autobus fino al recinto. Pratico: il sole di agosto a Castellón non perdona, mettete gli oscuranti su oblò e finestrini fin dal primo giorno. Sito: arenalsound.com, Instagram @arenal_sound",
+        nl: "29 juli tot 1 augustus 2027. Het festival neemt de haven en het hele strand van Burriana in beslag. Er is geen officiële camperzone, maar de gemeente opent meestal transferparkings waar overnachten is toegestaan. Alternatief op tien minuten: camping Camí de les Serratellers in Nules, de afgelopen jaren vanaf 4,5 € per caravan en met een bus naar het terrein. Praktisch: de augustuszon in Castellón is genadeloos, zet vanaf dag één verduistering op dakluiken en ramen. Site: arenalsound.com, Instagram @arenal_sound",
+        ru: "29 июля - 1 августа 2027. Фестиваль занимает порт и пляж Буррианы целиком. Официальной кемпер-зоны нет, но мэрия обычно открывает перехватывающие парковки, где разрешена ночёвка. Альтернатива в десяти минутах: кемпинг Camí de les Serratellers в Нулесе — в прошлые годы от 4,5 € за караван, с автобусом до площадки. Практическое: августовское солнце Кастельона не щадит — затемнение на люки и окна ставьте с первого дня. Сайт: arenalsound.com, Instagram @arenal_sound",
+        uk: "29 липня - 1 серпня 2027. Фестиваль займає порт і пляж Бурріани цілком. Офіційної кемпер-зони немає, але мерія зазвичай відкриває перехоплювальні парковки, де дозволена ночівля. Альтернатива за десять хвилин: кемпінг Camí de les Serratellers у Нулесі — у минулі роки від 4,5 € за караван, з автобусом до майданчика. Практичне: серпневе сонце Кастельйона не щадить — затемнення на люки і вікна ставте з першого дня. Сайт: arenalsound.com, Instagram @arenal_sound",
+      },
+    },
+    {
+      photoSlot: "rocanrola-alicante",
+      title: {
+        es: "Rocanrola — Alicante, 170 km",
+        en: "Rocanrola — Alicante, 170 km",
+        de: "Rocanrola — Alicante, 170 km",
+        it: "Rocanrola — Alicante, 170 km",
+        nl: "Rocanrola — Alicante, 170 km",
+        ru: "Rocanrola — Аликанте, 170 км",
+        uk: "Rocanrola — Аліканте, 170 км",
+      },
+      text: {
+        es: "El único festival grande fuera del pico del verano y, por eso, el más económico en alquiler. Del 29 de abril al 1 de mayo de 2027, en el Multiespacio Rabasa. Rap, hip hop y cultura urbana, cinco escenarios y una zona Living Park con skate, grafiti y baloncesto. Para 2027 los organizadores han anunciado un camping para 2.000 personas bajo una gran carpa, con duchas, aseos, zona gastronómica y un espacio aparte para quienes llegan en autocaravana. Advertencia: en 2026 el camping se canceló y se sustituyó por lanzaderas gratuitas hasta Alicante, así que antes de comprar conviene confirmar que la zona camper funciona de verdad. Web: rocanrola.com, Instagram @festivalrocanrola",
+        en: "The only large festival outside the summer peak, and for that reason the cheapest one to rent for. From 29 April to 1 May 2027 at the Multiespacio Rabasa. Rap, hip hop and urban culture, five stages and a Living Park zone with skating, graffiti and basketball. For 2027 the organisers have announced a campsite for 2,000 people under a large marquee, with showers, toilets, a food area and a separate space for people arriving by campervan. Caveat: in 2026 the campsite was cancelled and replaced with free shuttles to Alicante, so it is worth confirming that the camper zone is genuinely running before you buy. Web: rocanrola.com, Instagram @festivalrocanrola",
+        de: "Das einzige große Festival außerhalb der Sommerspitze und deshalb das günstigste in der Miete. Vom 29. April bis 1. Mai 2027 im Multiespacio Rabasa. Rap, Hip-Hop und urbane Kultur, fünf Bühnen und eine Living-Park-Zone mit Skate, Graffiti und Basketball. Für 2027 haben die Veranstalter einen Campingplatz für 2.000 Personen unter einem großen Zelt angekündigt, mit Duschen, Toiletten, Gastrobereich und einem eigenen Bereich für Anreisende im Wohnmobil. Einschränkung: 2026 wurde der Campingplatz abgesagt und durch kostenlose Shuttles nach Alicante ersetzt, prüfe also vor dem Kauf, ob die Camper-Zone wirklich läuft. Web: rocanrola.com, Instagram @festivalrocanrola",
+        it: "L'unico grande festival fuori dal picco estivo e per questo il più conveniente per il noleggio. Dal 29 aprile al 1 maggio 2027, al Multiespacio Rabasa. Rap, hip hop e cultura urbana, cinque palchi e una zona Living Park con skate, graffiti e basket. Per il 2027 gli organizzatori hanno annunciato un campeggio per 2.000 persone sotto un grande tendone, con docce, servizi, area gastronomica e uno spazio a parte per chi arriva in camper. Avvertenza: nel 2026 il campeggio è stato annullato e sostituito da navette gratuite fino ad Alicante, quindi prima di comprare conviene verificare che l'area camper funzioni davvero. Sito: rocanrola.com, Instagram @festivalrocanrola",
+        nl: "Het enige grote festival buiten de zomerpiek en daardoor het voordeligste qua huur. Van 29 april tot 1 mei 2027 in het Multiespacio Rabasa. Rap, hiphop en stadscultuur, vijf podia en een Living Park-zone met skaten, graffiti en basketbal. Voor 2027 hebben de organisatoren een camping voor 2.000 mensen onder een grote tent aangekondigd, met douches, toiletten, een foodzone en een aparte plek voor wie met de camper komt. Kanttekening: in 2026 werd de camping geschrapt en vervangen door gratis shuttles naar Alicante, dus check voor je koopt of de camperzone echt draait. Site: rocanrola.com, Instagram @festivalrocanrola",
+        ru: "Единственный крупный фестиваль вне летнего пика, и потому самый выгодный по аренде. 29 апреля - 1 мая 2027, Multiespacio Rabasa. Рэп, хип-хоп и городская культура, пять сцен, зона Living Park со скейтом, граффити и баскетболом. На 2027-й организаторы анонсировали кемпинг на 2000 человек под большим шатром — с душами, туалетами, гастрозоной и отдельной зоной для приезжающих на кемпере. Оговорка: в 2026 году кемпинг отменяли и заменяли бесплатными шаттлами до Аликанте, так что перед покупкой стоит убедиться, что кемпер-зона действительно работает. Сайт: rocanrola.com, Instagram @festivalrocanrola",
+        uk: "Єдиний великий фестиваль поза літнім піком, і тому найвигідніший за орендою. 29 квітня - 1 травня 2027, Multiespacio Rabasa. Реп, хіп-хоп і міська культура, п'ять сцен, зона Living Park зі скейтом, графіті та баскетболом. На 2027-й організатори анонсували кемпінг на 2000 осіб під великим шатром — з душами, туалетами, гастрозоною та окремою зоною для тих, хто приїжджає на кемпері. Застереження: у 2026 році кемпінг скасовували і замінювали безкоштовними шатлами до Аліканте, тож перед купівлею варто переконатися, що кемпер-зона справді працює. Сайт: rocanrola.com, Instagram @festivalrocanrola",
+      },
+    },
+    {
+      photoSlot: "low-festival-torrevieja",
+      title: {
+        es: "Low Festival — Torrevieja, 180 km",
+        en: "Low Festival — Torrevieja, 180 km",
+        de: "Low Festival — Torrevieja, 180 km",
+        it: "Low Festival — Torrevieja, 180 km",
+        nl: "Low Festival — Torrevieja, 180 km",
+        ru: "Low Festival — Торревьеха, 180 км",
+        uk: "Low Festival — Торрев'єха, 180 км",
+      },
+      text: {
+        es: "Indie y rock, del 30 de julio al 1 de agosto de 2027. Cambio importante: el festival se ha mudado de Benidorm a Torrevieja. El recinto para 2027 no está confirmado oficialmente y el cartel no se ha anunciado. El camping del festival es de tiendas y no contempla alojar autocaravanas dentro. Habrá que dormir en las áreas de Torrevieja y alrededores, que son suficientes, pero reserva con antelación: las fechas coinciden con Arenal Sound y todo el sur de la provincia se llena esos días. Web: lowfestival.es",
+        en: "Indie and rock, 30 July to 1 August 2027. An important change: the festival has moved from Benidorm to Torrevieja. The 2027 site is not officially confirmed and the line-up has not been announced. The festival campsite is for tents and does not provide for campervans inside. You will have to sleep at the areas in Torrevieja and nearby, of which there are enough, but book ahead: the dates clash with Arenal Sound and the whole south of the province fills up on those days. Web: lowfestival.es",
+        de: "Indie und Rock, 30. Juli bis 1. August 2027. Wichtige Änderung: Das Festival ist von Benidorm nach Torrevieja umgezogen. Das Gelände für 2027 ist offiziell nicht bestätigt, das Line-up nicht angekündigt. Der Campingplatz des Festivals ist ein Zeltplatz, Wohnmobile sind darin nicht vorgesehen. Übernachten musst du auf den Plätzen in Torrevieja und Umgebung, davon gibt es genug, aber buche früh: Die Termine überschneiden sich mit Arenal Sound, und der ganze Süden der Provinz ist an diesen Tagen voll. Web: lowfestival.es",
+        it: "Indie e rock, dal 30 luglio al 1 agosto 2027. Cambiamento importante: il festival si è spostato da Benidorm a Torrevieja. Il recinto per il 2027 non è confermato ufficialmente e la line-up non è stata annunciata. Il campeggio del festival è in tenda e non prevede la sistemazione dei camper all'interno. Bisognerà dormire nelle aree di Torrevieja e dintorni, che sono sufficienti, ma prenotate in anticipo: le date coincidono con Arenal Sound e tutto il sud della provincia si riempie in quei giorni. Sito: lowfestival.es",
+        nl: "Indie en rock, 30 juli tot 1 augustus 2027. Belangrijke wijziging: het festival is verhuisd van Benidorm naar Torrevieja. Het terrein voor 2027 is officieel niet bevestigd en de line-up is niet aangekondigd. De festivalcamping is voor tenten en voorziet niet in campers binnen het terrein. Slapen doe je op de plaatsen in Torrevieja en omgeving, die er genoeg zijn, maar boek vooruit: de data vallen samen met Arenal Sound en het hele zuiden van de provincie zit die dagen vol. Site: lowfestival.es",
+        ru: "Инди и рок, 30 июля - 1 августа 2027. Важное изменение: фестиваль переехал из Бенидорма в Торревьеху. Площадка на 2027 год официально не подтверждена, лайнап не объявлен. Кемпинг у фестиваля палаточный, размещения автодомов внутри не предусмотрено. Ночевать придётся на площадках Торревьехи и окрестностей — их достаточно, но бронируйте заранее: даты совпадают с Arenal Sound, и весь юг провинции в эти дни забит. Сайт: lowfestival.es",
+        uk: "Інді та рок, 30 липня - 1 серпня 2027. Важлива зміна: фестиваль переїхав з Бенідорма до Торрев'єхи. Майданчик на 2027 рік офіційно не підтверджений, лайнап не оголошений. Кемпінг у фестивалю наметовий, розміщення автодомів усередині не передбачено. Ночувати доведеться на майданчиках Торрев'єхи та околиць — їх достатньо, але бронюйте заздалегідь: дати збігаються з Arenal Sound, і весь південь провінції в ці дні забитий. Сайт: lowfestival.es",
+      },
+    },
+  ],
+
+  tips: [
+    {
+      tip: {
+        es: "Dos festivales con un solo alquiler: Medusa (12-16 de agosto) y Rototom (16-22 de agosto) van seguidos y están a 50 km uno del otro, así que un alquiler de 10-12 días cubre los dos y a partir de ese plazo se aplica un 10% de descuento. Una pareja parecida a finales de julio: Arenal Sound y Low Festival, aunque entre ellos hay 200 km.",
+        en: "Two festivals on one rental: Medusa (12-16 August) and Rototom (16-22 August) run back to back and sit 50 km apart, so a 10-12 day rental covers both and that length already earns a 10% discount. A similar pair at the end of July: Arenal Sound and Low Festival, though those are 200 km apart.",
+        de: "Zwei Festivals mit einer Miete: Medusa (12.-16. August) und Rototom (16.-22. August) schließen direkt aneinander an und liegen 50 km auseinander, eine Miete über 10-12 Tage deckt also beide ab, und ab dieser Dauer gibt es 10% Rabatt. Ein ähnliches Paar Ende Juli: Arenal Sound und Low Festival, dazwischen liegen allerdings 200 km.",
+        it: "Due festival con un solo noleggio: Medusa (12-16 agosto) e Rototom (16-22 agosto) sono consecutivi e distano 50 km, quindi un noleggio di 10-12 giorni li copre entrambi e da quella durata si applica il 10% di sconto. Una coppia simile a fine luglio: Arenal Sound e Low Festival, anche se tra loro ci sono 200 km.",
+        nl: "Twee festivals met één huurperiode: Medusa (12-16 augustus) en Rototom (16-22 augustus) sluiten op elkaar aan en liggen 50 km uit elkaar, dus een huur van 10-12 dagen dekt beide en vanaf die duur geldt 10% korting. Een vergelijkbaar duo eind juli: Arenal Sound en Low Festival, al zit daar 200 km tussen.",
+        ru: "Два фестиваля за одну аренду: Medusa (12-16 августа) и Rototom (16-22 августа) идут встык и разнесены на 50 км — аренда на 10-12 дней покрывает оба, а на такой срок действует скидка 10%. Похожая пара в конце июля: Arenal Sound и Low Festival, но между ними 200 км.",
+        uk: "Два фестивалі за одну оренду: Medusa (12-16 серпня) і Rototom (16-22 серпня) йдуть встик і рознесені на 50 км — оренда на 10-12 днів покриває обидва, а на такий строк діє знижка 10%. Схожа пара наприкінці липня: Arenal Sound і Low Festival, але між ними 200 км.",
+      },
+    },
+    {
+      tip: {
+        es: "La plaza de camper no es el abono: en la mayoría de los festivales el sitio para la autocaravana se vende aparte y a menudo exige todavía un suplemento por la zona de descanso. Calcula el presupuesto entero y compra en la primera oleada: las zonas camper son pequeñas y se agotan las primeras.",
+        en: "A camper pitch is not the festival pass: at most festivals the campervan space is sold separately and often still requires a supplement for the rest area. Budget for the whole thing and buy in the first wave, because camper zones are small and sell out first.",
+        de: "Der Camper-Stellplatz ist nicht das Ticket: Bei den meisten Festivals wird der Platz fürs Wohnmobil separat verkauft und verlangt oft noch einen Aufschlag für die Ruhezone. Rechne das Budget komplett und kaufe in der ersten Welle, denn die Camper-Zonen sind klein und zuerst weg.",
+        it: "La piazzola camper non è l'abbonamento: nella maggior parte dei festival il posto per il camper si vende a parte e spesso richiede ancora un supplemento per la zona relax. Calcolate il budget per intero e comprate nella prima ondata: le aree camper sono piccole e finiscono per prime.",
+        nl: "Een camperplaats is niet het festivalticket: bij de meeste festivals wordt de plek voor de camper apart verkocht en vraagt die vaak nog een toeslag voor de rustzone. Reken het hele budget door en koop in de eerste ronde, want camperzones zijn klein en gaan het eerst weg.",
+        ru: "Кемпер-место — это не абонемент: на большинстве фестивалей место для автодома продаётся отдельно и часто требует ещё доплаты за зону отдыха. Считайте бюджет целиком и покупайте в первую волну: кемпер-зоны маленькие и уходят первыми.",
+        uk: "Кемпер-місце — це не абонемент: на більшості фестивалів місце для автодома продається окремо і часто вимагає ще доплати за зону відпочинку. Рахуйте бюджет цілком і купуйте в першу хвилю: кемпер-зони маленькі й розходяться першими.",
+      },
+    },
+    {
+      tip: {
+        es: "Agosto en Castellón son +38: el aire acondicionado funciona con conexión a la red; si la plaza no tiene electricidad, planifica dormir de día a la sombra y llevar reserva de agua. El panel solar da para la nevera y la luz, pero no para el aire acondicionado en campo abierto.",
+        en: "August in Castellón means +38: the air conditioning runs off mains power, so if your pitch has no electricity, plan on sleeping through the day in the shade and carrying a water reserve. The solar panel handles the fridge and the lights, but not air conditioning out in the open.",
+        de: "August in Castellón heißt +38: Die Klimaanlage läuft über Landstrom. Hat der Platz keinen Strom, plane Tagesschlaf im Schatten und einen Wasservorrat ein. Das Solarpanel trägt Kühlschrank und Licht, aber keine Klimaanlage auf freiem Feld.",
+        it: "Agosto a Castellón vuol dire +38: il condizionatore funziona con l'allaccio alla rete; se la piazzola non ha elettricità, mettete in conto di dormire di giorno all'ombra e una riserva d'acqua. Il pannello solare regge frigo e luci, ma non il condizionatore in campo aperto.",
+        nl: "Augustus in Castellón betekent +38: de airco draait op walstroom. Heeft je plek geen elektriciteit, reken dan op overdag slapen in de schaduw en een watervoorraad. Het zonnepaneel trekt de koelkast en de verlichting, maar geen airco in het open veld.",
+        ru: "Август в Кастельоне — это +38: кондиционер работает от сети; если место без электричества, планируйте дневной сон в тени и запас воды. Солнечная панель тянет холодильник и свет, но не кондиционер в чистом поле.",
+        uk: "Серпень у Кастельйоні — це +38: кондиціонер працює від мережі; якщо місце без електрики, плануйте денний сон у тіні та запас води. Сонячна панель тягне холодильник і світло, але не кондиціонер у чистому полі.",
+      },
+    },
+    {
+      tip: {
+        es: "Llega un día antes: las zonas camper suelen abrir 24 horas antes del primer concierto y las plazas se reparten por orden de llegada. Por la mañana eliges sombra, por la tarde te quedas en el borde.",
+        en: "Arrive a day early: camper zones usually open 24 hours before the first concert and pitches are handed out in order of arrival. Come in the morning and you pick the shade; come in the evening and you end up on the edge.",
+        de: "Komm einen Tag früher: Camper-Zonen öffnen meist 24 Stunden vor dem ersten Konzert, und die Plätze werden nach Ankunft vergeben. Morgens suchst du dir den Schatten aus, abends stehst du am Rand.",
+        it: "Arrivate un giorno prima: le aree camper di solito aprono 24 ore prima del primo concerto e le piazzole si assegnano per ordine di arrivo. La mattina scegliete l'ombra, la sera vi tocca il bordo.",
+        nl: "Kom een dag eerder: camperzones openen meestal 24 uur voor het eerste concert en plaatsen worden op volgorde van aankomst verdeeld. 's Ochtends kies je de schaduw, 's avonds sta je aan de rand.",
+        ru: "Приезжайте на день раньше: кемпер-зоны обычно открываются за сутки до первого концерта, а места распределяются по прибытии. Утром вы выберете тень, вечером встанете с краю.",
+        uk: "Приїжджайте на день раніше: кемпер-зони зазвичай відкриваються за добу до першого концерту, а місця розподіляються за прибуттям. Вранці ви виберете тінь, увечері станете скраю.",
+      },
+    },
+    {
+      tip: {
+        es: "No te pongas al volante nada más cerrar el festival: todos los recintos permiten salir hasta el mediodía del día siguiente. Duerme.",
+        en: "Do not get behind the wheel the moment the festival closes: every site lets you stay until midday the following day. Sleep first.",
+        de: "Setz dich nicht direkt nach dem Ende ans Steuer: Alle Gelände erlauben die Abfahrt bis zum Mittag des Folgetags. Schlaf dich aus.",
+        it: "Non mettetevi al volante appena chiude il festival: tutti i recinti permettono di uscire fino a mezzogiorno del giorno dopo. Dormite.",
+        nl: "Ga niet meteen na afloop achter het stuur zitten: alle terreinen laten je tot de middag van de volgende dag blijven. Slaap eerst uit.",
+        ru: "Не садитесь за руль сразу после закрытия: все площадки разрешают выехать до полудня следующего дня. Выспитесь.",
+        uk: "Не сідайте за кермо одразу після закриття: усі майданчики дозволяють виїхати до полудня наступного дня. Виспіться.",
+      },
+    },
+    {
+      tip: {
+        es: "Comprueba las fechas: el calendario de festivales cambia. En 2026 Rocanrola se aplazó por la DANA y Low Festival cambió de ciudad. La información actualizada está siempre en las webs oficiales.",
+        en: "Check the dates: the festival calendar moves. In 2026 Rocanrola was postponed because of the DANA storm and Low Festival changed city. The current information is always on the official sites.",
+        de: "Prüfe die Termine: Der Festivalkalender ändert sich. 2026 wurde Rocanrola wegen der DANA verschoben, und Low Festival wechselte die Stadt. Die aktuellen Angaben stehen immer auf den offiziellen Seiten.",
+        it: "Verificate le date: il calendario dei festival cambia. Nel 2026 Rocanrola è stato rinviato per la DANA e Low Festival ha cambiato città. Le informazioni aggiornate sono sempre sui siti ufficiali.",
+        nl: "Controleer de data: de festivalkalender verschuift. In 2026 werd Rocanrola uitgesteld door de DANA en verhuisde Low Festival naar een andere stad. De actuele informatie staat altijd op de officiële sites.",
+        ru: "Сверяйте даты: фестивальный календарь меняется — в 2026-м Rocanrola переносили из-за DANA, Low Festival сменил город. Актуальная информация всегда на официальных сайтах.",
+        uk: "Звіряйте дати: фестивальний календар змінюється — у 2026-му Rocanrola переносили через DANA, Low Festival змінив місто. Актуальна інформація завжди на офіційних сайтах.",
+      },
+    },
+  ],
+
+  ctaText: {
+    es: "Nuestro McLouis Yearling 89G encaja en este formato: hasta cinco plazas para dormir, ducha y aseo dentro, nevera con congelador, panel solar para las jornadas autónomas y cocina de gas exterior. A finales de abril, cuando se celebra Rocanrola, el alquiler sale desde 99 € por noche.",
+    en: "Our McLouis Yearling 89G fits this format: up to five sleeping places, shower and toilet inside, a fridge with freezer, a solar panel for self-sufficient days and an outdoor gas stove. At the end of April, when Rocanrola takes place, the rental starts at 99 € a night.",
+    de: "Unser McLouis Yearling 89G passt zu diesem Format: bis zu fünf Schlafplätze, Dusche und WC innen, Kühlschrank mit Gefrierfach, Solarpanel für autarke Tage und ein Gaskocher für draußen. Ende April, wenn Rocanrola stattfindet, beginnt die Miete bei 99 € pro Nacht.",
+    it: "Il nostro McLouis Yearling 89G si adatta a questo formato: fino a cinque posti letto, doccia e servizi interni, frigo con congelatore, pannello solare per le giornate in autonomia e fornello a gas da esterno. A fine aprile, quando si tiene Rocanrola, il noleggio parte da 99 € a notte.",
+    nl: "Onze McLouis Yearling 89G past bij dit format: tot vijf slaapplaatsen, douche en toilet binnen, koelkast met vriesvak, zonnepaneel voor autonome dagen en een gaskookplaat voor buiten. Eind april, wanneer Rocanrola plaatsvindt, begint de huur bij 99 € per nacht.",
+    ru: "Наш McLouis Yearling 89G подходит для этого формата: до пяти спальных мест, душ и туалет внутри, холодильник с морозилкой, солнечная панель для автономных суток и уличная газовая плита. В конце апреля, когда проходит Rocanrola, аренда стоит от 99 € в сутки.",
+    uk: "Наш McLouis Yearling 89G підходить для цього формату: до п'яти спальних місць, душ і туалет усередині, холодильник з морозилкою, сонячна панель для автономної доби і вулична газова плита. Наприкінці квітня, коли проходить Rocanrola, оренда коштує від 99 € за добу.",
+  },
+  ctaButton: {
+    es: "Reservar fechas",
+    en: "Book your dates",
+    de: "Termine buchen",
+    it: "Prenota le date",
+    nl: "Boek je data",
+    ru: "Забронировать даты",
+    uk: "Забронювати дати",
+  },
+};
+
+export const ROUTE_PAGES: RouteContent[] = [costaBlanca, valenciaBarcalona, paisVasco, andalucia, festivales2027];
 
 /** Date of the last editorial review of the route guides (ISO 8601, used for Article.dateModified). */
 export const ROUTE_DATE_MODIFIED = "2026-08-15";

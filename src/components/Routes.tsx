@@ -9,6 +9,7 @@ const ROUTES = [
   { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco" },
   { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia" },
   { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona" },
+  { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027" },
 ] as const;
 
 export function Routes() {
@@ -31,7 +32,8 @@ export function Routes() {
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-2xl text-foreground">{t(`routes.${r.id}_name`)}</h3>
                 <span className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2.5 py-0.5 text-xs text-foreground/80">
-                  <Clock className="h-3 w-3" />{t(`routes.${r.id}_dur`)} {t("routes.days")}
+                  <Clock className="h-3 w-3" />{t(`routes.${r.id}_dur`)}{" "}
+                  {t(`routes.${r.id}_unit`, { defaultValue: t("routes.days") })}
                 </span>
               </div>
               <p className="mt-2 text-sm text-foreground/80">{t(`routes.${r.id}_high`)}</p>

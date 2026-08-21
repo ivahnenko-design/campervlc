@@ -8,6 +8,7 @@ import {
   ROUTE_BYLINE,
   ROUTE_DATE_MODIFIED,
   type Lang,
+  type RouteContent,
 } from "@/data/routes-content";
 
 export const Route = createFileRoute("/rutas/$slug")({
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/rutas/$slug")({
     if (!route) return { meta: [{ title: "Ruta no encontrada" }] };
     const base = "https://campervlc.com";
     const langs: Lang[] = ["es", "en", "de", "it", "nl", "ru", "uk"];
-    const ogImage = `${base}/images/routes/${params.slug}-hero.jpg`;
+    const ogImage = route.heroImage ? `${base}${route.heroImage}` : `${base}/images/og-home.jpg`;
     const ogUrl = `${base}/rutas/${params.slug}`;
     return {
       meta: [
@@ -92,7 +93,9 @@ export const Route = createFileRoute("/rutas/$slug")({
 
 function RoutePageComponent() {
   const { i18n } = useTranslation();
-  const route = Route.useLoaderData();
+  // The loader throws notFound() when the slug is unknown, so by the time this
+  // renders the route is always present; the cast narrows it for TypeScript.
+  const route = Route.useLoaderData() as RouteContent;
   const lang = (i18n.language?.slice(0, 2) as Lang) ?? "es";
 
   const t = <T extends Record<Lang, string>>(field: T): string =>
@@ -146,7 +149,7 @@ function RoutePageComponent() {
       ) : (
         <div
           className="route-photo-placeholder w-full aspect-[16/6] bg-surface border-b border-border/40 flex items-center justify-center text-muted-foreground/30 text-sm"
-          data-photo={`hero-${route.slug}`}
+          data-photo={route.heroPhotoSlot ?? `hero-${route.slug}`}
         >
           [ foto principal ]
         </div>

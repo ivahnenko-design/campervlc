@@ -184,7 +184,12 @@
     "r4_name": "Valencia – Barcelona",
     "r4_dur": "4–5",
     "r4_high": "Peñíscola · Delta del Ebro · Tarragona · Sitges · Barcelona",
-    "r4_tag": "Costa Dorada, arrozales y la ciudad condal"
+    "r4_tag": "Costa Dorada, arrozales y la ciudad condal",
+    "r5_name": "Festivales 2027",
+    "r5_dur": "6",
+    "r5_unit": "festivales",
+    "r5_high": "Medusa · Rototom · FIB · Arenal Sound · Rocanrola · Low",
+    "r5_tag": "Dormir en tu autocaravana y no en una tienda sobre las piedras"
   },
   "reviews": {
     "title": "Lo que dicen nuestros viajeros",
