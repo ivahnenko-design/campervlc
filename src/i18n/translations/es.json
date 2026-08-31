@@ -68,6 +68,48 @@
       "ext2": "3 sillas de playa",
       "ext3": "Cocina de gas exterior",
       "transmission": "Transmisión manual"
+    },
+    "quick": {
+      "seats": "5 plazas de viaje",
+      "beds": "5 plazas para dormir",
+      "allIncluded": "Todo incluido",
+      "dims": "7,4 × 2,3 × 2,9 m",
+      "dimsLabel": "Largo × ancho × alto"
+    },
+    "tech": {
+      "title": "Ficha técnica",
+      "vehicle": "Vehículo",
+      "bedsCol": "Camas",
+      "capacityCol": "Capacidades",
+      "brand": "Marca",
+      "model": "Modelo",
+      "engine": "Motor",
+      "transmission": "Transmisión",
+      "transmissionValue": "Manual",
+      "freshWater": "Depósito de agua limpia",
+      "fridge": "Nevera con congelador",
+      "sockets": "Enchufes 230V / 12V",
+      "tbd": "Por confirmar"
+    },
+    "equip": {
+      "title": "Equipamiento incluido",
+      "bedBath": "Kit de cama y baño",
+      "bedBathItems": "Almohadas y mantas, toallas de baño",
+      "kitchen": "Kit de cocina",
+      "welcome": "Welcome-kit",
+      "welcomeItems": "Papel higiénico, café, jabón",
+      "outdoor": "Kit exterior",
+      "outdoorItems": "2 mesas y 4 sillas, 3 sillas de playa, sombrilla, cocina de gas exterior, toldo",
+      "climate": "Aire acondicionado y calefacción",
+      "solar": "Panel solar y batería de alta capacidad",
+      "water": "Agua caliente, ducha y WC",
+      "tv": "Smart TV 24 pulgadas",
+      "child": "Silla infantil (gratis, bajo petición)",
+      "pet": "Pet friendly sin coste adicional"
+    },
+    "included": {
+      "title": "Todo incluido",
+      "parking": "Aparcamiento gratuito para tu vehículo en nuestras instalaciones incluido"
     }
   },
   "how": {

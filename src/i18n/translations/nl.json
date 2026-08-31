@@ -68,6 +68,48 @@
       "ext2": "3 strandstoelen",
       "ext3": "Outdoor gaskookplaat",
       "transmission": "Handgeschakeld"
+    },
+    "quick": {
+      "seats": "5 reiszitplaatsen",
+      "beds": "5 slaapplaatsen",
+      "allIncluded": "Alles inbegrepen",
+      "dims": "7,4 × 2,3 × 2,9 m",
+      "dimsLabel": "Lengte × breedte × hoogte"
+    },
+    "tech": {
+      "title": "Technische gegevens",
+      "vehicle": "Voertuig",
+      "bedsCol": "Bedden",
+      "capacityCol": "Capaciteiten",
+      "brand": "Merk",
+      "model": "Model",
+      "engine": "Motor",
+      "transmission": "Transmissie",
+      "transmissionValue": "Handgeschakeld",
+      "freshWater": "Schoonwatertank",
+      "fridge": "Koelkast met vriesvak",
+      "sockets": "Stopcontacten 230V / 12V",
+      "tbd": "Nog te bevestigen"
+    },
+    "equip": {
+      "title": "Inbegrepen uitrusting",
+      "bedBath": "Bed- en badset",
+      "bedBathItems": "Kussens en dekens, badhanddoeken",
+      "kitchen": "Keukenset",
+      "welcome": "Welkomstpakket",
+      "welcomeItems": "Toiletpapier, koffie, zeep",
+      "outdoor": "Buitenset",
+      "outdoorItems": "2 tafels en 4 stoelen, 3 strandstoelen, parasol, gaskookplaat voor buiten, luifel",
+      "climate": "Airconditioning en verwarming",
+      "solar": "Zonnepaneel en accu met hoge capaciteit",
+      "water": "Warm water, douche en toilet",
+      "tv": "Smart TV van 24 inch",
+      "child": "Kinderzitje (gratis, op aanvraag)",
+      "pet": "Huisdieren welkom zonder meerprijs"
+    },
+    "included": {
+      "title": "Alles inbegrepen",
+      "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen"
     }
   },
   "how": {

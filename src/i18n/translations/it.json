@@ -68,6 +68,48 @@
       "ext2": "3 sedie da spiaggia",
       "ext3": "Fornello a gas da esterno",
       "transmission": "Cambio manuale"
+    },
+    "quick": {
+      "seats": "5 posti di viaggio",
+      "beds": "5 posti letto",
+      "allIncluded": "Tutto incluso",
+      "dims": "7,4 × 2,3 × 2,9 m",
+      "dimsLabel": "Lunghezza × larghezza × altezza"
+    },
+    "tech": {
+      "title": "Scheda tecnica",
+      "vehicle": "Veicolo",
+      "bedsCol": "Letti",
+      "capacityCol": "Capacità",
+      "brand": "Marca",
+      "model": "Modello",
+      "engine": "Motore",
+      "transmission": "Cambio",
+      "transmissionValue": "Manuale",
+      "freshWater": "Serbatoio acqua pulita",
+      "fridge": "Frigo con congelatore",
+      "sockets": "Prese 230V / 12V",
+      "tbd": "Da confermare"
+    },
+    "equip": {
+      "title": "Dotazione inclusa",
+      "bedBath": "Kit letto e bagno",
+      "bedBathItems": "Cuscini e coperte, asciugamani da bagno",
+      "kitchen": "Kit cucina",
+      "welcome": "Welcome kit",
+      "welcomeItems": "Carta igienica, caffè, sapone",
+      "outdoor": "Kit esterno",
+      "outdoorItems": "2 tavoli e 4 sedie, 3 sedie da spiaggia, ombrellone, fornello a gas esterno, tenda da sole",
+      "climate": "Aria condizionata e riscaldamento",
+      "solar": "Pannello solare e batteria ad alta capacità",
+      "water": "Acqua calda, doccia e WC",
+      "tv": "Smart TV da 24 pollici",
+      "child": "Seggiolino per bambini (gratuito, su richiesta)",
+      "pet": "Pet friendly senza costi aggiuntivi"
+    },
+    "included": {
+      "title": "Tutto incluso",
+      "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso"
     }
   },
   "how": {

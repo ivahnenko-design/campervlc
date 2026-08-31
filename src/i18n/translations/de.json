@@ -68,6 +68,48 @@
       "ext2": "3 Strandstühle",
       "ext3": "Outdoor-Gaskocher",
       "transmission": "Schaltgetriebe (manuell)"
+    },
+    "quick": {
+      "seats": "5 Sitzplätze",
+      "beds": "5 Schlafplätze",
+      "allIncluded": "Alles inklusive",
+      "dims": "7,4 × 2,3 × 2,9 m",
+      "dimsLabel": "Länge × Breite × Höhe"
+    },
+    "tech": {
+      "title": "Technische Daten",
+      "vehicle": "Fahrzeug",
+      "bedsCol": "Betten",
+      "capacityCol": "Kapazitäten",
+      "brand": "Marke",
+      "model": "Modell",
+      "engine": "Motor",
+      "transmission": "Getriebe",
+      "transmissionValue": "Schaltgetriebe",
+      "freshWater": "Frischwassertank",
+      "fridge": "Kühlschrank mit Gefrierfach",
+      "sockets": "Steckdosen 230V / 12V",
+      "tbd": "Wird ergänzt"
+    },
+    "equip": {
+      "title": "Enthaltene Ausstattung",
+      "bedBath": "Bett- und Bad-Set",
+      "bedBathItems": "Kissen und Decken, Badetücher",
+      "kitchen": "Küchen-Set",
+      "welcome": "Welcome-Kit",
+      "welcomeItems": "Toilettenpapier, Kaffee, Seife",
+      "outdoor": "Außen-Set",
+      "outdoorItems": "2 Tische und 4 Stühle, 3 Strandstühle, Sonnenschirm, Outdoor-Gaskocher, Markise",
+      "climate": "Klimaanlage und Heizung",
+      "solar": "Solarpanel und Hochleistungsbatterie",
+      "water": "Warmwasser, Dusche und WC",
+      "tv": "Smart TV 24 Zoll",
+      "child": "Kindersitz (kostenlos, auf Anfrage)",
+      "pet": "Haustiere willkommen, ohne Aufpreis"
+    },
+    "included": {
+      "title": "Alles inklusive",
+      "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive"
     }
   },
   "how": {

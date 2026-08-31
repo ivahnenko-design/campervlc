@@ -1,7 +1,11 @@
 import { useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Bed, Snowflake, Sun, Tv, Bath, X, Users, MapPin, ChevronLeft, ChevronRight, PawPrint } from "lucide-react";
+import {
+  Bed, BedDouble, Snowflake, Sun, SunMedium, Tv, Bath, X, Users, MapPin,
+  ChevronLeft, ChevronRight, PawPrint, Ruler, PackageCheck, UtensilsCrossed,
+  Gift, TreePalm, Thermometer, Droplets, Baby, SquareParking, CircleCheck,
+} from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
 
 export function Fleet() {
@@ -210,16 +214,41 @@ function GallerySlider({ name }: { name: string }) {
   );
 }
 
+function QuickFact({ icon, label, sub }: { icon: React.ReactNode; label: string; sub?: string }) {
+  return (
+    <div className="flex flex-col items-center gap-1.5 rounded-xl border border-border/60 bg-background/40 px-3 py-4 text-center">
+      <span className="text-primary">{icon}</span>
+      <span className="text-sm font-medium text-foreground leading-tight">{label}</span>
+      {sub ? <span className="text-[11px] text-muted-foreground leading-tight">{sub}</span> : null}
+    </div>
+  );
+}
+
+function SpecRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 border-b border-border/40 py-1.5 last:border-0">
+      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className="text-sm text-foreground text-right">{value}</span>
+    </div>
+  );
+}
+
+function EquipCard({ icon, title, items }: { icon: React.ReactNode; title: string; items?: string }) {
+  return (
+    <div className="rounded-xl border border-border/60 bg-background/40 p-4">
+      <div className="flex items-center gap-2">
+        <span className="text-primary">{icon}</span>
+        <h5 className="text-sm font-semibold text-foreground">{title}</h5>
+      </div>
+      {items ? <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{items}</p> : null}
+    </div>
+  );
+}
+
 function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void }) {
   const { t } = useTranslation();
-  const sections: Array<[string, string[]]> = [
-    [t("fleet.sections.sleeping"), [t("fleet.specs.bed1"), t("fleet.specs.bed2"), t("fleet.specs.bed3")]],
-    [t("fleet.sections.comfort"), [t("fleet.specs.comfort1"), t("fleet.specs.comfort2"), t("fleet.specs.comfort3")]],
-    [t("fleet.sections.autonomy"), [t("fleet.specs.auto1"), t("fleet.specs.auto2")]],
-    [t("fleet.sections.kitchen"), [t("fleet.specs.kit1"), t("fleet.specs.kit2"), t("fleet.specs.kit3")]],
-    [t("fleet.sections.exterior"), [t("fleet.specs.ext1"), t("fleet.specs.ext2"), t("fleet.specs.ext3")]],
-    [t("fleet.sections.driving"), [t("fleet.specs.transmission")]],
-  ];
+
+  const beds = [t("fleet.specs.bed1"), t("fleet.specs.bed2"), t("fleet.specs.bed3")];
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm" onClick={onClose}>
@@ -239,19 +268,74 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
             <X className="h-4 w-4" />
           </button>
         </div>
+
         <div className="p-6 sm:p-8">
           <h3 className="font-display text-3xl text-foreground">{camper.name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{t("fleet.capacity", { n: camper.capacity })} · {camper.location}</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("fleet.capacity", { n: camper.capacity })} · {camper.location}
+          </p>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            {sections.map(([title, items]) => (
-              <div key={title}>
-                <h4 className="font-display text-lg text-primary">{title}</h4>
-                <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                  {items.map((it) => (<li key={it}>· {it}</li>))}
-                </ul>
-              </div>
-            ))}
+          {/* Quick facts */}
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <QuickFact icon={<Users className="h-5 w-5" />} label={t("fleet.quick.seats")} />
+            <QuickFact icon={<BedDouble className="h-5 w-5" />} label={t("fleet.quick.beds")} />
+            <a href="#equipamiento" onClick={(e) => { e.preventDefault(); document.getElementById("equipamiento")?.scrollIntoView({ behavior: "smooth", block: "start" }); }} className="contents">
+              <QuickFact icon={<PackageCheck className="h-5 w-5" />} label={t("fleet.quick.allIncluded")} />
+            </a>
+            <QuickFact icon={<Ruler className="h-5 w-5" />} label={t("fleet.quick.dims")} sub={t("fleet.quick.dimsLabel")} />
+          </div>
+
+          {/* Technical specs */}
+          <h4 className="mt-8 font-display text-xl text-primary">{t("fleet.tech.title")}</h4>
+          <div className="mt-3 grid gap-5 sm:grid-cols-3">
+            <div>
+              <h5 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">{t("fleet.tech.vehicle")}</h5>
+              <SpecRow label={t("fleet.tech.brand")} value="McLouis" />
+              <SpecRow label={t("fleet.tech.model")} value="Yearling 89G" />
+              <SpecRow label={t("fleet.tech.engine")} value={t("fleet.tech.tbd")} />
+              <SpecRow label={t("fleet.tech.transmission")} value={t("fleet.tech.transmissionValue")} />
+            </div>
+            <div>
+              <h5 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">{t("fleet.tech.bedsCol")}</h5>
+              {beds.map((b) => (
+                <p key={b} className="border-b border-border/40 py-1.5 text-sm text-foreground last:border-0">{b}</p>
+              ))}
+            </div>
+            <div>
+              <h5 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">{t("fleet.tech.capacityCol")}</h5>
+              <SpecRow label={t("fleet.tech.freshWater")} value={t("fleet.tech.tbd")} />
+              <p className="border-b border-border/40 py-1.5 text-sm text-foreground">{t("fleet.tech.fridge")}</p>
+              <p className="py-1.5 text-sm text-foreground">{t("fleet.tech.sockets")}</p>
+            </div>
+          </div>
+
+          {/* Equipment */}
+          <h4 id="equipamiento" className="mt-8 scroll-mt-4 font-display text-xl text-primary">{t("fleet.equip.title")}</h4>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <EquipCard icon={<BedDouble className="h-4 w-4" />} title={t("fleet.equip.bedBath")} items={t("fleet.equip.bedBathItems")} />
+            <EquipCard icon={<UtensilsCrossed className="h-4 w-4" />} title={t("fleet.equip.kitchen")} items={t("fleet.specs.kit1")} />
+            <EquipCard icon={<Gift className="h-4 w-4" />} title={t("fleet.equip.welcome")} items={t("fleet.equip.welcomeItems")} />
+            <EquipCard icon={<TreePalm className="h-4 w-4" />} title={t("fleet.equip.outdoor")} items={t("fleet.equip.outdoorItems")} />
+            <EquipCard icon={<Thermometer className="h-4 w-4" />} title={t("fleet.equip.climate")} />
+            <EquipCard icon={<SunMedium className="h-4 w-4" />} title={t("fleet.equip.solar")} />
+            <EquipCard icon={<Droplets className="h-4 w-4" />} title={t("fleet.equip.water")} />
+            <EquipCard icon={<Tv className="h-4 w-4" />} title={t("fleet.equip.tv")} />
+            <EquipCard icon={<Baby className="h-4 w-4" />} title={t("fleet.equip.child")} />
+            <EquipCard icon={<PawPrint className="h-4 w-4" />} title={t("fleet.equip.pet")} />
+          </div>
+
+          {/* Free inclusions */}
+          <div className="mt-6 rounded-xl border border-primary/40 bg-primary/10 p-4">
+            <p className="flex items-center gap-2 text-sm font-semibold text-primary">
+              <CircleCheck className="h-4 w-4" />
+              {t("fleet.included.title")}
+            </p>
+            <ul className="mt-2 space-y-1.5">
+              <li className="flex items-start gap-2 text-sm text-foreground">
+                <SquareParking className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                {t("fleet.included.parking")}
+              </li>
+            </ul>
           </div>
 
           <p className="mt-6 rounded-lg border border-border/50 bg-background/50 p-3 text-xs text-muted-foreground">

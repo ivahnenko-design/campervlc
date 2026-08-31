@@ -68,6 +68,48 @@
       "ext2": "3 beach chairs",
       "ext3": "Outdoor gas stove",
       "transmission": "Manual transmission"
+    },
+    "quick": {
+      "seats": "5 travel seats",
+      "beds": "5 sleeping places",
+      "allIncluded": "All included",
+      "dims": "7.4 × 2.3 × 2.9 m",
+      "dimsLabel": "Length × width × height"
+    },
+    "tech": {
+      "title": "Technical specs",
+      "vehicle": "Vehicle",
+      "bedsCol": "Beds",
+      "capacityCol": "Capacities",
+      "brand": "Brand",
+      "model": "Model",
+      "engine": "Engine",
+      "transmission": "Transmission",
+      "transmissionValue": "Manual",
+      "freshWater": "Fresh water tank",
+      "fridge": "Fridge with freezer",
+      "sockets": "Sockets 230V / 12V",
+      "tbd": "TBD"
+    },
+    "equip": {
+      "title": "Equipment included",
+      "bedBath": "Bed and bathroom kit",
+      "bedBathItems": "Pillows and blankets, bath towels",
+      "kitchen": "Kitchen kit",
+      "welcome": "Welcome kit",
+      "welcomeItems": "Toilet paper, coffee, soap",
+      "outdoor": "Outdoor kit",
+      "outdoorItems": "2 tables and 4 chairs, 3 beach chairs, parasol, outdoor gas stove, awning",
+      "climate": "Air conditioning and heating",
+      "solar": "Solar panel and high-capacity battery",
+      "water": "Hot water, shower and toilet",
+      "tv": "24-inch Smart TV",
+      "child": "Child seat (free, on request)",
+      "pet": "Pet friendly at no extra cost"
+    },
+    "included": {
+      "title": "All included",
+      "parking": "Free parking for your own vehicle at our premises included"
     }
   },
   "how": {
