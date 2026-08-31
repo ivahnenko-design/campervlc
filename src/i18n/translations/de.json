@@ -105,11 +105,14 @@
       "water": "Warmwasser, Dusche und WC",
       "tv": "Smart TV 24 Zoll",
       "child": "Kindersitz (kostenlos, auf Anfrage)",
-      "pet": "Haustiere willkommen, ohne Aufpreis"
+      "pet": "Haustiere willkommen, ohne Aufpreis",
+      "kitchenItems": "Teller, Gläser, Kaffeetassen, Löffel, Kaffeelöffel, Gabeln, Tafelmesser, Küchen- und Sägemesser, Schneidebrett aus Holz, Küchenwender, 3 Pfannen, ein mittlerer Stieltopf, ein Topf mit Glasdeckel, eine Salatschüssel, ein Korkenzieher und eine italienische Espressokanne."
     },
     "included": {
       "title": "Alles inklusive",
-      "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive"
+      "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive",
+      "gasBottles": "2 Gasflaschen inklusive",
+      "toiletCapsules": "WC-Kapseln inklusive"
     }
   },
   "how": {

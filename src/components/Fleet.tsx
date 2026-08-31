@@ -5,6 +5,7 @@ import {
   Bed, BedDouble, Snowflake, Sun, SunMedium, Tv, Bath, X, Users, MapPin,
   ChevronLeft, ChevronRight, PawPrint, Ruler, PackageCheck, UtensilsCrossed,
   Gift, TreePalm, Thermometer, Droplets, Baby, SquareParking, CircleCheck,
+  Flame, Sparkles,
 } from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
 
@@ -313,7 +314,7 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
           <h4 id="equipamiento" className="mt-8 scroll-mt-4 font-display text-xl text-primary">{t("fleet.equip.title")}</h4>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <EquipCard icon={<BedDouble className="h-4 w-4" />} title={t("fleet.equip.bedBath")} items={t("fleet.equip.bedBathItems")} />
-            <EquipCard icon={<UtensilsCrossed className="h-4 w-4" />} title={t("fleet.equip.kitchen")} items={t("fleet.specs.kit1")} />
+            <EquipCard icon={<UtensilsCrossed className="h-4 w-4" />} title={t("fleet.equip.kitchen")} items={t("fleet.equip.kitchenItems")} />
             <EquipCard icon={<Gift className="h-4 w-4" />} title={t("fleet.equip.welcome")} items={t("fleet.equip.welcomeItems")} />
             <EquipCard icon={<TreePalm className="h-4 w-4" />} title={t("fleet.equip.outdoor")} items={t("fleet.equip.outdoorItems")} />
             <EquipCard icon={<Thermometer className="h-4 w-4" />} title={t("fleet.equip.climate")} />
@@ -334,6 +335,14 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
               <li className="flex items-start gap-2 text-sm text-foreground">
                 <SquareParking className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 {t("fleet.included.parking")}
+              </li>
+              <li className="flex items-start gap-2 text-sm text-foreground">
+                <Flame className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                {t("fleet.included.gasBottles")}
+              </li>
+              <li className="flex items-start gap-2 text-sm text-foreground">
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                {t("fleet.included.toiletCapsules")}
               </li>
             </ul>
           </div>

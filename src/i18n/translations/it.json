@@ -105,11 +105,14 @@
       "water": "Acqua calda, doccia e WC",
       "tv": "Smart TV da 24 pollici",
       "child": "Seggiolino per bambini (gratuito, su richiesta)",
-      "pet": "Pet friendly senza costi aggiuntivi"
+      "pet": "Pet friendly senza costi aggiuntivi",
+      "kitchenItems": "Piatti, bicchieri, tazzine da caffè, cucchiai, cucchiaini, forchette, coltelli da tavola, coltelli da cucina e seghettati, tagliere di legno, spatole da cucina, 3 padelle, un pentolino medio, una pentola con coperchio di vetro, un'insalatiera, un cavatappi e una moka."
     },
     "included": {
       "title": "Tutto incluso",
-      "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso"
+      "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso",
+      "gasBottles": "2 bombole di gas incluse",
+      "toiletCapsules": "Capsule per il WC incluse"
     }
   },
   "how": {

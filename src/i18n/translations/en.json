@@ -105,11 +105,14 @@
       "water": "Hot water, shower and toilet",
       "tv": "24-inch Smart TV",
       "child": "Child seat (free, on request)",
-      "pet": "Pet friendly at no extra cost"
+      "pet": "Pet friendly at no extra cost",
+      "kitchenItems": "Plates, glasses, coffee cups, spoons, coffee spoons, forks, table knives, kitchen and serrated knives, wooden chopping board, kitchen spatulas, 3 frying pans, a medium saucepan, a pot with a glass lid, a salad bowl, a corkscrew and an Italian coffee maker."
     },
     "included": {
       "title": "All included",
-      "parking": "Free parking for your own vehicle at our premises included"
+      "parking": "Free parking for your own vehicle at our premises included",
+      "gasBottles": "2 gas bottles included",
+      "toiletCapsules": "Toilet capsules included"
     }
   },
   "how": {

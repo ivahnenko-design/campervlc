@@ -105,11 +105,14 @@
       "water": "Agua caliente, ducha y WC",
       "tv": "Smart TV 24 pulgadas",
       "child": "Silla infantil (gratis, bajo petición)",
-      "pet": "Pet friendly sin coste adicional"
+      "pet": "Pet friendly sin coste adicional",
+      "kitchenItems": "Platos, vasos, tazas de café, cucharas, cucharillas, tenedores, cuchillos de mesa, cuchillos de cocina y de sierra, tabla de cortar de madera, espátulas de cocina, 3 sartenes, cazo mediano, olla con tapa de cristal, ensaladera, sacacorchos y cafetera italiana."
     },
     "included": {
       "title": "Todo incluido",
-      "parking": "Aparcamiento gratuito para tu vehículo en nuestras instalaciones incluido"
+      "parking": "Aparcamiento gratuito para tu vehículo en nuestras instalaciones incluido",
+      "gasBottles": "2 bombonas de gas incluidas",
+      "toiletCapsules": "Cápsulas para el WC incluidas"
     }
   },
   "how": {

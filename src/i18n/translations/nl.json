@@ -105,11 +105,14 @@
       "water": "Warm water, douche en toilet",
       "tv": "Smart TV van 24 inch",
       "child": "Kinderzitje (gratis, op aanvraag)",
-      "pet": "Huisdieren welkom zonder meerprijs"
+      "pet": "Huisdieren welkom zonder meerprijs",
+      "kitchenItems": "Borden, glazen, koffiekopjes, lepels, koffielepels, vorken, tafelmessen, keuken- en kartelmessen, houten snijplank, keukenspatels, 3 koekenpannen, een middelgrote steelpan, een pan met glazen deksel, een slakom, een kurkentrekker en een Italiaans koffiezetapparaat."
     },
     "included": {
       "title": "Alles inbegrepen",
-      "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen"
+      "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen",
+      "gasBottles": "2 gasflessen inbegrepen",
+      "toiletCapsules": "Toiletcapsules inbegrepen"
     }
   },
   "how": {
