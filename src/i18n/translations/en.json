@@ -73,7 +73,7 @@
       "seats": "5 travel seats",
       "beds": "5 sleeping places",
       "allIncluded": "All included",
-      "dims": "7.4 × 2.3 × 2.9 m",
+      "dims": "7.48 × 2.3 × 3.3 m",
       "dimsLabel": "Length × width × height"
     },
     "tech": {
@@ -94,20 +94,20 @@
     },
     "equip": {
       "title": "Equipment included",
-      "bedBath": "Bed and bathroom kit",
-      "bedBathItems": "Pillows and blankets, bath towels",
       "kitchen": "Kitchen kit",
       "welcome": "Welcome kit",
       "welcomeItems": "Toilet paper, coffee, soap",
       "outdoor": "Outdoor kit",
-      "outdoorItems": "2 tables and 4 chairs, 3 beach chairs, parasol, outdoor gas stove, awning",
+      "outdoorItems": "2 tables and 4 chairs, 3 beach chairs, parasol and awning",
       "climate": "Air conditioning and heating",
       "solar": "Solar panel and high-capacity battery",
       "water": "Hot water, shower and toilet",
       "tv": "24-inch Smart TV",
       "child": "Child seat (free, on request)",
       "pet": "Pet friendly at no extra cost",
-      "kitchenItems": "Plates, glasses, coffee cups, spoons, coffee spoons, forks, table knives, kitchen and serrated knives, wooden chopping board, kitchen spatulas, 3 frying pans, a medium saucepan, a pot with a glass lid, a salad bowl, a corkscrew and an Italian coffee maker."
+      "kitchenItems": "Plates, glasses, coffee cups, spoons, coffee spoons, forks, table knives, kitchen and serrated knives, wooden chopping board, kitchen spatulas, 3 frying pans, a medium saucepan, a pot with a glass lid, a salad bowl, a corkscrew and an Italian coffee maker.",
+      "bedKit": "Bed kit",
+      "bedKitItems": "Pillows and blankets"
     },
     "included": {
       "title": "All included",

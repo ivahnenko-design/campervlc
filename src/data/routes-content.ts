@@ -302,13 +302,13 @@ const costaBlanca: RouteContent = {
   ],
 
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G encaja bien en esta ruta autocaravana Costa Blanca: compacto para las carreteras costeras, con aire acondicionado, 3 sillas de playa y cocina de gas exterior para cenar junto al mar.",
-    en: "Our McLouis Yearling 89G fits this route well: compact enough for coastal roads, air-conditioned, with 3 beach chairs and an outdoor gas stove for dinner by the sea.",
-    de: "Unser McLouis Yearling 89G passt gut zu dieser Route: kompakt genug für Küstenstraßen, klimatisiert, mit 3 Strandstühlen und einem Outdoor-Gaskocher für das Abendessen am Meer.",
-    it: "Il nostro McLouis Yearling 89G si adatta bene a questo itinerario: compatto per le strade costiere, con aria condizionata, 3 sedie da spiaggia e un fornello a gas da esterno per la cena in riva al mare.",
-    nl: "Onze McLouis Yearling 89G past goed bij deze route: compact genoeg voor kustroutes, met airconditioning, 3 strandstoelen en een outdoor gaskookplaat voor een diner aan zee.",
-    ru: "Наш McLouis Yearling 89G подходит для этого маршрута: компактный для прибрежных дорог, с кондиционером, 3 пляжными креслами и уличной газовой плитой для ужина у моря.",
-    uk: "Наш McLouis Yearling 89G підходить для цього маршруту: компактний для прибережних доріг, з кондиціонером, 3 пляжними кріслами та вуличною газовою плитою для вечері біля моря.",
+    es: "Nuestro McLouis Yearling 89G encaja bien en esta ruta autocaravana Costa Blanca: compacto para las carreteras costeras, con aire acondicionado, 3 sillas de playa para las tardes junto al mar.",
+    en: "Our McLouis Yearling 89G fits this route well: compact enough for coastal roads, air-conditioned, with 3 beach chairs for the evenings by the sea.",
+    de: "Unser McLouis Yearling 89G passt gut zu dieser Route: kompakt genug für Küstenstraßen, klimatisiert, mit 3 Strandstühlen für die Abende am Meer.",
+    it: "Il nostro McLouis Yearling 89G si adatta bene a questo itinerario: compatto per le strade costiere, con aria condizionata, 3 sedie da spiaggia per le serate in riva al mare.",
+    nl: "Onze McLouis Yearling 89G past goed bij deze route: compact genoeg voor kustroutes, met airconditioning, 3 strandstoelen voor de avonden aan zee.",
+    ru: "Наш McLouis Yearling 89G подходит для этого маршрута: компактный для прибрежных дорог, с кондиционером, 3 пляжными креслами для вечеров у моря.",
+    uk: "Наш McLouis Yearling 89G підходить для цього маршруту: компактний для прибережних доріг, з кондиціонером, 3 пляжними кріслами для вечорів біля моря.",
   },
   ctaButton: {
     es: "Reservar fechas",
@@ -543,13 +543,13 @@ const valenciaBarcalona: RouteContent = {
   ],
 
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G encaja en esta ruta autocaravana Valencia Barcelona: diésel eficiente para los traslados, aire acondicionado, una cocina completa para preparar arroz del delta del Ebro junto a los arrozales y cocina de gas exterior para cenar bajo las estrellas.",
-    en: "Our McLouis Yearling 89G fits a campervan route like this one: efficient diesel for the longer hauls, air conditioning, a full kitchen to cook Ebro Delta rice right beside the rice paddies, and an outdoor gas stove for dinners under the stars.",
-    de: "Unser McLouis Yearling 89G passt zu einer Wohnmobil-Route wie dieser: sparsamer Diesel für die langen Strecken, Klimaanlage, eine vollständige Küche, um Ebro-Delta-Reis direkt an den Reisfeldern zuzubereiten, und ein Outdoor-Gaskocher für Abende unter dem Sternenhimmel.",
-    it: "Il nostro McLouis Yearling 89G si adatta a un itinerario in camper come questo: diesel efficiente per i trasferimenti, aria condizionata, una cucina completa per cucinare il riso del Delta dell'Ebro proprio in mezzo alle risaie, e un fornello a gas da esterno per le cene sotto le stelle.",
-    nl: "Onze McLouis Yearling 89G past bij een camperroute als deze: zuinige diesel voor de langere ritten, airconditioning, een volledige keuken om Ebrorijst pal naast de rijstvelden te koken, en een outdoor gaskookplaat voor avonden onder de sterren.",
-    ru: "Наш McLouis Yearling 89G подходит под такой маршрут на автодоме: экономичный дизель для перегонов, кондиционер, полноценная кухня, чтобы готовить рис из дельты Эбро прямо у рисовых полей, и уличная газовая плита для ужинов под звёздами.",
-    uk: "Наш McLouis Yearling 89G підходить під такий маршрут на автодімі: економічний дизель для переїздів, кондиціонер, повноцінна кухня, щоб готувати рис з дельти Ебро прямо біля рисових полів, і вулична газова плита для вечерь під зорями.",
+    es: "Nuestro McLouis Yearling 89G encaja en esta ruta autocaravana Valencia Barcelona: diésel eficiente para los traslados, aire acondicionado, una cocina completa para preparar arroz del delta del Ebro junto a los arrozales y cenar bajo las estrellas.",
+    en: "Our McLouis Yearling 89G fits a campervan route like this one: efficient diesel for the longer hauls, air conditioning, a full kitchen to cook Ebro Delta rice right beside the rice paddies and eat under the stars.",
+    de: "Unser McLouis Yearling 89G passt zu einer Wohnmobil-Route wie dieser: sparsamer Diesel für die langen Strecken, Klimaanlage, eine vollständige Küche, um Ebro-Delta-Reis direkt an den Reisfeldern zuzubereiten und unter dem Sternenhimmel zu essen.",
+    it: "Il nostro McLouis Yearling 89G si adatta a un itinerario in camper come questo: diesel efficiente per i trasferimenti, aria condizionata, una cucina completa per cucinare il riso del Delta dell'Ebro proprio in mezzo alle risaie e cenare sotto le stelle.",
+    nl: "Onze McLouis Yearling 89G past bij een camperroute als deze: zuinige diesel voor de langere ritten, airconditioning, een volledige keuken om Ebrorijst pal naast de rijstvelden te koken en onder de sterren te eten.",
+    ru: "Наш McLouis Yearling 89G подходит под такой маршрут на автодоме: экономичный дизель для перегонов, кондиционер, полноценная кухня, чтобы готовить рис из дельты Эбро прямо у рисовых полей, и ужинать под звёздами.",
+    uk: "Наш McLouis Yearling 89G підходить під такий маршрут на автодімі: економічний дизель для переїздів, кондиціонер, повноцінна кухня, щоб готувати рис з дельти Ебро прямо біля рисових полів, і вечеряти під зорями.",
   },
 
   ctaButton: {
@@ -1143,13 +1143,13 @@ const andalucia: RouteContent = {
     },
   ],
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G va bien equipado para Andalucía: aire acondicionado para el verano del sur, panel solar para las noches autónomas en Cabo de Gata, 7,4 metros compactos para los pueblos de montaña y 3 sillas de playa para las calas salvajes.",
-    en: "Our McLouis Yearling 89G is well equipped for Andalusia: air conditioning for the southern summer, a solar panel for self-sufficient nights in Cabo de Gata, a compact 7.4 metres for mountain villages and 3 beach chairs for wild coves.",
-    de: "Unser McLouis Yearling 89G ist gut ausgerüstet für Andalusien: Klimaanlage für den südlichen Sommer, Solarpanel für autonome Nächte in Cabo de Gata, kompakte 7,4 Meter für die Bergdörfer und 3 Strandsessel für wilde Buchten.",
-    it: "Il nostro McLouis Yearling 89G è ben attrezzato per l'Andalusia: aria condizionata per l'estate del sud, pannello solare per le notti autonome a Cabo de Gata, 7,4 metri compatti per i borghi di montagna e 3 sedie da spiaggia per le calette selvagge.",
-    nl: "Onze McLouis Yearling 89G is goed uitgerust voor Andalusië: airconditioning voor de zuidelijke zomer, zonnepaneel voor autonome nachten in Cabo de Gata, compacte 7,4 meter voor bergdorpen en 3 strandstoelen voor wilde baaien.",
-    ru: "Наш McLouis Yearling 89G хорошо подходит для Андалусии: кондиционер для южного лета, солнечная панель для автономных ночёвок в Cabo de Gata, компактные 7,4 метра для горных деревень и 3 пляжных кресла для диких бухт.",
-    uk: "Наш McLouis Yearling 89G добре підходить для Андалусії: кондиціонер для південного літа, сонячна панель для автономних ночівель у Cabo de Gata, компактні 7,4 метра для гірських сіл і 3 пляжні крісла для диких бухт.",
+    es: "Nuestro McLouis Yearling 89G va bien equipado para Andalucía: aire acondicionado para el verano del sur, panel solar para las noches autónomas en Cabo de Gata, 7,48 metros compactos para los pueblos de montaña y 3 sillas de playa para las calas salvajes.",
+    en: "Our McLouis Yearling 89G is well equipped for Andalusia: air conditioning for the southern summer, a solar panel for self-sufficient nights in Cabo de Gata, a compact 7.48 metres for mountain villages and 3 beach chairs for wild coves.",
+    de: "Unser McLouis Yearling 89G ist gut ausgerüstet für Andalusien: Klimaanlage für den südlichen Sommer, Solarpanel für autonome Nächte in Cabo de Gata, kompakte 7,48 Meter für die Bergdörfer und 3 Strandsessel für wilde Buchten.",
+    it: "Il nostro McLouis Yearling 89G è ben attrezzato per l'Andalusia: aria condizionata per l'estate del sud, pannello solare per le notti autonome a Cabo de Gata, 7,48 metri compatti per i borghi di montagna e 3 sedie da spiaggia per le calette selvagge.",
+    nl: "Onze McLouis Yearling 89G is goed uitgerust voor Andalusië: airconditioning voor de zuidelijke zomer, zonnepaneel voor autonome nachten in Cabo de Gata, compacte 7,48 meter voor bergdorpen en 3 strandstoelen voor wilde baaien.",
+    ru: "Наш McLouis Yearling 89G хорошо подходит для Андалусии: кондиционер для южного лета, солнечная панель для автономных ночёвок в Cabo de Gata, компактные 7,48 метра для горных деревень и 3 пляжных кресла для диких бухт.",
+    uk: "Наш McLouis Yearling 89G добре підходить для Андалусії: кондиціонер для південного літа, сонячна панель для автономних ночівель у Cabo de Gata, компактні 7,48 метра для гірських сіл і 3 пляжні крісла для диких бухт.",
   },
   ctaButton: {
     es: "Reservar fechas",
@@ -1418,13 +1418,13 @@ const festivales2027: RouteContent = {
   ],
 
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G encaja en este formato: hasta cinco plazas para dormir, ducha y aseo dentro, nevera con congelador, panel solar para las jornadas autónomas y cocina de gas exterior. A finales de abril, cuando se celebra Rocanrola, el alquiler sale desde 99 € por noche.",
-    en: "Our McLouis Yearling 89G fits this format: up to five sleeping places, shower and toilet inside, a fridge with freezer, a solar panel for self-sufficient days and an outdoor gas stove. At the end of April, when Rocanrola takes place, the rental starts at 99 € a night.",
-    de: "Unser McLouis Yearling 89G passt zu diesem Format: bis zu fünf Schlafplätze, Dusche und WC innen, Kühlschrank mit Gefrierfach, Solarpanel für autarke Tage und ein Gaskocher für draußen. Ende April, wenn Rocanrola stattfindet, beginnt die Miete bei 99 € pro Nacht.",
-    it: "Il nostro McLouis Yearling 89G si adatta a questo formato: fino a cinque posti letto, doccia e servizi interni, frigo con congelatore, pannello solare per le giornate in autonomia e fornello a gas da esterno. A fine aprile, quando si tiene Rocanrola, il noleggio parte da 99 € a notte.",
-    nl: "Onze McLouis Yearling 89G past bij dit format: tot vijf slaapplaatsen, douche en toilet binnen, koelkast met vriesvak, zonnepaneel voor autonome dagen en een gaskookplaat voor buiten. Eind april, wanneer Rocanrola plaatsvindt, begint de huur bij 99 € per nacht.",
-    ru: "Наш McLouis Yearling 89G подходит для этого формата: до пяти спальных мест, душ и туалет внутри, холодильник с морозилкой, солнечная панель для автономных суток и уличная газовая плита. В конце апреля, когда проходит Rocanrola, аренда стоит от 99 € в сутки.",
-    uk: "Наш McLouis Yearling 89G підходить для цього формату: до п'яти спальних місць, душ і туалет усередині, холодильник з морозилкою, сонячна панель для автономної доби і вулична газова плита. Наприкінці квітня, коли проходить Rocanrola, оренда коштує від 99 € за добу.",
+    es: "Nuestro McLouis Yearling 89G encaja en este formato: hasta cinco plazas para dormir, ducha y aseo dentro, nevera con congelador, panel solar para las jornadas autónomas. A finales de abril, cuando se celebra Rocanrola, el alquiler sale desde 99 € por noche.",
+    en: "Our McLouis Yearling 89G fits this format: up to five sleeping places, shower and toilet inside, a fridge with freezer, a solar panel for self-sufficient days. At the end of April, when Rocanrola takes place, the rental starts at 99 € a night.",
+    de: "Unser McLouis Yearling 89G passt zu diesem Format: bis zu fünf Schlafplätze, Dusche und WC innen, Kühlschrank mit Gefrierfach, Solarpanel für autarke Tage. Ende April, wenn Rocanrola stattfindet, beginnt die Miete bei 99 € pro Nacht.",
+    it: "Il nostro McLouis Yearling 89G si adatta a questo formato: fino a cinque posti letto, doccia e servizi interni, frigo con congelatore, pannello solare per le giornate in autonomia. A fine aprile, quando si tiene Rocanrola, il noleggio parte da 99 € a notte.",
+    nl: "Onze McLouis Yearling 89G past bij dit format: tot vijf slaapplaatsen, douche en toilet binnen, koelkast met vriesvak, zonnepaneel voor autonome dagen. Eind april, wanneer Rocanrola plaatsvindt, begint de huur bij 99 € per nacht.",
+    ru: "Наш McLouis Yearling 89G подходит для этого формата: до пяти спальных мест, душ и туалет внутри, холодильник с морозилкой, солнечная панель для автономных суток. В конце апреля, когда проходит Rocanrola, аренда стоит от 99 € в сутки.",
+    uk: "Наш McLouis Yearling 89G підходить для цього формату: до п'яти спальних місць, душ і туалет усередині, холодильник з морозилкою, сонячна панель для автономної доби. Наприкінці квітня, коли проходить Rocanrola, оренда коштує від 99 € за добу.",
   },
   ctaButton: {
     es: "Reservar fechas",

@@ -73,7 +73,7 @@
       "seats": "5 plazas de viaje",
       "beds": "5 plazas para dormir",
       "allIncluded": "Todo incluido",
-      "dims": "7,4 × 2,3 × 2,9 m",
+      "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Largo × ancho × alto"
     },
     "tech": {
@@ -94,20 +94,20 @@
     },
     "equip": {
       "title": "Equipamiento incluido",
-      "bedBath": "Kit de cama y baño",
-      "bedBathItems": "Almohadas y mantas, toallas de baño",
       "kitchen": "Kit de cocina",
       "welcome": "Welcome-kit",
       "welcomeItems": "Papel higiénico, café, jabón",
       "outdoor": "Kit exterior",
-      "outdoorItems": "2 mesas y 4 sillas, 3 sillas de playa, sombrilla, cocina de gas exterior, toldo",
+      "outdoorItems": "2 mesas y 4 sillas, 3 sillas de playa, sombrilla y toldo",
       "climate": "Aire acondicionado y calefacción",
       "solar": "Panel solar y batería de alta capacidad",
       "water": "Agua caliente, ducha y WC",
       "tv": "Smart TV 24 pulgadas",
       "child": "Silla infantil (gratis, bajo petición)",
       "pet": "Pet friendly sin coste adicional",
-      "kitchenItems": "Platos, vasos, tazas de café, cucharas, cucharillas, tenedores, cuchillos de mesa, cuchillos de cocina y de sierra, tabla de cortar de madera, espátulas de cocina, 3 sartenes, cazo mediano, olla con tapa de cristal, ensaladera, sacacorchos y cafetera italiana."
+      "kitchenItems": "Platos, vasos, tazas de café, cucharas, cucharillas, tenedores, cuchillos de mesa, cuchillos de cocina y de sierra, tabla de cortar de madera, espátulas de cocina, 3 sartenes, cazo mediano, olla con tapa de cristal, ensaladera, sacacorchos y cafetera italiana.",
+      "bedKit": "Kit de cama",
+      "bedKitItems": "Almohadas y mantas"
     },
     "included": {
       "title": "Todo incluido",

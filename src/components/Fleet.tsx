@@ -313,7 +313,7 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
           {/* Equipment */}
           <h4 id="equipamiento" className="mt-8 scroll-mt-4 font-display text-xl text-primary">{t("fleet.equip.title")}</h4>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <EquipCard icon={<BedDouble className="h-4 w-4" />} title={t("fleet.equip.bedBath")} items={t("fleet.equip.bedBathItems")} />
+            <EquipCard icon={<BedDouble className="h-4 w-4" />} title={t("fleet.equip.bedKit")} items={t("fleet.equip.bedKitItems")} />
             <EquipCard icon={<UtensilsCrossed className="h-4 w-4" />} title={t("fleet.equip.kitchen")} items={t("fleet.equip.kitchenItems")} />
             <EquipCard icon={<Gift className="h-4 w-4" />} title={t("fleet.equip.welcome")} items={t("fleet.equip.welcomeItems")} />
             <EquipCard icon={<TreePalm className="h-4 w-4" />} title={t("fleet.equip.outdoor")} items={t("fleet.equip.outdoorItems")} />

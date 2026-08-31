@@ -73,7 +73,7 @@
       "seats": "5 posti di viaggio",
       "beds": "5 posti letto",
       "allIncluded": "Tutto incluso",
-      "dims": "7,4 × 2,3 × 2,9 m",
+      "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Lunghezza × larghezza × altezza"
     },
     "tech": {
@@ -94,20 +94,20 @@
     },
     "equip": {
       "title": "Dotazione inclusa",
-      "bedBath": "Kit letto e bagno",
-      "bedBathItems": "Cuscini e coperte, asciugamani da bagno",
       "kitchen": "Kit cucina",
       "welcome": "Welcome kit",
       "welcomeItems": "Carta igienica, caffè, sapone",
       "outdoor": "Kit esterno",
-      "outdoorItems": "2 tavoli e 4 sedie, 3 sedie da spiaggia, ombrellone, fornello a gas esterno, tenda da sole",
+      "outdoorItems": "2 tavoli e 4 sedie, 3 sedie da spiaggia, ombrellone e tenda da sole",
       "climate": "Aria condizionata e riscaldamento",
       "solar": "Pannello solare e batteria ad alta capacità",
       "water": "Acqua calda, doccia e WC",
       "tv": "Smart TV da 24 pollici",
       "child": "Seggiolino per bambini (gratuito, su richiesta)",
       "pet": "Pet friendly senza costi aggiuntivi",
-      "kitchenItems": "Piatti, bicchieri, tazzine da caffè, cucchiai, cucchiaini, forchette, coltelli da tavola, coltelli da cucina e seghettati, tagliere di legno, spatole da cucina, 3 padelle, un pentolino medio, una pentola con coperchio di vetro, un'insalatiera, un cavatappi e una moka."
+      "kitchenItems": "Piatti, bicchieri, tazzine da caffè, cucchiai, cucchiaini, forchette, coltelli da tavola, coltelli da cucina e seghettati, tagliere di legno, spatole da cucina, 3 padelle, un pentolino medio, una pentola con coperchio di vetro, un'insalatiera, un cavatappi e una moka.",
+      "bedKit": "Kit letto",
+      "bedKitItems": "Cuscini e coperte"
     },
     "included": {
       "title": "Tutto incluso",

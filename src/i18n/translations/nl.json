@@ -73,7 +73,7 @@
       "seats": "5 reiszitplaatsen",
       "beds": "5 slaapplaatsen",
       "allIncluded": "Alles inbegrepen",
-      "dims": "7,4 × 2,3 × 2,9 m",
+      "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Lengte × breedte × hoogte"
     },
     "tech": {
@@ -94,20 +94,20 @@
     },
     "equip": {
       "title": "Inbegrepen uitrusting",
-      "bedBath": "Bed- en badset",
-      "bedBathItems": "Kussens en dekens, badhanddoeken",
       "kitchen": "Keukenset",
       "welcome": "Welkomstpakket",
       "welcomeItems": "Toiletpapier, koffie, zeep",
       "outdoor": "Buitenset",
-      "outdoorItems": "2 tafels en 4 stoelen, 3 strandstoelen, parasol, gaskookplaat voor buiten, luifel",
+      "outdoorItems": "2 tafels en 4 stoelen, 3 strandstoelen, parasol en luifel",
       "climate": "Airconditioning en verwarming",
       "solar": "Zonnepaneel en accu met hoge capaciteit",
       "water": "Warm water, douche en toilet",
       "tv": "Smart TV van 24 inch",
       "child": "Kinderzitje (gratis, op aanvraag)",
       "pet": "Huisdieren welkom zonder meerprijs",
-      "kitchenItems": "Borden, glazen, koffiekopjes, lepels, koffielepels, vorken, tafelmessen, keuken- en kartelmessen, houten snijplank, keukenspatels, 3 koekenpannen, een middelgrote steelpan, een pan met glazen deksel, een slakom, een kurkentrekker en een Italiaans koffiezetapparaat."
+      "kitchenItems": "Borden, glazen, koffiekopjes, lepels, koffielepels, vorken, tafelmessen, keuken- en kartelmessen, houten snijplank, keukenspatels, 3 koekenpannen, een middelgrote steelpan, een pan met glazen deksel, een slakom, een kurkentrekker en een Italiaans koffiezetapparaat.",
+      "bedKit": "Bedset",
+      "bedKitItems": "Kussens en dekens"
     },
     "included": {
       "title": "Alles inbegrepen",
