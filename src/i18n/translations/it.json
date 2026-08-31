@@ -89,7 +89,8 @@
       "freshWater": "Serbatoio acqua pulita",
       "fridge": "Frigo con congelatore",
       "sockets": "Prese 230V / 12V",
-      "tbd": "Da confermare"
+      "engineValue": "Renault 2.2 diesel, 165 CV",
+      "freshWaterValue": "120 L"
     },
     "equip": {
       "title": "Dotazione inclusa",

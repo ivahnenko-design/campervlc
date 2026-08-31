@@ -89,7 +89,8 @@
       "freshWater": "Frischwassertank",
       "fridge": "Kühlschrank mit Gefrierfach",
       "sockets": "Steckdosen 230V / 12V",
-      "tbd": "Wird ergänzt"
+      "engineValue": "Renault 2.2 Diesel, 165 PS",
+      "freshWaterValue": "120 L"
     },
     "equip": {
       "title": "Enthaltene Ausstattung",

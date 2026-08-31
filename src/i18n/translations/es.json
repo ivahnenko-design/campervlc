@@ -89,7 +89,8 @@
       "freshWater": "Depósito de agua limpia",
       "fridge": "Nevera con congelador",
       "sockets": "Enchufes 230V / 12V",
-      "tbd": "Por confirmar"
+      "engineValue": "Renault 2.2 diésel, 165 CV",
+      "freshWaterValue": "120 L"
     },
     "equip": {
       "title": "Equipamiento incluido",

@@ -89,7 +89,8 @@
       "freshWater": "Бак чистої води",
       "fridge": "Холодильник з морозилкою",
       "sockets": "Розетки 230В / 12В",
-      "tbd": "Уточнити"
+      "engineValue": "Renault 2.2 дизель, 165 к.с.",
+      "freshWaterValue": "120 л"
     },
     "equip": {
       "title": "Що входить в оренду",

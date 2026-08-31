@@ -89,7 +89,8 @@
       "freshWater": "Schoonwatertank",
       "fridge": "Koelkast met vriesvak",
       "sockets": "Stopcontacten 230V / 12V",
-      "tbd": "Nog te bevestigen"
+      "engineValue": "Renault 2.2 diesel, 165 pk",
+      "freshWaterValue": "120 L"
     },
     "equip": {
       "title": "Inbegrepen uitrusting",

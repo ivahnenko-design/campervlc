@@ -293,7 +293,7 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
               <h5 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">{t("fleet.tech.vehicle")}</h5>
               <SpecRow label={t("fleet.tech.brand")} value="McLouis" />
               <SpecRow label={t("fleet.tech.model")} value="Yearling 89G" />
-              <SpecRow label={t("fleet.tech.engine")} value={t("fleet.tech.tbd")} />
+              <SpecRow label={t("fleet.tech.engine")} value={t("fleet.tech.engineValue")} />
               <SpecRow label={t("fleet.tech.transmission")} value={t("fleet.tech.transmissionValue")} />
             </div>
             <div>
@@ -304,7 +304,7 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
             </div>
             <div>
               <h5 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">{t("fleet.tech.capacityCol")}</h5>
-              <SpecRow label={t("fleet.tech.freshWater")} value={t("fleet.tech.tbd")} />
+              <SpecRow label={t("fleet.tech.freshWater")} value={t("fleet.tech.freshWaterValue")} />
               <p className="border-b border-border/40 py-1.5 text-sm text-foreground">{t("fleet.tech.fridge")}</p>
               <p className="py-1.5 text-sm text-foreground">{t("fleet.tech.sockets")}</p>
             </div>

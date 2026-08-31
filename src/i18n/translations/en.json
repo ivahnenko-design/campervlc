@@ -89,7 +89,8 @@
       "freshWater": "Fresh water tank",
       "fridge": "Fridge with freezer",
       "sockets": "Sockets 230V / 12V",
-      "tbd": "TBD"
+      "engineValue": "Renault 2.2 diesel, 165 HP",
+      "freshWaterValue": "120 L"
     },
     "equip": {
       "title": "Equipment included",
