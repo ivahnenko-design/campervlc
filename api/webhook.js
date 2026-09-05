@@ -65,6 +65,31 @@ async function saveBooking(booking) {
   });
 }
 
+// Resend answers 4xx/5xx with a JSON error body, and fetch does NOT reject on
+// those statuses — an unchecked call silently "succeeds". Surface the status and
+// Resend's payload, then throw so the caller's rejection handling actually runs.
+// The API key lives in the request header and is never logged.
+async function postToResend(body) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "<response body unreadable>");
+    console.error(
+      `Resend send FAILED: ${res.status} ${res.statusText} · to=${body.to} · subject=${body.subject} · ${detail}`
+    );
+    throw new Error(`Resend ${res.status} for ${body.to}: ${detail}`);
+  }
+
+  return res.json().catch(() => ({}));
+}
+
 async function sendGuestEmail(booking) {
   const {
     guestFirstName,
@@ -114,14 +139,7 @@ async function sendGuestEmail(booking) {
     `,
   };
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  await postToResend(body);
 }
 
 async function sendOwnerEmail(booking) {
@@ -170,14 +188,7 @@ async function sendOwnerEmail(booking) {
     `,
   };
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  await postToResend(body);
 }
 
 export default async function handler(req, res) {

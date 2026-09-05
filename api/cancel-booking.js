@@ -49,6 +49,31 @@ function computeRefundAmountCents(depositAmountEur, pct) {
   return Math.round((depositCents * pct) / 100);
 }
 
+// Resend answers 4xx/5xx with a JSON error body, and fetch does NOT reject on
+// those statuses — an unchecked call silently "succeeds". Surface the status and
+// Resend's payload, then throw so the caller's rejection handling actually runs.
+// The API key lives in the request header and is never logged.
+async function postToResend(body) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "<response body unreadable>");
+    console.error(
+      `Resend send FAILED: ${res.status} ${res.statusText} · to=${body.to} · subject=${body.subject} · ${detail}`
+    );
+    throw new Error(`Resend ${res.status} for ${body.to}: ${detail}`);
+  }
+
+  return res.json().catch(() => ({}));
+}
+
 async function sendCancellationGuestEmail(booking) {
   const { guestFirstName, guestEmail, bookingRef, refundPct, refundAmount, startDate, endDate } = booking;
 
@@ -74,14 +99,7 @@ async function sendCancellationGuestEmail(booking) {
     `,
   };
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  await postToResend(body);
 }
 
 async function sendCancellationOwnerEmail(booking) {
@@ -109,14 +127,7 @@ async function sendCancellationOwnerEmail(booking) {
     `,
   };
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  await postToResend(body);
 }
 
 function findBooking(bookings, { bookingRef, email, lastName }) {
@@ -259,10 +270,20 @@ export default async function handler(req, res) {
 
   await saveBooking(updatedBooking);
 
-  await Promise.all([
+  // The refund is already issued and the booking already saved as cancelled, so
+  // an email failure must never turn a completed cancellation into a 500. Log it
+  // and still return success to the customer.
+  const emailResults = await Promise.allSettled([
     sendCancellationGuestEmail(updatedBooking),
     sendCancellationOwnerEmail(updatedBooking),
   ]);
+  const [guestMail, ownerMail] = emailResults;
+  if (guestMail.status === "rejected") {
+    console.error("sendCancellationGuestEmail failed for", updatedBooking.bookingRef, "-", guestMail.reason);
+  }
+  if (ownerMail.status === "rejected") {
+    console.error("sendCancellationOwnerEmail failed for", updatedBooking.bookingRef, "-", ownerMail.reason);
+  }
 
   return res.status(200).json({
     bookingRef: updatedBooking.bookingRef,
