@@ -83,9 +83,9 @@ async function sendCancellationGuestEmail(booking) {
       : `<p>Per our cancellation policy, your deposit is not refundable for this cancellation.</p>`;
 
   const body = {
-    from: "Camper Retreat VLC <onboarding@resend.dev>",
+    from: "Camper Retreat VLC <info@campervlc.com>",
     to: guestEmail,
-    reply_to: process.env.OWNER_EMAIL,
+    reply_to: "info@campervlc.com",
     subject: `Booking cancelled – ${bookingRef}`,
     html: `
       <h2>Hi ${guestFirstName}, your booking has been cancelled</h2>
@@ -114,8 +114,9 @@ async function sendCancellationOwnerEmail(booking) {
   } = booking;
 
   const body = {
-    from: "Booking System <onboarding@resend.dev>",
+    from: "Camper Retreat VLC <info@campervlc.com>",
     to: process.env.OWNER_EMAIL,
+    reply_to: "info@campervlc.com",
     subject: `Booking cancelled: ${guestFirstName} ${guestLastName} · ${bookingRef}`,
     html: `
       <h2>A booking was cancelled</h2>

@@ -118,9 +118,9 @@ async function sendGuestEmail(booking) {
     : "";
 
   const body = {
-    from: "Camper Retreat VLC <onboarding@resend.dev>",
+    from: "Camper Retreat VLC <info@campervlc.com>",
     to: guestEmail,
-    reply_to: process.env.OWNER_EMAIL,
+    reply_to: "info@campervlc.com",
     subject: `Booking confirmed – ${startDate} → ${endDate}`,
     html: `
       <h2>Hi ${guestFirstName}! Your booking is confirmed 🎉</h2>
@@ -166,8 +166,9 @@ async function sendOwnerEmail(booking) {
   const isFullPayment = prepaymentOption === "full";
 
   const body = {
-    from: "Booking System <onboarding@resend.dev>",
+    from: "Camper Retreat VLC <info@campervlc.com>",
     to: process.env.OWNER_EMAIL,
+    reply_to: "info@campervlc.com",
     subject: `New booking: ${guestFirstName} ${guestLastName} · ${bookingRef} · ${startDate}–${endDate}`,
     html: `
       <h2>New booking received</h2>
