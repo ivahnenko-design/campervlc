@@ -383,5 +383,21 @@
     "row3_purpose": "Google Analytics: distinguishes users",
     "row3_duration": "24 hours",
     "manage": "You can manage or delete cookies from your browser settings. Disabling analytics cookies does not affect site functionality. See our Privacy Policy for more information."
+  },
+  "success": {
+    "title": "Booking confirmed!",
+    "desc": "Thank you. We'll email you the details shortly.",
+    "deposit_paid": "Deposit (50%) paid",
+    "pickup_note": "The remaining 50% is due on pickup of the campervan in Valencia.",
+    "paid_full": "Payment received in full",
+    "no_balance": "Balance due on pickup: €0. Nothing left to pay.",
+    "email_note": "Check your inbox for the confirmation email.",
+    "ref": "Booking reference",
+    "ref_note": "Save this reference — you'll need it with your last name to cancel.",
+    "ref_pending": "Being generated — it will arrive in your confirmation email.",
+    "amount_paid": "Amount paid",
+    "dates": "Dates",
+    "loading": "Loading your booking details…",
+    "back": "Back to homepage"
   }
 }

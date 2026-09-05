@@ -383,5 +383,21 @@
     "row3_purpose": "Google Analytics: unterscheidet Nutzer",
     "row3_duration": "24 Stunden",
     "manage": "Sie koennen Cookies in Ihren Browsereinstellungen verwalten oder loeschen. Das Deaktivieren von Analyse-Cookies beeintraechtigt die Website-Funktionalitaet nicht. Weitere Informationen finden Sie in unserer Datenschutzerklaerung."
+  },
+  "success": {
+    "title": "Buchung bestätigt!",
+    "desc": "Danke. Wir senden dir die Details in Kürze per E-Mail.",
+    "deposit_paid": "Anzahlung (50%) bezahlt",
+    "pickup_note": "Die restlichen 50% werden bei der Abholung des Wohnmobils in Valencia fällig.",
+    "paid_full": "Zahlung vollständig erhalten",
+    "no_balance": "Restbetrag bei Abholung: 0 €. Es ist nichts mehr offen.",
+    "email_note": "Sieh in deinem Postfach nach der Bestätigungsmail.",
+    "ref": "Buchungsreferenz",
+    "ref_note": "Bewahre diese Referenz auf — du brauchst sie mit deinem Nachnamen zum Stornieren.",
+    "ref_pending": "Wird erstellt — sie kommt mit der Bestätigungsmail.",
+    "amount_paid": "Gezahlter Betrag",
+    "dates": "Zeitraum",
+    "loading": "Buchungsdaten werden geladen…",
+    "back": "Zurück zur Startseite"
   }
 }

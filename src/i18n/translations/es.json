@@ -383,5 +383,21 @@
     "row3_purpose": "Google Analytics: distingue a los usuarios",
     "row3_duration": "24 horas",
     "manage": "Puede gestionar o eliminar las cookies desde la configuración de su navegador. Desactivar las cookies analíticas no afecta al funcionamiento del sitio. Para más información, consulte nuestra Política de Privacidad."
+  },
+  "success": {
+    "title": "¡Reserva confirmada!",
+    "desc": "Gracias. Te enviaremos los detalles por correo en breve.",
+    "deposit_paid": "Depósito (50%) pagado",
+    "pickup_note": "El 50% restante se paga al recoger la autocaravana en Valencia.",
+    "paid_full": "Pago completo recibido",
+    "no_balance": "Pendiente al recoger: 0 €. No queda nada por pagar.",
+    "email_note": "Revisa tu bandeja de entrada: te hemos enviado la confirmación.",
+    "ref": "Referencia de reserva",
+    "ref_note": "Guarda esta referencia: la necesitarás junto con tu apellido para cancelar.",
+    "ref_pending": "Se está generando y llegará en el correo de confirmación.",
+    "amount_paid": "Importe pagado",
+    "dates": "Fechas",
+    "loading": "Cargando los datos de tu reserva…",
+    "back": "Volver al inicio"
   }
 }

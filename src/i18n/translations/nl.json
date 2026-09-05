@@ -383,5 +383,21 @@
     "row3_purpose": "Google Analytics: onderscheidt gebruikers",
     "row3_duration": "24 uur",
     "manage": "U kunt cookies beheren of verwijderen via uw browserinstellingen. Het uitschakelen van analytische cookies heeft geen invloed op de sitefunctionaliteit. Zie ons Privacybeleid voor meer informatie."
+  },
+  "success": {
+    "title": "Boeking bevestigd!",
+    "desc": "Bedankt. We mailen je de details binnenkort.",
+    "deposit_paid": "Aanbetaling (50%) betaald",
+    "pickup_note": "De resterende 50% betaal je bij het ophalen van de camper in Valencia.",
+    "paid_full": "Betaling volledig ontvangen",
+    "no_balance": "Openstaand bij ophalen: € 0. Er hoeft niets meer betaald te worden.",
+    "email_note": "Kijk in je inbox voor de bevestigingsmail.",
+    "ref": "Boekingsreferentie",
+    "ref_note": "Bewaar deze referentie — je hebt hem met je achternaam nodig om te annuleren.",
+    "ref_pending": "Wordt aangemaakt — hij komt in je bevestigingsmail.",
+    "amount_paid": "Betaald bedrag",
+    "dates": "Data",
+    "loading": "Boekingsgegevens laden…",
+    "back": "Terug naar de homepage"
   }
 }

@@ -383,5 +383,21 @@
     "row3_purpose": "Google Analytics: distingue gli utenti",
     "row3_duration": "24 ore",
     "manage": "E' possibile gestire o eliminare i cookie dalle impostazioni del browser. Disabilitare i cookie analitici non influisce sul funzionamento del sito. Per ulteriori informazioni consultare la nostra Informativa sulla Privacy."
+  },
+  "success": {
+    "title": "Prenotazione confermata!",
+    "desc": "Grazie. Ti invieremo i dettagli via email a breve.",
+    "deposit_paid": "Acconto (50%) pagato",
+    "pickup_note": "Il restante 50% si paga al ritiro del camper a Valencia.",
+    "paid_full": "Pagamento ricevuto per intero",
+    "no_balance": "Saldo al ritiro: 0 €. Non resta nulla da pagare.",
+    "email_note": "Controlla la tua casella di posta per l'email di conferma.",
+    "ref": "Riferimento prenotazione",
+    "ref_note": "Conserva questo riferimento: ti servirà con il cognome per annullare.",
+    "ref_pending": "In fase di generazione: arriverà nell'email di conferma.",
+    "amount_paid": "Importo pagato",
+    "dates": "Date",
+    "loading": "Caricamento dei dati della prenotazione…",
+    "back": "Torna alla homepage"
   }
 }
