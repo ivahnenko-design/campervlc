@@ -25,6 +25,18 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    // km_200 and km_unlimited are alternatives (see EXCLUSIVE_EXTRA_GROUPS in
+    // src/data/fleet.ts). The UI enforces this, but a stale page or a crafted
+    // request could still send both — keep only the broader plan.
+    let cleanExtraIds = Array.isArray(extraIds) ? extraIds.filter(Boolean) : [];
+    if (cleanExtraIds.includes("km_200") && cleanExtraIds.includes("km_unlimited")) {
+      console.warn(
+        "create-checkout: both mileage options received; keeping km_unlimited only",
+        { startDate, endDate, totalWithIva, extraIds }
+      );
+      cleanExtraIds = cleanExtraIds.filter((id) => id !== "km_200");
+    }
+
     const isFullPayment = prepaymentOption === "full";
     const depositAmount = isFullPayment ? totalWithIva : Math.round(totalWithIva * 0.5);
     const remainingAmount = totalWithIva - depositAmount;
@@ -60,7 +72,7 @@ export default async function handler(req, res) {
         startDate,
         endDate,
         nights: String(nights),
-        extraIds: extraIds.join(","),
+        extraIds: cleanExtraIds.join(","),
         totalWithIva: String(totalWithIva),
         depositAmount: String(depositAmount),
         remainingAmount: String(remainingAmount),

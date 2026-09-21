@@ -17,7 +17,7 @@ import {
 } from "date-fns";
 import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles, Tag } from "lucide-react";
 import { SectionHeader } from "./Fleet";
-import { AVAILABILITY, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
+import { AVAILABILITY, EXCLUSIVE_EXTRA_GROUPS, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import {
   calculatePrice,
   getSeason,
@@ -168,7 +168,18 @@ export function BookingCalendar() {
     if (extra?.mandatory) return;
     setSelectedExtras((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
+      if (next.has(id)) {
+        // Clicking the active option clears it, so neither mileage option is required.
+        next.delete(id);
+      } else {
+        next.add(id);
+        // Radio-style: selecting one member of an exclusive group drops the others,
+        // otherwise the customer would be charged for both mileage plans.
+        for (const group of EXCLUSIVE_EXTRA_GROUPS) {
+          if (!group.includes(id)) continue;
+          for (const other of group) if (other !== id) next.delete(other);
+        }
+      }
       return next;
     });
   };
@@ -312,7 +323,11 @@ export function BookingCalendar() {
                       }`}
                     >
                       <span className="flex items-center gap-2">
-                        <span className={`grid h-4 w-4 place-items-center rounded border ${active ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
+                        <span
+                          className={`grid h-4 w-4 place-items-center border ${
+                            EXCLUSIVE_EXTRA_GROUPS.some((g) => g.includes(e.id)) ? "rounded-full" : "rounded"
+                          } ${active ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}
+                        >
                           {active ? "✓" : ""}
                         </span>
                         {t(`extras.${e.id}`)}

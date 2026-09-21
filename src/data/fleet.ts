@@ -71,3 +71,12 @@ export const EXTRAS: readonly ExtraItem[] = [
 ] as const;
 
 export type ExtraId = (typeof EXTRAS)[number]["id"];
+
+/**
+ * Extras that are alternatives rather than add-ons: selecting one deselects the
+ * rest of its group, and none of them is required. Mirrored server-side in
+ * api/create-checkout.js, which cannot import from src/.
+ */
+export const EXCLUSIVE_EXTRA_GROUPS: readonly (readonly ExtraId[])[] = [
+  ["km_200", "km_unlimited"],
+];
