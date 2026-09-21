@@ -145,7 +145,7 @@
     "price_breakdown_many": "{{price}} € × {{count}} ночей",
     "price_breakdown_other": "{{price}} € × {{count}} ночі",
     "subtotal": "Сума",
-    "discount": "Знижка ({{pct}}%)",
+    "discount": "Знижка за тривалу оренду ({{pct}}%)",
     "extras": "Додатки",
     "total": "Орієнтовна сума",
     "cta": "Замовити через WhatsApp",

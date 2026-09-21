@@ -143,7 +143,7 @@
     "price_breakdown_one": "{{price}} € × {{count}} nacht",
     "price_breakdown_other": "{{price}} € × {{count}} nachten",
     "subtotal": "Subtotaal",
-    "discount": "Korting ({{pct}}%)",
+    "discount": "Korting lang verblijf ({{pct}}%)",
     "extras": "Extra's",
     "total": "Geschatte totaal",
     "cta": "Boeking aanvragen via WhatsApp",

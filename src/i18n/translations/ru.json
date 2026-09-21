@@ -145,7 +145,7 @@
     "price_breakdown_many": "{{price}} € × {{count}} ночей",
     "price_breakdown_other": "{{price}} € × {{count}} ночи",
     "subtotal": "Сумма",
-    "discount": "Скидка ({{pct}}%)",
+    "discount": "Скидка за длительную аренду ({{pct}}%)",
     "extras": "Опции",
     "total": "Примерный итог",
     "cta": "Заказать через WhatsApp",

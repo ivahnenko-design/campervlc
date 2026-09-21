@@ -143,7 +143,7 @@
     "price_breakdown_one": "{{price}} € × {{count}} notte",
     "price_breakdown_other": "{{price}} € × {{count}} notti",
     "subtotal": "Subtotale",
-    "discount": "Sconto ({{pct}}%)",
+    "discount": "Sconto soggiorno lungo ({{pct}}%)",
     "extras": "Extra",
     "total": "Totale stimato",
     "cta": "Richiedi prenotazione via WhatsApp",
