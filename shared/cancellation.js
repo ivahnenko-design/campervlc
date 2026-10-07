@@ -42,15 +42,19 @@ export function retentionPct(daysToPickup) {
  * cancelled with 100% retention) is reported as `unpaidRetention` and is NOT
  * charged automatically.
  */
+export function isFreeWindow(booking, nowMs) {
+  const hoursSinceBooking = (nowMs - Date.parse(booking.createdAt)) / 3_600_000;
+  return hoursSinceBooking <= FREE_CANCELLATION_HOURS && daysUntil(booking.startDate, nowMs) > FREE_CANCELLATION_MIN_DAYS;
+}
+
 export function cancellationQuote(booking, nowMs) {
   const total = Number(booking.totalWithIva) || 0;
   const paid = Number(booking.amountPaid ?? booking.depositAmount) || 0;
   const alreadyRetained = Number(booking.retainedTotal) || 0;
 
-  const hoursSinceBooking = (nowMs - Date.parse(booking.createdAt)) / 3_600_000;
   const daysToPickup = daysUntil(booking.startDate, nowMs);
 
-  const free = hoursSinceBooking <= FREE_CANCELLATION_HOURS && daysToPickup > FREE_CANCELLATION_MIN_DAYS;
+  const free = isFreeWindow(booking, nowMs);
   const pct = free ? 0 : retentionPct(daysToPickup);
   const retained = free ? 0 : Math.round((total - alreadyRetained) * (pct / 100)) + alreadyRetained;
 

@@ -284,3 +284,29 @@ test("refunds go to the original payment first, never above what each holds", ()
   });
   assert.equal(allocateRefund(b, 1000).unallocated, 850);
 });
+
+test("24 h free window applies to shortening: paid 2 h ago, 40 days ahead → no retention", () => {
+  const b = makeBooking({ createdAt: new Date(NOW - 2 * 3_600_000).toISOString() });
+  const r = planChange({ booking: b, request: { endDate: "2026-11-20" }, nowMs: NOW });
+  assert.equal(r.ok, true, JSON.stringify(r.errors));
+  assert.equal(r.plan.freeWindow, true);
+  assert.equal(r.plan.retentionPct, 0);
+  assert.equal(r.plan.retention, 0);
+  assert.equal(r.plan.settlement.type, "refund");
+});
+
+test("24 h free window ends after 24 h or inside 7 days of pickup", () => {
+  const late = makeBooking({ createdAt: new Date(NOW - 25 * 3_600_000).toISOString() });
+  const a = planChange({ booking: late, request: { endDate: "2026-11-20" }, nowMs: NOW });
+  assert.equal(a.plan.freeWindow, false);
+  assert.equal(a.plan.retentionPct, 10);
+
+  const near = makeBooking({
+    createdAt: new Date(NOW - 2 * 3_600_000).toISOString(),
+    startDate: "2026-10-12",
+    endDate: "2026-10-19",
+  });
+  const c = planChange({ booking: near, request: { endDate: "2026-10-16" }, nowMs: NOW });
+  assert.equal(c.plan.freeWindow, false);
+  assert.equal(c.plan.retentionPct, 100);
+});

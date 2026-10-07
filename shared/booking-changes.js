@@ -18,7 +18,7 @@ import {
   parseIsoDate,
   withIva,
 } from "./pricing.js";
-import { RETENTION_SCALE, retentionPct } from "./cancellation.js";
+import { RETENTION_SCALE, retentionPct, isFreeWindow } from "./cancellation.js";
 import { BUSINESS_TIME_ZONE, daysUntil, hoursUntil } from "./dates.js";
 
 // One scale and one set of date helpers for the whole site (see cancellation.js / dates.js).
@@ -213,7 +213,10 @@ export function planChange({ booking, request = {}, nowMs, blockedDates = new Se
   // ── Retention for removed nights (clause 4.1) ──
   const removedNights = Math.max(0, originalQuote.nights - newQuote.nights);
   const retentionDays = daysUntil(booking.startDate, nowMs);
-  const pct = removedNights > 0 ? retentionPct(retentionDays) : 0;
+  // Same free window as a full cancellation: within 24 h of payment and more
+  // than 7 days before pickup, shortening costs nothing.
+  const freeWindow = removedNights > 0 && isFreeWindow(booking, nowMs);
+  const pct = removedNights > 0 && !freeWindow ? retentionPct(retentionDays) : 0;
   const removedNightsValue =
     removedNights > 0
       ? withIva(Math.round((originalQuote.nightsSubtotal / originalQuote.nights) * removedNights))
@@ -270,6 +273,7 @@ export function planChange({ booking, request = {}, nowMs, blockedDates = new Se
       removedNights,
       retentionDays,
       retentionPct: pct,
+      freeWindow,
       removedNightsValue,
       retention,
       previousRetention,
