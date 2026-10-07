@@ -9,6 +9,10 @@ import {
   parseIsoDate,
 } from "../shared/pricing.js";
 
+// Version of the rental conditions the guest ticks "I have read" for
+// (content/condiciones-web-*.md). Bump it when the contract text changes.
+const TERMS_VERSION = "2026-10-v3";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
 });
@@ -29,10 +33,20 @@ export default async function handler(req, res) {
       guest,
       prepaymentOption,
       promoCode,
+      acceptedTerms,
     } = req.body;
 
     if (!startDate || !endDate || !guest?.email) {
       return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // The checkbox in the calculator is enforced here too: a client that skips
+    // it (stale page, crafted request) can not start a payment.
+    if (acceptedTerms !== true) {
+      return res.status(400).json({
+        error: "Please confirm that you have read the rental conditions.",
+        code: "terms_not_accepted",
+      });
     }
 
     const start = parseIsoDate(startDate);
@@ -135,6 +149,8 @@ export default async function handler(req, res) {
         remainingAmount: String(remainingAmount),
         prepaymentOption: isFullPayment ? "full" : "deposit",
         promoCode: quote.appliedPromoCode || "",
+        acceptedTerms: "true",
+        termsVersion: TERMS_VERSION,
         guestFirstName: guest.firstName,
         guestLastName: guest.lastName,
         guestEmail: guest.email,

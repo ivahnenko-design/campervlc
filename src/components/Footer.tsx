@@ -20,7 +20,8 @@ export function Footer() {
             <li><Link to="/privacy" className="hover:text-foreground transition-colors">{t("footer.privacy")}</Link></li>
             <li><Link to="/terms" className="hover:text-foreground transition-colors">{t("footer.terms")}</Link></li>
             <li><Link to="/cookies" className="hover:text-foreground transition-colors">{t("footer.cookies")}</Link></li>
-            <li><Link to="/cancellation-policy" className="hover:text-foreground transition-colors">{t("footer.cancellationPolicy")}</Link></li>
+            <li><Link to="/condiciones" className="hover:text-foreground transition-colors">{t("footer.conditions")}</Link></li>
+            <li><Link to="/condiciones" hash="cancelacion" className="hover:text-foreground transition-colors">{t("footer.cancellationPolicy")}</Link></li>
           </ul>
           <div className="flex flex-col items-start gap-4 md:items-end">
             <div className="flex gap-3">

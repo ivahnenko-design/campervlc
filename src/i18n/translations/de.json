@@ -110,6 +110,7 @@
     },
     "included": {
       "title": "Alles inklusive",
+      "km": "100 km pro Mietnacht inklusive",
       "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive",
       "gasBottles": "2 Gasflaschen inklusive",
       "toiletCapsules": "WC-Kapseln inklusive"
@@ -133,6 +134,7 @@
     "pickup_time": "Abholzeit",
     "return_time": "Rückgabezeit",
     "nights": "Nächte",
+    "km_included": "100 km/Nacht im Preis inbegriffen",
     "pickRange": "Datumsbereich auswählen",
     "minNights": "Mindestaufenthalt in dieser Saison: {{n}} Nächte",
     "season_low": "Nebensaison",
@@ -183,7 +185,9 @@
     "promo_apply": "Anwenden",
     "promo_success": "Code angewendet: -{{pct}}%",
     "promo_invalid": "Ungültiger Gutscheincode",
-    "promo_discount_row": "Gutscheincode ({{code}})"
+    "promo_discount_row": "Gutscheincode ({{code}})",
+    "terms_accept": "Ich habe die <terms>Mietbedingungen</terms> gelesen",
+    "terms_required": "Bitte bestätige, dass du die Mietbedingungen gelesen hast, um fortzufahren."
   },
   "extras": {
     "title": "Optionale Extras",
@@ -208,7 +212,7 @@
     "towels": "Badetücher",
     "extra_driver": "Zusätzlicher Fahrer",
     "festival": "Festival",
-    "km_200": "200 km/Tag inklusive",
+    "km_200": "Bis zu 200 km/Nacht statt 100",
     "km_unlimited": "Unbegrenzte Kilometer",
     "sup_board": "SUP-Board",
     "reduced_deductible": "Reduzierte Selbstbeteiligung (600 €)"
@@ -248,23 +252,23 @@
   "faq": {
     "title": "Häufige Fragen",
     "q1": "Welche Dokumente brauche ich?",
-    "a1": "Gültiger Führerschein Klasse B (mindestens 2 Jahre alt), Ausweis oder Reisepass.",
+    "a1": "Du brauchst einen in Spanien gültigen Führerschein der Klasse B, den du seit mehr als 2 Jahren besitzt, und musst mindestens 25 Jahre alt sein (gilt auch für jeden zusätzlichen Fahrer). Fahrer von außerhalb der EU brauchen zusätzlich den internationalen Führerschein. Bring deinen Ausweis oder Reisepass mit.",
     "q2": "Wie hoch ist die Kaution?",
-    "a2": "Kaution 900 € (vorbehaltlich Bestätigung), erstattbar nach schadensfreier Rückgabe.",
+    "a2": "Die Kaution beträgt 900 €. Sie wird vor der Übergabe als Vorautorisierung auf deiner Karte reserviert und innerhalb von 14 Werktagen nach der Rückgabe freigegeben, wenn das Fahrzeug im gleichen Zustand zurückkommt.",
     "q3": "Ist die Versicherung inklusive?",
-    "a3": "Ja, Vollkasko ist im Grundpreis enthalten. Selbstbeteiligung kann reduziert werden.",
+    "a3": "Ja. Eine Vollkaskoversicherung ist im Preis enthalten, mit einer Selbstbeteiligung von 900 €. Mit der Option reduzierte Selbstbeteiligung (60 € pro Buchung) beträgt sie 600 €.",
     "q4": "Wo Abholung und Rückgabe?",
-    "a4": "In der Stadt Valencia. Flughafentransfer optional (90 €).",
+    "a4": "Abholung und Rückgabe: Carrer de Nino Bravo, 3, 46013 Valencia. Den Flughafentransfer kannst du als Option dazubuchen (90 €).",
     "q5": "Sind Haustiere erlaubt?",
-    "a5": "Ja, wir sind haustierfreundlich. Es wird kein Haustierzuschlag berechnet.",
+    "a5": "Ja, Haustiere sind ohne Aufpreis willkommen. Du haftest für Schäden, die sie verursachen; im Fahrzeug darf nicht geraucht werden.",
     "q6": "Wie viele Kilometer sind inkl.?",
-    "a6": "100 km/Tag inklusive. Zusätzlich: 0,30 €/km (vorbehaltlich).",
+    "a6": "100 km pro Mietnacht sind inklusive. Du kannst auf bis zu 200 km/Nacht (20 €/Nacht) oder unbegrenzte Kilometer (40 €/Nacht) erweitern. Kilometer über dem Inklusivkontingent kosten 0,30 €/km.",
     "q7": "Mindestaufenthalt?",
-    "a7": "Nebensaison (Nov–Mär): 3 Nächte. Zwischensaison (Apr–Mai, Okt): 4 Nächte. Hauptsaison (Jun–Sep): 5 Nächte.",
+    "a7": "Neben- und Zwischensaison: 3 Nächte. Hauptsaison: 4 Nächte. Spitzensaison (August und Weihnachten): 5 Nächte. Der Rechner zeigt das Minimum für deine Daten.",
     "q8": "Kann ich mit Karte zahlen?",
-    "a8": "Karte, Bizum und Banküberweisung.",
+    "a8": "Ja. Die Online-Zahlung ist nur per Karte möglich. Bei der Buchung zahlst du 50 % Anzahlung oder 100 % im Voraus mit 5 % Rabatt.",
     "q9": "Wie miete ich ein Wohnmobil in Valencia?",
-    "a9": "Waehle deine Reisedaten im Preisrechner, schreib uns auf WhatsApp und wir bestaetigen die Verfuegbarkeit in wenigen Minuten. Zur Buchung wird eine Anzahlung von 50% faellig (oder 100% mit 5% Rabatt). Der Rest ist vor der Abholung zu zahlen."
+    "a9": "Wähle im Preisrechner deine Daten, füge Optionen hinzu, bestätige, dass du die Mietbedingungen gelesen hast, und zahle online per Karte: 50 % Anzahlung oder 100 % im Voraus mit 5 % Rabatt. Die Bestätigung kommt per E-Mail, der Rest wird bei der Abholung bezahlt."
   },
   "contact": {
     "title": "Kontaktiere uns",
@@ -277,29 +281,16 @@
   },
   "meta": {
     "title": "Wohnmobil mieten Valencia Spanien | Camper Retreat VLC",
-    "description": "Mieten Sie unser Wohnmobil in Valencia für bis zu 5 Personen ab 100€/Nacht. Alles inklusive. Buchung per WhatsApp in Minuten."
+    "description": "Mieten Sie unser Wohnmobil in Valencia für bis zu 5 Personen ab 99€/Nacht. Alles inklusive. Online buchen in wenigen Minuten."
   },
   "footer": {
     "tagline": "Freiheit der Straße, aus Valencia.",
     "privacy": "Datenschutz",
     "terms": "AGB",
+    "conditions": "Bedingungen und Preise",
     "cookies": "Cookies",
     "cancellationPolicy": "Stornierungsbedingungen",
     "rights": "© 2026 Camper Retreat VLC. Alle Rechte vorbehalten."
-  },
-  "cancellationPolicy": {
-    "title": "Stornierungsbedingungen",
-    "intro": "Wir wissen, dass sich Pläne ändern. Hier erfährst du genau, was passiert, wenn du deine Buchung stornieren musst.",
-    "tier1_title": "Stornierung innerhalb von 24 Stunden nach Buchung",
-    "tier1_body": "Wenn du innerhalb von 24 Stunden nach der Buchung stornierst und dein Reisestart noch mehr als 48 Stunden entfernt ist, erhältst du eine 100%ige Rückerstattung deiner Anzahlung.",
-    "tier2_title": "Stornierung 30+ Tage vor Abreise",
-    "tier2_body": "Stornierungen, die 30 Tage oder mehr vor deinem Startdatum erfolgen, werden zu 95% der Anzahlung erstattet.",
-    "tier3_title": "Stornierung weniger als 30 Tage vor Abreise",
-    "tier3_body": "Stornierungen weniger als 30 Tage vor deinem Startdatum berechtigen nicht zur Rückerstattung der Anzahlung. Deine Buchung wird dennoch storniert und die Termine werden freigegeben — wir werden nicht versuchen, den Restbetrag einzuziehen.",
-    "tier4_title": "Höhere Gewalt",
-    "tier4_body": "Außergewöhnliche Umstände (medizinische Notfälle, Naturkatastrophen usw.) werden individuell behandelt. Bitte kontaktiere uns direkt.",
-    "cta_cancel": "Musst du eine Buchung stornieren?",
-    "cta_cancel_link": "Zur Stornierungsseite"
   },
   "cancelBooking": {
     "title": "Buchung stornieren",
@@ -317,8 +308,10 @@
     "error_refund_failed": "Wir konnten die Rückerstattung gerade nicht verarbeiten. Bitte versuche es erneut oder kontaktiere uns.",
     "error_generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     "quote_title": "Stornierung bestätigen",
-    "quote_refund_full": "Dir werden {{pct}}% (€{{amount}}) deiner Anzahlung erstattet.",
-    "quote_refund_zero": "Deine Anzahlung ist derzeit nicht erstattungsfähig, aber deine Buchung wird storniert und die Termine werden freigegeben.",
+    "quote_free": "Kostenlose Stornierung: Du hast vor weniger als 24 Stunden gebucht und die Übergabe ist mehr als 7 Tage entfernt. Alles, was du bezahlt hast (€{{amount}}), wird erstattet.",
+    "quote_refund": "Gemäß Ziffer 4.1 der Mietbedingungen werden {{pct}} % des Gesamtpreises (€{{retained}}) einbehalten. Du erhältst €{{amount}} zurück.",
+    "quote_refund_zero": "Gemäß Ziffer 4.1 der Mietbedingungen werden {{pct}} % des Gesamtpreises (€{{retained}}) einbehalten, was deine bisherige Zahlung abdeckt. Es erfolgt keine Erstattung; deine Buchung wird storniert und die Termine werden freigegeben. Einen offenen Restbetrag buchen wir nicht automatisch ab.",
+    "quote_policy_link": "Stornobedingungen lesen",
     "quote_confirm": "Stornierung bestätigen",
     "quote_back": "Nein, zurück",
     "quote_processing": "Wird verarbeitet…",
@@ -362,7 +355,7 @@
     "s7_title": "Versicherung und Selbstbeteiligung",
     "s7_body": "Im Grundpreis ist eine Vollkaskoversicherung mit Standard-Selbstbeteiligung enthalten. Die reduzierte Selbstbeteiligungsoption kann als Extra gebucht werden.",
     "s8_title": "Stornierungen",
-    "s8_body": "Stornierungen unterliegen der Stornierungsrichtlinie unter campervlc.com/cancellation-policy.",
+    "s8_body": "Stornierungen unterliegen der Stornierungsrichtlinie unter campervlc.com/condiciones#cancelacion.",
     "s9_title": "Anwendbares Recht",
     "s9_body": "Dieser Vertrag unterliegt spanischem Recht. Streitigkeiten werden vor den Gerichten von Valencia ausgetragen."
   },
@@ -402,6 +395,10 @@
     "amount_paid": "Gezahlter Betrag",
     "dates": "Zeitraum",
     "loading": "Buchungsdaten werden geladen…",
+    "back": "Zurück zur Startseite"
+  },
+  "conditions": {
+    "toc": "Auf dieser Seite",
     "back": "Zurück zur Startseite"
   }
 }

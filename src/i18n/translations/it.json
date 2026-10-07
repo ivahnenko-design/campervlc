@@ -110,6 +110,7 @@
     },
     "included": {
       "title": "Tutto incluso",
+      "km": "100 km per ogni notte di noleggio inclusi",
       "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso",
       "gasBottles": "2 bombole di gas incluse",
       "toiletCapsules": "Capsule per il WC incluse"
@@ -133,6 +134,7 @@
     "pickup_time": "Orario di ritiro",
     "return_time": "Orario di riconsegna",
     "nights": "Notti",
+    "km_included": "100 km/notte inclusi nel prezzo",
     "pickRange": "Seleziona un intervallo di date",
     "minNights": "Soggiorno minimo in questa stagione: {{n}} notti",
     "season_low": "Bassa stagione",
@@ -183,7 +185,9 @@
     "promo_apply": "Applica",
     "promo_success": "Codice applicato: -{{pct}}%",
     "promo_invalid": "Codice promozionale non valido",
-    "promo_discount_row": "Codice promozionale ({{code}})"
+    "promo_discount_row": "Codice promozionale ({{code}})",
+    "terms_accept": "Ho letto le <terms>condizioni di noleggio</terms>",
+    "terms_required": "Conferma di aver letto le condizioni di noleggio per continuare."
   },
   "extras": {
     "title": "Extra opzionali",
@@ -208,7 +212,7 @@
     "towels": "Asciugamani",
     "extra_driver": "Conducente aggiuntivo",
     "festival": "Festival",
-    "km_200": "200 km/giorno inclusi",
+    "km_200": "Fino a 200 km/notte invece di 100",
     "km_unlimited": "Chilometri illimitati",
     "sup_board": "Tavola SUP",
     "reduced_deductible": "Franchigia ridotta (600 €)"
@@ -248,23 +252,23 @@
   "faq": {
     "title": "Domande frequenti",
     "q1": "Quali documenti servono?",
-    "a1": "Patente B valida (minimo 2 anni), documento o passaporto.",
+    "a1": "Serve la patente di categoria B, valida in Spagna e posseduta da più di 2 anni, e un'età minima di 25 anni (vale anche per ogni conducente aggiuntivo). I conducenti extra-UE hanno bisogno anche della patente internazionale. Porta il documento d'identità o il passaporto.",
     "q2": "Qual è la cauzione?",
-    "a2": "Cauzione di 900 € (da confermare), rimborsabile a fine noleggio senza incidenti.",
+    "a2": "La cauzione è di 900 €. È una preautorizzazione sulla carta fatta prima del ritiro e viene rilasciata entro 14 giorni lavorativi dalla riconsegna se il veicolo torna nelle stesse condizioni.",
     "q3": "L'assicurazione è inclusa?",
-    "a3": "Sì, kasko completa inclusa nel prezzo base. Opzionale riduzione della franchigia.",
+    "a3": "Sì. L'assicurazione kasko è inclusa nel prezzo, con una franchigia di 900 €. Con l'opzione franchigia ridotta (60 € a prenotazione) la franchigia è di 600 €.",
     "q4": "Dove si ritira e riconsegna?",
-    "a4": "Nella città di Valencia. Offriamo transfer aeroporto Valencia opzionale (90 €).",
+    "a4": "Ritiro e riconsegna in Carrer de Nino Bravo, 3, 46013 Valencia. Il trasferimento dall'aeroporto si può aggiungere come opzione (90 €).",
     "q5": "Posso portare animali?",
-    "a5": "Sì, siamo pet friendly. Non applichiamo alcun supplemento per gli animali.",
+    "a5": "Sì, gli animali sono i benvenuti senza costi aggiuntivi. Rispondi dei danni che causano e nel veicolo non si può fumare.",
     "q6": "Quanti km sono inclusi?",
-    "a6": "100 km/giorno inclusi. Aggiuntivi: 0,3 €/km (da confermare).",
+    "a6": "Sono inclusi 100 km per ogni notte di noleggio. Puoi estenderli fino a 200 km/notte (20 €/notte) o chilometraggio illimitato (40 €/notte). I chilometri oltre il limite costano 0,30 €/km.",
     "q7": "Soggiorno minimo?",
-    "a7": "Bassa (nov–mar): 3 notti. Media (apr–mag, ott): 4 notti. Alta (giu–set): 5 notti.",
+    "a7": "Bassa e media stagione: 3 notti. Alta stagione: 4 notti. Altissima stagione (agosto e Natale): 5 notti. Il calcolatore mostra il minimo per le tue date.",
     "q8": "Posso pagare con carta?",
-    "a8": "Accettiamo carta, Bizum e bonifico.",
+    "a8": "Sì. Il pagamento online avviene solo con carta. Alla prenotazione paghi il 50 % di acconto oppure il 100 % in anticipo con il 5 % di sconto.",
     "q9": "Come noleggiare un camper a Valencia?",
-    "a9": "Scegli le date nel calcolatore prezzi, scrivici su WhatsApp e confermiamo la disponibilita' in pochi minuti. Per prenotare si paga un acconto del 50% (oppure il 100% con uno sconto del 5%). Il saldo va versato prima del ritiro."
+    "a9": "Scegli le date nel calcolatore, aggiungi le opzioni che vuoi, conferma di aver letto le condizioni di noleggio e paga online con carta: acconto del 50 % oppure 100 % in anticipo con il 5 % di sconto. La conferma arriva via email e il saldo si paga al ritiro."
   },
   "contact": {
     "title": "Contattaci",
@@ -277,29 +281,16 @@
   },
   "meta": {
     "title": "Noleggio Camper Valencia Spagna | Camper Retreat VLC",
-    "description": "Noleggia il nostro camper a Valencia per fino a 5 persone da 100€/notte. Tutto incluso. Prenota via WhatsApp in pochi minuti."
+    "description": "Noleggia il nostro camper a Valencia per fino a 5 persone da 99€/notte. Tutto incluso. Prenota online in pochi minuti."
   },
   "footer": {
     "tagline": "La libertà della strada, da Valencia.",
     "privacy": "Privacy",
     "terms": "Termini e condizioni",
+    "conditions": "Condizioni e tariffe",
     "cookies": "Cookie",
     "cancellationPolicy": "Politica di cancellazione",
     "rights": "© 2026 Camper Retreat VLC. Tutti i diritti riservati."
-  },
-  "cancellationPolicy": {
-    "title": "Politica di cancellazione",
-    "intro": "Sappiamo che i piani cambiano. Ecco esattamente cosa succede se devi cancellare la tua prenotazione.",
-    "tier1_title": "Cancella entro 24 ore dalla prenotazione",
-    "tier1_body": "Se cancelli entro 24 ore dalla prenotazione e la data di inizio del viaggio è ancora a più di 48 ore, riceverai un rimborso del 100% della caparra.",
-    "tier2_title": "Cancella con 30+ giorni di anticipo",
-    "tier2_body": "Le cancellazioni effettuate con 30 o più giorni di anticipo rispetto alla data di inizio vengono rimborsate al 95% della caparra.",
-    "tier3_title": "Cancella con meno di 30 giorni di anticipo",
-    "tier3_body": "Le cancellazioni effettuate con meno di 30 giorni di anticipo non danno diritto al rimborso della caparra. La prenotazione verrà comunque cancellata e le date liberate — non tenteremo di addebitare l'importo restante.",
-    "tier4_title": "Causa di forza maggiore",
-    "tier4_body": "Le circostanze eccezionali (emergenze mediche, calamità naturali, ecc.) vengono gestite caso per caso. Contattaci direttamente.",
-    "cta_cancel": "Devi cancellare una prenotazione?",
-    "cta_cancel_link": "Vai alla pagina di cancellazione"
   },
   "cancelBooking": {
     "title": "Cancella la tua prenotazione",
@@ -317,8 +308,10 @@
     "error_refund_failed": "Non siamo riusciti a elaborare il rimborso in questo momento. Riprova o contattaci.",
     "error_generic": "Qualcosa è andato storto. Riprova.",
     "quote_title": "Conferma cancellazione",
-    "quote_refund_full": "Ti verrà rimborsato il {{pct}}% (€{{amount}}) della caparra.",
-    "quote_refund_zero": "La tua caparra non è rimborsabile in questa fase, ma la prenotazione verrà cancellata e le date liberate.",
+    "quote_free": "Cancellazione gratuita: hai prenotato da meno di 24 ore e il ritiro è tra più di 7 giorni. Tutto ciò che hai pagato (€{{amount}}) sarà rimborsato.",
+    "quote_refund": "Ai sensi del punto 4.1 delle condizioni di noleggio viene trattenuto il {{pct}} % del prezzo totale (€{{retained}}). Ti rimborseremo €{{amount}}.",
+    "quote_refund_zero": "Ai sensi del punto 4.1 delle condizioni di noleggio viene trattenuto il {{pct}} % del prezzo totale (€{{retained}}), che copre quanto hai già pagato. Non è previsto alcun rimborso; la prenotazione sarà annullata e le date liberate. Non addebitiamo automaticamente l'eventuale saldo residuo.",
+    "quote_policy_link": "Leggi le condizioni di cancellazione",
     "quote_confirm": "Conferma cancellazione",
     "quote_back": "No, torna indietro",
     "quote_processing": "Elaborazione…",
@@ -362,7 +355,7 @@
     "s7_title": "Assicurazione e franchigia",
     "s7_body": "Il prezzo base include un'assicurazione kasko totale con franchigia standard. Il cliente puo' aggiungere l'opzione franchigia ridotta come extra.",
     "s8_title": "Cancellazioni",
-    "s8_body": "Le cancellazioni sono disciplinate dalla Politica di Cancellazione disponibile su campervlc.com/cancellation-policy.",
+    "s8_body": "Le cancellazioni sono disciplinate dalla Politica di Cancellazione disponibile su campervlc.com/condiciones#cancelacion.",
     "s9_title": "Legge applicabile",
     "s9_body": "Il presente contratto e' regolato dalla legge spagnola. Le controversie saranno sottoposte ai tribunali di Valencia."
   },
@@ -403,5 +396,9 @@
     "dates": "Date",
     "loading": "Caricamento dei dati della prenotazione…",
     "back": "Torna alla homepage"
+  },
+  "conditions": {
+    "toc": "In questa pagina",
+    "back": "Torna alla home"
   }
 }

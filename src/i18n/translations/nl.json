@@ -110,6 +110,7 @@
     },
     "included": {
       "title": "Alles inbegrepen",
+      "km": "100 km per huurnacht inbegrepen",
       "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen",
       "gasBottles": "2 gasflessen inbegrepen",
       "toiletCapsules": "Toiletcapsules inbegrepen"
@@ -133,6 +134,7 @@
     "pickup_time": "Ophaaltijd",
     "return_time": "Inlevertijd",
     "nights": "Nachten",
+    "km_included": "100 km/nacht inbegrepen in de prijs",
     "pickRange": "Selecteer een datumbereik",
     "minNights": "Minimumverblijf dit seizoen: {{n}} nachten",
     "season_low": "Laagseizoen",
@@ -183,7 +185,9 @@
     "promo_apply": "Toepassen",
     "promo_success": "Code toegepast: -{{pct}}%",
     "promo_invalid": "Ongeldige kortingscode",
-    "promo_discount_row": "Kortingscode ({{code}})"
+    "promo_discount_row": "Kortingscode ({{code}})",
+    "terms_accept": "Ik heb de <terms>huurvoorwaarden</terms> gelezen",
+    "terms_required": "Bevestig dat je de huurvoorwaarden hebt gelezen om verder te gaan."
   },
   "extras": {
     "title": "Optionele extra's",
@@ -208,7 +212,7 @@
     "towels": "Badhanddoeken",
     "extra_driver": "Extra bestuurder",
     "festival": "Festival",
-    "km_200": "200 km/dag inbegrepen",
+    "km_200": "Tot 200 km/nacht in plaats van 100",
     "km_unlimited": "Onbeperkte kilometers",
     "sup_board": "SUP-board",
     "reduced_deductible": "Verlaagd eigen risico (€600)"
@@ -248,23 +252,23 @@
   "faq": {
     "title": "Veelgestelde vragen",
     "q1": "Welke documenten heb ik nodig?",
-    "a1": "Geldig rijbewijs B (minstens 2 jaar oud), ID of paspoort.",
+    "a1": "Je hebt een in Spanje geldig rijbewijs B nodig dat je al meer dan 2 jaar hebt, en je moet minstens 25 jaar zijn (ook voor elke extra bestuurder). Bestuurders van buiten de EU hebben daarnaast een internationaal rijbewijs nodig. Neem je identiteitsbewijs of paspoort mee.",
     "q2": "Hoe hoog is de waarborg?",
-    "a2": "Waarborg van €900 (te bevestigen), terugbetaalbaar bij schadevrije teruggave.",
+    "a2": "De waarborg is 900 €. Dit is een voorautorisatie op je kaart vóór de overdracht; ze wordt binnen 14 werkdagen na het inleveren vrijgegeven als het voertuig in dezelfde staat terugkomt.",
     "q3": "Is verzekering inbegrepen?",
-    "a3": "Ja, allriskverzekering in de basisprijs. Optioneel kun je het eigen risico verlagen.",
+    "a3": "Ja. Een allrisk-verzekering is inbegrepen in de prijs, met een eigen risico van 900 €. Met de optie verlaagd eigen risico (60 € per boeking) is het eigen risico 600 €.",
     "q4": "Waar ophalen en inleveren?",
-    "a4": "In de stad Valencia. We bieden transfer naar/van Valencia Airport aan als optie (€90).",
+    "a4": "Ophalen en inleveren: Carrer de Nino Bravo, 3, 46013 Valencia. De transfer van en naar de luchthaven kun je als optie toevoegen (90 €).",
     "q5": "Mag ik huisdieren meenemen?",
-    "a5": "Ja, wij zijn huisdiervriendelijk. Er wordt geen extra toeslag voor huisdieren gevraagd.",
+    "a5": "Ja, huisdieren zijn welkom zonder extra kosten. Je bent aansprakelijk voor schade die ze veroorzaken en roken in het voertuig is niet toegestaan.",
     "q6": "Hoeveel kilometers zijn inbegrepen?",
-    "a6": "100 km/dag inbegrepen. Extra: €0,30/km (te bevestigen).",
+    "a6": "100 km per huurnacht is inbegrepen. Je kunt uitbreiden naar 200 km/nacht (20 €/nacht) of onbeperkt kilometers (40 €/nacht). Kilometers boven het inbegrepen aantal kosten 0,30 €/km.",
     "q7": "Minimumverblijf?",
-    "a7": "Laag (nov–mrt): 3 nachten. Tussen (apr–mei, okt): 4 nachten. Hoog (jun–sep): 5 nachten.",
+    "a7": "Laag- en middenseizoen: 3 nachten. Hoogseizoen: 4 nachten. Topseizoen (augustus en kerst): 5 nachten. De calculator toont het minimum voor jouw data.",
     "q8": "Kan ik met kaart betalen?",
-    "a8": "We accepteren kaart, Bizum en bankoverschrijving.",
+    "a8": "Ja. Online betalen kan alleen met een bankkaart. Bij het boeken betaal je 50 % aanbetaling, of 100 % vooraf met 5 % korting.",
     "q9": "Hoe huur ik een camper in Valencia?",
-    "a9": "Kies je datums in de prijscalculator, stuur ons een WhatsApp-bericht en we bevestigen de beschikbaarheid binnen enkele minuten. Voor de boeking betaal je 50% aanbetaling (of 100% vooruit met 5% korting). De rest is verschuldigd voor ophalen."
+    "a9": "Kies je data in de prijscalculator, voeg de gewenste opties toe, bevestig dat je de huurvoorwaarden hebt gelezen en betaal online met kaart: 50 % aanbetaling of 100 % vooraf met 5 % korting. De bevestiging komt per e-mail en het restant betaal je bij het ophalen."
   },
   "contact": {
     "title": "Neem contact op",
@@ -277,29 +281,16 @@
   },
   "meta": {
     "title": "Camper Huren Valencia Spanje | Camper Retreat VLC",
-    "description": "Huur onze camper in Valencia voor tot 5 personen vanaf €100/nacht. Alles inbegrepen. Boek via WhatsApp binnen enkele minuten."
+    "description": "Huur onze camper in Valencia voor tot 5 personen vanaf €99/nacht. Alles inbegrepen. Boek online binnen enkele minuten."
   },
   "footer": {
     "tagline": "Vrijheid van de weg, vanuit Valencia.",
     "privacy": "Privacybeleid",
     "terms": "Voorwaarden",
+    "conditions": "Voorwaarden en tarieven",
     "cookies": "Cookies",
     "cancellationPolicy": "Annuleringsbeleid",
     "rights": "© 2026 Camper Retreat VLC. Alle rechten voorbehouden."
-  },
-  "cancellationPolicy": {
-    "title": "Annuleringsbeleid",
-    "intro": "We weten dat plannen veranderen. Dit is precies wat er gebeurt als je je boeking moet annuleren.",
-    "tier1_title": "Annuleren binnen 24 uur na boeking",
-    "tier1_body": "Als je binnen 24 uur na het boeken annuleert, en je vertrekdatum is nog meer dan 48 uur weg, ontvang je een volledige (100%) terugbetaling van je aanbetaling.",
-    "tier2_title": "Annuleren 30+ dagen voor vertrek",
-    "tier2_body": "Annuleringen die 30 dagen of meer voor je startdatum worden gedaan, worden voor 95% van de aanbetaling terugbetaald.",
-    "tier3_title": "Annuleren minder dan 30 dagen voor vertrek",
-    "tier3_body": "Annuleringen minder dan 30 dagen voor je startdatum komen niet in aanmerking voor terugbetaling van de aanbetaling. Je boeking wordt alsnog geannuleerd en de data worden vrijgegeven — we proberen niet het resterende bedrag in rekening te brengen.",
-    "tier4_title": "Overmacht",
-    "tier4_body": "Uitzonderlijke omstandigheden (medische noodgevallen, natuurrampen, enz.) worden per geval behandeld. Neem rechtstreeks contact met ons op.",
-    "cta_cancel": "Moet je een boeking annuleren?",
-    "cta_cancel_link": "Ga naar de annuleringspagina"
   },
   "cancelBooking": {
     "title": "Annuleer je boeking",
@@ -317,8 +308,10 @@
     "error_refund_failed": "We konden de terugbetaling nu niet verwerken. Probeer het opnieuw of neem contact met ons op.",
     "error_generic": "Er is iets misgegaan. Probeer het opnieuw.",
     "quote_title": "Annulering bevestigen",
-    "quote_refund_full": "Je krijgt {{pct}}% (€{{amount}}) van je aanbetaling terug.",
-    "quote_refund_zero": "Je aanbetaling is op dit moment niet terugbetaalbaar, maar je boeking wordt geannuleerd en de data worden vrijgegeven.",
+    "quote_free": "Gratis annuleren: je hebt minder dan 24 uur geleden geboekt en de ophaaldatum is meer dan 7 dagen weg. Alles wat je hebt betaald (€{{amount}}) wordt terugbetaald.",
+    "quote_refund": "Volgens artikel 4.1 van de huurvoorwaarden wordt {{pct}} % van de totaalprijs (€{{retained}}) ingehouden. Je krijgt €{{amount}} terug.",
+    "quote_refund_zero": "Volgens artikel 4.1 van de huurvoorwaarden wordt {{pct}} % van de totaalprijs (€{{retained}}) ingehouden, wat overeenkomt met wat je hebt betaald. Er is geen terugbetaling; je boeking wordt geannuleerd en de data komen vrij. Een eventueel openstaand restbedrag incasseren we niet automatisch.",
+    "quote_policy_link": "Lees de annuleringsvoorwaarden",
     "quote_confirm": "Annulering bevestigen",
     "quote_back": "Nee, ga terug",
     "quote_processing": "Bezig met verwerken…",
@@ -362,7 +355,7 @@
     "s7_title": "Verzekering en eigen risico",
     "s7_body": "De basisprijs omvat een allriskverzekering met standaard eigen risico. De klant kan de optie verlaagd eigen risico als extra toevoegen.",
     "s8_title": "Annuleringen",
-    "s8_body": "Annuleringen worden geregeld door het Annuleringsbeleid op campervlc.com/cancellation-policy.",
+    "s8_body": "Annuleringen worden geregeld door het Annuleringsbeleid op campervlc.com/condiciones#cancelacion.",
     "s9_title": "Toepasselijk recht",
     "s9_body": "Deze overeenkomst wordt beheerst door Spaans recht. Geschillen worden voorgelegd aan de rechtbanken van Valencia."
   },
@@ -403,5 +396,9 @@
     "dates": "Data",
     "loading": "Boekingsgegevens laden…",
     "back": "Terug naar de homepage"
+  },
+  "conditions": {
+    "toc": "Op deze pagina",
+    "back": "Terug naar home"
   }
 }

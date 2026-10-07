@@ -6,11 +6,14 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, useMemo, type ReactNode } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
 import appCss from "../styles.css?url";
+import es from "../i18n/translations/es.json";
+import { FAQ_ITEMS } from "../data/faq";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import {
   getI18nForLanguage,
@@ -87,14 +90,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "description", content: "Alquiler de autocaravanas en Valencia desde 99€/noche. McLouis Yearling 89G para hasta 5 personas. Todo incluido. Reserva por WhatsApp en minutos." },
+      { name: "description", content: "Alquiler de autocaravanas en Valencia desde 99€/noche. McLouis Yearling 89G para hasta 5 personas. Todo incluido. Reserva online en minutos." },
       { name: "author", content: "Camper Retreat VLC" },
       { property: "og:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { property: "og:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva online en minutos. Valencia, España." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Alquiler de Autocaravana en Valencia | Camper Retreat VLC" },
-      { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva por WhatsApp en minutos. Valencia, España." },
+      { name: "twitter:description", content: "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 99€/noche. Todo incluido. Reserva online en minutos. Valencia, España." },
       { property: "og:image", content: "https://campervlc.com/images/og-home.jpg" },
       { name: "twitter:image", content: "https://campervlc.com/images/og-home.jpg" },
       { name: "theme-color", content: "#0f1b2d" },
@@ -121,7 +124,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               logo: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               image: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               description:
-                "Alquiler de autocaravana McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva por WhatsApp.",
+                "Alquiler de autocaravana McLouis Yearling 89G en Valencia. Hasta 5 personas, todo incluido. Reserva online.",
               telephone: "+34624038085",
               address: {
                 "@type": "PostalAddress",
@@ -150,7 +153,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               },
               priceRange: "€€",
               currenciesAccepted: "EUR",
-              paymentAccepted: "Cash, Credit Card, Bank Transfer",
+              paymentAccepted: "Credit Card",
             },
             {
               "@type": "Product",
@@ -183,80 +186,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "¿Qué documentación necesito?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Carné de conducir B válido (mínimo 2 años de antigüedad), DNI o pasaporte.",
-              },
+          mainEntity: FAQ_ITEMS.map((n) => ({
+            "@type": "Question",
+            name: (es.faq as Record<string, string>)[`q${n}`],
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: (es.faq as Record<string, string>)[`a${n}`],
             },
-            {
-              "@type": "Question",
-              name: "¿Cuál es el depósito de garantía?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Se solicita una fianza de 900 € (por confirmar), reembolsable al finalizar el alquiler sin incidencias.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Está incluido el seguro?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Sí, seguro a todo riesgo incluido en el precio base. Opcionalmente puedes reducir la franquicia.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Dónde se recoge y entrega la autocaravana?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "En Valencia ciudad. Ofrecemos traslado al aeropuerto de Valencia como opción adicional (90 €).",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Puedo llevar mascotas?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Sí, somos pet friendly. No cobramos ningún suplemento por mascotas.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Cuántos kilómetros están incluidos?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "100 km/día incluidos. Kilómetros adicionales: 0,3 €/km (por confirmar).",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Cuál es la estancia mínima?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Temporada baja (nov–mar): 3 noches. Temporada media (abr–may, oct): 4 noches. Temporada alta (jun–sep): 5 noches.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Puedo pagar con tarjeta?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Aceptamos tarjeta, bizum y transferencia bancaria.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "¿Cómo alquilar una autocaravana en Valencia?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Elige tus fechas en el calculador de precio, escríbenos por WhatsApp y te confirmamos disponibilidad en minutos. Para reservar se paga un depósito del 50% (o el 100% con un 5% de descuento). El resto antes de la recogida.",
-              },
-            },
-          ],
+          })),
         }),
       },
     ],
@@ -318,6 +255,7 @@ function RootComponent() {
 
 function RootHead() {
   const { t, i18n } = useTranslation();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   // Existing visitors kept their choice in localStorage, which the server cannot
   // read. Adopt it once, after hydration, and mirror it into the cookie so every
@@ -338,7 +276,11 @@ function RootHead() {
     if (lang) persistLanguage(lang);
   }, [i18n.language]);
 
+  // The home-page title/description below belong to "/" only. Every other
+  // route (routes, conditions, legal pages) renders its own head on the server,
+  // and this effect must not overwrite it after hydration.
   useEffect(() => {
+    if (pathname !== "/") return;
     const title = t("meta.title");
     const description = t("meta.description");
 
@@ -359,7 +301,7 @@ function RootHead() {
     const twDesc = document.querySelector('meta[name="twitter:description"]');
     if (twDesc) twDesc.setAttribute("content", description);
 
-  }, [i18n.language, t]);
+  }, [i18n.language, t, pathname]);
 
   return null;
 }

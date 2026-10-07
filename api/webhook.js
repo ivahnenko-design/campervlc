@@ -140,7 +140,8 @@ async function sendGuestEmail(booking) {
       ${promoLine}
       ${paymentLine}
       <hr />
-      <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using your booking reference and last name. See our <a href="${siteUrl}/cancellation-policy">cancellation policy</a> for refund terms.</p>
+      <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using your booking reference and last name. See the <a href="${siteUrl}/condiciones#cancelacion">cancellation terms</a> for refund details.</p>
+      <p>Your booking is subject to our <a href="${siteUrl}/condiciones">rental conditions and rates</a>, which you accepted when booking.</p>
       <hr />
       <p>We'll be in touch to confirm pickup details. Questions? Reply to this email or WhatsApp us.</p>
       <p>— Camper Retreat VLC team</p>
@@ -197,6 +198,7 @@ async function sendOwnerEmail(booking) {
       <hr />
       <p><strong>Payment option:</strong> ${isFullPayment ? "100% paid now" : "50% deposit"}</p>
       <p><strong>Promo code used:</strong> ${promoCode || "none"}</p>
+      <p><strong>Rental conditions accepted:</strong> ${booking.acceptedTerms ? `yes (version ${booking.termsVersion || "n/a"})` : "not recorded"}</p>
       <p><strong>Total (incl. IVA):</strong> €${totalWithIva}</p>
       <p><strong>Amount received:</strong> €${depositAmount}</p>
       <p><strong>Balance due on pickup:</strong> €${remainingAmount}</p>
@@ -251,6 +253,8 @@ export default async function handler(req, res) {
       remainingAmount: Number(m.remainingAmount),
       prepaymentOption: m.prepaymentOption === "full" ? "full" : "deposit",
       promoCode: m.promoCode || null,
+      acceptedTerms: m.acceptedTerms === "true",
+      termsVersion: m.termsVersion || null,
       guestFirstName: m.guestFirstName,
       guestLastName: m.guestLastName,
       guestEmail: m.guestEmail,

@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { SectionHeader } from "./Fleet";
+import { FAQ_ITEMS } from "@/data/faq";
 
-const ITEMS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 
 export function FAQ() {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ export function FAQ() {
         <SectionHeader title={t("faq.title")} />
 
         <div className="mt-10 divide-y divide-border/50 rounded-2xl border border-border/60 bg-surface">
-          {ITEMS.map((n, i) => {
+          {FAQ_ITEMS.map((n, i) => {
             const open = openIdx === i;
             return (
               <div key={n}>

@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { list, put } from "@vercel/blob";
+import { cancellationQuote } from "../shared/cancellation.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -31,24 +32,6 @@ async function saveBooking(booking) {
   });
 }
 
-// 24h/48h cooling-off override takes precedence over the 30-day tiers — a booking
-// cancelled 2h after purchase for a departure 20 days out must get 100%, not fall
-// into the "<30 days" 0% bucket.
-function computeRefundPct(booking, nowMs) {
-  const hoursSinceBooking = (nowMs - new Date(booking.createdAt).getTime()) / 3_600_000;
-  const hoursUntilDeparture =
-    (new Date(`${booking.startDate}T00:00:00Z`).getTime() - nowMs) / 3_600_000;
-
-  if (hoursSinceBooking <= 24 && hoursUntilDeparture > 48) return 100;
-  if (hoursUntilDeparture / 24 >= 30) return 95;
-  return 0;
-}
-
-function computeRefundAmountCents(depositAmountEur, pct) {
-  const depositCents = Math.round(depositAmountEur * 100);
-  return Math.round((depositCents * pct) / 100);
-}
-
 // Resend answers 4xx/5xx with a JSON error body, and fetch does NOT reject on
 // those statuses — an unchecked call silently "succeeds". Surface the status and
 // Resend's payload, then throw so the caller's rejection handling actually runs.
@@ -75,12 +58,24 @@ async function postToResend(body) {
 }
 
 async function sendCancellationGuestEmail(booking) {
-  const { guestFirstName, guestEmail, bookingRef, refundPct, refundAmount, startDate, endDate } = booking;
+  const {
+    guestFirstName,
+    guestEmail,
+    bookingRef,
+    retentionPct,
+    retainedAmount,
+    refundAmount,
+    freeCancellation,
+    startDate,
+    endDate,
+  } = booking;
+  const siteUrl = process.env.SITE_URL || "https://campervlc.com";
 
-  const refundLine =
-    refundPct > 0
-      ? `<p><strong>Refund:</strong> €${refundAmount} (${refundPct}% of your deposit) is being processed and typically arrives within 5–10 business days.</p>`
-      : `<p>Per our cancellation policy, your deposit is not refundable for this cancellation.</p>`;
+  const refundLine = freeCancellation
+    ? `<p><strong>Free cancellation:</strong> you cancelled within 24 hours of booking and more than 7 days before pickup, so everything you paid (€${refundAmount}) is being refunded. It typically arrives within 5–10 business days.</p>`
+    : refundAmount > 0
+      ? `<p><strong>Refund:</strong> €${refundAmount}. Under clause 4.1 of the <a href="${siteUrl}/condiciones#cancelacion">rental conditions</a> we retain ${retentionPct}% of the total price (€${retainedAmount}). The refund is being processed and typically arrives within 5–10 business days.</p>`
+      : `<p>Under clause 4.1 of the <a href="${siteUrl}/condiciones#cancelacion">rental conditions</a> we retain ${retentionPct}% of the total price (€${retainedAmount}), which covers what you have paid, so there is nothing to refund. We do not charge any remaining balance automatically.</p>`;
 
   const body = {
     from: "Camper Retreat VLC <info@campervlc.com>",
@@ -109,8 +104,11 @@ async function sendCancellationOwnerEmail(booking) {
     bookingRef,
     startDate,
     endDate,
-    refundPct,
+    retentionPct,
+    retainedAmount,
     refundAmount,
+    unpaidRetention,
+    freeCancellation,
   } = booking;
 
   const body = {
@@ -123,7 +121,9 @@ async function sendCancellationOwnerEmail(booking) {
       <p><strong>Guest:</strong> ${guestFirstName} ${guestLastName}</p>
       <p><strong>Booking reference:</strong> ${bookingRef}</p>
       <p><strong>Dates:</strong> ${startDate} → ${endDate}</p>
-      <p><strong>Refund:</strong> ${refundPct}% (€${refundAmount})</p>
+      <p><strong>Retention (clause 4.1):</strong> ${freeCancellation ? "none — free cancellation within 24 h" : `${retentionPct}% of the total price (€${retainedAmount})`}</p>
+      <p><strong>Refund:</strong> €${refundAmount}</p>
+      ${unpaidRetention > 0 ? `<p><strong>Not collected:</strong> €${unpaidRetention} retained beyond what was paid (not charged automatically; claim it manually if you want it).</p>` : ""}
       <p>The dates have been released and will free up in the calendar feed shortly.</p>
     `,
   };
@@ -172,17 +172,20 @@ function findBooking(bookings, { bookingRef, email, lastName }) {
 }
 
 function buildQuote(booking) {
-  const pct = computeRefundPct(booking, Date.now());
-  const amountEur = computeRefundAmountCents(booking.depositAmount, pct) / 100;
+  const q = cancellationQuote(booking, Date.now());
   return {
     bookingRef: booking.bookingRef,
     guestFirstName: booking.guestFirstName,
     startDate: booking.startDate,
     endDate: booking.endDate,
     nights: booking.nights,
-    depositAmount: booking.depositAmount,
-    refundPct: pct,
-    refundAmount: amountEur,
+    totalWithIva: q.total,
+    amountPaid: q.paid,
+    freeCancellation: q.free,
+    retentionPct: q.retentionPct,
+    retainedAmount: q.retained,
+    refundAmount: q.refund,
+    unpaidRetention: q.unpaidRetention,
   };
 }
 
@@ -225,12 +228,12 @@ export default async function handler(req, res) {
 
   // action === "confirm" — never trust any client-supplied percentage/amount,
   // recompute from scratch since time may have passed since the lookup step.
-  const pct = computeRefundPct(booking, Date.now());
-  const amountCents = computeRefundAmountCents(booking.depositAmount, pct);
+  const quote = cancellationQuote(booking, Date.now());
+  const amountCents = Math.round(quote.refund * 100);
 
   let refundId = null;
 
-  if (pct > 0) {
+  if (amountCents > 0) {
     let paymentIntentId = booking.paymentIntentId;
     if (!paymentIntentId) {
       try {
@@ -264,8 +267,13 @@ export default async function handler(req, res) {
     ...booking,
     status: "cancelled",
     cancelledAt: new Date().toISOString(),
-    refundPct: pct,
+    freeCancellation: quote.free,
+    retentionPct: quote.retentionPct,
+    retainedAmount: quote.retained,
+    unpaidRetention: quote.unpaidRetention,
     refundAmount: amountCents / 100,
+    // Share of the amount paid that came back (kept for older records/readers).
+    refundPct: quote.paid > 0 ? Math.round((quote.refund / quote.paid) * 100) : 0,
     refundId,
   };
 
@@ -288,8 +296,11 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     bookingRef: updatedBooking.bookingRef,
-    refundPct: updatedBooking.refundPct,
+    freeCancellation: updatedBooking.freeCancellation,
+    retentionPct: updatedBooking.retentionPct,
+    retainedAmount: updatedBooking.retainedAmount,
     refundAmount: updatedBooking.refundAmount,
+    unpaidRetention: updatedBooking.unpaidRetention,
     status: "cancelled",
   });
 }

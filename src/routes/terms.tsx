@@ -43,7 +43,7 @@ function TermsPage() {
           <h2 className="font-display text-lg text-foreground mb-2">{t("terms.s8_title")}</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             {t("terms.s8_body")}{" "}
-            <Link to="/cancellation-policy" className="text-primary underline hover:brightness-110 transition">
+            <Link to="/condiciones" hash="cancelacion" className="text-primary underline hover:brightness-110 transition">
               {t("footer.cancellationPolicy")}
             </Link>
           </p>

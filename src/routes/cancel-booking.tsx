@@ -38,9 +38,13 @@ interface Quote {
   startDate: string;
   endDate: string;
   nights: number;
-  depositAmount: number;
-  refundPct: number;
+  totalWithIva: number;
+  amountPaid: number;
+  freeCancellation: boolean;
+  retentionPct: number;
+  retainedAmount: number;
   refundAmount: number;
+  unpaidRetention: number;
 }
 
 type Stage = "lookup" | "quote" | "done";
@@ -108,7 +112,18 @@ function CancelBookingPage() {
         setConfirmLoading(false);
         return;
       }
-      setQuote((q) => (q ? { ...q, refundPct: body.refundPct, refundAmount: body.refundAmount } : q));
+      setQuote((q) =>
+        q
+          ? {
+              ...q,
+              freeCancellation: body.freeCancellation,
+              retentionPct: body.retentionPct,
+              retainedAmount: body.retainedAmount,
+              refundAmount: body.refundAmount,
+              unpaidRetention: body.unpaidRetention,
+            }
+          : q,
+      );
       setStage("done");
     } catch {
       setConfirmError("generic");
@@ -187,10 +202,24 @@ function CancelBookingPage() {
               <p>{quote.bookingRef}</p>
               <p>{quote.startDate} → {quote.endDate} · {quote.nights} {t("booking.nights").toLowerCase()}</p>
             </div>
-            <p className="text-sm text-foreground mb-6">
-              {quote.refundPct > 0
-                ? t("cancelBooking.quote_refund_full", { pct: quote.refundPct, amount: quote.refundAmount })
-                : t("cancelBooking.quote_refund_zero")}
+            <p className="text-sm text-foreground mb-2">
+              {quote.freeCancellation
+                ? t("cancelBooking.quote_free", { amount: quote.refundAmount })
+                : quote.refundAmount > 0
+                  ? t("cancelBooking.quote_refund", {
+                      pct: quote.retentionPct,
+                      retained: quote.retainedAmount,
+                      amount: quote.refundAmount,
+                    })
+                  : t("cancelBooking.quote_refund_zero", {
+                      pct: quote.retentionPct,
+                      retained: quote.retainedAmount,
+                    })}
+            </p>
+            <p className="mb-6 text-xs text-muted-foreground">
+              <Link to="/condiciones" hash="cancelacion" className="underline hover:text-foreground transition">
+                {t("cancelBooking.quote_policy_link")}
+              </Link>
             </p>
 
             {confirmErrorKey && (

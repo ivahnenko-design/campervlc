@@ -5,8 +5,7 @@ import {
   Bed, BedDouble, Snowflake, Sun, SunMedium, Tv, Bath, X, Users, MapPin,
   ChevronLeft, ChevronRight, PawPrint, Ruler, PackageCheck, UtensilsCrossed,
   Gift, TreePalm, Thermometer, Droplets, Baby, SquareParking, CircleCheck,
-  Flame, Sparkles,
-} from "lucide-react";
+  Flame, Sparkles, Gauge } from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
 
 export function Fleet() {
@@ -332,6 +331,10 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
               {t("fleet.included.title")}
             </p>
             <ul className="mt-2 space-y-1.5">
+              <li className="flex items-start gap-2 text-sm text-foreground">
+                <Gauge className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                {t("fleet.included.km")}
+              </li>
               <li className="flex items-start gap-2 text-sm text-foreground">
                 <SquareParking className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 {t("fleet.included.parking")}

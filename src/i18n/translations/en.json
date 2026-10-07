@@ -110,6 +110,7 @@
     },
     "included": {
       "title": "All included",
+      "km": "100 km per rental night included",
       "parking": "Free parking for your own vehicle at our premises included",
       "gasBottles": "2 gas bottles included",
       "toiletCapsules": "Toilet capsules included"
@@ -133,6 +134,7 @@
     "pickup_time": "Pickup time",
     "return_time": "Return time",
     "nights": "Nights",
+    "km_included": "100 km/night included in the price",
     "pickRange": "Select a date range",
     "minNights": "Minimum stay this season: {{n}} nights",
     "season_low": "Low season",
@@ -183,7 +185,9 @@
     "promo_apply": "Apply",
     "promo_success": "Code applied: -{{pct}}%",
     "promo_invalid": "Invalid promo code",
-    "promo_discount_row": "Promo code ({{code}})"
+    "promo_discount_row": "Promo code ({{code}})",
+    "terms_accept": "I have read the <terms>rental conditions</terms>",
+    "terms_required": "Please confirm that you have read the rental conditions to continue."
   },
   "extras": {
     "title": "Optional extras",
@@ -208,7 +212,7 @@
     "towels": "Bath towels",
     "extra_driver": "Additional driver",
     "festival": "Festival",
-    "km_200": "200 km/day included",
+    "km_200": "Up to 200 km/night instead of 100",
     "km_unlimited": "Unlimited mileage",
     "sup_board": "SUP board",
     "reduced_deductible": "Reduced deductible (€600)"
@@ -248,23 +252,23 @@
   "faq": {
     "title": "Frequently asked questions",
     "q1": "What documents do I need?",
-    "a1": "Valid category B driver's license (at least 2 years old), ID or passport.",
+    "a1": "You need a category B driving licence held for more than 2 years, valid in Spain, and to be at least 25 years old (the same applies to any additional driver). Drivers from outside the EU also need an international driving permit. Bring your ID or passport.",
     "q2": "What is the security deposit?",
-    "a2": "A €900 deposit (to be confirmed), refundable at the end of the rental if no incidents.",
+    "a2": "The security deposit is 900 €. It is a card pre-authorisation made before pick-up, and it is released within 14 working days of return if the vehicle comes back in the same condition.",
     "q3": "Is insurance included?",
-    "a3": "Yes, fully comprehensive insurance is included in the base price. You can optionally reduce the excess.",
+    "a3": "Yes. Fully comprehensive insurance is included in the price, with a deductible of 900 €. With the reduced-deductible option (60 € per booking) the deductible is 600 €.",
     "q4": "Where is the motorhome picked up and returned?",
-    "a4": "In Valencia city. We offer transfer to Valencia airport as an add-on (€90).",
+    "a4": "Pick-up and return are at Carrer de Nino Bravo, 3, 46013 Valencia. An airport transfer is available as an option (90 €).",
     "q5": "Can I bring pets?",
-    "a5": "Yes, we are pet friendly. There is no extra fee for pets.",
+    "a5": "Yes, pets are welcome at no extra cost. You are responsible for any damage they cause, and smoking is not allowed in the vehicle.",
     "q6": "How many kilometers are included?",
-    "a6": "100 km/day included. Additional km: €0.30/km (to be confirmed).",
+    "a6": "100 km per rental night are included. You can extend it with up to 200 km/night (20 €/night) or unlimited mileage (40 €/night). Kilometres above the allowance cost 0.30 €/km.",
     "q7": "What's the minimum stay?",
-    "a7": "Low season (Nov–Mar): 3 nights. Mid season (Apr–May, Oct): 4 nights. High season (Jun–Sep): 5 nights.",
+    "a7": "Low and mid season: 3 nights. High season: 4 nights. Peak season (August and Christmas): 5 nights. The calculator shows the minimum for your dates.",
     "q8": "Can I pay by card?",
-    "a8": "We accept card, Bizum and bank transfer.",
+    "a8": "Yes. Online payment is by bank card only. At booking you pay a 50% deposit, or 100% in advance with a 5% discount.",
     "q9": "How do I rent a motorhome in Valencia?",
-    "a9": "Pick your dates in the price calculator, send us a WhatsApp and we confirm availability within minutes. To secure the booking you pay a 50% deposit (or 100% upfront with a 5% discount). The balance is due before pick-up."
+    "a9": "Pick your dates in the price calculator, add the options you want, tick that you have read the rental conditions and pay online by card: a 50% deposit, or 100% in advance with a 5% discount. The confirmation arrives by email and the balance is paid at pick-up."
   },
   "contact": {
     "title": "Contact us",
@@ -277,29 +281,16 @@
   },
   "meta": {
     "title": "Camper Van Rental Valencia Spain | Camper Retreat VLC",
-    "description": "Rent our premium motorhome in Valencia for up to 5 people from €100/night. Everything included. Book via WhatsApp in minutes."
+    "description": "Rent our premium motorhome in Valencia for up to 5 people from €99/night. Everything included. Book online in minutes."
   },
   "footer": {
     "tagline": "Freedom on the road, from Valencia.",
     "privacy": "Privacy policy",
     "terms": "Terms and conditions",
+    "conditions": "Conditions and rates",
     "cookies": "Cookies",
     "cancellationPolicy": "Cancellation Policy",
     "rights": "© 2026 Camper Retreat VLC. All rights reserved."
-  },
-  "cancellationPolicy": {
-    "title": "Cancellation Policy",
-    "intro": "We know plans change. Here's exactly what happens if you need to cancel your booking.",
-    "tier1_title": "Cancel within 24 hours of booking",
-    "tier1_body": "If you cancel within 24 hours of making your booking, and your trip start date is more than 48 hours away, you'll receive a 100% refund of your deposit.",
-    "tier2_title": "Cancel 30+ days before departure",
-    "tier2_body": "Cancellations made 30 or more days before your start date are refunded 95% of the deposit.",
-    "tier3_title": "Cancel less than 30 days before departure",
-    "tier3_body": "Cancellations made less than 30 days before your start date are not eligible for a deposit refund. Your booking will still be cancelled and the dates released — we will not attempt to charge the remaining balance.",
-    "tier4_title": "Force majeure",
-    "tier4_body": "Exceptional circumstances (medical emergencies, natural disasters, etc.) are handled on a case-by-case basis. Please contact us directly.",
-    "cta_cancel": "Need to cancel a booking?",
-    "cta_cancel_link": "Go to the cancellation page"
   },
   "cancelBooking": {
     "title": "Cancel Your Booking",
@@ -317,8 +308,10 @@
     "error_refund_failed": "We couldn't process the refund right now. Please try again or contact us.",
     "error_generic": "Something went wrong. Please try again.",
     "quote_title": "Confirm Cancellation",
-    "quote_refund_full": "You will be refunded {{pct}}% (€{{amount}}) of your deposit.",
-    "quote_refund_zero": "Your deposit is non-refundable at this stage, but your booking will be cancelled and the dates released.",
+    "quote_free": "Free cancellation: you booked less than 24 hours ago and pick-up is more than 7 days away. Everything you paid (€{{amount}}) will be refunded.",
+    "quote_refund": "Under clause 4.1 of the rental conditions, {{pct}}% of the total price (€{{retained}}) is retained. You will be refunded €{{amount}}.",
+    "quote_refund_zero": "Under clause 4.1 of the rental conditions, {{pct}}% of the total price (€{{retained}}) is retained, which covers what you have paid. There is no refund; your booking will be cancelled and the dates released. We do not charge any remaining balance automatically.",
+    "quote_policy_link": "Read the cancellation terms",
     "quote_confirm": "Confirm cancellation",
     "quote_back": "Never mind, go back",
     "quote_processing": "Processing…",
@@ -362,7 +355,7 @@
     "s7_title": "Insurance and excess",
     "s7_body": "The base price includes fully comprehensive insurance with a standard excess. The customer may add the reduced-excess option as an extra. Damage caused by gross negligence, driving under the influence of alcohol or drugs, or breach of these terms is not covered.",
     "s8_title": "Cancellations",
-    "s8_body": "Cancellations are governed by the Cancellation Policy available at campervlc.com/cancellation-policy.",
+    "s8_body": "Cancellations are governed by the Cancellation Policy available at campervlc.com/condiciones#cancelacion.",
     "s9_title": "Governing law",
     "s9_body": "This agreement is governed by Spanish law. Disputes shall be submitted to the courts of Valencia."
   },
@@ -403,5 +396,9 @@
     "dates": "Dates",
     "loading": "Loading your booking details…",
     "back": "Back to homepage"
+  },
+  "conditions": {
+    "toc": "On this page",
+    "back": "Back to home"
   }
 }

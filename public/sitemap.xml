@@ -199,7 +199,113 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/festivales-2027"/>
   </url>
 
+    <!-- Rental conditions and rates (7 languages) -->
   <url>
+    <loc>https://campervlc.com/condiciones</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=en</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=de</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=it</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=nl</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=ru</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+  <url>
+    <loc>https://campervlc.com/condiciones?lang=uk</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/condiciones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/condiciones?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/condiciones?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/condiciones?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/condiciones?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/condiciones?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/condiciones"/>
+  </url>
+
+<url>
     <loc>https://campervlc.com/privacy</loc>
     <lastmod>2026-08-12</lastmod>
     <changefreq>yearly</changefreq>

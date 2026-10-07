@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   addDays,
@@ -188,6 +188,9 @@ export function BookingCalendar() {
   });
 
   const canSubmit = range.start && range.end && meetsMin;
+  // Paying needs the rental conditions ticked; the WhatsApp link does not.
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const canPay = Boolean(canSubmit && acceptedTerms);
 
   const [showForm, setShowForm] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
@@ -195,6 +198,10 @@ export function BookingCalendar() {
 
   const handleGuestSubmit = async (guest: GuestData) => {
     if (!range.start || !range.end) return;
+    if (!acceptedTerms) {
+      setCheckoutError(t("booking.terms_required"));
+      return;
+    }
     setCheckoutLoading(true);
     setCheckoutError(null);
     try {
@@ -212,6 +219,7 @@ export function BookingCalendar() {
           guest,
           prepaymentOption,
           promoCode: appliedPromoCode,
+          acceptedTerms,
         }),
       });
       const data = await res.json();
@@ -306,6 +314,7 @@ export function BookingCalendar() {
               <span>{t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span></span>
               {seasonLabel && <span className="text-primary/80">{seasonLabel}</span>}
             </div>
+            <p className="mt-1 text-xs text-muted-foreground">{t("booking.km_included")}</p>
             {range.start && !meetsMin && (
               <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
             )}
@@ -485,10 +494,43 @@ export function BookingCalendar() {
               {prepaymentOption === "full" ? t("booking.full_payment_note") : t("booking.deposit_note")}
             </p>
             <p className="mt-1 text-center text-xs text-muted-foreground">
-              <Link to="/cancellation-policy" className="underline hover:text-foreground transition">
+              <Link to="/condiciones" hash="cancelacion" className="underline hover:text-foreground transition">
                 {t("booking.see_cancellation_policy")}
               </Link>
             </p>
+
+            {/* Rental conditions: required before any payment */}
+            <label
+              htmlFor="accept-terms"
+              className="mt-5 flex cursor-pointer items-start gap-2.5 text-sm text-foreground"
+            >
+              <input
+                id="accept-terms"
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(e) => {
+                  setAcceptedTerms(e.target.checked);
+                  if (e.target.checked) setCheckoutError(null);
+                }}
+                aria-required="true"
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+              />
+              <span>
+                <Trans
+                  i18nKey="booking.terms_accept"
+                  components={{
+                    terms: (
+                      <Link
+                        to="/condiciones"
+                        target="_blank"
+                        rel="noopener"
+                        className="underline underline-offset-2 hover:text-primary"
+                      />
+                    ),
+                  }}
+                />
+              </span>
+            </label>
 
             {/* Guest form (shown after "Pay deposit" click) */}
             {showForm && canSubmit && (
@@ -503,10 +545,10 @@ export function BookingCalendar() {
             {/* Primary CTA: Pay deposit */}
             {!showForm && (
               <button
-                disabled={!canSubmit}
+                disabled={!canPay}
                 onClick={() => setShowForm(true)}
                 className={`mt-4 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition ${
-                  canSubmit
+                  canPay
                     ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
                     : "bg-border/60 text-muted-foreground cursor-not-allowed"
                 }`}
