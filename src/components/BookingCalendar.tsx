@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
@@ -193,6 +193,27 @@ export function BookingCalendar() {
   const canPay = Boolean(canSubmit && acceptedTerms);
 
   const [showForm, setShowForm] = useState(false);
+  // Phones stack the summary below the options; a slim bar keeps the total in
+  // view until the summary card itself is on screen.
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [summaryVisible, setSummaryVisible] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+    const watch = (el: Element | null, set: (v: boolean) => void) => {
+      if (!el) return () => {};
+      const io = new IntersectionObserver(([e]) => set(e.isIntersecting));
+      io.observe(el);
+      return () => io.disconnect();
+    };
+    const a = watch(summaryRef.current, setSummaryVisible);
+    const b = watch(sectionRef.current, setSectionVisible);
+    return () => {
+      a();
+      b();
+    };
+  }, []);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
@@ -232,7 +253,7 @@ export function BookingCalendar() {
   };
 
   return (
-    <section id="booking" className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
+    <section id="booking" ref={sectionRef} className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title={t("booking.title")}
@@ -240,9 +261,9 @@ export function BookingCalendar() {
           eyebrow={t("booking.eyebrow")}
         />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          {/* Calendar */}
-          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7">
+        <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_1.05fr] lg:grid-rows-[auto_1fr]">
+          {/* Calendar + pickup/return time */}
+          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-start-1 lg:row-start-1 self-start">
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setMonthBase(addMonths(monthBase, -1))}
@@ -274,29 +295,19 @@ export function BookingCalendar() {
 
             <div className="mt-6 grid gap-8 sm:grid-cols-2">
               {months.map((m) => (
-                <MonthGrid
-                  key={m.toISOString()}
-                  month={m}
-                  today={today}
-                  booked={booked}
-                  range={range}
-                  onPick={handleClick}
-                  locale={dateLocale}
-                />
+                <div key={m.toISOString()}>
+                  <MonthGrid
+                    month={m}
+                    today={today}
+                    booked={booked}
+                    range={range}
+                    onPick={handleClick}
+                    locale={dateLocale}
+                  />
+                </div>
               ))}
             </div>
-          </div>
-
-          {/* Summary */}
-          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 self-start sticky top-24">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80">
-              <Sparkles className="h-3.5 w-3.5" />
-              {t("booking.summary")}
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <DateBox label={t("booking.checkin")} value={range.start ? fmtDate(range.start) : "—"} />
-              <DateBox label={t("booking.checkout")} value={range.end ? fmtDate(range.end) : "—"} />
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <TimeSelect
                 id="pickup-time"
                 label={t("booking.pickup_time")}
@@ -310,19 +321,15 @@ export function BookingCalendar() {
                 onChange={setReturnTime}
               />
             </div>
-            <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
-              <span>{t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span></span>
-              {seasonLabel && <span className="text-primary/80">{seasonLabel}</span>}
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">{t("booking.km_included")}</p>
-            {range.start && !meetsMin && (
-              <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
-            )}
+          </div>
 
+
+          {/* Extras, promo code and payment option: right column on desktop */}
+          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-start-2 lg:row-span-2 lg:row-start-1">
             {/* Extras */}
-            <div className="mt-4">
+            <div>
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
-              <div className="max-h-72 overflow-y-auto pr-1 space-y-1.5">
+              <div className="grid gap-1.5 sm:grid-cols-2">
                 {EXTRAS.filter((e) => !e.mandatory).map((e) => {
                   const active = selectedExtras.has(e.id);
                   return (
@@ -345,7 +352,7 @@ export function BookingCalendar() {
                         </span>
                         {t(`extras.${e.id}`)}
                       </span>
-                      <span className="font-mono-num text-xs text-foreground">
+                      <span className="ml-2 shrink-0 whitespace-nowrap font-mono-num text-xs text-foreground">
                         {e.price} €
                         <span className="ml-0.5 text-muted-foreground">
                           {e.perNight ? t("extras.perNight") : t("extras.perBooking")}
@@ -358,7 +365,7 @@ export function BookingCalendar() {
             </div>
 
             {/* Promo code */}
-            <div className="mt-4">
+            <div className="mt-6">
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.promo_label")}</div>
               <div className="flex gap-2">
                 <input
@@ -390,9 +397,9 @@ export function BookingCalendar() {
             </div>
 
             {/* Prepayment option */}
-            <div className="mt-4">
+            <div className="mt-6">
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.prepayment_title")}</div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid gap-2 sm:grid-cols-2">
                 <button
                   type="button"
                   onClick={() => setPrepaymentOption("deposit")}
@@ -427,6 +434,28 @@ export function BookingCalendar() {
                 </button>
               </div>
             </div>
+
+          </div>
+
+          {/* Summary */}
+          <div ref={summaryRef} className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 self-start lg:col-start-1 lg:row-start-2">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80">
+              <Sparkles className="h-3.5 w-3.5" />
+              {t("booking.summary")}
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <DateBox label={t("booking.checkin")} value={range.start ? fmtDate(range.start) : "—"} />
+              <DateBox label={t("booking.checkout")} value={range.end ? fmtDate(range.end) : "—"} />
+            </div>
+            <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
+              <span>{t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span></span>
+              {seasonLabel && <span className="text-primary/80">{seasonLabel}</span>}
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">{t("booking.km_included")}</p>
+            {range.start && !meetsMin && (
+              <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
+            )}
 
             {/* Price breakdown */}
             <div className="mt-6 space-y-1.5 text-sm">
@@ -477,14 +506,14 @@ export function BookingCalendar() {
                 <div className="flex items-end justify-between">
                   <span className="text-sm text-muted-foreground">{t("booking.total")}</span>
                   <div className="text-right">
-                    <span className="font-mono-num text-3xl font-bold text-primary">
-                      {finalTotal} €
+                    <span className="font-mono-num text-4xl font-bold text-primary drop-shadow-[0_0_14px_rgba(251,191,36,0.35)]">
+                      {finalTotalWithIva} €
                     </span>
-                    <span className="ml-1.5 text-xs text-muted-foreground">{t("booking.iva")}</span>
+                    <span className="ml-1.5 text-xs text-primary/80">{t("booking.total_with_iva")}</span>
                   </div>
                 </div>
-                <p className="mt-1 text-right text-xs text-muted-foreground">
-                  {finalTotalWithIva} € {t("booking.total_with_iva")}
+                <p className="mt-1 text-right text-xs text-muted-foreground/70">
+                  {finalTotal} € {t("booking.iva")}
                 </p>
               </motion.div>
             </AnimatePresence>
@@ -588,6 +617,19 @@ export function BookingCalendar() {
           </div>
         </div>
       </div>
+      {/* Phones only: total + jump to the summary while it is off screen */}
+      {sectionVisible && !summaryVisible && range.start && range.end && (
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 px-4 py-3 backdrop-blur lg:hidden" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
+          <button
+            type="button"
+            onClick={() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="flex w-full items-center justify-between rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
+          >
+            <span>{t("booking.total")}</span>
+            <span className="font-mono-num">{finalTotalWithIva} € {t("booking.total_with_iva")}</span>
+          </button>
+        </div>
+      )}
     </section>
   );
 }
