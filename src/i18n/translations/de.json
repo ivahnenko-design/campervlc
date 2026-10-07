@@ -98,7 +98,7 @@
       "welcomeItems": "Toilettenpapier, Kaffee, Seife",
       "outdoor": "Außen-Set",
       "outdoorItems": "2 Tische und 4 Stühle, 3 Strandstühle, Sonnenschirm und Markise",
-      "climate": "Klimaanlage und Heizung",
+      "climate": "Klimaanlage, Heizung, Kühlschrank und Gefrierfach",
       "solar": "Solarpanel und Hochleistungsbatterie",
       "water": "Warmwasser, Dusche und WC",
       "tv": "Smart TV 24 Zoll",
@@ -112,7 +112,7 @@
       "title": "Alles inklusive",
       "km": "100 km pro Mietnacht inklusive",
       "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive",
-      "gasBottles": "2 Gasflaschen inklusive",
+      "gasBottles": "2 Gasflaschen inklusive (für Kühlschrank, Heizung, Warmwasser und Gasherd)",
       "toiletCapsules": "WC-Kapseln inklusive"
     }
   },

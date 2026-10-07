@@ -98,7 +98,7 @@
       "welcomeItems": "Toilet paper, coffee, soap",
       "outdoor": "Outdoor kit",
       "outdoorItems": "2 tables and 4 chairs, 3 beach chairs, parasol and awning",
-      "climate": "Air conditioning and heating",
+      "climate": "Air conditioning, heating, fridge and freezer",
       "solar": "Solar panel and high-capacity battery",
       "water": "Hot water, shower and toilet",
       "tv": "24-inch Smart TV",
@@ -112,7 +112,7 @@
       "title": "All included",
       "km": "100 km per rental night included",
       "parking": "Free parking for your own vehicle at our premises included",
-      "gasBottles": "2 gas bottles included",
+      "gasBottles": "2 gas bottles included (for the fridge, heating, hot water and gas stove)",
       "toiletCapsules": "Toilet capsules included"
     }
   },

@@ -98,7 +98,7 @@
       "welcomeItems": "Carta igienica, caffè, sapone",
       "outdoor": "Kit esterno",
       "outdoorItems": "2 tavoli e 4 sedie, 3 sedie da spiaggia, ombrellone e tenda da sole",
-      "climate": "Aria condizionata e riscaldamento",
+      "climate": "Aria condizionata, riscaldamento, frigorifero e congelatore",
       "solar": "Pannello solare e batteria ad alta capacità",
       "water": "Acqua calda, doccia e WC",
       "tv": "Smart TV da 24 pollici",
@@ -112,7 +112,7 @@
       "title": "Tutto incluso",
       "km": "100 km per ogni notte di noleggio inclusi",
       "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso",
-      "gasBottles": "2 bombole di gas incluse",
+      "gasBottles": "2 bombole di gas incluse (per frigorifero, riscaldamento, acqua calda e piano cottura a gas)",
       "toiletCapsules": "Capsule per il WC incluse"
     }
   },

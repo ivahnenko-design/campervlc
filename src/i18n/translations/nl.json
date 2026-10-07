@@ -98,7 +98,7 @@
       "welcomeItems": "Toiletpapier, koffie, zeep",
       "outdoor": "Buitenset",
       "outdoorItems": "2 tafels en 4 stoelen, 3 strandstoelen, parasol en luifel",
-      "climate": "Airconditioning en verwarming",
+      "climate": "Airconditioning, verwarming, koelkast en vriezer",
       "solar": "Zonnepaneel en accu met hoge capaciteit",
       "water": "Warm water, douche en toilet",
       "tv": "Smart TV van 24 inch",
@@ -112,7 +112,7 @@
       "title": "Alles inbegrepen",
       "km": "100 km per huurnacht inbegrepen",
       "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen",
-      "gasBottles": "2 gasflessen inbegrepen",
+      "gasBottles": "2 gasflessen inbegrepen (voor koelkast, verwarming, warm water en gasfornuis)",
       "toiletCapsules": "Toiletcapsules inbegrepen"
     }
   },
