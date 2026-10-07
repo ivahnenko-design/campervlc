@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,7 +15,7 @@ import {
   startOfMonth,
   startOfDay,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles, Tag } from "lucide-react";
+import { ChevronLeft, ChevronRight, CreditCard, Sparkles, Tag } from "lucide-react";
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXCLUSIVE_EXTRA_GROUPS, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import {
@@ -30,7 +30,6 @@ import {
   TIME_OPTIONS,
   type PrepaymentOption,
 } from "@/utils/pricing";
-import { buildWhatsAppLink, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
@@ -153,6 +152,16 @@ export function BookingCalendar() {
 
   const perNightRate = range.start ? getPriceForDate(range.start) : 0;
 
+  const mileagePlan = MILEAGE_PLANS.find((e) => selectedExtras.has(e.id))?.id ?? null;
+  const setMileage = (id: ExtraId | null) => {
+    setSelectedExtras((prev) => {
+      const next = new Set(prev);
+      for (const e of MILEAGE_PLANS) next.delete(e.id);
+      if (id) next.add(id);
+      return next;
+    });
+  };
+
   const toggleExtra = (id: ExtraId) => {
     const extra = EXTRAS.find((e) => e.id === id);
     if (extra?.mandatory) return;
@@ -177,43 +186,12 @@ export function BookingCalendar() {
   const dateLocale = i18n.language;
   const fmtDate = (d: Date) => d.toLocaleDateString(dateLocale, { day: "2-digit", month: "short", year: "numeric" });
 
-  const waMessage = t("booking.wa_message", {
-    start: range.start ? `${fmtDate(range.start)} ${pickupTime}` : "—",
-    end: range.end ? `${fmtDate(range.end)} ${returnTime}` : "—",
-    nights,
-    extras: selectedExtras.size
-      ? EXTRAS.filter((e) => selectedExtras.has(e.id)).map((e) => t(`extras.${e.id}`)).join(", ")
-      : t("booking.none"),
-    total: finalTotal,
-  });
-
   const canSubmit = range.start && range.end && meetsMin;
   // Paying needs the rental conditions ticked; the WhatsApp link does not.
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const canPay = Boolean(canSubmit && acceptedTerms);
 
   const [showForm, setShowForm] = useState(false);
-  // Phones stack the summary below the options; a slim bar keeps the total in
-  // view until the summary card itself is on screen.
-  const summaryRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [summaryVisible, setSummaryVisible] = useState(false);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-    const watch = (el: Element | null, set: (v: boolean) => void) => {
-      if (!el) return () => {};
-      const io = new IntersectionObserver(([e]) => set(e.isIntersecting));
-      io.observe(el);
-      return () => io.disconnect();
-    };
-    const a = watch(summaryRef.current, setSummaryVisible);
-    const b = watch(sectionRef.current, setSectionVisible);
-    return () => {
-      a();
-      b();
-    };
-  }, []);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
@@ -253,7 +231,7 @@ export function BookingCalendar() {
   };
 
   return (
-    <section id="booking" ref={sectionRef} className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
+    <section id="booking" className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title={t("booking.title")}
@@ -261,9 +239,9 @@ export function BookingCalendar() {
           eyebrow={t("booking.eyebrow")}
         />
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_1.05fr] lg:grid-rows-[auto_1fr]">
+        <div className="mt-6 grid gap-4 lg:grid-cols-[1.3fr_1fr] lg:items-start">
           {/* Calendar + pickup/return time */}
-          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-start-1 lg:row-start-1 self-start">
+          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:p-5">
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setMonthBase(addMonths(monthBase, -1))}
@@ -293,7 +271,7 @@ export function BookingCalendar() {
               </button>
             </div>
 
-            <div className="mt-6 grid gap-8 sm:grid-cols-2">
+            <div className="mt-4 grid gap-6 sm:grid-cols-2">
               {months.map((m) => (
                 <div key={m.toISOString()}>
                   <MonthGrid
@@ -307,7 +285,7 @@ export function BookingCalendar() {
                 </div>
               ))}
             </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <TimeSelect
                 id="pickup-time"
                 label={t("booking.pickup_time")}
@@ -324,80 +302,32 @@ export function BookingCalendar() {
           </div>
 
 
-          {/* Extras, promo code and payment option: right column on desktop */}
-          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-            {/* Extras */}
-            <div>
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
-              <div className="grid gap-1.5 sm:grid-cols-2">
-                {EXTRAS.filter((e) => !e.mandatory).map((e) => {
-                  const active = selectedExtras.has(e.id);
-                  return (
-                    <button
-                      key={e.id}
-                      onClick={() => toggleExtra(e.id)}
-                      className={`flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition ${
-                        active
-                          ? "border-primary/60 bg-primary/10 text-foreground"
-                          : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2">
-                        <span
-                          className={`grid h-4 w-4 place-items-center border ${
-                            EXCLUSIVE_EXTRA_GROUPS.some((g) => g.includes(e.id)) ? "rounded-full" : "rounded"
-                          } ${active ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}
-                        >
-                          {active ? "✓" : ""}
-                        </span>
-                        {t(`extras.${e.id}`)}
-                      </span>
-                      <span className="ml-2 shrink-0 whitespace-nowrap font-mono-num text-xs text-foreground">
-                        {e.price} €
-                        <span className="ml-0.5 text-muted-foreground">
-                          {e.perNight ? t("extras.perNight") : t("extras.perBooking")}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
+          {/* Summary: last on phones so the extras come before the pay button */}
+          <div className="order-last rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:order-none lg:p-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80">
+                <Sparkles className="h-3.5 w-3.5" />
+                {t("booking.summary")}
               </div>
+              {seasonLabel && <span className="text-xs text-primary/80">{seasonLabel}</span>}
             </div>
 
-            {/* Promo code */}
-            <div className="mt-6">
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.promo_label")}</div>
-              <div className="flex gap-2">
-                <input
-                  value={promoInput}
-                  onChange={(e) => {
-                    setPromoInput(e.target.value);
-                    setPromoStatus("idle");
-                  }}
-                  placeholder={t("booking.promo_placeholder")}
-                  className="w-full rounded-lg border border-border/60 bg-background/40 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-                <button
-                  type="button"
-                  onClick={handleApplyPromo}
-                  className="shrink-0 rounded-lg border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition"
-                >
-                  {t("booking.promo_apply")}
-                </button>
-              </div>
-              {promoStatus === "valid" && appliedPromoCode && (
-                <p className="mt-1.5 flex items-center gap-1 text-xs text-emerald-500">
-                  <Tag className="h-3 w-3" />
-                  {t("booking.promo_success", { pct: promoPctAt(appliedPromoCode) })}
-                </p>
-              )}
-              {promoStatus === "invalid" && (
-                <p className="mt-1.5 text-xs text-rose-500">{t("booking.promo_invalid")}</p>
-              )}
+            <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <span className="font-display text-base text-foreground">
+                {range.start ? `${fmtDate(range.start)} ${pickupTime}` : "—"}
+                <span className="mx-2 text-muted-foreground">→</span>
+                {range.end ? `${fmtDate(range.end)} ${returnTime}` : "—"}
+              </span>
+              <span className="text-sm text-muted-foreground">
+                {t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span>
+              </span>
             </div>
+            {range.start && !meetsMin && (
+              <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
+            )}
 
             {/* Prepayment option */}
-            <div className="mt-6">
+            <div className="mt-4">
               <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.prepayment_title")}</div>
               <div className="grid gap-2 sm:grid-cols-2">
                 <button
@@ -435,30 +365,40 @@ export function BookingCalendar() {
               </div>
             </div>
 
-          </div>
-
-          {/* Summary */}
-          <div ref={summaryRef} className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 self-start lg:col-start-1 lg:row-start-2">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary/80">
-              <Sparkles className="h-3.5 w-3.5" />
-              {t("booking.summary")}
+            {/* Promo code */}
+            <div className="mt-4">
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.promo_label")}</div>
+              <div className="flex gap-2">
+                <input
+                  value={promoInput}
+                  onChange={(e) => {
+                    setPromoInput(e.target.value);
+                    setPromoStatus("idle");
+                  }}
+                  placeholder={t("booking.promo_placeholder")}
+                  className="w-full rounded-lg border border-border/60 bg-background/40 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyPromo}
+                  className="shrink-0 rounded-lg border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition"
+                >
+                  {t("booking.promo_apply")}
+                </button>
+              </div>
+              {promoStatus === "valid" && appliedPromoCode && (
+                <p className="mt-1.5 flex items-center gap-1 text-xs text-emerald-500">
+                  <Tag className="h-3 w-3" />
+                  {t("booking.promo_success", { pct: promoPctAt(appliedPromoCode) })}
+                </p>
+              )}
+              {promoStatus === "invalid" && (
+                <p className="mt-1.5 text-xs text-rose-500">{t("booking.promo_invalid")}</p>
+              )}
             </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <DateBox label={t("booking.checkin")} value={range.start ? fmtDate(range.start) : "—"} />
-              <DateBox label={t("booking.checkout")} value={range.end ? fmtDate(range.end) : "—"} />
-            </div>
-            <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
-              <span>{t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span></span>
-              {seasonLabel && <span className="text-primary/80">{seasonLabel}</span>}
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">{t("booking.km_included")}</p>
-            {range.start && !meetsMin && (
-              <p className="mt-2 text-xs text-coral">{t("booking.minNights", { n: minNights })}</p>
-            )}
 
             {/* Price breakdown */}
-            <div className="mt-6 space-y-1.5 text-sm">
+            <div className="mt-4 space-y-1 text-sm">
               {price && (
                 <>
                   <Row
@@ -473,7 +413,6 @@ export function BookingCalendar() {
                       value={`${price.surcharge} €`}
                     />
                   )}
-                  <Row label={t("booking.subtotal")} value={`${price.subtotal} €`} iva={t("booking.iva")} />
                   {price.discountPct > 0 && (
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
                   )}
@@ -501,65 +440,78 @@ export function BookingCalendar() {
                 key={finalTotal}
                 initial={{ scale: 0.98, opacity: 0.6 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="mt-5 border-t border-border/60 pt-4"
+                className="mt-4 border-t border-border/60 pt-3"
               >
-                <div className="flex items-end justify-between">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                   <span className="text-sm text-muted-foreground">{t("booking.total")}</span>
-                  <div className="text-right">
-                    <span className="font-mono-num text-4xl font-bold text-primary drop-shadow-[0_0_14px_rgba(251,191,36,0.35)]">
+                  <span className="flex flex-wrap items-baseline justify-end gap-x-3">
+                    <span className="font-mono-num text-sm text-muted-foreground/70">
+                      {finalTotal} € {t("booking.iva")}
+                    </span>
+                    <span className="font-mono-num text-3xl font-bold text-primary drop-shadow-[0_0_14px_rgba(251,191,36,0.35)]">
                       {finalTotalWithIva} €
                     </span>
-                    <span className="ml-1.5 text-xs text-primary/80">{t("booking.total_with_iva")}</span>
-                  </div>
+                    <span className="text-xs text-primary/80">{t("booking.total_with_iva")}</span>
+                  </span>
                 </div>
-                <p className="mt-1 text-right text-xs text-muted-foreground/70">
-                  {finalTotal} € {t("booking.iva")}
-                </p>
               </motion.div>
             </AnimatePresence>
 
             {/* Deposit note */}
-            <p className="mt-4 text-center text-xs text-muted-foreground">
+            <p className="mt-3 text-center text-xs text-muted-foreground">
               {prepaymentOption === "full" ? t("booking.full_payment_note") : t("booking.deposit_note")}
             </p>
-            <p className="mt-1 text-center text-xs text-muted-foreground">
-              <Link to="/condiciones" hash="cancelacion" className="underline hover:text-foreground transition">
-                {t("booking.see_cancellation_policy")}
-              </Link>
-            </p>
 
-            {/* Rental conditions: required before any payment */}
-            <label
-              htmlFor="accept-terms"
-              className="mt-5 flex cursor-pointer items-start gap-2.5 text-sm text-foreground"
-            >
-              <input
-                id="accept-terms"
-                type="checkbox"
-                checked={acceptedTerms}
-                onChange={(e) => {
-                  setAcceptedTerms(e.target.checked);
-                  if (e.target.checked) setCheckoutError(null);
-                }}
-                aria-required="true"
-                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
-              />
-              <span>
-                <Trans
-                  i18nKey="booking.terms_accept"
-                  components={{
-                    terms: (
-                      <Link
-                        to="/condiciones"
-                        target="_blank"
-                        rel="noopener"
-                        className="underline underline-offset-2 hover:text-primary"
-                      />
-                    ),
+            {/* Rental conditions (required) with the pay button beside them */}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <label
+                htmlFor="accept-terms"
+                className="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 text-sm text-foreground"
+              >
+                <input
+                  id="accept-terms"
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => {
+                    setAcceptedTerms(e.target.checked);
+                    if (e.target.checked) setCheckoutError(null);
                   }}
+                  aria-required="true"
+                  className="h-4 w-4 shrink-0 cursor-pointer accent-primary"
                 />
-              </span>
-            </label>
+                <span>
+                  <Trans
+                    i18nKey="booking.terms_accept"
+                    components={{
+                      terms: (
+                        <Link
+                          to="/condiciones"
+                          target="_blank"
+                          rel="noopener"
+                          className="underline underline-offset-2 hover:text-primary"
+                        />
+                      ),
+                    }}
+                  />
+                </span>
+              </label>
+
+              {/* Primary CTA: Pay deposit */}
+              {!showForm && (
+                <button
+                  disabled={!canPay}
+                  onClick={() => setShowForm(true)}
+                  className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    canPay
+                      ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
+                      : "bg-border/60 text-muted-foreground cursor-not-allowed"
+                  }`}
+                >
+                  <CreditCard className="h-4 w-4" />
+                  {prepaymentOption === "full" ? t("booking.cta_full_payment") : t("booking.cta_deposit")}
+                </button>
+              )}
+            </div>
 
             {/* Guest form (shown after "Pay deposit" click) */}
             {showForm && canSubmit && (
@@ -571,65 +523,55 @@ export function BookingCalendar() {
               </>
             )}
 
-            {/* Primary CTA: Pay deposit */}
-            {!showForm && (
-              <button
-                disabled={!canPay}
-                onClick={() => setShowForm(true)}
-                className={`mt-4 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition ${
-                  canPay
-                    ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
-                    : "bg-border/60 text-muted-foreground cursor-not-allowed"
-                }`}
-              >
-                <CreditCard className="h-4 w-4" />
-                {prepaymentOption === "full" ? t("booking.cta_full_payment") : t("booking.cta_deposit")}
-              </button>
-            )}
+          </div>
 
-            {/* Secondary: WhatsApp */}
-            <a
-              href={canSubmit ? buildWhatsAppLink(waMessage) : undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={!canSubmit}
-              onClick={(e) => { if (!canSubmit) e.preventDefault(); }}
-              className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition ${
-                canSubmit
-                  ? "border-border/60 text-muted-foreground hover:text-foreground hover:border-border"
-                  : "border-border/30 text-muted-foreground/50 cursor-not-allowed"
-              }`}
-            >
-              <MessageCircle className="h-4 w-4" />
-              {t("booking.cta_whatsapp")}
-            </a>
-            <p className="mt-3 text-center text-xs text-muted-foreground">
-              {t("booking.alt_contact", { handle: "" })}
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-foreground transition"
-              >
-                {INSTAGRAM_HANDLE}
-              </a>
-            </p>
+          {/* Options: full width under the calendar and the summary */}
+          <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-span-2 lg:p-5">
+            {/* Extras */}
+            <div>
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
+              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {EXTRAS.filter((e) => !e.mandatory && !isMileage(e.id)).map((e) => (
+                  <OptionRow
+                    key={e.id}
+                    active={selectedExtras.has(e.id)}
+                    onClick={() => toggleExtra(e.id)}
+                    label={t(`extras.${e.id}`)}
+                    price={e.price > 0 ? `${e.price} €` : null}
+                    unit={e.perNight ? t("extras.perNight") : undefined}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Mileage: one plan at a time, 100 km/night is the default */}
+            <div className="mt-4">
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.mileage")}</div>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <OptionRow
+                  radio
+                  active={!mileagePlan}
+                  onClick={() => setMileage(null)}
+                  label={t("extras.km_100")}
+                  price={t("extras.included")}
+                />
+                {MILEAGE_PLANS.map((e) => (
+                  <OptionRow
+                    key={e.id}
+                    radio
+                    active={mileagePlan === e.id}
+                    onClick={() => setMileage(e.id)}
+                    label={t(`extras.${e.id}`)}
+                    price={`+${e.price} €`}
+                    unit={t("extras.perNight")}
+                  />
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
-      {/* Phones only: total + jump to the summary while it is off screen */}
-      {sectionVisible && !summaryVisible && range.start && range.end && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 px-4 py-3 backdrop-blur lg:hidden" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
-          <button
-            type="button"
-            onClick={() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-            className="flex w-full items-center justify-between rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
-          >
-            <span>{t("booking.total")}</span>
-            <span className="font-mono-num">{finalTotalWithIva} € {t("booking.total_with_iva")}</span>
-          </button>
-        </div>
-      )}
     </section>
   );
 }
@@ -643,12 +585,48 @@ function Legend({ color, label }: { color: string; label: string }) {
   );
 }
 
-function DateBox({ label, value }: { label: string; value: string }) {
+// The mileage plans are an exclusive group with a free default (100 km/night),
+// so they are rendered as radios in their own block rather than as checkboxes.
+const MILEAGE_PLANS = EXTRAS.filter((e) => EXCLUSIVE_EXTRA_GROUPS.some((g) => g.includes(e.id)));
+const isMileage = (id: ExtraId) => MILEAGE_PLANS.some((e) => e.id === id);
+
+function OptionRow({
+  active, onClick, label, price, unit, radio,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+  price: string | null;
+  unit?: string;
+  radio?: boolean;
+}) {
   return (
-    <div className="rounded-lg border border-border/50 bg-background/40 px-3 py-2">
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
-      <div className="mt-0.5 font-display text-base text-foreground">{value}</div>
-    </div>
+    <button
+      type="button"
+      role={radio ? "radio" : "checkbox"}
+      aria-checked={active}
+      onClick={onClick}
+      className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm leading-snug transition ${
+        active
+          ? "border-primary/60 bg-primary/10 text-foreground"
+          : "border-border/40 bg-background/40 text-muted-foreground hover:text-foreground"
+      }`}
+    >
+      <span
+        className={`grid h-4 w-4 shrink-0 place-items-center border text-[10px] ${radio ? "rounded-full" : "rounded"} ${
+          active ? "border-primary bg-primary text-primary-foreground" : "border-border"
+        }`}
+      >
+        {active && (radio ? <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" /> : "✓")}
+      </span>
+      <span className="min-w-0 flex-1">{label}</span>
+      {price && (
+        <span className="shrink-0 whitespace-nowrap font-mono-num text-xs text-foreground">
+          {price}
+          {unit && <span className="text-muted-foreground">{unit}</span>}
+        </span>
+      )}
+    </button>
   );
 }
 

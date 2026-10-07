@@ -151,7 +151,7 @@
     "discount": "Long-stay discount ({{pct}}%)",
     "late_return_surcharge": "Late return surcharge (+{{hours}} h)",
     "extras": "Extras",
-    "total": "Estimated total",
+    "total": "Total",
     "cta": "Request booking via WhatsApp",
     "alt_contact": "You can also message us directly on Instagram {{handle}}",
     "wa_message": "Hi, I'd like to rent the McLouis Yearling 89G.\nDates: {{start}} – {{end}} ({{nights}} nights)\nExtras: {{extras}}\nEstimated total: €{{total}}",
@@ -191,6 +191,8 @@
   },
   "extras": {
     "title": "Optional extras",
+    "mileage": "Mileage",
+    "km_100": "100 km/night",
     "perBooking": "/ booking",
     "perNight": "/ night",
     "included": "Included",

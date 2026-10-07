@@ -151,7 +151,7 @@
     "discount": "Korting lang verblijf ({{pct}}%)",
     "late_return_surcharge": "Toeslag voor late inlevering (+{{hours}} u)",
     "extras": "Extra's",
-    "total": "Geschatte totaal",
+    "total": "Totaal",
     "cta": "Boeking aanvragen via WhatsApp",
     "alt_contact": "Je kunt ons ook direct op Instagram berichten {{handle}}",
     "wa_message": "Hoi, ik wil graag de McLouis Yearling 89G huren.\nData: {{start}} – {{end}} ({{nights}} nachten)\nExtra's: {{extras}}\nGeschatte totaal: €{{total}}",
@@ -191,6 +191,8 @@
   },
   "extras": {
     "title": "Optionele extra's",
+    "mileage": "Kilometers",
+    "km_100": "100 km/nacht",
     "perBooking": "/ boeking",
     "perNight": "/ nacht",
     "included": "Inbegrepen",
