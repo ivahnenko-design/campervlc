@@ -15,6 +15,7 @@ import { Route as CancelBookingRouteImport } from './routes/cancel-booking'
 import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
 import { Route as CondicionesRouteImport } from './routes/condiciones'
 import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as ManageBookingRouteImport } from './routes/manage-booking'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RutasSlugRouteImport } from './routes/rutas.$slug'
@@ -49,6 +50,11 @@ const CookiesRoute = CookiesRouteImport.update({
   path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManageBookingRoute = ManageBookingRouteImport.update({
+  id: '/manage-booking',
+  path: '/manage-booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/condiciones': typeof CondicionesRoute
   '/cookies': typeof CookiesRoute
+  '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/rutas/$slug': typeof RutasSlugRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/condiciones': typeof CondicionesRoute
   '/cookies': typeof CookiesRoute
+  '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/rutas/$slug': typeof RutasSlugRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/condiciones': typeof CondicionesRoute
   '/cookies': typeof CookiesRoute
+  '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/rutas/$slug': typeof RutasSlugRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/cancellation-policy'
     | '/condiciones'
     | '/cookies'
+    | '/manage-booking'
     | '/privacy'
     | '/terms'
     | '/rutas/$slug'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/cancellation-policy'
     | '/condiciones'
     | '/cookies'
+    | '/manage-booking'
     | '/privacy'
     | '/terms'
     | '/rutas/$slug'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/cancellation-policy'
     | '/condiciones'
     | '/cookies'
+    | '/manage-booking'
     | '/privacy'
     | '/terms'
     | '/rutas/$slug'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   CancellationPolicyRoute: typeof CancellationPolicyRoute
   CondicionesRoute: typeof CondicionesRoute
   CookiesRoute: typeof CookiesRoute
+  ManageBookingRoute: typeof ManageBookingRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   RutasSlugRoute: typeof RutasSlugRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manage-booking': {
+      id: '/manage-booking'
+      path: '/manage-booking'
+      fullPath: '/manage-booking'
+      preLoaderRoute: typeof ManageBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   CancellationPolicyRoute: CancellationPolicyRoute,
   CondicionesRoute: CondicionesRoute,
   CookiesRoute: CookiesRoute,
+  ManageBookingRoute: ManageBookingRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   RutasSlugRoute: RutasSlugRoute,

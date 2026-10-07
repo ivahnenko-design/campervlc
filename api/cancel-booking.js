@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { list, put } from "@vercel/blob";
 import { cancellationQuote } from "../shared/cancellation.js";
+import { allocateRefund, paymentsOf } from "../shared/booking-changes.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -232,35 +233,42 @@ export default async function handler(req, res) {
   const amountCents = Math.round(quote.refund * 100);
 
   let refundId = null;
+  const refundIds = [];
 
   if (amountCents > 0) {
-    let paymentIntentId = booking.paymentIntentId;
-    if (!paymentIntentId) {
+    // A booking changed through /manage-booking can hold several payments
+    // (original + top-ups); refund the original first, never more than each holds.
+    let current = booking;
+    if (!paymentsOf(current).length) {
       try {
         const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId || booking.id);
-        paymentIntentId = session.payment_intent;
+        current = { ...booking, paymentIntentId: session.payment_intent };
       } catch (err) {
         console.error("Failed to retrieve session for refund:", err.message);
       }
     }
-
-    if (!paymentIntentId) {
+    const { parts, unallocated } = allocateRefund(current, quote.refund);
+    if (!parts.length || unallocated > 0) {
       return res.status(500).json({
         error: "no_payment_intent",
         message: "Cannot process refund — contact support.",
       });
     }
 
-    try {
-      const refund = await stripe.refunds.create(
-        { payment_intent: paymentIntentId, amount: amountCents },
-        { idempotencyKey: `refund-${booking.id}` }
-      );
-      refundId = refund.id;
-    } catch (err) {
-      console.error("Stripe refund failed:", err.message);
-      return res.status(502).json({ error: "refund_failed", message: err.message });
+    for (const part of parts) {
+      try {
+        const refund = await stripe.refunds.create(
+          { payment_intent: part.paymentIntentId, amount: Math.round(part.amount * 100) },
+          { idempotencyKey: `refund-${booking.id}-${part.paymentIntentId}` }
+        );
+        console.log("stripe cancel refund ok", JSON.stringify({ bookingRef: booking.bookingRef, refundId: refund.id, paymentIntentId: part.paymentIntentId, amount: part.amount }));
+        refundIds.push(refund.id);
+      } catch (err) {
+        console.error("Stripe refund failed:", part.paymentIntentId, err.message);
+        return res.status(502).json({ error: "refund_failed", message: err.message });
+      }
     }
+    refundId = refundIds[0] || null;
   }
 
   const updatedBooking = {
@@ -275,6 +283,8 @@ export default async function handler(req, res) {
     // Share of the amount paid that came back (kept for older records/readers).
     refundPct: quote.paid > 0 ? Math.round((quote.refund / quote.paid) * 100) : 0,
     refundId,
+    refundIds,
+    pendingChange: null,
   };
 
   await saveBooking(updatedBooking);

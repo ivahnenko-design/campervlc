@@ -1,6 +1,9 @@
 import Stripe from "stripe";
 import { list, put, get } from "@vercel/blob";
 import { randomInt } from "node:crypto";
+import { createBlobStore } from "./_lib/store.js";
+import { completeChangePayment } from "./_lib/manage.js";
+import { sendChangeEmails } from "./_lib/email.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -140,6 +143,7 @@ async function sendGuestEmail(booking) {
       ${promoLine}
       ${paymentLine}
       <hr />
+      <p><strong>Change dates or add extras:</strong> <a href="${siteUrl}/manage-booking?ref=${encodeURIComponent(bookingRef)}">manage your booking</a> with your booking reference and this email address (online changes close 48 hours before pickup).</p>
       <p>Need to cancel? Visit <a href="${siteUrl}/cancel-booking">${siteUrl}/cancel-booking</a> using your booking reference and last name. See the <a href="${siteUrl}/condiciones#cancelacion">cancellation terms</a> for refund details.</p>
       <p>Your booking is subject to our <a href="${siteUrl}/condiciones">rental conditions and rates</a>, which you accepted when booking.</p>
       <hr />
@@ -231,6 +235,31 @@ export default async function handler(req, res) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const m = session.metadata;
+
+    // Payment of the difference for a self-service booking change: apply the
+    // pending change instead of creating a booking. A 500 makes Stripe retry.
+    if (m?.kind === "booking_change") {
+      try {
+        const result = await completeChangePayment(session, {
+          store: createBlobStore(),
+          stripe,
+          sendEmails: sendChangeEmails,
+          sendOwnerAlert: (text) =>
+            postToResend({
+              from: "Camper Retreat VLC <info@campervlc.com>",
+              to: process.env.OWNER_EMAIL,
+              subject: "Booking change payment needs attention",
+              html: `<p>${text}</p>`,
+            }),
+          now: () => Date.now(),
+        });
+        console.log("booking_change webhook:", session.id, result.status);
+        return res.status(200).json({ received: true });
+      } catch (err) {
+        console.error("booking_change webhook failed for", session.id, "-", err.message);
+        return res.status(500).json({ error: "booking_change_failed" });
+      }
+    }
 
     const existingBookings = await loadBookings();
     const bookingRef = await getUniqueBookingRef(existingBookings);
