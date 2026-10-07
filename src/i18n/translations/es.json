@@ -462,6 +462,7 @@
     "e_invalid": "Revisa las fechas y las horas.",
     "e_no_changes": "Todavía no has cambiado nada.",
     "e_availability": "No hemos podido comprobar la disponibilidad ahora. Inténtalo de nuevo en un momento.",
+    "cancel_btn": "Cancelar esta reserva",
     "cancel_link": "¿Prefieres cancelar?"
   }
 }

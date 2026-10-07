@@ -462,6 +462,7 @@
     "e_invalid": "Bitte prüfe Daten und Zeiten.",
     "e_no_changes": "Du hast noch nichts geändert.",
     "e_availability": "Die Verfügbarkeit konnte gerade nicht geprüft werden. Bitte versuche es gleich noch einmal.",
+    "cancel_btn": "Diese Buchung stornieren",
     "cancel_link": "Stattdessen stornieren?"
   }
 }

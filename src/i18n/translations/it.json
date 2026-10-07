@@ -462,6 +462,7 @@
     "e_invalid": "Controlla date e orari.",
     "e_no_changes": "Non hai ancora cambiato nulla.",
     "e_availability": "Non siamo riusciti a verificare la disponibilità. Riprova tra un momento.",
+    "cancel_btn": "Annulla questa prenotazione",
     "cancel_link": "Preferisci annullare?"
   }
 }

@@ -340,6 +340,16 @@ function ManageBookingPage() {
               </section>
             )}
 
+            {booking.status !== "cancelled" && (
+              <Link
+                to="/cancel-booking"
+                search={{ ref: booking.bookingRef }}
+                className="flex w-full items-center justify-center rounded-full border border-rose-500/50 px-5 py-3 text-sm font-semibold text-rose-400 hover:bg-rose-500/10 transition"
+              >
+                {t("manage.cancel_btn")}
+              </Link>
+            )}
+
             {plan && (
               <section className="space-y-4 rounded-2xl border border-primary/40 bg-surface p-5">
                 <div className="grid grid-cols-2 gap-4 text-sm">

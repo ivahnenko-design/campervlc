@@ -16,6 +16,9 @@ export const Route = createFileRoute("/cancel-booking")({
       { name: "description", content: "Look up and cancel your camper van booking in Valencia." },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>): { ref?: string } => ({
+    ref: typeof search.ref === "string" && search.ref ? search.ref : undefined,
+  }),
   component: CancelBookingPage,
 });
 
@@ -51,6 +54,7 @@ type Stage = "lookup" | "quote" | "done";
 
 function CancelBookingPage() {
   const { t } = useTranslation();
+  const search = Route.useSearch();
   const [stage, setStage] = useState<Stage>("lookup");
   const [quote, setQuote] = useState<Quote | null>(null);
   const [identity, setIdentity] = useState<{ bookingRef?: string; email?: string; lastName: string } | null>(null);
@@ -64,6 +68,7 @@ function CancelBookingPage() {
     formState: { errors, isSubmitting },
   } = useForm<LookupData>({
     resolver: zodResolver(lookupSchema),
+    defaultValues: { bookingRef: search.ref ?? "" },
   });
 
   const onLookup = async (data: LookupData) => {

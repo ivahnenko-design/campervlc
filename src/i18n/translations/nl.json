@@ -462,6 +462,7 @@
     "e_invalid": "Controleer de data en tijden.",
     "e_no_changes": "Je hebt nog niets gewijzigd.",
     "e_availability": "We konden de beschikbaarheid nu niet controleren. Probeer het zo meteen opnieuw.",
+    "cancel_btn": "Deze boeking annuleren",
     "cancel_link": "Liever annuleren?"
   }
 }

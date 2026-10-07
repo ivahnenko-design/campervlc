@@ -462,6 +462,7 @@
     "e_invalid": "Please check the dates and times.",
     "e_no_changes": "Nothing has changed yet.",
     "e_availability": "We could not check availability right now. Please try again in a moment.",
+    "cancel_btn": "Cancel this booking",
     "cancel_link": "Need to cancel instead?"
   }
 }
