@@ -7,7 +7,7 @@ These are the terms of the contract you will sign when you collect the motorhome
 ## What the price includes
 
 - VAT.
-- Comprehensive insurance with a deductible (excess) of 900 €, or 600 € with the reduced deductible option.
+- Comprehensive insurance with an excess (deductible) of 900 €, or 600 € with the reduced excess option.
 - 100 km per rental night, which can be extended with the mileage options.
 - Roadside assistance and the manufacturer's mobility guarantee.
 - Two gas bottles and capsules for the chemical toilet.
@@ -30,7 +30,7 @@ These are the terms of the contract you will sign when you collect the motorhome
 | 200 km per night option | 20 € / night |
 | Unlimited mileage option | 40 € / night |
 | Kilometres beyond the included allowance | 0.30 € / km |
-| Option: deductible reduced to 600 € | 60 € / booking |
+| Option: excess (deductible) reduced to 600 € | 60 € / booking |
 | Return later than the collection time, up to 6 h | 50 % of one rental day |
 | Return later than the collection time, more than 6 h | one full rental day |
 | Late return not agreed in advance | 50 € / hour |
@@ -67,7 +67,7 @@ The options (bicycle, SUP, barbecue, additional driver, etc.) and their prices a
 
 ### 3. Price, duration, handover and return
 
-3.1. The price includes: VAT; mileage of 100 km per rental night (excess charged at 0.30 €/km), which may be increased through the mileage options purchased when booking (200 km per night or unlimited mileage); comprehensive insurance with a deductible of 900 €, or 600 € if the reduced deductible option is taken out (sec. 11); the chassis-cab manufacturer's mobility guarantee; two gas bottles; capsules for the chemical toilet; and free parking for the Lessee's private vehicle at the Lessor's premises during the rental (sec. 12.3).
+3.1. The price includes: VAT; mileage of 100 km per rental night (excess charged at 0.30 €/km), which may be increased through the mileage options purchased when booking (200 km per night or unlimited mileage); comprehensive insurance with an excess of 900 €, or 600 € if the reduced excess option is taken out (sec. 11); the chassis-cab manufacturer's mobility guarantee; two gas bottles; capsules for the chemical toilet; and free parking for the Lessee's private vehicle at the Lessor's premises during the rental (sec. 12.3).
 
 3.2. At handover, the Handover Report (Check-In) describing the condition of the vehicle shall be signed and one set of keys shall be handed over. Loss or theft of the keys shall be invoiced at the actual cost of replacement and shipping, up to a maximum of 250 €. The Lessor may make handover conditional on completion of the briefing on how to use the vehicle.
 
@@ -114,7 +114,7 @@ Free cancellation within 24 hours: the booking may be cancelled free of charge w
 
 5.3. Return of the security deposit: after inspection of the vehicle, within a maximum of 14 working days from the return, provided that the vehicle is in the same condition as at handover. If there is damage that cannot be assessed immediately, the Lessor shall have a maximum of 30 calendar days from the return to draw up the settlement with supporting documents (invoices or garage estimates), refund the balance of the security deposit or claim the difference if the proven cost exceeds it.
 
-5.4. The following may be deducted from the security deposit, with supporting documentation: the damage referred to in section 11 and the insurance deductible, the supplements in sections 3.7 to 3.9, the late-return penalties (3.4) and the amounts in section 5.5.
+5.4. The following may be deducted from the security deposit, with supporting documentation: the damage referred to in section 11 and the insurance excess, the supplements in sections 3.7 to 3.9, the late-return penalties (3.4) and the amounts in section 5.5.
 
 5.5. The following shall be borne by the Lessee: (a) charges for return at a different location that was not agreed; (b) the amount of traffic or other fines and penalties arising from use of the vehicle during the rental that are attributable to the Lessee, as well as reasonable administration costs for processing them (25 € per file); (c) costs arising from the detention or seizure of the vehicle for reasons attributable to the Lessee, including proven loss of earnings during immobilisation; (d) statutory default interest in the event of late payment.
 
@@ -149,9 +149,9 @@ Free cancellation within 24 hours: the booking may be cancelled free of charge w
 
 7.3. Travel to countries at war or in armed conflict is prohibited. Taking the vehicle into unauthorised areas constitutes a serious breach of the contract; the Lessor may terminate the contract, demand immediate return and, where appropriate, inform the authorities. Any resulting damage and costs shall be borne by the Lessee, including the loss of insurance cover outside the authorised territory.
 
-### 8. What to do in the event of an accident, theft or damage
+### 8. What to do in the event of an accident, robbery or damage
 
-8.1. In the event of an accident, theft, fire or damage caused by animals, the Lessee shall notify the Lessor immediately (+34 624 038 085) and, where appropriate, the police, at the time of the incident.
+8.1. In the event of an accident, robbery, fire or damage caused by animals, the Lessee shall notify the Lessor immediately (+34 624 038 085) and, where appropriate, the police, at the time of the incident.
 
 8.2. Where another party is involved, the Lessee shall complete the Joint Accident Statement, recording the names and addresses of those involved and of any witnesses, driving licence details, the other party's insurance company and policy number, registration numbers and a description of the events, and shall send it to the Lessor as soon as possible and in any event within 24 hours.
 
@@ -175,7 +175,7 @@ Free cancellation within 24 hours: the booking may be cancelled free of charge w
 
 | Faulty item | Compensation per day |
 |---|---|
-| Heating (from 1/10 to 30/4) or living-area air conditioning (from 1/5 to 30/9) | 25 € |
+| Heating (from 1 October to 30 April) or living-area air conditioning (from 1 May to 30 September) | 25 € |
 | Shower / water pump / water heater | 20 € |
 | Fridge or cooker | 20 € |
 | WC | 25 € |
@@ -197,15 +197,15 @@ The compensation amounts are cumulative, subject to a combined maximum of 30 % o
 
 10.4. If the damage is attributable to the Lessee, the Lessor shall not be obliged to offer a replacement vehicle and the Lessee may not terminate the contract; if the Lessor offers a replacement, it may pass on the resulting costs.
 
-### 11. Liability of the Lessee. Comprehensive insurance with deductible
+### 11. Liability of the Lessee. Comprehensive insurance with excess
 
-11.1. The vehicle has comprehensive insurance with a deductible of 900 €. If the Lessee purchases the reduced deductible option when booking (60 € per booking), the deductible is limited to 600 €. In the event of total or partial damage covered by the insurance, the Lessee shall pay at most the applicable deductible for each claim item determined by the insurer's loss adjuster (the insurer counts one claim item for each separate impact, breakage or defect; if an accident affects two parts, two deductibles are payable).
+11.1. The vehicle has comprehensive insurance with an excess (deductible) of 900 €. If the Lessee purchases the reduced excess option when booking (60 € per booking), the excess is limited to 600 €. In the event of total or partial damage covered by the insurance, the Lessee shall pay at most the applicable excess for each claim item determined by the insurer's loss adjuster (the insurer counts one claim item for each separate impact, breakage or defect; if an accident affects two parts, two excesses are payable).
 
 11.2. The insurance does not cover the personal belongings of the Lessee or of their companions.
 
-11.3. If the cost of repairing damage attributable to the Lessee that is not covered by the insurance, or the sum of the deductibles, exceeds the security deposit, the Lessee shall pay the difference, upon presentation of supporting documentation (loss adjuster's report, invoices or estimates). The procedure and time limits of section 5.3 shall apply.
+11.3. If the cost of repairing damage attributable to the Lessee that is not covered by the insurance, or the sum of the excesses, exceeds the security deposit, the Lessee shall pay the difference, upon presentation of supporting documentation (loss adjuster's report, invoices or estimates). The procedure and time limits of section 5.3 shall apply.
 
-11.4. The limitation of liability to the deductible shall not apply, and the Lessee shall be liable for the full amount of the damage, where the damage results from wilful misconduct or gross negligence and, in particular, where:
+11.4. The limitation of liability to the excess shall not apply, and the Lessee shall be liable for the full amount of the damage, where the damage results from wilful misconduct or gross negligence and, in particular, where:
 
 - a) the damage results from driving under the influence of alcohol or drugs, or from reckless driving;
 - b) the driver leaves the scene after an accident or fails to comply with the duty to render assistance;
@@ -226,7 +226,7 @@ The compensation amounts are cumulative, subject to a combined maximum of 30 % o
 
 12.3. The Lessee may park their private vehicle free of charge at the Lessor's premises during the rental. The Lessor accepts no custodial responsibility for that vehicle.
 
-12.4. GPS tracker: the motorhome is fitted with a tracking device, which shall be used exclusively for the security and recovery of the vehicle (breakdown, theft, failure to return or use outside the authorised territory). The Lessee is informed of this and consents to the processing in accordance with section 15.
+12.4. GPS tracker: the motorhome is fitted with a tracking device, which shall be used exclusively for the security and recovery of the vehicle (breakdown, robbery, failure to return or use outside the authorised territory). The Lessee is informed of this and consents to the processing in accordance with section 15.
 
 12.5. Equipment included in the price: camping table and chairs, three beach chairs, beach umbrella, awning, Smart TV, kitchenware, pillows and blankets. These items are provided with the vehicle; their loss or breakage attributable to the Lessee shall be paid for at their proven replacement value. Optional accessories booked with the reservation (bicycle, SUP board, barbecue, child seat and others) are subject to the same rule. The fixed equipment of the living area (heating, air conditioning, cooker, fridge, water pump, shower, WC, solar panel, electrical system) forms part of the rented vehicle for all purposes.
 
@@ -238,7 +238,7 @@ The compensation amounts are cumulative, subject to a combined maximum of 30 % o
 
 14.1. Camper Retreat S.L. has official complaint forms available free of charge at its establishment for consumers who request them. The Lessee may also file a complaint online with the consumer affairs services of the Comunitat Valenciana.
 
-14.2. The parties shall endeavour to resolve any dispute amicably. This contract is governed by Spanish law. In the event of litigation with a consumer, jurisdiction shall be determined in accordance with the applicable procedural legislation, without any express submission to jurisdiction that limits the consumer's statutory forums.
+14.2. The parties shall endeavour to resolve any dispute amicably. This contract is governed by Spanish law. In the event of litigation with a consumer, jurisdiction shall be determined in accordance with the applicable procedural legislation, without any jurisdiction agreement restricting the consumer's rights (no express submission that limits the consumer's statutory forums).
 
 ### 15. Personal data protection
 

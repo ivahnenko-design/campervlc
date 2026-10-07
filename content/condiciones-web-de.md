@@ -1,4 +1,4 @@
-# Mietbedingungen und Tarife
+# Mietbedingungen und Preise
 
 Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unterzeichnen. Wir veröffentlichen sie, damit Sie schon vor der Buchung wissen, was im Preis enthalten ist, was gesondert berechnet wird und wie Stornierung, Kaution und Versicherung geregelt sind. Fassung vom Oktober 2026.
 
@@ -149,13 +149,13 @@ Kostenlose Stornierung innerhalb von 24 Stunden: Die Buchung kann innerhalb von 
 
 7.3. Reisen in Länder, in denen Krieg oder ein bewaffneter Konflikt herrscht, sind verboten. Das Einfahren mit dem Fahrzeug in nicht zugelassene Gebiete stellt einen schwerwiegenden Vertragsverstoß dar; der Vermieter kann den Vertrag auflösen, die sofortige Rückgabe verlangen und gegebenenfalls die Behörden davon in Kenntnis setzen. Die daraus entstehenden Schäden und Kosten trägt der Mieter, einschließlich des Verlusts des Versicherungsschutzes außerhalb des zugelassenen räumlichen Geltungsbereichs.
 
-### 8. Verhalten bei Unfall, Diebstahl oder Schäden
+### 8. Verhalten bei Unfall, Raub oder Schäden
 
-8.1. Bei Unfall, Diebstahl, Brand oder durch Tiere verursachten Schäden benachrichtigt der Mieter unverzüglich den Vermieter (+34 624 038 085) und gegebenenfalls die Polizei, und zwar zum Zeitpunkt des Vorfalls.
+8.1. Bei Unfall, Raub, Brand oder durch Tiere verursachten Schäden benachrichtigt der Mieter unverzüglich den Vermieter (+34 624 038 085) und gegebenenfalls die Polizei, und zwar zum Zeitpunkt des Vorfalls.
 
 8.2. Ist ein Unfallgegner beteiligt, füllt der Mieter den Europäischen Unfallbericht (Declaración Amistosa) aus, mit Namen und Anschrift der Beteiligten und Zeugen, Führerscheindaten, Versicherungsgesellschaft und Policennummer des Unfallgegners, Kennzeichen sowie einer Beschreibung des Hergangs, und übermittelt ihn dem Vermieter so bald wie möglich, in jedem Fall innerhalb von 24 Stunden.
 
-8.3. Bei Diebstahl oder Entwendung erstattet der Mieter unverzüglich Anzeige bei der zuständigen Behörde und übermittelt dem Vermieter innerhalb von höchstens 24 Stunden eine Kopie der Anzeige zusammen mit den Fahrzeugschlüsseln. Ein Verstoß hiergegen kann zum Wegfall des Versicherungsschutzes führen; in diesem Fall haftet der Mieter für die Schäden, soweit sein Verstoß die Zahlung durch den Versicherer verhindert hat.
+8.3. Bei Raub oder Diebstahl erstattet der Mieter unverzüglich Anzeige bei der zuständigen Behörde und übermittelt dem Vermieter innerhalb von höchstens 24 Stunden eine Kopie der Anzeige zusammen mit den Fahrzeugschlüsseln. Ein Verstoß hiergegen kann zum Wegfall des Versicherungsschutzes führen; in diesem Fall haftet der Mieter für die Schäden, soweit sein Verstoß die Zahlung durch den Versicherer verhindert hat.
 
 8.4. Bei Schäden ohne Unfallgegner erstellt der Mieter für den Vermieter einen schriftlichen Bericht über den Hergang mit Fotos. Verhindert das Fehlen des Berichts die Regulierung durch die Versicherung, haftet der Mieter für den entsprechenden Betrag.
 
@@ -175,7 +175,7 @@ Kostenlose Stornierung innerhalb von 24 Stunden: Die Buchung kann innerhalb von 
 
 | Ausgefallene Einrichtung | Entschädigung pro Tag |
 |---|---|
-| Heizung (vom 1/10 bis 30/4) oder Klimaanlage des Wohnaufbaus (vom 1/5 bis 30/9) | 25 € |
+| Heizung (vom 1. Oktober bis 30. April) oder Klimaanlage des Wohnaufbaus (vom 1. Mai bis 30. September) | 25 € |
 | Dusche / Wasserpumpe / Warmwasserbereiter | 20 € |
 | Kühlschrank oder Kochstelle | 20 € |
 | WC | 25 € |
@@ -226,7 +226,7 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 12.3. Der Mieter kann sein Privatfahrzeug während der Mietdauer kostenlos auf dem Gelände des Vermieters parken. Der Vermieter übernimmt für dieses Fahrzeug keine Haftung aus Verwahrung.
 
-12.4. GPS-Ortung: Das Wohnmobil ist mit einem Ortungsgerät ausgestattet, das ausschließlich zur Sicherung und Wiederbeschaffung des Fahrzeugs eingesetzt wird (Panne, Diebstahl, Nichtrückgabe oder Nutzung außerhalb des zugelassenen Gebiets). Der Mieter wird hierüber informiert und willigt in die Verarbeitung gemäß Ziffer 15 ein.
+12.4. GPS-Ortung: Das Wohnmobil ist mit einem Ortungsgerät ausgestattet, das ausschließlich zur Sicherung und Wiederbeschaffung des Fahrzeugs eingesetzt wird (Panne, Raub, Nichtrückgabe oder Nutzung außerhalb des zugelassenen Gebiets). Der Mieter wird hierüber informiert und willigt in die Verarbeitung gemäß Ziffer 15 ein.
 
 12.5. Im Preis enthaltene Ausstattung: Campingtisch und Campingstühle, drei Strandstühle, Sonnenschirm, Markise, Smart-TV, Küchenutensilien, Kopfkissen und Decken. Diese Gegenstände werden zusammen mit dem Fahrzeug überlassen; ihr vom Mieter zu vertretender Verlust oder Bruch ist zum nachgewiesenen Wiederbeschaffungswert zu bezahlen. Für die bei der Buchung gebuchten optionalen Zubehörteile (Fahrrad, SUP-Board, Grill, Kindersitz und andere) gilt dieselbe Regel. Die fest eingebaute Ausstattung des Wohnaufbaus (Heizung, Klimaanlage, Küche, Kühlschrank, Wasserpumpe, Dusche, WC, Solarmodul, Elektroinstallation) ist in jeder Hinsicht Bestandteil des gemieteten Fahrzeugs.
 
@@ -238,7 +238,7 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 14.1. Camper Retreat S.L. hält in seinen Geschäftsräumen offizielle Beschwerdeformulare (hojas de reclamaciones) bereit, die Verbrauchern auf Verlangen kostenlos zur Verfügung gestellt werden. Der Mieter kann außerdem auf elektronischem Weg eine Beschwerde bei den Verbraucherschutzbehörden der Comunitat Valenciana einreichen.
 
-14.2. Die Parteien bemühen sich, Streitigkeiten gütlich beizulegen. Dieser Vertrag unterliegt spanischem Recht. Bei Rechtsstreitigkeiten mit einem Verbraucher bestimmt sich die gerichtliche Zuständigkeit nach dem anwendbaren Prozessrecht, ohne ausdrückliche Gerichtsstandsvereinbarung, die die gesetzlichen Gerichtsstände des Verbrauchers einschränkt.
+14.2. Die Parteien bemühen sich, Streitigkeiten gütlich beizulegen. Dieser Vertrag unterliegt spanischem Recht. Bei Rechtsstreitigkeiten mit einem Verbraucher bestimmt sich die gerichtliche Zuständigkeit nach dem anwendbaren Prozessrecht, ohne eine Gerichtsstandsvereinbarung, die die Rechte des Verbrauchers einschränkt.
 
 ### 15. Schutz personenbezogener Daten
 

@@ -149,13 +149,13 @@ Kosteloos annuleren binnen 24 uur: de boeking kan zonder enige kosten worden gea
 
 7.3. Reizen naar landen die in oorlog of in een gewapend conflict verwikkeld zijn, is verboden. Het binnenrijden van niet-toegestane gebieden met het voertuig vormt een ernstige tekortkoming in de nakoming van het contract; de Verhuurder kan het contract ontbinden, de onmiddellijke teruggave verlangen en in voorkomend geval de autoriteiten daarvan in kennis stellen. De daaruit voortvloeiende schade en kosten komen voor rekening van de Huurder, met inbegrip van het verlies van verzekeringsdekking buiten het toegestane gebied.
 
-### 8. Handelwijze bij ongeval, diefstal of schade
+### 8. Handelwijze bij ongeval, roof of schade
 
-8.1. Bij een ongeval, diefstal, brand of schade veroorzaakt door dieren stelt de Huurder de Verhuurder (+34 624 038 085) en, waar nodig, de politie onmiddellijk, op het moment van het incident, op de hoogte.
+8.1. Bij een ongeval, roof, brand of schade veroorzaakt door dieren stelt de Huurder de Verhuurder (+34 624 038 085) en, waar nodig, de politie onmiddellijk, op het moment van het incident, op de hoogte.
 
 8.2. Is er een tegenpartij, dan vult de Huurder het Europees schadeformulier (Declaración Amistosa) in, met naam en adres van de betrokkenen en getuigen, de gegevens van het rijbewijs, de verzekeringsmaatschappij en het polisnummer van de tegenpartij, de kentekens en een beschrijving van de toedracht, en stuurt hij dit zo spoedig mogelijk en in ieder geval binnen 24 uur naar de Verhuurder.
 
-8.3. Bij diefstal, met of zonder braak of geweld, doet de Huurder onmiddellijk aangifte bij de bevoegde autoriteit en stuurt hij de Verhuurder binnen uiterlijk 24 uur een kopie van de aangifte, samen met de sleutels van het voertuig. Niet-nakoming kan ertoe leiden dat de verzekeringsdekking vervalt; in dat geval is de Huurder aansprakelijk voor de schade voor zover zijn tekortkoming de uitkering door de verzekeraar heeft verhinderd.
+8.3. Bij roof of diefstal doet de Huurder onmiddellijk aangifte bij de bevoegde autoriteit en stuurt hij de Verhuurder binnen uiterlijk 24 uur een kopie van de aangifte, samen met de sleutels van het voertuig. Niet-nakoming kan ertoe leiden dat de verzekeringsdekking vervalt; in dat geval is de Huurder aansprakelijk voor de schade voor zover zijn tekortkoming de uitkering door de verzekeraar heeft verhinderd.
 
 8.4. Bij schade zonder tegenpartij stelt de Huurder voor de Verhuurder een schriftelijk verslag van de toedracht met foto's op. Verhindert het ontbreken van een verslag de uitkering door de verzekering, dan is de Huurder aansprakelijk voor het betreffende bedrag.
 
@@ -175,7 +175,7 @@ Kosteloos annuleren binnen 24 uur: de boeking kan zonder enige kosten worden gea
 
 | Defect onderdeel | Compensatie per dag |
 |---|---|
-| Verwarming (van 1/10 tot 30/4) of airconditioning van de woonopbouw (van 1/5 tot 30/9) | 25 € |
+| Verwarming (van 1 oktober tot 30 april) of airconditioning van de woonopbouw (van 1 mei tot 30 september) | 25 € |
 | Douche / waterpomp / boiler | 20 € |
 | Koelkast of kooktoestel | 20 € |
 | Toilet | 25 € |
@@ -226,7 +226,7 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 12.3. De Huurder kan zijn eigen voertuig tijdens de huurperiode gratis parkeren op het terrein van de Verhuurder. De Verhuurder aanvaardt geen aansprakelijkheid als bewaarnemer van dat voertuig.
 
-12.4. Gps-tracker: de camper is uitgerust met een volgsysteem dat uitsluitend wordt gebruikt voor de beveiliging en het terugvinden van het voertuig (defect, diefstal, niet terugbrengen of gebruik buiten het toegestane gebied). De Huurder wordt hiervan in kennis gesteld en stemt in met de verwerking overeenkomstig artikel 15.
+12.4. Gps-tracker: de camper is uitgerust met een volgsysteem dat uitsluitend wordt gebruikt voor de beveiliging en het terugvinden van het voertuig (defect, roof, niet terugbrengen of gebruik buiten het toegestane gebied). De Huurder wordt hiervan in kennis gesteld en stemt in met de verwerking overeenkomstig artikel 15.
 
 12.5. Bij de prijs inbegrepen uitrusting: campingtafel en -stoelen, drie strandstoelen, parasol, luifel, smart-tv, keukengerei, kussens en dekens. Deze worden samen met het voertuig ter beschikking gesteld; verlies of breuk die aan de Huurder toe te rekenen is, wordt vergoed tegen de aangetoonde vervangingswaarde. Voor de bij de boeking afgesloten optionele accessoires (fiets, SUP-board, barbecue, kinderzitje en andere) geldt dezelfde regel. De vaste uitrusting van de woonopbouw (verwarming, airconditioning, kooktoestel, koelkast, waterpomp, douche, toilet, zonnepaneel, elektrische installatie) maakt in alle opzichten deel uit van het gehuurde voertuig.
 
@@ -238,7 +238,7 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 14.1. Camper Retreat S.L. stelt in haar vestiging kosteloos officiële klachtenformulieren (hojas de reclamaciones) ter beschikking van consumenten die daarom verzoeken. De Huurder kan bovendien langs elektronische weg een klacht indienen bij de consumentendiensten van de Comunitat Valenciana.
 
-14.2. De partijen streven ernaar elk geschil in der minne te schikken. Op dit contract is Spaans recht van toepassing. Bij een geschil met een consument wordt de bevoegde rechter bepaald overeenkomstig het toepasselijke procesrecht, zonder uitdrukkelijke forumkeuze die de wettelijke bevoegdheidsregels ten gunste van de consument beperkt.
+14.2. De partijen streven ernaar elk geschil in der minne te schikken. Op dit contract is Spaans recht van toepassing. Bij een geschil met een consument wordt de bevoegde rechter bepaald overeenkomstig het toepasselijke procesrecht, zonder een forumkeuze die de rechten van de consument beperkt.
 
 ### 15. Bescherming van persoonsgegevens
 

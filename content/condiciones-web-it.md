@@ -149,9 +149,9 @@ Cancellazione gratuita entro 24 ore: la prenotazione può essere cancellata senz
 
 7.3. È vietato recarsi in paesi in guerra o in conflitto armato. L'ingresso del veicolo in zone non autorizzate costituisce grave inadempimento del contratto; il Locatore potrà risolvere il contratto, esigere la restituzione immediata del veicolo e, se del caso, darne notizia alle autorità. I danni e le spese che ne derivano saranno a carico del Conduttore, compresa la perdita delle coperture assicurative al di fuori dell'ambito territoriale autorizzato.
 
-### 8. Comportamento in caso di incidente, furto o danni
+### 8. Comportamento in caso di incidente, rapina o danni
 
-8.1. In caso di incidente, furto, incendio o danni causati da animali, il Conduttore avviserà immediatamente il Locatore (+34 624 038 085) e, ove necessario, la polizia, al momento dell'evento.
+8.1. In caso di incidente, rapina, incendio o danni causati da animali, il Conduttore avviserà immediatamente il Locatore (+34 624 038 085) e, ove necessario, la polizia, al momento dell'evento.
 
 8.2. Il Conduttore compilerà la Constatazione Amichevole di Incidente in presenza di una controparte, riportando nome e indirizzo delle persone coinvolte e dei testimoni, i dati della patente di guida, la compagnia assicurativa e il numero di polizza della controparte, le targhe e la descrizione dei fatti, e la trasmetterà al Locatore il prima possibile e, in ogni caso, entro le 24 ore successive.
 
@@ -175,7 +175,7 @@ Cancellazione gratuita entro 24 ore: la prenotazione può essere cancellata senz
 
 | Elemento guasto | Indennizzo al giorno |
 |---|---|
-| Riscaldamento (dall'1/10 al 30/4) o aria condizionata della cellula (dall'1/5 al 30/9) | 25 € |
+| Riscaldamento (dal 1 ottobre al 30 aprile) o aria condizionata della cellula (dal 1 maggio al 30 settembre) | 25 € |
 | Doccia / pompa dell'acqua / scaldabagno | 20 € |
 | Frigorifero o cucina | 20 € |
 | WC | 25 € |
@@ -226,7 +226,7 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 12.3. Il Conduttore può parcheggiare gratuitamente il proprio veicolo privato presso i locali del Locatore durante il noleggio. Il Locatore non assume alcuna responsabilità di custodia su tale veicolo.
 
-12.4. Localizzatore GPS: il camper è dotato di un dispositivo di localizzazione, che sarà utilizzato esclusivamente per la sicurezza e il recupero del veicolo (guasto, furto, mancata restituzione o uso al di fuori del territorio autorizzato). Il Conduttore ne è informato e acconsente al trattamento ai sensi del punto 15.
+12.4. Localizzatore GPS: il camper è dotato di un dispositivo di localizzazione, che sarà utilizzato esclusivamente per la sicurezza e il recupero del veicolo (guasto, rapina, mancata restituzione o uso al di fuori del territorio autorizzato). Il Conduttore ne è informato e acconsente al trattamento ai sensi del punto 15.
 
 12.5. Dotazione inclusa nel prezzo: tavolo e sedie da campeggio, tre sedie da spiaggia, ombrellone, tendalino, Smart TV, stoviglie e utensili da cucina, cuscini e coperte. Sono concessi insieme al veicolo; il loro smarrimento o la loro rottura imputabile al Conduttore sarà pagato al valore di sostituzione comprovato. Gli accessori opzionali acquistati in fase di prenotazione (bicicletta, tavola da SUP, barbecue, seggiolino per bambini e altri) sono soggetti alla stessa regola. La dotazione fissa della cellula abitativa (riscaldamento, aria condizionata, cucina, frigorifero, pompa dell'acqua, doccia, WC, pannello solare, impianto elettrico) fa parte a tutti gli effetti del veicolo locato.
 
@@ -238,7 +238,7 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 14.1. Camper Retreat S.L. tiene gratuitamente a disposizione dei consumatori che li richiedano, presso la propria sede, i moduli ufficiali di reclamo (hojas de reclamaciones). Il Conduttore può inoltre presentare reclamo in via telematica ai servizi di tutela dei consumatori della Comunitat Valenciana.
 
-14.2. Le parti cercheranno di risolvere amichevolmente qualsiasi controversia. Il presente contratto è disciplinato dal diritto spagnolo. In caso di controversia con un consumatore, la competenza giurisdizionale sarà determinata secondo la normativa processuale applicabile, senza alcuna clausola di deroga espressa che limiti i fori previsti dalla legge a favore del consumatore.
+14.2. Le parti cercheranno di risolvere amichevolmente qualsiasi controversia. Il presente contratto è disciplinato dal diritto spagnolo. In caso di controversia con un consumatore, la competenza giurisdizionale sarà determinata secondo la normativa processuale applicabile, senza alcuna clausola sul foro competente che limiti i diritti del consumatore.
 
 ### 15. Protezione dei dati personali
 
