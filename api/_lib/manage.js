@@ -112,6 +112,41 @@ export function createManageHandlers(deps) {
     return match ? { match, bookings } : null;
   }
 
+  // Fields a retry must find unchanged before it may rebase onto a newer copy
+  // of the booking: the plan and any refund were computed from these.
+  const sameMaterial = (a, b) =>
+    ["startDate", "endDate", "pickupTime", "returnTime", "totalWithIva", "amountPaid", "retainedTotal", "status", "prepaymentOption"].every(
+      (k) => a[k] === b[k],
+    ) &&
+    JSON.stringify(a.extraIds) === JSON.stringify(b.extraIds) &&
+    (a.pendingChange?.changeId ?? null) === (b.pendingChange?.changeId ?? null) &&
+    (a.changes || []).length === (b.changes || []).length;
+
+  /**
+   * Saves `build(booking)` guarded by the ETag. On a conflicting write it re-reads
+   * and tries again when nothing the plan depends on moved (other writes are
+   * harmless, e.g. a double click). With `final` (money already moved) the last
+   * round is written without the guard. A conflict that is a real change, or the
+   * same change already applied, is rethrown for the caller to handle.
+   */
+  async function saveRebased(booking, etag, changeId, build, { final = false } = {}) {
+    let current = { booking, etag };
+    for (let round = 0; ; round += 1) {
+      const next = build(current.booking);
+      try {
+        await store.saveBooking(next, final && round >= 2 ? {} : { etag: current.etag });
+        if (round) console.warn("manage-booking: save needed", round, "retries for", booking.bookingRef, changeId);
+        return next;
+      } catch (err) {
+        if (!(err instanceof StoreConflictError) || round >= 2) throw err;
+        const latest = await store.getBooking(booking.id);
+        if (!latest || (latest.booking.changes || []).some((c) => c.id === changeId)) throw err;
+        if (!sameMaterial(booking, latest.booking)) throw err;
+        current = latest;
+      }
+    }
+  }
+
   async function blockedFor(bookings, bookingId) {
     return loadBlocked({ bookings, exceptBookingId: bookingId });
   }
@@ -331,7 +366,7 @@ export function createManageHandlers(deps) {
     try {
       if (plan.settlement.type === "charge") {
         const { pendingChange } = await startCheckout(booking, plan, changeId, request);
-        await store.saveBooking({ ...booking, pendingChange }, { etag });
+        await saveRebased(booking, etag, changeId, (b) => ({ ...b, pendingChange }));
         return res.status(200).json({ result: "checkout", url: pendingChange.checkoutUrl });
       }
 
@@ -342,9 +377,15 @@ export function createManageHandlers(deps) {
       }
 
       const nowIso = new Date(nowMs).toISOString();
-      const updated = applyPlanToBooking(base, plan, { changeId, nowIso, refunds });
+      let updated;
       try {
-        await store.saveBooking(updated, { etag });
+        updated = await saveRebased(
+          booking,
+          etag,
+          changeId,
+          (b) => applyPlanToBooking({ ...b, paymentIntentId: base.paymentIntentId ?? b.paymentIntentId }, plan, { changeId, nowIso, refunds }),
+          { final: refunds.length > 0 },
+        );
       } catch (err) {
         if (refunds.length) {
           // Money already left. A retry with the same changeId replays the same

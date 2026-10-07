@@ -222,3 +222,46 @@ test("a paid change is still applied when the store keeps reporting write confli
   assert.equal((await store.getBooking("cs_test_1")).booking.endDate, "2026-11-23");
   assert.equal(emails.length, 1);
 });
+
+const handlersWith = (base, times) =>
+  createManageHandlers({
+    store: conflicting(base.store, times), stripe: base.stripe, tokenSecret: SECRET, now: () => clock,
+    siteUrl: () => "https://campervlc.com", loadBlocked: async () => ({ dates: new Set(), yescapaOk: true }),
+    sendEmails: async () => {},
+  });
+
+// A store whose guarded saves fail `times` times with a write conflict.
+function conflicting(store, times) {
+  let left = times;
+  return {
+    ...store,
+    getBooking: store.getBooking.bind(store),
+    saveBooking: async (b, opts = {}) => {
+      if (opts.etag && left > 0) { left -= 1; throw new StoreConflictError(b.id); }
+      return store.saveBooking(b, opts);
+    },
+  };
+}
+
+test("refund change: write conflicts after the refund are retried, the guest sees success", async () => {
+  clock = NOW; const base = setup([makeBooking({ endDate: "2026-11-23" })]);
+  const h = handlersWith(base, 3);
+  const req = { endDate: "2026-11-20" };
+  const plan = (await change(h, "cs_test_1", { action: "preview", change: req })).json.plan;
+  assert.equal(plan.settlement.type, "refund");
+  const r = await change(h, "cs_test_1", { action: "apply", changeId: "chg_abcdefgh6", change: req, expectedNewTotal: plan.newTotal, confirm: true });
+  assert.equal(r.status, 200, JSON.stringify(r.json));
+  assert.equal(r.json.result, "applied");
+  assert.equal(base.stripe.calls.refunds.length, 1, "one refund despite the retries");
+  assert.equal((await base.store.getBooking("cs_test_1")).booking.endDate, "2026-11-20");
+});
+
+test("charge change: pending-payment save survives a write conflict", async () => {
+  clock = NOW; const base = setup([makeBooking({ endDate: "2026-11-20" })]);
+  const h = handlersWith(base, 1);
+  const req = { endDate: "2026-11-23" };
+  const plan = (await change(h, "cs_test_1", { action: "preview", change: req })).json.plan;
+  const r = await change(h, "cs_test_1", { action: "apply", changeId: "chg_abcdefgh7", change: req, expectedNewTotal: plan.newTotal, confirm: true });
+  assert.equal(r.json.result, "checkout");
+  assert.equal((await base.store.getBooking("cs_test_1")).booking.pendingChange.changeId, "chg_abcdefgh7");
+});
