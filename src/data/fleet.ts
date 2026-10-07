@@ -45,38 +45,7 @@ export const AVAILABILITY: Availability[] = [
   },
 ];
 
-export interface ExtraItem {
-  id: string;
-  price: number;
-  mandatory?: boolean;
-  perNight?: boolean;
-}
-
-export const EXTRAS: readonly ExtraItem[] = [
-  // Mandatory paid
-  { id: "cleaning_fee",          price: 50, mandatory: true  },
-  // Optional extras
-  { id: "airport_transfer",      price: 80                   },
-  { id: "bicycle",               price: 90                   },
-  { id: "baby_seat",             price: 0                    },
-  { id: "bedding",               price: 20                   },
-  { id: "towels",                price: 15                   },
-  { id: "bbq",                   price: 15                   },
-  { id: "festival",              price: 150                  },
-  { id: "extra_driver",          price: 50                   },
-  { id: "km_200",                price: 20, perNight: true   },
-  { id: "km_unlimited",          price: 40, perNight: true   },
-  { id: "sup_board",             price: 90                   },
-  { id: "reduced_deductible",    price: 60                   },
-] as const;
-
-export type ExtraId = (typeof EXTRAS)[number]["id"];
-
-/**
- * Extras that are alternatives rather than add-ons: selecting one deselects the
- * rest of its group, and none of them is required. Mirrored server-side in
- * api/create-checkout.js, which cannot import from src/.
- */
-export const EXCLUSIVE_EXTRA_GROUPS: readonly (readonly ExtraId[])[] = [
-  ["km_200", "km_unlimited"],
-];
+// Extras and their prices live in shared/pricing.js so api/create-checkout.js
+// prices them from the same table the calculator shows.
+export { EXTRAS, EXCLUSIVE_EXTRA_GROUPS } from "../../shared/pricing.js";
+export type { ExtraId, ExtraItem } from "../../shared/pricing.js";

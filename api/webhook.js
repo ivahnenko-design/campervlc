@@ -90,6 +90,14 @@ async function postToResend(body) {
   return res.json().catch(() => ({}));
 }
 
+// "2026-10-07 10:00 → 2026-10-12 14:00". Bookings made before pickup/return
+// times existed have none stored, so they keep the date-only form.
+function formatDateRange({ startDate, endDate, pickupTime, returnTime }) {
+  const from = pickupTime ? `${startDate} ${pickupTime}` : startDate;
+  const to = returnTime ? `${endDate} ${returnTime}` : endDate;
+  return `${from} → ${to}`;
+}
+
 async function sendGuestEmail(booking) {
   const {
     guestFirstName,
@@ -126,7 +134,7 @@ async function sendGuestEmail(booking) {
       <h2>Hi ${guestFirstName}! Your booking is confirmed 🎉</h2>
       <p style="font-size:18px"><strong>Booking reference: ${bookingRef}</strong></p>
       <p style="color:#666">Save this reference — you'll need it (along with your last name) if you ever need to cancel.</p>
-      <p><strong>Dates:</strong> ${startDate} → ${endDate} (${nights} nights)</p>
+      <p><strong>Dates:</strong> ${formatDateRange(booking)} (${nights} nights)</p>
       <hr />
       <p><strong>Total (incl. IVA 21%):</strong> €${totalWithIva}</p>
       ${promoLine}
@@ -161,9 +169,14 @@ async function sendOwnerEmail(booking) {
     bookingRef,
     prepaymentOption,
     promoCode,
+    lateReturnHours,
+    lateReturnSurcharge,
   } = booking;
 
   const isFullPayment = prepaymentOption === "full";
+  const lateReturnLine = lateReturnSurcharge
+    ? `<p><strong>Late return surcharge:</strong> €${lateReturnSurcharge} (+${lateReturnHours} h, before IVA)</p>`
+    : "";
 
   const body = {
     from: "Camper Retreat VLC <info@campervlc.com>",
@@ -176,7 +189,8 @@ async function sendOwnerEmail(booking) {
       <p><strong>Guest:</strong> ${guestFirstName} ${guestLastName}</p>
       <p><strong>Email:</strong> ${guestEmail}</p>
       <p><strong>WhatsApp/Phone:</strong> ${guestPhone}</p>
-      <p><strong>Dates:</strong> ${startDate} → ${endDate} (${nights} nights)</p>
+      <p><strong>Dates:</strong> ${formatDateRange(booking)} (${nights} nights)</p>
+      ${lateReturnLine}
       <p><strong>Adults:</strong> ${adults} · <strong>Children:</strong> ${children}</p>
       <p><strong>Extras:</strong> ${extraIds || "none"}</p>
       <p><strong>Message:</strong> ${message || "—"}</p>
@@ -226,7 +240,11 @@ export default async function handler(req, res) {
       createdAt: new Date().toISOString(),
       startDate: m.startDate,
       endDate: m.endDate,
+      pickupTime: m.pickupTime || null,
+      returnTime: m.returnTime || null,
       nights: Number(m.nights),
+      lateReturnHours: m.lateReturnHours ? Number(m.lateReturnHours) : 0,
+      lateReturnSurcharge: m.lateReturnSurcharge ? Number(m.lateReturnSurcharge) : 0,
       extraIds: m.extraIds ? m.extraIds.split(",").filter(Boolean) : [],
       totalWithIva: Number(m.totalWithIva),
       depositAmount: Number(m.depositAmount),

@@ -53,6 +53,8 @@ export default async function handler(req, res) {
       totalWithIva: Number(m.totalWithIva) || 0,
       startDate: m.startDate || null,
       endDate: m.endDate || null,
+      pickupTime: m.pickupTime || null,
+      returnTime: m.returnTime || null,
       nights: m.nights ? Number(m.nights) : null,
       guestFirstName: m.guestFirstName || null,
       promoCode: m.promoCode || null,

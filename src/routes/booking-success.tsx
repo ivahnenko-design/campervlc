@@ -16,6 +16,8 @@ interface BookingSession {
   totalWithIva: number;
   startDate: string | null;
   endDate: string | null;
+  pickupTime: string | null;
+  returnTime: string | null;
   nights: number | null;
   guestFirstName: string | null;
   promoCode: string | null;
@@ -125,7 +127,9 @@ function BookingSuccessPage() {
 
               {data?.startDate && data?.endDate ? (
                 <p>
-                  📅 {t("success.dates")}: {data.startDate} → {data.endDate}
+                  📅 {t("success.dates")}: {data.startDate}
+                  {data.pickupTime ? ` ${data.pickupTime}` : ""} → {data.endDate}
+                  {data.returnTime ? ` ${data.returnTime}` : ""}
                 </p>
               ) : null}
 

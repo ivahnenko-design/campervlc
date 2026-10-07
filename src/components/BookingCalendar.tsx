@@ -19,21 +19,21 @@ import { ChevronLeft, ChevronRight, CreditCard, MessageCircle, Sparkles, Tag } f
 import { SectionHeader } from "./Fleet";
 import { AVAILABILITY, EXCLUSIVE_EXTRA_GROUPS, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
 import {
-  calculatePrice,
+  calculateQuote,
   getSeason,
   getMinNights,
   getPriceForDate,
-  withIva,
   BOOKING_MAX_DATE,
+  DEFAULT_PICKUP_TIME,
+  DEFAULT_RETURN_TIME,
+  PROMO_CODES,
+  TIME_OPTIONS,
+  type PrepaymentOption,
 } from "@/utils/pricing";
 import { buildWhatsAppLink, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/constants";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
-
-const PROMO_CODES: Record<string, number> = { CAMPER10: 10 };
-const PREPAYMENT_DISCOUNT_PCT = 5;
-type PrepaymentOption = "deposit" | "full";
 
 function isoDay(d: Date) {
   return format(d, "yyyy-MM-dd");
@@ -74,6 +74,8 @@ export function BookingCalendar() {
   const today = startOfDay(new Date());
   const [monthBase, setMonthBase] = useState<Date>(startOfMonth(today));
   const [range, setRange] = useState<Range>({ start: null, end: null });
+  const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
+  const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
   const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(
     () => new Set(EXTRAS.filter((e) => e.mandatory).map((e) => e.id))
   );
@@ -107,43 +109,31 @@ export function BookingCalendar() {
     setRange({ start: range.start, end: d });
   };
 
+  // Same function api/create-checkout.js runs, so the total shown here is the
+  // total the server will charge.
   const price = useMemo(() => {
-    if (range.start && range.end) return calculatePrice(range.start, range.end);
-    return null;
-  }, [range]);
+    if (!range.start || !range.end) return null;
+    return calculateQuote({
+      start: range.start,
+      end: range.end,
+      pickupTime,
+      returnTime,
+      extraIds: Array.from(selectedExtras),
+      promoCode: appliedPromoCode,
+      prepaymentOption,
+    });
+  }, [range, pickupTime, returnTime, selectedExtras, appliedPromoCode, prepaymentOption]);
 
   const minNights = range.start ? getMinNights(range.start) : null;
   const nights = price?.nights ?? 0;
   const meetsMin = !minNights || nights >= minNights;
 
-  const extrasTotal = useMemo(
-    () =>
-      EXTRAS.filter((e) => selectedExtras.has(e.id) && !e.mandatory).reduce(
-        (s, e) => s + (e.perNight ? e.price * nights : e.price),
-        0
-      ),
-    [selectedExtras, nights]
-  );
-  const mandatoryTotal = useMemo(
-    () => EXTRAS.filter((e) => e.mandatory).reduce((s, e) => s + e.price, 0),
-    []
-  );
-
-  const preDiscountTotal = (price?.total ?? 0) + extrasTotal + mandatoryTotal;
-
-  const promoDiscountPct = appliedPromoCode ? PROMO_CODES[appliedPromoCode] : 0;
-  const promoDiscountAmount = Math.round(preDiscountTotal * (promoDiscountPct / 100));
-  const afterPromoTotal = preDiscountTotal - promoDiscountAmount;
-
-  const prepaymentDiscountAmount =
-    prepaymentOption === "full" ? Math.round(afterPromoTotal * (PREPAYMENT_DISCOUNT_PCT / 100)) : 0;
-
-  const finalTotal = afterPromoTotal - prepaymentDiscountAmount;
-  const finalTotalWithIva = withIva(finalTotal);
-
-  const depositAmount =
-    prepaymentOption === "full" ? finalTotalWithIva : Math.round(finalTotalWithIva * 0.5);
-  const remainingAmount = finalTotalWithIva - depositAmount;
+  const mandatoryTotal = EXTRAS.filter((e) => e.mandatory).reduce((s, e) => s + e.price, 0);
+  const extrasTotal = price?.extrasTotal ?? 0;
+  const promoDiscountAmount = price?.promoDiscountAmount ?? 0;
+  const prepaymentDiscountAmount = price?.prepaymentDiscountAmount ?? 0;
+  const finalTotal = price?.finalTotal ?? mandatoryTotal;
+  const finalTotalWithIva = price?.finalTotalWithIva ?? 0;
 
   const handleApplyPromo = () => {
     const code = promoInput.trim().toUpperCase();
@@ -188,8 +178,8 @@ export function BookingCalendar() {
   const fmtDate = (d: Date) => d.toLocaleDateString(dateLocale, { day: "2-digit", month: "short", year: "numeric" });
 
   const waMessage = t("booking.wa_message", {
-    start: range.start ? fmtDate(range.start) : "—",
-    end: range.end ? fmtDate(range.end) : "—",
+    start: range.start ? `${fmtDate(range.start)} ${pickupTime}` : "—",
+    end: range.end ? `${fmtDate(range.end)} ${returnTime}` : "—",
     nights,
     extras: selectedExtras.size
       ? EXTRAS.filter((e) => selectedExtras.has(e.id)).map((e) => t(`extras.${e.id}`)).join(", ")
@@ -214,6 +204,8 @@ export function BookingCalendar() {
         body: JSON.stringify({
           startDate: format(range.start, "yyyy-MM-dd"),
           endDate: format(range.end, "yyyy-MM-dd"),
+          pickupTime,
+          returnTime,
           nights,
           extraIds: EXTRAS.filter((e) => selectedExtras.has(e.id)).map((e) => e.id),
           totalWithIva: finalTotalWithIva,
@@ -297,6 +289,18 @@ export function BookingCalendar() {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <DateBox label={t("booking.checkin")} value={range.start ? fmtDate(range.start) : "—"} />
               <DateBox label={t("booking.checkout")} value={range.end ? fmtDate(range.end) : "—"} />
+              <TimeSelect
+                id="pickup-time"
+                label={t("booking.pickup_time")}
+                value={pickupTime}
+                onChange={setPickupTime}
+              />
+              <TimeSelect
+                id="return-time"
+                label={t("booking.return_time")}
+                value={returnTime}
+                onChange={setReturnTime}
+              />
             </div>
             <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
               <span>{t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span></span>
@@ -421,8 +425,16 @@ export function BookingCalendar() {
                 <>
                   <Row
                     label={t("booking.price_breakdown", { price: perNightRate, count: nights })}
-                    value={`${price.subtotal} €`}
+                    value={`${price.nightsSubtotal} €`}
                   />
+                  {price.surcharge > 0 && (
+                    <Row
+                      label={t("booking.late_return_surcharge", {
+                        hours: price.excessHours.toLocaleString(dateLocale, { maximumFractionDigits: 1 }),
+                      })}
+                      value={`${price.surcharge} €`}
+                    />
+                  )}
                   <Row label={t("booking.subtotal")} value={`${price.subtotal} €`} iva={t("booking.iva")} />
                   {price.discountPct > 0 && (
                     <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
@@ -553,6 +565,36 @@ function DateBox({ label, value }: { label: string; value: string }) {
       <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
       <div className="mt-0.5 font-display text-base text-foreground">{value}</div>
     </div>
+  );
+}
+
+function TimeSelect({
+  id,
+  label,
+  value,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label htmlFor={id} className="rounded-lg border border-border/50 bg-background/40 px-3 py-2">
+      <span className="block text-[10px] uppercase tracking-widest text-muted-foreground">{label}</span>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-0.5 w-full bg-transparent font-display text-base text-foreground focus:outline-none"
+      >
+        {TIME_OPTIONS.map((time) => (
+          <option key={time} value={time} className="bg-surface text-foreground">
+            {time}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 

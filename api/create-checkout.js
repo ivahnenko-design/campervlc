@@ -1,4 +1,13 @@
 import Stripe from "stripe";
+import {
+  BOOKING_MAX_DATE,
+  DEFAULT_PICKUP_TIME,
+  DEFAULT_RETURN_TIME,
+  calculateQuote,
+  getMinNights,
+  isValidTimeOption,
+  parseIsoDate,
+} from "../shared/pricing.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -13,33 +22,77 @@ export default async function handler(req, res) {
     const {
       startDate,
       endDate,
-      nights,
+      pickupTime = DEFAULT_PICKUP_TIME,
+      returnTime = DEFAULT_RETURN_TIME,
       extraIds,
-      totalWithIva,
+      totalWithIva: clientTotalWithIva,
       guest,
       prepaymentOption,
       promoCode,
     } = req.body;
 
-    if (!totalWithIva || !startDate || !endDate || !guest?.email) {
+    if (!startDate || !endDate || !guest?.email) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    // km_200 and km_unlimited are alternatives (see EXCLUSIVE_EXTRA_GROUPS in
-    // src/data/fleet.ts). The UI enforces this, but a stale page or a crafted
-    // request could still send both — keep only the broader plan.
-    let cleanExtraIds = Array.isArray(extraIds) ? extraIds.filter(Boolean) : [];
-    if (cleanExtraIds.includes("km_200") && cleanExtraIds.includes("km_unlimited")) {
-      console.warn(
-        "create-checkout: both mileage options received; keeping km_unlimited only",
-        { startDate, endDate, totalWithIva, extraIds }
-      );
-      cleanExtraIds = cleanExtraIds.filter((id) => id !== "km_200");
+    const start = parseIsoDate(startDate);
+    const end = parseIsoDate(endDate);
+    if (!start || !end || end <= start) {
+      return res.status(400).json({ error: "Invalid dates" });
+    }
+    if (end > BOOKING_MAX_DATE) {
+      return res.status(400).json({ error: "Dates are beyond the booking window" });
+    }
+    if (!isValidTimeOption(pickupTime) || !isValidTimeOption(returnTime)) {
+      return res.status(400).json({ error: "Invalid pickup or return time" });
     }
 
-    const isFullPayment = prepaymentOption === "full";
-    const depositAmount = isFullPayment ? totalWithIva : Math.round(totalWithIva * 0.5);
-    const remainingAmount = totalWithIva - depositAmount;
+    // Every amount is recalculated here from the shared pricing rules; the
+    // client total is only compared, never charged. normalizeExtraIds (inside
+    // calculateQuote) also drops unknown ids and keeps only one mileage plan.
+    const quote = calculateQuote({
+      start,
+      end,
+      pickupTime,
+      returnTime,
+      extraIds,
+      promoCode,
+      prepaymentOption,
+    });
+
+    if (quote.nights < getMinNights(start)) {
+      return res.status(400).json({ error: "Stay is shorter than the minimum for this season" });
+    }
+
+    if (Number(clientTotalWithIva) !== quote.finalTotalWithIva) {
+      console.warn("create-checkout: client total differs from server quote, rejecting", {
+        startDate,
+        endDate,
+        pickupTime,
+        returnTime,
+        extraIds,
+        promoCode,
+        prepaymentOption,
+        clientTotalWithIva,
+        serverTotalWithIva: quote.finalTotalWithIva,
+      });
+      return res.status(400).json({
+        error: "The price has changed. Please refresh the page and check your booking again.",
+        code: "price_mismatch",
+      });
+    }
+
+    const {
+      nights,
+      cleanExtraIds,
+      finalTotalWithIva: totalWithIva,
+      depositAmount,
+      remainingAmount,
+      surcharge,
+      excessHours,
+    } = quote;
+    const isFullPayment = quote.prepaymentOption === "full";
+    const dateRange = `${startDate} ${pickupTime} → ${endDate} ${returnTime}`;
 
     const origin =
       process.env.SITE_URL ||
@@ -58,8 +111,8 @@ export default async function handler(req, res) {
                 ? "Camper Retreat VLC — Full payment"
                 : "Camper Retreat VLC — Deposit (50%)",
               description: isFullPayment
-                ? `${startDate} → ${endDate} · ${nights} nights. Paid in full, nothing due on pickup.`
-                : `${startDate} → ${endDate} · ${nights} nights. Remaining €${remainingAmount} due on pickup.`,
+                ? `${dateRange} · ${nights} nights. Paid in full, nothing due on pickup.`
+                : `${dateRange} · ${nights} nights. Remaining €${remainingAmount} due on pickup.`,
             },
             unit_amount: depositAmount * 100,
           },
@@ -71,13 +124,17 @@ export default async function handler(req, res) {
       metadata: {
         startDate,
         endDate,
+        pickupTime,
+        returnTime,
         nights: String(nights),
+        lateReturnHours: String(excessHours),
+        lateReturnSurcharge: String(surcharge),
         extraIds: cleanExtraIds.join(","),
         totalWithIva: String(totalWithIva),
         depositAmount: String(depositAmount),
         remainingAmount: String(remainingAmount),
         prepaymentOption: isFullPayment ? "full" : "deposit",
-        promoCode: promoCode || "",
+        promoCode: quote.appliedPromoCode || "",
         guestFirstName: guest.firstName,
         guestLastName: guest.lastName,
         guestEmail: guest.email,
