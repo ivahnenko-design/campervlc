@@ -123,3 +123,19 @@ test("parseIsoDate rejects malformed and rolled-over dates", () => {
   assert.equal(d.getMonth(), 9);
   assert.equal(d.getDate(), 7);
 });
+
+test("OWNERTEST: 99% off until it expires, then ignored; floor keeps the charge >= 1 EUR", async () => {
+  const { calculateQuote, promoPctAt, parseIsoDate, PROMO_EXPIRES_AT } = await import("./pricing.js");
+  const base = { start: parseIsoDate("2026-11-16"), end: parseIsoDate("2026-11-23"), prepaymentOption: "full" };
+  const before = Date.parse(PROMO_EXPIRES_AT.OWNERTEST) - 1000;
+  const after = Date.parse(PROMO_EXPIRES_AT.OWNERTEST) + 1000;
+  const plain = calculateQuote({ ...base, promoValidAtMs: before });
+  const test = calculateQuote({ ...base, promoCode: "ownertest", promoValidAtMs: before });
+  assert.equal(test.appliedPromoCode, "OWNERTEST");
+  assert.ok(test.finalTotalWithIva >= 1 && test.finalTotalWithIva < plain.finalTotalWithIva * 0.05);
+  const expired = calculateQuote({ ...base, promoCode: "OWNERTEST", promoValidAtMs: after });
+  assert.equal(expired.appliedPromoCode, null);
+  assert.equal(expired.finalTotalWithIva, plain.finalTotalWithIva);
+  assert.equal(promoPctAt("OWNERTEST", after), 0);
+  assert.equal(promoPctAt("CAMPER10", after), 10);
+});

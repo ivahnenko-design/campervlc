@@ -49,6 +49,9 @@ export interface ExtraItem {
 export const EXTRAS: readonly ExtraItem[];
 export const EXCLUSIVE_EXTRA_GROUPS: readonly (readonly ExtraId[])[];
 export const PROMO_CODES: Record<string, number>;
+export const PROMO_EXPIRES_AT: Record<string, string>;
+export const MIN_CHARGE_EUR: number;
+export function promoPctAt(code: string | null | undefined, atMs?: number): number;
 export const PREPAYMENT_DISCOUNT_PCT: number;
 export const DEPOSIT_SHARE: number;
 export function normalizeExtraIds(extraIds: unknown): ExtraId[];
@@ -85,6 +88,7 @@ export interface QuoteInput {
   extraIds?: readonly string[];
   promoCode?: string | null;
   prepaymentOption?: PrepaymentOption | string;
+  promoValidAtMs?: number;
 }
 
 export interface Quote extends PriceBreakdown {

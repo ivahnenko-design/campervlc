@@ -232,7 +232,21 @@ export const EXCLUSIVE_EXTRA_GROUPS = [
   ["km_200", "km_unlimited"],
 ];
 
-export const PROMO_CODES = { CAMPER10: 10 };
+export const PROMO_CODES = { CAMPER10: 10, OWNERTEST: 99 };
+// Codes that stop working at a fixed moment (UTC). OWNERTEST is a temporary
+// owner test code for live checks; it is never listed anywhere on the site.
+export const PROMO_EXPIRES_AT = { OWNERTEST: "2026-10-09T20:00:00Z" };
+// Stripe refuses charges under 0.50 EUR; prices here are whole euros.
+export const MIN_CHARGE_EUR = 1;
+
+/** Percent off for a promo code at a moment in time, 0 when unknown or expired. */
+export function promoPctAt(code, atMs = Date.now()) {
+  const c = typeof code === "string" ? code.trim().toUpperCase() : "";
+  if (!c || !PROMO_CODES[c]) return 0;
+  const expires = PROMO_EXPIRES_AT[c];
+  if (expires && atMs >= Date.parse(expires)) return 0;
+  return PROMO_CODES[c];
+}
 export const PREPAYMENT_DISCOUNT_PCT = 5;
 export const DEPOSIT_SHARE = 0.5;
 
@@ -309,6 +323,7 @@ export function calculateQuote({
   extraIds = [],
   promoCode = null,
   prepaymentOption = "deposit",
+  promoValidAtMs = Date.now(),
 }) {
   const price = calculatePrice(start, end, pickupTime, returnTime);
   const nights = price.nights;
@@ -324,9 +339,14 @@ export function calculateQuote({
   const preDiscountTotal = price.total + extrasTotal + mandatoryTotal;
 
   const code = typeof promoCode === "string" ? promoCode.trim().toUpperCase() : "";
-  const appliedPromoCode = code && PROMO_CODES[code] ? code : null;
-  const promoDiscountPct = appliedPromoCode ? PROMO_CODES[appliedPromoCode] : 0;
-  const promoDiscountAmount = Math.round(preDiscountTotal * (promoDiscountPct / 100));
+  const promoDiscountPct = promoPctAt(code, promoValidAtMs);
+  const appliedPromoCode = promoDiscountPct ? code : null;
+  // Never discount below the Stripe minimum charge (before IVA, so the
+  // amount with IVA is always at least MIN_CHARGE_EUR).
+  const promoDiscountAmount = Math.min(
+    Math.round(preDiscountTotal * (promoDiscountPct / 100)),
+    Math.max(0, preDiscountTotal - MIN_CHARGE_EUR),
+  );
   const afterPromoTotal = preDiscountTotal - promoDiscountAmount;
 
   const isFullPayment = prepaymentOption === "full";

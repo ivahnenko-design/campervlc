@@ -26,7 +26,7 @@ import {
   BOOKING_MAX_DATE,
   DEFAULT_PICKUP_TIME,
   DEFAULT_RETURN_TIME,
-  PROMO_CODES,
+  promoPctAt,
   TIME_OPTIONS,
   type PrepaymentOption,
 } from "@/utils/pricing";
@@ -138,7 +138,7 @@ export function BookingCalendar() {
   const handleApplyPromo = () => {
     const code = promoInput.trim().toUpperCase();
     if (!code) return;
-    if (PROMO_CODES[code]) {
+    if (promoPctAt(code)) {
       setAppliedPromoCode(code);
       setPromoStatus("valid");
     } else {
@@ -381,7 +381,7 @@ export function BookingCalendar() {
               {promoStatus === "valid" && appliedPromoCode && (
                 <p className="mt-1.5 flex items-center gap-1 text-xs text-emerald-500">
                   <Tag className="h-3 w-3" />
-                  {t("booking.promo_success", { pct: PROMO_CODES[appliedPromoCode] })}
+                  {t("booking.promo_success", { pct: promoPctAt(appliedPromoCode) })}
                 </p>
               )}
               {promoStatus === "invalid" && (

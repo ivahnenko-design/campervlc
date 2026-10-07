@@ -102,7 +102,7 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 4.2. Cancelación por el Arrendador: si por causa no imputable al Arrendatario (avería previa, siniestro, fuerza mayor) el Arrendador no pudiera entregar el vehículo, ofrecerá un vehículo de características equivalentes o superiores o, a elección del Arrendatario, devolverá la totalidad de las cantidades abonadas. La devolución íntegra agota la responsabilidad del Arrendador salvo dolo o negligencia grave.
 
-4.3. Modificación de la reserva: el Arrendatario podrá cambiar las fechas y añadir opciones en la página de gestión de la reserva de campervlc.com, con el número de reserva y el email utilizado, hasta 48 horas antes de la entrega; después, por WhatsApp. Las nuevas fechas quedan sujetas a disponibilidad, a la estancia mínima de la temporada y a las tarifas vigentes. La reducción del período se considera cancelación parcial: a las noches suprimidas se aplica la escala del apartado 4.1, según la antelación respecto de la fecha de entrega original. La retirada de opciones ya pagadas solo es posible con más de 7 días de antelación a la entrega.
+4.3. Modificación de la reserva: el Arrendatario podrá cambiar las fechas y añadir opciones en la página de gestión de la reserva de campervlc.com, con el número de reserva y el email utilizado, hasta 48 horas antes de la entrega; después, por WhatsApp. Las nuevas fechas quedan sujetas a disponibilidad, a la estancia mínima de la temporada y a las tarifas vigentes. La reducción del período se considera cancelación parcial: a las noches suprimidas se aplica la escala del apartado 4.1, según la antelación respecto de la fecha de entrega original, incluida la cancelación gratuita en 24 horas en las mismas condiciones. La retirada de opciones ya pagadas solo es posible con más de 7 días de antelación a la entrega.
 
 ### 5. Condiciones de pago y fianza
 
@@ -173,7 +173,7 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 | Elemento averiado | Compensación por día |
 |---|---|
-| Calefacción (del 1 de octubre al 30 de abril) o aire acondicionado de la célula (del 1 de mayo al 30 de septiembre) | 25 € |
+| Calefacción (del 1/10 al 30/4) o aire acondicionado de la célula (del 1/5 al 30/9) | 25 € |
 | Ducha / bomba de agua / calentador de agua | 20 € |
 | Frigorífico o cocina | 20 € |
 | WC | 25 € |
