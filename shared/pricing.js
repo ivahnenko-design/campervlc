@@ -212,7 +212,7 @@ export const EXTRAS = [
   // Optional extras
   { id: "airport_transfer",      price: 90                   },
   { id: "bicycle",               price: 90                   },
-  { id: "baby_seat",             price: 0                    },
+  { id: "sup_board",             price: 90                   },
   { id: "bedding",               price: 20                   },
   { id: "towels",                price: 15                   },
   { id: "bbq",                   price: 15                   },
@@ -220,7 +220,6 @@ export const EXTRAS = [
   { id: "extra_driver",          price: 50                   },
   { id: "km_200",                price: 20, perNight: true   },
   { id: "km_unlimited",          price: 40, perNight: true   },
-  { id: "sup_board",             price: 90                   },
   { id: "reduced_deductible",    price: 60                   },
 ];
 

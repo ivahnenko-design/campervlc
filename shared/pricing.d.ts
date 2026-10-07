@@ -28,7 +28,6 @@ export type ExtraId =
   | "cleaning_fee"
   | "airport_transfer"
   | "bicycle"
-  | "baby_seat"
   | "bedding"
   | "towels"
   | "bbq"
