@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 import { list } from "@vercel/blob";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -9,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 // browser redirect. If the blob is not there yet the page just retries.
 async function findBookingRef(sessionId) {
   try {
-    const { blobs } = await list({ prefix: `campervlc-bookings/${sessionId}.json` });
+    const { blobs } = await list({ prefix: `${BOOKINGS_PREFIX}${sessionId}.json` });
     if (!blobs.length) return null;
     const res = await fetch(blobs[0].url);
     if (!res.ok) return null;

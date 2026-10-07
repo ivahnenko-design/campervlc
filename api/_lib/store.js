@@ -2,7 +2,8 @@
 // api/_lib are helpers, not endpoints (Vercel skips "_" paths).
 import { BlobPreconditionFailedError, get, list, put } from "@vercel/blob";
 
-export const BOOKINGS_PREFIX = process.env.BOOKINGS_BLOB_PREFIX || "campervlc-bookings/";
+import { BOOKINGS_PREFIX } from "./prefix.js";
+export { BOOKINGS_PREFIX };
 
 export class StoreConflictError extends Error {
   constructor(id) {

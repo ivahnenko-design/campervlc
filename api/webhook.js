@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 import { list, put, get } from "@vercel/blob";
 import { randomInt } from "node:crypto";
 import { createBlobStore } from "./_lib/store.js";
@@ -44,7 +45,7 @@ async function getRawBody(req) {
 
 async function loadBookings() {
   try {
-    const { blobs } = await list({ prefix: "campervlc-bookings/" });
+    const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
     if (!blobs.length) return [];
     const bookings = [];
     for (const blob of blobs) {
@@ -60,7 +61,7 @@ async function loadBookings() {
 }
 
 async function saveBooking(booking) {
-  const key = `campervlc-bookings/${booking.id}.json`;
+  const key = `${BOOKINGS_PREFIX}${booking.id}.json`;
   await put(key, JSON.stringify(booking), {
     access: "public",
     contentType: "application/json",

@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 import { list, put } from "@vercel/blob";
 import { cancellationQuote } from "../shared/cancellation.js";
 import { allocateRefund, paymentsOf } from "../shared/booking-changes.js";
@@ -9,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
 async function loadBookings() {
   try {
-    const { blobs } = await list({ prefix: "campervlc-bookings/" });
+    const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
     if (!blobs.length) return [];
     const bookings = [];
     for (const blob of blobs) {
@@ -25,7 +26,7 @@ async function loadBookings() {
 }
 
 async function saveBooking(booking) {
-  const key = `campervlc-bookings/${booking.id}.json`;
+  const key = `${BOOKINGS_PREFIX}${booking.id}.json`;
   await put(key, JSON.stringify(booking), {
     access: "public",
     contentType: "application/json",

@@ -1,4 +1,5 @@
 import { list } from "@vercel/blob";
+import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 
 function toIcalDate(dateStr) {
   // dateStr is "YYYY-MM-DD"
@@ -48,7 +49,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { blobs } = await list({ prefix: "campervlc-bookings/" });
+    const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
     const allBookings = await Promise.all(
       blobs.map(async (blob) => {
         const r = await fetch(blob.url);
