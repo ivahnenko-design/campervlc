@@ -1,6 +1,7 @@
 // Booking records in Vercel Blob, one JSON file per booking. Files under
 // api/_lib are helpers, not endpoints (Vercel skips "_" paths).
-import { BlobPreconditionFailedError, get, list, put } from "@vercel/blob";
+import { BlobPreconditionFailedError } from "@vercel/blob";
+import { blobStore, list } from "./blob.js";
 
 import { BOOKINGS_PREFIX } from "./prefix.js";
 export { BOOKINGS_PREFIX };
@@ -15,10 +16,8 @@ export class StoreConflictError extends Error {
 async function readJson(pathname) {
   // useCache:false reads from origin: a CDN copy may still hold the version
   // from before the last save, and every change is priced from this read.
-  const res = await get(pathname, { access: "public", useCache: false });
-  if (!res || res.statusCode !== 200) return null;
-  const text = await new Response(res.stream).text();
-  return { booking: JSON.parse(text), etag: res.blob.etag };
+  const read = await blobStore.readJson(pathname);
+  return read ? { booking: read.data, etag: read.etag } : null;
 }
 
 export function createBlobStore({ prefix = BOOKINGS_PREFIX } = {}) {
@@ -48,12 +47,7 @@ export function createBlobStore({ prefix = BOOKINGS_PREFIX } = {}) {
      */
     async saveBooking(booking, { etag } = {}) {
       try {
-        await put(pathFor(booking.id), JSON.stringify(booking), {
-          access: "public",
-          contentType: "application/json",
-          addRandomSuffix: false,
-          ...(etag ? { ifMatch: etag } : { allowOverwrite: true }),
-        });
+        await blobStore.put(pathFor(booking.id), booking, etag ? { ifMatch: etag } : {});
       } catch (err) {
         if (err instanceof BlobPreconditionFailedError) throw new StoreConflictError(booking.id);
         throw err;

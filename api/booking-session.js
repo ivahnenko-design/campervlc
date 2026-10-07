@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
-import { list } from "@vercel/blob";
+import { blobStore, list } from "./_lib/blob.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -12,10 +12,8 @@ async function findBookingRef(sessionId) {
   try {
     const { blobs } = await list({ prefix: `${BOOKINGS_PREFIX}${sessionId}.json` });
     if (!blobs.length) return null;
-    const res = await fetch(blobs[0].url);
-    if (!res.ok) return null;
-    const booking = await res.json();
-    return booking.bookingRef || null;
+    const read = await blobStore.readJson(blobs[0].pathname);
+    return read?.data.bookingRef || null;
   } catch (err) {
     console.error("booking-session: blob lookup failed for", sessionId, "-", err.message);
     return null;

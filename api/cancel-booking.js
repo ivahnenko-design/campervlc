@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
-import { list, put } from "@vercel/blob";
+import { blobStore, list } from "./_lib/blob.js";
 import { cancellationQuote } from "../shared/cancellation.js";
 import { allocateRefund, paymentsOf } from "../shared/booking-changes.js";
 
@@ -14,9 +14,8 @@ async function loadBookings() {
     if (!blobs.length) return [];
     const bookings = [];
     for (const blob of blobs) {
-      const res = await fetch(blob.url);
-      const booking = await res.json();
-      bookings.push(booking);
+      const read = await blobStore.readJson(blob.pathname);
+      if (read) bookings.push(read.data);
     }
     return bookings;
   } catch (err) {
@@ -27,11 +26,7 @@ async function loadBookings() {
 
 async function saveBooking(booking) {
   const key = `${BOOKINGS_PREFIX}${booking.id}.json`;
-  await put(key, JSON.stringify(booking), {
-    access: "public",
-    contentType: "application/json",
-    addRandomSuffix: false,
-  });
+  await blobStore.put(key, booking);
 }
 
 // Resend answers 4xx/5xx with a JSON error body, and fetch does NOT reject on

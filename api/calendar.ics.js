@@ -1,4 +1,4 @@
-import { list } from "@vercel/blob";
+import { blobStore, list } from "./_lib/blob.js";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 
 function toIcalDate(dateStr) {
@@ -50,12 +50,9 @@ export default async function handler(req, res) {
 
   try {
     const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
-    const allBookings = await Promise.all(
-      blobs.map(async (blob) => {
-        const r = await fetch(blob.url);
-        return r.json();
-      })
-    );
+    const allBookings = (
+      await Promise.all(blobs.map(async (blob) => (await blobStore.readJson(blob.pathname))?.data))
+    ).filter(Boolean);
     const bookings = allBookings.filter((b) => b.status !== "cancelled");
 
     const ical = generateIcal(bookings);

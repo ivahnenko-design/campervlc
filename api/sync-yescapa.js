@@ -1,4 +1,4 @@
-import { put } from "@vercel/blob";
+import { blobStore } from "./_lib/blob.js";
 
 function parseIcsDate(str) {
   // Handles VALUE=DATE (YYYYMMDD) and datetime (YYYYMMDDTHHmmssZ)
@@ -68,11 +68,7 @@ export default async function handler(req, res) {
 
   try {
     const dates = await fetchYescapaDates();
-    await put(
-      "campervlc-yescapa-cache.json",
-      JSON.stringify({ dates, updatedAt: new Date().toISOString() }),
-      { access: "public", contentType: "application/json", addRandomSuffix: false }
-    );
+    await blobStore.put("campervlc-yescapa-cache.json", { dates, updatedAt: new Date().toISOString() });
 
     console.log(`Yescapa sync: ${dates.length} dates cached`);
     return res.status(200).json({ synced: dates.length });
