@@ -1,4 +1,6 @@
 import Stripe from "stripe";
+import { createBlobStore } from "./_lib/store.js";
+import { occupiedDays } from "../shared/booking-changes.js";
 import {
   BOOKING_MAX_DATE,
   DEFAULT_PICKUP_TIME,
@@ -56,6 +58,22 @@ export default async function handler(req, res) {
     }
     if (end > BOOKING_MAX_DATE) {
       return res.status(400).json({ error: "Dates are beyond the booking window" });
+    }
+
+    // Two guests must not pay for the same days: refuse dates already taken by a
+    // booking made on this site. If the store can not be read the check is
+    // skipped rather than blocking every payment.
+    try {
+      const taken = new Set();
+      for (const b of await createBlobStore().listBookings()) {
+        if (b.status === "cancelled") continue;
+        for (const day of occupiedDays(b.startDate, b.endDate)) taken.add(day);
+      }
+      if (occupiedDays(startDate, endDate).some((day) => taken.has(day))) {
+        return res.status(409).json({ error: "These dates are no longer available.", code: "dates_unavailable" });
+      }
+    } catch (err) {
+      console.error("create-checkout: availability check skipped -", err.message);
     }
     if (!isValidTimeOption(pickupTime) || !isValidTimeOption(returnTime)) {
       return res.status(400).json({ error: "Invalid pickup or return time" });

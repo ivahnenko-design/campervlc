@@ -55,11 +55,25 @@ function useBookedSet(camperId: string) {
   });
 
 
+  // Bookings made on this site; Yescapa only learns about them later, if at all.
+  const { data: own } = useQuery({
+    queryKey: ["own-bookings"],
+    queryFn: async (): Promise<{ dates: string[] }> => {
+      const res = await fetch("/api/availability");
+      if (!res.ok) return { dates: [] };
+      return res.json();
+    },
+    staleTime: 60_000,
+    refetchInterval: 60_000,
+    refetchOnWindowFocus: true,
+  });
+
   return useMemo(() => {
     const set = new Set<string>(local);
     for (const d of data?.dates ?? []) set.add(d);
+    for (const d of own?.dates ?? []) set.add(d);
     return set;
-  }, [local, data]);
+  }, [local, data, own]);
 }
 
 

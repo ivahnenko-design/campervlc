@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { calculateQuote, parseIsoDate } from "../../shared/pricing.js";
 import { createMemoryStore } from "./store.js";
 import { createManageHandlers, completeChangePayment } from "./manage.js";
+import { StoreConflictError } from "./store.js";
 import { issueToken } from "./token.js";
 
 const SECRET = "test-secret";
@@ -200,4 +201,24 @@ test("inside 48 h only WhatsApp is offered", async () => {
   const r = await change(h, "cs_test_1", { action: "preview", change: { endDate: "2026-10-15" } });
   assert.equal(r.json.errors[0].code, "cutoff_passed");
   assert.equal(r.json.errors[0].whatsapp, "+34 624 038 085");
+});
+
+test("a paid change is still applied when the store keeps reporting write conflicts", async () => {
+  clock = NOW; const { h, stripe, store, emails } = setup([makeBooking({ endDate: "2026-11-20" })]);
+  const req = { endDate: "2026-11-23" };
+  const plan = (await change(h, "cs_test_1", { action: "preview", change: req })).json.plan;
+  await change(h, "cs_test_1", { action: "apply", changeId: "chg_abcdefgh5", change: req, expectedNewTotal: plan.newTotal, confirm: true });
+  const session = { id: "cs_change_1", payment_intent: "pi_change", amount_total: plan.settlement.amount * 100, metadata: stripe.calls.sessions[0].metadata };
+
+  const realSave = store.saveBooking.bind(store);
+  let guarded = 0;
+  const flaky = { ...store, getBooking: store.getBooking.bind(store), saveBooking: async (b, opts = {}) => {
+    if (opts.etag) { guarded += 1; throw new StoreConflictError(b.id); }
+    return realSave(b, opts);
+  } };
+  const deps = { store: flaky, stripe, sendEmails: async (b, c) => emails.push({ b, c }), now: () => clock };
+  assert.equal((await completeChangePayment(session, deps)).status, "applied");
+  assert.equal(guarded, 2, "two guarded attempts, then the unguarded write");
+  assert.equal((await store.getBooking("cs_test_1")).booking.endDate, "2026-11-23");
+  assert.equal(emails.length, 1);
 });

@@ -392,43 +392,59 @@ export async function completeChangePayment(session, { store, stripe, sendEmails
   const paid = Math.round(session.amount_total) / 100;
   const paymentIntentId = session.payment_intent;
 
-  const record = await store.getBooking(bookingId);
-  if (!record) {
-    console.error("change payment for unknown booking", bookingId, changeId, session.id);
-    return { status: "unknown_booking" };
-  }
-  const { booking, etag } = record;
-
-  if ((booking.changes || []).some((c) => c.id === changeId)) {
-    console.log("change payment webhook repeated, already applied", booking.bookingRef, changeId);
-    return { status: "duplicate" };
-  }
-
-  const pending = booking.pendingChange;
-  if (!pending || pending.changeId !== changeId || pending.checkoutSessionId !== session.id) {
-    const idempotencyKey = `booking-change-${changeId}-orphan-refund`;
-    try {
-      const refund = await stripe.refunds.create(
-        { payment_intent: paymentIntentId, metadata: { bookingRef: booking.bookingRef, changeId, reason: "superseded_change" } },
-        { idempotencyKey },
-      );
-      logStripe("orphan change payment refunded", { bookingRef: booking.bookingRef, changeId, refundId: refund.id, paymentIntentId, amount: paid });
-    } catch (err) {
-      logStripe("orphan change refund FAILED", { bookingRef: booking.bookingRef, changeId, paymentIntentId, error: err.message });
+  // The guest has already paid, so this must end with the change applied. Read,
+  // check and save in a loop: a conflicting save (someone wrote in between) makes
+  // the next round start from the fresh record; after a few rounds the write is
+  // made without the ETag guard, which is safe because the changeId check below
+  // makes applying idempotent.
+  let updated;
+  for (let round = 0; ; round += 1) {
+    const record = await store.getBooking(bookingId);
+    if (!record) {
+      console.error("change payment for unknown booking", bookingId, changeId, session.id);
+      return { status: "unknown_booking" };
     }
-    await sendOwnerAlert?.(
-      `Payment for a superseded booking change (${booking.bookingRef}, change ${changeId}, €${paid}, ${paymentIntentId}) was refunded automatically. Check Stripe if the refund failed.`,
-    );
-    return { status: "orphan_refunded" };
-  }
+    const { booking, etag } = record;
 
-  const nowIso = new Date(now()).toISOString();
-  const updated = applyPlanToBooking(booking, pending.plan, {
-    changeId,
-    nowIso,
-    payment: { paymentIntentId, amount: paid },
-  });
-  await store.saveBooking(updated, { etag });
+    if ((booking.changes || []).some((c) => c.id === changeId)) {
+      console.log("change payment webhook repeated, already applied", booking.bookingRef, changeId);
+      return { status: "duplicate" };
+    }
+
+    const pending = booking.pendingChange;
+    if (!pending || pending.changeId !== changeId || pending.checkoutSessionId !== session.id) {
+      const idempotencyKey = `booking-change-${changeId}-orphan-refund`;
+      try {
+        const refund = await stripe.refunds.create(
+          { payment_intent: paymentIntentId, metadata: { bookingRef: booking.bookingRef, changeId, reason: "superseded_change" } },
+          { idempotencyKey },
+        );
+        logStripe("orphan change payment refunded", { bookingRef: booking.bookingRef, changeId, refundId: refund.id, paymentIntentId, amount: paid });
+      } catch (err) {
+        logStripe("orphan change refund FAILED", { bookingRef: booking.bookingRef, changeId, paymentIntentId, error: err.message });
+      }
+      await sendOwnerAlert?.(
+        `Payment for a superseded booking change (${booking.bookingRef}, change ${changeId}, €${paid}, ${paymentIntentId}) was refunded automatically. Check Stripe if the refund failed.`,
+      );
+      return { status: "orphan_refunded" };
+    }
+
+    const nowIso = new Date(now()).toISOString();
+    updated = applyPlanToBooking(booking, pending.plan, {
+      changeId,
+      nowIso,
+      payment: { paymentIntentId, amount: paid },
+    });
+    try {
+      await store.saveBooking(updated, round < 2 ? { etag } : {});
+      if (round >= 2) console.warn("change payment saved without ETag guard after conflicts", booking.bookingRef, changeId);
+      break;
+    } catch (err) {
+      if (!(err instanceof StoreConflictError) || round >= 2) throw err;
+      console.warn("change payment: conflicting save, re-reading", booking.bookingRef, changeId, "round", round, "etag", etag);
+    }
+  }
+  const booking = updated;
   logStripe("change payment applied", { bookingRef: booking.bookingRef, changeId, sessionId: session.id, paymentIntentId, amount: paid });
   await sendEmails(updated, updated.changes.at(-1));
   return { status: "applied", booking: updated };
