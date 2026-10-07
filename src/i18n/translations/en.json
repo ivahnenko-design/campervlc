@@ -137,6 +137,7 @@
     "km_included": "100 km/night included in the price",
     "pickRange": "Select a date range",
     "minNights": "Minimum stay this season: {{n}} nights",
+    "min_notice": "Bookings need at least {{hours}} hours notice before pickup.",
     "season_low": "Low season",
     "season_mid": "Mid season",
     "season_high": "High season",

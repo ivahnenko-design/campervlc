@@ -310,3 +310,13 @@ test("24 h free window ends after 24 h or inside 7 days of pickup", () => {
   assert.equal(c.plan.freeWindow, false);
   assert.equal(c.plan.retentionPct, 100);
 });
+
+test("new bookings need 24 h notice before pickup (Madrid time)", async () => {
+  const { startTooSoon, MIN_NOTICE_HOURS } = await import("./notice.js");
+  assert.equal(MIN_NOTICE_HOURS, 24);
+  // NOW = 2026-10-07 12:00 Madrid
+  assert.equal(startTooSoon("2026-10-08", "10:00", NOW), true, "22 h away");
+  assert.equal(startTooSoon("2026-10-08", "12:00", NOW), false, "exactly 24 h");
+  assert.equal(startTooSoon("2026-10-09", "09:00", NOW), false);
+  assert.equal(startTooSoon("2026-10-07", "18:00", NOW), true);
+});

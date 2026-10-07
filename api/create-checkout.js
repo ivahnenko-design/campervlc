@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { createBlobStore } from "./_lib/store.js";
 import { occupiedDays } from "../shared/booking-changes.js";
+import { MIN_NOTICE_HOURS, startTooSoon } from "../shared/notice.js";
 import {
   BOOKING_MAX_DATE,
   DEFAULT_PICKUP_TIME,
@@ -77,6 +78,12 @@ export default async function handler(req, res) {
     }
     if (!isValidTimeOption(pickupTime) || !isValidTimeOption(returnTime)) {
       return res.status(400).json({ error: "Invalid pickup or return time" });
+    }
+    if (startTooSoon(startDate, pickupTime, Date.now())) {
+      return res.status(400).json({
+        error: `Bookings need at least ${MIN_NOTICE_HOURS} hours notice before pickup.`,
+        code: "too_soon",
+      });
     }
 
     // Every amount is recalculated here from the shared pricing rules; the

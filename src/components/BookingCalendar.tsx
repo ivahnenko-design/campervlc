@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,6 +30,7 @@ import {
   TIME_OPTIONS,
   type PrepaymentOption,
 } from "@/utils/pricing";
+import { MIN_NOTICE_HOURS, startTooSoon } from "@/utils/notice";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
@@ -99,14 +100,26 @@ export function BookingCalendar() {
 
   const months = [monthBase, addMonths(monthBase, 1)];
 
+  // A start day is only selectable when the pickup is at least MIN_NOTICE_HOURS
+  // away at the chosen pickup time.
+  const tooSoon = (d: Date) => startTooSoon(isoDay(d), pickupTime);
+
+  // Changing the pickup time can push an already chosen start under the limit.
+  const startNowTooSoon = !!range.start && tooSoon(range.start);
+  useEffect(() => {
+    if (startNowTooSoon) setRange({ start: null, end: null });
+  }, [startNowTooSoon]);
+
   const handleClick = (d: Date) => {
     if (isBefore(d, today)) return;
     if (booked.has(isoDay(d))) return;
     if (!range.start || (range.start && range.end)) {
+      if (tooSoon(d)) return;
       setRange({ start: d, end: null });
       return;
     }
     if (isBefore(d, range.start)) {
+      if (tooSoon(d)) return;
       setRange({ start: d, end: null });
       return;
     }
@@ -294,6 +307,8 @@ export function BookingCalendar() {
                     booked={booked}
                     range={range}
                     onPick={handleClick}
+                    tooSoon={tooSoon}
+                    pickingStart={!range.start || !!range.end}
                     locale={dateLocale}
                   />
                 </div>
@@ -313,6 +328,7 @@ export function BookingCalendar() {
                 onChange={setReturnTime}
               />
             </div>
+            <p className="mt-2 text-xs text-muted-foreground">{t("booking.min_notice", { hours: MIN_NOTICE_HOURS })}</p>
           </div>
 
 
@@ -687,7 +703,7 @@ function Row({ label, value, accent, iva }: { label: string; value: string; acce
 }
 
 function MonthGrid({
-  month, today, booked, range, onPick, locale,
+  month, today, booked, range, onPick, locale, tooSoon, pickingStart,
 }: {
   month: Date;
   today: Date;
@@ -695,6 +711,8 @@ function MonthGrid({
   range: Range;
   onPick: (d: Date) => void;
   locale: string;
+  tooSoon: (d: Date) => boolean;
+  pickingStart: boolean;
 }) {
   const start = startOfMonth(month);
   const end = endOfMonth(month);
@@ -727,7 +745,8 @@ function MonthGrid({
           const isStart = range.start && isSameDay(d, range.start);
           const isEnd = range.end && isSameDay(d, range.end);
           const within = inRange(d);
-          const disabled = past || beyondMax || isBooked;
+          const soon = !past && (pickingStart || (!!range.start && isBefore(d, range.start))) && tooSoon(d);
+          const disabled = past || soon || beyondMax || isBooked;
 
           let cls = "aspect-square w-full rounded-md text-sm font-mono-num transition-colors ";
           if (disabled) {

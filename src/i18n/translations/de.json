@@ -137,6 +137,7 @@
     "km_included": "100 km/Nacht im Preis inbegriffen",
     "pickRange": "Datumsbereich auswählen",
     "minNights": "Mindestaufenthalt in dieser Saison: {{n}} Nächte",
+    "min_notice": "Buchungen sind bis mindestens {{hours}} Stunden vor der Abholung möglich.",
     "season_low": "Nebensaison",
     "season_mid": "Zwischensaison",
     "season_high": "Hauptsaison",

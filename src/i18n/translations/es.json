@@ -137,6 +137,7 @@
     "km_included": "100 km/noche incluidos en el precio",
     "pickRange": "Selecciona un rango de fechas",
     "minNights": "Estancia mínima en esta temporada: {{n}} noches",
+    "min_notice": "Reservas con al menos {{hours}} horas de antelación a la recogida.",
     "season_low": "Temporada baja",
     "season_mid": "Temporada media",
     "season_high": "Temporada alta",

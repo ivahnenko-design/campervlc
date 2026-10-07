@@ -137,6 +137,7 @@
     "km_included": "100 km/nacht inbegrepen in de prijs",
     "pickRange": "Selecteer een datumbereik",
     "minNights": "Minimumverblijf dit seizoen: {{n}} nachten",
+    "min_notice": "Boeken kan tot uiterlijk {{hours}} uur vóór ophalen.",
     "season_low": "Laagseizoen",
     "season_mid": "Tussenseizoen",
     "season_high": "Hoogseizoen",
