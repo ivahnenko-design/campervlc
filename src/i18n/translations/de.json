@@ -6,7 +6,7 @@
     "reviews": "Bewertungen",
     "faq": "FAQ",
     "contact": "Kontakt",
-    "cta": "Auf WhatsApp buchen"
+    "cta": "Jetzt buchen"
   },
   "hero": {
     "line1": "Dein Zuhause auf Rädern.",
@@ -28,7 +28,7 @@
   },
   "fleet": {
     "title": "Unsere Flotte",
-    "subtitle": "Ein Wohnmobil, im Detail gepflegt, bereit für dein nächstes Abenteuer.",
+    "subtitle": "Ein Wohnmobil, im Detail gepflegt, bereit für deine nächste Reise.",
     "available": "Verfügbar",
     "capacity": "Bis zu {{n}} Personen",
     "from": "ab",
@@ -125,8 +125,9 @@
     "step3_desc": "Hol den Camper in Valencia mit vollständiger Einweisung ab und los geht's"
   },
   "booking": {
-    "title": "Buche dein Abenteuer",
-    "subtitle": "Wähle deine Daten und konfiguriere die Reise. Bestätigung per WhatsApp in Minuten.",
+    "title": "Buche deine Reise",
+    "subtitle": "Wähle deine Daten, füge Optionen hinzu und zahle online. Die Bestätigung kommt per E-Mail.",
+    "eyebrow": "01 · Buchung",
     "checkin": "Abholung",
     "checkout": "Rückgabe",
     "pickup_time": "Abholzeit",

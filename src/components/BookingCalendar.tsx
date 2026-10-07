@@ -224,12 +224,12 @@ export function BookingCalendar() {
   };
 
   return (
-    <section id="booking" className="relative py-24 sm:py-32 border-t border-border/40">
+    <section id="booking" className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title={t("booking.title")}
           subtitle={t("booking.subtitle")}
-          eyebrow="01 · Reserva"
+          eyebrow={t("booking.eyebrow")}
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.3fr_1fr]">

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { buildWhatsAppLink } from "@/lib/constants";
 
 function CamperIcon({ className }: { className?: string }) {
   return (
@@ -32,7 +31,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const waLink = buildWhatsAppLink("Hola, me interesa alquilar la camper en Valencia.");
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  // On the home page, scroll to the calendar in place. From any other page the
+  // href navigates to "/#booking" and the browser lands on the same anchor.
+  const goToBooking = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setMobileOpen(false);
+    if (pathname !== "/") return;
+    const target = document.getElementById("booking");
+    if (!target) return;
+    e.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  };
 
   return (
     <header
@@ -68,9 +79,8 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/#booking"
+              onClick={goToBooking}
               className="hidden sm:inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 transition"
             >
               {t("nav.cta")}
@@ -98,9 +108,8 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/#booking"
+              onClick={goToBooking}
               className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
             >
               {t("nav.cta")}

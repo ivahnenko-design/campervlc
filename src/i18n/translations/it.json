@@ -6,7 +6,7 @@
     "reviews": "Recensioni",
     "faq": "FAQ",
     "contact": "Contatti",
-    "cta": "Prenota su WhatsApp"
+    "cta": "Prenota"
   },
   "hero": {
     "line1": "La tua casa su ruote.",
@@ -28,7 +28,7 @@
   },
   "fleet": {
     "title": "La nostra flotta",
-    "subtitle": "Un camper curato nei minimi dettagli, pronto per la tua prossima avventura.",
+    "subtitle": "Un camper curato nei minimi dettagli, pronto per il tuo prossimo viaggio.",
     "available": "Disponibile",
     "capacity": "Fino a {{n}} persone",
     "from": "da",
@@ -125,8 +125,9 @@
     "step3_desc": "Ritira il camper a Valencia con consegna completa e parti"
   },
   "booking": {
-    "title": "Prenota la tua avventura",
-    "subtitle": "Scegli le date e personalizza il viaggio. Conferma su WhatsApp in pochi minuti.",
+    "title": "Prenota il tuo viaggio",
+    "subtitle": "Scegli le date, aggiungi le opzioni e paga online: la conferma arriva via email.",
+    "eyebrow": "01 · Prenotazione",
     "checkin": "Ritiro",
     "checkout": "Riconsegna",
     "pickup_time": "Orario di ritiro",

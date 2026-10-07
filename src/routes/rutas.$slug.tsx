@@ -216,10 +216,10 @@ function RoutePageComponent() {
         {/* CTA */}
         <div className="mt-20 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/5 via-surface to-coral/5 p-8 sm:p-12 text-center">
           <h2 className="font-display text-2xl sm:text-3xl text-foreground mb-3">
-            {lang === "ru" ? "Готовы к путешествию?" : lang === "uk" ? "Готові до подорожі?" : lang === "de" ? "Bereit für das Abenteuer?" : lang === "it" ? "Pronti per l'avventura?" : lang === "nl" ? "Klaar voor het avontuur?" : lang === "en" ? "Ready for the adventure?" : "¿Listo para la aventura?"}
+            {lang === "ru" ? "Готовы к путешествию?" : lang === "uk" ? "Готові до подорожі?" : lang === "de" ? "Bereit für die Reise?" : lang === "it" ? "Pronti per il viaggio?" : lang === "nl" ? "Klaar voor de reis?" : lang === "en" ? "Ready for your trip?" : "¿Listo para el viaje?"}
           </h2>
           <p className="text-muted-foreground mb-4 max-w-lg mx-auto">
-            {lang === "ru" ? "Забронируйте свои даты в Валенсии и начните приключение." : lang === "uk" ? "Забронюйте свої дати у Валенсії та починайте пригоду." : lang === "de" ? "Buche dein Wohnmobil in Valencia und starte dein Abenteuer." : lang === "it" ? "Prenota il tuo camper a Valencia e inizia l'avventura." : lang === "nl" ? "Boek je camper in Valencia en begin het avontuur." : lang === "en" ? "Book your campervan in Valencia and start the adventure." : "Alquiler autocaravana Valencia — reserva tu autocaravana y empieza la aventura."}
+            {lang === "ru" ? "Забронируйте свои даты в Валенсии и отправляйтесь в путь." : lang === "uk" ? "Забронюйте свої дати у Валенсії та вирушайте в дорогу." : lang === "de" ? "Buche dein Wohnmobil in Valencia und mach dich auf den Weg." : lang === "it" ? "Prenota il tuo camper a Valencia e mettiti in viaggio." : lang === "nl" ? "Boek je camper in Valencia en ga op pad." : lang === "en" ? "Book your campervan in Valencia and hit the road." : "Alquiler autocaravana Valencia — reserva tu autocaravana y ponte en ruta."}
           </p>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
             {t(route.ctaText)}

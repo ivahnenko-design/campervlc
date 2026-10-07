@@ -6,7 +6,7 @@
     "reviews": "Reviews",
     "faq": "FAQ",
     "contact": "Contact",
-    "cta": "Boek via WhatsApp"
+    "cta": "Boek nu"
   },
   "hero": {
     "line1": "Jouw huis op wielen.",
@@ -28,7 +28,7 @@
   },
   "fleet": {
     "title": "Onze vloot",
-    "subtitle": "Eén camper, tot in detail verzorgd, klaar voor je volgende avontuur.",
+    "subtitle": "Eén camper, tot in detail verzorgd, klaar voor je volgende reis.",
     "available": "Beschikbaar",
     "capacity": "Tot {{n}} personen",
     "from": "vanaf",
@@ -125,8 +125,9 @@
     "step3_desc": "Haal de camper op in Valencia met volledige uitleg en vertrek"
   },
   "booking": {
-    "title": "Boek je avontuur",
-    "subtitle": "Kies je data en stel je trip samen. Bevestiging via WhatsApp in minuten.",
+    "title": "Boek je reis",
+    "subtitle": "Kies je data, voeg opties toe en betaal online. De bevestiging komt per e-mail.",
+    "eyebrow": "01 · Boeking",
     "checkin": "Ophalen",
     "checkout": "Inleveren",
     "pickup_time": "Ophaaltijd",

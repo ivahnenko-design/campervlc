@@ -6,7 +6,7 @@
     "reviews": "Reseñas",
     "faq": "FAQ",
     "contact": "Contacto",
-    "cta": "Reservar por WhatsApp"
+    "cta": "Reservar"
   },
   "hero": {
     "line1": "Tu hogar sobre ruedas.",
@@ -28,7 +28,7 @@
   },
   "fleet": {
     "title": "Nuestra Flota",
-    "subtitle": "Una autocaravana cuidada al detalle, lista para tu próxima aventura.",
+    "subtitle": "Una autocaravana cuidada al detalle, lista para tu próximo viaje.",
     "available": "Disponible",
     "capacity": "Hasta {{n}} personas",
     "from": "desde",
@@ -122,11 +122,12 @@
     "step2_title": "Configura tu viaje",
     "step2_desc": "Añade extras: ropa de cama, bicicleta, traslado al aeropuerto…",
     "step3_title": "¡A rodar!",
-    "step3_desc": "Recoge la camper en Valencia con explicación completa y empieza tu aventura"
+    "step3_desc": "Recoge la camper en Valencia con explicación completa y empieza tu viaje"
   },
   "booking": {
-    "title": "Reserva tu Aventura",
-    "subtitle": "Selecciona tus fechas y personaliza tu viaje. Te confirmamos por WhatsApp en minutos.",
+    "title": "Reserva tu viaje",
+    "subtitle": "Elige las fechas, añade opciones y paga online; recibirás la confirmación por email.",
+    "eyebrow": "01 · Reserva",
     "checkin": "Salida",
     "checkout": "Llegada",
     "pickup_time": "Hora de recogida",

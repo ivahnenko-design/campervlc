@@ -6,7 +6,7 @@
     "reviews": "Reviews",
     "faq": "FAQ",
     "contact": "Contact",
-    "cta": "Book on WhatsApp"
+    "cta": "Book now"
   },
   "hero": {
     "line1": "Your home on wheels.",
@@ -28,7 +28,7 @@
   },
   "fleet": {
     "title": "Our Fleet",
-    "subtitle": "One motorhome cared for in every detail, ready for your next adventure.",
+    "subtitle": "One motorhome cared for in every detail, ready for your next trip.",
     "available": "Available",
     "capacity": "Up to {{n}} people",
     "from": "from",
@@ -122,11 +122,12 @@
     "step2_title": "Customize your trip",
     "step2_desc": "Add extras: bedding, bicycle, airport transfer…",
     "step3_title": "Hit the road!",
-    "step3_desc": "Pick up the camper in Valencia with a full walk-through and start your adventure"
+    "step3_desc": "Pick up the camper in Valencia with a full walk-through and start your trip"
   },
   "booking": {
-    "title": "Book your Adventure",
-    "subtitle": "Pick your dates and customize your trip. We confirm via WhatsApp in minutes.",
+    "title": "Book your trip",
+    "subtitle": "Pick your dates, add options and pay online. Confirmation arrives by email.",
+    "eyebrow": "01 · Booking",
     "checkin": "Check-in",
     "checkout": "Check-out",
     "pickup_time": "Pickup time",
