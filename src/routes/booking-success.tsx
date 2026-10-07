@@ -25,7 +25,7 @@ interface BookingSession {
 
 // The webhook that mints the booking reference races this redirect, so give it
 // a few seconds before falling back to "it will be in your email".
-const REF_RETRIES = 4;
+const REF_RETRIES = 20;
 const REF_RETRY_MS = 1500;
 
 function useBookingSession() {
@@ -124,6 +124,12 @@ function BookingSuccessPage() {
                 </strong>
                 {data ? <> — {money(data.amountPaid)}</> : null}
               </p>
+
+              {data?.bookingRef ? (
+                <p>
+                  🔖 {t("success.ref")}: <strong className="font-mono-num">{data.bookingRef}</strong>
+                </p>
+              ) : null}
 
               {data?.startDate && data?.endDate ? (
                 <p>
