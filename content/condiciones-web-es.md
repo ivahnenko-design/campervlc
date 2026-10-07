@@ -173,7 +173,7 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 | Elemento averiado | Compensación por día |
 |---|---|
-| Calefacción (del 1/10 al 30/4) o aire acondicionado de la célula (del 1/5 al 30/9) | 25 € |
+| Calefacción (del 1 de octubre al 30 de abril) o aire acondicionado de la célula (del 1 de mayo al 30 de septiembre) | 25 € |
 | Ducha / bomba de agua / calentador de agua | 20 € |
 | Frigorífico o cocina | 20 € |
 | WC | 25 € |
