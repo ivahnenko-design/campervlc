@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { guidesUi } from "@/data/guides";
+import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
 
 function CamperIcon({ className }: { className?: string }) {
   return (
@@ -21,7 +23,8 @@ function CamperIcon({ className }: { className?: string }) {
 const SECTIONS = ["fleet", "booking", "routes", "reviews", "faq", "contact"] as const;
 
 export function Navbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const guidesLabel = guidesUi(normalizeLanguage(i18n.language) ?? DEFAULT_LANGUAGE).label;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,8 +53,8 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/75 backdrop-blur-xl border-b border-border/60"
+        scrolled || mobileOpen
+          ? "bg-background/95 backdrop-blur-xl border-b border-border/60"
           : "bg-transparent"
       }`}
     >
@@ -76,6 +79,9 @@ export function Navbar() {
                 {t(`nav.${s}`)}
               </a>
             ))}
+            <Link to="/guias" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {guidesLabel}
+            </Link>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -98,7 +104,7 @@ export function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden pb-4 flex flex-col gap-1">
+          <div className="lg:hidden pb-4 flex flex-col gap-1 max-h-[calc(100dvh-4rem)] overflow-y-auto">
             {SECTIONS.map((s) => (
               <a
                 key={s}
@@ -109,6 +115,13 @@ export function Navbar() {
                 {t(`nav.${s}`)}
               </a>
             ))}
+            <Link
+              to="/guias"
+              onClick={() => setMobileOpen(false)}
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface/70"
+            >
+              {guidesLabel}
+            </Link>
             <a
               href="/#booking"
               onClick={goToBooking}
