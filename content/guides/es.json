@@ -49,7 +49,7 @@
             "Temporada baja: 90 € por noche, mínimo 3 noches.",
             "Temporada media: 125 € por noche, mínimo 3 noches.",
             "Temporada alta: 155 € por noche, mínimo 4 noches.",
-            "Temporada superalta (Navidad y agosto): 175 € por noche, mínimo 5 noches."
+            "Temporada superalta (Navidad y agosto): 180 € por noche, mínimo 5 noches."
           ]
         },
         {
@@ -202,7 +202,7 @@
           ]
         },
         {
-          "h2": "Temporada superalta (175 € por noche, mínimo 5 noches)",
+          "h2": "Temporada superalta (180 € por noche, mínimo 5 noches)",
           "paragraphs": [
             "Son las fechas de máxima demanda:"
           ],
