@@ -1,3 +1,4 @@
+import { track } from "@/lib/analytics";
 import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
@@ -36,6 +37,7 @@ export function Footer() {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
+                onClick={() => track("contact_whatsapp", { place: "footer" })}
                 href={buildWhatsAppLink("Hola, me interesa alquilar la camper en Valencia.")}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -1,3 +1,4 @@
+import { track } from "@/lib/analytics";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,6 +29,23 @@ interface BookingSession {
 const REF_RETRIES = 20;
 const REF_RETRY_MS = 1500;
 
+// One GA4 purchase per Stripe session, even if the page is reloaded.
+function reportPurchase(sessionId: string, b: BookingSession) {
+  try {
+    const key = `purchase-${sessionId}`;
+    if (window.sessionStorage.getItem(key)) return;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    // storage blocked: report anyway
+  }
+  track("purchase", {
+    transaction_id: sessionId,
+    currency: "EUR",
+    value: b.amountPaid,
+    coupon: b.promoCode ?? undefined,
+  });
+}
+
 function useBookingSession() {
   const [data, setData] = useState<BookingSession | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,6 +67,7 @@ function useBookingSession() {
         const json: BookingSession = await res.json();
         if (cancelled) return;
         setData(json);
+        reportPurchase(sessionId, json);
         setLoading(false);
         // Payment facts are already correct; only the reference may still be pending.
         if (!json.bookingRef && attempt < REF_RETRIES) {

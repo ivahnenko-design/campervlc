@@ -1,3 +1,4 @@
+import { track } from "@/lib/analytics";
 import { useTranslation } from "react-i18next";
 import { MapPin, Instagram, MessageCircle, Clock } from "lucide-react";
 import { SectionHeader } from "./Fleet";
@@ -32,6 +33,7 @@ export function Contact() {
               </li>
               <li>
                 <a
+                  onClick={() => track("contact_whatsapp", { place: "contact" })}
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"

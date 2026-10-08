@@ -31,6 +31,7 @@ import {
   type PrepaymentOption,
 } from "@/utils/pricing";
 import { MIN_NOTICE_HOURS, startTooSoon } from "@/utils/notice";
+import { track } from "@/lib/analytics";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
@@ -133,6 +134,7 @@ export function BookingCalendar() {
       }
     }
     setRange({ start: range.start, end: d });
+    track("select_dates", { start: isoDay(range.start), end: isoDay(d) });
   };
 
   // Same function api/create-checkout.js runs, so the total shown here is the
@@ -250,6 +252,7 @@ export function BookingCalendar() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Payment error");
+      track("add_payment_info", { currency: "EUR", value: finalTotalWithIva });
       window.location.href = data.url;
     } catch (err: unknown) {
       setCheckoutError(err instanceof Error ? err.message : "Unknown error");
@@ -530,7 +533,10 @@ export function BookingCalendar() {
               {!showForm && (
                 <button
                   disabled={!canPay}
-                  onClick={() => setShowForm(true)}
+                  onClick={() => {
+                    track("begin_checkout", { currency: "EUR", value: finalTotalWithIva, nights, option: prepaymentOption });
+                    setShowForm(true);
+                  }}
                   className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
                     canPay
                       ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"

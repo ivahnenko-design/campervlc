@@ -1,3 +1,4 @@
+import { track } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
@@ -36,6 +37,7 @@ export function Navbar() {
   // On the home page, scroll to the calendar in place. From any other page the
   // href navigates to "/#booking" and the browser lands on the same anchor.
   const goToBooking = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    track("click_book_cta", { page: pathname });
     setMobileOpen(false);
     if (pathname !== "/") return;
     const target = document.getElementById("booking");

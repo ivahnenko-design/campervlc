@@ -118,9 +118,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": ["LocalBusiness", "RentalCarDealer"],
-              "@id": "https://campervlc.vercel.app/#business",
+              "@id": "https://campervlc.com/#business",
               name: "Camper Retreat VLC",
-              url: "https://campervlc.vercel.app/",
+              url: "https://campervlc.com/",
               logo: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               image: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               description:
