@@ -32,7 +32,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
     const months = Array.from({ length: 12 }, (_, m) => {
       const first = (new Date(year, m, 1).getDay() + 6) % 7;
       const count = new Date(year, m + 1, 0).getDate();
-      const days = Array.from({ length: count }, (_, i) => ({ day: i + 1, season: getSeason(new Date(year, m, i + 1)) }));
+      const days = Array.from({ length: count }, (_, i) => ({ day: i + 1, season: getSeason(new Date(year, m, i + 1)), weekend: (first + i) % 7 >= 5 }));
       const label = month.format(new Date(year, m, 1));
       return { label: label.charAt(0).toUpperCase() + label.slice(1), first, days };
     });
@@ -45,7 +45,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
       <ul className="mb-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-foreground/90">
         {ORDER.map((s) => (
           <li key={s} className="flex items-center gap-2">
-            <span className="season-pill h-4 w-4" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
+            <span className="season-cell h-4 w-4 !rounded-[4px]" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
             <span className="font-medium">{names[s]}</span>
             <span className="text-muted-foreground">
               {PRICES[s]} € · {ui.calPerNight} · {ui.calMin.replace("{{n}}", String(MIN_NIGHTS[s]))}
@@ -53,6 +53,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
           </li>
         ))}
       </ul>
+      <p className="-mt-3 mb-6 text-sm text-muted-foreground">{ui.calDiscounts}</p>
       <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
         {months.map((m) => (
           <div key={m.label}>
@@ -71,7 +72,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
               {m.days.map((d) => (
                 <span
                   key={d.day}
-                  className="season-pill flex h-7 items-center justify-center text-[11px] font-bold sm:h-8 sm:text-xs"
+                  className={`season-cell flex aspect-square items-center justify-center font-mono-num text-[11px] sm:text-sm ${d.weekend ? "font-extrabold" : "font-medium"}`}
                   style={{ ["--c" as string]: COLOR[d.season] }}
                   aria-label={`${d.day} ${m.label}: ${names[d.season]}`}
                 >

@@ -16,7 +16,8 @@
     "calHigh": "Hoog",
     "calPeak": "Piek",
     "calPerNight": "per nacht + btw",
-    "calMin": "min. {{n}} nachten"
+    "calMin": "min. {{n}} nachten",
+    "calDiscounts": "Kortingen: −5% vanaf 7 nachten · −10% vanaf 14 nachten · −5% bij 100% vooruitbetaling"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

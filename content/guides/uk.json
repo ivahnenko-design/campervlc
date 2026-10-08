@@ -16,7 +16,8 @@
     "calHigh": "Високий",
     "calPeak": "Пік",
     "calPerNight": "за ніч + ПДВ",
-    "calMin": "мін. ночей: {{n}}"
+    "calMin": "мін. ночей: {{n}}",
+    "calDiscounts": "Знижки: −5 % від 7 ночей · −10 % від 14 ночей · −5 % при 100 % передоплаті"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

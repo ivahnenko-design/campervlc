@@ -16,7 +16,8 @@
     "calHigh": "Hauptsaison",
     "calPeak": "Spitzensaison",
     "calPerNight": "pro Nacht + MwSt.",
-    "calMin": "mind. {{n}} Nächte"
+    "calMin": "mind. {{n}} Nächte",
+    "calDiscounts": "Rabatte: −5 % ab 7 Nächten · −10 % ab 14 Nächten · −5 % bei 100 % Vorauszahlung"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

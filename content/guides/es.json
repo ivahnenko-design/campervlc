@@ -16,7 +16,8 @@
     "calHigh": "Alta",
     "calPeak": "Superalta",
     "calPerNight": "por noche + IVA",
-    "calMin": "mín. {{n}} noches"
+    "calMin": "mín. {{n}} noches",
+    "calDiscounts": "Descuentos: −5 % desde 7 noches · −10 % desde 14 noches · −5 % por pago anticipado del 100 %"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {
