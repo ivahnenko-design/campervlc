@@ -45,7 +45,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
       <ul className="mb-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-foreground/90">
         {ORDER.map((s) => (
           <li key={s} className="flex items-center gap-2">
-            <span className="season-cell h-4 w-4 !rounded-[4px]" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
+            <span className="season-dot h-4 w-4" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
             <span className="font-medium">{names[s]}</span>
             <span className="text-muted-foreground">
               {PRICES[s]} € · {ui.calPerNight} · {ui.calMin.replace("{{n}}", String(MIN_NIGHTS[s]))}
@@ -72,7 +72,7 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
               {m.days.map((d) => (
                 <span
                   key={d.day}
-                  className={`season-cell flex aspect-square items-center justify-center font-mono-num text-[11px] sm:text-sm ${d.weekend ? "font-extrabold" : "font-medium"}`}
+                  className={`season-cell flex aspect-square items-center justify-center font-mono-num text-[11px] sm:text-sm ${d.weekend ? "font-semibold text-primary" : "font-medium text-foreground"}`}
                   style={{ ["--c" as string]: COLOR[d.season] }}
                   aria-label={`${d.day} ${m.label}: ${names[d.season]}`}
                 >

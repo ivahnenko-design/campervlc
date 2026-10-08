@@ -96,10 +96,16 @@
   }
 }
 
-/* Season calendar: flat bright square cells in the season colour */
+/* Season calendar: muted tinted cells (surface mixed with the season colour) */
 .season-cell {
   --c: 251 191 36;
-  border-radius: 6px;
-  color: #0d1b2a;
+  border-radius: 8px;
+  background: color-mix(in oklab, rgb(var(--c)) 30%, #152236);
+  border: 1px solid color-mix(in oklab, rgb(var(--c)) 70%, #2e3a4e);
+}
+/* Legend swatch: the full-strength season colour */
+.season-dot {
+  --c: 251 191 36;
+  border-radius: 5px;
   background: rgb(var(--c));
 }

@@ -26,7 +26,7 @@ export function SeasonStrip() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {ORDER.map((s) => (
             <li key={s} className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/40 px-3 py-2.5">
-              <span className="season-cell h-5 w-5 shrink-0" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
+              <span className="season-dot h-5 w-5 shrink-0" style={{ ["--c" as string]: COLOR[s] }} aria-hidden="true" />
               <span className="text-sm">
                 <span className="block font-semibold text-foreground">
                   {names[s]} · {PRICES[s]} €
