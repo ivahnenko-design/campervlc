@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SeasonCalendar } from "@/components/SeasonCalendar";
 import { GUIDE_SLUGS, GUIDES_DATE_MODIFIED, getGuide, guidesUi } from "@/data/guides";
 import {
   DEFAULT_LANGUAGE,
@@ -128,6 +129,8 @@ function GuidePage() {
             {ui.updated}: {guide.updated}
           </p>
           <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
+
+          {slug === "mejor-epoca-autocaravana-valencia" && <SeasonCalendar year={2027} lang={lang} />}
 
           {guide.sections.map((s) => (
             <section key={s.h2} className="mt-12">

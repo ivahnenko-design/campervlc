@@ -9,7 +9,14 @@
     "breadcrumbHome": "Inicio",
     "book": "Reservar ahora",
     "indexTitle": "Guías para alquilar una autocaravana en Valencia",
-    "indexDescription": "Requisitos, precios por temporada, mejor época y equipamiento de nuestra autocaravana McLouis para 5 personas en Valencia."
+    "indexDescription": "Requisitos, precios por temporada, mejor época y equipamiento de nuestra autocaravana McLouis para 5 personas en Valencia.",
+    "calTitle": "Calendario de temporadas 2027",
+    "calLow": "Baja",
+    "calMid": "Media",
+    "calHigh": "Alta",
+    "calPeak": "Superalta",
+    "calPerNight": "por noche + IVA",
+    "calMin": "mín. {{n}} noches"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

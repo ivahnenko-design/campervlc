@@ -9,7 +9,14 @@
     "breadcrumbHome": "Startseite",
     "book": "Jetzt buchen",
     "indexTitle": "Ratgeber: Wohnmobil mieten in Valencia",
-    "indexDescription": "Voraussetzungen, Preise nach Saison, beste Reisezeit und Ausstattung unseres McLouis-Wohnmobils für 5 Personen in Valencia."
+    "indexDescription": "Voraussetzungen, Preise nach Saison, beste Reisezeit und Ausstattung unseres McLouis-Wohnmobils für 5 Personen in Valencia.",
+    "calTitle": "Saisonkalender 2027",
+    "calLow": "Nebensaison",
+    "calMid": "Zwischensaison",
+    "calHigh": "Hauptsaison",
+    "calPeak": "Spitzensaison",
+    "calPerNight": "pro Nacht + MwSt.",
+    "calMin": "mind. {{n}} Nächte"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

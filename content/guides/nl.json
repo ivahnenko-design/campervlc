@@ -9,7 +9,14 @@
     "breadcrumbHome": "Home",
     "book": "Nu boeken",
     "indexTitle": "Gidsen voor camper huren in Valencia",
-    "indexDescription": "Voorwaarden, prijzen per seizoen, de beste reistijd en de uitrusting van onze McLouis-camper voor 5 personen in Valencia."
+    "indexDescription": "Voorwaarden, prijzen per seizoen, de beste reistijd en de uitrusting van onze McLouis-camper voor 5 personen in Valencia.",
+    "calTitle": "Seizoenskalender 2027",
+    "calLow": "Laag",
+    "calMid": "Midden",
+    "calHigh": "Hoog",
+    "calPeak": "Piek",
+    "calPerNight": "per nacht + btw",
+    "calMin": "min. {{n}} nachten"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

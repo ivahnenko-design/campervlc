@@ -9,7 +9,14 @@
     "breadcrumbHome": "Home",
     "book": "Book now",
     "indexTitle": "Guides to renting a motorhome in Valencia",
-    "indexDescription": "Requirements, seasonal prices, the best time to travel and the equipment of our 5-berth McLouis motorhome for hire in Valencia."
+    "indexDescription": "Requirements, seasonal prices, the best time to travel and the equipment of our 5-berth McLouis motorhome for hire in Valencia.",
+    "calTitle": "2027 season calendar",
+    "calLow": "Low",
+    "calMid": "Mid",
+    "calHigh": "High",
+    "calPeak": "Peak",
+    "calPerNight": "per night + VAT",
+    "calMin": "min. {{n}} nights"
   },
   "guides": {
     "alquilar-autocaravana-valencia": {

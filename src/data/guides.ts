@@ -34,6 +34,13 @@ export interface GuidesUi {
   book: string;
   indexTitle: string;
   indexDescription: string;
+  calTitle: string;
+  calLow: string;
+  calMid: string;
+  calHigh: string;
+  calPeak: string;
+  calPerNight: string;
+  calMin: string;
 }
 interface GuidesFile {
   ui: GuidesUi;

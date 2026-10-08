@@ -95,3 +95,15 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Season calendar: 3D pill "keys" in the style of the site's primary buttons */
+.season-pill {
+  --c: 251 191 36;
+  border-radius: 9999px;
+  color: #0f1b2d;
+  background: linear-gradient(to bottom, rgb(var(--c) / 1) 0%, color-mix(in oklab, rgb(var(--c)) 80%, #000) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.45),
+    0 3px 0 color-mix(in oklab, rgb(var(--c)) 55%, #000),
+    0 6px 12px -4px rgb(var(--c) / 0.55);
+}
