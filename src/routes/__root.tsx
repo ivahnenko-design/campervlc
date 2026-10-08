@@ -172,11 +172,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 offerCount: "4",
                 availability: "https://schema.org/InStock",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "5.0",
-                reviewCount: "47",
-              },
             },
           ],
         }),
