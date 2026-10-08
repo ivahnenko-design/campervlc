@@ -20,7 +20,7 @@ export function SeasonStrip() {
   const names: Record<Season, string> = { low: ui.calLow, mid: ui.calMid, high: ui.calHigh, super: ui.calPeak };
 
   return (
-    <section className="mx-auto max-w-5xl px-4 pb-16 sm:px-6 lg:px-8" aria-label={ui.calTitle}>
+    <section className="mx-auto max-w-5xl px-4 pb-20 sm:px-6 lg:px-8" aria-label={ui.calTitle}>
       <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-6">
         <h2 className="mb-4 font-display text-xl text-foreground">{ui.calTitle}</h2>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

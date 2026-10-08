@@ -69,8 +69,8 @@ function Index() {
         <Hero />
         <Fleet />
         <HowItWorks />
-        <BookingCalendar />
         <SeasonStrip />
+        <BookingCalendar />
         <RoutesSection />
         <Reviews />
         <FAQ />
