@@ -18,6 +18,7 @@ import { Hero } from "@/components/Hero";
 import { Fleet } from "@/components/Fleet";
 import { HowItWorks } from "@/components/HowItWorks";
 import { BookingCalendar } from "@/components/BookingCalendar";
+import { SeasonStrip } from "@/components/SeasonStrip";
 import { Routes as RoutesSection } from "@/components/Routes";
 import { Reviews } from "@/components/Reviews";
 import { FAQ } from "@/components/FAQ";
@@ -69,6 +70,7 @@ function Index() {
         <Fleet />
         <HowItWorks />
         <BookingCalendar />
+        <SeasonStrip />
         <RoutesSection />
         <Reviews />
         <FAQ />

@@ -42,6 +42,7 @@ export interface GuidesUi {
   calPerNight: string;
   calMin: string;
   calDiscounts: string;
+  calLink: string;
 }
 interface GuidesFile {
   ui: GuidesUi;
