@@ -91,7 +91,7 @@ test("SCENARIO 1: shorten a 100%-paid booking 40 days ahead → 10% retention, r
 
   const orig = quoteOf(b, {});
   const next = quoteOf(b, { endDate: "2026-11-20" });
-  const removedValue = withIva(Math.round((orig.nightsSubtotal / 7) * 3)); // 3 nights × 99 €
+  const removedValue = withIva(Math.round((orig.nightsSubtotal / 7) * 3)); // 3 nights × 90 €
   const retention = Math.round(removedValue * 0.1);
 
   assert.equal(p.removedNights, 3);

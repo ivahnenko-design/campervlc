@@ -12,7 +12,7 @@ export function withIva(amount) {
 
 /** Nightly rate per season, in euros (before IVA). */
 export const PRICES = {
-  low: 99,    // Baja
+  low: 90,    // Baja
   mid: 125,   // Medio
   high: 155,  // Alta
   super: 169, // Super Alta

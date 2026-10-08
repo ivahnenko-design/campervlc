@@ -37,7 +37,7 @@
             "Der Preis hängt von der Saison ab. Das sind die Preise pro Nacht ohne MwSt. (zzgl. 21 %) mit der jeweiligen Mindestmietdauer:"
           ],
           "list": [
-            "Nebensaison: 99 € pro Nacht, mindestens 3 Nächte.",
+            "Nebensaison: 90 € pro Nacht, mindestens 3 Nächte.",
             "Zwischensaison: 125 € pro Nacht, mindestens 3 Nächte.",
             "Hauptsaison: 155 € pro Nacht, mindestens 4 Nächte.",
             "Spitzensaison (Weihnachten und August): 169 € pro Nacht, mindestens 5 Nächte."
@@ -57,7 +57,7 @@
         {
           "h2": "Zwei echte Beispiele",
           "paragraphs": [
-            "7 Nächte im Februar 2027 (Nebensaison), 100 % bei der Buchung bezahlt: 814 € inkl. MwSt., also rund 116 € pro Nacht. Enthalten sind die Endreinigung für 50 € sowie die Rabatte von 5 % für die Mietdauer und 5 % für die Vollzahlung.",
+            "7 Nächte im Februar 2027 (Nebensaison), 100 % bei der Buchung bezahlt: 745 € inkl. MwSt., also rund 106 € pro Nacht. Enthalten sind die Endreinigung für 50 € sowie die Rabatte von 5 % für die Mietdauer und 5 % für die Vollzahlung.",
             "7 Nächte im Juli 2027 (Hauptsaison), 50 % bei der Buchung bezahlt: 1.308 € inkl. MwSt., davon 654 € bei der Buchung und der Rest bei der Abholung des Wohnmobils. Die genauen Gesamtpreise für deine Reisedaten zeigt dir der Buchungsrechner."
           ]
         },
@@ -151,7 +151,7 @@
           ]
         },
         {
-          "h2": "Nebensaison (99 € pro Nacht, mindestens 3 Nächte)",
+          "h2": "Nebensaison (90 € pro Nacht, mindestens 3 Nächte)",
           "paragraphs": [
             "Die ruhigste und günstigste Reisezeit, ideal, um ohne Eile zu reisen, mit wenig Betrieb an den Stränden und auf den Stellplätzen. 2027 umfasst die Nebensaison folgende Zeiträume:"
           ],
@@ -213,7 +213,7 @@
       "faq": [
         {
           "q": "Wann ist es am günstigsten, ein Wohnmobil in Valencia zu mieten?",
-          "a": "In der Nebensaison (99 € pro Nacht im Jahr 2027): Januar, Februar und ein Großteil des März, Ende Oktober und November. Außerdem gibt es für Aufenthalte ab 7 und 14 Nächten Rabatte von 5 % und 10 %."
+          "a": "In der Nebensaison (90 € pro Nacht im Jahr 2027): Januar, Februar und ein Großteil des März, Ende Oktober und November. Außerdem gibt es für Aufenthalte ab 7 und 14 Nächten Rabatte von 5 % und 10 %."
         },
         {
           "q": "Wie früh sollte man buchen?",

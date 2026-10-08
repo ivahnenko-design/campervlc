@@ -68,9 +68,9 @@ test("long-stay discount applies to subtotal including the surcharge", () => {
   const end = new Date(2026, 10, 9);    // 7 nights → 5%
   const p = calculatePrice(start, end, "10:00", "12:00");
   assert.equal(p.nights, 7);
-  assert.equal(p.surcharge, Math.round(99 * 0.5));
+  assert.equal(p.surcharge, Math.round(90 * 0.5));
   assert.equal(p.discountPct, 5);
-  assert.equal(p.discountAmount, Math.round((99 * 7 + 50) * 0.05));
+  assert.equal(p.discountAmount, Math.round((90 * 7 + 50) * 0.05));
 });
 
 test("quote: promo and prepayment discounts run after extras, on the surcharged total", () => {

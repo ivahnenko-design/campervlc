@@ -44,7 +44,7 @@ const costaBlanca: RouteContent = {
   },
 
   metaDescription: {
-    es: "Ruta autocaravana Costa Blanca en 5 días desde Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea y Alicante. Alquiler autocaravana Valencia desde 99 €/noche. Guía completa con áreas de servicio y consejos.",
+    es: "Ruta autocaravana Costa Blanca en 5 días desde Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea y Alicante. Alquiler autocaravana Valencia desde 90 €/noche. Guía completa con áreas de servicio y consejos.",
     en: "Costa Blanca campervan route in 5 days from Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea and Alicante. Complete guide with motorhome stopovers and practical tips.",
     de: "Wohnmobil-Route Costa Blanca in 5 Tagen ab Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea und Alicante. Vollständiger Guide mit Stellplätzen und praktischen Tipps.",
     it: "Itinerario camper Costa Blanca in 5 giorni da Valencia: Cullera, Gandía, Dénia, Jávea, Calpe, Altea e Alicante. Guida completa con aree di sosta e consigli pratici.",
@@ -337,7 +337,7 @@ const valenciaBarcalona: RouteContent = {
   },
 
   metaDescription: {
-    es: "Ruta autocaravana Valencia Barcelona en 4-5 días: Peñíscola, delta del ebro autocaravana, Tarragona, Sitges y Barcelona. Viajar en autocaravana costa dorada desde 99 €/noche. Guía completa con áreas de servicio.",
+    es: "Ruta autocaravana Valencia Barcelona en 4-5 días: Peñíscola, delta del ebro autocaravana, Tarragona, Sitges y Barcelona. Viajar en autocaravana costa dorada desde 90 €/noche. Guía completa con áreas de servicio.",
     en: "Valencia to Barcelona campervan route in 4-5 days: Peñíscola, Ebro Delta, Tarragona, Sitges and Barcelona. Complete guide with motorhome stopovers, practical tips and budget breakdown.",
     de: "Wohnmobil-Route Valencia–Barcelona in 4-5 Tagen: Peñíscola, Ebro-Delta, Tarragona, Sitges und Barcelona. Vollständiger Guide mit Stellplätzen, Tipps und Kostenübersicht.",
     it: "Itinerario camper Valencia–Barcellona in 4-5 giorni: Peñíscola, Delta dell'Ebro, Tarragona, Sitges e Barcellona. Guida completa con aree di sosta e consigli pratici.",
@@ -487,13 +487,13 @@ const valenciaBarcalona: RouteContent = {
   tips: [
     {
       tip: {
-        es: "Presupuesto: alquiler desde 99 €/noche + combustible ~90 € para 700 km + áreas ~60 €. Sale por debajo de un hotel más coche de alquiler, y decides tú dónde amaneces.",
-        en: "Budget: hire from 99 EUR/night + fuel approx. 90 EUR for 700 km + stopovers approx. 60 EUR. That comes in under a hotel plus a rental car, and you decide where you wake up.",
-        de: "Budget: Miete ab 99 Euro pro Nacht + Kraftstoff ca. 90 Euro für 700 km + Stellplätze ca. 60 Euro. Das liegt unter Hotel plus Mietwagen, und du entscheidest, wo du aufwachst.",
-        it: "Budget: noleggio da 99 euro a notte + carburante circa 90 euro per 700 km + aree di sosta circa 60 euro. Costa meno di hotel più auto a noleggio, e decidete voi dove svegliarvi.",
-        nl: "Budget: huur vanaf 99 euro per nacht + brandstof ca. 90 euro voor 700 km + camperplaatsen ca. 60 euro. Dat blijft onder hotel plus huurauto, en jij bepaalt waar je wakker wordt.",
-        ru: "Бюджет: аренда от 99 €/ночь + топливо ~90 € на 700 км + площадки ~60 €. Выходит дешевле, чем отель плюс аренда машины, и вы сами решаете, где просыпаться.",
-        uk: "Бюджет: оренда від 99 €/ніч + паливо ~90 € на 700 км + майданчики ~60 €. Виходить дешевше, ніж готель плюс оренда авто, і ви самі вирішуєте, де прокидатись.",
+        es: "Presupuesto: alquiler desde 90 €/noche + combustible ~90 € para 700 km + áreas ~60 €. Sale por debajo de un hotel más coche de alquiler, y decides tú dónde amaneces.",
+        en: "Budget: hire from 90 EUR/night + fuel approx. 90 EUR for 700 km + stopovers approx. 60 EUR. That comes in under a hotel plus a rental car, and you decide where you wake up.",
+        de: "Budget: Miete ab 90 Euro pro Nacht + Kraftstoff ca. 90 Euro für 700 km + Stellplätze ca. 60 Euro. Das liegt unter Hotel plus Mietwagen, und du entscheidest, wo du aufwachst.",
+        it: "Budget: noleggio da 90 euro a notte + carburante circa 90 euro per 700 km + aree di sosta circa 60 euro. Costa meno di hotel più auto a noleggio, e decidete voi dove svegliarvi.",
+        nl: "Budget: huur vanaf 90 euro per nacht + brandstof ca. 90 euro voor 700 km + camperplaatsen ca. 60 euro. Dat blijft onder hotel plus huurauto, en jij bepaalt waar je wakker wordt.",
+        ru: "Бюджет: аренда от 90 €/ночь + топливо ~90 € на 700 км + площадки ~60 €. Выходит дешевле, чем отель плюс аренда машины, и вы сами решаете, где просыпаться.",
+        uk: "Бюджет: оренда від 90 €/ніч + паливо ~90 € на 700 км + майданчики ~60 €. Виходить дешевше, ніж готель плюс оренда авто, і ви самі вирішуєте, де прокидатись.",
       },
     },
     {
@@ -1178,7 +1178,7 @@ const festivales2027: RouteContent = {
   },
 
   metaDescription: {
-    es: "Festivales en autocaravana en 200 km alrededor de Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola y Low Festival. Guía de festivales Valencia 2027 con zonas camper, fechas y precios. Camper festival España desde 99 €/noche.",
+    es: "Festivales en autocaravana en 200 km alrededor de Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola y Low Festival. Guía de festivales Valencia 2027 con zonas camper, fechas y precios. Camper festival España desde 90 €/noche.",
     en: "Festivals by campervan within 200 km of Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola and Low Festival. 2027 dates, camper zones and honest caveats. Campervan rental in Valencia from 99 €/night.",
     de: "Festivals im Wohnmobil im Umkreis von 200 km um Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola und Low Festival. Termine 2027, Camper-Zonen und ehrliche Hinweise. Wohnmobilmiete ab 99 €/Nacht.",
     it: "Festival in camper entro 200 km da Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola e Low Festival. Date 2027, aree camper e avvertenze oneste. Noleggio camper a Valencia da 99 €/notte.",

@@ -37,7 +37,7 @@
             "El precio depende de la temporada. Estos son los precios por noche, sin IVA (se suma el 21 %), con la estancia mínima de cada temporada:"
           ],
           "list": [
-            "Temporada baja: 99 € por noche, mínimo 3 noches.",
+            "Temporada baja: 90 € por noche, mínimo 3 noches.",
             "Temporada media: 125 € por noche, mínimo 3 noches.",
             "Temporada alta: 155 € por noche, mínimo 4 noches.",
             "Temporada superalta (Navidad y agosto): 169 € por noche, mínimo 5 noches."
@@ -57,7 +57,7 @@
         {
           "h2": "Dos ejemplos reales",
           "paragraphs": [
-            "7 noches en febrero de 2027 (temporada baja), pagando el 100 % al reservar: 814 € con IVA incluido, unos 116 € por noche. Incluye la limpieza final de 50 € y los descuentos del 5 % por estancia y del 5 % por pago completo.",
+            "7 noches en febrero de 2027 (temporada baja), pagando el 100 % al reservar: 745 € con IVA incluido, unos 106 € por noche. Incluye la limpieza final de 50 € y los descuentos del 5 % por estancia y del 5 % por pago completo.",
             "7 noches en julio de 2027 (temporada alta), pagando el 50 % al reservar: 1.308 € con IVA incluido, de los cuales 654 € se pagan al reservar y el resto al recoger la autocaravana. Los totales exactos para tus fechas aparecen en el calculador de reserva."
           ]
         },
@@ -151,7 +151,7 @@
           ]
         },
         {
-          "h2": "Temporada baja (99 € por noche, mínimo 3 noches)",
+          "h2": "Temporada baja (90 € por noche, mínimo 3 noches)",
           "paragraphs": [
             "Es la época más tranquila y económica, ideal para viajar sin prisa y con poca gente en las playas y en las áreas de servicio. En 2027 la temporada baja cubre estas fechas:"
           ],
@@ -213,7 +213,7 @@
       "faq": [
         {
           "q": "¿Cuándo es más barato alquilar una autocaravana en Valencia?",
-          "a": "En temporada baja (99 € por noche en 2027): enero, febrero y gran parte de marzo, finales de octubre y noviembre. Además, las estancias de 7 y 14 noches tienen descuentos del 5 % y del 10 %."
+          "a": "En temporada baja (90 € por noche en 2027): enero, febrero y gran parte de marzo, finales de octubre y noviembre. Además, las estancias de 7 y 14 noches tienen descuentos del 5 % y del 10 %."
         },
         {
           "q": "¿Con cuánta antelación hay que reservar?",
