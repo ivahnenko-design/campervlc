@@ -15,7 +15,7 @@ export const PRICES = {
   low: 90,    // Baja
   mid: 125,   // Medio
   high: 155,  // Alta
-  super: 180, // Super Alta
+  super: 185, // Super Alta
 };
 
 export const MIN_NIGHTS = {
