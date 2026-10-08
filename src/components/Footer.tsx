@@ -4,9 +4,12 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
 import { INSTAGRAM_URL, buildWhatsAppLink } from "@/lib/constants";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { guidesUi } from "@/data/guides";
+import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const guidesLabel = guidesUi(normalizeLanguage(i18n.language) ?? DEFAULT_LANGUAGE).label;
   return (
     <footer className="border-t border-border/60 bg-background py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -18,6 +21,7 @@ export function Footer() {
             <p className="mt-2 text-sm text-muted-foreground max-w-xs">{t("footer.tagline")}</p>
           </div>
           <ul className="text-sm text-muted-foreground space-y-2 md:justify-self-center">
+            <li><Link to="/guias" className="hover:text-foreground transition-colors">{guidesLabel}</Link></li>
             <li><Link to="/privacy" className="hover:text-foreground transition-colors">{t("footer.privacy")}</Link></li>
             <li><Link to="/terms" className="hover:text-foreground transition-colors">{t("footer.terms")}</Link></li>
             <li><Link to="/cookies" className="hover:text-foreground transition-colors">{t("footer.cookies")}</Link></li>

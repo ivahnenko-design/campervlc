@@ -1,0 +1,312 @@
+{
+  "ui": {
+    "label": "Guides",
+    "allGuides": "All guides",
+    "updated": "Updated",
+    "faqTitle": "Frequently asked questions",
+    "moreGuides": "More guides",
+    "routes": "Motorhome routes from Valencia",
+    "breadcrumbHome": "Home",
+    "book": "Book now",
+    "indexTitle": "Guides to renting a motorhome in Valencia",
+    "indexDescription": "Requirements, seasonal prices, the best time to travel and the equipment of our 5-berth McLouis motorhome for hire in Valencia."
+  },
+  "guides": {
+    "alquilar-autocaravana-valencia": {
+      "metaTitle": "Motorhome Hire Valencia: Requirements, Price & Deposit | Camper Retreat VLC",
+      "metaDescription": "Campervan rental in Valencia: age, licence, price per night, what's included, the €900 deposit, mileage and cancellation.",
+      "h1": "Motorhome hire in Valencia: requirements, price and deposit",
+      "intro": "If you're looking for campervan or motorhome rental in Valencia, this guide sums up what you need to know before you book: who can drive, how much each night costs, what the price includes, how the security deposit works and what happens if your plans change. All details refer to our McLouis Yearling 89 motorhome for up to 5 people.",
+      "updated": "October 2026",
+      "sections": [
+        {
+          "h2": "What you need to rent",
+          "paragraphs": [
+            "A standard car driving licence (category B) is all you need to drive the motorhome; no special licence is required."
+          ],
+          "list": [
+            "Minimum age of 25 for the main renter and for every additional driver.",
+            "Category B driving licence held for more than 2 years. If you live outside the EU, you also need an International Driving Permit.",
+            "A bank card to pay for the booking online and for the €900 security deposit.",
+            "Pick-up and drop-off at Carrer de Nino Bravo, 3, Valencia."
+          ]
+        },
+        {
+          "h2": "How much does it cost to rent a motorhome in Valencia?",
+          "paragraphs": [
+            "The price depends on the season. These are the nightly rates excluding VAT (21% is added), with the minimum stay for each season:"
+          ],
+          "list": [
+            "Low season: €99 per night, minimum 3 nights.",
+            "Mid season: €125 per night, minimum 3 nights.",
+            "High season: €155 per night, minimum 4 nights.",
+            "Peak season (Christmas and August): €169 per night, minimum 5 nights."
+          ]
+        },
+        {
+          "h2": "Discounts",
+          "paragraphs": [
+            "Discounts can be combined. The longer you stay, the lower your nightly rate:"
+          ],
+          "list": [
+            "5% off for stays of 7 nights or more, and 10% off from 14 nights.",
+            "An extra 5% off if you pay 100% of the booking up front.",
+            "Occasional promo codes, applied in the price calculator before you pay."
+          ]
+        },
+        {
+          "h2": "Two real examples",
+          "paragraphs": [
+            "7 nights in February 2027 (low season), paying 100% when booking: €814 including VAT, around €116 per night. This includes the €50 final cleaning fee and the 5% long-stay and 5% full-payment discounts.",
+            "7 nights in July 2027 (high season), paying 50% when booking: €1,308 including VAT, of which €654 is paid when you book and the rest when you pick up the motorhome. The exact totals for your dates are shown in the booking calculator."
+          ]
+        },
+        {
+          "h2": "What the price includes",
+          "paragraphs": [
+            "The final price already includes VAT and the following:"
+          ],
+          "list": [
+            "Comprehensive insurance with a €900 excess (€600 with the reduced excess option, €60 per booking).",
+            "100 km per rental night.",
+            "Roadside assistance and the manufacturer's mobility guarantee.",
+            "Two gas bottles and chemical toilet capsules.",
+            "Free parking for your car at our premises during the rental.",
+            "Pets at no extra cost.",
+            "Camping table and chairs, three beach chairs, a parasol and awning, Smart TV, kitchenware, pillows and blankets."
+          ]
+        },
+        {
+          "h2": "Mileage, fuel and extras",
+          "paragraphs": [
+            "Each night includes 100 km. If you plan to drive more, you can add 200 km per night (€20 per night) or unlimited mileage (€40 per night). Any kilometres beyond your allowance cost €0.30 each.",
+            "The motorhome is handed over with a full tank and must be returned the same way. It should also be returned clean inside, with the grey water and toilet cassette emptied and the fresh water tank full.",
+            "In the calculator you can add per-booking extras: airport transfer (€90), bike (€90), SUP board (€90), additional driver (€50), bed linen (€20), towels (€15) and barbecue (€15)."
+          ]
+        },
+        {
+          "h2": "Security deposit and insurance",
+          "paragraphs": [
+            "The refundable security deposit is €900 and is paid before handover, preferably as a pre-authorisation on the main driver's card. After the motorhome has been inspected, it is refunded within 14 working days of the return at the latest, provided the vehicle is in the same condition as at handover. The insurance is comprehensive: in the event of damage, the most you pay is the applicable excess, €900, or €600 if you choose the reduced excess."
+          ]
+        },
+        {
+          "h2": "How to book and pay",
+          "paragraphs": [
+            "Choose your dates and pick-up and drop-off times in the calendar on campervlc.com, add any extras and pay by card. You can pay 50% when booking and the rest at pick-up, or 100% up front with a 5% discount. You'll receive a confirmation email with your booking number.",
+            "With that number and your email address you can change your dates or add extras on the manage-booking page, up to 48 hours before handover."
+          ]
+        },
+        {
+          "h2": "Cancellation",
+          "paragraphs": [
+            "You can cancel free of charge within 24 hours of booking if handover is more than 7 days away. After that, the amount we keep depends on how far in advance you cancel:"
+          ],
+          "list": [
+            "More than 30 days before handover: 10%.",
+            "Between 30 and 15 days: 30%.",
+            "Between 14 and 7 days: 50%.",
+            "Less than 7 days or no-show: 100%."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "What licence do I need to drive the motorhome?",
+          "a": "A standard category B car licence, held for more than 2 years, and a minimum age of 25. If you live outside the EU, you also need an International Driving Permit. The motorhome is 3.30 m high, so check the height limits of car parks and tunnels."
+        },
+        {
+          "q": "How many people does it sleep?",
+          "a": "It has 5 travelling seats and 5 berths, with a maximum payload of 500 kg for passengers and luggage."
+        },
+        {
+          "q": "Can I bring my dog?",
+          "a": "Yes. Pets travel at no extra cost. If on return there is a smell of tobacco or animals that requires special treatment, the actual cost is charged, up to a maximum of €300."
+        },
+        {
+          "q": "What happens if I return the motorhome later?",
+          "a": "If you choose your return time when booking, returning up to 6 hours after the pick-up time costs 50% of a rental day, and more than 6 hours costs a full day. An unagreed late return is charged at €50 per hour, so always let us know."
+        },
+        {
+          "q": "How do I pay?",
+          "a": "You pay for the booking online by bank card, securely via Stripe: 50% when booking and the rest at pick-up, or 100% up front with a 5% discount. The €900 security deposit is paid before handover, preferably as a card pre-authorisation."
+        }
+      ],
+      "cta": {
+        "text": "Check the exact price for your dates and book in minutes.",
+        "button": "Check availability and book"
+      }
+    },
+    "mejor-epoca-autocaravana-valencia": {
+      "metaTitle": "Best Time for a Motorhome Trip in Valencia: 2027 Seasons | Camper Retreat VLC",
+      "metaDescription": "When to hire a motorhome in Valencia: 2027 low, mid, high and peak seasons, nightly prices, minimum stays, Fallas, Easter and summer.",
+      "h1": "Best time for a motorhome trip in Valencia: 2027 seasons and prices",
+      "intro": "You can tour Valencia and the Mediterranean coast by motorhome all year round. What changes with the date is the atmosphere, the crowds and the price. This guide helps you choose when to travel and shows the 2027 season calendar for our motorhome.",
+      "updated": "October 2026",
+      "sections": [
+        {
+          "h2": "A year-round destination",
+          "paragraphs": [
+            "Winter on the Valencian coast is mild, summer is hot and humid, and spring and autumn are the most comfortable months to sleep in the motorhome without relying on air conditioning. Our motorhome has air conditioning and heating, so you can travel comfortably in any season."
+          ]
+        },
+        {
+          "h2": "Low season (€99 per night, minimum 3 nights)",
+          "paragraphs": [
+            "This is the quietest and most affordable time, ideal for travelling at a relaxed pace with few people on the beaches and at motorhome service areas. In 2027 low season covers these dates:"
+          ],
+          "list": [
+            "7 to 21 January.",
+            "25 January to 14 March.",
+            "22 to 24 March.",
+            "19 to 28 October.",
+            "2 November to 2 December."
+          ]
+        },
+        {
+          "h2": "Mid season (€125 per night, minimum 3 nights)",
+          "paragraphs": [
+            "Spring and early autumn bring good weather and mid-range prices. 2027 dates:"
+          ],
+          "list": [
+            "6 to 28 April.",
+            "4 to 31 May.",
+            "13 September to 7 October.",
+            "9 to 21 December."
+          ]
+        },
+        {
+          "h2": "High season (€155 per night, minimum 4 nights)",
+          "paragraphs": [
+            "It covers the most popular festivals and long weekends, plus summer. Book well ahead for these 2027 dates:"
+          ],
+          "list": [
+            "22 to 24 January (San Vicente Mártir long weekend).",
+            "15 to 21 March (Fallas, Valencia's famous March festival).",
+            "25 March to 5 April (Semana Santa, Holy Week and Easter).",
+            "29 April to 3 May.",
+            "1 June to 31 July.",
+            "1 to 12 September.",
+            "8 to 18 October (October long weekend).",
+            "29 October to 1 November.",
+            "3 to 8 December."
+          ]
+        },
+        {
+          "h2": "Peak season (€169 per night, minimum 5 nights)",
+          "paragraphs": [
+            "These are the dates of highest demand:"
+          ],
+          "list": [
+            "22 December to 6 January (Christmas and New Year).",
+            "The whole of August."
+          ]
+        },
+        {
+          "h2": "Tips for choosing your dates",
+          "paragraphs": [
+            "Prices are per night and 21% VAT is added. If you can choose, travel outside long weekends and summer: you save on the rate and find more space at motorhome areas. Stays of 7 nights or more get a 5% discount, stays of 14 nights or more get 10%, and paying 100% when booking adds another 5%.",
+            "For Fallas, Semana Santa, the October long weekend and August, it's best to book several months in advance, as the calendar fills up early. You can check real-time availability in the booking calendar on campervlc.com. For itinerary ideas, see our motorhome routes from Valencia."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "When is it cheapest to rent a motorhome in Valencia?",
+          "a": "In low season (€99 per night in 2027): January, February and most of March, late October and November. On top of that, stays of 7 and 14 nights get 5% and 10% discounts."
+        },
+        {
+          "q": "How far in advance should I book?",
+          "a": "For Fallas, Semana Santa, summer and long weekends, it's best to book months ahead. The rest of the year there is usually availability at shorter notice; you can book up to 24 hours before pick-up."
+        },
+        {
+          "q": "Are the seasons the same every year?",
+          "a": "No. The dates in this calendar are for 2027 and follow Valencia's official holidays and long weekends, which change every year. The booking calculator always shows the exact price for your dates."
+        }
+      ],
+      "cta": {
+        "text": "Choose your dates and see the exact price before you pay.",
+        "button": "View booking calendar"
+      }
+    },
+    "autocaravana-5-plazas-valencia": {
+      "metaTitle": "5-Berth Motorhome Hire Valencia: Shower, A/C, Pet Friendly | Camper Retreat VLC",
+      "metaDescription": "McLouis Yearling 89 motorhome for hire in Valencia: 5 berths, A/C, heating, shower, toilet, fridge-freezer, Smart TV and equipment included.",
+      "h1": "5-berth motorhome with shower, air conditioning and pet friendly in Valencia",
+      "intro": "Here is the full spec sheet for the motorhome we rent out in Valencia: a 2024 McLouis Yearling 89 on a Renault Master base, designed for up to 5 people travelling with all equipment included.",
+      "updated": "October 2026",
+      "sections": [
+        {
+          "h2": "Vehicle details",
+          "paragraphs": [],
+          "list": [
+            "Model: McLouis Yearling 89 on a Renault Master (2024), diesel.",
+            "5 travelling seats and 5 berths.",
+            "Height: 3.30 m. Maximum payload (passengers and luggage): 500 kg.",
+            "Air conditioning, heating, fridge-freezer, hot water, shower and toilet.",
+            "Solar panel and high-capacity battery.",
+            "24-inch Smart TV."
+          ]
+        },
+        {
+          "h2": "Kitchen and kitchenware",
+          "paragraphs": [
+            "Kitchenware is included in the price: plates, glasses, coffee cups, spoons and teaspoons, forks, table knives, kitchen knives and serrated knives, a wooden chopping board, spatulas, 3 frying pans, a medium saucepan, a saucepan with a glass lid, a salad bowl, a corkscrew and a moka pot."
+          ]
+        },
+        {
+          "h2": "Sleeping",
+          "paragraphs": [
+            "Pillows and blankets are included. If you'd like bed linen, you can add it to your booking for €20 (bath towels, €15)."
+          ]
+        },
+        {
+          "h2": "Outdoor equipment",
+          "paragraphs": [
+            "Two tables and four camping chairs, three beach chairs, a parasol and an awning, so you can enjoy your stop outside the motorhome. As per-booking extras you can add a bike (€90), a SUP board (€90) and a barbecue (€15)."
+          ]
+        },
+        {
+          "h2": "Everything included to get started",
+          "paragraphs": [
+            "Two gas bottles for the fridge, heating, hot water and gas hob, plus chemical toilet capsules. A welcome kit with toilet paper, coffee and soap. 100 km per night included and free parking for your car at our premises during the rental."
+          ]
+        },
+        {
+          "h2": "Pet friendly and family travel",
+          "paragraphs": [
+            "Pets travel at no extra cost. A free child seat is available on request for travelling with children."
+          ]
+        },
+        {
+          "h2": "Pick-up and getting started",
+          "paragraphs": [
+            "Pick-up and drop-off are at Carrer de Nino Bravo, 3, Valencia. At handover we sign a condition report for the motorhome and show you how all the equipment works. If you have any questions, you can message us on WhatsApp."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Can 5 people sleep in the motorhome?",
+          "a": "Yes, it has 5 berths and 5 travelling seats. The maximum payload for passengers and luggage is 500 kg."
+        },
+        {
+          "q": "Does it have a shower and toilet?",
+          "a": "Yes: a shower with hot water and a cassette toilet. It is returned with the cassette emptied and clean."
+        },
+        {
+          "q": "Does it have air conditioning and heating?",
+          "a": "Yes, the motorhome has air conditioning and heating, plus a fridge-freezer."
+        },
+        {
+          "q": "Is it pet friendly?",
+          "a": "Yes. Pets are welcome at no extra cost."
+        }
+      ],
+      "cta": {
+        "text": "Book the motorhome and check the exact price for your dates.",
+        "button": "Check availability and book"
+      }
+    }
+  }
+}

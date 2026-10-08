@@ -1,0 +1,312 @@
+{
+  "ui": {
+    "label": "Guías",
+    "allGuides": "Todas las guías",
+    "updated": "Actualizado",
+    "faqTitle": "Preguntas frecuentes",
+    "moreGuides": "Más guías",
+    "routes": "Rutas en autocaravana desde Valencia",
+    "breadcrumbHome": "Inicio",
+    "book": "Reservar ahora",
+    "indexTitle": "Guías para alquilar una autocaravana en Valencia",
+    "indexDescription": "Requisitos, precios por temporada, mejor época y equipamiento de nuestra autocaravana McLouis para 5 personas en Valencia."
+  },
+  "guides": {
+    "alquilar-autocaravana-valencia": {
+      "metaTitle": "Alquilar una autocaravana en Valencia: requisitos, precio y fianza | Camper Retreat VLC",
+      "metaDescription": "Todo lo que necesitas para alquilar una camper o autocaravana en Valencia: edad, carnet, precio por noche, qué incluye, fianza de 900 €, kilómetros y cancelación.",
+      "h1": "Alquilar una autocaravana en Valencia: requisitos, precio y fianza",
+      "intro": "Si buscas alquilar una camper o autocaravana en Valencia, esta guía resume lo que necesitas saber antes de reservar: quién puede conducir, cuánto cuesta cada noche, qué incluye el precio, cómo funciona la fianza y qué pasa si cambias de planes. Los datos son los de nuestra autocaravana McLouis Yearling 89 para hasta 5 personas.",
+      "updated": "octubre de 2026",
+      "sections": [
+        {
+          "h2": "Qué necesitas para alquilar",
+          "paragraphs": [
+            "Para alquilar la autocaravana basta con el permiso de conducir normal (clase B); no hace falta ningún carnet especial."
+          ],
+          "list": [
+            "Edad mínima de 25 años para el titular y para cada conductor adicional.",
+            "Permiso de conducir clase B con más de 2 años de antigüedad. Si no resides en la UE, además el permiso internacional.",
+            "Una tarjeta bancaria para pagar la reserva online y para la fianza de 900 €.",
+            "Recogida y devolución en Carrer de Nino Bravo, 3, Valencia."
+          ]
+        },
+        {
+          "h2": "Cuánto cuesta alquilar una autocaravana en Valencia",
+          "paragraphs": [
+            "El precio depende de la temporada. Estos son los precios por noche, sin IVA (se suma el 21 %), con la estancia mínima de cada temporada:"
+          ],
+          "list": [
+            "Temporada baja: 99 € por noche, mínimo 3 noches.",
+            "Temporada media: 125 € por noche, mínimo 3 noches.",
+            "Temporada alta: 155 € por noche, mínimo 4 noches.",
+            "Temporada superalta (Navidad y agosto): 169 € por noche, mínimo 5 noches."
+          ]
+        },
+        {
+          "h2": "Descuentos",
+          "paragraphs": [
+            "Los descuentos se acumulan. Cuanto más larga es la estancia, más baja es la tarifa por noche:"
+          ],
+          "list": [
+            "5 % de descuento a partir de 7 noches y 10 % a partir de 14 noches.",
+            "5 % adicional si pagas el 100 % de la reserva al reservar.",
+            "Códigos promocionales puntuales, que se aplican en el calculador antes de pagar."
+          ]
+        },
+        {
+          "h2": "Dos ejemplos reales",
+          "paragraphs": [
+            "7 noches en febrero de 2027 (temporada baja), pagando el 100 % al reservar: 814 € con IVA incluido, unos 116 € por noche. Incluye la limpieza final de 50 € y los descuentos del 5 % por estancia y del 5 % por pago completo.",
+            "7 noches en julio de 2027 (temporada alta), pagando el 50 % al reservar: 1.308 € con IVA incluido, de los cuales 654 € se pagan al reservar y el resto al recoger la autocaravana. Los totales exactos para tus fechas aparecen en el calculador de reserva."
+          ]
+        },
+        {
+          "h2": "Qué incluye el precio",
+          "paragraphs": [
+            "El precio final ya incluye el IVA y estas prestaciones:"
+          ],
+          "list": [
+            "Seguro a todo riesgo con franquicia de 900 € (600 € con la opción de franquicia reducida, 60 € por reserva).",
+            "100 km por noche de alquiler.",
+            "Asistencia en carretera y garantía de movilidad del fabricante.",
+            "Dos bombonas de gas y cápsulas para el WC químico.",
+            "Aparcamiento gratuito de tu coche en nuestras instalaciones durante el alquiler.",
+            "Mascotas sin coste adicional.",
+            "Mesa y sillas de camping, tres sillas de playa, sombrilla y toldo, Smart TV, menaje de cocina, almohadas y mantas."
+          ]
+        },
+        {
+          "h2": "Kilómetros, combustible y opciones",
+          "paragraphs": [
+            "Cada noche incluye 100 km. Si vas a hacer más, puedes añadir 200 km por noche (20 € por noche) o kilometraje ilimitado (40 € por noche). Los kilómetros por encima de lo contratado cuestan 0,30 € cada uno.",
+            "La autocaravana se entrega con el depósito lleno y se devuelve igual. También se devuelve limpia por dentro, con las aguas grises y el casete del WC vaciados y el depósito de agua limpia lleno.",
+            "En el calculador puedes añadir opciones por reserva: traslado del aeropuerto (90 €), bicicleta (90 €), tabla SUP (90 €), conductor adicional (50 €), ropa de cama (20 €), toallas (15 €) y barbacoa (15 €)."
+          ]
+        },
+        {
+          "h2": "Fianza y seguro",
+          "paragraphs": [
+            "La fianza es de 900 € y se abona antes de la entrega, preferentemente como preautorización en la tarjeta del conductor principal. Tras la inspección de la autocaravana se devuelve en un máximo de 14 días hábiles desde la devolución, siempre que esté en las mismas condiciones que en la entrega. El seguro es a todo riesgo: en caso de daños pagas como máximo la franquicia aplicable, de 900 € o de 600 € si contratas la franquicia reducida."
+          ]
+        },
+        {
+          "h2": "Cómo reservar y pagar",
+          "paragraphs": [
+            "Elige las fechas y las horas de recogida y devolución en el calendario de campervlc.com, añade las opciones y paga con tarjeta. Puedes pagar el 50 % al reservar y el resto al recoger, o el 100 % con un 5 % de descuento. Recibirás por email la confirmación con tu número de reserva.",
+            "Con ese número y tu email puedes cambiar las fechas o añadir opciones desde la página de gestión de la reserva, hasta 48 horas antes de la entrega."
+          ]
+        },
+        {
+          "h2": "Cancelación",
+          "paragraphs": [
+            "Puedes cancelar gratis durante las 24 horas siguientes a la reserva si faltan más de 7 días para la entrega. Después, el importe que retenemos depende de la antelación:"
+          ],
+          "list": [
+            "Más de 30 días antes de la entrega: 10 %.",
+            "Entre 30 y 15 días: 30 %.",
+            "Entre 14 y 7 días: 50 %.",
+            "Menos de 7 días o no presentación: 100 %."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Qué carnet necesito para conducir la autocaravana?",
+          "a": "El permiso B normal, con más de 2 años de antigüedad y una edad mínima de 25 años. Si no resides en la UE, también el permiso internacional. La autocaravana mide 3,30 m de altura, así que conviene revisar la altura de parkings y túneles."
+        },
+        {
+          "q": "¿Cuántas personas caben?",
+          "a": "Tiene 5 plazas para viajar y 5 para dormir, y una carga máxima de 500 kg entre pasajeros y equipaje."
+        },
+        {
+          "q": "¿Puedo viajar con mi perro?",
+          "a": "Sí. Las mascotas viajan sin coste adicional. Si a la devolución hay olor a tabaco o a animales que requiera un tratamiento especial, se factura el coste real, con un máximo de 300 €."
+        },
+        {
+          "q": "¿Qué pasa si devuelvo la autocaravana más tarde?",
+          "a": "Si eliges la hora de devolución al reservar, una devolución de hasta 6 horas después de la hora de recogida cuesta el 50 % de una jornada de alquiler y de más de 6 horas, una jornada completa. Un retraso no pactado se penaliza con 50 € por hora, así que avísanos siempre."
+        },
+        {
+          "q": "¿Cómo se paga?",
+          "a": "La reserva se paga online con tarjeta bancaria, de forma segura a través de Stripe: el 50 % al reservar y el resto al recoger, o el 100 % con un 5 % de descuento. La fianza de 900 € se abona antes de la entrega, preferentemente con preautorización en tarjeta."
+        }
+      ],
+      "cta": {
+        "text": "Consulta el precio exacto de tus fechas y reserva en minutos.",
+        "button": "Ver disponibilidad y reservar"
+      }
+    },
+    "mejor-epoca-autocaravana-valencia": {
+      "metaTitle": "Mejor época para viajar en autocaravana por Valencia: temporadas y precios 2027 | Camper Retreat VLC",
+      "metaDescription": "Cuándo alquilar una autocaravana en Valencia: temporadas baja, media, alta y superalta de 2027, precios por noche, estancia mínima, Fallas, Semana Santa y verano.",
+      "h1": "Mejor época para viajar en autocaravana por Valencia: temporadas y precios 2027",
+      "intro": "Valencia y la costa mediterránea se pueden recorrer en autocaravana todo el año. Lo que cambia con la fecha es el ambiente, la afluencia y el precio. Esta guía te ayuda a elegir cuándo viajar y muestra el calendario de temporadas de nuestra autocaravana en 2027.",
+      "updated": "octubre de 2026",
+      "sections": [
+        {
+          "h2": "Un destino para todo el año",
+          "paragraphs": [
+            "El invierno en la costa valenciana es suave, el verano es caluroso y húmedo, y primavera y otoño son los meses más cómodos para dormir en la autocaravana sin depender del aire acondicionado. Nuestra autocaravana lleva aire acondicionado y calefacción, por lo que se puede viajar con comodidad en cualquier estación."
+          ]
+        },
+        {
+          "h2": "Temporada baja (99 € por noche, mínimo 3 noches)",
+          "paragraphs": [
+            "Es la época más tranquila y económica, ideal para viajar sin prisa y con poca gente en las playas y en las áreas de servicio. En 2027 la temporada baja cubre estas fechas:"
+          ],
+          "list": [
+            "Del 7 al 21 de enero.",
+            "Del 25 de enero al 14 de marzo.",
+            "Del 22 al 24 de marzo.",
+            "Del 19 al 28 de octubre.",
+            "Del 2 de noviembre al 2 de diciembre."
+          ]
+        },
+        {
+          "h2": "Temporada media (125 € por noche, mínimo 3 noches)",
+          "paragraphs": [
+            "La primavera y el inicio del otoño ofrecen buen tiempo y precios intermedios. Fechas de 2027:"
+          ],
+          "list": [
+            "Del 6 al 28 de abril.",
+            "Del 4 al 31 de mayo.",
+            "Del 13 de septiembre al 7 de octubre.",
+            "Del 9 al 21 de diciembre."
+          ]
+        },
+        {
+          "h2": "Temporada alta (155 € por noche, mínimo 4 noches)",
+          "paragraphs": [
+            "Incluye las fiestas y puentes de más demanda y el verano. Reserva con antelación para estas fechas de 2027:"
+          ],
+          "list": [
+            "Del 22 al 24 de enero (puente de San Vicente Mártir).",
+            "Del 15 al 21 de marzo (Fallas).",
+            "Del 25 de marzo al 5 de abril (Semana Santa).",
+            "Del 29 de abril al 3 de mayo.",
+            "Del 1 de junio al 31 de julio.",
+            "Del 1 al 12 de septiembre.",
+            "Del 8 al 18 de octubre (puente de octubre).",
+            "Del 29 de octubre al 1 de noviembre.",
+            "Del 3 al 8 de diciembre."
+          ]
+        },
+        {
+          "h2": "Temporada superalta (169 € por noche, mínimo 5 noches)",
+          "paragraphs": [
+            "Son las fechas de máxima demanda:"
+          ],
+          "list": [
+            "Del 22 de diciembre al 6 de enero (Navidad y Año Nuevo).",
+            "Todo el mes de agosto."
+          ]
+        },
+        {
+          "h2": "Consejos para elegir fecha",
+          "paragraphs": [
+            "Los precios son por noche y se suma el 21 % de IVA. Si puedes elegir, viaja fuera de los puentes y del verano: ahorras en la tarifa y encuentras más sitio en las áreas. Las estancias de 7 noches o más tienen un 5 % de descuento, las de 14 noches o más un 10 %, y pagar el 100 % al reservar suma otro 5 %.",
+            "Para Fallas, Semana Santa, el puente de octubre y agosto conviene reservar con varios meses de antelación, porque el calendario se llena pronto. Puedes consultar la disponibilidad real en el calendario de reserva de campervlc.com. Para ideas de itinerarios consulta nuestras rutas en autocaravana desde Valencia."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Cuándo es más barato alquilar una autocaravana en Valencia?",
+          "a": "En temporada baja (99 € por noche en 2027): enero, febrero y gran parte de marzo, finales de octubre y noviembre. Además, las estancias de 7 y 14 noches tienen descuentos del 5 % y del 10 %."
+        },
+        {
+          "q": "¿Con cuánta antelación hay que reservar?",
+          "a": "Para Fallas, Semana Santa, verano y puentes, lo recomendable es hacerlo con meses de antelación. El resto del año suele haber disponibilidad con menos tiempo; se puede reservar hasta 24 horas antes de la recogida."
+        },
+        {
+          "q": "¿Las temporadas son las mismas todos los años?",
+          "a": "No. Las fechas de este calendario son las de 2027 y siguen las fiestas y puentes oficiales de Valencia, que cambian cada año. El calculador de reserva siempre muestra el precio exacto de tus fechas."
+        }
+      ],
+      "cta": {
+        "text": "Elige tus fechas y mira el precio exacto antes de pagar.",
+        "button": "Ver calendario de reservas"
+      }
+    },
+    "autocaravana-5-plazas-valencia": {
+      "metaTitle": "Autocaravana 5 plazas con ducha, A/C y pet friendly en Valencia: equipamiento | Camper Retreat VLC",
+      "metaDescription": "Ficha de la autocaravana McLouis Yearling 89 para alquilar en Valencia: 5 plazas, aire acondicionado, calefacción, ducha, WC, nevera con congelador, Smart TV y equipamiento incluido.",
+      "h1": "Autocaravana de 5 plazas con ducha, aire acondicionado y pet friendly en Valencia",
+      "intro": "Esta es la ficha completa de la autocaravana que alquilamos en Valencia: una McLouis Yearling 89 sobre Renault Master de 2024, pensada para viajar hasta 5 personas con todo el equipamiento incluido.",
+      "updated": "octubre de 2026",
+      "sections": [
+        {
+          "h2": "Datos del vehículo",
+          "paragraphs": [],
+          "list": [
+            "Modelo: McLouis Yearling 89 sobre Renault Master (2024), diésel.",
+            "5 plazas para viajar y 5 para dormir.",
+            "Altura: 3,30 m. Carga máxima (pasajeros y equipaje): 500 kg.",
+            "Aire acondicionado, calefacción, nevera con congelador, agua caliente, ducha y WC.",
+            "Placa solar y batería de alta capacidad.",
+            "Smart TV de 24 pulgadas."
+          ]
+        },
+        {
+          "h2": "Cocina y menaje",
+          "paragraphs": [
+            "El menaje de cocina está incluido en el precio: platos, vasos, tazas de café, cucharas y cucharillas de café, tenedores, cuchillos de mesa, de cocina y de sierra, tabla de cortar de madera, espátulas, 3 sartenes, cacerola mediana, cacerola con tapa de cristal, ensaladera, sacacorchos y cafetera italiana."
+          ]
+        },
+        {
+          "h2": "Dormir",
+          "paragraphs": [
+            "Almohadas y mantas incluidas. Si prefieres ropa de cama, puedes añadirla a la reserva por 20 € (toallas de baño, 15 €)."
+          ]
+        },
+        {
+          "h2": "Equipamiento exterior",
+          "paragraphs": [
+            "Dos mesas y cuatro sillas de camping, tres sillas de playa, sombrilla y toldo, para disfrutar de la parada fuera de la autocaravana. Como opción por reserva puedes añadir bicicleta (90 €), tabla SUP (90 €) y barbacoa (15 €)."
+          ]
+        },
+        {
+          "h2": "Todo incluido para empezar",
+          "paragraphs": [
+            "Dos bombonas de gas para la nevera, la calefacción, el agua caliente y la cocina de gas, y cápsulas para el WC químico. Kit de bienvenida con papel higiénico, café y jabón. 100 km por noche incluidos y aparcamiento gratuito de tu coche en nuestras instalaciones durante el alquiler."
+          ]
+        },
+        {
+          "h2": "Pet friendly y viajes en familia",
+          "paragraphs": [
+            "Las mascotas viajan sin coste adicional. Disponemos de silla infantil gratuita, bajo petición, para viajar con niños."
+          ]
+        },
+        {
+          "h2": "Recogida y primeros pasos",
+          "paragraphs": [
+            "La recogida y la devolución son en Carrer de Nino Bravo, 3, Valencia. En la entrega firmamos el acta con el estado de la autocaravana y te explicamos el funcionamiento de todos los equipos. Si tienes dudas, puedes escribirnos por WhatsApp."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Se puede dormir en la autocaravana 5 personas?",
+          "a": "Sí, tiene 5 plazas para dormir y 5 para viajar. La carga máxima de pasajeros y equipaje es de 500 kg."
+        },
+        {
+          "q": "¿Tiene ducha y WC?",
+          "a": "Sí: ducha con agua caliente y WC con casete. Se devuelve con el casete vaciado y limpio."
+        },
+        {
+          "q": "¿Tiene aire acondicionado y calefacción?",
+          "a": "Sí, la autocaravana lleva aire acondicionado y calefacción, además de nevera con congelador."
+        },
+        {
+          "q": "¿Es pet friendly?",
+          "a": "Sí. Las mascotas son bienvenidas sin coste adicional."
+        }
+      ],
+      "cta": {
+        "text": "Reserva la autocaravana y revisa el precio exacto de tus fechas.",
+        "button": "Ver disponibilidad y reservar"
+      }
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "ui": {
+    "label": "Gidsen",
+    "allGuides": "Alle gidsen",
+    "updated": "Bijgewerkt",
+    "faqTitle": "Veelgestelde vragen",
+    "moreGuides": "Meer gidsen",
+    "routes": "Camperroutes vanuit Valencia",
+    "breadcrumbHome": "Home",
+    "book": "Nu boeken",
+    "indexTitle": "Gidsen voor camper huren in Valencia",
+    "indexDescription": "Voorwaarden, prijzen per seizoen, de beste reistijd en de uitrusting van onze McLouis-camper voor 5 personen in Valencia."
+  },
+  "guides": {
+    "alquilar-autocaravana-valencia": {
+      "metaTitle": "Camper huren Valencia: voorwaarden, prijs, borg | Camper Retreat VLC",
+      "metaDescription": "Camper huren in Valencia: leeftijd, rijbewijs, prijs per nacht, wat inbegrepen is, borg van € 900, kilometers en annulering. Alles op een rij.",
+      "h1": "Camper huren in Valencia: voorwaarden, prijs en borg",
+      "intro": "Wil je een camper huren in Valencia? Deze gids zet op een rij wat je moet weten voordat je boekt: wie mag rijden, wat een nacht kost, wat er bij de prijs inbegrepen is, hoe de borg werkt en wat er gebeurt als je plannen veranderen. De gegevens gelden voor onze camper, een McLouis Yearling 89 voor maximaal 5 personen.",
+      "updated": "oktober 2026",
+      "sections": [
+        {
+          "h2": "Wat heb je nodig om een camper te huren",
+          "paragraphs": [
+            "Om de camper te huren is een gewoon rijbewijs B voldoende; je hebt geen speciaal rijbewijs nodig."
+          ],
+          "list": [
+            "Minimumleeftijd van 25 jaar voor de hoofdhuurder en voor elke extra bestuurder.",
+            "Rijbewijs B dat je langer dan 2 jaar hebt. Woon je buiten de EU, dan ook een internationaal rijbewijs.",
+            "Een bankpas of creditcard om de boeking online te betalen en voor de borg van € 900.",
+            "Ophalen en terugbrengen aan de Carrer de Nino Bravo, 3, Valencia."
+          ]
+        },
+        {
+          "h2": "Wat kost een camper huren in Valencia",
+          "paragraphs": [
+            "De prijs hangt af van het seizoen. Dit zijn de prijzen per nacht, exclusief btw (daar komt 21% bij), met de minimale huurperiode per seizoen:"
+          ],
+          "list": [
+            "Laagseizoen: € 99 per nacht, minimaal 3 nachten.",
+            "Middenseizoen: € 125 per nacht, minimaal 3 nachten.",
+            "Hoogseizoen: € 155 per nacht, minimaal 4 nachten.",
+            "Piekseizoen (kerst en augustus): € 169 per nacht, minimaal 5 nachten."
+          ]
+        },
+        {
+          "h2": "Kortingen",
+          "paragraphs": [
+            "Kortingen zijn bij elkaar op te tellen. Hoe langer je huurt, hoe lager het tarief per nacht:"
+          ],
+          "list": [
+            "5% korting vanaf 7 nachten en 10% vanaf 14 nachten.",
+            "Nog eens 5% extra als je bij het boeken 100% van de boeking betaalt.",
+            "Tijdelijke kortingscodes, die je in de prijscalculator invoert voordat je betaalt."
+          ]
+        },
+        {
+          "h2": "Twee echte voorbeelden",
+          "paragraphs": [
+            "7 nachten in februari 2027 (laagseizoen), met 100% betaling bij het boeken: € 814 inclusief btw, ongeveer € 116 per nacht. Inclusief de eindschoonmaak van € 50 en de kortingen van 5% voor de huurduur en 5% voor volledige betaling.",
+            "7 nachten in juli 2027 (hoogseizoen), met 50% betaling bij het boeken: € 1.308 inclusief btw, waarvan je € 654 betaalt bij het boeken en de rest bij het ophalen van de camper. De exacte totalen voor jouw data zie je in de boekingscalculator."
+          ]
+        },
+        {
+          "h2": "Wat is inbegrepen bij de prijs",
+          "paragraphs": [
+            "De eindprijs is inclusief btw en de volgende zaken:"
+          ],
+          "list": [
+            "Allriskverzekering met een eigen risico van € 900 (€ 600 met de optie verlaagd eigen risico, € 60 per boeking).",
+            "100 km per huurnacht.",
+            "Pechhulp onderweg en de mobiliteitsgarantie van de fabrikant.",
+            "Twee gasflessen en tabs voor het chemische toilet.",
+            "Gratis parkeren van je eigen auto op ons terrein tijdens de huurperiode.",
+            "Huisdieren zonder extra kosten.",
+            "Campingtafel en -stoelen, drie strandstoelen, parasol en luifel, smart-tv, keukengerei, kussens en dekens."
+          ]
+        },
+        {
+          "h2": "Kilometers, brandstof en extra opties",
+          "paragraphs": [
+            "Elke nacht is inclusief 100 km. Ga je verder, dan kun je 200 km per nacht bijboeken (€ 20 per nacht) of onbeperkt kilometers (€ 40 per nacht). Kilometers boven het geboekte aantal kosten € 0,30 per km.",
+            "Je krijgt de camper met een volle tank mee en levert hem ook zo weer in. Je brengt hem verder schoon van binnen terug, met de grijswatertank en de toiletcassette geleegd en de schoonwatertank gevuld.",
+            "In de calculator kun je per boeking opties toevoegen: transfer van/naar het vliegveld (€ 90), fiets (€ 90), SUP-board (€ 90), extra bestuurder (€ 50), beddengoed (€ 20), handdoeken (€ 15) en barbecue (€ 15)."
+          ]
+        },
+        {
+          "h2": "Borg en verzekering",
+          "paragraphs": [
+            "De borg bedraagt € 900 en betaal je voor de overdracht, bij voorkeur als pre-autorisatie op de creditcard van de hoofdbestuurder. Na inspectie van de camper krijg je de borg binnen maximaal 14 werkdagen na het terugbrengen terug, mits de camper in dezelfde staat is als bij de overdracht. De verzekering is allrisk: bij schade betaal je maximaal het geldende eigen risico, € 900 of € 600 als je het verlaagde eigen risico afsluit."
+          ]
+        },
+        {
+          "h2": "Boeken en betalen",
+          "paragraphs": [
+            "Kies je data en de tijden voor ophalen en terugbrengen in de kalender op campervlc.com, voeg opties toe en betaal met je kaart. Je kunt 50% betalen bij het boeken en de rest bij het ophalen, of 100% met 5% korting. Je ontvangt per e-mail een bevestiging met je boekingsnummer.",
+            "Met dat nummer en je e-mailadres kun je via de pagina Boeking beheren je data wijzigen of opties toevoegen, tot 48 uur voor de overdracht."
+          ]
+        },
+        {
+          "h2": "Annuleren",
+          "paragraphs": [
+            "Je kunt binnen 24 uur na het boeken gratis annuleren als de overdracht nog meer dan 7 dagen weg is. Daarna hangt het bedrag dat we inhouden af van hoe ver vooruit je annuleert:"
+          ],
+          "list": [
+            "Meer dan 30 dagen voor de overdracht: 10%.",
+            "Tussen 30 en 15 dagen: 30%.",
+            "Tussen 14 en 7 dagen: 50%.",
+            "Minder dan 7 dagen of niet komen opdagen: 100%."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Welk rijbewijs heb ik nodig om de camper te besturen?",
+          "a": "Een gewoon rijbewijs B dat je langer dan 2 jaar hebt, en je moet minimaal 25 jaar oud zijn. Woon je buiten de EU, dan ook een internationaal rijbewijs. De camper is 3,30 m hoog, dus let op de doorrijhoogte van parkeergarages en tunnels."
+        },
+        {
+          "q": "Met hoeveel personen kun je erin?",
+          "a": "Hij heeft 5 zitplaatsen en 5 slaapplaatsen, en een maximaal laadvermogen van 500 kg voor passagiers en bagage samen."
+        },
+        {
+          "q": "Mag mijn hond mee?",
+          "a": "Ja. Huisdieren reizen mee zonder extra kosten. Ruikt de camper bij het terugbrengen naar tabak of dieren en is een speciale behandeling nodig, dan rekenen we de werkelijke kosten, tot maximaal € 300."
+        },
+        {
+          "q": "Wat gebeurt er als ik de camper later terugbreng?",
+          "a": "Kies je bij het boeken een latere terugbrengtijd, dan kost terugbrengen tot 6 uur na het ophaaltijdstip 50% van een huurdag, en meer dan 6 uur later een volledige huurdag. Een niet afgesproken vertraging kost € 50 per uur, dus laat het ons altijd weten."
+        },
+        {
+          "q": "Hoe betaal ik?",
+          "a": "Je betaalt de boeking online met je bankpas of creditcard, veilig via Stripe: 50% bij het boeken en de rest bij het ophalen, of 100% met 5% korting. De borg van € 900 betaal je voor de overdracht, bij voorkeur via een pre-autorisatie op je creditcard."
+        }
+      ],
+      "cta": {
+        "text": "Bekijk de exacte prijs voor jouw data en boek in een paar minuten.",
+        "button": "Beschikbaarheid bekijken en boeken"
+      }
+    },
+    "mejor-epoca-autocaravana-valencia": {
+      "metaTitle": "Beste reistijd camper Valencia: prijzen 2027 | Camper Retreat VLC",
+      "metaDescription": "Wanneer huur je een camper in Valencia? Laag-, midden-, hoog- en piekseizoen 2027, prijzen per nacht, minimale huur, Fallas, Pasen en zomer.",
+      "h1": "Beste reistijd voor een camperreis in Valencia: seizoenen en prijzen 2027",
+      "intro": "Valencia en de Middellandse Zeekust kun je het hele jaar door met de camper verkennen. Wat met de datum verandert, zijn de sfeer, de drukte en de prijs. Deze gids helpt je kiezen wanneer je gaat en laat de seizoenskalender van onze camper voor 2027 zien.",
+      "updated": "oktober 2026",
+      "sections": [
+        {
+          "h2": "Een bestemming voor het hele jaar",
+          "paragraphs": [
+            "De winter aan de Valenciaanse kust is mild, de zomer heet en vochtig, en in het voorjaar en het najaar slaap je het prettigst in de camper zonder airco nodig te hebben. Onze camper heeft airco en verwarming, dus je reist in elk seizoen comfortabel."
+          ]
+        },
+        {
+          "h2": "Laagseizoen (€ 99 per nacht, minimaal 3 nachten)",
+          "paragraphs": [
+            "De rustigste en voordeligste periode, ideaal om zonder haast te reizen, met weinig mensen op de stranden en op de camperplaatsen. In 2027 valt het laagseizoen op deze data:"
+          ],
+          "list": [
+            "7 t/m 21 januari.",
+            "25 januari t/m 14 maart.",
+            "22 t/m 24 maart.",
+            "19 t/m 28 oktober.",
+            "2 november t/m 2 december."
+          ]
+        },
+        {
+          "h2": "Middenseizoen (€ 125 per nacht, minimaal 3 nachten)",
+          "paragraphs": [
+            "Het voorjaar en het begin van de herfst bieden mooi weer en gemiddelde prijzen. Data in 2027:"
+          ],
+          "list": [
+            "6 t/m 28 april.",
+            "4 t/m 31 mei.",
+            "13 september t/m 7 oktober.",
+            "9 t/m 21 december."
+          ]
+        },
+        {
+          "h2": "Hoogseizoen (€ 155 per nacht, minimaal 4 nachten)",
+          "paragraphs": [
+            "Hieronder vallen de drukste feestdagen, lange weekenden en de zomer. Boek ruim op tijd voor deze data in 2027:"
+          ],
+          "list": [
+            "22 t/m 24 januari (lang weekend van San Vicente Mártir).",
+            "15 t/m 21 maart (Fallas, het grote vuurwerk- en beeldenfeest van Valencia).",
+            "25 maart t/m 5 april (Semana Santa, de Goede Week rond Pasen).",
+            "29 april t/m 3 mei.",
+            "1 juni t/m 31 juli.",
+            "1 t/m 12 september.",
+            "8 t/m 18 oktober (lang weekend in oktober).",
+            "29 oktober t/m 1 november.",
+            "3 t/m 8 december."
+          ]
+        },
+        {
+          "h2": "Piekseizoen (€ 169 per nacht, minimaal 5 nachten)",
+          "paragraphs": [
+            "Dit zijn de data met de meeste vraag:"
+          ],
+          "list": [
+            "22 december t/m 6 januari (kerst en oud en nieuw).",
+            "De hele maand augustus."
+          ]
+        },
+        {
+          "h2": "Tips om je reisdata te kiezen",
+          "paragraphs": [
+            "De prijzen zijn per nacht, exclusief 21% btw. Kun je kiezen, reis dan buiten de lange weekenden en de zomer: je bespaart op het tarief en vindt makkelijker een plek op de camperplaatsen. Huur je 7 nachten of langer, dan krijg je 5% korting, vanaf 14 nachten 10%, en wie bij het boeken 100% betaalt, krijgt daar nog eens 5% bij.",
+            "Voor Fallas, Semana Santa, het lange weekend in oktober en augustus kun je het best enkele maanden van tevoren boeken, want de kalender raakt snel vol. De actuele beschikbaarheid zie je in de boekingskalender op campervlc.com. Inspiratie voor je reisroute vind je in onze camperroutes vanuit Valencia."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Wanneer is een camper huren in Valencia het goedkoopst?",
+          "a": "In het laagseizoen (€ 99 per nacht in 2027): januari, februari en een groot deel van maart, eind oktober en november. Bovendien krijg je bij 7 en 14 nachten huur 5% en 10% korting."
+        },
+        {
+          "q": "Hoe ver van tevoren moet ik boeken?",
+          "a": "Voor Fallas, Semana Santa, de zomer en lange weekenden boek je het best maanden van tevoren. In de rest van het jaar is er meestal ook op kortere termijn plek; je kunt boeken tot 24 uur voor het ophalen."
+        },
+        {
+          "q": "Zijn de seizoenen elk jaar hetzelfde?",
+          "a": "Nee. De data in deze kalender gelden voor 2027 en volgen de officiele feestdagen en lange weekenden van Valencia, die elk jaar verschuiven. De boekingscalculator toont altijd de exacte prijs voor jouw data."
+        }
+      ],
+      "cta": {
+        "text": "Kies je data en bekijk de exacte prijs voordat je betaalt.",
+        "button": "Boekingskalender bekijken"
+      }
+    },
+    "autocaravana-5-plazas-valencia": {
+      "metaTitle": "Camper 5 personen Valencia: douche, airco | Camper Retreat VLC",
+      "metaDescription": "Camper McLouis Yearling 89 te huur in Valencia: 5 personen, airco, verwarming, douche, toilet, koelkast met vriesvak, smart-tv en uitrusting inbegrepen.",
+      "h1": "Camper voor 5 personen met douche, airco en huisdieren welkom in Valencia",
+      "intro": "Dit zijn alle gegevens van de camper die we in Valencia verhuren: een McLouis Yearling 89 op een Renault Master uit 2024, gemaakt om met maximaal 5 personen te reizen, met alle uitrusting inbegrepen.",
+      "updated": "oktober 2026",
+      "sections": [
+        {
+          "h2": "Voertuiggegevens",
+          "paragraphs": [],
+          "list": [
+            "Model: McLouis Yearling 89 op Renault Master (2024), diesel.",
+            "5 zitplaatsen en 5 slaapplaatsen.",
+            "Hoogte: 3,30 m. Maximaal laadvermogen (passagiers en bagage): 500 kg.",
+            "Airco, verwarming, koelkast met vriesvak, warm water, douche en toilet.",
+            "Zonnepaneel en accu met hoge capaciteit.",
+            "Smart-tv van 24 inch."
+          ]
+        },
+        {
+          "h2": "Keuken en keukengerei",
+          "paragraphs": [
+            "Keukengerei is bij de prijs inbegrepen: borden, glazen, koffiekopjes, lepels en koffielepeltjes, vorken, tafelmessen, keukenmessen en kartelmessen, houten snijplank, spatels, 3 koekenpannen, middelgrote kookpan, kookpan met glazen deksel, slakom, kurkentrekker en percolator (Italiaans koffiepotje)."
+          ]
+        },
+        {
+          "h2": "Slapen",
+          "paragraphs": [
+            "Kussens en dekens zijn inbegrepen. Wil je liever beddengoed, dan kun je dat voor € 20 aan je boeking toevoegen (badhanddoeken € 15)."
+          ]
+        },
+        {
+          "h2": "Buitenuitrusting",
+          "paragraphs": [
+            "Twee tafels en vier campingstoelen, drie strandstoelen, parasol en luifel, om buiten de camper van je stop te genieten. Als optie per boeking kun je een fiets (€ 90), SUP-board (€ 90) en barbecue (€ 15) toevoegen."
+          ]
+        },
+        {
+          "h2": "Alles inbegrepen om meteen te vertrekken",
+          "paragraphs": [
+            "Twee gasflessen voor de koelkast, de verwarming, het warme water en het gasstel, en tabs voor het chemische toilet. Welkomstpakket met toiletpapier, koffie en zeep. 100 km per nacht inbegrepen en gratis parkeren van je eigen auto op ons terrein tijdens de huurperiode."
+          ]
+        },
+        {
+          "h2": "Huisdieren welkom en reizen met het gezin",
+          "paragraphs": [
+            "Huisdieren reizen mee zonder extra kosten. Op aanvraag hebben we gratis een kinderzitje, zodat je ook met kinderen kunt reizen."
+          ]
+        },
+        {
+          "h2": "Ophalen en eerste stappen",
+          "paragraphs": [
+            "Ophalen en terugbrengen doe je aan de Carrer de Nino Bravo, 3, Valencia. Bij de overdracht ondertekenen we samen het overdrachtsrapport met de staat van de camper en leggen we uit hoe alle apparatuur werkt. Heb je vragen, stuur ons dan een bericht via WhatsApp."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Kunnen er 5 personen in de camper slapen?",
+          "a": "Ja, hij heeft 5 slaapplaatsen en 5 zitplaatsen. Het maximale laadvermogen voor passagiers en bagage is 500 kg."
+        },
+        {
+          "q": "Heeft de camper een douche en toilet?",
+          "a": "Ja: een douche met warm water en een cassettetoilet. Je brengt de camper terug met de cassette geleegd en schoon."
+        },
+        {
+          "q": "Heeft de camper airco en verwarming?",
+          "a": "Ja, de camper heeft airco en verwarming, en daarnaast een koelkast met vriesvak."
+        },
+        {
+          "q": "Zijn huisdieren welkom?",
+          "a": "Ja. Huisdieren zijn welkom zonder extra kosten."
+        }
+      ],
+      "cta": {
+        "text": "Boek de camper en bekijk de exacte prijs voor jouw data.",
+        "button": "Beschikbaarheid bekijken en boeken"
+      }
+    }
+  }
+}

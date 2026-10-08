@@ -10,6 +10,7 @@ import {
   type Lang,
   type RouteContent,
 } from "@/data/routes-content";
+import { DEFAULT_LANGUAGE, resolveLanguage } from "@/i18n/language";
 
 export const Route = createFileRoute("/rutas/$slug")({
   head: ({ params }) => {
@@ -17,14 +18,21 @@ export const Route = createFileRoute("/rutas/$slug")({
     if (!route) return { meta: [{ title: "Ruta no encontrada" }] };
     const base = "https://campervlc.com";
     const langs: Lang[] = ["es", "en", "de", "it", "nl", "ru", "uk"];
+    // Rendered in the visitor's language on the server, with that language's own
+    // canonical (Spanish at the bare path, others at ?lang=xx) so every version can be indexed.
+    const lang = resolveLanguage() as Lang;
+    const urlFor = (l: Lang) => (l === DEFAULT_LANGUAGE ? `${base}/rutas/${params.slug}` : `${base}/rutas/${params.slug}?lang=${l}`);
     const ogImage = route.heroImage ? `${base}${route.heroImage}` : `${base}/images/og-home.jpg`;
-    const ogUrl = `${base}/rutas/${params.slug}`;
+    const ogUrl = urlFor(lang);
+    const metaTitle = route.metaTitle[lang] ?? route.metaTitle.es;
+    const metaDescription = route.metaDescription[lang] ?? route.metaDescription.es;
+    const heroTitle = route.heroTitle[lang] ?? route.heroTitle.es;
     return {
       meta: [
-        { title: route.metaTitle.es },
-        { name: "description", content: route.metaDescription.es },
-        { property: "og:title", content: route.metaTitle.es },
-        { property: "og:description", content: route.metaDescription.es },
+        { title: metaTitle },
+        { name: "description", content: metaDescription },
+        { property: "og:title", content: metaTitle },
+        { property: "og:description", content: metaDescription },
         { property: "og:type", content: "article" },
         { property: "og:url", content: ogUrl },
         { property: "og:image", content: ogImage },
@@ -32,21 +40,21 @@ export const Route = createFileRoute("/rutas/$slug")({
         { property: "og:image:height", content: "720" },
         { property: "og:site_name", content: "Camper Retreat VLC" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: route.metaTitle.es },
-        { name: "twitter:description", content: route.metaDescription.es },
+        { name: "twitter:title", content: metaTitle },
+        { name: "twitter:description", content: metaDescription },
         { name: "twitter:image", content: ogImage },
-        ...langs.map((l) => ({
+        ...langs.filter((l) => l !== lang).map((l) => ({
           property: "og:locale:alternate",
           content: l,
         })),
       ],
       links: [
-        { rel: "canonical", href: `${base}/rutas/${params.slug}` },
-        { rel: "alternate", hrefLang: "x-default", href: `${base}/rutas/${params.slug}` },
+        { rel: "canonical", href: ogUrl },
+        { rel: "alternate", hrefLang: "x-default", href: urlFor(DEFAULT_LANGUAGE) },
         ...langs.map((l) => ({
           rel: "alternate",
           hrefLang: l,
-          href: `${base}/rutas/${params.slug}?lang=${l}`,
+          href: urlFor(l),
         })),
       ],
       scripts: [
@@ -55,8 +63,8 @@ export const Route = createFileRoute("/rutas/$slug")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: route.heroTitle.es,
-            description: route.metaDescription.es,
+            headline: heroTitle,
+            description: metaDescription,
             author: {
               "@type": "Organization",
               name: "Camper Retreat VLC",
@@ -71,8 +79,8 @@ export const Route = createFileRoute("/rutas/$slug")({
                 url: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               },
             },
-            url: `${base}/rutas/${params.slug}`,
-            inLanguage: "es",
+            url: ogUrl,
+            inLanguage: lang,
           }),
         },
       ],

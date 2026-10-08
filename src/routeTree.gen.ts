@@ -18,6 +18,8 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ManageBookingRouteImport } from './routes/manage-booking'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as GuiasIndexRouteImport } from './routes/guias.index'
+import { Route as GuiasSlugRouteImport } from './routes/guias.$slug'
 import { Route as RutasSlugRouteImport } from './routes/rutas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +67,16 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuiasIndexRoute = GuiasIndexRouteImport.update({
+  id: '/guias/',
+  path: '/guias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuiasSlugRoute = GuiasSlugRouteImport.update({
+  id: '/guias/$slug',
+  path: '/guias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RutasSlugRoute = RutasSlugRouteImport.update({
   id: '/rutas/$slug',
   path: '/rutas/$slug',
@@ -81,7 +93,9 @@ export interface FileRoutesByFullPath {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/guias/': typeof GuiasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -93,7 +107,9 @@ export interface FileRoutesByTo {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/guias': typeof GuiasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,7 +122,9 @@ export interface FileRoutesById {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/guias/': typeof GuiasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,7 +138,9 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/guias/$slug'
     | '/rutas/$slug'
+    | '/guias/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -132,7 +152,9 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/guias/$slug'
     | '/rutas/$slug'
+    | '/guias'
   id:
     | '__root__'
     | '/'
@@ -144,7 +166,9 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/guias/$slug'
     | '/rutas/$slug'
+    | '/guias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,7 +181,9 @@ export interface RootRouteChildren {
   ManageBookingRoute: typeof ManageBookingRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  GuiasSlugRoute: typeof GuiasSlugRoute
   RutasSlugRoute: typeof RutasSlugRoute
+  GuiasIndexRoute: typeof GuiasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -225,6 +251,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guias/': {
+      id: '/guias/'
+      path: '/guias'
+      fullPath: '/guias/'
+      preLoaderRoute: typeof GuiasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guias/$slug': {
+      id: '/guias/$slug'
+      path: '/guias/$slug'
+      fullPath: '/guias/$slug'
+      preLoaderRoute: typeof GuiasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rutas/$slug': {
       id: '/rutas/$slug'
       path: '/rutas/$slug'
@@ -245,7 +285,9 @@ const rootRouteChildren: RootRouteChildren = {
   ManageBookingRoute: ManageBookingRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  GuiasSlugRoute: GuiasSlugRoute,
   RutasSlugRoute: RutasSlugRoute,
+  GuiasIndexRoute: GuiasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "check:content": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs",
-    "prebuild": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs",
+    "prebuild": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs && node scripts/check-guides.mjs",
     "test": "node --test shared/pricing.test.js shared/cancellation.test.js shared/booking-changes.test.js api/_lib/manage.test.js api/_lib/blob.test.js",
     "build": "vite build",
     "build:dev": "vite build --mode development",
