@@ -279,6 +279,11 @@
     "instagram": "Instagram",
     "whatsapp": "Message us on WhatsApp",
     "hours": "We reply in under 2 hours · Mon–Sun 9:00–21:00",
+    "pickup": "Pickup and return",
+    "map_open": "Open in Google Maps",
+    "map_route": "Get directions",
+    "map_alt": "Map showing Camper Retreat VLC at Carrer de Nino Bravo, 3, Valencia",
+    "map_credit": "Map © OpenStreetMap contributors",
     "soon_title": "Online booking coming soon",
     "soon_desc": "For now, drop us a WhatsApp message and we confirm availability in minutes."
   },

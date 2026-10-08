@@ -128,14 +128,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               telephone: "+34624038085",
               address: {
                 "@type": "PostalAddress",
+                streetAddress: "Carrer de Nino Bravo, 3",
+                postalCode: "46013",
                 addressLocality: "Valencia",
                 addressRegion: "Comunitat Valenciana",
                 addressCountry: "ES",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: 39.4699,
-                longitude: -0.3763,
+                latitude: 39.4570837,
+                longitude: -0.3583681,
               },
               sameAs: ["https://www.instagram.com/camper.retreat.vlc"],
               contactPoint: {
