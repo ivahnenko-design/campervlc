@@ -14,7 +14,7 @@ export function withIva(amount) {
 export const PRICES = {
   low: 90,    // Baja
   mid: 125,   // Medio
-  high: 155,  // Alta
+  high: 160,  // Alta
   super: 175, // Super Alta
 };
 

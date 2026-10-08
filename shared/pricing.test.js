@@ -13,8 +13,8 @@ import {
 } from "./pricing.js";
 
 const oct7 = new Date(2026, 9, 7);   // mid season (Oct 5–7): 125 €
-const oct12 = new Date(2026, 9, 12); // high season (Oct 8–18): 155 €
-const NIGHTS_OCT7_12 = 125 + 155 * 4; // 745
+const oct12 = new Date(2026, 9, 12); // high season (Oct 8–18): 160 €
+const NIGHTS_OCT7_12 = 125 + 160 * 4; // 765
 
 test("time options run 09:00–20:00 in 30-minute steps", () => {
   assert.equal(TIME_OPTIONS[0], "09:00");
@@ -50,17 +50,17 @@ test("spec example 1: Oct 7 10:00 → Oct 12 14:00 = 5 nights + 50% of return-da
   assert.equal(p.nights, 5);
   assert.equal(p.excessHours, 4);
   assert.equal(p.surchargePct, 50);
-  assert.equal(getPriceForDate(oct12), 155);
-  assert.equal(p.surcharge, Math.round(155 * 0.5)); // 78
-  assert.equal(p.subtotal, NIGHTS_OCT7_12 + 78);
+  assert.equal(getPriceForDate(oct12), 160);
+  assert.equal(p.surcharge, Math.round(160 * 0.5)); // 80
+  assert.equal(p.subtotal, NIGHTS_OCT7_12 + 80);
 });
 
 test("spec example 2: Oct 7 10:00 → Oct 12 18:00 = 6 nights' worth", () => {
   const p = calculatePrice(oct7, oct12, "10:00", "18:00");
   assert.equal(p.excessHours, 8);
   assert.equal(p.surchargePct, 100);
-  assert.equal(p.surcharge, 155);
-  assert.equal(p.subtotal, NIGHTS_OCT7_12 + 155);
+  assert.equal(p.surcharge, 160);
+  assert.equal(p.subtotal, NIGHTS_OCT7_12 + 160);
 });
 
 test("long-stay discount applies to subtotal including the surcharge", () => {
@@ -83,7 +83,7 @@ test("quote: promo and prepayment discounts run after extras, on the surcharged 
     promoCode: "camper10",
     prepaymentOption: "full",
   });
-  const base = NIGHTS_OCT7_12 + 78;             // 823, no long-stay discount at 5 nights
+  const base = NIGHTS_OCT7_12 + 80;             // 845, no long-stay discount at 5 nights
   const extras = 20 * 5 + 20;                   // km_200 per night + bedding
   const pre = base + extras + 50;               // + cleaning
   const promo = Math.round(pre * 0.1);
