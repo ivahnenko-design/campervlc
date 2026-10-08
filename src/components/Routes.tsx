@@ -23,8 +23,8 @@ export function Routes() {
           {ROUTES.map((r, i) => (
             <motion.article
               key={r.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 24 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className={`relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br ${r.gradient} bg-surface p-6 sm:p-8`}

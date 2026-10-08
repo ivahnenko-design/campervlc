@@ -29,8 +29,8 @@ export function Reviews() {
           {REVIEWS.map((r, i) => (
             <motion.article
               key={r.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 24 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="flex break-inside-avoid flex-col rounded-2xl border border-border/60 bg-surface p-6"

@@ -21,8 +21,8 @@ export function Fleet() {
           {FLEET.map((c, i) => (
             <motion.article
               key={c.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 30 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="group overflow-hidden rounded-2xl border border-border/60 bg-surface"
@@ -362,8 +362,8 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
 export function SectionHeader({ title, subtitle, eyebrow }: { title: string; subtitle?: string; eyebrow?: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 20 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5 }}
       className="max-w-2xl"

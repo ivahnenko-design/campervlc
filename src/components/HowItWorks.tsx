@@ -19,8 +19,8 @@ export function HowItWorks() {
           {steps.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 24 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="relative rounded-2xl border border-border/60 bg-surface p-6"
