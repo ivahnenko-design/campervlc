@@ -412,6 +412,9 @@
   },
   "manage": {
     "title": "Manage your booking",
+    "review_title": "How was your trip?",
+    "review_text": "Thank you for travelling with us. Your review helps other travellers and helps us improve. It takes a minute on Google.",
+    "review_btn": "Write a Google review",
     "intro": "Enter your booking reference and the email you used when booking.",
     "ref": "Booking reference",
     "email": "Email",

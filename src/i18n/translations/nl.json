@@ -412,6 +412,9 @@
   },
   "manage": {
     "title": "Beheer je boeking",
+    "review_title": "Hoe was jullie reis?",
+    "review_text": "Bedankt dat jullie met ons op pad gingen. Jullie review helpt andere reizigers en helpt ons beter te worden. Het kost een minuut op Google.",
+    "review_btn": "Schrijf een Google-review",
     "intro": "Vul je boekingsnummer in en het e-mailadres waarmee je hebt geboekt.",
     "ref": "Boekingsnummer",
     "email": "E-mail",

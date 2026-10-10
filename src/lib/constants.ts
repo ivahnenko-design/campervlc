@@ -13,3 +13,6 @@ export const PICKUP_LAT = 39.4570837;
 export const PICKUP_LNG = -0.3583681;
 export const MAPS_OPEN_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(PICKUP_ADDRESS)}`;
 export const MAPS_ROUTE_URL = `https://www.google.com/maps/dir/?api=1&destination=${PICKUP_LAT},${PICKUP_LNG}`;
+
+// Google review form of the business profile (g.page short link).
+export const GOOGLE_REVIEW_URL = "https://g.page/r/CZURsHE9aJOhEBM/review";

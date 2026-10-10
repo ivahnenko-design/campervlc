@@ -412,6 +412,9 @@
   },
   "manage": {
     "title": "Gestisci la tua prenotazione",
+    "review_title": "Com'è andato il viaggio?",
+    "review_text": "Grazie per aver viaggiato con noi. La tua recensione aiuta gli altri viaggiatori e noi a migliorare. Su Google basta un minuto.",
+    "review_btn": "Scrivi una recensione su Google",
     "intro": "Inserisci il numero di prenotazione e l'email usata al momento della prenotazione.",
     "ref": "Numero di prenotazione",
     "email": "Email",

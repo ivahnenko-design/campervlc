@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { CheckCircle, Loader2 } from "lucide-react";
+import { track } from "@/lib/analytics";
+import { GOOGLE_REVIEW_URL } from "@/lib/constants";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Field, inputCls } from "@/components/GuestForm";
@@ -286,6 +288,22 @@ function ManageBookingPage() {
               </p>
             )}
             {booking.pendingPayment && <p className="text-sm text-muted-foreground">{t("manage.pending")}</p>}
+
+            {booking.status !== "cancelled" && !booking.pendingPayment && booking.endDate < new Date().toISOString().slice(0, 10) && (
+              <section className="rounded-2xl border border-primary/30 bg-primary/5 p-5">
+                <h2 className="font-display text-lg">{t("manage.review_title")}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">{t("manage.review_text")}</p>
+                <a
+                  href={GOOGLE_REVIEW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("click_review", { place: "manage_booking" })}
+                  className="mt-4 inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:brightness-110 transition"
+                >
+                  {t("manage.review_btn")}
+                </a>
+              </section>
+            )}
 
             {booking.canSelfServe && !booking.pendingPayment && !done && (
               <section className="space-y-4 rounded-2xl border border-border/60 bg-surface p-5">

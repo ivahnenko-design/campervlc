@@ -412,6 +412,9 @@
   },
   "manage": {
     "title": "Buchung verwalten",
+    "review_title": "Wie war eure Reise?",
+    "review_text": "Danke, dass ihr mit uns unterwegs wart. Eure Bewertung hilft anderen Reisenden und uns, besser zu werden. Bei Google dauert sie eine Minute.",
+    "review_btn": "Google-Bewertung schreiben",
     "intro": "Gib deine Buchungsnummer und die bei der Buchung verwendete E-Mail-Adresse ein.",
     "ref": "Buchungsnummer",
     "email": "E-Mail",
