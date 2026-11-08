@@ -100,8 +100,18 @@
 .season-cell {
   --c: 251 191 36;
   border-radius: 8px;
-  background: color-mix(in oklab, rgb(var(--c)) 30%, #152236);
-  border: 1px solid color-mix(in oklab, rgb(var(--c)) 70%, #2e3a4e);
+  background: rgb(var(--c));
+  color: #0d1b2a;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.season-cell:hover,
+.season-cell[aria-expanded="true"] {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px #fff;
+  position: relative;
+  z-index: 5;
 }
 /* Legend swatch: the full-strength season colour */
 .season-dot {

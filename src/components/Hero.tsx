@@ -21,7 +21,7 @@ function Typewriter({ text, delay = 0 }: { text: string; delay?: number }) {
   // copy is purely visual.
   return (
     <>
-      <span className="sr-only">{text}</span>
+      <span className="sr-only">{text} </span>
       <span aria-hidden="true">{shown}<span className="inline-block w-[0.05em]" /></span>
     </>
   );

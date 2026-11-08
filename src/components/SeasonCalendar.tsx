@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MIN_NIGHTS, PRICES, getSeason, type Season } from "@/utils/pricing";
 import { guidesUi } from "@/data/guides";
 import type { LanguageCode } from "@/i18n/language";
@@ -19,6 +19,15 @@ const ORDER: Season[] = ["low", "mid", "high", "super"];
  */
 export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: LanguageCode }) {
   const ui = guidesUi(lang);
+  // "m-d" of the day whose price tooltip is open (hover on desktop, tap on touch).
+  const [open, setOpen] = useState<string | null>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(null);
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, [open]);
+  const fmtDay = useMemo(() => new Intl.DateTimeFormat(lang, { day: "numeric", month: "long" }), [lang]);
   const names: Record<Season, string> = { low: ui.calLow, mid: ui.calMid, high: ui.calHigh, super: ui.calPeak };
 
   const { months, weekdays } = useMemo(() => {
@@ -32,9 +41,9 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
     const months = Array.from({ length: 12 }, (_, m) => {
       const first = (new Date(year, m, 1).getDay() + 6) % 7;
       const count = new Date(year, m + 1, 0).getDate();
-      const days = Array.from({ length: count }, (_, i) => ({ day: i + 1, season: getSeason(new Date(year, m, i + 1)), weekend: (first + i) % 7 >= 5 }));
+      const days = Array.from({ length: count }, (_, i) => ({ day: i + 1, col: (first + i) % 7, season: getSeason(new Date(year, m, i + 1)), weekend: (first + i) % 7 >= 5 }));
       const label = month.format(new Date(year, m, 1));
-      return { label: label.charAt(0).toUpperCase() + label.slice(1), first, days };
+      return { m, label: label.charAt(0).toUpperCase() + label.slice(1), first, days };
     });
     return { months, weekdays };
   }, [lang, year]);
@@ -69,16 +78,40 @@ export function SeasonCalendar({ year = 2027, lang }: { year?: number; lang: Lan
               {Array.from({ length: m.first }, (_, i) => (
                 <div key={`e${i}`} />
               ))}
-              {m.days.map((d) => (
-                <span
-                  key={d.day}
-                  className={`season-cell flex aspect-square items-center justify-center font-mono-num text-[11px] sm:text-sm ${d.weekend ? "font-semibold text-primary" : "font-medium text-foreground"}`}
-                  style={{ ["--c" as string]: COLOR[d.season] }}
-                  aria-label={`${d.day} ${m.label}: ${names[d.season]}`}
-                >
-                  {d.day}
-                </span>
-              ))}
+              {m.days.map((d) => {
+                const key = `${m.m}-${d.day}`;
+                const isOpen = open === key;
+                const price = `${PRICES[d.season]} € · ${ui.calPerNight}`;
+                const align = d.col <= 1 ? "left-0" : d.col >= 5 ? "right-0" : "left-1/2 -translate-x-1/2";
+                return (
+                  <span key={d.day} className="relative block" onMouseEnter={() => setOpen(key)} onMouseLeave={() => setOpen((o) => (o === key ? null : o))}>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpen(isOpen ? null : key);
+                      }}
+                      aria-expanded={isOpen}
+                      className={`season-cell flex aspect-square w-full items-center justify-center font-mono-num text-[11px] sm:text-sm ${d.weekend ? "font-extrabold" : "font-medium"}`}
+                      style={{ ["--c" as string]: COLOR[d.season] }}
+                      aria-label={`${d.day} ${m.label}: ${names[d.season]}, ${price}`}
+                    >
+                      {d.day}
+                    </button>
+                    {isOpen && (
+                      <span
+                        role="tooltip"
+                        className={`pointer-events-none absolute bottom-full z-20 mb-2 whitespace-nowrap rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground shadow-xl ${align}`}
+                      >
+                        <span className="block font-semibold">
+                          {fmtDay.format(new Date(year, m.m, d.day))} · {names[d.season]}
+                        </span>
+                        <span className="block text-muted-foreground">{price}</span>
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ))}

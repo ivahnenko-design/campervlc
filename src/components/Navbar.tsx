@@ -26,6 +26,7 @@ export function Navbar() {
   const { t, i18n } = useTranslation();
   const guidesLabel = guidesUi(normalizeLanguage(i18n.language) ?? DEFAULT_LANGUAGE).label;
   const [scrolled, setScrolled] = useState(false);
+  const linkTone = scrolled ? "text-muted-foreground" : "text-foreground/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]";
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export function Navbar() {
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled || mobileOpen
           ? "bg-background/95 backdrop-blur-xl border-b border-border/60"
-          : "bg-transparent"
+          : "bg-gradient-to-b from-black/70 via-black/35 to-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,12 +75,12 @@ export function Navbar() {
               <a
                 key={s}
                 href={`/#${s}`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className={`text-sm hover:text-foreground transition-colors ${linkTone}`}
               >
                 {t(`nav.${s}`)}
               </a>
             ))}
-            <Link to="/guias" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/guias" className={`text-sm hover:text-foreground transition-colors ${linkTone}`}>
               {guidesLabel}
             </Link>
           </nav>
