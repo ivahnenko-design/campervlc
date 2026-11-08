@@ -17,7 +17,14 @@ function Typewriter({ text, delay = 0 }: { text: string; delay?: number }) {
     }, delay);
     return () => window.clearTimeout(start);
   }, [text, delay]);
-  return <>{shown}<span className="inline-block w-[0.05em]" /></>;
+  // The full text sits in the HTML for crawlers and screen readers; the typed
+  // copy is purely visual.
+  return (
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{shown}<span className="inline-block w-[0.05em]" /></span>
+    </>
+  );
 }
 
 export function Hero() {
@@ -40,8 +47,8 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pt-32 pb-44 sm:px-6 lg:px-8 lg:pb-56">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6 }}
           className="font-display text-4xl leading-[1.05] text-foreground sm:text-6xl lg:text-7xl text-balance max-w-4xl"
         >

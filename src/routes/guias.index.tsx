@@ -63,7 +63,7 @@ function GuidesIndex() {
                   params={{ slug: s }}
                   className="block rounded-2xl border border-border/60 bg-surface p-6 transition hover:border-primary/50"
                 >
-                  <span className="font-display text-xl text-foreground">{g.h1}</span>
+                  <h2 className="font-display text-xl text-foreground">{g.h1}</h2>
                   <span className="mt-2 block text-sm text-muted-foreground">{g.metaDescription}</span>
                 </Link>
               </li>
