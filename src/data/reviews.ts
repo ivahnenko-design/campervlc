@@ -1,6 +1,6 @@
 // Real reviews, copied unchanged from the sources below (original language,
 // no edits): Yescapa "Mis opiniones" and the Google Maps listing. Private
-// messages to the owner are not published. Verified 2026-10-08.
+// messages to the owner are not published. Verified 2026-11-09.
 export interface Review {
   name: string;
   rating: number;
@@ -18,6 +18,16 @@ const YESCAPA = "https://www.yescapa.es/campers/76347";
 const GOOGLE = "https://www.google.com/maps/search/Camper+Retreat+Carrer+de+Nino+Bravo+3+Valencia";
 
 export const REVIEWS: Review[] = [
+  {
+    name: "Dmitriy Kovalov",
+    rating: 5,
+    date: "2026-10-01",
+    lang: "en",
+    text: "Excellent service and a great overall experience! The motorhome was in excellent technical condition, clean, and well prepared for the trip. The company is professional, attentive, and clearly cares about the quality of its service and customer satisfaction. Highly recommended for anyone looking for a reliable and hassle-free motorhome rental experience!",
+    source: "Google",
+    url: GOOGLE,
+    color: "from-cyan-500 to-blue-500",
+  },
   {
     name: "Марика И.",
     rating: 5,
