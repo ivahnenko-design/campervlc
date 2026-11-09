@@ -26,7 +26,6 @@ export function lateReturnSurchargePct(hours: number): 0 | 50 | 100;
 
 export type ExtraId =
   | "cleaning_fee"
-  | "airport_transfer"
   | "bicycle"
   | "bedding"
   | "towels"

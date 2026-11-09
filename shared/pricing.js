@@ -210,7 +210,6 @@ export const EXTRAS = [
   // Mandatory paid
   { id: "cleaning_fee",          price: 50, mandatory: true  },
   // Optional extras
-  { id: "airport_transfer",      price: 90                   },
   { id: "bicycle",               price: 90                   },
   { id: "sup_board",             price: 90                   },
   { id: "bedding",               price: 20                   },
