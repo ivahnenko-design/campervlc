@@ -216,8 +216,7 @@
     "festival": "Festival",
     "km_200": "Hasta 200 km/noche en lugar de 100",
     "km_unlimited": "Kilómetros ilimitados",
-    "sup_board": "Tabla SUP",
-    "reduced_deductible": "Franquicia reducida (600 €)"
+    "sup_board": "Tabla SUP"
   },
   "routes": {
     "title": "Rutas Populares desde Valencia",
@@ -258,7 +257,7 @@
     "q2": "¿Cuál es el depósito de garantía?",
     "a2": "La fianza es de 900 €. Se retiene como preautorización en tu tarjeta antes de la entrega y se libera en un máximo de 14 días hábiles tras la devolución si el vehículo vuelve en las mismas condiciones.",
     "q3": "¿Está incluido el seguro?",
-    "a3": "Sí. El seguro a todo riesgo está incluido en el precio, con una franquicia de 900 €. Con la opción de franquicia reducida (60 € por reserva) la franquicia es de 600 €.",
+    "a3": "Sí. El seguro a todo riesgo está incluido en el precio, con una franquicia de 900 €.",
     "q4": "¿Dónde se recoge y entrega la autocaravana?",
     "a4": "La recogida y la devolución son en Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "¿Puedo llevar mascotas?",
@@ -361,7 +360,7 @@
     "s6_title": "Uso del vehículo",
     "s6_body": "El vehículo no puede circular fuera de España sin autorización previa por escrito. Se prohíbe el transporte de mercancías, el uso comercial y la participación en competiciones. El conductor está obligado a respetar las normas de circulación y los límites de velocidad vigentes.",
     "s7_title": "Seguro y franquicia",
-    "s7_body": "El precio base incluye seguro a todo riesgo con una franquicia estándar. El cliente puede contratar la opción de franquicia reducida como extra. No están cubiertos los daños causados por imprudencia grave, conducción bajo la influencia de alcohol o estupefacientes, o incumplimiento de las presentes condiciones.",
+    "s7_body": "El precio base incluye seguro a todo riesgo con una franquicia estándar. No están cubiertos los daños causados por imprudencia grave, conducción bajo la influencia de alcohol o estupefacientes, o incumplimiento de las presentes condiciones.",
     "s8_title": "Cancelaciones",
     "s8_body": "Las cancelaciones se rigen por la Política de Cancelación disponible en campervlc.com/condiciones#cancelacion.",
     "s9_title": "Legislación aplicable",

@@ -216,8 +216,7 @@
     "festival": "Festival",
     "km_200": "Tot 200 km/nacht in plaats van 100",
     "km_unlimited": "Onbeperkte kilometers",
-    "sup_board": "SUP-board",
-    "reduced_deductible": "Verlaagd eigen risico (€600)"
+    "sup_board": "SUP-board"
   },
   "routes": {
     "title": "Populaire routes vanuit Valencia",
@@ -258,7 +257,7 @@
     "q2": "Hoe hoog is de waarborg?",
     "a2": "De waarborg is 900 €. Dit is een voorautorisatie op je kaart vóór de overdracht; ze wordt binnen 14 werkdagen na het inleveren vrijgegeven als het voertuig in dezelfde staat terugkomt.",
     "q3": "Is verzekering inbegrepen?",
-    "a3": "Ja. Een allrisk-verzekering is inbegrepen in de prijs, met een eigen risico van 900 €. Met de optie verlaagd eigen risico (60 € per boeking) is het eigen risico 600 €.",
+    "a3": "Ja. Een allrisk-verzekering is inbegrepen in de prijs, met een eigen risico van 900 €.",
     "q4": "Waar ophalen en inleveren?",
     "a4": "Ophalen en inleveren: Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Mag ik huisdieren meenemen?",
@@ -361,7 +360,7 @@
     "s6_title": "Voertuiggebruik",
     "s6_body": "Het voertuig mag niet buiten Spanje worden gebruikt zonder voorafgaande schriftelijke toestemming. Commercieel gebruik, goederenvervoer en deelname aan wedstrijden zijn verboden.",
     "s7_title": "Verzekering en eigen risico",
-    "s7_body": "De basisprijs omvat een allriskverzekering met standaard eigen risico. De klant kan de optie verlaagd eigen risico als extra toevoegen.",
+    "s7_body": "De basisprijs omvat een allriskverzekering met standaard eigen risico.",
     "s8_title": "Annuleringen",
     "s8_body": "Annuleringen worden geregeld door het Annuleringsbeleid op campervlc.com/condiciones#cancelacion.",
     "s9_title": "Toepasselijk recht",

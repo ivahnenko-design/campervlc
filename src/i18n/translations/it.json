@@ -216,8 +216,7 @@
     "festival": "Festival",
     "km_200": "Fino a 200 km/notte invece di 100",
     "km_unlimited": "Chilometri illimitati",
-    "sup_board": "Tavola SUP",
-    "reduced_deductible": "Franchigia ridotta (600 €)"
+    "sup_board": "Tavola SUP"
   },
   "routes": {
     "title": "Itinerari popolari da Valencia",
@@ -258,7 +257,7 @@
     "q2": "Qual è la cauzione?",
     "a2": "La cauzione è di 900 €. È una preautorizzazione sulla carta fatta prima del ritiro e viene rilasciata entro 14 giorni lavorativi dalla riconsegna se il veicolo torna nelle stesse condizioni.",
     "q3": "L'assicurazione è inclusa?",
-    "a3": "Sì. L'assicurazione kasko è inclusa nel prezzo, con una franchigia di 900 €. Con l'opzione franchigia ridotta (60 € a prenotazione) la franchigia è di 600 €.",
+    "a3": "Sì. L'assicurazione kasko è inclusa nel prezzo, con una franchigia di 900 €.",
     "q4": "Dove si ritira e riconsegna?",
     "a4": "Ritiro e riconsegna in Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Posso portare animali?",
@@ -361,7 +360,7 @@
     "s6_title": "Utilizzo del veicolo",
     "s6_body": "Il veicolo non puo' essere portato fuori dalla Spagna senza previa autorizzazione scritta. Sono vietati l'uso commerciale, il trasporto di merci e la partecipazione a competizioni.",
     "s7_title": "Assicurazione e franchigia",
-    "s7_body": "Il prezzo base include un'assicurazione kasko totale con franchigia standard. Il cliente puo' aggiungere l'opzione franchigia ridotta come extra.",
+    "s7_body": "Il prezzo base include un'assicurazione kasko totale con franchigia standard.",
     "s8_title": "Cancellazioni",
     "s8_body": "Le cancellazioni sono disciplinate dalla Politica di Cancellazione disponibile su campervlc.com/condiciones#cancelacion.",
     "s9_title": "Legge applicabile",

@@ -7,7 +7,7 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 ## Cosa comprende il prezzo
 
 - IVA.
-- Assicurazione kasko con franchigia di 900 €, o di 600 € con l'opzione di franchigia ridotta.
+- Assicurazione kasko con franchigia di 900 €.
 - 100 km per notte di noleggio, estendibili con le opzioni di chilometraggio.
 - Assistenza stradale e garanzia di mobilità del costruttore.
 - Due bombole di gas e capsule per il WC chimico.
@@ -30,7 +30,6 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 | Opzione 200 km per notte | 20 € / notte |
 | Opzione chilometraggio illimitato | 40 € / notte |
 | Chilometri oltre quelli inclusi | 0,30 € / km |
-| Opzione franchigia ridotta a 600 € | 60 € / prenotazione |
 | Restituzione oltre l'orario di ritiro, fino a 6 h | 50 % di una giornata |
 | Restituzione oltre l'orario di ritiro, più di 6 h | una giornata intera |
 | Ritardo non concordato | 50 € / ora |
@@ -67,7 +66,7 @@ Le opzioni (bicicletta, SUP, barbecue, conducente aggiuntivo, ecc.) e i relativi
 
 ### 3. Prezzo, durata, consegna e restituzione
 
-3.1. Il prezzo comprende: IVA; chilometraggio di 100 km per notte di noleggio (eccedenza a 0,30 €/km), estendibile mediante le opzioni di chilometraggio acquistate in fase di prenotazione (200 km per notte o chilometraggio illimitato); assicurazione kasko con franchigia di 900 €, o di 600 € se si sottoscrive l'opzione di franchigia ridotta (punto 11); garanzia di mobilità del costruttore del telaio cabinato; due bombole di gas; capsule per il WC chimico; e parcheggio gratuito del veicolo privato del Conduttore presso i locali del Locatore durante il noleggio (punto 12.3).
+3.1. Il prezzo comprende: IVA; chilometraggio di 100 km per notte di noleggio (eccedenza a 0,30 €/km), estendibile mediante le opzioni di chilometraggio acquistate in fase di prenotazione (200 km per notte o chilometraggio illimitato); assicurazione kasko con franchigia di 900 € (punto 11); garanzia di mobilità del costruttore del telaio cabinato; due bombole di gas; capsule per il WC chimico; e parcheggio gratuito del veicolo privato del Conduttore presso i locali del Locatore durante il noleggio (punto 12.3).
 
 3.2. Alla consegna sarà firmato il Verbale di Consegna (Check-In) con la descrizione dello stato del veicolo e sarà consegnato un mazzo di chiavi. Lo smarrimento o il furto delle chiavi sarà fatturato al costo effettivo di sostituzione e spedizione, fino a un massimo di 250 €. Il Locatore potrà subordinare la consegna allo svolgimento dell'istruzione sull'uso del veicolo.
 
@@ -199,7 +198,7 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 ### 11. Responsabilità del Conduttore. Assicurazione kasko con franchigia
 
-11.1. Il veicolo è coperto da assicurazione kasko (a copertura totale) con franchigia di 900 €. Se il Conduttore sottoscrive in fase di prenotazione l'opzione di franchigia ridotta (60 € per prenotazione), la franchigia è limitata a 600 €. In caso di danni totali o parziali coperti dall'assicurazione, il Conduttore pagherà al massimo la franchigia applicabile per ciascuna voce di danno determinata dal perito della compagnia assicurativa (la compagnia assicurativa considera una voce per ogni urto, rottura o danneggiamento indipendente; se un incidente interessa due voci, sono dovute due franchigie).
+11.1. Il veicolo è coperto da assicurazione kasko (a copertura totale) con franchigia di 900 €. In caso di danni totali o parziali coperti dall'assicurazione, il Conduttore pagherà al massimo la franchigia applicabile per ciascuna voce di danno determinata dal perito della compagnia assicurativa (la compagnia assicurativa considera una voce per ogni urto, rottura o danneggiamento indipendente; se un incidente interessa due voci, sono dovute due franchigie).
 
 11.2. L'assicurazione non copre gli effetti personali del Conduttore né quelli dei suoi accompagnatori.
 

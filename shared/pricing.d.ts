@@ -34,8 +34,7 @@ export type ExtraId =
   | "extra_driver"
   | "km_200"
   | "km_unlimited"
-  | "sup_board"
-  | "reduced_deductible";
+  | "sup_board";
 
 export interface ExtraItem {
   id: ExtraId;

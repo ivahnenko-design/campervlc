@@ -5,7 +5,7 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 ## Qué incluye el precio
 
 - IVA.
-- Seguro a todo riesgo con franquicia de 900 €, o de 600 € con la opción de franquicia reducida.
+- Seguro a todo riesgo con franquicia de 900 €.
 - 100 km por noche de alquiler, ampliables con las opciones de kilometraje.
 - Asistencia en carretera y garantía de movilidad del fabricante.
 - Dos bombonas de gas y cápsulas para el WC químico.
@@ -28,7 +28,6 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 | Opción 200 km por noche | 20 € / noche |
 | Opción kilometraje ilimitado | 40 € / noche |
 | Kilómetros por encima de lo incluido | 0,30 € / km |
-| Opción franquicia reducida a 600 € | 60 € / reserva |
 | Devolución posterior a la hora de recogida, hasta 6 h | 50 % de una jornada |
 | Devolución posterior a la hora de recogida, más de 6 h | una jornada completa |
 | Retraso no pactado | 50 € / hora |
@@ -65,7 +64,7 @@ Las opciones (bicicleta, SUP, barbacoa, conductor adicional, etc.) y sus precios
 
 ### 3. Precio, duración, entrega y devolución
 
-3.1. El precio incluye: IVA; kilometraje de 100 km por noche de alquiler (exceso a 0,30 €/km), ampliable mediante las opciones de kilometraje contratadas en la reserva (200 km por noche o kilometraje ilimitado); seguro a todo riesgo con franquicia de 900 €, o de 600 € si se contrata la opción de franquicia reducida (apdo. 11); garantía de movilidad del fabricante del chasis-cabina; dos bombonas de gas; cápsulas para el WC químico; y aparcamiento gratuito del vehículo particular del Arrendatario en las dependencias del Arrendador durante el alquiler (apdo. 12.3).
+3.1. El precio incluye: IVA; kilometraje de 100 km por noche de alquiler (exceso a 0,30 €/km), ampliable mediante las opciones de kilometraje contratadas en la reserva (200 km por noche o kilometraje ilimitado); seguro a todo riesgo con franquicia de 900 € (apdo. 11); garantía de movilidad del fabricante del chasis-cabina; dos bombonas de gas; cápsulas para el WC químico; y aparcamiento gratuito del vehículo particular del Arrendatario en las dependencias del Arrendador durante el alquiler (apdo. 12.3).
 
 3.2. En la entrega se firmará el Acta de Entrega (Check-In) con la descripción del estado del vehículo y se entregará un juego de llaves. La pérdida o robo de las llaves se facturará por su coste real de reposición y envío, con un máximo de 250 €. El Arrendador podrá condicionar la entrega a la realización de la instrucción de uso del vehículo.
 
@@ -197,7 +196,7 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 ### 11. Responsabilidad del Arrendatario. Seguro a todo riesgo con franquicia
 
-11.1. El vehículo dispone de seguro a todo riesgo con franquicia de 900 €. Si el Arrendatario contrata en la reserva la opción de franquicia reducida (60 € por reserva), la franquicia queda limitada a 600 €. En caso de daños totales o parciales cubiertos por el seguro, el Arrendatario abonará como máximo la franquicia aplicable por cada parte de siniestro que determine el perito de la aseguradora (la aseguradora considera un parte por cada golpe, rotura o desperfecto independiente; si un accidente afecta a dos partes, se devengan dos franquicias).
+11.1. El vehículo dispone de seguro a todo riesgo con franquicia de 900 €. En caso de daños totales o parciales cubiertos por el seguro, el Arrendatario abonará como máximo la franquicia aplicable por cada parte de siniestro que determine el perito de la aseguradora (la aseguradora considera un parte por cada golpe, rotura o desperfecto independiente; si un accidente afecta a dos partes, se devengan dos franquicias).
 
 11.2. El seguro no cubre los efectos personales del Arrendatario ni de sus acompañantes.
 

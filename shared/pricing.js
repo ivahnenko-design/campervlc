@@ -219,7 +219,6 @@ export const EXTRAS = [
   { id: "extra_driver",          price: 50                   },
   { id: "km_200",                price: 20, perNight: true   },
   { id: "km_unlimited",          price: 40, perNight: true   },
-  { id: "reduced_deductible",    price: 60                   },
 ];
 
 /**

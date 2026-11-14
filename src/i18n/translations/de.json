@@ -216,8 +216,7 @@
     "festival": "Festival",
     "km_200": "Bis zu 200 km/Nacht statt 100",
     "km_unlimited": "Unbegrenzte Kilometer",
-    "sup_board": "SUP-Board",
-    "reduced_deductible": "Reduzierte Selbstbeteiligung (600 €)"
+    "sup_board": "SUP-Board"
   },
   "routes": {
     "title": "Beliebte Routen ab Valencia",
@@ -258,7 +257,7 @@
     "q2": "Wie hoch ist die Kaution?",
     "a2": "Die Kaution beträgt 900 €. Sie wird vor der Übergabe als Vorautorisierung auf deiner Karte reserviert und innerhalb von 14 Werktagen nach der Rückgabe freigegeben, wenn das Fahrzeug im gleichen Zustand zurückkommt.",
     "q3": "Ist die Versicherung inklusive?",
-    "a3": "Ja. Eine Vollkaskoversicherung ist im Preis enthalten, mit einer Selbstbeteiligung von 900 €. Mit der Option reduzierte Selbstbeteiligung (60 € pro Buchung) beträgt sie 600 €.",
+    "a3": "Ja. Eine Vollkaskoversicherung ist im Preis enthalten, mit einer Selbstbeteiligung von 900 €.",
     "q4": "Wo Abholung und Rückgabe?",
     "a4": "Abholung und Rückgabe: Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Sind Haustiere erlaubt?",
@@ -361,7 +360,7 @@
     "s6_title": "Fahrzeugnutzung",
     "s6_body": "Das Fahrzeug darf ohne vorherige schriftliche Genehmigung nicht ausserhalb Spaniens genutzt werden. Gewerbliche Nutzung, Gueterbefoerderung und Teilnahme an Wettbewerben sind untersagt.",
     "s7_title": "Versicherung und Selbstbeteiligung",
-    "s7_body": "Im Grundpreis ist eine Vollkaskoversicherung mit Standard-Selbstbeteiligung enthalten. Die reduzierte Selbstbeteiligungsoption kann als Extra gebucht werden.",
+    "s7_body": "Im Grundpreis ist eine Vollkaskoversicherung mit Standard-Selbstbeteiligung enthalten.",
     "s8_title": "Stornierungen",
     "s8_body": "Stornierungen unterliegen der Stornierungsrichtlinie unter campervlc.com/condiciones#cancelacion.",
     "s9_title": "Anwendbares Recht",

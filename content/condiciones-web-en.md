@@ -7,7 +7,7 @@ These are the terms of the contract you will sign when you collect the motorhome
 ## What the price includes
 
 - VAT.
-- Comprehensive insurance with an excess (deductible) of 900 €, or 600 € with the reduced excess option.
+- Comprehensive insurance with an excess (deductible) of 900 €.
 - 100 km per rental night, which can be extended with the mileage options.
 - Roadside assistance and the manufacturer's mobility guarantee.
 - Two gas bottles and capsules for the chemical toilet.
@@ -30,7 +30,6 @@ These are the terms of the contract you will sign when you collect the motorhome
 | 200 km per night option | 20 € / night |
 | Unlimited mileage option | 40 € / night |
 | Kilometres beyond the included allowance | 0.30 € / km |
-| Option: excess (deductible) reduced to 600 € | 60 € / booking |
 | Return later than the collection time, up to 6 h | 50 % of one rental day |
 | Return later than the collection time, more than 6 h | one full rental day |
 | Late return not agreed in advance | 50 € / hour |
@@ -67,7 +66,7 @@ The options (bicycle, SUP, barbecue, additional driver, etc.) and their prices a
 
 ### 3. Price, duration, handover and return
 
-3.1. The price includes: VAT; mileage of 100 km per rental night (excess charged at 0.30 €/km), which may be increased through the mileage options purchased when booking (200 km per night or unlimited mileage); comprehensive insurance with an excess of 900 €, or 600 € if the reduced excess option is taken out (sec. 11); the chassis-cab manufacturer's mobility guarantee; two gas bottles; capsules for the chemical toilet; and free parking for the Lessee's private vehicle at the Lessor's premises during the rental (sec. 12.3).
+3.1. The price includes: VAT; mileage of 100 km per rental night (excess charged at 0.30 €/km), which may be increased through the mileage options purchased when booking (200 km per night or unlimited mileage); comprehensive insurance with an excess of 900 € (sec. 11); the chassis-cab manufacturer's mobility guarantee; two gas bottles; capsules for the chemical toilet; and free parking for the Lessee's private vehicle at the Lessor's premises during the rental (sec. 12.3).
 
 3.2. At handover, the Handover Report (Check-In) describing the condition of the vehicle shall be signed and one set of keys shall be handed over. Loss or theft of the keys shall be invoiced at the actual cost of replacement and shipping, up to a maximum of 250 €. The Lessor may make handover conditional on completion of the briefing on how to use the vehicle.
 
@@ -199,7 +198,7 @@ The compensation amounts are cumulative, subject to a combined maximum of 30 % o
 
 ### 11. Liability of the Lessee. Comprehensive insurance with excess
 
-11.1. The vehicle has comprehensive insurance with an excess (deductible) of 900 €. If the Lessee purchases the reduced excess option when booking (60 € per booking), the excess is limited to 600 €. In the event of total or partial damage covered by the insurance, the Lessee shall pay at most the applicable excess for each claim item determined by the insurer's loss adjuster (the insurer counts one claim item for each separate impact, breakage or defect; if an accident affects two parts, two excesses are payable).
+11.1. The vehicle has comprehensive insurance with an excess (deductible) of 900 €. In the event of total or partial damage covered by the insurance, the Lessee shall pay at most the applicable excess for each claim item determined by the insurer's loss adjuster (the insurer counts one claim item for each separate impact, breakage or defect; if an accident affects two parts, two excesses are payable).
 
 11.2. The insurance does not cover the personal belongings of the Lessee or of their companions.
 

@@ -7,7 +7,7 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 ## Wat is inbegrepen in de prijs
 
 - Btw.
-- Allrisk-verzekering met een eigen risico van 900 €, of van 600 € met de optie verlaagd eigen risico.
+- Allrisk-verzekering met een eigen risico van 900 €.
 - 100 km per huurnacht, uit te breiden met de kilometeropties.
 - Pechhulp onderweg en mobiliteitsgarantie van de fabrikant.
 - Twee gasflessen en capsules voor het chemische toilet.
@@ -30,7 +30,6 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 | Optie 200 km per nacht | 20 € / nacht |
 | Optie onbeperkt aantal kilometers | 40 € / nacht |
 | Kilometers boven het inbegrepen aantal | 0,30 € / km |
-| Optie verlaagd eigen risico van 600 € | 60 € / boeking |
 | Terugbrengen na het ophaaltijdstip, tot 6 h | 50 % van een huurdag |
 | Terugbrengen na het ophaaltijdstip, meer dan 6 h | een volledige huurdag |
 | Niet-afgesproken vertraging | 50 € / uur |
@@ -67,7 +66,7 @@ De opties (fiets, SUP, barbecue, extra bestuurder, enz.) en de prijzen daarvan w
 
 ### 3. Prijs, duur, overdracht en teruggave
 
-3.1. De prijs omvat: btw; 100 km per huurnacht (meerkilometers à 0,30 €/km), uit te breiden met de bij de boeking afgesloten kilometeropties (200 km per nacht of onbeperkt aantal kilometers); allrisk-verzekering met een eigen risico van 900 €, of van 600 € als de optie verlaagd eigen risico wordt afgesloten (art. 11); mobiliteitsgarantie van de fabrikant van het chassis-cabine; twee gasflessen; capsules voor het chemische toilet; en gratis parkeren van het eigen voertuig van de Huurder op het terrein van de Verhuurder tijdens de huurperiode (art. 12.3).
+3.1. De prijs omvat: btw; 100 km per huurnacht (meerkilometers à 0,30 €/km), uit te breiden met de bij de boeking afgesloten kilometeropties (200 km per nacht of onbeperkt aantal kilometers); allrisk-verzekering met een eigen risico van 900 € (art. 11); mobiliteitsgarantie van de fabrikant van het chassis-cabine; twee gasflessen; capsules voor het chemische toilet; en gratis parkeren van het eigen voertuig van de Huurder op het terrein van de Verhuurder tijdens de huurperiode (art. 12.3).
 
 3.2. Bij de overdracht wordt het Overdrachtsprotocol (Check-In) ondertekend met een beschrijving van de staat van het voertuig en wordt één set sleutels overhandigd. Verlies of diefstal van de sleutels wordt gefactureerd tegen de werkelijke kosten van vervanging en verzending, met een maximum van 250 €. De Verhuurder kan de overdracht afhankelijk stellen van het volgen van de gebruiksinstructie van het voertuig.
 
@@ -199,7 +198,7 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 ### 11. Aansprakelijkheid van de Huurder. Allrisk-verzekering met eigen risico
 
-11.1. Het voertuig beschikt over een allrisk-verzekering met een eigen risico van 900 €. Sluit de Huurder bij de boeking de optie verlaagd eigen risico af (60 € per boeking), dan wordt het eigen risico beperkt tot 600 €. Bij gehele of gedeeltelijke schade die door de verzekering wordt gedekt, betaalt de Huurder ten hoogste het toepasselijke eigen risico per schadepost die door de expert van de verzekeraar wordt vastgesteld (de verzekeraar rekent één schadepost per afzonderlijke deuk, breuk of beschadiging; heeft een ongeval betrekking op twee delen, dan is het eigen risico twee keer verschuldigd).
+11.1. Het voertuig beschikt over een allrisk-verzekering met een eigen risico van 900 €. Bij gehele of gedeeltelijke schade die door de verzekering wordt gedekt, betaalt de Huurder ten hoogste het toepasselijke eigen risico per schadepost die door de expert van de verzekeraar wordt vastgesteld (de verzekeraar rekent één schadepost per afzonderlijke deuk, breuk of beschadiging; heeft een ongeval betrekking op twee delen, dan is het eigen risico twee keer verschuldigd).
 
 11.2. De verzekering dekt geen persoonlijke bezittingen van de Huurder of van zijn medereizigers.
 

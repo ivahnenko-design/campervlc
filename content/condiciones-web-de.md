@@ -7,7 +7,7 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 ## Im Preis enthalten
 
 - Mehrwertsteuer (IVA).
-- Vollkaskoversicherung mit einer Selbstbeteiligung von 900 € bzw. von 600 € mit der Option reduzierte Selbstbeteiligung.
+- Vollkaskoversicherung mit einer Selbstbeteiligung von 900 €.
 - 100 km pro Mietnacht, erweiterbar über die Kilometeroptionen.
 - Pannenhilfe und Mobilitätsgarantie des Herstellers.
 - Zwei Gasflaschen und Sanitärkapseln für die Chemietoilette.
@@ -30,7 +30,6 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 | Option 200 km pro Nacht | 20 € / Nacht |
 | Option unbegrenzte Kilometer | 40 € / Nacht |
 | Kilometer über das Inklusivkontingent hinaus | 0,30 € / km |
-| Option Selbstbeteiligung reduziert auf 600 € | 60 € / Buchung |
 | Rückgabe nach der Uhrzeit der Abholung, bis 6 Std. | 50 % eines Miettags |
 | Rückgabe nach der Uhrzeit der Abholung, mehr als 6 Std. | ein voller Miettag |
 | Nicht vereinbarte Verspätung | 50 € / Stunde |
@@ -67,7 +66,7 @@ Die Optionen (Fahrrad, SUP, Grill, Zusatzfahrer usw.) und ihre Preise werden im 
 
 ### 3. Preis, Mietdauer, Übergabe und Rückgabe
 
-3.1. Im Preis enthalten sind: Mehrwertsteuer (IVA); 100 km pro Mietnacht (Mehrkilometer zu 0,30 €/km), erweiterbar durch die bei der Buchung gewählten Kilometeroptionen (200 km pro Nacht oder unbegrenzte Kilometer); Vollkaskoversicherung mit einer Selbstbeteiligung von 900 € bzw. von 600 €, wenn die Option reduzierte Selbstbeteiligung gebucht wird (Ziff. 11); Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus; zwei Gasflaschen; Sanitärkapseln für die Chemietoilette; sowie kostenloses Parken des Privatfahrzeugs des Mieters auf dem Gelände des Vermieters während der Mietdauer (Ziff. 12.3).
+3.1. Im Preis enthalten sind: Mehrwertsteuer (IVA); 100 km pro Mietnacht (Mehrkilometer zu 0,30 €/km), erweiterbar durch die bei der Buchung gewählten Kilometeroptionen (200 km pro Nacht oder unbegrenzte Kilometer); Vollkaskoversicherung mit einer Selbstbeteiligung von 900 € (Ziff. 11); Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus; zwei Gasflaschen; Sanitärkapseln für die Chemietoilette; sowie kostenloses Parken des Privatfahrzeugs des Mieters auf dem Gelände des Vermieters während der Mietdauer (Ziff. 12.3).
 
 3.2. Bei der Übergabe wird das Übergabeprotokoll (Check-In) mit der Beschreibung des Fahrzeugzustands unterzeichnet und ein Schlüsselsatz ausgehändigt. Verlust oder Diebstahl der Schlüssel wird zu den tatsächlichen Kosten für Ersatz und Versand berechnet, höchstens jedoch mit 250 €. Der Vermieter kann die Übergabe von der Durchführung der Einweisung in die Bedienung des Fahrzeugs abhängig machen.
 
@@ -199,7 +198,7 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 ### 11. Haftung des Mieters. Vollkaskoversicherung mit Selbstbeteiligung
 
-11.1. Das Fahrzeug ist vollkaskoversichert mit einer Selbstbeteiligung von 900 €. Wählt der Mieter bei der Buchung die Option reduzierte Selbstbeteiligung (60 € pro Buchung), ist die Selbstbeteiligung auf 600 € begrenzt. Bei vom Versicherungsschutz umfassten Total- oder Teilschäden zahlt der Mieter höchstens die jeweils geltende Selbstbeteiligung für jede vom Gutachter des Versicherers festgestellte Schadenposition (der Versicherer betrachtet jeden unabhängigen Anstoß, Bruch oder Schaden als eigene Schadenposition; betrifft ein Unfall zwei Schadenpositionen, fallen zwei Selbstbeteiligungen an).
+11.1. Das Fahrzeug ist vollkaskoversichert mit einer Selbstbeteiligung von 900 €. Bei vom Versicherungsschutz umfassten Total- oder Teilschäden zahlt der Mieter höchstens die jeweils geltende Selbstbeteiligung für jede vom Gutachter des Versicherers festgestellte Schadenposition (der Versicherer betrachtet jeden unabhängigen Anstoß, Bruch oder Schaden als eigene Schadenposition; betrifft ein Unfall zwei Schadenpositionen, fallen zwei Selbstbeteiligungen an).
 
 11.2. Die Versicherung deckt keine persönlichen Gegenstände des Mieters oder seiner Mitreisenden.
 
