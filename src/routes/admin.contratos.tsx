@@ -68,7 +68,7 @@ function AdminContracts() {
 
   const load = useCallback(async () => {
     if (!token) return;
-    const r = await api("/api/admin-contracts");
+    const r = await api("/api/contract");
     if (!r.ok) {
       setMsg(r.status === 401 ? "Неверный токен." : r.status === 503 ? "ADMIN_TOKEN не настроен в Vercel." : "Ошибка загрузки.");
       setSaved(false);
@@ -97,7 +97,7 @@ function AdminContracts() {
     setMsg(null);
     setLink(null);
     try {
-      const r = await api("/api/admin-contracts", { method: "POST", body: JSON.stringify({ action: "create", ...form }) });
+      const r = await api("/api/contract", { method: "POST", body: JSON.stringify({ action: "create", ...form }) });
       const j = (await r.json()) as { link?: string; emailSent?: boolean; error?: string };
       if (!r.ok) throw new Error(j.error || "Ошибка");
       setLink(j.link || null);
@@ -112,7 +112,7 @@ function AdminContracts() {
   }
 
   async function act(id: string, action: "resend" | "cancel") {
-    const r = await api("/api/admin-contracts", { method: "POST", body: JSON.stringify({ action, id }) });
+    const r = await api("/api/contract", { method: "POST", body: JSON.stringify({ action, id }) });
     const j = (await r.json()) as { link?: string; emailSent?: boolean; error?: string };
     if (!r.ok) return setMsg(j.error || "Ошибка");
     if (j.link) {
@@ -123,7 +123,7 @@ function AdminContracts() {
   }
 
   async function download(id: string) {
-    const r = await api(`/api/admin-contracts?id=${id}&pdf=1`);
+    const r = await api(`/api/contract?id=${id}&pdf=1`);
     if (!r.ok) return setMsg("PDF не найден.");
     const url = URL.createObjectURL(await r.blob());
     window.open(url, "_blank");
