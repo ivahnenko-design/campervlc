@@ -1,13 +1,13 @@
 # Condiciones de alquiler y tarifas
 
-Estas son las condiciones del contrato que firmarás al recoger la autocaravana. Las publicamos para que conozcas antes de reservar qué incluye el precio, qué se cobra aparte y cómo funcionan la cancelación, la fianza y el seguro. Versión de octubre de 2026.
+Estas son las condiciones del contrato que firmarás al recoger la autocaravana. Las publicamos para que conozcas antes de reservar qué incluye el precio, qué se cobra aparte y cómo funcionan la cancelación, la fianza y el seguro. Versión de noviembre de 2026.
 
 ## Qué incluye el precio
 
 - IVA.
-- Seguro a todo riesgo con franquicia de 900 €.
+- Seguro a todo riesgo; la franquicia a cargo del Arrendatario es de 900 € por cada parte de siniestro.
 - 100 km por noche de alquiler, ampliables con las opciones de kilometraje.
-- Asistencia en carretera y garantía de movilidad del fabricante.
+- Garantía de movilidad del fabricante del chasis-cabina.
 - Dos bombonas de gas y cápsulas para el WC químico.
 - Aparcamiento gratuito de tu coche en nuestras instalaciones durante el alquiler.
 - Mascotas sin coste adicional.
@@ -24,7 +24,7 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 
 | Concepto | Importe |
 |---|---|
-| Fianza (preautorización en tarjeta) | 900 € |
+| Fianza (preautorización o cobro en tarjeta) | 900 € |
 | Opción 200 km por noche | 20 € / noche |
 | Opción kilometraje ilimitado | 40 € / noche |
 | Kilómetros por encima de lo incluido | 0,30 € / km |
@@ -38,7 +38,7 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 | Limpieza interior insuficiente | coste real, máx. 150 € |
 | Olor a tabaco o a animales, ozonización | coste real, máx. 300 € |
 | Pérdida de llaves | coste real, máx. 250 € |
-| Gestión de multas | 25 € / expediente |
+| Servicio de gestión y acompañamiento (siniestro con daños o multa) | 40 € / expediente (IVA incluido) |
 
 Las opciones (bicicleta, SUP, barbacoa, conductor adicional, etc.) y sus precios se muestran en el calculador de reserva.
 
@@ -60,15 +60,15 @@ Las opciones (bicicleta, SUP, barbacoa, conductor adicional, etc.) y sus precios
 
 2.2. Si en el momento de la entrega el conductor no acredita permiso válido, el Arrendador podrá denegar la entrega; se aplicará la política de cancelación del apartado 4 como cancelación imputable al Arrendatario.
 
-2.3. Solo podrán conducir el vehículo el Arrendatario y los conductores adicionales registrados en este contrato.
+2.3. Solo podrán conducir el vehículo el Arrendatario y los conductores adicionales registrados en este contrato. La conducción por una persona no registrada deja sin efecto la cobertura del seguro (apdo. 11.4).
 
 ### 3. Precio, duración, entrega y devolución
 
-3.1. El precio incluye: IVA; kilometraje de 100 km por noche de alquiler (exceso a 0,30 €/km), ampliable mediante las opciones de kilometraje contratadas en la reserva (200 km por noche o kilometraje ilimitado); seguro a todo riesgo con franquicia de 900 € (apdo. 11); garantía de movilidad del fabricante del chasis-cabina; dos bombonas de gas; cápsulas para el WC químico; y aparcamiento gratuito del vehículo particular del Arrendatario en las dependencias del Arrendador durante el alquiler (apdo. 12.3).
+3.1. El precio incluye: IVA; kilometraje de 100 km por noche de alquiler (exceso a 0,30 €/km), ampliable mediante las opciones de kilometraje contratadas en la reserva (200 km por noche o kilometraje ilimitado); seguro a todo riesgo con franquicia a cargo del Arrendatario de 900 € por cada parte de siniestro (apdo. 11); garantía de movilidad del fabricante del chasis-cabina; dos bombonas de gas; cápsulas para el WC químico; y aparcamiento gratuito del vehículo particular del Arrendatario en las dependencias del Arrendador durante el alquiler (apdo. 12.3).
 
-3.2. En la entrega se firmará el Acta de Entrega (Check-In) con la descripción del estado del vehículo y se entregará un juego de llaves. La pérdida o robo de las llaves se facturará por su coste real de reposición y envío, con un máximo de 250 €. El Arrendador podrá condicionar la entrega a la realización de la instrucción de uso del vehículo.
+3.2. En la entrega se firmará el Acta de Entrega (Check-In) con la descripción del estado del vehículo y se entregará un juego de llaves. Todo daño que no conste en el Acta de Entrega se presumirá producido durante el alquiler, salvo prueba en contrario. La pérdida o robo de las llaves se facturará por su coste real de reposición y envío, con un máximo de 250 €. El Arrendador podrá condicionar la entrega a la realización de la instrucción de uso del vehículo.
 
-3.3. En la devolución se firmará el Acta de Devolución (Check-Out). Si el Arrendatario no está presente en la inspección por causas que le sean imputables (entrega de llaves por buzón, no comparecencia), el Arrendador documentará el estado del vehículo con fotografías fechadas el mismo día y comunicará al Arrendatario cualquier daño detectado en un plazo máximo de 48 horas, con derecho del Arrendatario a formular alegaciones.
+3.3. En la devolución se firmará el Acta de Devolución (Check-Out). El Arrendatario puede solicitar la revisión conjunta del vehículo; si no la solicita o no está presente en la inspección por causas que le sean imputables (entrega de llaves por buzón, no comparecencia), el Arrendador documentará el estado del vehículo con fotografías fechadas el mismo día y comunicará al Arrendatario cualquier daño detectado en un plazo máximo de 48 horas, con derecho del Arrendatario a formular alegaciones.
 
 3.4. Hora de devolución y retraso. Una devolución posterior a la hora de recogida pactada en la reserva se factura como suplemento: hasta 6 horas de exceso, el 50 % de una jornada de alquiler; más de 6 horas, una jornada completa. Este suplemento se paga al reservar cuando la hora de devolución se elige en la reserva. El retraso no pactado se penalizará con 50 € por hora, con el máximo, por cada día de retraso, del importe correspondiente a 3 jornadas de alquiler; el Arrendatario deberá comunicar de inmediato cualquier retraso y responderá además de los daños acreditados que cause al Arrendador frente a otros clientes. Transcurridas 4 horas de retraso sin comunicación ni causa justificada, el Arrendador podrá dar por finalizado el contrato y presentar denuncia ante las autoridades competentes por la no devolución del vehículo, además de activar el localizador GPS (apdo. 12.4).
 
@@ -76,7 +76,7 @@ Las opciones (bicicleta, SUP, barbacoa, conductor adicional, etc.) y sus precios
 
 3.6. La devolución en lugar distinto al de recogida requiere acuerdo escrito previo y el pago del importe que se pacte antes de la recogida.
 
-3.7. Combustible: el vehículo se entrega con el depósito lleno y así debe devolverse. En caso contrario se cobrarán 25 € por cada raya del indicador que falte más 10 € por el servicio de repostaje. El Arrendatario asume el coste de combustible, AdBlue y aceite durante el alquiler.
+3.7. Combustible: el vehículo se entrega con el depósito lleno y así debe devolverse. En caso contrario se cobrarán 25 € por cada raya del indicador que falte más 10 € por el servicio de repostaje, importe que se deducirá de la fianza o se cobrará en la tarjeta (apdo. 5.6). Se considerará depósito lleno el que conste como tal en el Acta de Devolución; el Arrendatario podrá acreditarlo con el tique de una gasolinera situada a un máximo de 10 km del lugar de devolución. El Arrendatario asume el coste de combustible, AdBlue y aceite durante el alquiler.
 
 3.8. Aguas y limpieza: el vehículo se devolverá limpio interiormente, con el depósito de aguas grises vacío, el casete del WC (aguas negras) vaciado y limpio, y el depósito de agua limpia lleno. En caso contrario: 20 € por las aguas grises, 90 € por el casete del WC no vaciado o no limpiado y 20 € por el agua limpia. La limpieza interior insuficiente se cobrará por su coste real con un máximo de 150 €.
 
@@ -103,17 +103,23 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 4.3. Modificación de la reserva: el Arrendatario podrá cambiar las fechas y añadir opciones en la página de gestión de la reserva de campervlc.com, con el número de reserva y el email utilizado, hasta 48 horas antes de la entrega; después, por WhatsApp. Las nuevas fechas quedan sujetas a disponibilidad, a la estancia mínima de la temporada y a las tarifas vigentes. La reducción del período se considera cancelación parcial: a las noches suprimidas se aplica la escala del apartado 4.1, según la antelación respecto de la fecha de entrega original, incluida la cancelación gratuita en 24 horas en las mismas condiciones. La retirada de opciones ya pagadas solo es posible con más de 7 días de antelación a la entrega.
 
-### 5. Condiciones de pago y fianza
+### 5. Condiciones de pago, fianza y cargos posteriores
 
 5.1. Forma de pago: el alquiler y la fianza se abonarán mediante tarjeta bancaria o transferencia a la cuenta del Arrendador. Conforme al artículo 7 de la Ley 7/2012, no se admiten pagos en efectivo iguales o superiores a 1.000 € cuando el pagador sea residente fiscal en España, ni iguales o superiores a 10.000 € cuando el pagador sea persona física no residente fiscal en España que no actúe como empresario o profesional. El Arrendador emitirá factura de todos los importes cobrados.
 
-5.2. La fianza de 900 € se abonará antes de la entrega del vehículo, preferentemente mediante preautorización en tarjeta de crédito a nombre del conductor principal.
+5.2. La fianza de 900 € se abonará antes de la entrega del vehículo, mediante preautorización (retención) o cobro en tarjeta de crédito o débito (preferentemente Visa) a nombre del Arrendatario, que deberá estar presente en el momento de la entrega y acreditar su titularidad. Se utilizará una sola tarjeta por contrato; no se admiten tarjetas prepago ni tarjetas virtuales de un solo uso.
 
-5.3. Devolución de la fianza: tras la inspección del vehículo, en el plazo máximo de 14 días hábiles desde la devolución, siempre que el vehículo se encuentre en las mismas condiciones que en la entrega. Si existieran daños cuya valoración no fuera posible de inmediato, el Arrendador dispondrá de un plazo máximo de 30 días naturales desde la devolución para practicar la liquidación con justificantes (facturas o presupuestos de taller), devolver el remanente de la fianza o reclamar la diferencia si el coste acreditado la supera.
+5.3. Devolución de la fianza: tras la inspección del vehículo, en el plazo máximo de 14 días hábiles desde la devolución, siempre que el vehículo se encuentre en las mismas condiciones que en la entrega. Si existieran daños cuya valoración no fuera posible de inmediato, el Arrendador dispondrá de un plazo máximo de 30 días naturales desde la devolución para practicar la liquidación con justificantes (facturas o presupuestos de taller), devolver el remanente de la fianza o reclamar la diferencia si el coste acreditado la supera. La preautorización puede ser liberada por la entidad bancaria antes de ese plazo; el Arrendador podrá cobrarla en el momento de la devolución cuando existan daños o importes pendientes consignados en el Acta de Devolución. La liberación efectiva de la retención puede tardar, según la entidad emisora, hasta 30 días naturales, sin que el Arrendador responda de las comisiones bancarias.
 
-5.4. De la fianza podrán deducirse, con justificación documental: los daños del apartado 11 y la franquicia del seguro, los suplementos de los apartados 3.7 a 3.9, las penalizaciones por retraso (3.4) y los importes del apartado 5.5.
+5.4. De la fianza podrán deducirse, con justificación documental: los daños del apartado 11 y la franquicia a cargo del Arrendatario, los suplementos de los apartados 3.7 a 3.9, las penalizaciones por retraso (3.4) y los importes de los apartados 5.5 a 5.7.
 
-5.5. Serán a cargo del Arrendatario: (a) los cargos por devolución en lugar distinto no pactado; (b) el importe de multas y sanciones de tráfico o de otra índole derivadas del uso del vehículo durante el alquiler que le sean imputables, así como los gastos razonables de gestión de su tramitación (25 € por expediente); (c) los gastos derivados de la retención o embargo del vehículo por causa imputable al Arrendatario, incluido el lucro cesante acreditado durante la inmovilización; (d) los intereses de demora legales en caso de retraso en los pagos.
+5.5. Serán a cargo del Arrendatario: (a) los cargos por devolución en lugar distinto no pactado; (b) el importe de multas y sanciones de tráfico o de otra índole derivadas del uso del vehículo durante el alquiler que le sean imputables (apdo. 5.8); (c) en caso de retención, embargo, inmovilización o intervención del vehículo por causa imputable al Arrendatario: los gastos de grúa, depósito, custodia y asistencia jurídica, más una indemnización por la inmovilización equivalente al precio diario del alquiler pactado por cada día de inmovilización (con un máximo de 30 días), pactada como cláusula penal y sin perjuicio de la facultad moderadora de los tribunales y del derecho del Arrendatario a acreditar un perjuicio menor; (d) los intereses de demora legales en caso de retraso en los pagos; (e) los gastos de reclamación extrajudicial y judicial debidamente acreditados cuando el Arrendatario no abone las cantidades debidas conforme a este contrato.
+
+5.6. Autorización de cargos posteriores. El Arrendatario autoriza expresamente al Arrendador a utilizar la tarjeta facilitada al contratar o en la entrega (cuyos datos se conservan de forma segura a través de la pasarela de pago) para cobrar, una vez finalizado el alquiler y hasta 90 días naturales después, los importes debidos conforme a este contrato por: (i) daños y franquicia a cargo del Arrendatario (apdo. 11) acreditados; (ii) suplementos y penalizaciones de los apartados 3.4 a 3.9 y 6.3; (iii) el servicio del apartado 5.7. Para las multas, sanciones, peajes y tasas imputables (apdo. 5.8) la autorización se extiende hasta 12 meses después de la finalización del alquiler. Antes de cada cargo posterior el Arrendador enviará al email del Arrendatario la justificación del importe (descripción, fotografías, Acta de Devolución, factura o presupuesto) y concederá un plazo de 5 días naturales para alegaciones; los importes ya consignados y firmados en el Acta de Devolución podrán deducirse de inmediato. Esta autorización no limita el derecho del Arrendatario a reclamar ante los servicios de consumo o los tribunales.
+
+5.7. Servicio de gestión y acompañamiento: el Arrendatario abonará 40 € (IVA incluido) por cada expediente que obligue al Arrendador a gestionar, en su nombre o en el de ambos, (a) un siniestro con daños al vehículo o a terceros imputable al Arrendatario (comunicación a la aseguradora, peritación, taller y seguimiento), o (b) una multa o sanción que requiera la identificación del conductor, el traslado de la notificación o su tramitación. Este importe retribuye gestiones efectivamente realizadas y es independiente de la franquicia, de los daños y de la sanción. No se cobrará cuando el siniestro no sea imputable al Arrendatario.
+
+5.8. Multas y sanciones. El Arrendador está obligado por ley a identificar al conductor ante la autoridad que sancione (art. 11.1 del Real Decreto Legislativo 6/2015) y, a tal efecto, el Arrendatario consiente que se comuniquen sus datos personales y los del conductor, la copia del permiso y del contrato a las autoridades competentes. La sanción se notificará directamente al Arrendatario y este la abonará. Si no pudiera realizarse la identificación por causa no imputable al Arrendador, o si el Arrendador tuviera que abonar la sanción, el Arrendatario le reembolsará el importe, más el servicio del apartado 5.7, y le mantendrá indemne frente a cualquier sanción, multa, tasa o recargo que se le imponga como consecuencia de la infracción del conductor durante el alquiler.
 
 ### 6. Usos prohibidos y obligaciones de cuidado
 
@@ -156,7 +162,7 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 8.4. En daños sin contrario, el Arrendatario redactará para el Arrendador un informe escrito de los hechos con fotografías. Si la falta de informe impide el cobro del seguro, el Arrendatario responderá del importe correspondiente.
 
-8.5. El Arrendatario no abandonará el vehículo sin tomar medidas adecuadas para protegerlo y contactará, cuando sea necesario, con la compañía de asistencia en carretera concertada por el Arrendador.
+8.5. El Arrendatario no abandonará el vehículo sin tomar medidas adecuadas para protegerlo y avisará al Arrendador, que gestionará la asistencia necesaria, incluida la garantía de movilidad del fabricante del chasis-cabina. El Arrendatario no contratará grúas ni reparaciones por su cuenta sin autorización del Arrendador, salvo urgencia por motivos de seguridad. En caso de inmovilización, retirada o intervención del vehículo por la autoridad, avisará al Arrendador de inmediato, antes de autorizar traslados o pagos.
 
 8.6. El incumplimiento de las obligaciones de este apartado que cause un perjuicio acreditado al Arrendador (incluida la pérdida de cobertura del seguro y el lucro cesante durante la inmovilización) dará derecho al Arrendador a reclamar los daños correspondientes.
 
@@ -188,7 +194,7 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 10.1. El desgaste mecánico normal del vehículo (motor, transmisión) es a cargo del Arrendador. Cuando la duración del recorrido lo aconseje, el Arrendador dará instrucciones para realizar las operaciones de mantenimiento necesarias en un servicio oficial de la marca del chasis.
 
-10.2. El Arrendatario detendrá el vehículo tan pronto como sea seguro cuando se ilumine cualquier testigo de anomalía, contactará con el Arrendador y con la compañía de asistencia concertada, y acudirá exclusivamente a un servicio oficial de la marca del chasis, salvo autorización expresa distinta del Arrendador.
+10.2. El Arrendatario detendrá el vehículo tan pronto como sea seguro cuando se ilumine cualquier testigo de anomalía, contactará con el Arrendador y acudirá exclusivamente a un servicio oficial de la marca del chasis, salvo autorización expresa distinta del Arrendador.
 
 10.3. Si por causa no imputable al Arrendatario el vehículo sufre daños graves o queda inutilizable durante un período prolongado, el Arrendador podrá ofrecer, sujeto a disponibilidad y en un plazo razonable, un vehículo de sustitución de plazas equivalentes o superiores; en tal caso no procederá la resolución del contrato. Si no ofrece sustitución, se aplicará el apartado 9.5.
 
@@ -196,11 +202,11 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 ### 11. Responsabilidad del Arrendatario. Seguro a todo riesgo con franquicia
 
-11.1. El vehículo dispone de seguro a todo riesgo con franquicia de 900 €. En caso de daños totales o parciales cubiertos por el seguro, el Arrendatario abonará como máximo la franquicia aplicable por cada parte de siniestro que determine el perito de la aseguradora (la aseguradora considera un parte por cada golpe, rotura o desperfecto independiente; si un accidente afecta a dos partes, se devengan dos franquicias).
+11.1. El vehículo dispone de seguro a todo riesgo con franquicia. En caso de daños totales o parciales al vehículo cubiertos por el seguro, el Arrendatario abonará una franquicia contractual de 900 € por cada parte de siniestro que determine el perito de la aseguradora (la aseguradora considera una parte por cada golpe, rotura o desperfecto independiente; si un accidente afecta a dos partes, se devengan dos franquicias). Esta franquicia es la responsabilidad máxima del Arrendatario por los daños cubiertos, sin perjuicio de los apartados 11.3 y 11.4.
 
 11.2. El seguro no cubre los efectos personales del Arrendatario ni de sus acompañantes.
 
-11.3. Si el coste de reparación de daños imputables al Arrendatario no cubiertos por el seguro, o la suma de franquicias, supera la fianza, el Arrendatario abonará la diferencia, previa justificación documental (peritación, facturas o presupuestos). Se aplicará el procedimiento y los plazos del apartado 5.3.
+11.3. Daños y pérdidas no cubiertos por el seguro. El seguro del vehículo no cubre, entre otros, el mobiliario no fijo, los enseres, utensilios y electrodomésticos no fijos del interior de la célula habitable, ni el combustible o los líquidos que falten. Los daños o pérdidas de estos elementos, así como los daños no cubiertos por el seguro por causa imputable al Arrendatario, serán abonados por el Arrendatario por su coste real de reparación o reposición, previa justificación documental (peritación, facturas, presupuestos o precio de reposición), sin el límite de franquicia del apartado 11.1. Si dicho coste, o la suma de franquicias, supera la fianza, el Arrendatario abonará la diferencia conforme al apartado 5.3.
 
 11.4. La limitación de responsabilidad a la franquicia no se aplicará, respondiendo el Arrendatario de la totalidad del daño, cuando este derive de dolo o negligencia grave y, en particular, cuando:
 
@@ -208,10 +214,10 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 - b) el conductor se dé a la fuga tras un accidente o incumpla el deber de socorro;
 - c) se incumplan las obligaciones del apartado 8, en la medida en que el incumplimiento haya impedido la cobertura del seguro o la determinación del daño;
 - d) los daños deriven de un uso prohibido (apdo. 6) o de la circulación fuera del territorio autorizado (apdo. 7);
-- e) los daños los cause un conductor no autorizado al que el Arrendatario haya cedido el vehículo;
+- e) los daños los cause un conductor no autorizado al que el Arrendatario haya cedido el vehículo o que carezca de permiso válido;
 - f) los daños se produzcan por no respetar las dimensiones del vehículo (altura, anchura, longitud) o las normas de carga máxima.
 
-11.5. El Arrendatario responde igualmente de las multas, tasas y sanciones derivadas del uso del vehículo durante el alquiler que le sean imputables (apdo. 5.5.b), y de sus responsabilidades civiles, administrativas o penales derivadas de un siniestro o de un comportamiento doloso.
+11.5. El Arrendatario responde igualmente de las multas, tasas y sanciones derivadas del uso del vehículo durante el alquiler que le sean imputables (apdos. 5.5.b y 5.8), y de sus responsabilidades civiles, administrativas o penales derivadas de un siniestro o de un comportamiento doloso.
 
 11.6. Si hubiera varios arrendatarios, responderán solidariamente.
 
@@ -223,9 +229,9 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 12.3. El Arrendatario puede aparcar gratuitamente su vehículo particular en las dependencias del Arrendador durante el alquiler. El Arrendador no asume responsabilidad de custodia sobre dicho vehículo.
 
-12.4. Localizador GPS: la autocaravana incorpora un dispositivo de localización, que se utilizará exclusivamente para la seguridad y recuperación del vehículo (avería, robo, no devolución o uso fuera del territorio autorizado). El Arrendatario es informado de ello y consiente el tratamiento conforme al apartado 15.
+12.4. Localizador GPS: la autocaravana puede incorporar un dispositivo de localización, que se utilizará exclusivamente para la seguridad y recuperación del vehículo (avería, robo, no devolución o uso fuera del territorio autorizado). El Arrendatario es informado de ello y consiente el tratamiento conforme al apartado 15.
 
-12.5. Equipamiento incluido en el precio: mesa y sillas de camping, tres sillas de playa, sombrilla, toldo, Smart TV, menaje de cocina, almohadas y mantas. Se ceden con el vehículo; su pérdida o rotura imputable al Arrendatario se abonará por su valor de reposición acreditado. Los accesorios opcionales contratados en la reserva (bicicleta, tabla de SUP, barbacoa, silla infantil y otros) se rigen por la misma regla. El equipamiento fijo de la célula habitable (calefacción, aire acondicionado, cocina, frigorífico, bomba de agua, ducha, WC, panel solar, instalación eléctrica) forma parte del vehículo arrendado a todos los efectos.
+12.5. Equipamiento incluido en el precio: mesa y sillas de camping, tres sillas de playa, sombrilla, toldo, Smart TV, menaje de cocina, almohadas y mantas. Se ceden con el vehículo; su pérdida o rotura imputable al Arrendatario se abonará por su valor de reposición acreditado (apdo. 11.3). Los accesorios opcionales contratados en la reserva (bicicleta, tabla de SUP, barbacoa, silla infantil y otros) se rigen por la misma regla. El equipamiento fijo de la célula habitable (calefacción, aire acondicionado, cocina, frigorífico, bomba de agua, ducha, WC, panel solar, instalación eléctrica) forma parte del vehículo arrendado a todos los efectos.
 
 ### 13. Seguridad
 
@@ -237,13 +243,25 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 14.2. Las partes procurarán resolver amistosamente cualquier controversia. Este contrato se rige por el derecho español. En caso de litigio con un consumidor, la competencia judicial se determinará conforme a la legislación procesal aplicable, sin sumisión expresa que limite los fueros legales del consumidor.
 
+14.3. Ante cualquier cargo o reclamación, el Arrendador facilitará la documentación que lo justifique y atenderá las alegaciones que el Arrendatario formule por escrito al email indicado en este contrato.
+
 ### 15. Protección de datos personales
 
-15.1. Responsable del tratamiento: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Finalidades: gestión y ejecución del contrato de alquiler, facturación, gestión de la fianza y de siniestros, cumplimiento de obligaciones legales (fiscales, de tráfico y de seguros) y, en su caso, reclamación de cantidades. Base jurídica: ejecución del contrato y cumplimiento de obligaciones legales.
+15.1. Responsable del tratamiento: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Finalidades: gestión y ejecución del contrato de alquiler, facturación, gestión de la fianza, de los cargos posteriores y de siniestros, cumplimiento de obligaciones legales (fiscales, de tráfico y de seguros) y, en su caso, reclamación de cantidades. Base jurídica: ejecución del contrato y cumplimiento de obligaciones legales.
 
 15.2. Los datos de geolocalización del vehículo (apdo. 12.4) se tratarán únicamente durante el alquiler y para las finalidades de seguridad indicadas. Los datos podrán comunicarse a la compañía aseguradora, a la asistencia en carretera, a las administraciones públicas competentes y a asesores legales, cuando sea necesario. Se conservarán durante la vigencia del contrato y los plazos de prescripción legales.
 
-15.3. El interesado puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad dirigiéndose al correo indicado, y reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).
+15.3. En caso de multa o sanción, los datos del Arrendatario y del conductor, la copia del permiso de conducir y del contrato se comunicarán a la autoridad sancionadora para su identificación, en cumplimiento de una obligación legal (art. 11.1 del Real Decreto Legislativo 6/2015, de 30 de octubre).
+
+15.4. Las copias de los documentos de identidad y del permiso de conducir se conservarán de forma segura, con acceso restringido, durante la vigencia del contrato y el plazo necesario para atender reclamaciones y obligaciones legales, tras el cual se suprimirán.
+
+15.5. El interesado puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad dirigiéndose al correo indicado, y reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).
+
+### 16. Firma electrónica y comunicaciones
+
+16.1. Este contrato y sus Anexos pueden firmarse mediante firma electrónica (firma manuscrita digitalizada en tableta o dispositivo, o firma electrónica con código de verificación), que tendrá la misma validez que la firma en papel. Una vez firmado, ambas partes recibirán una copia íntegra en formato PDF en el email indicado en este contrato.
+
+16.2. Las comunicaciones y justificaciones previstas en este contrato podrán realizarse por correo electrónico a la dirección indicada, que el Arrendatario se compromete a mantener operativa durante el contrato y hasta 12 meses después de su finalización.
 
 ---
 

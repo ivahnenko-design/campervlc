@@ -1,15 +1,15 @@
 # Huurvoorwaarden en tarieven
 
-Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper ophaalt. We publiceren ze zodat je vóór het boeken weet wat er in de prijs is inbegrepen, wat apart in rekening wordt gebracht en hoe annulering, borg en verzekering werken. Versie van oktober 2026.
+Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper ophaalt. We publiceren ze zodat je vóór het boeken weet wat er in de prijs is inbegrepen, wat apart in rekening wordt gebracht en hoe annulering, borg en verzekering werken. Versie van november 2026.
 
 > Deze vertaling is uitsluitend ter informatie; de Spaanse versie prevaleert.
 
 ## Wat is inbegrepen in de prijs
 
 - Btw.
-- Allrisk-verzekering met een eigen risico van 900 €.
+- Allrisk-verzekering; het eigen risico ten laste van de Huurder bedraagt 900 € per schadepost.
 - 100 km per huurnacht, uit te breiden met de kilometeropties.
-- Pechhulp onderweg en mobiliteitsgarantie van de fabrikant.
+- Mobiliteitsgarantie van de fabrikant van het chassis-cabine.
 - Twee gasflessen en capsules voor het chemische toilet.
 - Gratis parkeren van je auto op ons terrein tijdens de huurperiode.
 - Huisdieren zonder meerkosten.
@@ -26,7 +26,7 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 
 | Omschrijving | Bedrag |
 |---|---|
-| Borg (voorautorisatie op de kaart) | 900 € |
+| Borg (voorautorisatie of afschrijving op de kaart) | 900 € |
 | Optie 200 km per nacht | 20 € / nacht |
 | Optie onbeperkt aantal kilometers | 40 € / nacht |
 | Kilometers boven het inbegrepen aantal | 0,30 € / km |
@@ -40,7 +40,7 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 | Onvoldoende schoonmaak van het interieur | werkelijke kosten, max. 150 € |
 | Tabaks- of dierengeur, ozonbehandeling | werkelijke kosten, max. 300 € |
 | Verlies van sleutels | werkelijke kosten, max. 250 € |
-| Afhandeling van boetes | 25 € / dossier |
+| Beheer- en begeleidingsdienst (schadegeval met schade of boete) | 40 € / dossier (btw inbegrepen) |
 
 De opties (fiets, SUP, barbecue, extra bestuurder, enz.) en de prijzen daarvan worden getoond in de boekingscalculator.
 
@@ -62,15 +62,15 @@ De opties (fiets, SUP, barbecue, extra bestuurder, enz.) en de prijzen daarvan w
 
 2.2. Kan de bestuurder bij de overdracht geen geldig rijbewijs overleggen, dan kan de Verhuurder de overdracht weigeren; in dat geval is het annuleringsbeleid van artikel 4 van toepassing als annulering die aan de Huurder toe te rekenen is.
 
-2.3. Alleen de Huurder en de in dit contract geregistreerde extra bestuurders mogen het voertuig besturen.
+2.3. Alleen de Huurder en de in dit contract geregistreerde extra bestuurders mogen het voertuig besturen. Besturing door een niet-geregistreerde persoon doet de verzekeringsdekking vervallen (art. 11.4).
 
 ### 3. Prijs, duur, overdracht en teruggave
 
-3.1. De prijs omvat: btw; 100 km per huurnacht (meerkilometers à 0,30 €/km), uit te breiden met de bij de boeking afgesloten kilometeropties (200 km per nacht of onbeperkt aantal kilometers); allrisk-verzekering met een eigen risico van 900 € (art. 11); mobiliteitsgarantie van de fabrikant van het chassis-cabine; twee gasflessen; capsules voor het chemische toilet; en gratis parkeren van het eigen voertuig van de Huurder op het terrein van de Verhuurder tijdens de huurperiode (art. 12.3).
+3.1. De prijs omvat: btw; 100 km per huurnacht (meerkilometers à 0,30 €/km), uit te breiden met de bij de boeking afgesloten kilometeropties (200 km per nacht of onbeperkt aantal kilometers); allrisk-verzekering met een eigen risico ten laste van de Huurder van 900 € per schadepost (art. 11); mobiliteitsgarantie van de fabrikant van het chassis-cabine; twee gasflessen; capsules voor het chemische toilet; en gratis parkeren van het eigen voertuig van de Huurder op het terrein van de Verhuurder tijdens de huurperiode (art. 12.3).
 
-3.2. Bij de overdracht wordt het Overdrachtsprotocol (Check-In) ondertekend met een beschrijving van de staat van het voertuig en wordt één set sleutels overhandigd. Verlies of diefstal van de sleutels wordt gefactureerd tegen de werkelijke kosten van vervanging en verzending, met een maximum van 250 €. De Verhuurder kan de overdracht afhankelijk stellen van het volgen van de gebruiksinstructie van het voertuig.
+3.2. Bij de overdracht wordt het Overdrachtsprotocol (Check-In) ondertekend met een beschrijving van de staat van het voertuig en wordt één set sleutels overhandigd. Alle schade die niet in het Overdrachtsprotocol is vermeld, wordt vermoed tijdens de huurperiode te zijn ontstaan, behoudens tegenbewijs. Verlies of diefstal van de sleutels wordt gefactureerd tegen de werkelijke kosten van vervanging en verzending, met een maximum van 250 €. De Verhuurder kan de overdracht afhankelijk stellen van het volgen van de gebruiksinstructie van het voertuig.
 
-3.3. Bij de teruggave wordt het Retourprotocol (Check-Out) ondertekend. Is de Huurder om aan hem toe te rekenen redenen niet aanwezig bij de inspectie (afgifte van de sleutels via de brievenbus, niet verschijnen), dan legt de Verhuurder de staat van het voertuig vast met foto's die op dezelfde dag zijn gedateerd en meldt hij de Huurder eventuele geconstateerde schade binnen uiterlijk 48 uur, waarbij de Huurder het recht heeft zijn standpunt kenbaar te maken.
+3.3. Bij de teruggave wordt het Retourprotocol (Check-Out) ondertekend. De Huurder kan verzoeken om een gezamenlijke controle van het voertuig; verzoekt hij daar niet om of is hij om aan hem toe te rekenen redenen niet aanwezig bij de inspectie (afgifte van de sleutels via de brievenbus, niet verschijnen), dan legt de Verhuurder de staat van het voertuig vast met foto's die op dezelfde dag zijn gedateerd en meldt hij de Huurder eventuele geconstateerde schade binnen uiterlijk 48 uur, waarbij de Huurder het recht heeft zijn standpunt kenbaar te maken.
 
 3.4. Tijdstip van teruggave en vertraging. Teruggave na het bij de boeking overeengekomen ophaaltijdstip wordt als toeslag gefactureerd: bij een overschrijding tot 6 uur, 50 % van een huurdag; bij meer dan 6 uur, een volledige huurdag. Deze toeslag wordt bij het boeken betaald wanneer het tijdstip van teruggave bij de boeking wordt gekozen. Voor niet-afgesproken vertraging geldt een boete van 50 € per uur, met als maximum per dag vertraging het bedrag dat overeenkomt met 3 huurdagen; de Huurder moet elke vertraging onmiddellijk melden en is daarnaast aansprakelijk voor de aangetoonde schade die hij de Verhuurder ten opzichte van andere klanten berokkent. Na 4 uur vertraging zonder melding of gegronde reden kan de Verhuurder het contract beëindigen en bij de bevoegde autoriteiten aangifte doen wegens het niet terugbrengen van het voertuig, en bovendien de gps-tracker activeren (art. 12.4).
 
@@ -78,7 +78,7 @@ De opties (fiets, SUP, barbecue, extra bestuurder, enz.) en de prijzen daarvan w
 
 3.6. Teruggave op een andere plaats dan de ophaalplaats vereist voorafgaande schriftelijke overeenstemming en betaling van het bedrag dat vóór het ophalen wordt overeengekomen.
 
-3.7. Brandstof: het voertuig wordt met een volle tank overgedragen en moet ook zo worden teruggebracht. Is dat niet het geval, dan wordt 25 € in rekening gebracht per ontbrekend streepje op de brandstofmeter, plus 10 € voor het tanken. De kosten van brandstof, AdBlue en olie tijdens de huurperiode komen voor rekening van de Huurder.
+3.7. Brandstof: het voertuig wordt met een volle tank overgedragen en moet ook zo worden teruggebracht. Is dat niet het geval, dan wordt 25 € in rekening gebracht per ontbrekend streepje op de brandstofmeter, plus 10 € voor het tanken, een bedrag dat op de borg wordt ingehouden of op de kaart wordt afgeschreven (art. 5.6). Als volle tank geldt de tank die als zodanig in het Retourprotocol is vermeld; de Huurder kan dit aantonen met de kassabon van een tankstation op maximaal 10 km van de plaats van teruggave. De kosten van brandstof, AdBlue en olie tijdens de huurperiode komen voor rekening van de Huurder.
 
 3.8. Water en schoonmaak: het voertuig moet met een schoon interieur worden teruggebracht, met een lege grijswatertank, een geleegde en schone toiletcassette (zwart water) en een volle schoonwatertank. Zo niet: 20 € voor het grijs water, 90 € voor een niet-geleegde of niet-gereinigde toiletcassette en 20 € voor het schone water. Onvoldoende schoonmaak van het interieur wordt in rekening gebracht tegen de werkelijke kosten, met een maximum van 150 €.
 
@@ -105,17 +105,23 @@ Kosteloos annuleren binnen 24 uur: de boeking kan zonder enige kosten worden gea
 
 4.3. Wijziging van de boeking: de Huurder kan tot 48 uur vóór de overdracht de data wijzigen en opties toevoegen op de pagina voor boekingsbeheer van campervlc.com, met het boekingsnummer en het gebruikte e-mailadres; daarna via WhatsApp. De nieuwe data zijn afhankelijk van beschikbaarheid, de minimale verblijfsduur van het seizoen en de geldende tarieven. Inkorting van de periode wordt beschouwd als gedeeltelijke annulering: op de geschrapte nachten is de staffel van artikel 4.1 van toepassing, afhankelijk van de termijn ten opzichte van de oorspronkelijke overdrachtsdatum, met inbegrip van de kosteloze annulering binnen 24 uur onder dezelfde voorwaarden. Reeds betaalde opties kunnen alleen worden geschrapt als dat meer dan 7 dagen vóór de overdracht gebeurt.
 
-### 5. Betalingsvoorwaarden en borg
+### 5. Betalingsvoorwaarden, borg en latere afschrijvingen
 
 5.1. Wijze van betaling: de huurprijs en de borg worden voldaan per bankkaart of door overmaking naar de rekening van de Verhuurder. Overeenkomstig artikel 7 van de Spaanse wet Ley 7/2012 worden geen contante betalingen aanvaard van 1.000 € of meer wanneer de betaler fiscaal inwoner van Spanje is, noch van 10.000 € of meer wanneer de betaler een natuurlijk persoon is die geen fiscaal inwoner van Spanje is en niet handelt als ondernemer of beroepsbeoefenaar. De Verhuurder reikt voor alle geïnde bedragen een factuur uit.
 
-5.2. De borg van 900 € wordt vóór de overdracht van het voertuig voldaan, bij voorkeur door middel van een voorautorisatie op de creditcard op naam van de hoofdbestuurder.
+5.2. De borg van 900 € wordt vóór de overdracht van het voertuig voldaan, door middel van een voorautorisatie (reservering) of afschrijving op een credit- of debitcard (bij voorkeur Visa) op naam van de Huurder, die bij de overdracht aanwezig moet zijn en zijn eigendom van de kaart moet aantonen. Per contract wordt één kaart gebruikt; prepaidkaarten en virtuele kaarten voor eenmalig gebruik worden niet aanvaard.
 
-5.3. Terugbetaling van de borg: na inspectie van het voertuig, binnen uiterlijk 14 werkdagen na de teruggave, mits het voertuig zich in dezelfde staat bevindt als bij de overdracht. Is er schade waarvan de waardering niet direct mogelijk is, dan beschikt de Verhuurder over een termijn van uiterlijk 30 kalenderdagen na de teruggave om met bewijsstukken (facturen of offertes van een garage) de afrekening op te stellen, het resterende deel van de borg terug te betalen of het verschil te vorderen als de aangetoonde kosten de borg overschrijden.
+5.3. Terugbetaling van de borg: na inspectie van het voertuig, binnen uiterlijk 14 werkdagen na de teruggave, mits het voertuig zich in dezelfde staat bevindt als bij de overdracht. Is er schade waarvan de waardering niet direct mogelijk is, dan beschikt de Verhuurder over een termijn van uiterlijk 30 kalenderdagen na de teruggave om met bewijsstukken (facturen of offertes van een garage) de afrekening op te stellen, het resterende deel van de borg terug te betalen of het verschil te vorderen als de aangetoonde kosten de borg overschrijden. De voorautorisatie kan vóór die termijn door de bank worden vrijgegeven; de Verhuurder kan het bedrag op het moment van teruggave afschrijven wanneer er schade of openstaande bedragen zijn vermeld in het Retourprotocol. Het daadwerkelijk vrijgeven van de reservering kan, afhankelijk van de uitgevende bank, tot 30 kalenderdagen duren, zonder dat de Verhuurder aansprakelijk is voor bankkosten.
 
-5.4. Op de borg kunnen, met schriftelijke onderbouwing, in mindering worden gebracht: de schade als bedoeld in artikel 11 en het eigen risico van de verzekering, de toeslagen van de artikelen 3.7 tot en met 3.9, de boetes wegens vertraging (3.4) en de bedragen van artikel 5.5.
+5.4. Op de borg kunnen, met schriftelijke onderbouwing, in mindering worden gebracht: de schade als bedoeld in artikel 11 en het eigen risico ten laste van de Huurder, de toeslagen van de artikelen 3.7 tot en met 3.9, de boetes wegens vertraging (3.4) en de bedragen van de artikelen 5.5 tot en met 5.7.
 
-5.5. Voor rekening van de Huurder komen: (a) de kosten van teruggave op een andere, niet overeengekomen plaats; (b) het bedrag van verkeersboetes en andere boetes en sancties die voortvloeien uit het gebruik van het voertuig tijdens de huurperiode en aan hem toe te rekenen zijn, alsmede de redelijke administratiekosten voor de afhandeling daarvan (25 € per dossier); (c) de kosten die voortvloeien uit het vasthouden van of beslag op het voertuig door een aan de Huurder toe te rekenen oorzaak, met inbegrip van de aangetoonde gederfde winst tijdens de periode dat het voertuig stilstaat; (d) de wettelijke vertragingsrente bij te late betaling.
+5.5. Voor rekening van de Huurder komen: (a) de kosten van teruggave op een andere, niet overeengekomen plaats; (b) het bedrag van verkeersboetes en andere boetes en sancties die voortvloeien uit het gebruik van het voertuig tijdens de huurperiode en aan hem toe te rekenen zijn (art. 5.8); (c) bij vasthouden, beslag, stilstand of ingrijpen van een autoriteit ten aanzien van het voertuig door een aan de Huurder toe te rekenen oorzaak: de kosten van sleepdienst, stalling, bewaring en juridische bijstand, plus een vergoeding voor de stilstand gelijk aan de overeengekomen dagprijs van de huur voor elke dag stilstand (met een maximum van 30 dagen), overeengekomen als contractuele boete en onverminderd de matigingsbevoegdheid van de rechter en het recht van de Huurder om een geringere schade aan te tonen; (d) de wettelijke vertragingsrente bij te late betaling; (e) de naar behoren aangetoonde kosten van buitengerechtelijke en gerechtelijke invordering wanneer de Huurder de volgens dit contract verschuldigde bedragen niet betaalt.
+
+5.6. Machtiging voor latere afschrijvingen. De Huurder machtigt de Verhuurder uitdrukkelijk om de kaart die bij het afsluiten van het contract of bij de overdracht is verstrekt (waarvan de gegevens veilig worden bewaard via de betaalprovider) te gebruiken om, na afloop van de huur en tot 90 kalenderdagen daarna, de volgens dit contract verschuldigde bedragen af te schrijven voor: (i) aangetoonde schade en het eigen risico ten laste van de Huurder (art. 11); (ii) toeslagen en boetes van de artikelen 3.4 tot en met 3.9 en 6.3; (iii) de dienst van artikel 5.7. Voor aan de Huurder toe te rekenen boetes, sancties, tolgelden en heffingen (art. 5.8) strekt de machtiging zich uit tot 12 maanden na afloop van de huur. Vóór elke latere afschrijving stuurt de Verhuurder de onderbouwing van het bedrag (omschrijving, foto's, Retourprotocol, factuur of offerte) naar het e-mailadres van de Huurder en geeft hij een termijn van 5 kalenderdagen om bezwaar te maken; bedragen die reeds in het Retourprotocol zijn vermeld en ondertekend, kunnen onmiddellijk in mindering worden gebracht. Deze machtiging beperkt het recht van de Huurder niet om een klacht in te dienen bij de consumentendiensten of de rechter.
+
+5.7. Beheer- en begeleidingsdienst: de Huurder betaalt 40 € (btw inbegrepen) voor elk dossier dat de Verhuurder verplicht om, namens hem of namens beiden, (a) een aan de Huurder toe te rekenen schadegeval met schade aan het voertuig of aan derden af te handelen (melding aan de verzekeraar, expertise, garage en opvolging), of (b) een boete of sanctie af te handelen waarvoor de bestuurder moet worden geïdentificeerd, de kennisgeving moet worden doorgestuurd of de afhandeling nodig is. Dit bedrag vergoedt daadwerkelijk verrichte werkzaamheden en staat los van het eigen risico, de schade en de sanctie. Het wordt niet in rekening gebracht wanneer het schadegeval niet aan de Huurder is toe te rekenen.
+
+5.8. Boetes en sancties. De Verhuurder is wettelijk verplicht de bestuurder te identificeren bij de sanctionerende autoriteit (art. 11.1 van het Koninklijk Wetgevend Besluit 6/2015) en daartoe stemt de Huurder ermee in dat zijn persoonsgegevens en die van de bestuurder, de kopie van het rijbewijs en van het contract aan de bevoegde autoriteiten worden verstrekt. De sanctie wordt rechtstreeks aan de Huurder bekendgemaakt en door hem betaald. Kan de identificatie om een niet aan de Verhuurder toe te rekenen reden niet plaatsvinden, of moet de Verhuurder de sanctie betalen, dan vergoedt de Huurder hem het bedrag, plus de dienst van artikel 5.7, en vrijwaart hij hem tegen elke sanctie, boete, heffing of toeslag die hem wordt opgelegd als gevolg van de overtreding van de bestuurder tijdens de huurperiode.
 
 ### 6. Verboden gebruik en zorgplichten
 
@@ -158,7 +164,7 @@ Kosteloos annuleren binnen 24 uur: de boeking kan zonder enige kosten worden gea
 
 8.4. Bij schade zonder tegenpartij stelt de Huurder voor de Verhuurder een schriftelijk verslag van de toedracht met foto's op. Verhindert het ontbreken van een verslag de uitkering door de verzekering, dan is de Huurder aansprakelijk voor het betreffende bedrag.
 
-8.5. De Huurder laat het voertuig niet achter zonder passende maatregelen te nemen om het te beschermen en neemt zo nodig contact op met de pechhulpdienst waarmee de Verhuurder een overeenkomst heeft gesloten.
+8.5. De Huurder laat het voertuig niet achter zonder passende maatregelen te nemen om het te beschermen en waarschuwt de Verhuurder, die de nodige hulp regelt, met inbegrip van de mobiliteitsgarantie van de fabrikant van het chassis-cabine. De Huurder huurt niet op eigen gelegenheid sleepdiensten of reparaties in zonder toestemming van de Verhuurder, behoudens spoed om veiligheidsredenen. Bij stilstand, wegslepen of ingrijpen van een autoriteit ten aanzien van het voertuig waarschuwt hij de Verhuurder onmiddellijk, voordat hij overbrenging of betalingen toestaat.
 
 8.6. Niet-nakoming van de verplichtingen van dit artikel die de Verhuurder aantoonbaar nadeel berokkent (met inbegrip van het verlies van verzekeringsdekking en de gederfde winst tijdens de periode dat het voertuig stilstaat) geeft de Verhuurder het recht de betreffende schade te vorderen.
 
@@ -190,7 +196,7 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 10.1. Normale mechanische slijtage van het voertuig (motor, aandrijving) komt voor rekening van de Verhuurder. Wanneer de duur van de reis dat raadzaam maakt, geeft de Verhuurder instructies om het nodige onderhoud te laten uitvoeren bij een officiële dealer van het merk van het chassis.
 
-10.2. De Huurder zet het voertuig stil zodra dat veilig kan wanneer er een waarschuwingslampje gaat branden, neemt contact op met de Verhuurder en met de pechhulpdienst waarmee een overeenkomst is gesloten, en wendt zich uitsluitend tot een officiële dealer van het merk van het chassis, tenzij de Verhuurder uitdrukkelijk anders toestaat.
+10.2. De Huurder zet het voertuig stil zodra dat veilig kan wanneer er een waarschuwingslampje gaat branden, neemt contact op met de Verhuurder en wendt zich uitsluitend tot een officiële dealer van het merk van het chassis, tenzij de Verhuurder uitdrukkelijk anders toestaat.
 
 10.3. Lijdt het voertuig door een niet aan de Huurder toe te rekenen oorzaak ernstige schade of is het gedurende langere tijd onbruikbaar, dan kan de Verhuurder, afhankelijk van beschikbaarheid en binnen een redelijke termijn, een vervangend voertuig met een gelijk of groter aantal plaatsen aanbieden; in dat geval is ontbinding van het contract niet mogelijk. Biedt hij geen vervanging aan, dan is artikel 9.5 van toepassing.
 
@@ -198,11 +204,11 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 ### 11. Aansprakelijkheid van de Huurder. Allrisk-verzekering met eigen risico
 
-11.1. Het voertuig beschikt over een allrisk-verzekering met een eigen risico van 900 €. Bij gehele of gedeeltelijke schade die door de verzekering wordt gedekt, betaalt de Huurder ten hoogste het toepasselijke eigen risico per schadepost die door de expert van de verzekeraar wordt vastgesteld (de verzekeraar rekent één schadepost per afzonderlijke deuk, breuk of beschadiging; heeft een ongeval betrekking op twee delen, dan is het eigen risico twee keer verschuldigd).
+11.1. Het voertuig beschikt over een allrisk-verzekering met eigen risico. Bij gehele of gedeeltelijke schade aan het voertuig die door de verzekering wordt gedekt, betaalt de Huurder een contractueel eigen risico van 900 € per schadepost die door de expert van de verzekeraar wordt vastgesteld (de verzekeraar rekent één schadepost per afzonderlijke deuk, breuk of beschadiging; heeft een ongeval betrekking op twee delen, dan is het eigen risico twee keer verschuldigd). Dit eigen risico is de maximale aansprakelijkheid van de Huurder voor gedekte schade, onverminderd de artikelen 11.3 en 11.4.
 
 11.2. De verzekering dekt geen persoonlijke bezittingen van de Huurder of van zijn medereizigers.
 
-11.3. Overschrijden de kosten van herstel van aan de Huurder toe te rekenen schade die niet door de verzekering wordt gedekt, of de som van de eigen risico's, de borg, dan betaalt de Huurder het verschil, na schriftelijke onderbouwing (expertiserapport, facturen of offertes). De procedure en de termijnen van artikel 5.3 zijn van toepassing.
+11.3. Schade en verlies die niet door de verzekering worden gedekt. De verzekering van het voertuig dekt onder meer niet: losse inrichting, losse spullen, gebruiksvoorwerpen en losse apparaten in het interieur van de woonopbouw, noch ontbrekende brandstof of vloeistoffen. Schade aan of verlies van deze zaken, alsmede niet door de verzekering gedekte schade die aan de Huurder toe te rekenen is, wordt door de Huurder vergoed tegen de werkelijke kosten van herstel of vervanging, na schriftelijke onderbouwing (expertiserapport, facturen, offertes of vervangingsprijs), zonder de beperking van het eigen risico van artikel 11.1. Overschrijden deze kosten, of de som van de eigen risico's, de borg, dan betaalt de Huurder het verschil overeenkomstig artikel 5.3.
 
 11.4. De beperking van de aansprakelijkheid tot het eigen risico geldt niet, en de Huurder is dan aansprakelijk voor de volledige schade, wanneer deze het gevolg is van opzet of grove nalatigheid en in het bijzonder wanneer:
 
@@ -210,10 +216,10 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 - b) de bestuurder na een ongeval doorrijdt of de plicht tot hulpverlening niet nakomt;
 - c) de verplichtingen van artikel 8 niet worden nagekomen, voor zover die niet-nakoming de verzekeringsdekking of de vaststelling van de schade heeft verhinderd;
 - d) de schade voortvloeit uit verboden gebruik (art. 6) of uit het rijden buiten het toegestane gebied (art. 7);
-- e) de schade wordt veroorzaakt door een niet-gemachtigde bestuurder aan wie de Huurder het voertuig heeft afgestaan;
+- e) de schade wordt veroorzaakt door een niet-gemachtigde bestuurder aan wie de Huurder het voertuig heeft afgestaan of die niet over een geldig rijbewijs beschikt;
 - f) de schade ontstaat doordat de afmetingen van het voertuig (hoogte, breedte, lengte) of de regels inzake maximale belading niet in acht zijn genomen.
 
-11.5. De Huurder is eveneens aansprakelijk voor boetes, heffingen en sancties die voortvloeien uit het gebruik van het voertuig tijdens de huurperiode en aan hem toe te rekenen zijn (art. 5.5.b), alsmede voor zijn civielrechtelijke, bestuursrechtelijke of strafrechtelijke aansprakelijkheid als gevolg van een schadegeval of opzettelijk gedrag.
+11.5. De Huurder is eveneens aansprakelijk voor boetes, heffingen en sancties die voortvloeien uit het gebruik van het voertuig tijdens de huurperiode en aan hem toe te rekenen zijn (art. 5.5.b en 5.8), alsmede voor zijn civielrechtelijke, bestuursrechtelijke of strafrechtelijke aansprakelijkheid als gevolg van een schadegeval of opzettelijk gedrag.
 
 11.6. Zijn er meerdere huurders, dan zijn zij hoofdelijk aansprakelijk.
 
@@ -225,9 +231,9 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 12.3. De Huurder kan zijn eigen voertuig tijdens de huurperiode gratis parkeren op het terrein van de Verhuurder. De Verhuurder aanvaardt geen aansprakelijkheid als bewaarnemer van dat voertuig.
 
-12.4. Gps-tracker: de camper is uitgerust met een volgsysteem dat uitsluitend wordt gebruikt voor de beveiliging en het terugvinden van het voertuig (defect, roof, niet terugbrengen of gebruik buiten het toegestane gebied). De Huurder wordt hiervan in kennis gesteld en stemt in met de verwerking overeenkomstig artikel 15.
+12.4. Gps-tracker: de camper kan zijn uitgerust met een volgsysteem dat uitsluitend wordt gebruikt voor de beveiliging en het terugvinden van het voertuig (defect, roof, niet terugbrengen of gebruik buiten het toegestane gebied). De Huurder wordt hiervan in kennis gesteld en stemt in met de verwerking overeenkomstig artikel 15.
 
-12.5. Bij de prijs inbegrepen uitrusting: campingtafel en -stoelen, drie strandstoelen, parasol, luifel, smart-tv, keukengerei, kussens en dekens. Deze worden samen met het voertuig ter beschikking gesteld; verlies of breuk die aan de Huurder toe te rekenen is, wordt vergoed tegen de aangetoonde vervangingswaarde. Voor de bij de boeking afgesloten optionele accessoires (fiets, SUP-board, barbecue, kinderzitje en andere) geldt dezelfde regel. De vaste uitrusting van de woonopbouw (verwarming, airconditioning, kooktoestel, koelkast, waterpomp, douche, toilet, zonnepaneel, elektrische installatie) maakt in alle opzichten deel uit van het gehuurde voertuig.
+12.5. Bij de prijs inbegrepen uitrusting: campingtafel en -stoelen, drie strandstoelen, parasol, luifel, smart-tv, keukengerei, kussens en dekens. Deze worden samen met het voertuig ter beschikking gesteld; verlies of breuk die aan de Huurder toe te rekenen is, wordt vergoed tegen de aangetoonde vervangingswaarde (art. 11.3). Voor de bij de boeking afgesloten optionele accessoires (fiets, SUP-board, barbecue, kinderzitje en andere) geldt dezelfde regel. De vaste uitrusting van de woonopbouw (verwarming, airconditioning, kooktoestel, koelkast, waterpomp, douche, toilet, zonnepaneel, elektrische installatie) maakt in alle opzichten deel uit van het gehuurde voertuig.
 
 ### 13. Veiligheid
 
@@ -239,13 +245,25 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 14.2. De partijen streven ernaar elk geschil in der minne te schikken. Op dit contract is Spaans recht van toepassing. Bij een geschil met een consument wordt de bevoegde rechter bepaald overeenkomstig het toepasselijke procesrecht, zonder een forumkeuze die de rechten van de consument beperkt.
 
+14.3. Bij elke afschrijving of vordering verstrekt de Verhuurder de documentatie ter onderbouwing en behandelt hij het bezwaar dat de Huurder schriftelijk indient op het in dit contract vermelde e-mailadres.
+
 ### 15. Bescherming van persoonsgegevens
 
-15.1. Verwerkingsverantwoordelijke: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Doeleinden: beheer en uitvoering van het huurcontract, facturering, beheer van de borg en van schadegevallen, nakoming van wettelijke verplichtingen (op het gebied van belastingen, verkeer en verzekeringen) en, in voorkomend geval, invordering van bedragen. Rechtsgrondslag: uitvoering van het contract en nakoming van wettelijke verplichtingen.
+15.1. Verwerkingsverantwoordelijke: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Doeleinden: beheer en uitvoering van het huurcontract, facturering, beheer van de borg, van latere afschrijvingen en van schadegevallen, nakoming van wettelijke verplichtingen (op het gebied van belastingen, verkeer en verzekeringen) en, in voorkomend geval, invordering van bedragen. Rechtsgrondslag: uitvoering van het contract en nakoming van wettelijke verplichtingen.
 
 15.2. De geolocatiegegevens van het voertuig (art. 12.4) worden uitsluitend tijdens de huurperiode en voor de genoemde beveiligingsdoeleinden verwerkt. De gegevens kunnen zo nodig worden verstrekt aan de verzekeringsmaatschappij, de pechhulpdienst, de bevoegde overheidsinstanties en juridisch adviseurs. Zij worden bewaard gedurende de looptijd van het contract en de wettelijke verjaringstermijnen.
 
-15.3. De betrokkene kan zijn rechten op inzage, rectificatie, wissing, bezwaar, beperking en overdraagbaarheid uitoefenen door zich tot het vermelde e-mailadres te wenden, en een klacht indienen bij de Spaanse gegevensbeschermingsautoriteit (AEPD) (www.aepd.es).
+15.3. Bij een boete of sanctie worden de gegevens van de Huurder en van de bestuurder, de kopie van het rijbewijs en van het contract verstrekt aan de sanctionerende autoriteit ter identificatie, ter nakoming van een wettelijke verplichting (art. 11.1 van het Koninklijk Wetgevend Besluit 6/2015 van 30 oktober).
+
+15.4. Kopieën van de identiteitsdocumenten en van het rijbewijs worden veilig bewaard, met beperkte toegang, gedurende de looptijd van het contract en de termijn die nodig is om vorderingen en wettelijke verplichtingen af te handelen, waarna zij worden gewist.
+
+15.5. De betrokkene kan zijn rechten op inzage, rectificatie, wissing, bezwaar, beperking en overdraagbaarheid uitoefenen door zich tot het vermelde e-mailadres te wenden, en een klacht indienen bij de Spaanse gegevensbeschermingsautoriteit (AEPD) (www.aepd.es).
+
+### 16. Elektronische handtekening en communicatie
+
+16.1. Dit contract en de bijlagen daarvan kunnen worden ondertekend met een elektronische handtekening (gedigitaliseerde handgeschreven handtekening op een tablet of apparaat, of elektronische handtekening met verificatiecode), die dezelfde geldigheid heeft als een handtekening op papier. Na ondertekening ontvangen beide partijen een volledige kopie in pdf-formaat op het in dit contract vermelde e-mailadres.
+
+16.2. De in dit contract bedoelde mededelingen en onderbouwingen kunnen per e-mail worden gedaan aan het vermelde adres, dat de Huurder zich verbindt operationeel te houden gedurende het contract en tot 12 maanden na afloop daarvan.
 
 ---
 

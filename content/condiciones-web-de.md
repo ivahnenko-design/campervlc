@@ -1,15 +1,15 @@
 # Mietbedingungen und Preise
 
-Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unterzeichnen. Wir veröffentlichen sie, damit Sie schon vor der Buchung wissen, was im Preis enthalten ist, was gesondert berechnet wird und wie Stornierung, Kaution und Versicherung geregelt sind. Fassung vom Oktober 2026.
+Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unterzeichnen. Wir veröffentlichen sie, damit Sie schon vor der Buchung wissen, was im Preis enthalten ist, was gesondert berechnet wird und wie Stornierung, Kaution und Versicherung geregelt sind. Fassung vom November 2026.
 
 > Diese Übersetzung dient nur zur Information; es gilt die spanische Fassung.
 
 ## Im Preis enthalten
 
 - Mehrwertsteuer (IVA).
-- Vollkaskoversicherung mit einer Selbstbeteiligung von 900 €.
+- Vollkaskoversicherung; die vom Mieter zu tragende Selbstbeteiligung beträgt 900 € je Schadenmeldung.
 - 100 km pro Mietnacht, erweiterbar über die Kilometeroptionen.
-- Pannenhilfe und Mobilitätsgarantie des Herstellers.
+- Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus.
 - Zwei Gasflaschen und Sanitärkapseln für die Chemietoilette.
 - Kostenloses Parken Ihres Autos auf unserem Gelände während der Mietdauer.
 - Haustiere ohne Aufpreis.
@@ -26,7 +26,7 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 
 | Posten | Betrag |
 |---|---|
-| Kaution (Kartenvorautorisierung) | 900 € |
+| Kaution (Kartenvorautorisierung oder Kartenbelastung) | 900 € |
 | Option 200 km pro Nacht | 20 € / Nacht |
 | Option unbegrenzte Kilometer | 40 € / Nacht |
 | Kilometer über das Inklusivkontingent hinaus | 0,30 € / km |
@@ -40,7 +40,7 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 | Unzureichende Innenreinigung | tatsächliche Kosten, max. 150 € |
 | Tabak- oder Tiergeruch, Ozonbehandlung | tatsächliche Kosten, max. 300 € |
 | Verlust von Schlüsseln | tatsächliche Kosten, max. 250 € |
-| Bearbeitung von Bußgeldern | 25 € / Vorgang |
+| Service für Abwicklung und Begleitung (Schadensfall mit Schäden oder Bußgeld) | 40 € / Vorgang (inkl. IVA) |
 
 Die Optionen (Fahrrad, SUP, Grill, Zusatzfahrer usw.) und ihre Preise werden im Buchungsrechner angezeigt.
 
@@ -62,15 +62,15 @@ Die Optionen (Fahrrad, SUP, Grill, Zusatzfahrer usw.) und ihre Preise werden im 
 
 2.2. Kann der Fahrer bei der Übergabe keinen gültigen Führerschein nachweisen, kann der Vermieter die Übergabe verweigern; es gelten dann die Stornobedingungen nach Ziffer 4 wie bei einer vom Mieter zu vertretenden Stornierung.
 
-2.3. Das Fahrzeug darf nur vom Mieter und von den in diesem Vertrag eingetragenen Zusatzfahrern geführt werden.
+2.3. Das Fahrzeug darf nur vom Mieter und von den in diesem Vertrag eingetragenen Zusatzfahrern geführt werden. Das Führen des Fahrzeugs durch eine nicht eingetragene Person hebt den Versicherungsschutz auf (Ziff. 11.4).
 
 ### 3. Preis, Mietdauer, Übergabe und Rückgabe
 
-3.1. Im Preis enthalten sind: Mehrwertsteuer (IVA); 100 km pro Mietnacht (Mehrkilometer zu 0,30 €/km), erweiterbar durch die bei der Buchung gewählten Kilometeroptionen (200 km pro Nacht oder unbegrenzte Kilometer); Vollkaskoversicherung mit einer Selbstbeteiligung von 900 € (Ziff. 11); Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus; zwei Gasflaschen; Sanitärkapseln für die Chemietoilette; sowie kostenloses Parken des Privatfahrzeugs des Mieters auf dem Gelände des Vermieters während der Mietdauer (Ziff. 12.3).
+3.1. Im Preis enthalten sind: Mehrwertsteuer (IVA); 100 km pro Mietnacht (Mehrkilometer zu 0,30 €/km), erweiterbar durch die bei der Buchung gewählten Kilometeroptionen (200 km pro Nacht oder unbegrenzte Kilometer); Vollkaskoversicherung mit einer vom Mieter zu tragenden Selbstbeteiligung von 900 € je Schadenmeldung (Ziff. 11); Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus; zwei Gasflaschen; Sanitärkapseln für die Chemietoilette; sowie kostenloses Parken des Privatfahrzeugs des Mieters auf dem Gelände des Vermieters während der Mietdauer (Ziff. 12.3).
 
-3.2. Bei der Übergabe wird das Übergabeprotokoll (Check-In) mit der Beschreibung des Fahrzeugzustands unterzeichnet und ein Schlüsselsatz ausgehändigt. Verlust oder Diebstahl der Schlüssel wird zu den tatsächlichen Kosten für Ersatz und Versand berechnet, höchstens jedoch mit 250 €. Der Vermieter kann die Übergabe von der Durchführung der Einweisung in die Bedienung des Fahrzeugs abhängig machen.
+3.2. Bei der Übergabe wird das Übergabeprotokoll (Check-In) mit der Beschreibung des Fahrzeugzustands unterzeichnet und ein Schlüsselsatz ausgehändigt. Jeder Schaden, der nicht im Übergabeprotokoll vermerkt ist, gilt bis zum Beweis des Gegenteils als während der Mietdauer entstanden. Verlust oder Diebstahl der Schlüssel wird zu den tatsächlichen Kosten für Ersatz und Versand berechnet, höchstens jedoch mit 250 €. Der Vermieter kann die Übergabe von der Durchführung der Einweisung in die Bedienung des Fahrzeugs abhängig machen.
 
-3.3. Bei der Rückgabe wird das Rückgabeprotokoll (Check-Out) unterzeichnet. Ist der Mieter aus von ihm zu vertretenden Gründen bei der Inspektion nicht anwesend (Schlüsselrückgabe über den Briefkasten, Nichterscheinen), dokumentiert der Vermieter den Zustand des Fahrzeugs mit am selben Tag datierten Fotos und teilt dem Mieter festgestellte Schäden innerhalb von höchstens 48 Stunden mit; der Mieter ist berechtigt, dazu Stellung zu nehmen.
+3.3. Bei der Rückgabe wird das Rückgabeprotokoll (Check-Out) unterzeichnet. Der Mieter kann eine gemeinsame Überprüfung des Fahrzeugs verlangen; verlangt er sie nicht oder ist er aus von ihm zu vertretenden Gründen bei der Inspektion nicht anwesend (Schlüsselrückgabe über den Briefkasten, Nichterscheinen), dokumentiert der Vermieter den Zustand des Fahrzeugs mit am selben Tag datierten Fotos und teilt dem Mieter festgestellte Schäden innerhalb von höchstens 48 Stunden mit; der Mieter ist berechtigt, dazu Stellung zu nehmen.
 
 3.4. Rückgabezeit und Verspätung. Eine Rückgabe nach der bei der Buchung vereinbarten Uhrzeit der Abholung wird als Zuschlag berechnet: bei einer Überschreitung von bis zu 6 Stunden 50 % eines Miettags, bei mehr als 6 Stunden ein voller Miettag. Dieser Zuschlag ist bei der Buchung zu zahlen, wenn die Rückgabezeit in der Buchung gewählt wird. Für eine nicht vereinbarte Verspätung wird eine Vertragsstrafe von 50 € pro Stunde erhoben, je Verspätungstag höchstens in Höhe des Betrags für 3 Miettage; der Mieter hat jede Verspätung unverzüglich mitzuteilen und haftet darüber hinaus für die nachgewiesenen Schäden, die er dem Vermieter gegenüber anderen Kunden verursacht. Nach 4 Stunden Verspätung ohne Mitteilung oder berechtigten Grund kann der Vermieter den Vertrag beenden und bei den zuständigen Behörden Anzeige wegen Nichtrückgabe des Fahrzeugs erstatten sowie die GPS-Ortung aktivieren (Ziff. 12.4).
 
@@ -78,7 +78,7 @@ Die Optionen (Fahrrad, SUP, Grill, Zusatzfahrer usw.) und ihre Preise werden im 
 
 3.6. Eine Rückgabe an einem anderen Ort als dem Abholort erfordert eine vorherige schriftliche Vereinbarung und die Zahlung des vor der Abholung vereinbarten Betrags.
 
-3.7. Kraftstoff: Das Fahrzeug wird vollgetankt übergeben und ist vollgetankt zurückzugeben. Andernfalls werden 25 € für jeden fehlenden Strich der Tankanzeige zuzüglich 10 € für den Tankservice berechnet. Der Mieter trägt während der Mietdauer die Kosten für Kraftstoff, AdBlue und Öl.
+3.7. Kraftstoff: Das Fahrzeug wird vollgetankt übergeben und ist vollgetankt zurückzugeben. Andernfalls werden 25 € für jeden fehlenden Strich der Tankanzeige zuzüglich 10 € für den Tankservice berechnet; dieser Betrag wird von der Kaution abgezogen oder der Karte belastet (Ziff. 5.6). Als vollgetankt gilt der Tank, der im Rückgabeprotokoll als voll vermerkt ist; der Mieter kann dies mit dem Beleg einer Tankstelle nachweisen, die höchstens 10 km vom Rückgabeort entfernt liegt. Der Mieter trägt während der Mietdauer die Kosten für Kraftstoff, AdBlue und Öl.
 
 3.8. Wasser und Reinigung: Das Fahrzeug ist innen gereinigt zurückzugeben, mit leerem Grauwassertank, entleerter und gereinigter Toilettenkassette (Schwarzwasser) und vollem Frischwassertank. Andernfalls werden berechnet: 20 € für das Grauwasser, 90 € für die nicht entleerte oder nicht gereinigte Toilettenkassette und 20 € für das Frischwasser. Eine unzureichende Innenreinigung wird zu den tatsächlichen Kosten berechnet, höchstens mit 150 €.
 
@@ -105,17 +105,23 @@ Kostenlose Stornierung innerhalb von 24 Stunden: Die Buchung kann innerhalb von 
 
 4.3. Änderung der Buchung: Der Mieter kann bis 48 Stunden vor der Übergabe auf der Seite zur Buchungsverwaltung von campervlc.com mit der Buchungsnummer und der verwendeten E-Mail-Adresse die Reisedaten ändern und Optionen hinzufügen; danach per WhatsApp. Die neuen Reisedaten stehen unter dem Vorbehalt der Verfügbarkeit, der Mindestmietdauer der jeweiligen Saison und der geltenden Tarife. Eine Verkürzung des Zeitraums gilt als Teilstornierung: Auf die entfallenden Nächte wird die Staffel nach Ziffer 4.1 angewandt, je nach zeitlichem Abstand zum ursprünglichen Übergabedatum, einschließlich der kostenlosen Stornierung innerhalb von 24 Stunden unter denselben Bedingungen. Bereits bezahlte Optionen können nur mehr als 7 Tage vor der Übergabe wieder abbestellt werden.
 
-### 5. Zahlungsbedingungen und Kaution
+### 5. Zahlungsbedingungen, Kaution und nachträgliche Belastungen
 
 5.1. Zahlungsweise: Miete und Kaution sind per Bankkarte oder durch Überweisung auf das Konto des Vermieters zu zahlen. Gemäß Artikel 7 des Gesetzes Ley 7/2012 sind Barzahlungen in Höhe von 1.000 € oder mehr nicht zulässig, wenn der Zahlende in Spanien steuerlich ansässig ist, und in Höhe von 10.000 € oder mehr nicht zulässig, wenn der Zahlende eine in Spanien nicht steuerlich ansässige natürliche Person ist, die nicht als Unternehmer oder Freiberufler handelt. Der Vermieter stellt über alle vereinnahmten Beträge eine Rechnung aus.
 
-5.2. Die Kaution von 900 € ist vor der Übergabe des Fahrzeugs zu leisten, vorzugsweise durch Kartenvorautorisierung auf einer Kreditkarte, die auf den Namen des Hauptfahrers lautet.
+5.2. Die Kaution von 900 € ist vor der Übergabe des Fahrzeugs zu leisten, durch Kartenvorautorisierung (Sperrung) oder Belastung einer Kredit- oder Debitkarte (vorzugsweise Visa), die auf den Namen des Mieters lautet; dieser muss bei der Übergabe anwesend sein und seine Inhaberschaft nachweisen. Pro Vertrag wird nur eine Karte verwendet; Prepaid-Karten und virtuelle Einmalkarten werden nicht akzeptiert.
 
-5.3. Rückzahlung der Kaution: nach der Inspektion des Fahrzeugs innerhalb von höchstens 14 Werktagen ab der Rückgabe, sofern sich das Fahrzeug im selben Zustand wie bei der Übergabe befindet. Können Schäden nicht sofort bewertet werden, hat der Vermieter ab der Rückgabe höchstens 30 Kalendertage Zeit, um anhand von Belegen (Werkstattrechnungen oder Kostenvoranschlägen) abzurechnen, den Restbetrag der Kaution zu erstatten oder die Differenz zu fordern, wenn die nachgewiesenen Kosten die Kaution übersteigen.
+5.3. Rückzahlung der Kaution: nach der Inspektion des Fahrzeugs innerhalb von höchstens 14 Werktagen ab der Rückgabe, sofern sich das Fahrzeug im selben Zustand wie bei der Übergabe befindet. Können Schäden nicht sofort bewertet werden, hat der Vermieter ab der Rückgabe höchstens 30 Kalendertage Zeit, um anhand von Belegen (Werkstattrechnungen oder Kostenvoranschlägen) abzurechnen, den Restbetrag der Kaution zu erstatten oder die Differenz zu fordern, wenn die nachgewiesenen Kosten die Kaution übersteigen. Die Vorautorisierung kann von der Bank vor Ablauf dieser Frist freigegeben werden; der Vermieter kann sie bei der Rückgabe einziehen, wenn im Rückgabeprotokoll Schäden oder offene Beträge vermerkt sind. Die tatsächliche Freigabe der Sperrung kann je nach kartenausgebender Bank bis zu 30 Kalendertage dauern, wobei der Vermieter für Bankgebühren nicht haftet.
 
-5.4. Von der Kaution können unter Vorlage von Nachweisen abgezogen werden: die Schäden nach Ziffer 11 und die Selbstbeteiligung der Versicherung, die Zuschläge nach den Ziffern 3.7 bis 3.9, die Vertragsstrafen bei Verspätung (3.4) und die Beträge nach Ziffer 5.5.
+5.4. Von der Kaution können unter Vorlage von Nachweisen abgezogen werden: die Schäden nach Ziffer 11 und die vom Mieter zu tragende Selbstbeteiligung, die Zuschläge nach den Ziffern 3.7 bis 3.9, die Vertragsstrafen bei Verspätung (3.4) und die Beträge nach den Ziffern 5.5 bis 5.7.
 
-5.5. Zulasten des Mieters gehen: (a) die Kosten einer nicht vereinbarten Rückgabe an einem anderen Ort; (b) Bußgelder und Strafen wegen Verkehrsverstößen oder sonstiger Art, die sich aus der Nutzung des Fahrzeugs während der Mietdauer ergeben und ihm zuzurechnen sind, sowie angemessene Kosten für deren Bearbeitung (25 € je Vorgang); (c) Kosten infolge einer Festhaltung oder Beschlagnahme des Fahrzeugs aus vom Mieter zu vertretenden Gründen, einschließlich des nachgewiesenen entgangenen Gewinns während der Stilllegung; (d) die gesetzlichen Verzugszinsen bei Zahlungsverzug.
+5.5. Zulasten des Mieters gehen: (a) die Kosten einer nicht vereinbarten Rückgabe an einem anderen Ort; (b) Bußgelder und Strafen wegen Verkehrsverstößen oder sonstiger Art, die sich aus der Nutzung des Fahrzeugs während der Mietdauer ergeben und ihm zuzurechnen sind (Ziff. 5.8); (c) bei Festhaltung, Beschlagnahme, Stilllegung oder behördlichem Eingriff in das Fahrzeug aus vom Mieter zu vertretenden Gründen: die Kosten für Abschleppen, Verwahrung, Aufbewahrung und Rechtsberatung, zuzüglich einer Entschädigung für die Stilllegung in Höhe des vereinbarten Tagesmietpreises für jeden Tag der Stilllegung (höchstens 30 Tage), die als Vertragsstrafe vereinbart ist, unbeschadet des richterlichen Mäßigungsrechts und des Rechts des Mieters, einen geringeren Schaden nachzuweisen; (d) die gesetzlichen Verzugszinsen bei Zahlungsverzug; (e) die ordnungsgemäß nachgewiesenen Kosten der außergerichtlichen und gerichtlichen Geltendmachung, wenn der Mieter die nach diesem Vertrag geschuldeten Beträge nicht zahlt.
+
+5.6. Ermächtigung zu nachträglichen Belastungen. Der Mieter ermächtigt den Vermieter ausdrücklich, die bei Vertragsabschluss oder bei der Übergabe angegebene Karte (deren Daten über das Zahlungsgateway sicher gespeichert werden) zu verwenden, um nach Ende der Mietdauer und bis zu 90 Kalendertage danach die nach diesem Vertrag geschuldeten Beträge einzuziehen für: (i) nachgewiesene Schäden und die vom Mieter zu tragende Selbstbeteiligung (Ziff. 11); (ii) Zuschläge und Vertragsstrafen nach den Ziffern 3.4 bis 3.9 und 6.3; (iii) den Service nach Ziffer 5.7. Für zurechenbare Bußgelder, Strafen, Mautgebühren und Abgaben (Ziff. 5.8) gilt die Ermächtigung bis zu 12 Monate nach Ende der Mietdauer. Vor jeder nachträglichen Belastung sendet der Vermieter dem Mieter per E-Mail den Nachweis des Betrags (Beschreibung, Fotos, Rückgabeprotokoll, Rechnung oder Kostenvoranschlag) und räumt eine Frist von 5 Kalendertagen für Einwendungen ein; die im Rückgabeprotokoll vermerkten und unterzeichneten Beträge können sofort abgezogen werden. Diese Ermächtigung schränkt das Recht des Mieters nicht ein, sich an die Verbraucherschutzstellen oder die Gerichte zu wenden.
+
+5.7. Service für Abwicklung und Begleitung: Der Mieter zahlt 40 € (inkl. IVA) für jeden Vorgang, der den Vermieter zwingt, in seinem Namen oder im Namen beider (a) einen vom Mieter zu vertretenden Schadensfall mit Schäden am Fahrzeug oder an Dritten (Meldung an den Versicherer, Begutachtung, Werkstatt und Nachverfolgung) oder (b) ein Bußgeld oder eine Strafe abzuwickeln, die die Benennung des Fahrers, die Weiterleitung des Bescheids oder dessen Bearbeitung erfordert. Dieser Betrag vergütet tatsächlich erbrachte Tätigkeiten und ist unabhängig von der Selbstbeteiligung, den Schäden und der Sanktion. Er wird nicht berechnet, wenn der Schadensfall nicht vom Mieter zu vertreten ist.
+
+5.8. Bußgelder und Strafen. Der Vermieter ist gesetzlich verpflichtet, der sanktionierenden Behörde den Fahrer zu benennen (Art. 11.1 des Real Decreto Legislativo 6/2015), und der Mieter willigt zu diesem Zweck ein, dass seine personenbezogenen Daten und die des Fahrers, die Kopie des Führerscheins und des Vertrags an die zuständigen Behörden übermittelt werden. Die Sanktion wird dem Mieter direkt zugestellt und von diesem bezahlt. Kann die Benennung aus einem nicht vom Vermieter zu vertretenden Grund nicht erfolgen oder muss der Vermieter die Sanktion zahlen, erstattet der Mieter ihm den Betrag zuzüglich des Service nach Ziffer 5.7 und stellt ihn von jeder Sanktion, jedem Bußgeld, jeder Gebühr oder jedem Zuschlag frei, die ihm infolge des Verstoßes des Fahrers während der Mietdauer auferlegt werden.
 
 ### 6. Verbotene Nutzungen und Sorgfaltspflichten
 
@@ -158,7 +164,7 @@ Kostenlose Stornierung innerhalb von 24 Stunden: Die Buchung kann innerhalb von 
 
 8.4. Bei Schäden ohne Unfallgegner erstellt der Mieter für den Vermieter einen schriftlichen Bericht über den Hergang mit Fotos. Verhindert das Fehlen des Berichts die Regulierung durch die Versicherung, haftet der Mieter für den entsprechenden Betrag.
 
-8.5. Der Mieter darf das Fahrzeug nicht verlassen, ohne geeignete Maßnahmen zu seinem Schutz zu treffen, und wendet sich bei Bedarf an den vom Vermieter beauftragten Pannendienst.
+8.5. Der Mieter darf das Fahrzeug nicht verlassen, ohne geeignete Maßnahmen zu seinem Schutz zu treffen, und benachrichtigt den Vermieter, der die erforderliche Hilfe organisiert, einschließlich der Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus. Der Mieter beauftragt ohne Genehmigung des Vermieters keine Abschleppdienste oder Reparaturen auf eigene Rechnung, außer in dringenden Fällen aus Sicherheitsgründen. Bei Stilllegung, Abschleppen oder behördlichem Eingriff in das Fahrzeug benachrichtigt er den Vermieter unverzüglich, bevor er Überführungen oder Zahlungen genehmigt.
 
 8.6. Verletzt der Mieter die Pflichten nach dieser Ziffer und entsteht dem Vermieter dadurch ein nachgewiesener Schaden (einschließlich des Verlusts des Versicherungsschutzes und des entgangenen Gewinns während der Stilllegung), ist der Vermieter berechtigt, Ersatz des entsprechenden Schadens zu verlangen.
 
@@ -190,7 +196,7 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 10.1. Der normale mechanische Verschleiß des Fahrzeugs (Motor, Getriebe) geht zulasten des Vermieters. Wenn die Länge der Reise es angezeigt erscheinen lässt, gibt der Vermieter Anweisungen zur Durchführung der erforderlichen Wartungsarbeiten in einer Vertragswerkstatt der Marke des Fahrgestells.
 
-10.2. Leuchtet eine Störungsanzeige auf, hält der Mieter das Fahrzeug an, sobald dies gefahrlos möglich ist, setzt sich mit dem Vermieter und dem beauftragten Pannendienst in Verbindung und wendet sich ausschließlich an eine Vertragswerkstatt der Marke des Fahrgestells, sofern der Vermieter nicht ausdrücklich etwas anderes genehmigt.
+10.2. Leuchtet eine Störungsanzeige auf, hält der Mieter das Fahrzeug an, sobald dies gefahrlos möglich ist, setzt sich mit dem Vermieter in Verbindung und wendet sich ausschließlich an eine Vertragswerkstatt der Marke des Fahrgestells, sofern der Vermieter nicht ausdrücklich etwas anderes genehmigt.
 
 10.3. Erleidet das Fahrzeug aus einem nicht vom Mieter zu vertretenden Grund schwere Schäden oder ist es über einen längeren Zeitraum nicht nutzbar, kann der Vermieter vorbehaltlich der Verfügbarkeit und innerhalb einer angemessenen Frist ein Ersatzfahrzeug mit gleicher oder höherer Platzzahl anbieten; in diesem Fall ist eine Vertragsauflösung ausgeschlossen. Bietet er keinen Ersatz an, gilt Ziffer 9.5.
 
@@ -198,11 +204,11 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 ### 11. Haftung des Mieters. Vollkaskoversicherung mit Selbstbeteiligung
 
-11.1. Das Fahrzeug ist vollkaskoversichert mit einer Selbstbeteiligung von 900 €. Bei vom Versicherungsschutz umfassten Total- oder Teilschäden zahlt der Mieter höchstens die jeweils geltende Selbstbeteiligung für jede vom Gutachter des Versicherers festgestellte Schadenposition (der Versicherer betrachtet jeden unabhängigen Anstoß, Bruch oder Schaden als eigene Schadenposition; betrifft ein Unfall zwei Schadenpositionen, fallen zwei Selbstbeteiligungen an).
+11.1. Das Fahrzeug ist vollkaskoversichert mit einer Selbstbeteiligung. Bei vom Versicherungsschutz umfassten Total- oder Teilschäden am Fahrzeug zahlt der Mieter eine vertragliche Selbstbeteiligung von 900 € für jede vom Gutachter des Versicherers festgestellte Schadenposition (der Versicherer betrachtet jeden unabhängigen Anstoß, Bruch oder Schaden als eigene Schadenposition; betrifft ein Unfall zwei Schadenpositionen, fallen zwei Selbstbeteiligungen an). Diese Selbstbeteiligung ist die Höchsthaftung des Mieters für die gedeckten Schäden, unbeschadet der Ziffern 11.3 und 11.4.
 
 11.2. Die Versicherung deckt keine persönlichen Gegenstände des Mieters oder seiner Mitreisenden.
 
-11.3. Übersteigen die Reparaturkosten für vom Mieter zu vertretende, nicht von der Versicherung gedeckte Schäden oder die Summe der Selbstbeteiligungen die Kaution, zahlt der Mieter die Differenz gegen Vorlage von Nachweisen (Gutachten, Rechnungen oder Kostenvoranschläge). Es gelten das Verfahren und die Fristen nach Ziffer 5.3.
+11.3. Nicht von der Versicherung gedeckte Schäden und Verluste. Die Fahrzeugversicherung deckt unter anderem nicht die nicht fest eingebauten Möbel, die Gegenstände, Utensilien und nicht fest eingebauten Elektrogeräte im Innenraum des Wohnaufbaus sowie fehlenden Kraftstoff oder fehlende Flüssigkeiten. Schäden oder Verluste an diesen Gegenständen sowie nicht von der Versicherung gedeckte Schäden, die vom Mieter zu vertreten sind, zahlt der Mieter zu den tatsächlichen Reparatur- oder Wiederbeschaffungskosten gegen Vorlage von Nachweisen (Gutachten, Rechnungen, Kostenvoranschläge oder Wiederbeschaffungspreis), ohne die Begrenzung auf die Selbstbeteiligung nach Ziffer 11.1. Übersteigen diese Kosten oder die Summe der Selbstbeteiligungen die Kaution, zahlt der Mieter die Differenz gemäß Ziffer 5.3.
 
 11.4. Die Haftungsbeschränkung auf die Selbstbeteiligung gilt nicht, und der Mieter haftet für den gesamten Schaden, wenn dieser auf Vorsatz oder grobe Fahrlässigkeit zurückzuführen ist, insbesondere wenn:
 
@@ -210,10 +216,10 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 - b) der Fahrer nach einem Unfall Fahrerflucht begeht oder die Pflicht zur Hilfeleistung verletzt;
 - c) die Pflichten nach Ziffer 8 verletzt werden, soweit die Verletzung den Versicherungsschutz oder die Feststellung des Schadens verhindert hat;
 - d) die Schäden auf eine verbotene Nutzung (Ziff. 6) oder auf Fahrten außerhalb des zugelassenen Gebiets (Ziff. 7) zurückzuführen sind;
-- e) die Schäden von einem nicht berechtigten Fahrer verursacht werden, dem der Mieter das Fahrzeug überlassen hat;
+- e) die Schäden von einem nicht berechtigten Fahrer verursacht werden, dem der Mieter das Fahrzeug überlassen hat oder der keinen gültigen Führerschein besitzt;
 - f) die Schäden durch Nichtbeachtung der Fahrzeugabmessungen (Höhe, Breite, Länge) oder der Vorschriften zur maximalen Zuladung entstehen.
 
-11.5. Der Mieter haftet ebenso für die ihm zuzurechnenden Bußgelder, Gebühren und Strafen aus der Nutzung des Fahrzeugs während der Mietdauer (Ziff. 5.5.b) sowie für seine zivil-, verwaltungs- oder strafrechtliche Verantwortung infolge eines Schadensfalls oder eines vorsätzlichen Verhaltens.
+11.5. Der Mieter haftet ebenso für die ihm zuzurechnenden Bußgelder, Gebühren und Strafen aus der Nutzung des Fahrzeugs während der Mietdauer (Ziff. 5.5.b und 5.8) sowie für seine zivil-, verwaltungs- oder strafrechtliche Verantwortung infolge eines Schadensfalls oder eines vorsätzlichen Verhaltens.
 
 11.6. Gibt es mehrere Mieter, haften sie gesamtschuldnerisch.
 
@@ -225,9 +231,9 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 12.3. Der Mieter kann sein Privatfahrzeug während der Mietdauer kostenlos auf dem Gelände des Vermieters parken. Der Vermieter übernimmt für dieses Fahrzeug keine Haftung aus Verwahrung.
 
-12.4. GPS-Ortung: Das Wohnmobil ist mit einem Ortungsgerät ausgestattet, das ausschließlich zur Sicherung und Wiederbeschaffung des Fahrzeugs eingesetzt wird (Panne, Raub, Nichtrückgabe oder Nutzung außerhalb des zugelassenen Gebiets). Der Mieter wird hierüber informiert und willigt in die Verarbeitung gemäß Ziffer 15 ein.
+12.4. GPS-Ortung: Das Wohnmobil kann mit einem Ortungsgerät ausgestattet sein, das ausschließlich zur Sicherung und Wiederbeschaffung des Fahrzeugs eingesetzt wird (Panne, Raub, Nichtrückgabe oder Nutzung außerhalb des zugelassenen Gebiets). Der Mieter wird hierüber informiert und willigt in die Verarbeitung gemäß Ziffer 15 ein.
 
-12.5. Im Preis enthaltene Ausstattung: Campingtisch und Campingstühle, drei Strandstühle, Sonnenschirm, Markise, Smart-TV, Küchenutensilien, Kopfkissen und Decken. Diese Gegenstände werden zusammen mit dem Fahrzeug überlassen; ihr vom Mieter zu vertretender Verlust oder Bruch ist zum nachgewiesenen Wiederbeschaffungswert zu bezahlen. Für die bei der Buchung gebuchten optionalen Zubehörteile (Fahrrad, SUP-Board, Grill, Kindersitz und andere) gilt dieselbe Regel. Die fest eingebaute Ausstattung des Wohnaufbaus (Heizung, Klimaanlage, Küche, Kühlschrank, Wasserpumpe, Dusche, WC, Solarmodul, Elektroinstallation) ist in jeder Hinsicht Bestandteil des gemieteten Fahrzeugs.
+12.5. Im Preis enthaltene Ausstattung: Campingtisch und Campingstühle, drei Strandstühle, Sonnenschirm, Markise, Smart-TV, Küchenutensilien, Kopfkissen und Decken. Diese Gegenstände werden zusammen mit dem Fahrzeug überlassen; ihr vom Mieter zu vertretender Verlust oder Bruch ist zum nachgewiesenen Wiederbeschaffungswert zu bezahlen (Ziff. 11.3). Für die bei der Buchung gebuchten optionalen Zubehörteile (Fahrrad, SUP-Board, Grill, Kindersitz und andere) gilt dieselbe Regel. Die fest eingebaute Ausstattung des Wohnaufbaus (Heizung, Klimaanlage, Küche, Kühlschrank, Wasserpumpe, Dusche, WC, Solarmodul, Elektroinstallation) ist in jeder Hinsicht Bestandteil des gemieteten Fahrzeugs.
 
 ### 13. Sicherheit
 
@@ -239,13 +245,25 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 14.2. Die Parteien bemühen sich, Streitigkeiten gütlich beizulegen. Dieser Vertrag unterliegt spanischem Recht. Bei Rechtsstreitigkeiten mit einem Verbraucher bestimmt sich die gerichtliche Zuständigkeit nach dem anwendbaren Prozessrecht, ohne eine Gerichtsstandsvereinbarung, die die Rechte des Verbrauchers einschränkt.
 
+14.3. Bei jeder Belastung oder Forderung legt der Vermieter die Unterlagen vor, die sie belegen, und berücksichtigt die Einwendungen, die der Mieter schriftlich an die in diesem Vertrag angegebene E-Mail-Adresse richtet.
+
 ### 15. Schutz personenbezogener Daten
 
-15.1. Verantwortlicher: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Zwecke: Verwaltung und Durchführung des Mietvertrags, Rechnungsstellung, Verwaltung der Kaution und von Schadensfällen, Erfüllung rechtlicher Pflichten (steuer-, verkehrs- und versicherungsrechtlicher Art) und gegebenenfalls Geltendmachung von Forderungen. Rechtsgrundlage: Vertragserfüllung und Erfüllung rechtlicher Pflichten.
+15.1. Verantwortlicher: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Zwecke: Verwaltung und Durchführung des Mietvertrags, Rechnungsstellung, Verwaltung der Kaution, der nachträglichen Belastungen und von Schadensfällen, Erfüllung rechtlicher Pflichten (steuer-, verkehrs- und versicherungsrechtlicher Art) und gegebenenfalls Geltendmachung von Forderungen. Rechtsgrundlage: Vertragserfüllung und Erfüllung rechtlicher Pflichten.
 
 15.2. Die Geolokalisierungsdaten des Fahrzeugs (Ziff. 12.4) werden ausschließlich während der Mietdauer und für die genannten Sicherheitszwecke verarbeitet. Die Daten können bei Bedarf an den Versicherer, den Pannendienst, die zuständigen Behörden und Rechtsberater übermittelt werden. Sie werden für die Dauer des Vertrags und der gesetzlichen Verjährungsfristen aufbewahrt.
 
-15.3. Die betroffene Person kann ihre Rechte auf Auskunft, Berichtigung, Löschung, Widerspruch, Einschränkung der Verarbeitung und Datenübertragbarkeit durch eine Nachricht an die angegebene E-Mail-Adresse ausüben und Beschwerde bei der Spanischen Datenschutzbehörde (AEPD, www.aepd.es) einlegen.
+15.3. Im Falle eines Bußgelds oder einer Strafe werden die Daten des Mieters und des Fahrers sowie die Kopie des Führerscheins und des Vertrags zur Identifizierung an die sanktionierende Behörde übermittelt, in Erfüllung einer rechtlichen Pflicht (Art. 11.1 des Real Decreto Legislativo 6/2015 vom 30. Oktober).
+
+15.4. Die Kopien der Ausweisdokumente und des Führerscheins werden sicher und mit beschränktem Zugriff für die Dauer des Vertrags und den zur Bearbeitung von Ansprüchen und rechtlichen Pflichten erforderlichen Zeitraum aufbewahrt und danach gelöscht.
+
+15.5. Die betroffene Person kann ihre Rechte auf Auskunft, Berichtigung, Löschung, Widerspruch, Einschränkung der Verarbeitung und Datenübertragbarkeit durch eine Nachricht an die angegebene E-Mail-Adresse ausüben und Beschwerde bei der Spanischen Datenschutzbehörde (AEPD, www.aepd.es) einlegen.
+
+### 16. Elektronische Unterschrift und Mitteilungen
+
+16.1. Dieser Vertrag und seine Anlagen können mittels elektronischer Unterschrift unterzeichnet werden (digitalisierte handschriftliche Unterschrift auf einem Tablet oder Gerät oder elektronische Unterschrift mit Bestätigungscode), die dieselbe Gültigkeit hat wie die Unterschrift auf Papier. Nach der Unterzeichnung erhalten beide Parteien eine vollständige Kopie im PDF-Format an die in diesem Vertrag angegebene E-Mail-Adresse.
+
+16.2. Die in diesem Vertrag vorgesehenen Mitteilungen und Nachweise können per E-Mail an die angegebene Adresse erfolgen, die der Mieter sich verpflichtet, während des Vertrags und bis zu 12 Monate nach dessen Ende betriebsbereit zu halten.
 
 ---
 

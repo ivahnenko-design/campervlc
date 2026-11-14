@@ -14,7 +14,7 @@ import {
 
 // Version of the rental conditions the guest ticks "I have read" for
 // (content/condiciones-web-*.md). Bump it when the contract text changes.
-const TERMS_VERSION = "2026-10-v3";
+const TERMS_VERSION = "2026-11-v4";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -141,6 +141,16 @@ export default async function handler(req, res) {
       payment_method_types: ["card"],
       mode: "payment",
       customer_email: guest.email,
+      // The card is saved for the later charges the conditions allow (clause
+      // 5.6: damage, surcharges, fines), so a Customer is always created.
+      customer_creation: "always",
+      payment_intent_data: { setup_future_usage: "off_session" },
+      custom_text: {
+        submit: {
+          message:
+            "Your card is saved to charge, after the rental, any damage, surcharges or fines due under clause 5.6 of the rental conditions (you get an email with proof first). / Se guarda tu tarjeta para posibles cargos posteriores conforme al apdo. 5.6 de las condiciones (recibirás antes un email con la justificación).",
+        },
+      },
       line_items: [
         {
           price_data: {

@@ -289,6 +289,7 @@ export default async function handler(req, res) {
       message: m.message,
       stripeSessionId: session.id,
       paymentIntentId: session.payment_intent,
+      stripeCustomerId: session.customer || null,
       cancelledAt: null,
       refundPct: null,
       refundAmount: null,

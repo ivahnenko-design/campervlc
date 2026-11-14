@@ -1,15 +1,15 @@
 # Condizioni di noleggio e tariffe
 
-Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pubblichiamo affinché tu sappia, prima di prenotare, che cosa comprende il prezzo, che cosa si paga a parte e come funzionano la cancellazione, la cauzione e l'assicurazione. Versione di ottobre 2026.
+Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pubblichiamo affinché tu sappia, prima di prenotare, che cosa comprende il prezzo, che cosa si paga a parte e come funzionano la cancellazione, la cauzione e l'assicurazione. Versione di novembre 2026.
 
 > Questa traduzione è fornita a titolo informativo; prevale la versione spagnola.
 
 ## Cosa comprende il prezzo
 
 - IVA.
-- Assicurazione kasko con franchigia di 900 €.
+- Assicurazione kasko; la franchigia a carico del Conduttore è di 900 € per ogni voce di danno.
 - 100 km per notte di noleggio, estendibili con le opzioni di chilometraggio.
-- Assistenza stradale e garanzia di mobilità del costruttore.
+- Garanzia di mobilità del costruttore del telaio cabinato.
 - Due bombole di gas e capsule per il WC chimico.
 - Parcheggio gratuito della tua auto presso la nostra sede durante il noleggio.
 - Animali domestici senza costi aggiuntivi.
@@ -26,7 +26,7 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 
 | Voce | Importo |
 |---|---|
-| Cauzione (preautorizzazione sulla carta) | 900 € |
+| Cauzione (preautorizzazione o addebito sulla carta) | 900 € |
 | Opzione 200 km per notte | 20 € / notte |
 | Opzione chilometraggio illimitato | 40 € / notte |
 | Chilometri oltre quelli inclusi | 0,30 € / km |
@@ -40,7 +40,7 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 | Pulizia interna insufficiente | costo effettivo, max 150 € |
 | Odore di fumo o di animali, ozonizzazione | costo effettivo, max 300 € |
 | Smarrimento delle chiavi | costo effettivo, max 250 € |
-| Gestione delle multe | 25 € / pratica |
+| Servizio di gestione e assistenza (sinistro con danni o multa) | 40 € / pratica (IVA inclusa) |
 
 Le opzioni (bicicletta, SUP, barbecue, conducente aggiuntivo, ecc.) e i relativi prezzi sono indicati nel calcolatore di prenotazione.
 
@@ -62,15 +62,15 @@ Le opzioni (bicicletta, SUP, barbecue, conducente aggiuntivo, ecc.) e i relativi
 
 2.2. Se al momento della consegna il conducente non dimostra di essere titolare di una patente valida, il Locatore potrà rifiutare la consegna; si applicherà la politica di cancellazione di cui al punto 4 come cancellazione imputabile al Conduttore.
 
-2.3. Possono guidare il veicolo soltanto il Conduttore e i conducenti aggiuntivi registrati nel presente contratto.
+2.3. Possono guidare il veicolo soltanto il Conduttore e i conducenti aggiuntivi registrati nel presente contratto. La guida da parte di una persona non registrata fa venir meno la copertura assicurativa (punto 11.4).
 
 ### 3. Prezzo, durata, consegna e restituzione
 
-3.1. Il prezzo comprende: IVA; chilometraggio di 100 km per notte di noleggio (eccedenza a 0,30 €/km), estendibile mediante le opzioni di chilometraggio acquistate in fase di prenotazione (200 km per notte o chilometraggio illimitato); assicurazione kasko con franchigia di 900 € (punto 11); garanzia di mobilità del costruttore del telaio cabinato; due bombole di gas; capsule per il WC chimico; e parcheggio gratuito del veicolo privato del Conduttore presso i locali del Locatore durante il noleggio (punto 12.3).
+3.1. Il prezzo comprende: IVA; chilometraggio di 100 km per notte di noleggio (eccedenza a 0,30 €/km), estendibile mediante le opzioni di chilometraggio acquistate in fase di prenotazione (200 km per notte o chilometraggio illimitato); assicurazione kasko con franchigia a carico del Conduttore di 900 € per ogni voce di danno (punto 11); garanzia di mobilità del costruttore del telaio cabinato; due bombole di gas; capsule per il WC chimico; e parcheggio gratuito del veicolo privato del Conduttore presso i locali del Locatore durante il noleggio (punto 12.3).
 
-3.2. Alla consegna sarà firmato il Verbale di Consegna (Check-In) con la descrizione dello stato del veicolo e sarà consegnato un mazzo di chiavi. Lo smarrimento o il furto delle chiavi sarà fatturato al costo effettivo di sostituzione e spedizione, fino a un massimo di 250 €. Il Locatore potrà subordinare la consegna allo svolgimento dell'istruzione sull'uso del veicolo.
+3.2. Alla consegna sarà firmato il Verbale di Consegna (Check-In) con la descrizione dello stato del veicolo e sarà consegnato un mazzo di chiavi. Qualsiasi danno non riportato nel Verbale di Consegna si presumerà verificatosi durante il noleggio, salvo prova contraria. Lo smarrimento o il furto delle chiavi sarà fatturato al costo effettivo di sostituzione e spedizione, fino a un massimo di 250 €. Il Locatore potrà subordinare la consegna allo svolgimento dell'istruzione sull'uso del veicolo.
 
-3.3. Alla restituzione sarà firmato il Verbale di Restituzione (Check-Out). Se il Conduttore non è presente all'ispezione per cause a lui imputabili (consegna delle chiavi tramite cassetta delle lettere, mancata presentazione), il Locatore documenterà lo stato del veicolo con fotografie datate lo stesso giorno e comunicherà al Conduttore qualsiasi danno rilevato entro un termine massimo di 48 ore, fermo il diritto del Conduttore di presentare osservazioni.
+3.3. Alla restituzione sarà firmato il Verbale di Restituzione (Check-Out). Il Conduttore può chiedere la verifica congiunta del veicolo; se non la richiede o non è presente all'ispezione per cause a lui imputabili (consegna delle chiavi tramite cassetta delle lettere, mancata presentazione), il Locatore documenterà lo stato del veicolo con fotografie datate lo stesso giorno e comunicherà al Conduttore qualsiasi danno rilevato entro un termine massimo di 48 ore, fermo il diritto del Conduttore di presentare osservazioni.
 
 3.4. Orario di restituzione e ritardo. La restituzione successiva all'orario di ritiro concordato nella prenotazione è fatturata come supplemento: fino a 6 ore di eccedenza, il 50 % di una giornata di noleggio; oltre 6 ore, una giornata intera. Tale supplemento si paga al momento della prenotazione quando l'orario di restituzione viene scelto in fase di prenotazione. Il ritardo non concordato sarà penalizzato con 50 € per ogni ora, fino al massimo, per ciascun giorno di ritardo, dell'importo corrispondente a 3 giornate di noleggio; il Conduttore dovrà comunicare immediatamente qualsiasi ritardo e risponderà inoltre dei danni comprovati che arrechi al Locatore nei confronti di altri clienti. Trascorse 4 ore di ritardo senza comunicazione né giustificato motivo, il Locatore potrà considerare cessato il contratto e sporgere denuncia alle autorità competenti per la mancata restituzione del veicolo, oltre ad attivare il localizzatore GPS (punto 12.4).
 
@@ -78,7 +78,7 @@ Le opzioni (bicicletta, SUP, barbecue, conducente aggiuntivo, ecc.) e i relativi
 
 3.6. La restituzione in un luogo diverso da quello di ritiro richiede un previo accordo scritto e il pagamento dell'importo da concordare prima del ritiro.
 
-3.7. Carburante: il veicolo viene consegnato con il serbatoio pieno e così deve essere restituito. In caso contrario saranno addebitati 25 € per ogni tacca mancante dell'indicatore più 10 € per il servizio di rifornimento. Il Conduttore sostiene il costo di carburante, AdBlue e olio durante il noleggio.
+3.7. Carburante: il veicolo viene consegnato con il serbatoio pieno e così deve essere restituito. In caso contrario saranno addebitati 25 € per ogni tacca mancante dell'indicatore più 10 € per il servizio di rifornimento, importo che sarà detratto dalla cauzione o addebitato sulla carta (punto 5.6). Si considera serbatoio pieno quello indicato come tale nel Verbale di Restituzione; il Conduttore potrà dimostrarlo con lo scontrino di una stazione di servizio situata a un massimo di 10 km dal luogo di restituzione. Il Conduttore sostiene il costo di carburante, AdBlue e olio durante il noleggio.
 
 3.8. Acque e pulizia: il veicolo dovrà essere restituito pulito all'interno, con il serbatoio delle acque grigie vuoto, la cassetta del WC (acque nere) svuotata e pulita e il serbatoio dell'acqua pulita pieno. In caso contrario: 20 € per le acque grigie, 90 € per la cassetta del WC non svuotata o non pulita e 20 € per l'acqua pulita. La pulizia interna insufficiente sarà addebitata al costo effettivo, fino a un massimo di 150 €.
 
@@ -105,17 +105,23 @@ Cancellazione gratuita entro 24 ore: la prenotazione può essere cancellata senz
 
 4.3. Modifica della prenotazione: il Conduttore potrà modificare le date e aggiungere opzioni nella pagina di gestione della prenotazione di campervlc.com, con il numero di prenotazione e l'indirizzo e-mail utilizzato, fino a 48 ore prima della consegna; successivamente, tramite WhatsApp. Le nuove date sono soggette a disponibilità, al soggiorno minimo della stagione e alle tariffe in vigore. La riduzione del periodo è considerata cancellazione parziale: alle notti soppresse si applica la scala del punto 4.1, in base al preavviso rispetto alla data di consegna originaria, compresa la cancellazione gratuita entro 24 ore alle stesse condizioni. La rimozione di opzioni già pagate è possibile soltanto con più di 7 giorni di anticipo rispetto alla consegna.
 
-### 5. Condizioni di pagamento e cauzione
+### 5. Condizioni di pagamento, cauzione e addebiti successivi
 
 5.1. Modalità di pagamento: il noleggio e la cauzione si pagano con carta bancaria o bonifico sul conto del Locatore. Ai sensi dell'articolo 7 della Ley 7/2012, non sono ammessi pagamenti in contanti di importo pari o superiore a 1.000 € quando il pagatore sia fiscalmente residente in Spagna, né di importo pari o superiore a 10.000 € quando il pagatore sia una persona fisica non fiscalmente residente in Spagna che non agisca in qualità di imprenditore o professionista. Il Locatore emetterà fattura per tutti gli importi incassati.
 
-5.2. La cauzione di 900 € deve essere versata prima della consegna del veicolo, preferibilmente mediante preautorizzazione sulla carta di credito intestata al conducente principale.
+5.2. La cauzione di 900 € deve essere versata prima della consegna del veicolo, mediante preautorizzazione (blocco) o addebito sulla carta di credito o di debito (preferibilmente Visa) intestata al Conduttore, che dovrà essere presente al momento della consegna e dimostrarne la titolarità. Si utilizzerà una sola carta per contratto; non sono ammesse carte prepagate né carte virtuali monouso.
 
-5.3. Restituzione della cauzione: dopo l'ispezione del veicolo, entro un termine massimo di 14 giorni lavorativi dalla restituzione del veicolo, a condizione che questo si trovi nelle stesse condizioni in cui è stato consegnato. Qualora vi fossero danni la cui valutazione non fosse immediatamente possibile, il Locatore disporrà di un termine massimo di 30 giorni di calendario dalla restituzione per effettuare la liquidazione sulla base di documenti giustificativi (fatture o preventivi dell'officina), restituire la parte residua della cauzione o richiedere la differenza qualora il costo comprovato la superi.
+5.3. Restituzione della cauzione: dopo l'ispezione del veicolo, entro un termine massimo di 14 giorni lavorativi dalla restituzione del veicolo, a condizione che questo si trovi nelle stesse condizioni in cui è stato consegnato. Qualora vi fossero danni la cui valutazione non fosse immediatamente possibile, il Locatore disporrà di un termine massimo di 30 giorni di calendario dalla restituzione per effettuare la liquidazione sulla base di documenti giustificativi (fatture o preventivi dell'officina), restituire la parte residua della cauzione o richiedere la differenza qualora il costo comprovato la superi. La preautorizzazione può essere rilasciata dall'istituto bancario prima di tale termine; il Locatore potrà addebitarla al momento della restituzione quando risultino danni o importi dovuti riportati nel Verbale di Restituzione. L'effettivo rilascio del blocco può richiedere, a seconda dell'istituto emittente, fino a 30 giorni di calendario, senza che il Locatore risponda delle commissioni bancarie.
 
-5.4. Dalla cauzione potranno essere detratti, previa giustificazione documentale: i danni di cui al punto 11 e la franchigia assicurativa, i supplementi di cui ai punti da 3.7 a 3.9, le penali per ritardo (3.4) e gli importi di cui al punto 5.5.
+5.4. Dalla cauzione potranno essere detratti, previa giustificazione documentale: i danni di cui al punto 11 e la franchigia a carico del Conduttore, i supplementi di cui ai punti da 3.7 a 3.9, le penali per ritardo (3.4) e gli importi di cui ai punti da 5.5 a 5.7.
 
-5.5. Sono a carico del Conduttore: (a) gli addebiti per la restituzione in un luogo diverso non concordato; (b) l'importo delle multe e delle sanzioni stradali o di altra natura derivanti dall'uso del veicolo durante il noleggio a lui imputabili, nonché le ragionevoli spese di gestione delle relative pratiche (25 € per pratica); (c) le spese derivanti dal fermo o dal sequestro del veicolo per causa imputabile al Conduttore, compreso il mancato guadagno comprovato durante l'immobilizzazione; (d) gli interessi legali di mora in caso di ritardo nei pagamenti.
+5.5. Sono a carico del Conduttore: (a) gli addebiti per la restituzione in un luogo diverso non concordato; (b) l'importo delle multe e delle sanzioni stradali o di altra natura derivanti dall'uso del veicolo durante il noleggio a lui imputabili (punto 5.8); (c) in caso di fermo, sequestro, immobilizzazione o intervento sul veicolo per causa imputabile al Conduttore: le spese di carro attrezzi, deposito, custodia e assistenza legale, oltre a un indennizzo per l'immobilizzazione pari al prezzo giornaliero del noleggio pattuito per ogni giorno di immobilizzazione (fino a un massimo di 30 giorni), pattuito come clausola penale e fatto salvo il potere moderatore dei tribunali e il diritto del Conduttore di dimostrare un pregiudizio minore; (d) gli interessi legali di mora in caso di ritardo nei pagamenti; (e) le spese di recupero stragiudiziale e giudiziale debitamente comprovate quando il Conduttore non paghi le somme dovute ai sensi del presente contratto.
+
+5.6. Autorizzazione agli addebiti successivi. Il Conduttore autorizza espressamente il Locatore a utilizzare la carta fornita al momento della prenotazione o della consegna (i cui dati sono conservati in modo sicuro tramite il gateway di pagamento) per addebitare, al termine del noleggio e fino a 90 giorni di calendario dopo, gli importi dovuti ai sensi del presente contratto per: (i) danni e franchigia a carico del Conduttore (punto 11) comprovati; (ii) supplementi e penali di cui ai punti da 3.4 a 3.9 e 6.3; (iii) il servizio di cui al punto 5.7. Per le multe, sanzioni, pedaggi e tasse imputabili (punto 5.8) l'autorizzazione si estende fino a 12 mesi dopo la fine del noleggio. Prima di ogni addebito successivo il Locatore invierà all'indirizzo e-mail del Conduttore la giustificazione dell'importo (descrizione, fotografie, Verbale di Restituzione, fattura o preventivo) e concederà un termine di 5 giorni di calendario per le osservazioni; gli importi già riportati e firmati nel Verbale di Restituzione potranno essere detratti immediatamente. La presente autorizzazione non limita il diritto del Conduttore di presentare reclamo ai servizi di tutela dei consumatori o ai tribunali.
+
+5.7. Servizio di gestione e assistenza: il Conduttore pagherà 40 € (IVA inclusa) per ogni pratica che obblighi il Locatore a gestire, in nome proprio o di entrambi, (a) un sinistro con danni al veicolo o a terzi imputabile al Conduttore (comunicazione alla compagnia assicurativa, perizia, officina e follow-up), oppure (b) una multa o sanzione che richieda l'identificazione del conducente, l'inoltro della notifica o la sua gestione. Tale importo remunera attività effettivamente svolte ed è indipendente dalla franchigia, dai danni e dalla sanzione. Non sarà addebitato quando il sinistro non sia imputabile al Conduttore.
+
+5.8. Multe e sanzioni. Il Locatore è tenuto per legge a identificare il conducente presso l'autorità sanzionatoria (art. 11.1 del Real Decreto Legislativo 6/2015) e, a tal fine, il Conduttore acconsente alla comunicazione alle autorità competenti dei propri dati personali e di quelli del conducente, della copia della patente e del contratto. La sanzione sarà notificata direttamente al Conduttore, che la pagherà. Se l'identificazione non potesse essere effettuata per causa non imputabile al Locatore, o se il Locatore dovesse pagare la sanzione, il Conduttore gli rimborserà l'importo, oltre al servizio di cui al punto 5.7, e lo manleverà da qualsiasi sanzione, multa, tassa o maggiorazione che gli sia imposta a seguito dell'infrazione del conducente durante il noleggio.
 
 ### 6. Usi vietati e obblighi di diligenza
 
@@ -158,7 +164,7 @@ Cancellazione gratuita entro 24 ore: la prenotazione può essere cancellata senz
 
 8.4. In caso di danni senza controparte, il Conduttore redigerà per il Locatore una relazione scritta dei fatti corredata di fotografie. Se la mancanza della relazione impedisce l'indennizzo da parte dell'assicurazione, il Conduttore risponderà del relativo importo.
 
-8.5. Il Conduttore non abbandonerà il veicolo senza adottare misure adeguate per proteggerlo e contatterà, ove necessario, la compagnia di assistenza stradale convenzionata con il Locatore.
+8.5. Il Conduttore non abbandonerà il veicolo senza adottare misure adeguate per proteggerlo e avviserà il Locatore, che gestirà l'assistenza necessaria, compresa la garanzia di mobilità del costruttore del telaio cabinato. Il Conduttore non farà ricorso a carri attrezzi né a riparazioni per conto proprio senza autorizzazione del Locatore, salvo urgenza per motivi di sicurezza. In caso di immobilizzazione, rimozione o intervento sul veicolo da parte dell'autorità, avviserà immediatamente il Locatore, prima di autorizzare trasferimenti o pagamenti.
 
 8.6. L'inadempimento degli obblighi di cui al presente punto che causi un pregiudizio comprovato al Locatore (compresi la perdita della copertura assicurativa e il mancato guadagno durante l'immobilizzazione) darà diritto al Locatore di richiedere il risarcimento dei relativi danni.
 
@@ -190,7 +196,7 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 10.1. La normale usura meccanica del veicolo (motore, trasmissione) è a carico del Locatore. Quando la durata del percorso lo renda opportuno, il Locatore fornirà istruzioni per effettuare le operazioni di manutenzione necessarie presso un'officina autorizzata della casa costruttrice del telaio.
 
-10.2. Il Conduttore fermerà il veicolo non appena sia sicuro farlo quando si accende qualsiasi spia di anomalia, contatterà il Locatore e la compagnia di assistenza convenzionata e si rivolgerà esclusivamente a un'officina autorizzata della casa costruttrice del telaio, salvo diversa autorizzazione espressa del Locatore.
+10.2. Il Conduttore fermerà il veicolo non appena sia sicuro farlo quando si accende qualsiasi spia di anomalia, contatterà il Locatore e si rivolgerà esclusivamente a un'officina autorizzata della casa costruttrice del telaio, salvo diversa autorizzazione espressa del Locatore.
 
 10.3. Se per causa non imputabile al Conduttore il veicolo subisce danni gravi o resta inutilizzabile per un periodo prolungato, il Locatore potrà offrire, compatibilmente con la disponibilità ed entro un termine ragionevole, un veicolo sostitutivo con un numero di posti equivalente o superiore; in tal caso non si farà luogo alla risoluzione del contratto. Se non offre un veicolo sostitutivo, si applicherà il punto 9.5.
 
@@ -198,11 +204,11 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 ### 11. Responsabilità del Conduttore. Assicurazione kasko con franchigia
 
-11.1. Il veicolo è coperto da assicurazione kasko (a copertura totale) con franchigia di 900 €. In caso di danni totali o parziali coperti dall'assicurazione, il Conduttore pagherà al massimo la franchigia applicabile per ciascuna voce di danno determinata dal perito della compagnia assicurativa (la compagnia assicurativa considera una voce per ogni urto, rottura o danneggiamento indipendente; se un incidente interessa due voci, sono dovute due franchigie).
+11.1. Il veicolo è coperto da assicurazione kasko (a copertura totale) con franchigia. In caso di danni totali o parziali al veicolo coperti dall'assicurazione, il Conduttore pagherà una franchigia contrattuale di 900 € per ciascuna voce di danno determinata dal perito della compagnia assicurativa (la compagnia assicurativa considera una voce per ogni urto, rottura o danneggiamento indipendente; se un incidente interessa due voci, sono dovute due franchigie). Tale franchigia costituisce la responsabilità massima del Conduttore per i danni coperti, fatti salvi i punti 11.3 e 11.4.
 
 11.2. L'assicurazione non copre gli effetti personali del Conduttore né quelli dei suoi accompagnatori.
 
-11.3. Se il costo di riparazione dei danni imputabili al Conduttore non coperti dall'assicurazione, o la somma delle franchigie, supera la cauzione, il Conduttore pagherà la differenza, previa giustificazione documentale (perizia, fatture o preventivi). Si applicano la procedura e i termini di cui al punto 5.3.
+11.3. Danni e perdite non coperti dall'assicurazione. L'assicurazione del veicolo non copre, tra l'altro, l'arredo non fisso, gli effetti, gli utensili e gli elettrodomestici non fissi all'interno della cellula abitativa, né il carburante o i liquidi mancanti. I danni o le perdite di tali elementi, nonché i danni non coperti dall'assicurazione per causa imputabile al Conduttore, saranno pagati dal Conduttore al loro costo effettivo di riparazione o sostituzione, previa giustificazione documentale (perizia, fatture, preventivi o prezzo di sostituzione), senza il limite della franchigia di cui al punto 11.1. Se tale costo, o la somma delle franchigie, supera la cauzione, il Conduttore pagherà la differenza ai sensi del punto 5.3.
 
 11.4. La limitazione della responsabilità alla franchigia non si applica, e il Conduttore risponde dell'intero danno, quando questo derivi da dolo o colpa grave e, in particolare, quando:
 
@@ -210,10 +216,10 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 - b) il conducente si dia alla fuga dopo un incidente o ometta di prestare soccorso;
 - c) non siano adempiuti gli obblighi di cui al punto 8, nella misura in cui l'inadempimento abbia impedito la copertura assicurativa o la determinazione del danno;
 - d) i danni derivino da un uso vietato (punto 6) o dalla circolazione al di fuori del territorio autorizzato (punto 7);
-- e) i danni siano causati da un conducente non autorizzato al quale il Conduttore abbia ceduto il veicolo;
+- e) i danni siano causati da un conducente non autorizzato al quale il Conduttore abbia ceduto il veicolo o che non sia titolare di una patente valida;
 - f) i danni siano causati dal mancato rispetto delle dimensioni del veicolo (altezza, larghezza, lunghezza) o delle norme sul carico massimo.
 
-11.5. Il Conduttore risponde altresì delle multe, tasse e sanzioni derivanti dall'uso del veicolo durante il noleggio a lui imputabili (punto 5.5.b), nonché delle proprie responsabilità civili, amministrative o penali derivanti da un sinistro o da un comportamento doloso.
+11.5. Il Conduttore risponde altresì delle multe, tasse e sanzioni derivanti dall'uso del veicolo durante il noleggio a lui imputabili (punti 5.5.b e 5.8), nonché delle proprie responsabilità civili, amministrative o penali derivanti da un sinistro o da un comportamento doloso.
 
 11.6. In caso di pluralità di conduttori, questi rispondono in solido.
 
@@ -225,9 +231,9 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 12.3. Il Conduttore può parcheggiare gratuitamente il proprio veicolo privato presso i locali del Locatore durante il noleggio. Il Locatore non assume alcuna responsabilità di custodia su tale veicolo.
 
-12.4. Localizzatore GPS: il camper è dotato di un dispositivo di localizzazione, che sarà utilizzato esclusivamente per la sicurezza e il recupero del veicolo (guasto, rapina, mancata restituzione o uso al di fuori del territorio autorizzato). Il Conduttore ne è informato e acconsente al trattamento ai sensi del punto 15.
+12.4. Localizzatore GPS: il camper può essere dotato di un dispositivo di localizzazione, che sarà utilizzato esclusivamente per la sicurezza e il recupero del veicolo (guasto, rapina, mancata restituzione o uso al di fuori del territorio autorizzato). Il Conduttore ne è informato e acconsente al trattamento ai sensi del punto 15.
 
-12.5. Dotazione inclusa nel prezzo: tavolo e sedie da campeggio, tre sedie da spiaggia, ombrellone, tendalino, Smart TV, stoviglie e utensili da cucina, cuscini e coperte. Sono concessi insieme al veicolo; il loro smarrimento o la loro rottura imputabile al Conduttore sarà pagato al valore di sostituzione comprovato. Gli accessori opzionali acquistati in fase di prenotazione (bicicletta, tavola da SUP, barbecue, seggiolino per bambini e altri) sono soggetti alla stessa regola. La dotazione fissa della cellula abitativa (riscaldamento, aria condizionata, cucina, frigorifero, pompa dell'acqua, doccia, WC, pannello solare, impianto elettrico) fa parte a tutti gli effetti del veicolo locato.
+12.5. Dotazione inclusa nel prezzo: tavolo e sedie da campeggio, tre sedie da spiaggia, ombrellone, tendalino, Smart TV, stoviglie e utensili da cucina, cuscini e coperte. Sono concessi insieme al veicolo; il loro smarrimento o la loro rottura imputabile al Conduttore sarà pagato al valore di sostituzione comprovato (punto 11.3). Gli accessori opzionali acquistati in fase di prenotazione (bicicletta, tavola da SUP, barbecue, seggiolino per bambini e altri) sono soggetti alla stessa regola. La dotazione fissa della cellula abitativa (riscaldamento, aria condizionata, cucina, frigorifero, pompa dell'acqua, doccia, WC, pannello solare, impianto elettrico) fa parte a tutti gli effetti del veicolo locato.
 
 ### 13. Sicurezza
 
@@ -239,13 +245,25 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 14.2. Le parti cercheranno di risolvere amichevolmente qualsiasi controversia. Il presente contratto è disciplinato dal diritto spagnolo. In caso di controversia con un consumatore, la competenza giurisdizionale sarà determinata secondo la normativa processuale applicabile, senza alcuna clausola sul foro competente che limiti i diritti del consumatore.
 
+14.3. Per qualsiasi addebito o reclamo, il Locatore fornirà la documentazione che lo giustifica e prenderà in esame le osservazioni che il Conduttore formuli per iscritto all'indirizzo e-mail indicato nel presente contratto.
+
 ### 15. Protezione dei dati personali
 
-15.1. Titolare del trattamento: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Finalità: gestione ed esecuzione del contratto di noleggio, fatturazione, gestione della cauzione e dei sinistri, adempimento di obblighi di legge (fiscali, in materia di circolazione stradale e assicurativi) e, se del caso, recupero di somme dovute. Base giuridica: esecuzione del contratto e adempimento di obblighi di legge.
+15.1. Titolare del trattamento: CAMPER RETREAT S.L. (B56742075), Calle Donoso Cortés 26, 5.º izq., 03012 Alicante, camper.retreat.alicante@gmail.com. Finalità: gestione ed esecuzione del contratto di noleggio, fatturazione, gestione della cauzione, degli addebiti successivi e dei sinistri, adempimento di obblighi di legge (fiscali, in materia di circolazione stradale e assicurativi) e, se del caso, recupero di somme dovute. Base giuridica: esecuzione del contratto e adempimento di obblighi di legge.
 
 15.2. I dati di geolocalizzazione del veicolo (punto 12.4) saranno trattati unicamente durante il noleggio e per le finalità di sicurezza indicate. I dati potranno essere comunicati alla compagnia assicurativa, all'assistenza stradale, alle pubbliche amministrazioni competenti e ai consulenti legali, ove necessario. Saranno conservati per la durata del contratto e per i termini di prescrizione previsti dalla legge.
 
-15.3. L'interessato può esercitare i propri diritti di accesso, rettifica, cancellazione, opposizione, limitazione e portabilità scrivendo all'indirizzo e-mail indicato, e proporre reclamo all'Agenzia spagnola per la protezione dei dati (AEPD, www.aepd.es).
+15.3. In caso di multa o sanzione, i dati del Conduttore e del conducente, la copia della patente di guida e del contratto saranno comunicati all'autorità sanzionatoria ai fini dell'identificazione, in adempimento di un obbligo di legge (art. 11.1 del Real Decreto Legislativo 6/2015, del 30 ottobre).
+
+15.4. Le copie dei documenti di identità e della patente di guida saranno conservate in modo sicuro, con accesso limitato, per la durata del contratto e per il tempo necessario a far fronte a reclami e obblighi di legge, trascorso il quale saranno cancellate.
+
+15.5. L'interessato può esercitare i propri diritti di accesso, rettifica, cancellazione, opposizione, limitazione e portabilità scrivendo all'indirizzo e-mail indicato, e proporre reclamo all'Agenzia spagnola per la protezione dei dati (AEPD, www.aepd.es).
+
+### 16. Firma elettronica e comunicazioni
+
+16.1. Il presente contratto e i relativi Allegati possono essere sottoscritti mediante firma elettronica (firma autografa digitalizzata su tablet o dispositivo, oppure firma elettronica con codice di verifica), che avrà la stessa validità della firma cartacea. Una volta sottoscritto, entrambe le parti riceveranno una copia integrale in formato PDF all'indirizzo e-mail indicato nel presente contratto.
+
+16.2. Le comunicazioni e le giustificazioni previste dal presente contratto potranno essere effettuate per posta elettronica all'indirizzo indicato, che il Conduttore si impegna a mantenere attivo durante il contratto e fino a 12 mesi dopo la sua conclusione.
 
 ---
 
