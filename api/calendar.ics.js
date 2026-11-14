@@ -62,7 +62,7 @@ export default async function handler(req, res) {
       "Content-Disposition",
       'attachment; filename="campervlc-bookings.ics"'
     );
-    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate");
+    res.setHeader("Cache-Control", "public, s-maxage=900, stale-while-revalidate=3600");
     return res.status(200).send(ical);
   } catch (err) {
     console.error("calendar.ics error:", err);

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       if (b.status === "cancelled") continue;
       for (const day of occupiedDays(b.startDate, b.endDate)) dates.add(day);
     }
-    res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=60");
+    res.setHeader("Cache-Control", "public, s-maxage=600, stale-while-revalidate=3600");
     return res.status(200).json({ dates: [...dates].sort() });
   } catch (err) {
     console.error("availability failed -", err.message);
