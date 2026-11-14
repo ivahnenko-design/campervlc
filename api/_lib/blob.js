@@ -32,6 +32,18 @@ export function createBlobAccess(blob, initial = "private") {
         blob.put(pathname, typeof data === "string" ? data : JSON.stringify(data), { ...opts, access: a }),
       );
     },
+    // Binary body (PDF) as-is, no JSON encoding.
+    putRaw(pathname, body, options = {}) {
+      return withAccess((a) =>
+        blob.put(pathname, body, { addRandomSuffix: false, allowOverwrite: true, ...options, access: a }),
+      );
+    },
+    /** Buffer of the blob, or null when it is missing. */
+    async readBuffer(pathname) {
+      const res = await withAccess((a) => blob.get(pathname, { access: a, useCache: false }));
+      if (!res || res.statusCode !== 200) return null;
+      return Buffer.from(await new Response(res.stream).arrayBuffer());
+    },
     /** { data, etag } parsed from JSON, or null when the blob is missing. */
     async readJson(pathname) {
       const res = await withAccess((a) => blob.get(pathname, { access: a, useCache: false }));

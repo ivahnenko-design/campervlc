@@ -18,9 +18,11 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ManageBookingRouteImport } from './routes/manage-booking'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AdminContratosRouteImport } from './routes/admin.contratos'
 import { Route as GuiasIndexRouteImport } from './routes/guias.index'
 import { Route as GuiasSlugRouteImport } from './routes/guias.$slug'
 import { Route as RutasSlugRouteImport } from './routes/rutas.$slug'
+import { Route as SignTokenRouteImport } from './routes/sign.$token'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -67,6 +69,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminContratosRoute = AdminContratosRouteImport.update({
+  id: '/admin/contratos',
+  path: '/admin/contratos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuiasIndexRoute = GuiasIndexRouteImport.update({
   id: '/guias/',
   path: '/guias/',
@@ -82,6 +89,11 @@ const RutasSlugRoute = RutasSlugRouteImport.update({
   path: '/rutas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignTokenRoute = SignTokenRouteImport.update({
+  id: '/sign/$token',
+  path: '/sign/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -93,8 +105,10 @@ export interface FileRoutesByFullPath {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/contratos': typeof AdminContratosRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/sign/$token': typeof SignTokenRoute
   '/guias/': typeof GuiasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -107,8 +121,10 @@ export interface FileRoutesByTo {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/contratos': typeof AdminContratosRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/sign/$token': typeof SignTokenRoute
   '/guias': typeof GuiasIndexRoute
 }
 export interface FileRoutesById {
@@ -122,8 +138,10 @@ export interface FileRoutesById {
   '/manage-booking': typeof ManageBookingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/contratos': typeof AdminContratosRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/rutas/$slug': typeof RutasSlugRoute
+  '/sign/$token': typeof SignTokenRoute
   '/guias/': typeof GuiasIndexRoute
 }
 export interface FileRouteTypes {
@@ -138,8 +156,10 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/admin/contratos'
     | '/guias/$slug'
     | '/rutas/$slug'
+    | '/sign/$token'
     | '/guias/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -152,8 +172,10 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/admin/contratos'
     | '/guias/$slug'
     | '/rutas/$slug'
+    | '/sign/$token'
     | '/guias'
   id:
     | '__root__'
@@ -166,8 +188,10 @@ export interface FileRouteTypes {
     | '/manage-booking'
     | '/privacy'
     | '/terms'
+    | '/admin/contratos'
     | '/guias/$slug'
     | '/rutas/$slug'
+    | '/sign/$token'
     | '/guias/'
   fileRoutesById: FileRoutesById
 }
@@ -181,8 +205,10 @@ export interface RootRouteChildren {
   ManageBookingRoute: typeof ManageBookingRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  AdminContratosRoute: typeof AdminContratosRoute
   GuiasSlugRoute: typeof GuiasSlugRoute
   RutasSlugRoute: typeof RutasSlugRoute
+  SignTokenRoute: typeof SignTokenRoute
   GuiasIndexRoute: typeof GuiasIndexRoute
 }
 
@@ -251,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/contratos': {
+      id: '/admin/contratos'
+      path: '/admin/contratos'
+      fullPath: '/admin/contratos'
+      preLoaderRoute: typeof AdminContratosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guias/': {
       id: '/guias/'
       path: '/guias'
@@ -272,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RutasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sign/$token': {
+      id: '/sign/$token'
+      path: '/sign/$token'
+      fullPath: '/sign/$token'
+      preLoaderRoute: typeof SignTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -285,8 +325,10 @@ const rootRouteChildren: RootRouteChildren = {
   ManageBookingRoute: ManageBookingRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  AdminContratosRoute: AdminContratosRoute,
   GuiasSlugRoute: GuiasSlugRoute,
   RutasSlugRoute: RutasSlugRoute,
+  SignTokenRoute: SignTokenRoute,
   GuiasIndexRoute: GuiasIndexRoute,
 }
 export const routeTree = rootRouteImport
