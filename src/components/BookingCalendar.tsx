@@ -317,6 +317,29 @@ export function BookingCalendar() {
                 </div>
               ))}
             </div>
+            <div className="mt-4 flex items-center justify-between sm:hidden">
+              <button
+                onClick={() => setMonthBase(addMonths(monthBase, -1))}
+                disabled={isBefore(addMonths(monthBase, -1), startOfMonth(today))}
+                className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                aria-label="prev month"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setMonthBase(addMonths(monthBase, 1))}
+                disabled={
+                  !isBefore(
+                    startOfMonth(addMonths(monthBase, 1)),
+                    startOfMonth(BOOKING_MAX_DATE),
+                  )
+                }
+                className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                aria-label="next month"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <TimeSelect
                 id="pickup-time"
