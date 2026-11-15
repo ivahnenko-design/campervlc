@@ -278,6 +278,7 @@ export default async function handler(req, res) {
       remainingAmount: Number(m.remainingAmount),
       prepaymentOption: m.prepaymentOption === "full" ? "full" : "deposit",
       promoCode: m.promoCode || null,
+      memberDiscount: m.memberDiscount === "true",
       acceptedTerms: m.acceptedTerms === "true",
       termsVersion: m.termsVersion || null,
       guestFirstName: m.guestFirstName,

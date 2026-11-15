@@ -230,6 +230,9 @@ export const EXCLUSIVE_EXTRA_GROUPS = [
 ];
 
 export const PROMO_CODES = { CAMPER10: 10, OWNERTEST: 99 };
+
+/** Percent off every booking of a logged-in guest. Not combined with a promo code: the bigger one applies. */
+export const MEMBER_DISCOUNT_PCT = 5;
 // Codes that stop working at a fixed moment (UTC). OWNERTEST is a temporary
 // owner test code for live checks; it is never listed anywhere on the site.
 export const PROMO_EXPIRES_AT = { OWNERTEST: "2026-10-09T20:00:00Z" };
@@ -321,6 +324,7 @@ export function calculateQuote({
   promoCode = null,
   prepaymentOption = "deposit",
   promoValidAtMs = Date.now(),
+  member = false,
 }) {
   const price = calculatePrice(start, end, pickupTime, returnTime);
   const nights = price.nights;
@@ -336,8 +340,12 @@ export function calculateQuote({
   const preDiscountTotal = price.total + extrasTotal + mandatoryTotal;
 
   const code = typeof promoCode === "string" ? promoCode.trim().toUpperCase() : "";
-  const promoDiscountPct = promoPctAt(code, promoValidAtMs);
-  const appliedPromoCode = promoDiscountPct ? code : null;
+  const codePct = promoPctAt(code, promoValidAtMs);
+  const memberPct = member ? MEMBER_DISCOUNT_PCT : 0;
+  // One discount per booking: the bigger of promo code and member discount.
+  const promoDiscountPct = Math.max(codePct, memberPct);
+  const memberDiscountApplied = memberPct > 0 && memberPct >= codePct;
+  const appliedPromoCode = codePct > memberPct ? code : null;
   // Never discount below the Stripe minimum charge (before IVA, so the
   // amount with IVA is always at least MIN_CHARGE_EUR).
   const promoDiscountAmount = Math.min(
@@ -363,6 +371,7 @@ export function calculateQuote({
     mandatoryTotal,
     preDiscountTotal,
     appliedPromoCode,
+    memberDiscountApplied,
     promoDiscountPct,
     promoDiscountAmount,
     afterPromoTotal,

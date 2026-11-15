@@ -1,15 +1,25 @@
 import { track } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Menu, X } from "lucide-react";
+import { Check, Gift, Menu, X } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { guidesUi } from "@/data/guides";
 import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
+import { LoginDialog } from "./LoginDialog";
+import { loadAuth, logout, openLogin, useAuth } from "@/lib/auth";
 
 function CamperIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 20" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      viewBox="0 0 32 20"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M2 14V6h18l6 4v4" />
       <path d="M2 14h28" />
       <circle cx="8" cy="15.5" r="2.5" />
@@ -22,11 +32,49 @@ function CamperIcon({ className }: { className?: string }) {
 
 const SECTIONS = ["fleet", "booking", "routes", "reviews", "faq", "contact"] as const;
 
+// Slim strip above the menu: the 5% offer for logging in, or its confirmation.
+function MemberStrip() {
+  const { t } = useTranslation();
+  const { user, discountPct } = useAuth();
+  const base = "flex h-9 items-center justify-center gap-2 px-3 text-xs sm:text-sm";
+  if (user) {
+    return (
+      <div className={`${base} bg-emerald-600 text-white`}>
+        <Check className="h-4 w-4 shrink-0" />
+        <span className="truncate">{t("auth.banner_active", { pct: discountPct })}</span>
+        <button
+          onClick={() => void logout()}
+          className="shrink-0 underline underline-offset-2 opacity-90 hover:opacity-100"
+        >
+          {t("auth.logout")}
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div className={`${base} bg-primary text-primary-foreground`}>
+      <Gift className="h-4 w-4 shrink-0" />
+      <span className="truncate font-medium">{t("auth.banner_text", { pct: discountPct })}</span>
+      <button
+        onClick={openLogin}
+        className="shrink-0 rounded-full bg-background/90 px-3 py-0.5 text-xs font-semibold text-foreground hover:bg-background"
+      >
+        {t("auth.banner_cta")}
+      </button>
+    </div>
+  );
+}
+
 export function Navbar() {
   const { t, i18n } = useTranslation();
+  useEffect(() => {
+    void loadAuth();
+  }, []);
   const guidesLabel = guidesUi(normalizeLanguage(i18n.language) ?? DEFAULT_LANGUAGE).label;
   const [scrolled, setScrolled] = useState(false);
-  const linkTone = scrolled ? "text-muted-foreground" : "text-foreground/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]";
+  const linkTone = scrolled
+    ? "text-muted-foreground"
+    : "text-foreground/90 [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]";
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -59,6 +107,8 @@ export function Navbar() {
           : "bg-gradient-to-b from-black/70 via-black/35 to-transparent"
       }`}
     >
+      <MemberStrip />
+      <LoginDialog />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-foreground">
@@ -80,7 +130,10 @@ export function Navbar() {
                 {t(`nav.${s}`)}
               </a>
             ))}
-            <Link to="/guias" className={`text-sm hover:text-foreground transition-colors ${linkTone}`}>
+            <Link
+              to="/guias"
+              className={`text-sm hover:text-foreground transition-colors ${linkTone}`}
+            >
               {guidesLabel}
             </Link>
           </nav>
@@ -105,7 +158,7 @@ export function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden pb-4 flex flex-col gap-1 max-h-[calc(100dvh-4rem)] overflow-y-auto">
+          <div className="lg:hidden pb-4 flex flex-col gap-1 max-h-[calc(100dvh-6.25rem)] overflow-y-auto">
             {SECTIONS.map((s) => (
               <a
                 key={s}

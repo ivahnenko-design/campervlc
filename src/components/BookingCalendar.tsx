@@ -32,6 +32,7 @@ import {
 } from "@/utils/pricing";
 import { MIN_NOTICE_HOURS, startTooSoon } from "@/utils/notice";
 import { track } from "@/lib/analytics";
+import { openLogin, useAuth } from "@/lib/auth";
 import { fetchYescapaBookedDates } from "@/lib/ical.functions";
 import { useQuery } from "@tanstack/react-query";
 import { GuestForm, type GuestData } from "./GuestForm";
@@ -56,7 +57,6 @@ function useBookedSet(camperId: string) {
     refetchOnReconnect: true,
   });
 
-
   // Bookings made on this site; Yescapa only learns about them later, if at all.
   const { data: own } = useQuery({
     queryKey: ["own-bookings"],
@@ -78,11 +78,14 @@ function useBookedSet(camperId: string) {
   }, [local, data, own]);
 }
 
-
-interface Range { start: Date | null; end: Date | null }
+interface Range {
+  start: Date | null;
+  end: Date | null;
+}
 
 export function BookingCalendar() {
   const { t, i18n } = useTranslation();
+  const auth = useAuth();
   const camper = FLEET[0];
   const booked = useBookedSet(camper.id);
 
@@ -92,7 +95,7 @@ export function BookingCalendar() {
   const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
   const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
   const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(
-    () => new Set(EXTRAS.filter((e) => e.mandatory).map((e) => e.id))
+    () => new Set(EXTRAS.filter((e) => e.mandatory).map((e) => e.id)),
   );
   const [prepaymentOption, setPrepaymentOption] = useState<PrepaymentOption>("deposit");
   const [promoInput, setPromoInput] = useState("");
@@ -149,8 +152,17 @@ export function BookingCalendar() {
       extraIds: Array.from(selectedExtras),
       promoCode: appliedPromoCode,
       prepaymentOption,
+      member: !!auth.user,
     });
-  }, [range, pickupTime, returnTime, selectedExtras, appliedPromoCode, prepaymentOption]);
+  }, [
+    range,
+    pickupTime,
+    returnTime,
+    selectedExtras,
+    appliedPromoCode,
+    prepaymentOption,
+    auth.user,
+  ]);
 
   const minNights = range.start ? getMinNights(range.start) : null;
   const nights = price?.nights ?? 0;
@@ -175,9 +187,7 @@ export function BookingCalendar() {
     }
   };
 
-  const seasonLabel = range.start
-    ? t(`booking.season_${getSeason(range.start)}` as const)
-    : null;
+  const seasonLabel = range.start ? t(`booking.season_${getSeason(range.start)}` as const) : null;
 
   const perNightRate = range.start ? getPriceForDate(range.start) : 0;
 
@@ -213,7 +223,8 @@ export function BookingCalendar() {
   };
 
   const dateLocale = i18n.language;
-  const fmtDate = (d: Date) => d.toLocaleDateString(dateLocale, { day: "2-digit", month: "short", year: "numeric" });
+  const fmtDate = (d: Date) =>
+    d.toLocaleDateString(dateLocale, { day: "2-digit", month: "short", year: "numeric" });
 
   const canSubmit = range.start && range.end && meetsMin;
   // Paying needs the rental conditions ticked; the WhatsApp link does not.
@@ -261,7 +272,10 @@ export function BookingCalendar() {
   };
 
   return (
-    <section id="booking" className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40">
+    <section
+      id="booking"
+      className="relative scroll-mt-16 py-24 sm:py-32 border-t border-border/40"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title={t("booking.title")}
@@ -289,10 +303,7 @@ export function BookingCalendar() {
               <button
                 onClick={() => setMonthBase(addMonths(monthBase, 1))}
                 disabled={
-                  !isBefore(
-                    startOfMonth(addMonths(monthBase, 1)),
-                    startOfMonth(BOOKING_MAX_DATE),
-                  )
+                  !isBefore(startOfMonth(addMonths(monthBase, 1)), startOfMonth(BOOKING_MAX_DATE))
                 }
                 className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground disabled:opacity-30"
                 aria-label="next month"
@@ -329,10 +340,7 @@ export function BookingCalendar() {
               <button
                 onClick={() => setMonthBase(addMonths(monthBase, 1))}
                 disabled={
-                  !isBefore(
-                    startOfMonth(addMonths(monthBase, 1)),
-                    startOfMonth(BOOKING_MAX_DATE),
-                  )
+                  !isBefore(startOfMonth(addMonths(monthBase, 1)), startOfMonth(BOOKING_MAX_DATE))
                 }
                 className="grid h-9 w-9 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground disabled:opacity-30"
                 aria-label="next month"
@@ -354,9 +362,10 @@ export function BookingCalendar() {
                 onChange={setReturnTime}
               />
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">{t("booking.min_notice", { hours: MIN_NOTICE_HOURS })}</p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              {t("booking.min_notice", { hours: MIN_NOTICE_HOURS })}
+            </p>
           </div>
-
 
           {/* Summary: last on phones so the extras come before the pay button */}
           <div className="order-last rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:order-none lg:p-5">
@@ -375,7 +384,8 @@ export function BookingCalendar() {
                 {range.end ? `${fmtDate(range.end)} ${returnTime}` : "—"}
               </span>
               <span className="text-sm text-muted-foreground">
-                {t("booking.nights")}: <span className="font-mono-num text-foreground">{nights}</span>
+                {t("booking.nights")}:{" "}
+                <span className="font-mono-num text-foreground">{nights}</span>
               </span>
             </div>
             {range.start && !meetsMin && (
@@ -384,7 +394,9 @@ export function BookingCalendar() {
 
             {/* Prepayment option */}
             <div className="mt-4">
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.prepayment_title")}</div>
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {t("booking.prepayment_title")}
+              </div>
               <div className="grid gap-2 sm:grid-cols-2">
                 <button
                   type="button"
@@ -396,8 +408,12 @@ export function BookingCalendar() {
                   }`}
                 >
                   <span className="flex items-center gap-2">
-                    <span className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "deposit" ? "border-primary bg-primary" : "border-border"}`}>
-                      {prepaymentOption === "deposit" && <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />}
+                    <span
+                      className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "deposit" ? "border-primary bg-primary" : "border-border"}`}
+                    >
+                      {prepaymentOption === "deposit" && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+                      )}
                     </span>
                     {t("booking.prepayment_deposit")}
                   </span>
@@ -412,8 +428,12 @@ export function BookingCalendar() {
                   }`}
                 >
                   <span className="flex items-center gap-2">
-                    <span className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "full" ? "border-primary bg-primary" : "border-border"}`}>
-                      {prepaymentOption === "full" && <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />}
+                    <span
+                      className={`grid h-4 w-4 shrink-0 place-items-center rounded-full border ${prepaymentOption === "full" ? "border-primary bg-primary" : "border-border"}`}
+                    >
+                      {prepaymentOption === "full" && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+                      )}
                     </span>
                     {t("booking.prepayment_full")}
                   </span>
@@ -421,9 +441,31 @@ export function BookingCalendar() {
               </div>
             </div>
 
+            {/* Member discount: offer while logged out, confirmation after login */}
+            <div className="mt-4">
+              {auth.user ? (
+                <p className="rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600">
+                  {t("auth.hint_active", { pct: auth.discountPct })}
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  onClick={openLogin}
+                  className="flex w-full items-center justify-between gap-3 rounded-lg border border-primary/50 bg-primary/10 px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-primary/15"
+                >
+                  <span>{t("auth.hint_login", { pct: auth.discountPct })}</span>
+                  <span className="shrink-0 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                    {t("auth.banner_cta")}
+                  </span>
+                </button>
+              )}
+            </div>
+
             {/* Promo code */}
             <div className="mt-4">
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("booking.promo_label")}</div>
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {t("booking.promo_label")}
+              </div>
               <div className="flex gap-2">
                 <input
                   value={promoInput}
@@ -464,31 +506,43 @@ export function BookingCalendar() {
                   {price.surcharge > 0 && (
                     <Row
                       label={t("booking.late_return_surcharge", {
-                        hours: price.excessHours.toLocaleString(dateLocale, { maximumFractionDigits: 1 }),
+                        hours: price.excessHours.toLocaleString(dateLocale, {
+                          maximumFractionDigits: 1,
+                        }),
                       })}
                       value={`${price.surcharge} €`}
                     />
                   )}
                   {price.discountPct > 0 && (
-                    <Row label={t("booking.discount", { pct: price.discountPct })} value={`-${price.discountAmount} €`} accent />
+                    <Row
+                      label={t("booking.discount", { pct: price.discountPct })}
+                      value={`-${price.discountAmount} €`}
+                      accent
+                    />
                   )}
                   <Row label={t("booking.extras")} value={`${extrasTotal} €`} />
                   <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
                   {promoDiscountAmount > 0 && (
                     <Row
-                      label={t("booking.promo_discount_row", { code: appliedPromoCode })}
+                      label={
+                        price?.memberDiscountApplied
+                          ? t("auth.member_discount_row", { pct: auth.discountPct })
+                          : t("booking.promo_discount_row", { code: appliedPromoCode })
+                      }
                       value={`-${promoDiscountAmount} €`}
                       accent
                     />
                   )}
                   {prepaymentDiscountAmount > 0 && (
-                    <Row label={t("booking.prepayment_discount")} value={`-${prepaymentDiscountAmount} €`} accent />
+                    <Row
+                      label={t("booking.prepayment_discount")}
+                      value={`-${prepaymentDiscountAmount} €`}
+                      accent
+                    />
                   )}
                 </>
               )}
-              {!price && (
-                <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />
-              )}
+              {!price && <Row label={t("booking.cleaning")} value={`${mandatoryTotal} €`} />}
             </div>
 
             <AnimatePresence mode="wait">
@@ -515,7 +569,9 @@ export function BookingCalendar() {
 
             {/* Deposit note */}
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              {prepaymentOption === "full" ? t("booking.full_payment_note") : t("booking.deposit_note")}
+              {prepaymentOption === "full"
+                ? t("booking.full_payment_note")
+                : t("booking.deposit_note")}
             </p>
 
             {/* Rental conditions (required) with the pay button beside them */}
@@ -557,7 +613,12 @@ export function BookingCalendar() {
                 <button
                   disabled={!canPay}
                   onClick={() => {
-                    track("begin_checkout", { currency: "EUR", value: finalTotalWithIva, nights, option: prepaymentOption });
+                    track("begin_checkout", {
+                      currency: "EUR",
+                      value: finalTotalWithIva,
+                      nights,
+                      option: prepaymentOption,
+                    });
                     setShowForm(true);
                   }}
                   className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
@@ -567,7 +628,9 @@ export function BookingCalendar() {
                   }`}
                 >
                   <CreditCard className="h-4 w-4" />
-                  {prepaymentOption === "full" ? t("booking.cta_full_payment") : t("booking.cta_deposit")}
+                  {prepaymentOption === "full"
+                    ? t("booking.cta_full_payment")
+                    : t("booking.cta_deposit")}
                 </button>
               )}
             </div>
@@ -581,14 +644,15 @@ export function BookingCalendar() {
                 )}
               </>
             )}
-
           </div>
 
           {/* Options: full width under the calendar and the summary */}
           <div className="rounded-2xl border border-border/60 bg-surface p-5 sm:p-7 lg:col-span-2 lg:p-5">
             {/* Extras */}
             <div>
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.title")}</div>
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {t("extras.title")}
+              </div>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {EXTRAS.filter((e) => !e.mandatory && !isMileage(e.id)).map((e) => (
                   <OptionRow
@@ -605,7 +669,9 @@ export function BookingCalendar() {
 
             {/* Mileage: one plan at a time, 100 km/night is the default */}
             <div className="mt-4">
-              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("extras.mileage")}</div>
+              <div className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {t("extras.mileage")}
+              </div>
               <div className="grid gap-2 sm:grid-cols-3">
                 <OptionRow
                   radio
@@ -627,7 +693,6 @@ export function BookingCalendar() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -650,7 +715,12 @@ const MILEAGE_PLANS = EXTRAS.filter((e) => EXCLUSIVE_EXTRA_GROUPS.some((g) => g.
 const isMileage = (id: ExtraId) => MILEAGE_PLANS.some((e) => e.id === id);
 
 function OptionRow({
-  active, onClick, label, price, unit, radio,
+  active,
+  onClick,
+  label,
+  price,
+  unit,
+  radio,
 }: {
   active: boolean;
   onClick: () => void;
@@ -676,7 +746,8 @@ function OptionRow({
           active ? "border-primary bg-primary text-primary-foreground" : "border-border"
         }`}
       >
-        {active && (radio ? <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" /> : "✓")}
+        {active &&
+          (radio ? <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" /> : "✓")}
       </span>
       <span className="min-w-0 flex-1">{label}</span>
       {price && (
@@ -702,7 +773,9 @@ function TimeSelect({
 }) {
   return (
     <label htmlFor={id} className="rounded-lg border border-border/50 bg-background/40 px-3 py-2">
-      <span className="block text-[10px] uppercase tracking-widest text-muted-foreground">{label}</span>
+      <span className="block text-[10px] uppercase tracking-widest text-muted-foreground">
+        {label}
+      </span>
       <select
         id={id}
         value={value}
@@ -719,7 +792,17 @@ function TimeSelect({
   );
 }
 
-function Row({ label, value, accent, iva }: { label: string; value: string; accent?: boolean; iva?: string }) {
+function Row({
+  label,
+  value,
+  accent,
+  iva,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+  iva?: string;
+}) {
   return (
     <div className="flex items-center justify-between">
       <span className="text-muted-foreground">{label}</span>
@@ -732,7 +815,14 @@ function Row({ label, value, accent, iva }: { label: string; value: string; acce
 }
 
 function MonthGrid({
-  month, today, booked, range, onPick, locale, tooSoon, pickingStart,
+  month,
+  today,
+  booked,
+  range,
+  onPick,
+  locale,
+  tooSoon,
+  pickingStart,
 }: {
   month: Date;
   today: Date;
@@ -748,21 +838,29 @@ function MonthGrid({
   const startWeekday = (start.getDay() + 6) % 7; // Monday = 0
   const days: Array<Date | null> = [];
   for (let i = 0; i < startWeekday; i++) days.push(null);
-  for (let d = 1; d <= end.getDate(); d++) days.push(new Date(start.getFullYear(), start.getMonth(), d));
+  for (let d = 1; d <= end.getDate(); d++)
+    days.push(new Date(start.getFullYear(), start.getMonth(), d));
 
   const monthLabel = month.toLocaleDateString(locale, { month: "long", year: "numeric" });
   const dayLabels = ["L", "M", "X", "J", "V", "S", "D"];
 
   const inRange = (d: Date) => {
-    if (range.start && range.end) return isWithinInterval(d, { start: range.start, end: range.end });
+    if (range.start && range.end)
+      return isWithinInterval(d, { start: range.start, end: range.end });
     return false;
   };
 
   return (
     <div>
-      <div className="mb-3 text-center font-display text-lg text-foreground capitalize">{monthLabel}</div>
+      <div className="mb-3 text-center font-display text-lg text-foreground capitalize">
+        {monthLabel}
+      </div>
       <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
-        {dayLabels.map((l) => (<div key={l} className="py-1">{l}</div>))}
+        {dayLabels.map((l) => (
+          <div key={l} className="py-1">
+            {l}
+          </div>
+        ))}
       </div>
       <div className="mt-1 grid grid-cols-7 gap-1">
         {days.map((d, idx) => {
@@ -774,7 +872,8 @@ function MonthGrid({
           const isStart = range.start && isSameDay(d, range.start);
           const isEnd = range.end && isSameDay(d, range.end);
           const within = inRange(d);
-          const soon = !past && (pickingStart || (!!range.start && isBefore(d, range.start))) && tooSoon(d);
+          const soon =
+            !past && (pickingStart || (!!range.start && isBefore(d, range.start))) && tooSoon(d);
           const disabled = past || soon || beyondMax || isBooked;
 
           let cls = "aspect-square w-full rounded-md text-sm font-mono-num transition-colors ";
@@ -791,12 +890,7 @@ function MonthGrid({
           }
 
           return (
-            <button
-              key={idx}
-              disabled={disabled}
-              onClick={() => onPick(d)}
-              className={cls}
-            >
+            <button key={idx} disabled={disabled} onClick={() => onPick(d)} className={cls}>
               {d.getDate()}
             </button>
           );

@@ -48,6 +48,7 @@ export const EXCLUSIVE_EXTRA_GROUPS: readonly (readonly ExtraId[])[];
 export const PROMO_CODES: Record<string, number>;
 export const PROMO_EXPIRES_AT: Record<string, string>;
 export const MIN_CHARGE_EUR: number;
+export const MEMBER_DISCOUNT_PCT: number;
 export function promoPctAt(code: string | null | undefined, atMs?: number): number;
 export const PREPAYMENT_DISCOUNT_PCT: number;
 export const DEPOSIT_SHARE: number;
@@ -86,6 +87,7 @@ export interface QuoteInput {
   promoCode?: string | null;
   prepaymentOption?: PrepaymentOption | string;
   promoValidAtMs?: number;
+  member?: boolean;
 }
 
 export interface Quote extends PriceBreakdown {
@@ -94,6 +96,7 @@ export interface Quote extends PriceBreakdown {
   mandatoryTotal: number;
   preDiscountTotal: number;
   appliedPromoCode: string | null;
+  memberDiscountApplied: boolean;
   promoDiscountPct: number;
   promoDiscountAmount: number;
   afterPromoTotal: number;

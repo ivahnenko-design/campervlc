@@ -1,5 +1,7 @@
 import Stripe from "stripe";
 import { createBlobStore } from "./_lib/store.js";
+import { authSecret } from "./_lib/auth-secret.js";
+import { sessionFromRequest } from "./_lib/auth.js";
 import { occupiedDays } from "../shared/booking-changes.js";
 import { MIN_NOTICE_HOURS, startTooSoon } from "../shared/notice.js";
 import {
@@ -89,6 +91,8 @@ export default async function handler(req, res) {
     // Every amount is recalculated here from the shared pricing rules; the
     // client total is only compared, never charged. normalizeExtraIds (inside
     // calculateQuote) also drops unknown ids and keeps only one mileage plan.
+    // The discount for logged-in guests comes from the signed session cookie, never from the request body.
+    const member = !!sessionFromRequest(req, authSecret());
     const quote = calculateQuote({
       start,
       end,
@@ -97,6 +101,7 @@ export default async function handler(req, res) {
       extraIds,
       promoCode,
       prepaymentOption,
+      member,
     });
 
     if (quote.nights < getMinNights(start)) {
@@ -184,6 +189,7 @@ export default async function handler(req, res) {
         remainingAmount: String(remainingAmount),
         prepaymentOption: isFullPayment ? "full" : "deposit",
         promoCode: quote.appliedPromoCode || "",
+        memberDiscount: quote.memberDiscountApplied ? "true" : "false",
         acceptedTerms: "true",
         termsVersion: TERMS_VERSION,
         guestFirstName: guest.firstName,

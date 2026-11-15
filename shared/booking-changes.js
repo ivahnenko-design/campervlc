@@ -89,6 +89,7 @@ function quoteFor(booking, { startDate, endDate, pickupTime, returnTime, extraId
     returnTime,
     extraIds,
     promoCode: booking.promoCode || null,
+    member: booking.memberDiscount === true,
     // A booking keeps the promo it was made with, even after the code expires.
     promoValidAtMs: Date.parse(booking.createdAt) || Date.now(),
     prepaymentOption: booking.prepaymentOption === "full" ? "full" : "deposit",
