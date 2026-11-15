@@ -502,6 +502,7 @@
     "err_email_invalid": "Inserisci un'email valida.",
     "err_passkey": "Impossibile accedere con la passkey.",
     "err_google": "Impossibile accedere con Google.",
-    "err_default": "Qualcosa è andato storto. Riprova."
+    "err_default": "Qualcosa è andato storto. Riprova.",
+    "hint_promo_instead": "È applicato un codice promozionale: sostituisce lo sconto per l'accesso (non si sommano)"
   }
 }

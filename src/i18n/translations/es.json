@@ -502,6 +502,7 @@
     "err_email_invalid": "Introduce un email válido.",
     "err_passkey": "No se pudo entrar con passkey.",
     "err_google": "No se pudo entrar con Google.",
-    "err_default": "Algo ha fallado. Inténtalo de nuevo."
+    "err_default": "Algo ha fallado. Inténtalo de nuevo.",
+    "hint_promo_instead": "Has usado un código promocional: sustituye al descuento por iniciar sesión (no se suman)"
   }
 }

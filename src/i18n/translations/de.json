@@ -502,6 +502,7 @@
     "err_email_invalid": "Gib eine gültige E-Mail ein.",
     "err_passkey": "Anmeldung mit Passkey nicht möglich.",
     "err_google": "Anmeldung mit Google nicht möglich.",
-    "err_default": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    "err_default": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "hint_promo_instead": "Ein Aktionscode wird angewendet: Er ersetzt den Anmelde-Rabatt (keine Kombination)"
   }
 }

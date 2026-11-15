@@ -502,6 +502,7 @@
     "err_email_invalid": "Enter a valid email.",
     "err_passkey": "Could not log in with a passkey.",
     "err_google": "Could not log in with Google.",
-    "err_default": "Something went wrong. Please try again."
+    "err_default": "Something went wrong. Please try again.",
+    "hint_promo_instead": "A promo code is applied: it replaces the logged-in discount (they do not add up)"
   }
 }

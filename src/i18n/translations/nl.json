@@ -502,6 +502,7 @@
     "err_email_invalid": "Vul een geldig e-mailadres in.",
     "err_passkey": "Inloggen met passkey is niet gelukt.",
     "err_google": "Inloggen met Google is niet gelukt.",
-    "err_default": "Er ging iets mis. Probeer het opnieuw."
+    "err_default": "Er ging iets mis. Probeer het opnieuw.",
+    "hint_promo_instead": "Er is een kortingscode toegepast: die vervangt de inlogkorting (ze worden niet opgeteld)"
   }
 }

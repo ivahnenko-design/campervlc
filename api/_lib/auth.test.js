@@ -15,7 +15,7 @@ import {
   verifyGoogleCredential,
 } from "./auth.js";
 import { createAuthHandlers, relyingParty } from "./auth-handlers.js";
-import { MEMBER_DISCOUNT_PCT, calculateQuote } from "../../shared/pricing.js";
+import { MEMBER_DISCOUNT_PCT, PROMO_CODES, calculateQuote } from "../../shared/pricing.js";
 
 const SECRET = "test-secret";
 
@@ -192,7 +192,7 @@ test("passkey registration then login, with the WebAuthn library replaced by a f
   assert.equal(unknown.code, 400);
 });
 
-test("member discount: 5% off, never stacked with a promo code, the bigger one wins", () => {
+test("member discount: 5% off; a valid promo code replaces it and never stacks, even a smaller one", () => {
   const base = { start: new Date(2027, 2, 1), end: new Date(2027, 2, 6) };
   const plain = calculateQuote(base);
   const member = calculateQuote({ ...base, member: true });
@@ -202,9 +202,20 @@ test("member discount: 5% off, never stacked with a promo code, the bigger one w
   assert.ok(member.finalTotalWithIva < plain.finalTotalWithIva);
   assert.equal(member.appliedPromoCode, null);
 
-  const bigger = calculateQuote({ ...base, member: true, promoCode: "CAMPER10" });
-  assert.equal(bigger.appliedPromoCode, "CAMPER10");
-  assert.equal(bigger.memberDiscountApplied, false);
-  assert.equal(bigger.promoDiscountPct, 10);
-  assert.equal(calculateQuote({ ...base, promoCode: "CAMPER10" }).finalTotalWithIva, bigger.finalTotalWithIva);
+  const withCode = calculateQuote({ ...base, member: true, promoCode: "CAMPER10" });
+  assert.equal(withCode.appliedPromoCode, "CAMPER10");
+  assert.equal(withCode.memberDiscountApplied, false);
+  assert.equal(withCode.promoDiscountPct, 10);
+  assert.equal(calculateQuote({ ...base, promoCode: "CAMPER10" }).finalTotalWithIva, withCode.finalTotalWithIva, "same price with or without login");
+
+  PROMO_CODES.SMALL3 = 3;
+  try {
+    const small = calculateQuote({ ...base, member: true, promoCode: "SMALL3" });
+    assert.equal(small.appliedPromoCode, "SMALL3");
+    assert.equal(small.memberDiscountApplied, false);
+    assert.equal(small.promoDiscountPct, 3, "the promo code wins even when the member discount is bigger");
+  } finally {
+    delete PROMO_CODES.SMALL3;
+  }
+  assert.equal(calculateQuote({ ...base, member: true, promoCode: "NOPE" }).memberDiscountApplied, true, "an unknown code does not remove the member discount");
 });

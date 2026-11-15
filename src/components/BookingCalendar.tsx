@@ -445,7 +445,9 @@ export function BookingCalendar() {
             <div className="mt-4">
               {auth.user ? (
                 <p className="rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600">
-                  {t("auth.hint_active", { pct: auth.discountPct })}
+                  {appliedPromoCode
+                    ? t("auth.hint_promo_instead")
+                    : t("auth.hint_active", { pct: auth.discountPct })}
                 </p>
               ) : (
                 <button

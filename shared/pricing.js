@@ -231,7 +231,7 @@ export const EXCLUSIVE_EXTRA_GROUPS = [
 
 export const PROMO_CODES = { CAMPER10: 10, OWNERTEST: 99 };
 
-/** Percent off every booking of a logged-in guest. Not combined with a promo code: the bigger one applies. */
+/** Percent off every booking of a logged-in guest. Never combined with a promo code: a valid promo code replaces it, whatever its size. */
 export const MEMBER_DISCOUNT_PCT = 5;
 // Codes that stop working at a fixed moment (UTC). OWNERTEST is a temporary
 // owner test code for live checks; it is never listed anywhere on the site.
@@ -342,10 +342,11 @@ export function calculateQuote({
   const code = typeof promoCode === "string" ? promoCode.trim().toUpperCase() : "";
   const codePct = promoPctAt(code, promoValidAtMs);
   const memberPct = member ? MEMBER_DISCOUNT_PCT : 0;
-  // One discount per booking: the bigger of promo code and member discount.
-  const promoDiscountPct = Math.max(codePct, memberPct);
-  const memberDiscountApplied = memberPct > 0 && memberPct >= codePct;
-  const appliedPromoCode = codePct > memberPct ? code : null;
+  // One discount per booking. A valid promo code always takes the place of the
+  // member discount (even a smaller one); the member discount only applies without a code.
+  const promoDiscountPct = codePct > 0 ? codePct : memberPct;
+  const memberDiscountApplied = codePct === 0 && memberPct > 0;
+  const appliedPromoCode = codePct > 0 ? code : null;
   // Never discount below the Stripe minimum charge (before IVA, so the
   // amount with IVA is always at least MIN_CHARGE_EUR).
   const promoDiscountAmount = Math.min(
