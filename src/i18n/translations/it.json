@@ -473,12 +473,12 @@
     "cancel_link": "Preferisci annullare?"
   },
   "auth": {
-    "banner_text": "Accedi e ottieni il {{pct}} % di sconto sulla tua prenotazione",
+    "banner_text": "Accedi e ottieni il {{pct}} % di sconto sulla tua prima prenotazione",
     "banner_cta": "Accedi",
-    "banner_active": "Sconto del {{pct}} % attivo",
+    "banner_active": "Sconto del {{pct}} % sulla prima prenotazione attivo",
     "logout": "Esci",
     "title": "Accedi al tuo account",
-    "subtitle": "Accedi e ottieni il {{pct}} % di sconto su ogni prenotazione.",
+    "subtitle": "Accedi e ottieni il {{pct}} % di sconto sulla tua prima prenotazione.",
     "passkey": "Accedi con Face ID / impronta",
     "or_email": "oppure con la tua email",
     "email_label": "Email",
@@ -493,8 +493,8 @@
     "done": "Fatto. Il tuo sconto del {{pct}} % è attivo.",
     "close": "Chiudi",
     "member_discount_row": "Sconto per l'accesso ({{pct}} %)",
-    "hint_login": "Accedi e risparmia il {{pct}} % su questa prenotazione",
-    "hint_active": "Sconto del {{pct}} % applicato per aver effettuato l'accesso",
+    "hint_login": "Accedi e risparmia il {{pct}} % sulla tua prima prenotazione",
+    "hint_active": "Sconto del {{pct}} % sulla prima prenotazione applicato",
     "err_code_wrong": "Il codice non è corretto.",
     "err_code_expired": "Il codice è scaduto. Richiedine uno nuovo.",
     "err_too_many_attempts": "Troppi tentativi. Richiedi un nuovo codice più tardi.",
@@ -503,6 +503,8 @@
     "err_passkey": "Impossibile accedere con la passkey.",
     "err_google": "Impossibile accedere con Google.",
     "err_default": "Qualcosa è andato storto. Riprova.",
-    "hint_promo_instead": "È applicato un codice promozionale: sostituisce lo sconto per l'accesso (non si sommano)"
+    "hint_promo_instead": "È applicato un codice promozionale: sostituisce lo sconto per l'accesso (non si sommano)",
+    "banner_used": "Hai effettuato l'accesso",
+    "hint_used": "Lo sconto per l'accesso è già stato usato in una prenotazione precedente"
   }
 }

@@ -41,7 +41,11 @@ function MemberStrip() {
     return (
       <div className={`${base} bg-emerald-600 text-white`}>
         <Check className="h-4 w-4 shrink-0" />
-        <span className="truncate">{t("auth.banner_active", { pct: discountPct })}</span>
+        <span className="truncate">
+          {user.discountAvailable
+            ? t("auth.banner_active", { pct: discountPct })
+            : t("auth.banner_used")}
+        </span>
         <button
           onClick={() => void logout()}
           className="shrink-0 underline underline-offset-2 opacity-90 hover:opacity-100"

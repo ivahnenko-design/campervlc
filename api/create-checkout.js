@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { createBlobStore } from "./_lib/store.js";
 import { authSecret } from "./_lib/auth-secret.js";
-import { sessionFromRequest } from "./_lib/auth.js";
+import { createUserStore, memberEligible, sessionFromRequest } from "./_lib/auth.js";
 import { occupiedDays } from "../shared/booking-changes.js";
 import { MIN_NOTICE_HOURS, startTooSoon } from "../shared/notice.js";
 import {
@@ -92,7 +92,17 @@ export default async function handler(req, res) {
     // client total is only compared, never charged. normalizeExtraIds (inside
     // calculateQuote) also drops unknown ids and keeps only one mileage plan.
     // The discount for logged-in guests comes from the signed session cookie, never from the request body.
-    const member = !!sessionFromRequest(req, authSecret());
+    // First booking only: the account must exist and not have used the discount yet.
+    const sessionUser = sessionFromRequest(req, authSecret());
+    let member = false;
+    if (sessionUser) {
+      try {
+        const found = await createUserStore().get(sessionUser.userId);
+        member = memberEligible(found?.user);
+      } catch (err) {
+        console.error("create-checkout: could not read the guest account, no member discount -", err.message);
+      }
+    }
     const quote = calculateQuote({
       start,
       end,
@@ -190,6 +200,7 @@ export default async function handler(req, res) {
         prepaymentOption: isFullPayment ? "full" : "deposit",
         promoCode: quote.appliedPromoCode || "",
         memberDiscount: quote.memberDiscountApplied ? "true" : "false",
+        memberUserId: quote.memberDiscountApplied ? sessionUser.userId : "",
         acceptedTerms: "true",
         termsVersion: TERMS_VERSION,
         guestFirstName: guest.firstName,

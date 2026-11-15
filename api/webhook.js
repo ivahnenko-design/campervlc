@@ -5,6 +5,7 @@ import { randomInt } from "node:crypto";
 import { createBlobStore } from "./_lib/store.js";
 import { completeChangePayment } from "./_lib/manage.js";
 import { sendChangeEmails } from "./_lib/email.js";
+import { createUserStore } from "./_lib/auth.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -308,6 +309,21 @@ export default async function handler(req, res) {
       console.error("saveBooking FAILED for", booking.id, "bookingRef", booking.bookingRef, "-", saveResult.reason);
     } else {
       console.log("Booking saved:", booking.id, booking.bookingRef);
+      // The login discount is for the first booking only: use it up now that this one is paid and saved.
+      if (booking.memberDiscount && m.memberUserId) {
+        try {
+          const users = createUserStore();
+          const found = await users.get(m.memberUserId);
+          if (found && !found.user.memberDiscountUsedAt) {
+            await users.save(
+              { ...found.user, memberDiscountUsedAt: Date.now(), memberDiscountBookingId: booking.id },
+              { etag: found.etag },
+            );
+          }
+        } catch (err) {
+          console.error("could not mark the member discount as used for", m.memberUserId, "-", err.message);
+        }
+      }
     }
     if (guestEmailResult.status === "rejected") {
       console.error("sendGuestEmail failed for", booking.id, "-", guestEmailResult.reason);

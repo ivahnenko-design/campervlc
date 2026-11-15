@@ -1,7 +1,8 @@
 // Guest accounts: one JSON record per user in Vercel Blob, keyed by a hash of the
 // email, so the email code, Google and passkeys all land on the same account.
-// Sessions are a signed cookie (no session store). Logged-in guests get the
-// member discount (MEMBER_DISCOUNT_PCT in shared/pricing.js) on every booking.
+// Sessions are a signed cookie (no session store). A logged-in guest gets the
+// member discount (MEMBER_DISCOUNT_PCT in shared/pricing.js) on the FIRST booking only:
+// the webhook stamps memberDiscountUsedAt on the account once that booking is paid.
 import { createHash, createHmac, randomInt, timingSafeEqual } from "node:crypto";
 import { blobStore } from "./blob.js";
 
@@ -95,8 +96,12 @@ export function newUser(email, now = Date.now()) {
     passkeys: [],
     loginCode: null,
     logins: [],
+    memberDiscountUsedAt: null,
   };
 }
+
+/** True while the account has not used its first-booking discount. Unknown accounts are not eligible. */
+export const memberEligible = (user) => !!user && !user.memberDiscountUsedAt;
 
 export function recordLogin(user, method, now = Date.now()) {
   return { ...user, lastLoginAt: now, loginCode: null, logins: [{ t: now, method }, ...(user.logins || [])].slice(0, 20) };
@@ -109,6 +114,7 @@ export function publicUser(user) {
     name: user.name || "",
     passkeys: (user.passkeys || []).map((p) => ({ id: p.id, createdAt: p.createdAt, device: p.device || "" })),
     google: !!user.google,
+    discountAvailable: memberEligible(user),
   };
 }
 

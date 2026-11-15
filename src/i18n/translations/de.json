@@ -473,12 +473,12 @@
     "cancel_link": "Stattdessen stornieren?"
   },
   "auth": {
-    "banner_text": "Melde dich an und erhalte {{pct}} % Rabatt auf deine Buchung",
+    "banner_text": "Melde dich an und erhalte {{pct}} % Rabatt auf deine erste Buchung",
     "banner_cta": "Anmelden",
-    "banner_active": "{{pct}} % Rabatt aktiv",
+    "banner_active": "{{pct}} % Rabatt auf deine erste Buchung aktiv",
     "logout": "Abmelden",
     "title": "In dein Konto einloggen",
-    "subtitle": "Melde dich an und erhalte {{pct}} % Rabatt auf jede Buchung.",
+    "subtitle": "Melde dich an und erhalte {{pct}} % Rabatt auf deine erste Buchung.",
     "passkey": "Mit Face ID / Fingerabdruck anmelden",
     "or_email": "oder mit deiner E-Mail",
     "email_label": "E-Mail",
@@ -493,8 +493,8 @@
     "done": "Fertig. Dein Rabatt von {{pct}} % ist aktiv.",
     "close": "Schließen",
     "member_discount_row": "Anmelde-Rabatt ({{pct}} %)",
-    "hint_login": "Melde dich an und spare {{pct}} % bei dieser Buchung",
-    "hint_active": "{{pct}} % Rabatt für deine Anmeldung angewendet",
+    "hint_login": "Melde dich an und spare {{pct}} % bei deiner ersten Buchung",
+    "hint_active": "{{pct}} % Rabatt auf deine erste Buchung angewendet",
     "err_code_wrong": "Der Code ist nicht korrekt.",
     "err_code_expired": "Der Code ist abgelaufen. Fordere einen neuen an.",
     "err_too_many_attempts": "Zu viele Versuche. Fordere später einen neuen Code an.",
@@ -503,6 +503,8 @@
     "err_passkey": "Anmeldung mit Passkey nicht möglich.",
     "err_google": "Anmeldung mit Google nicht möglich.",
     "err_default": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
-    "hint_promo_instead": "Ein Aktionscode wird angewendet: Er ersetzt den Anmelde-Rabatt (keine Kombination)"
+    "hint_promo_instead": "Ein Aktionscode wird angewendet: Er ersetzt den Anmelde-Rabatt (keine Kombination)",
+    "banner_used": "Du bist angemeldet",
+    "hint_used": "Der Anmelde-Rabatt wurde bereits bei einer früheren Buchung genutzt"
   }
 }

@@ -473,12 +473,12 @@
     "cancel_link": "¿Prefieres cancelar?"
   },
   "auth": {
-    "banner_text": "Inicia sesión y obtén un {{pct}} % de descuento en tu reserva",
+    "banner_text": "Inicia sesión y obtén un {{pct}} % de descuento en tu primera reserva",
     "banner_cta": "Entrar",
-    "banner_active": "Descuento de {{pct}} % activo",
+    "banner_active": "Descuento de {{pct}} % en tu primera reserva activo",
     "logout": "Salir",
     "title": "Entra en tu cuenta",
-    "subtitle": "Entra y obtén un {{pct}} % de descuento en todas tus reservas.",
+    "subtitle": "Entra y obtén un {{pct}} % de descuento en tu primera reserva.",
     "passkey": "Entrar con Face ID / huella",
     "or_email": "o con tu email",
     "email_label": "Email",
@@ -493,8 +493,8 @@
     "done": "Listo. Tu descuento del {{pct}} % está activo.",
     "close": "Cerrar",
     "member_discount_row": "Descuento por iniciar sesión ({{pct}} %)",
-    "hint_login": "Entra y ahorra un {{pct}} % en esta reserva",
-    "hint_active": "Descuento de {{pct}} % aplicado por haber iniciado sesión",
+    "hint_login": "Entra y ahorra un {{pct}} % en tu primera reserva",
+    "hint_active": "Descuento de {{pct}} % en tu primera reserva aplicado",
     "err_code_wrong": "El código no es correcto.",
     "err_code_expired": "El código ha caducado. Pide uno nuevo.",
     "err_too_many_attempts": "Demasiados intentos. Pide un código nuevo más tarde.",
@@ -503,6 +503,8 @@
     "err_passkey": "No se pudo entrar con passkey.",
     "err_google": "No se pudo entrar con Google.",
     "err_default": "Algo ha fallado. Inténtalo de nuevo.",
-    "hint_promo_instead": "Has usado un código promocional: sustituye al descuento por iniciar sesión (no se suman)"
+    "hint_promo_instead": "Has usado un código promocional: sustituye al descuento por iniciar sesión (no se suman)",
+    "banner_used": "Sesión iniciada",
+    "hint_used": "El descuento por iniciar sesión ya se usó en una reserva anterior"
   }
 }

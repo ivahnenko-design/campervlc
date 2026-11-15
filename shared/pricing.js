@@ -231,7 +231,7 @@ export const EXCLUSIVE_EXTRA_GROUPS = [
 
 export const PROMO_CODES = { CAMPER10: 10, OWNERTEST: 99 };
 
-/** Percent off every booking of a logged-in guest. Never combined with a promo code: a valid promo code replaces it, whatever its size. */
+/** Percent off the first booking of a logged-in guest (the account is stamped when it is paid). Never combined with a promo code: a valid promo code replaces it, whatever its size. */
 export const MEMBER_DISCOUNT_PCT = 5;
 // Codes that stop working at a fixed moment (UTC). OWNERTEST is a temporary
 // owner test code for live checks; it is never listed anywhere on the site.

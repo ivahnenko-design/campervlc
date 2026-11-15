@@ -6,6 +6,8 @@ import {
   createMemoryUserStore,
   isEmail,
   issueLoginCode,
+  memberEligible,
+  publicUser,
   newSession,
   newUser,
   openValue,
@@ -218,4 +220,15 @@ test("member discount: 5% off; a valid promo code replaces it and never stacks, 
     delete PROMO_CODES.SMALL3;
   }
   assert.equal(calculateQuote({ ...base, member: true, promoCode: "NOPE" }).memberDiscountApplied, true, "an unknown code does not remove the member discount");
+});
+
+test("the login discount is for the first booking only: eligible until the account is stamped", () => {
+  const fresh = newUser("anna@example.com", 0);
+  assert.equal(memberEligible(fresh), true);
+  assert.equal(publicUser(fresh).discountAvailable, true);
+  const used = { ...fresh, memberDiscountUsedAt: 1234 };
+  assert.equal(memberEligible(used), false);
+  assert.equal(publicUser(used).discountAvailable, false);
+  assert.equal(memberEligible(null), false, "no account, no discount");
+  assert.equal(memberEligible(undefined), false);
 });

@@ -152,7 +152,7 @@ export function BookingCalendar() {
       extraIds: Array.from(selectedExtras),
       promoCode: appliedPromoCode,
       prepaymentOption,
-      member: !!auth.user,
+      member: !!auth.user?.discountAvailable,
     });
   }, [
     range,
@@ -445,9 +445,11 @@ export function BookingCalendar() {
             <div className="mt-4">
               {auth.user ? (
                 <p className="rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600">
-                  {appliedPromoCode
-                    ? t("auth.hint_promo_instead")
-                    : t("auth.hint_active", { pct: auth.discountPct })}
+                  {!auth.user.discountAvailable
+                    ? t("auth.hint_used")
+                    : appliedPromoCode
+                      ? t("auth.hint_promo_instead")
+                      : t("auth.hint_active", { pct: auth.discountPct })}
                 </p>
               ) : (
                 <button

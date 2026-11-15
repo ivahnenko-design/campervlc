@@ -473,12 +473,12 @@
     "cancel_link": "Liever annuleren?"
   },
   "auth": {
-    "banner_text": "Log in en krijg {{pct}} % korting op je boeking",
+    "banner_text": "Log in en krijg {{pct}} % korting op je eerste boeking",
     "banner_cta": "Inloggen",
-    "banner_active": "{{pct}} % korting actief",
+    "banner_active": "{{pct}} % korting op je eerste boeking actief",
     "logout": "Uitloggen",
     "title": "Log in op je account",
-    "subtitle": "Log in en krijg {{pct}} % korting op elke boeking.",
+    "subtitle": "Log in en krijg {{pct}} % korting op je eerste boeking.",
     "passkey": "Inloggen met Face ID / vingerafdruk",
     "or_email": "of met je e-mail",
     "email_label": "E-mail",
@@ -493,8 +493,8 @@
     "done": "Klaar. Je korting van {{pct}} % is actief.",
     "close": "Sluiten",
     "member_discount_row": "Korting voor inloggen ({{pct}} %)",
-    "hint_login": "Log in en bespaar {{pct}} % op deze boeking",
-    "hint_active": "{{pct}} % korting toegepast omdat je bent ingelogd",
+    "hint_login": "Log in en bespaar {{pct}} % op je eerste boeking",
+    "hint_active": "{{pct}} % korting op je eerste boeking toegepast",
     "err_code_wrong": "De code is niet juist.",
     "err_code_expired": "De code is verlopen. Vraag een nieuwe aan.",
     "err_too_many_attempts": "Te veel pogingen. Vraag later een nieuwe code aan.",
@@ -503,6 +503,8 @@
     "err_passkey": "Inloggen met passkey is niet gelukt.",
     "err_google": "Inloggen met Google is niet gelukt.",
     "err_default": "Er ging iets mis. Probeer het opnieuw.",
-    "hint_promo_instead": "Er is een kortingscode toegepast: die vervangt de inlogkorting (ze worden niet opgeteld)"
+    "hint_promo_instead": "Er is een kortingscode toegepast: die vervangt de inlogkorting (ze worden niet opgeteld)",
+    "banner_used": "Je bent ingelogd",
+    "hint_used": "De inlogkorting is al gebruikt bij een eerdere boeking"
   }
 }

@@ -7,6 +7,7 @@ export interface AuthUser {
   email: string;
   name: string;
   google: boolean;
+  discountAvailable: boolean;
   passkeys: { id: string; createdAt: number; device: string }[];
 }
 
