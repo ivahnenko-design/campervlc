@@ -179,7 +179,9 @@ const waLink = (phone: string, lang: string, name: string, link: string) =>
 
 function Badge({ status }: { status: Status }) {
   return (
-    <span className={`shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLS[status]}`}>
+    <span
+      className={`shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLS[status]}`}
+    >
       {STATUS_LABEL[status]}
     </span>
   );
@@ -904,7 +906,9 @@ function Admin() {
                         {b.totalWithIva} €
                       </p>
                     </div>
-                    <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">{b.bookingRef}</span>
+                    <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">
+                      {b.bookingRef}
+                    </span>
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {paidFull
