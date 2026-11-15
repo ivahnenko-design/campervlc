@@ -5,6 +5,7 @@ import { sendCodeEmail, sendSignedEmails } from "./contract-email.js";
 import { getSigningProvider } from "./signing-provider.js";
 import { siteUrl } from "./email.js";
 import { CONTRACT_PDF_PATH } from "./contracts.js";
+import { createBlobStore } from "./store.js";
 
 async function loadBasePdf() {
   const res = await fetch(`${siteUrl()}${CONTRACT_PDF_PATH}`);
@@ -18,6 +19,7 @@ export const contractHandlers = createContractHandlers({
   sendCode: (contract, code) => sendCodeEmail(contract, code),
   sendSigned: (contract, pdf) => sendSignedEmails(contract, pdf),
   loadBasePdf,
+  listBookings: () => createBlobStore().listBookings(),
   adminToken: process.env.ADMIN_TOKEN,
   secret: process.env.CONTRACT_SECRET || process.env.ADMIN_TOKEN,
 });

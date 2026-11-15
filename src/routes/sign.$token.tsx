@@ -64,7 +64,8 @@ const TEXT: Record<
 > = {
   en: {
     title: "Rental contract",
-    intro: "Please check your details, read the contract and sign it with your finger. You will get a copy by email.",
+    intro:
+      "Please check your details, read the contract and sign it with your finger. You will get a copy by email.",
     rental: "Your rental",
     pickup: "Pickup",
     ret: "Return",
@@ -95,7 +96,8 @@ const TEXT: Record<
     clear: "Clear",
     consents: {
       readContract: "I have read and accept the rental contract.",
-      electronicSignature: "I agree to sign electronically; it has the same validity as a paper signature (clause 16).",
+      electronicSignature:
+        "I agree to sign electronically; it has the same validity as a paper signature (clause 16).",
       cardAuthorization: "I authorise later charges to my card as described in clause 5.6.",
       dataProtection: "I have been informed about the processing of my personal data (clause 15).",
     },
@@ -107,7 +109,8 @@ const TEXT: Record<
     doneTitle: "Contract signed",
     doneBody: "Thank you. We have emailed you a PDF copy. Keep it with you during the trip.",
     signedAlready: "This contract is already signed.",
-    invalid: "This link is not valid or has expired. Please contact us on WhatsApp +34 624 038 085.",
+    invalid:
+      "This link is not valid or has expired. Please contact us on WhatsApp +34 624 038 085.",
     needSignature: "Please draw your signature.",
     fillAll: "Please fill in all the required fields.",
     errors: {
@@ -125,7 +128,8 @@ const TEXT: Record<
   },
   es: {
     title: "Contrato de alquiler",
-    intro: "Revisa tus datos, lee el contrato y fírmalo con el dedo. Recibirás una copia por email.",
+    intro:
+      "Revisa tus datos, lee el contrato y fírmalo con el dedo. Recibirás una copia por email.",
     rental: "Tu alquiler",
     pickup: "Recogida",
     ret: "Devolución",
@@ -156,7 +160,8 @@ const TEXT: Record<
     clear: "Borrar",
     consents: {
       readContract: "He leído y acepto el contrato de alquiler.",
-      electronicSignature: "Acepto firmar electrónicamente, con la misma validez que la firma en papel (apdo. 16).",
+      electronicSignature:
+        "Acepto firmar electrónicamente, con la misma validez que la firma en papel (apdo. 16).",
       cardAuthorization: "Autorizo los cargos posteriores en mi tarjeta descritos en el apdo. 5.6.",
       dataProtection: "He sido informado del tratamiento de mis datos personales (apdo. 15).",
     },
@@ -166,7 +171,8 @@ const TEXT: Record<
     sign: "Firmar el contrato",
     signing: "Firmando...",
     doneTitle: "Contrato firmado",
-    doneBody: "Gracias. Te hemos enviado una copia en PDF por email. Llévala contigo durante el viaje.",
+    doneBody:
+      "Gracias. Te hemos enviado una copia en PDF por email. Llévala contigo durante el viaje.",
     signedAlready: "Este contrato ya está firmado.",
     invalid: "El enlace no es válido o ha caducado. Escríbenos por WhatsApp al +34 624 038 085.",
     needSignature: "Dibuja tu firma.",
@@ -186,7 +192,8 @@ const TEXT: Record<
   },
   ru: {
     title: "Договор аренды",
-    intro: "Проверьте свои данные, прочитайте договор и подпишите его пальцем. Копия придёт вам на почту.",
+    intro:
+      "Проверьте свои данные, прочитайте договор и подпишите его пальцем. Копия придёт вам на почту.",
     rental: "Ваша аренда",
     pickup: "Получение",
     ret: "Возврат",
@@ -217,7 +224,8 @@ const TEXT: Record<
     clear: "Очистить",
     consents: {
       readContract: "Я прочитал(а) договор аренды и принимаю его условия.",
-      electronicSignature: "Я согласен(на) подписать электронно, подпись имеет ту же силу, что и на бумаге (п. 16).",
+      electronicSignature:
+        "Я согласен(на) подписать электронно, подпись имеет ту же силу, что и на бумаге (п. 16).",
       cardAuthorization: "Я разрешаю последующие списания с моей карты по п. 5.6.",
       dataProtection: "Я ознакомлен(а) с обработкой персональных данных (п. 15).",
     },
@@ -247,7 +255,8 @@ const TEXT: Record<
   },
   uk: {
     title: "Договір оренди",
-    intro: "Перевірте свої дані, прочитайте договір і підпишіть його пальцем. Копія прийде вам на пошту.",
+    intro:
+      "Перевірте свої дані, прочитайте договір і підпишіть його пальцем. Копія прийде вам на пошту.",
     rental: "Ваша оренда",
     pickup: "Отримання",
     ret: "Повернення",
@@ -278,7 +287,8 @@ const TEXT: Record<
     clear: "Очистити",
     consents: {
       readContract: "Я прочитав(ла) договір оренди та приймаю його умови.",
-      electronicSignature: "Я погоджуюсь підписати електронно, підпис має ту саму силу, що й на папері (п. 16).",
+      electronicSignature:
+        "Я погоджуюсь підписати електронно, підпис має ту саму силу, що й на папері (п. 16).",
       cardAuthorization: "Я дозволяю подальші списання з моєї картки за п. 5.6.",
       dataProtection: "Я ознайомлений(а) з обробкою персональних даних (п. 15).",
     },
@@ -316,7 +326,13 @@ const pickLang = (...candidates: (string | undefined)[]): Lang => {
 const inputCls =
   "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary";
 
-function SignaturePad({ onChange, clearLabel }: { onChange: (png: string | null) => void; clearLabel: string }) {
+function SignaturePad({
+  onChange,
+  clearLabel,
+}: {
+  onChange: (png: string | null) => void;
+  clearLabel: string;
+}) {
   const ref = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
   const last = useRef<{ x: number; y: number } | null>(null);
@@ -325,7 +341,10 @@ function SignaturePad({ onChange, clearLabel }: { onChange: (png: string | null)
   const point = (e: React.PointerEvent) => {
     const c = ref.current!;
     const r = c.getBoundingClientRect();
-    return { x: ((e.clientX - r.left) / r.width) * c.width, y: ((e.clientY - r.top) / r.height) * c.height };
+    return {
+      x: ((e.clientX - r.left) / r.width) * c.width,
+      y: ((e.clientY - r.top) / r.height) * c.height,
+    };
   };
   const start = (e: React.PointerEvent) => {
     ref.current?.setPointerCapture(e.pointerId);
@@ -374,7 +393,12 @@ function SignaturePad({ onChange, clearLabel }: { onChange: (png: string | null)
         onPointerCancel={end}
         onPointerLeave={end}
       />
-      <button type="button" onClick={clear} disabled={!hasInk} className="mt-1 text-xs text-muted-foreground underline disabled:opacity-40">
+      <button
+        type="button"
+        onClick={clear}
+        disabled={!hasInk}
+        className="mt-1 text-xs text-muted-foreground underline disabled:opacity-40"
+      >
         {clearLabel}
       </button>
     </div>
@@ -439,7 +463,12 @@ function SignPage() {
   }
 
   const filled = BASE_FIELDS.every((k) => (form[k] || "").trim());
-  const allConsents = ["readContract", "electronicSignature", "cardAuthorization", "dataProtection"].every((k) => consents[k]);
+  const allConsents = [
+    "readContract",
+    "electronicSignature",
+    "cardAuthorization",
+    "dataProtection",
+  ].every((k) => consents[k]);
 
   async function askCode() {
     setError(null);
@@ -462,7 +491,13 @@ function SignPage() {
     setBusy(true);
     try {
       const data: Record<string, string> = {};
-      for (const k of [...BASE_FIELDS, "docType", "extraDriverName", "extraDriverDoc", "extraDriverLicense"]) {
+      for (const k of [
+        ...BASE_FIELDS,
+        "docType",
+        "extraDriverName",
+        "extraDriverDoc",
+        "extraDriverLicense",
+      ]) {
         data[k] = (form[k] || "").trim();
       }
       await post({ action: "sign", code: code.trim(), data, consents, signature });
@@ -474,8 +509,19 @@ function SignPage() {
     }
   }
 
-  if (loadFailed) return <Shell><p className="text-sm">{TEXT.en.invalid}</p><p className="mt-2 text-sm">{TEXT.es.invalid}</p></Shell>;
-  if (!contract) return <Shell><Loader2 className="h-5 w-5 animate-spin" /></Shell>;
+  if (loadFailed)
+    return (
+      <Shell>
+        <p className="text-sm">{TEXT.en.invalid}</p>
+        <p className="mt-2 text-sm">{TEXT.es.invalid}</p>
+      </Shell>
+    );
+  if (!contract)
+    return (
+      <Shell>
+        <Loader2 className="h-5 w-5 animate-spin" />
+      </Shell>
+    );
   if (done) {
     return (
       <Shell>
@@ -488,7 +534,11 @@ function SignPage() {
     );
   }
   if (contract.status !== "pending") {
-    return <Shell><p className="text-sm">{contract.status === "signed" ? t.signedAlready : t.invalid}</p></Shell>;
+    return (
+      <Shell>
+        <p className="text-sm">{contract.status === "signed" ? t.signedAlready : t.invalid}</p>
+      </Shell>
+    );
   }
 
   return (
@@ -500,9 +550,13 @@ function SignPage() {
         <h2 className="font-semibold">{t.rental}</h2>
         <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
           <dt className="text-muted-foreground">{t.pickup}</dt>
-          <dd>{contract.startDate} · {contract.pickupTime}</dd>
+          <dd>
+            {contract.startDate} · {contract.pickupTime}
+          </dd>
           <dt className="text-muted-foreground">{t.ret}</dt>
-          <dd>{contract.endDate} · {contract.returnTime}</dd>
+          <dd>
+            {contract.endDate} · {contract.returnTime}
+          </dd>
           {contract.priceTotal != null && (
             <>
               <dt className="text-muted-foreground">{t.price}</dt>
@@ -510,7 +564,12 @@ function SignPage() {
             </>
           )}
         </dl>
-        <a href={contract.pdfPath} target="_blank" rel="noreferrer" className="mt-3 inline-block text-primary underline">
+        <a
+          href={contract.pdfPath}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 inline-block text-primary underline"
+        >
           {t.openContract}
         </a>
       </section>
@@ -520,9 +579,15 @@ function SignPage() {
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
           <label className="block text-sm">
             <span className="mb-1 block text-muted-foreground">{t.labels.docType}</span>
-            <select className={inputCls} value={form.docType} onChange={(e) => set("docType", e.target.value)}>
+            <select
+              className={inputCls}
+              value={form.docType}
+              onChange={(e) => set("docType", e.target.value)}
+            >
               {Object.entries(t.docTypes).map(([k, v]) => (
-                <option key={k} value={k}>{v}</option>
+                <option key={k} value={k}>
+                  {v}
+                </option>
               ))}
             </select>
           </label>
@@ -545,7 +610,12 @@ function SignPage() {
           {(["extraDriverName", "extraDriverDoc", "extraDriverLicense"] as const).map((k) => (
             <label key={k} className="block text-sm">
               <span className="mb-1 block text-muted-foreground">{t.labels[k]}</span>
-              <input className={inputCls} value={form[k] || ""} onChange={(e) => set(k, e.target.value)} autoComplete="off" />
+              <input
+                className={inputCls}
+                value={form[k] || ""}
+                onChange={(e) => set(k, e.target.value)}
+                autoComplete="off"
+              />
             </label>
           ))}
         </div>
@@ -553,22 +623,41 @@ function SignPage() {
 
       <section className="mt-5">
         <h2 className="font-semibold">{t.signHere}</h2>
-        <div className="mt-2"><SignaturePad onChange={setSignature} clearLabel={t.clear} /></div>
+        <div className="mt-2">
+          <SignaturePad onChange={setSignature} clearLabel={t.clear} />
+        </div>
       </section>
 
       <section className="mt-5 space-y-2 text-sm">
         {Object.entries(t.consents).map(([k, label]) => (
           <label key={k} className="flex items-start gap-2">
-            <input type="checkbox" className="mt-1" checked={!!consents[k]} onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))} />
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={!!consents[k]}
+              onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
+            />
             <span>{label}</span>
           </label>
         ))}
       </section>
 
-      {error && <p role="alert" className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
+      {error && (
+        <p
+          role="alert"
+          className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"
+        >
+          {error}
+        </p>
+      )}
 
       {!codeSent ? (
-        <button type="button" disabled={busy} onClick={askCode} className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">
+        <button
+          type="button"
+          disabled={busy}
+          onClick={askCode}
+          className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+        >
           {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.sendCode}
         </button>
       ) : (
@@ -576,9 +665,21 @@ function SignPage() {
           <p className="text-sm">{t.codeSent(codeSent)}</p>
           <label className="mt-3 block text-sm">
             <span className="mb-1 block text-muted-foreground">{t.codeLabel}</span>
-            <input className={inputCls} inputMode="numeric" autoComplete="one-time-code" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} />
+            <input
+              className={inputCls}
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              maxLength={6}
+              value={code}
+              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+            />
           </label>
-          <button type="button" disabled={busy || code.length !== 6} onClick={sign} className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">
+          <button
+            type="button"
+            disabled={busy || code.length !== 6}
+            onClick={sign}
+            className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+          >
             {busy ? t.signing : t.sign}
           </button>
         </div>
@@ -590,7 +691,9 @@ function SignPage() {
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <main className="mx-auto min-h-screen max-w-2xl bg-background px-4 py-8 text-foreground">
-      <p className="mb-4 text-xs uppercase tracking-widest text-muted-foreground">Camper Retreat VLC</p>
+      <p className="mb-4 text-xs uppercase tracking-widest text-muted-foreground">
+        Camper Retreat VLC
+      </p>
       {children}
     </main>
   );

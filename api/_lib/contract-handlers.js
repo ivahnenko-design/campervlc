@@ -47,14 +47,66 @@ function adminRow(c) {
     status: c.status,
     guestName: c.guestName,
     email: c.email,
+    phone: c.phone || "",
     source: c.source,
     bookingRef: c.bookingRef,
     startDate: c.startDate,
     endDate: c.endDate,
+    pickupTime: c.pickupTime,
+    returnTime: c.returnTime,
+    priceTotal: c.priceTotal,
     createdAt: c.createdAt,
+    viewedAt: c.viewedAt || null,
     signedAt: c.signed?.at || null,
     language: c.language,
     provider: c.provider,
+  };
+}
+
+/** Everything the owner may see about one contract: no token hash, no code hash. */
+function adminDetail(c) {
+  return {
+    ...adminRow(c),
+    note: c.note || "",
+    expiresAt: c.expiresAt,
+    signed: c.signed
+      ? {
+          at: c.signed.at,
+          data: c.signed.data,
+          consents: c.signed.consents,
+          ip: c.signed.ip,
+          userAgent: c.signed.userAgent,
+          pdfHash: c.signed.pdfHash,
+        }
+      : null,
+    audit: (c.audit || []).map(({ t, ev, ip }) => ({ t, ev, ...(ip ? { ip } : {}) })),
+  };
+}
+
+/** Site bookings (Stripe) for the admin list: only what the owner needs. */
+function bookingRow(b) {
+  return {
+    id: b.id,
+    bookingRef: b.bookingRef || "",
+    status: b.status,
+    createdAt: b.createdAt || null,
+    startDate: b.startDate,
+    endDate: b.endDate,
+    pickupTime: b.pickupTime || null,
+    returnTime: b.returnTime || null,
+    nights: b.nights,
+    totalWithIva: b.totalWithIva,
+    depositAmount: b.depositAmount,
+    remainingAmount: b.remainingAmount,
+    prepaymentOption: b.prepaymentOption,
+    guestName: [b.guestFirstName, b.guestLastName].filter(Boolean).join(" "),
+    guestEmail: b.guestEmail || "",
+    guestPhone: b.guestPhone || "",
+    adults: b.adults,
+    children: b.children,
+    extraIds: b.extraIds || [],
+    message: b.message || "",
+    paymentIntentId: b.paymentIntentId || null,
   };
 }
 
@@ -66,6 +118,7 @@ export function createContractHandlers({
   sendCode, // (contract, code) => Promise
   sendSigned, // (contract, pdfBytes) => Promise
   loadBasePdf, // () => Promise<Uint8Array>
+  listBookings = async () => [], // site bookings, for the admin list
   adminToken,
   secret,
   now = () => Date.now(),
@@ -76,6 +129,15 @@ export function createContractHandlers({
     try {
       if (req.method === "GET") {
         const id = typeof req.query?.id === "string" ? req.query.id : null;
+        if (req.query?.view === "bookings") {
+          const rows = (await listBookings()).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
+          return reply(res, 200, { bookings: rows });
+        }
+        if (id && req.query?.detail) {
+          const found = await store.get(id);
+          if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
+          return reply(res, 200, { contract: adminDetail(found.contract) });
+        }
         if (id && req.query?.pdf) {
           const found = await store.get(id);
           const pdf = found ? await store.getPdf(found.contract) : null;
@@ -140,8 +202,14 @@ export function createContractHandlers({
   async function guest(req, res) {
     try {
       if (req.method === "GET") {
-        const { contract } = await load(req.query?.token);
-        return reply(res, 200, { contract: publicView(contract) });
+        const found = await load(req.query?.token);
+        // First opening only, so the owner sees "opened" without a write per page view.
+        if (found.contract.status === "pending" && !found.contract.viewedAt) {
+          const t = now();
+          const viewed = { ...found.contract, viewedAt: t, audit: [...found.contract.audit, { t, ev: "viewed" }] };
+          await store.save(viewed, { etag: found.etag }).catch(() => {});
+        }
+        return reply(res, 200, { contract: publicView(found.contract) });
       }
       if (req.method !== "POST") return reply(res, 405, { error: "Method not allowed" });
       const body = req.body || {};

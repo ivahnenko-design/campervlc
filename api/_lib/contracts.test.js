@@ -154,6 +154,10 @@ async function setup() {
     sendCode: async (c, code) => sent.codes.push(code),
     sendSigned: async (c, pdf) => (sent.signed.push(pdf), ["fulfilled", "fulfilled"]),
     loadBasePdf: async () => basePdf,
+    listBookings: async () => [
+      { id: "cs_2", bookingRef: "CR-B", status: "confirmed", startDate: "2027-02-01", endDate: "2027-02-05", guestFirstName: "Bob", guestLastName: "B", guestEmail: "b@x.com", totalWithIva: 500 },
+      { id: "cs_1", bookingRef: "CR-A", status: "confirmed", startDate: "2027-01-01", endDate: "2027-01-03", guestFirstName: "Ann", guestLastName: "A", guestEmail: "a@x.com", totalWithIva: 300, secretThing: "x" },
+    ],
     adminToken: "admin-secret",
     secret: "otp-secret",
     now: () => t,
@@ -258,4 +262,30 @@ test("providers: own sends the invite, external is a documented stub", async () 
   assert.equal(mails.length, 1);
   assert.match(mails[0].html, /\/sign\//);
   await assert.rejects(createExternalProvider().invite(), (e) => e.code === "provider_not_configured");
+});
+
+test("admin views: site bookings sorted by date, contract detail without secrets, first view logged", async () => {
+  const { h, sent } = await setup();
+  const admin = { "x-admin-token": "admin-secret" };
+  const b = res();
+  await h.admin({ method: "GET", headers: admin, query: { view: "bookings" } }, b);
+  assert.equal(b.code, 200);
+  assert.deepEqual(b.body.bookings.map((x) => x.bookingRef), ["CR-A", "CR-B"]);
+  assert.equal(b.body.bookings[0].guestName, "Ann A");
+  assert.equal("secretThing" in b.body.bookings[0], false);
+
+  const created = res();
+  await h.admin({ method: "POST", headers: admin, body: INVITE }, created);
+  const token = sent.invites[0].token;
+  await h.guest({ method: "GET", query: { token } }, res());
+  await h.guest({ method: "GET", query: { token } }, res());
+
+  const d = res();
+  await h.admin({ method: "GET", headers: admin, query: { id: created.body.id, detail: "1" } }, d);
+  assert.equal(d.code, 200);
+  const json = JSON.stringify(d.body);
+  assert.equal(json.includes("tokenHash"), false);
+  assert.equal(json.includes('"hash"'), false);
+  assert.ok(d.body.contract.viewedAt);
+  assert.equal(d.body.contract.audit.filter((a) => a.ev === "viewed").length, 1, "only the first opening is written");
 });
