@@ -177,7 +177,7 @@
     "see_cancellation_policy": "Consulta la nostra politica di cancellazione",
     "prepayment_title": "Opzione di pagamento",
     "prepayment_deposit": "Caparra del 50%",
-    "prepayment_full": "100% ora (risparmia il 5%)",
+    "prepayment_full": "100% ora",
     "prepayment_discount": "Sconto per pagamento anticipato (-5%)",
     "cta_full_payment": "Paga l'intero importo online",
     "full_payment_note": "Pagato per intero — nulla da saldare al ritiro.",
@@ -267,9 +267,9 @@
     "q7": "Soggiorno minimo?",
     "a7": "Bassa e media stagione: 3 notti. Alta stagione: 4 notti. Altissima stagione (agosto e Natale): 5 notti. Il calcolatore mostra il minimo per le tue date.",
     "q8": "Posso pagare con carta?",
-    "a8": "Sì. Il pagamento online avviene solo con carta. Alla prenotazione paghi il 50 % di acconto oppure il 100 % in anticipo con il 5 % di sconto.",
+    "a8": "Sì. Il pagamento online avviene solo con carta. Alla prenotazione paghi il 50 % di acconto oppure il 100 % in anticipo.",
     "q9": "Come noleggiare un camper a Valencia?",
-    "a9": "Scegli le date nel calcolatore, aggiungi le opzioni che vuoi, conferma di aver letto le condizioni di noleggio e paga online con carta: acconto del 50 % oppure 100 % in anticipo con il 5 % di sconto. La conferma arriva via email e il saldo si paga al ritiro."
+    "a9": "Scegli le date nel calcolatore, aggiungi le opzioni che vuoi, conferma di aver letto le condizioni di noleggio e paga online con carta: acconto del 50 % oppure 100 % in anticipo. La conferma arriva via email e il saldo si paga al ritiro."
   },
   "contact": {
     "title": "Contattaci",
@@ -354,7 +354,7 @@
     "s3_title": "Requisiti del conducente",
     "s3_body": "Il conducente principale deve avere almeno 21 anni, essere in possesso di patente di categoria B con almeno 2 anni di anzianita' e presentare un documento d'identita' o passaporto in corso di validita' al momento del ritiro.",
     "s4_title": "Prezzi e pagamento",
-    "s4_body": "Il prezzo e' calcolato in base alla tariffa vigente al momento della prenotazione. E' richiesto un acconto del 50% per confermare la prenotazione. Il restante 50% e' dovuto prima del ritiro del veicolo. Il pagamento integrale anticipato prevede uno sconto del 5%.",
+    "s4_body": "Il prezzo e' calcolato in base alla tariffa vigente al momento della prenotazione. E' richiesto un acconto del 50% per confermare la prenotazione. Il restante 50% e' dovuto prima del ritiro del veicolo.",
     "s5_title": "Deposito cauzionale",
     "s5_body": "Al momento del ritiro sara' pre-autorizzata una cauzione di 900 euro tramite carta di credito. Questa sara' liberata entro 7 giorni lavorativi dalla restituzione, a condizione che il veicolo non presenti danni o inconvenienti.",
     "s6_title": "Utilizzo del veicolo",

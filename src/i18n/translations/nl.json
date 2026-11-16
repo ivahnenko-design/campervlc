@@ -177,7 +177,7 @@
     "see_cancellation_policy": "Bekijk ons annuleringsbeleid",
     "prepayment_title": "Betaalopties",
     "prepayment_deposit": "50% aanbetaling",
-    "prepayment_full": "100% nu (bespaar 5%)",
+    "prepayment_full": "100% nu",
     "prepayment_discount": "Vooruitbetalingskorting (-5%)",
     "cta_full_payment": "Volledig online betalen",
     "full_payment_note": "Volledig betaald — niets meer te betalen bij ophalen.",
@@ -267,9 +267,9 @@
     "q7": "Minimumverblijf?",
     "a7": "Laag- en middenseizoen: 3 nachten. Hoogseizoen: 4 nachten. Topseizoen (augustus en kerst): 5 nachten. De calculator toont het minimum voor jouw data.",
     "q8": "Kan ik met kaart betalen?",
-    "a8": "Ja. Online betalen kan alleen met een bankkaart. Bij het boeken betaal je 50 % aanbetaling, of 100 % vooraf met 5 % korting.",
+    "a8": "Ja. Online betalen kan alleen met een bankkaart. Bij het boeken betaal je 50 % aanbetaling of 100 % vooraf.",
     "q9": "Hoe huur ik een camper in Valencia?",
-    "a9": "Kies je data in de prijscalculator, voeg de gewenste opties toe, bevestig dat je de huurvoorwaarden hebt gelezen en betaal online met kaart: 50 % aanbetaling of 100 % vooraf met 5 % korting. De bevestiging komt per e-mail en het restant betaal je bij het ophalen."
+    "a9": "Kies je data in de prijscalculator, voeg de gewenste opties toe, bevestig dat je de huurvoorwaarden hebt gelezen en betaal online met kaart: 50 % aanbetaling of 100 % vooraf. De bevestiging komt per e-mail en het restant betaal je bij het ophalen."
   },
   "contact": {
     "title": "Neem contact op",
@@ -354,7 +354,7 @@
     "s3_title": "Bestuurdersvereisten",
     "s3_body": "De hoofdbestuurder moet minimaal 21 jaar oud zijn, in het bezit zijn van een rijbewijs categorie B met ten minste 2 jaar rijervaring en bij afhaling een geldig identiteitsbewijs of paspoort tonen.",
     "s4_title": "Prijzen en betaling",
-    "s4_body": "De prijs wordt berekend tegen het tarief dat geldt op het moment van boeking. Een aanbetaling van 50% is vereist om de boeking te bevestigen. De resterende 50% is verschuldigd voor afhaling van het voertuig. Volledige vooruitbetaling geeft 5% korting.",
+    "s4_body": "De prijs wordt berekend tegen het tarief dat geldt op het moment van boeking. Een aanbetaling van 50% is vereist om de boeking te bevestigen. De resterende 50% is verschuldigd voor afhaling van het voertuig.",
     "s5_title": "Borgsom",
     "s5_body": "Bij afhaling wordt een borgsom van 900 euro geblokkeerd op een creditcard. Deze wordt binnen 7 werkdagen na terugkeer vrijgegeven, mits het voertuig geen schade of incidenten vertoont.",
     "s6_title": "Voertuiggebruik",

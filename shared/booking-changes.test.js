@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { calculateQuote, parseIsoDate, withIva } from "./pricing.js";
+import { calculateQuote, parseIsoDate, prepaymentPctFor, withIva } from "./pricing.js";
 import {
   RETENTION_SCALE,
   allocateRefund,
@@ -41,6 +41,7 @@ function makeBooking(overrides) {
     extraIds: b.extraIds,
     promoCode: b.promoCode,
     prepaymentOption: b.prepaymentOption,
+    prepaymentDiscountPct: prepaymentPctFor(Date.parse(b.createdAt)),
   });
   return {
     ...b,
@@ -60,6 +61,7 @@ function quoteOf(b, dates) {
     extraIds: dates.extraIds ?? b.extraIds,
     promoCode: b.promoCode,
     prepaymentOption: b.prepaymentOption,
+    prepaymentDiscountPct: prepaymentPctFor(Date.parse(b.createdAt)),
   });
 }
 
@@ -319,4 +321,11 @@ test("new bookings need 24 h notice before pickup (Madrid time)", async () => {
   assert.equal(startTooSoon("2026-10-08", "12:00", NOW), false, "exactly 24 h");
   assert.equal(startTooSoon("2026-10-09", "09:00", NOW), false);
   assert.equal(startTooSoon("2026-10-07", "18:00", NOW), true);
+});
+
+test("plan: a 100% booking made after the cut-off gets no prepayment discount", () => {
+  const b = makeBooking({ startDate: "2026-11-16", endDate: "2026-11-23", prepaymentOption: "full", createdAt: "2026-11-20T10:00:00.000Z" });
+  const r = planChange({ booking: b, request: { endDate: "2026-11-20" }, nowMs: NOW });
+  assert.equal(r.ok, true, JSON.stringify(r.errors));
+  assert.equal(r.plan.after.quote.prepaymentDiscountAmount, 0);
 });

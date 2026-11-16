@@ -10,6 +10,7 @@ import {
   DEFAULT_RETURN_TIME,
   EXCLUSIVE_EXTRA_GROUPS,
   EXTRAS,
+  prepaymentPctFor,
   calculateQuote,
   differenceInCalendarDays,
   getMinNights,
@@ -93,6 +94,7 @@ function quoteFor(booking, { startDate, endDate, pickupTime, returnTime, extraId
     // A booking keeps the promo it was made with, even after the code expires.
     promoValidAtMs: Date.parse(booking.createdAt) || Date.now(),
     prepaymentOption: booking.prepaymentOption === "full" ? "full" : "deposit",
+    prepaymentDiscountPct: prepaymentPctFor(Date.parse(booking.createdAt)),
   });
 }
 

@@ -17,7 +17,7 @@
     "calPeak": "Piek",
     "calPerNight": "per nacht + btw",
     "calMin": "min. {{n}} nachten",
-    "calDiscounts": "Kortingen: −5% vanaf 7 nachten · −10% vanaf 14 nachten · −5% bij 100% vooruitbetaling",
+    "calDiscounts": "Kortingen: −5% vanaf 7 nachten · −10% vanaf 14 nachten",
     "calLink": "Bekijk de seizoenskalender 2027"
   },
   "guides": {
@@ -59,14 +59,13 @@
           ],
           "list": [
             "5% korting vanaf 7 nachten en 10% vanaf 14 nachten.",
-            "Nog eens 5% extra als je bij het boeken 100% van de boeking betaalt.",
             "Tijdelijke kortingscodes, die je in de prijscalculator invoert voordat je betaalt."
           ]
         },
         {
           "h2": "Twee echte voorbeelden",
           "paragraphs": [
-            "7 nachten in februari 2027 (laagseizoen), met 100% betaling bij het boeken: € 745 inclusief btw, ongeveer € 106 per nacht. Inclusief de eindschoonmaak van € 50 en de kortingen van 5% voor de huurduur en 5% voor volledige betaling.",
+            "7 nachten in februari 2027 (laagseizoen), met 100% betaling bij het boeken: € 784 inclusief btw, ongeveer € 112 per nacht. Inclusief de eindschoonmaak van € 50 en de korting van 5% voor de huurduur.",
             "7 nachten in juli 2027 (hoogseizoen), met 50% betaling bij het boeken: € 1.308 inclusief btw, waarvan je € 654 betaalt bij het boeken en de rest bij het ophalen van de camper. De exacte totalen voor jouw data zie je in de boekingscalculator."
           ]
         },
@@ -90,7 +89,7 @@
           "paragraphs": [
             "Elke nacht is inclusief 100 km. Ga je verder, dan kun je 200 km per nacht bijboeken (€ 20 per nacht) of onbeperkt kilometers (€ 40 per nacht). Kilometers boven het geboekte aantal kosten € 0,30 per km.",
             "Je krijgt de camper met een volle tank mee en levert hem ook zo weer in. Je brengt hem verder schoon van binnen terug, met de grijswatertank en de toiletcassette geleegd en de schoonwatertank gevuld.",
-            "In de calculator kun je per boeking opties toevoegen: transfer van/naar het vliegveld (€ 90), fiets (€ 90), SUP-board (€ 90), extra bestuurder (€ 50), beddengoed (€ 20), handdoeken (€ 15) en barbecue (€ 15)."
+            "In de calculator kun je per boeking opties toevoegen: fiets (€ 90), SUP-board (€ 90), extra bestuurder (€ 50), beddengoed (€ 20), handdoeken (€ 15) en barbecue (€ 15)."
           ]
         },
         {
@@ -102,7 +101,7 @@
         {
           "h2": "Boeken en betalen",
           "paragraphs": [
-            "Kies je data en de tijden voor ophalen en terugbrengen in de kalender op campervlc.com, voeg opties toe en betaal met je kaart. Je kunt 50% betalen bij het boeken en de rest bij het ophalen, of 100% met 5% korting. Je ontvangt per e-mail een bevestiging met je boekingsnummer.",
+            "Kies je data en de tijden voor ophalen en terugbrengen in de kalender op campervlc.com, voeg opties toe en betaal met je kaart. Je kunt 50% betalen bij het boeken en de rest bij het ophalen, of 100% direct. Je ontvangt per e-mail een bevestiging met je boekingsnummer.",
             "Met dat nummer en je e-mailadres kun je via de pagina Boeking beheren je data wijzigen of opties toevoegen, tot 48 uur voor de overdracht."
           ]
         },
@@ -138,7 +137,7 @@
         },
         {
           "q": "Hoe betaal ik?",
-          "a": "Je betaalt de boeking online met je bankpas of creditcard, veilig via Stripe: 50% bij het boeken en de rest bij het ophalen, of 100% met 5% korting. De borg van € 900 betaal je voor de overdracht, bij voorkeur via een pre-autorisatie op je creditcard."
+          "a": "Je betaalt de boeking online met je bankpas of creditcard, veilig via Stripe: 50% bij het boeken en de rest bij het ophalen, of 100% direct. De borg van € 900 betaal je voor de overdracht, bij voorkeur via een pre-autorisatie op je creditcard."
         }
       ],
       "cta": {
@@ -214,7 +213,7 @@
         {
           "h2": "Tips om je reisdata te kiezen",
           "paragraphs": [
-            "De prijzen zijn per nacht, exclusief 21% btw. Kun je kiezen, reis dan buiten de lange weekenden en de zomer: je bespaart op het tarief en vindt makkelijker een plek op de camperplaatsen. Huur je 7 nachten of langer, dan krijg je 5% korting, vanaf 14 nachten 10%, en wie bij het boeken 100% betaalt, krijgt daar nog eens 5% bij.",
+            "De prijzen zijn per nacht, exclusief 21% btw. Kun je kiezen, reis dan buiten de lange weekenden en de zomer: je bespaart op het tarief en vindt makkelijker een plek op de camperplaatsen. Huur je 7 nachten of langer, dan krijg je 5% korting, vanaf 14 nachten 10%.",
             "Voor Fallas, Semana Santa, het lange weekend in oktober en augustus kun je het best enkele maanden van tevoren boeken, want de kalender raakt snel vol. De actuele beschikbaarheid zie je in de boekingskalender op campervlc.com. Inspiratie voor je reisroute vind je in onze camperroutes vanuit Valencia."
           ]
         }

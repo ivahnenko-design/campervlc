@@ -17,7 +17,7 @@
     "calPeak": "Altissima",
     "calPerNight": "a notte + IVA",
     "calMin": "min. {{n}} notti",
-    "calDiscounts": "Sconti: −5% da 7 notti · −10% da 14 notti · −5% con pagamento anticipato del 100%",
+    "calDiscounts": "Sconti: −5% da 7 notti · −10% da 14 notti",
     "calLink": "Vedi il calendario stagioni 2027"
   },
   "guides": {
@@ -59,14 +59,13 @@
           ],
           "list": [
             "5 % di sconto da 7 notti e 10 % da 14 notti.",
-            "Un ulteriore 5 % se paghi il 100 % della prenotazione al momento della prenotazione.",
             "Codici promozionali occasionali, da applicare nel calcolatore prima del pagamento."
           ]
         },
         {
           "h2": "Due esempi reali",
           "paragraphs": [
-            "7 notti a febbraio 2027 (bassa stagione), pagando il 100 % alla prenotazione: 745 € IVA inclusa, circa 106 € a notte. Sono compresi la pulizia finale di 50 € e gli sconti del 5 % per la durata del soggiorno e del 5 % per il pagamento completo.",
+            "7 notti a febbraio 2027 (bassa stagione), pagando il 100 % alla prenotazione: 784 € IVA inclusa, circa 112 € a notte. Sono compresi la pulizia finale di 50 € e lo sconto del 5 % per la durata del soggiorno.",
             "7 notti a luglio 2027 (alta stagione), pagando il 50 % alla prenotazione: 1.308 € IVA inclusa, di cui 654 € alla prenotazione e il resto al ritiro del camper. I totali esatti per le tue date compaiono nel calcolatore di prenotazione."
           ]
         },
@@ -90,7 +89,7 @@
           "paragraphs": [
             "Ogni notte include 100 km. Se pensi di percorrerne di più, puoi aggiungere 200 km a notte (20 € a notte) oppure il chilometraggio illimitato (40 € a notte). I chilometri oltre quelli previsti costano 0,30 € l'uno.",
             "Il camper viene consegnato con il pieno e va riconsegnato allo stesso modo. Va riconsegnato anche pulito all'interno, con acque grigie e cassetta del WC svuotate e il serbatoio dell'acqua pulita pieno.",
-            "Nel calcolatore puoi aggiungere extra per prenotazione: transfer dall'aeroporto (90 €), bicicletta (90 €), tavola SUP (90 €), conducente aggiuntivo (50 €), biancheria da letto (20 €), asciugamani (15 €) e barbecue (15 €)."
+            "Nel calcolatore puoi aggiungere extra per prenotazione: bicicletta (90 €), tavola SUP (90 €), conducente aggiuntivo (50 €), biancheria da letto (20 €), asciugamani (15 €) e barbecue (15 €)."
           ]
         },
         {
@@ -102,7 +101,7 @@
         {
           "h2": "Come prenotare e pagare",
           "paragraphs": [
-            "Scegli le date e gli orari di ritiro e riconsegna nel calendario di campervlc.com, aggiungi gli extra e paga con carta. Puoi pagare il 50 % alla prenotazione e il resto al ritiro, oppure il 100 % con il 5 % di sconto. Riceverai via email la conferma con il tuo numero di prenotazione.",
+            "Scegli le date e gli orari di ritiro e riconsegna nel calendario di campervlc.com, aggiungi gli extra e paga con carta. Puoi pagare il 50 % alla prenotazione e il resto al ritiro, oppure il 100 % subito. Riceverai via email la conferma con il tuo numero di prenotazione.",
             "Con quel numero e la tua email puoi cambiare le date o aggiungere extra dalla pagina di gestione della prenotazione, fino a 48 ore prima della consegna."
           ]
         },
@@ -138,7 +137,7 @@
         },
         {
           "q": "Come si paga?",
-          "a": "La prenotazione si paga online con carta bancaria, in modo sicuro tramite Stripe: il 50 % alla prenotazione e il resto al ritiro, oppure il 100 % con il 5 % di sconto. La cauzione di 900 € si versa prima della consegna, preferibilmente con preautorizzazione sulla carta."
+          "a": "La prenotazione si paga online con carta bancaria, in modo sicuro tramite Stripe: il 50 % alla prenotazione e il resto al ritiro, oppure il 100 % subito. La cauzione di 900 € si versa prima della consegna, preferibilmente con preautorizzazione sulla carta."
         }
       ],
       "cta": {
@@ -214,7 +213,7 @@
         {
           "h2": "Consigli per scegliere le date",
           "paragraphs": [
-            "I prezzi sono a notte e si aggiunge il 21 % di IVA. Se puoi scegliere, viaggia fuori dai ponti e dall'estate: risparmi sulla tariffa e trovi più posto nelle aree di sosta. I soggiorni di 7 notti o più hanno il 5 % di sconto, quelli di 14 notti o più il 10 %, e pagare il 100 % alla prenotazione aggiunge un altro 5 %.",
+            "I prezzi sono a notte e si aggiunge il 21 % di IVA. Se puoi scegliere, viaggia fuori dai ponti e dall'estate: risparmi sulla tariffa e trovi più posto nelle aree di sosta. I soggiorni di 7 notti o più hanno il 5 % di sconto, quelli di 14 notti o più il 10 %.",
             "Per Fallas, Semana Santa, il ponte di ottobre e agosto conviene prenotare con diversi mesi di anticipo, perché il calendario si riempie presto. Puoi verificare la disponibilità reale nel calendario di prenotazione di campervlc.com. Per idee di itinerario consulta i nostri itinerari in camper da Valencia."
           ]
         }

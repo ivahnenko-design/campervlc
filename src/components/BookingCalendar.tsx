@@ -582,7 +582,7 @@ export function BookingCalendar() {
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <label
                 htmlFor="accept-terms"
-                className="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 text-sm text-foreground"
+                className="flex min-w-[13rem] flex-1 cursor-pointer items-center gap-2.5 text-sm text-foreground"
               >
                 <input
                   id="accept-terms"
@@ -625,7 +625,7 @@ export function BookingCalendar() {
                     });
                     setShowForm(true);
                   }}
-                  className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  className={`inline-flex grow items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition sm:grow-0 ${
                     canPay
                       ? "bg-primary text-primary-foreground glow-amber hover:brightness-110"
                       : "bg-border/60 text-muted-foreground cursor-not-allowed"

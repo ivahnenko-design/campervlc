@@ -51,6 +51,9 @@ export const MIN_CHARGE_EUR: number;
 export const MEMBER_DISCOUNT_PCT: number;
 export function promoPctAt(code: string | null | undefined, atMs?: number): number;
 export const PREPAYMENT_DISCOUNT_PCT: number;
+export const LEGACY_PREPAYMENT_DISCOUNT_PCT: number;
+export const PREPAYMENT_DISCOUNT_ENDED_AT: string;
+export function prepaymentPctFor(createdAtMs: number): number;
 export const DEPOSIT_SHARE: number;
 export function normalizeExtraIds(extraIds: unknown): ExtraId[];
 export function longStayDiscountPct(nights: number): number;
@@ -88,6 +91,7 @@ export interface QuoteInput {
   prepaymentOption?: PrepaymentOption | string;
   promoValidAtMs?: number;
   member?: boolean;
+  prepaymentDiscountPct?: number;
 }
 
 export interface Quote extends PriceBreakdown {

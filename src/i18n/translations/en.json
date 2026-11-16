@@ -177,7 +177,7 @@
     "see_cancellation_policy": "See our cancellation policy",
     "prepayment_title": "Payment option",
     "prepayment_deposit": "50% deposit",
-    "prepayment_full": "100% now (save 5%)",
+    "prepayment_full": "100% now",
     "prepayment_discount": "Prepayment discount (-5%)",
     "cta_full_payment": "Pay in full online",
     "full_payment_note": "Paid in full — nothing due on pickup.",
@@ -267,9 +267,9 @@
     "q7": "What's the minimum stay?",
     "a7": "Low and mid season: 3 nights. High season: 4 nights. Peak season (August and Christmas): 5 nights. The calculator shows the minimum for your dates.",
     "q8": "Can I pay by card?",
-    "a8": "Yes. Online payment is by bank card only. At booking you pay a 50% deposit, or 100% in advance with a 5% discount.",
+    "a8": "Yes. Online payment is by bank card only. At booking you pay a 50% deposit or 100% in advance.",
     "q9": "How do I rent a motorhome in Valencia?",
-    "a9": "Pick your dates in the price calculator, add the options you want, tick that you have read the rental conditions and pay online by card: a 50% deposit, or 100% in advance with a 5% discount. The confirmation arrives by email and the balance is paid at pick-up."
+    "a9": "Pick your dates in the price calculator, add the options you want, tick that you have read the rental conditions and pay online by card: a 50% deposit or 100% in advance. The confirmation arrives by email and the balance is paid at pick-up."
   },
   "contact": {
     "title": "Contact us",
@@ -354,7 +354,7 @@
     "s3_title": "Driver requirements",
     "s3_body": "The main driver must be at least 21 years old, hold a category B driving licence with at least 2 years of history, and present a valid ID or passport at pick-up.",
     "s4_title": "Prices and payment",
-    "s4_body": "The price is calculated at the rate in force at the time of booking. A 50% deposit is required to confirm the reservation. The remaining 50% is due before vehicle pick-up. Full payment in advance carries a 5% discount.",
+    "s4_body": "The price is calculated at the rate in force at the time of booking. A 50% deposit is required to confirm the reservation. The remaining 50% is due before vehicle pick-up.",
     "s5_title": "Security deposit",
     "s5_body": "A security deposit of €900 will be pre-authorised by credit card at pick-up and released within 7 business days after return, provided the vehicle shows no damage or incidents.",
     "s6_title": "Vehicle use",

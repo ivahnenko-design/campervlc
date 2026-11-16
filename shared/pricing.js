@@ -247,7 +247,16 @@ export function promoPctAt(code, atMs = Date.now()) {
   if (expires && atMs >= Date.parse(expires)) return 0;
   return PROMO_CODES[c];
 }
-export const PREPAYMENT_DISCOUNT_PCT = 5;
+// The 5% discount for paying 100% upfront ended on PREPAYMENT_DISCOUNT_ENDED_AT.
+// Bookings made before keep it when their dates or extras change.
+export const PREPAYMENT_DISCOUNT_PCT = 0;
+export const LEGACY_PREPAYMENT_DISCOUNT_PCT = 5;
+export const PREPAYMENT_DISCOUNT_ENDED_AT = "2026-11-17T00:00:00Z";
+/** Prepayment discount percent a booking made at createdAtMs is entitled to. */
+export const prepaymentPctFor = (createdAtMs) =>
+  Number.isFinite(createdAtMs) && createdAtMs < Date.parse(PREPAYMENT_DISCOUNT_ENDED_AT)
+    ? LEGACY_PREPAYMENT_DISCOUNT_PCT
+    : PREPAYMENT_DISCOUNT_PCT;
 export const DEPOSIT_SHARE = 0.5;
 
 /**
@@ -325,6 +334,7 @@ export function calculateQuote({
   prepaymentOption = "deposit",
   promoValidAtMs = Date.now(),
   member = false,
+  prepaymentDiscountPct = PREPAYMENT_DISCOUNT_PCT,
 }) {
   const price = calculatePrice(start, end, pickupTime, returnTime);
   const nights = price.nights;
@@ -357,7 +367,7 @@ export function calculateQuote({
 
   const isFullPayment = prepaymentOption === "full";
   const prepaymentDiscountAmount = isFullPayment
-    ? Math.round(afterPromoTotal * (PREPAYMENT_DISCOUNT_PCT / 100))
+    ? Math.round(afterPromoTotal * (prepaymentDiscountPct / 100))
     : 0;
 
   const finalTotal = afterPromoTotal - prepaymentDiscountAmount;

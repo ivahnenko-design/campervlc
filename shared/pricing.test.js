@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   calculatePrice,
   calculateQuote,
+  prepaymentPctFor,
   excessHours,
   getPriceForDate,
   isValidTimeOption,
@@ -82,6 +83,7 @@ test("quote: promo and prepayment discounts run after extras, on the surcharged 
     extraIds: ["km_200", "bedding"],
     promoCode: "camper10",
     prepaymentOption: "full",
+    prepaymentDiscountPct: 5, // legacy bookings only
   });
   const base = NIGHTS_OCT7_12 + 78;             // 823, no long-stay discount at 5 nights
   const extras = 20 * 5 + 20;                   // km_200 per night + bedding
@@ -138,4 +140,18 @@ test("OWNERTEST: 99% off until it expires, then ignored; floor keeps the charge 
   assert.equal(expired.finalTotalWithIva, plain.finalTotalWithIva);
   assert.equal(promoPctAt("OWNERTEST", after), 0);
   assert.equal(promoPctAt("CAMPER10", after), 10);
+});
+
+test("quote: paying 100% upfront has no discount for new bookings", () => {
+  const q = calculateQuote({ start: oct7, end: oct12, prepaymentOption: "full" });
+  const d = calculateQuote({ start: oct7, end: oct12, prepaymentOption: "deposit" });
+  assert.equal(q.prepaymentDiscountAmount, 0);
+  assert.equal(q.finalTotalWithIva, d.finalTotalWithIva);
+  assert.equal(q.depositAmount, q.finalTotalWithIva);
+});
+
+test("prepaymentPctFor: bookings made before the cut-off keep 5%", () => {
+  assert.equal(prepaymentPctFor(Date.parse("2026-11-16T20:00:00Z")), 5);
+  assert.equal(prepaymentPctFor(Date.parse("2026-11-17T00:00:00Z")), 0);
+  assert.equal(prepaymentPctFor(NaN), 0);
 });

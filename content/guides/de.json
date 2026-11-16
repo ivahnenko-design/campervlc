@@ -17,7 +17,7 @@
     "calPeak": "Spitzensaison",
     "calPerNight": "pro Nacht + MwSt.",
     "calMin": "mind. {{n}} Nächte",
-    "calDiscounts": "Rabatte: −5 % ab 7 Nächten · −10 % ab 14 Nächten · −5 % bei 100 % Vorauszahlung",
+    "calDiscounts": "Rabatte: −5 % ab 7 Nächten · −10 % ab 14 Nächten",
     "calLink": "Saisonkalender 2027 ansehen"
   },
   "guides": {
@@ -59,14 +59,13 @@
           ],
           "list": [
             "5 % Rabatt ab 7 Nächten und 10 % ab 14 Nächten.",
-            "Zusätzlich 5 %, wenn du bei der Buchung 100 % bezahlst.",
             "Gelegentliche Gutscheincodes, die du vor dem Bezahlen im Preisrechner einlöst."
           ]
         },
         {
           "h2": "Zwei echte Beispiele",
           "paragraphs": [
-            "7 Nächte im Februar 2027 (Nebensaison), 100 % bei der Buchung bezahlt: 745 € inkl. MwSt., also rund 106 € pro Nacht. Enthalten sind die Endreinigung für 50 € sowie die Rabatte von 5 % für die Mietdauer und 5 % für die Vollzahlung.",
+            "7 Nächte im Februar 2027 (Nebensaison), 100 % bei der Buchung bezahlt: 784 € inkl. MwSt., also rund 112 € pro Nacht. Enthalten sind die Endreinigung für 50 € und der Rabatt von 5 % für die Mietdauer.",
             "7 Nächte im Juli 2027 (Hauptsaison), 50 % bei der Buchung bezahlt: 1.308 € inkl. MwSt., davon 654 € bei der Buchung und der Rest bei der Abholung des Wohnmobils. Die genauen Gesamtpreise für deine Reisedaten zeigt dir der Buchungsrechner."
           ]
         },
@@ -90,7 +89,7 @@
           "paragraphs": [
             "Pro Nacht sind 100 km inklusive. Wenn du mehr fahren möchtest, kannst du 200 km pro Nacht (20 € pro Nacht) oder unbegrenzte Kilometer (40 € pro Nacht) dazubuchen. Jeder Kilometer über dem gebuchten Kontingent kostet 0,30 €.",
             "Das Wohnmobil wird vollgetankt übergeben und genauso zurückgegeben. Außerdem gibst du es innen sauber zurück, mit geleertem Grauwassertank und geleerter Toilettenkassette sowie vollem Frischwassertank.",
-            "Im Preisrechner kannst du Extras pro Buchung hinzufügen: Flughafentransfer (90 €), Fahrrad (90 €), SUP-Board (90 €), zusätzlicher Fahrer (50 €), Bettwäsche (20 €), Handtücher (15 €) und Grill (15 €)."
+            "Im Preisrechner kannst du Extras pro Buchung hinzufügen: Fahrrad (90 €), SUP-Board (90 €), zusätzlicher Fahrer (50 €), Bettwäsche (20 €), Handtücher (15 €) und Grill (15 €)."
           ]
         },
         {
@@ -102,7 +101,7 @@
         {
           "h2": "So buchst und bezahlst du",
           "paragraphs": [
-            "Wähle im Kalender auf campervlc.com deine Reisedaten sowie die Abhol- und Rückgabezeiten, füge Extras hinzu und bezahle per Karte. Du kannst 50 % bei der Buchung und den Rest bei der Abholung zahlen oder 100 % mit 5 % Rabatt. Die Bestätigung mit deiner Buchungsnummer erhältst du per E-Mail.",
+            "Wähle im Kalender auf campervlc.com deine Reisedaten sowie die Abhol- und Rückgabezeiten, füge Extras hinzu und bezahle per Karte. Du kannst 50 % bei der Buchung und den Rest bei der Abholung zahlen oder 100 % sofort. Die Bestätigung mit deiner Buchungsnummer erhältst du per E-Mail.",
             "Mit dieser Nummer und deiner E-Mail-Adresse kannst du auf der Seite zur Buchungsverwaltung bis 48 Stunden vor der Übergabe die Reisedaten ändern oder Extras hinzufügen."
           ]
         },
@@ -138,7 +137,7 @@
         },
         {
           "q": "Wie wird bezahlt?",
-          "a": "Die Buchung bezahlst du online per Bankkarte, sicher über Stripe: 50 % bei der Buchung und den Rest bei der Abholung oder 100 % mit 5 % Rabatt. Die Kaution von 900 € wird vor der Übergabe hinterlegt, bevorzugt als Vorautorisierung auf der Karte."
+          "a": "Die Buchung bezahlst du online per Bankkarte, sicher über Stripe: 50 % bei der Buchung und den Rest bei der Abholung oder 100 % sofort. Die Kaution von 900 € wird vor der Übergabe hinterlegt, bevorzugt als Vorautorisierung auf der Karte."
         }
       ],
       "cta": {
@@ -214,7 +213,7 @@
         {
           "h2": "Tipps für die Wahl des Reisezeitraums",
           "paragraphs": [
-            "Die Preise gelten pro Nacht, zzgl. 21 % MwSt. Wenn du flexibel bist, reise außerhalb der langen Wochenenden und des Sommers: Du sparst beim Tarif und findest leichter einen Stellplatz. Aufenthalte ab 7 Nächten erhalten 5 % Rabatt, ab 14 Nächten 10 %, und wer bei der Buchung 100 % bezahlt, spart zusätzlich 5 %.",
+            "Die Preise gelten pro Nacht, zzgl. 21 % MwSt. Wenn du flexibel bist, reise außerhalb der langen Wochenenden und des Sommers: Du sparst beim Tarif und findest leichter einen Stellplatz. Aufenthalte ab 7 Nächten erhalten 5 % Rabatt, ab 14 Nächten 10 %.",
             "Für Fallas, Semana Santa, das lange Oktoberwochenende und August solltest du mehrere Monate im Voraus buchen, denn der Kalender ist schnell voll. Die aktuelle Verfügbarkeit siehst du im Buchungskalender auf campervlc.com. Ideen für deine Reise findest du in unseren Wohnmobil-Routen ab Valencia."
           ]
         }

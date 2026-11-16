@@ -177,7 +177,7 @@
     "see_cancellation_policy": "Unsere Stornierungsbedingungen ansehen",
     "prepayment_title": "Zahlungsoption",
     "prepayment_deposit": "50% Anzahlung",
-    "prepayment_full": "100% jetzt (5% sparen)",
+    "prepayment_full": "100% jetzt",
     "prepayment_discount": "Vorauszahlungsrabatt (-5%)",
     "cta_full_payment": "Vollständig online bezahlen",
     "full_payment_note": "Vollständig bezahlt — bei Abholung ist nichts mehr fällig.",
@@ -267,9 +267,9 @@
     "q7": "Mindestaufenthalt?",
     "a7": "Neben- und Zwischensaison: 3 Nächte. Hauptsaison: 4 Nächte. Spitzensaison (August und Weihnachten): 5 Nächte. Der Rechner zeigt das Minimum für deine Daten.",
     "q8": "Kann ich mit Karte zahlen?",
-    "a8": "Ja. Die Online-Zahlung ist nur per Karte möglich. Bei der Buchung zahlst du 50 % Anzahlung oder 100 % im Voraus mit 5 % Rabatt.",
+    "a8": "Ja. Die Online-Zahlung ist nur per Karte möglich. Bei der Buchung zahlst du 50 % Anzahlung oder 100 % im Voraus.",
     "q9": "Wie miete ich ein Wohnmobil in Valencia?",
-    "a9": "Wähle im Preisrechner deine Daten, füge Optionen hinzu, bestätige, dass du die Mietbedingungen gelesen hast, und zahle online per Karte: 50 % Anzahlung oder 100 % im Voraus mit 5 % Rabatt. Die Bestätigung kommt per E-Mail, der Rest wird bei der Abholung bezahlt."
+    "a9": "Wähle im Preisrechner deine Daten, füge Optionen hinzu, bestätige, dass du die Mietbedingungen gelesen hast, und zahle online per Karte: 50 % Anzahlung oder 100 % im Voraus. Die Bestätigung kommt per E-Mail, der Rest wird bei der Abholung bezahlt."
   },
   "contact": {
     "title": "Kontaktiere uns",
@@ -354,7 +354,7 @@
     "s3_title": "Fahreranforderungen",
     "s3_body": "Der Hauptfahrer muss mindestens 21 Jahre alt sein, einen Fuehrerschein der Klasse B mit mindestens 2 Jahren Fahrpraxis besitzen und bei der Abholung einen gueltigen Personalausweis oder Reisepass vorlegen.",
     "s4_title": "Preise und Zahlung",
-    "s4_body": "Der Preis wird zum Tarif zum Buchungszeitpunkt berechnet. Eine Anzahlung von 50 % ist zur Buchungsbestaetigung erforderlich. Die restlichen 50 % sind vor der Fahrzeugabholung faellig. Bei Vorauszahlung des Gesamtbetrags gibt es 5 % Rabatt.",
+    "s4_body": "Der Preis wird zum Tarif zum Buchungszeitpunkt berechnet. Eine Anzahlung von 50 % ist zur Buchungsbestaetigung erforderlich. Die restlichen 50 % sind vor der Fahrzeugabholung faellig.",
     "s5_title": "Kaution",
     "s5_body": "Bei der Abholung wird eine Kaution von 900 Euro per Kreditkarte geblockt. Diese wird innerhalb von 7 Werktagen nach Rueckgabe freigegeben, sofern das Fahrzeug keine Schaeden oder Zwischenfaelle aufweist.",
     "s6_title": "Fahrzeugnutzung",

@@ -17,7 +17,7 @@
     "calPeak": "Peak",
     "calPerNight": "per night + VAT",
     "calMin": "min. {{n}} nights",
-    "calDiscounts": "Discounts: −5% from 7 nights · −10% from 14 nights · −5% for 100% prepayment",
+    "calDiscounts": "Discounts: −5% from 7 nights · −10% from 14 nights",
     "calLink": "See the 2027 season calendar"
   },
   "guides": {
@@ -59,14 +59,13 @@
           ],
           "list": [
             "5% off for stays of 7 nights or more, and 10% off from 14 nights.",
-            "An extra 5% off if you pay 100% of the booking up front.",
             "Occasional promo codes, applied in the price calculator before you pay."
           ]
         },
         {
           "h2": "Two real examples",
           "paragraphs": [
-            "7 nights in February 2027 (low season), paying 100% when booking: €745 including VAT, around €106 per night. This includes the €50 final cleaning fee and the 5% long-stay and 5% full-payment discounts.",
+            "7 nights in February 2027 (low season), paying 100% when booking: €784 including VAT, around €112 per night. This includes the €50 final cleaning fee and the 5% long-stay discount.",
             "7 nights in July 2027 (high season), paying 50% when booking: €1,308 including VAT, of which €654 is paid when you book and the rest when you pick up the motorhome. The exact totals for your dates are shown in the booking calculator."
           ]
         },
@@ -90,7 +89,7 @@
           "paragraphs": [
             "Each night includes 100 km. If you plan to drive more, you can add 200 km per night (€20 per night) or unlimited mileage (€40 per night). Any kilometres beyond your allowance cost €0.30 each.",
             "The motorhome is handed over with a full tank and must be returned the same way. It should also be returned clean inside, with the grey water and toilet cassette emptied and the fresh water tank full.",
-            "In the calculator you can add per-booking extras: airport transfer (€90), bike (€90), SUP board (€90), additional driver (€50), bed linen (€20), towels (€15) and barbecue (€15)."
+            "In the calculator you can add per-booking extras: bike (€90), SUP board (€90), additional driver (€50), bed linen (€20), towels (€15) and barbecue (€15)."
           ]
         },
         {
@@ -102,7 +101,7 @@
         {
           "h2": "How to book and pay",
           "paragraphs": [
-            "Choose your dates and pick-up and drop-off times in the calendar on campervlc.com, add any extras and pay by card. You can pay 50% when booking and the rest at pick-up, or 100% up front with a 5% discount. You'll receive a confirmation email with your booking number.",
+            "Choose your dates and pick-up and drop-off times in the calendar on campervlc.com, add any extras and pay by card. You can pay 50% when booking and the rest at pick-up, or 100% up front. You'll receive a confirmation email with your booking number.",
             "With that number and your email address you can change your dates or add extras on the manage-booking page, up to 48 hours before handover."
           ]
         },
@@ -138,7 +137,7 @@
         },
         {
           "q": "How do I pay?",
-          "a": "You pay for the booking online by bank card, securely via Stripe: 50% when booking and the rest at pick-up, or 100% up front with a 5% discount. The €900 security deposit is paid before handover, preferably as a card pre-authorisation."
+          "a": "You pay for the booking online by bank card, securely via Stripe: 50% when booking and the rest at pick-up, or 100% up front. The €900 security deposit is paid before handover, preferably as a card pre-authorisation."
         }
       ],
       "cta": {
@@ -214,7 +213,7 @@
         {
           "h2": "Tips for choosing your dates",
           "paragraphs": [
-            "Prices are per night and 21% VAT is added. If you can choose, travel outside long weekends and summer: you save on the rate and find more space at motorhome areas. Stays of 7 nights or more get a 5% discount, stays of 14 nights or more get 10%, and paying 100% when booking adds another 5%.",
+            "Prices are per night and 21% VAT is added. If you can choose, travel outside long weekends and summer: you save on the rate and find more space at motorhome areas. Stays of 7 nights or more get a 5% discount, stays of 14 nights or more get 10%.",
             "For Fallas, Semana Santa, the October long weekend and August, it's best to book several months in advance, as the calendar fills up early. You can check real-time availability in the booking calendar on campervlc.com. For itinerary ideas, see our motorhome routes from Valencia."
           ]
         }

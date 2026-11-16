@@ -17,7 +17,7 @@
     "calPeak": "Superalta",
     "calPerNight": "por noche + IVA",
     "calMin": "mín. {{n}} noches",
-    "calDiscounts": "Descuentos: −5 % desde 7 noches · −10 % desde 14 noches · −5 % por pago anticipado del 100 %",
+    "calDiscounts": "Descuentos: −5 % desde 7 noches · −10 % desde 14 noches",
     "calLink": "Ver el calendario de temporadas 2027"
   },
   "guides": {
@@ -59,14 +59,13 @@
           ],
           "list": [
             "5 % de descuento a partir de 7 noches y 10 % a partir de 14 noches.",
-            "5 % adicional si pagas el 100 % de la reserva al reservar.",
             "Códigos promocionales puntuales, que se aplican en el calculador antes de pagar."
           ]
         },
         {
           "h2": "Dos ejemplos reales",
           "paragraphs": [
-            "7 noches en febrero de 2027 (temporada baja), pagando el 100 % al reservar: 745 € con IVA incluido, unos 106 € por noche. Incluye la limpieza final de 50 € y los descuentos del 5 % por estancia y del 5 % por pago completo.",
+            "7 noches en febrero de 2027 (temporada baja), pagando el 100 % al reservar: 784 € con IVA incluido, unos 112 € por noche. Incluye la limpieza final de 50 € y el descuento del 5 % por estancia.",
             "7 noches en julio de 2027 (temporada alta), pagando el 50 % al reservar: 1.308 € con IVA incluido, de los cuales 654 € se pagan al reservar y el resto al recoger la autocaravana. Los totales exactos para tus fechas aparecen en el calculador de reserva."
           ]
         },
@@ -90,7 +89,7 @@
           "paragraphs": [
             "Cada noche incluye 100 km. Si vas a hacer más, puedes añadir 200 km por noche (20 € por noche) o kilometraje ilimitado (40 € por noche). Los kilómetros por encima de lo contratado cuestan 0,30 € cada uno.",
             "La autocaravana se entrega con el depósito lleno y se devuelve igual. También se devuelve limpia por dentro, con las aguas grises y el casete del WC vaciados y el depósito de agua limpia lleno.",
-            "En el calculador puedes añadir opciones por reserva: traslado del aeropuerto (90 €), bicicleta (90 €), tabla SUP (90 €), conductor adicional (50 €), ropa de cama (20 €), toallas (15 €) y barbacoa (15 €)."
+            "En el calculador puedes añadir opciones por reserva: bicicleta (90 €), tabla SUP (90 €), conductor adicional (50 €), ropa de cama (20 €), toallas (15 €) y barbacoa (15 €)."
           ]
         },
         {
@@ -102,7 +101,7 @@
         {
           "h2": "Cómo reservar y pagar",
           "paragraphs": [
-            "Elige las fechas y las horas de recogida y devolución en el calendario de campervlc.com, añade las opciones y paga con tarjeta. Puedes pagar el 50 % al reservar y el resto al recoger, o el 100 % con un 5 % de descuento. Recibirás por email la confirmación con tu número de reserva.",
+            "Elige las fechas y las horas de recogida y devolución en el calendario de campervlc.com, añade las opciones y paga con tarjeta. Puedes pagar el 50 % al reservar y el resto al recoger, o el 100 % al reservar. Recibirás por email la confirmación con tu número de reserva.",
             "Con ese número y tu email puedes cambiar las fechas o añadir opciones desde la página de gestión de la reserva, hasta 48 horas antes de la entrega."
           ]
         },
@@ -138,7 +137,7 @@
         },
         {
           "q": "¿Cómo se paga?",
-          "a": "La reserva se paga online con tarjeta bancaria, de forma segura a través de Stripe: el 50 % al reservar y el resto al recoger, o el 100 % con un 5 % de descuento. La fianza de 900 € se abona antes de la entrega, preferentemente con preautorización en tarjeta."
+          "a": "La reserva se paga online con tarjeta bancaria, de forma segura a través de Stripe: el 50 % al reservar y el resto al recoger, o el 100 % al reservar. La fianza de 900 € se abona antes de la entrega, preferentemente con preautorización en tarjeta."
         }
       ],
       "cta": {
@@ -214,7 +213,7 @@
         {
           "h2": "Consejos para elegir fecha",
           "paragraphs": [
-            "Los precios son por noche y se suma el 21 % de IVA. Si puedes elegir, viaja fuera de los puentes y del verano: ahorras en la tarifa y encuentras más sitio en las áreas. Las estancias de 7 noches o más tienen un 5 % de descuento, las de 14 noches o más un 10 %, y pagar el 100 % al reservar suma otro 5 %.",
+            "Los precios son por noche y se suma el 21 % de IVA. Si puedes elegir, viaja fuera de los puentes y del verano: ahorras en la tarifa y encuentras más sitio en las áreas. Las estancias de 7 noches o más tienen un 5 % de descuento, las de 14 noches o más un 10 %.",
             "Para Fallas, Semana Santa, el puente de octubre y agosto conviene reservar con varios meses de antelación, porque el calendario se llena pronto. Puedes consultar la disponibilidad real en el calendario de reserva de campervlc.com. Para ideas de itinerarios consulta nuestras rutas en autocaravana desde Valencia."
           ]
         }
