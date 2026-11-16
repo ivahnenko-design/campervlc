@@ -19,7 +19,8 @@ import {
   parseIsoDate,
   withIva,
 } from "./pricing.js";
-import { RETENTION_SCALE, retentionPct, isFreeWindow } from "./cancellation.js";
+import { RETENTION_SCALE, retentionPct, isFreeWindow, retentionStartDate } from "./cancellation.js";
+import { promoPctAt } from "./promo-codes.js";
 import { BUSINESS_TIME_ZONE, daysUntil, hoursUntil } from "./dates.js";
 
 // One scale and one set of date helpers for the whole site (see cancellation.js / dates.js).
@@ -90,9 +91,9 @@ function quoteFor(booking, { startDate, endDate, pickupTime, returnTime, extraId
     returnTime,
     extraIds,
     promoCode: booking.promoCode || null,
-    member: booking.memberDiscount === true,
     // A booking keeps the promo it was made with, even after the code expires.
-    promoValidAtMs: Date.parse(booking.createdAt) || Date.now(),
+    promoPct: Number.isFinite(booking.promoPct) ? booking.promoPct : promoPctAt(booking.promoCode, Date.parse(booking.createdAt) || Date.now()),
+    member: booking.memberDiscount === true,
     prepaymentOption: booking.prepaymentOption === "full" ? "full" : "deposit",
     prepaymentDiscountPct: prepaymentPctFor(Date.parse(booking.createdAt)),
   });
@@ -217,7 +218,7 @@ export function planChange({ booking, request = {}, nowMs, blockedDates = new Se
 
   // ── Retention for removed nights (clause 4.1) ──
   const removedNights = Math.max(0, originalQuote.nights - newQuote.nights);
-  const retentionDays = daysUntil(booking.startDate, nowMs);
+  const retentionDays = daysUntil(retentionStartDate(booking), nowMs);
   // Same free window as a full cancellation: within 24 h of payment and more
   // than 7 days before pickup, shortening costs nothing.
   const freeWindow = removedNights > 0 && isFreeWindow(booking, nowMs);
@@ -307,6 +308,9 @@ export function applyPlanToBooking(booking, plan, { changeId, nowIso, payment = 
   const after = plan.after;
   return {
     ...booking,
+    // Earliest pickup date the booking has held: cancellation retention counts
+    // from it, so moving the stay later can not lower the retention.
+    originalStartDate: retentionStartDate(booking),
     startDate: after.startDate,
     endDate: after.endDate,
     pickupTime: after.pickupTime,

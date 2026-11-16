@@ -28,6 +28,19 @@ const CHECKOUT_TTL_MS = 30 * 60_000;
 
 const MANDATORY_IDS = EXTRAS.filter((e) => e.mandatory).map((e) => e.id);
 
+/** A refund claim older than this no longer blocks (a crashed request). */
+export const REFUND_LOCK_TTL_MS = 24 * 3_600_000;
+
+/**
+ * True when another request has claimed the booking to move money and has not
+ * finished. The same changeId may go on: its Stripe calls replay idempotently.
+ */
+export function refundLockedByOther(booking, changeId, nowMs) {
+  const lock = booking.refundLock;
+  if (!lock || lock.changeId === changeId) return false;
+  return nowMs - Date.parse(lock.at) < REFUND_LOCK_TTL_MS;
+}
+
 function normEmail(v) {
   return typeof v === "string" ? v.trim().toLowerCase() : "";
 }
@@ -142,6 +155,29 @@ export function createManageHandlers(deps) {
         const latest = await store.getBooking(booking.id);
         if (!latest || (latest.booking.changes || []).some((c) => c.id === changeId)) throw err;
         if (!sameMaterial(booking, latest.booking)) throw err;
+        current = latest;
+      }
+    }
+  }
+
+  /**
+   * Marks the booking as "money moving for changeId" with an ETag-guarded write
+   * before any refund. A request priced from an older version, or another change,
+   * loses here and refunds nothing. The same changeId (a double click) may go on:
+   * its Stripe refunds replay idempotently. Spurious write conflicts are retried.
+   */
+  async function claimRefund(booking, etag, changeId, nowMs) {
+    let current = { booking, etag };
+    for (let round = 0; ; round += 1) {
+      try {
+        await store.saveBooking({ ...current.booking, refundLock: { changeId, at: new Date(nowMs).toISOString() } }, { etag: current.etag });
+        return;
+      } catch (err) {
+        if (!(err instanceof StoreConflictError) || round >= 4) throw err;
+        const latest = await store.getBooking(booking.id);
+        if (!latest) throw err;
+        if (latest.booking.refundLock?.changeId === changeId) return;
+        if (refundLockedByOther(latest.booking, changeId, nowMs) || !sameMaterial(booking, latest.booking)) throw err;
         current = latest;
       }
     }
@@ -362,6 +398,8 @@ export function createManageHandlers(deps) {
     if (Number(expectedNewTotal) !== plan.newTotal) {
       return res.status(409).json({ code: "amount_changed", plan });
     }
+    // Another change or a cancellation is moving money on this booking right now.
+    if (refundLockedByOther(booking, changeId, nowMs)) return res.status(409).json({ code: "conflict" });
 
     try {
       if (plan.settlement.type === "charge") {
@@ -373,6 +411,10 @@ export function createManageHandlers(deps) {
       let refunds = [];
       let base = booking;
       if (plan.settlement.type === "refund") {
+        // Claim the booking BEFORE any money moves: the claim is an ETag-guarded
+        // write, so of several parallel requests priced from the same version only
+        // one gets here; the others hit a conflict and refund nothing.
+        await claimRefund(booking, etag, changeId, nowMs);
         ({ refunds, booking: base } = await refundParts(booking, plan, changeId));
       }
 
@@ -383,7 +425,10 @@ export function createManageHandlers(deps) {
           booking,
           etag,
           changeId,
-          (b) => applyPlanToBooking({ ...b, paymentIntentId: base.paymentIntentId ?? b.paymentIntentId }, plan, { changeId, nowIso, refunds }),
+          (b) => ({
+            ...applyPlanToBooking({ ...b, paymentIntentId: base.paymentIntentId ?? b.paymentIntentId }, plan, { changeId, nowIso, refunds }),
+            refundLock: null,
+          }),
           { final: refunds.length > 0 },
         );
       } catch (err) {

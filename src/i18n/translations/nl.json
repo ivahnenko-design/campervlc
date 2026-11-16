@@ -189,7 +189,8 @@
     "promo_invalid": "Ongeldige kortingscode",
     "promo_discount_row": "Kortingscode ({{code}})",
     "terms_accept": "Ik heb de <terms>huurvoorwaarden</terms> gelezen",
-    "terms_required": "Bevestig dat je de huurvoorwaarden hebt gelezen om verder te gaan."
+    "terms_required": "Bevestig dat je de huurvoorwaarden hebt gelezen om verder te gaan.",
+    "member_discount_used": "De korting voor de eerste boeking is al gebruikt voor deze naam, dit telefoonnummer of e-mailadres. De prijs is zonder korting herberekend – controleer het totaal en klik opnieuw op Betalen."
   },
   "extras": {
     "title": "Optionele extra's",
@@ -302,16 +303,12 @@
   },
   "cancelBooking": {
     "title": "Annuleer je boeking",
-    "intro": "Vul je boekingsreferentie en achternaam in, of je e-mail en achternaam, om je boeking op te zoeken.",
+    "intro": "Vul je boekingsnummer in en het e-mailadres waarmee je hebt geboekt. We sturen daar een code naartoe om de annulering te bevestigen.",
     "form_ref": "Boekingsreferentie",
     "form_ref_placeholder": "CVLC-XXXX",
-    "form_or": "of",
     "form_email": "E-mail",
-    "form_lastname": "Achternaam",
-    "form_submit": "Boeking opzoeken",
-    "form_required": "Vul je boekingsreferentie of e-mail in, plus je achternaam",
-    "error_not_found": "Geen bijpassende boeking gevonden. Controleer je referentie of gegevens.",
-    "error_ambiguous": "We hebben meerdere boekingen gevonden voor dit e-mailadres. Gebruik je boekingsreferentie.",
+    "form_submit": "Code ontvangen",
+    "error_not_found": "Boeking niet gevonden. Controleer nummer en e-mail.",
     "error_already_cancelled": "Deze boeking is al geannuleerd.",
     "error_refund_failed": "We konden de terugbetaling nu niet verwerken. Probeer het opnieuw of neem contact met ons op.",
     "error_generic": "Er is iets misgegaan. Probeer het opnieuw.",
@@ -325,7 +322,14 @@
     "quote_processing": "Bezig met verwerken…",
     "done_title": "Boeking geannuleerd",
     "done_body": "Je boeking is geannuleerd. Er is een bevestigingsmail onderweg — terugbetalingen duren meestal 5–10 werkdagen.",
-    "back_home": "Terug naar home"
+    "back_home": "Terug naar home",
+    "code_sent": "We hebben een 6-cijferige code naar {{email}} gestuurd. Hij is 15 minuten geldig.",
+    "code_label": "Code uit de e-mail",
+    "code_submit": "Doorgaan",
+    "code_resend": "Code opnieuw sturen",
+    "error_code_wrong": "Onjuiste code. Controleer de e-mail en probeer het opnieuw.",
+    "error_code_expired": "De code is verlopen. Vraag een nieuwe aan.",
+    "error_too_many": "Te veel pogingen. Wacht even en probeer het opnieuw."
   },
   "privacy": {
     "title": "Privacybeleid",
@@ -398,7 +402,7 @@
     "no_balance": "Openstaand bij ophalen: € 0. Er hoeft niets meer betaald te worden.",
     "email_note": "Kijk in je inbox voor de bevestigingsmail.",
     "ref": "Boekingsreferentie",
-    "ref_note": "Bewaar deze referentie — je hebt hem met je achternaam nodig om te annuleren.",
+    "ref_note": "Bewaar dit nummer – je hebt het samen met je e-mailadres nodig om de boeking te wijzigen of te annuleren.",
     "ref_pending": "Wordt aangemaakt — hij komt in je bevestigingsmail.",
     "amount_paid": "Betaald bedrag",
     "dates": "Data",
@@ -506,6 +510,7 @@
     "err_default": "Er ging iets mis. Probeer het opnieuw.",
     "hint_promo_instead": "Er is een kortingscode toegepast: die vervangt de inlogkorting (ze worden niet opgeteld)",
     "banner_used": "Je bent ingelogd",
-    "hint_used": "De inlogkorting is al gebruikt bij een eerdere boeking"
+    "hint_used": "De inlogkorting is al gebruikt bij een eerdere boeking",
+    "err_too_many_requests": "Te veel pogingen. Wacht even en probeer het opnieuw."
   }
 }

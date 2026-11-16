@@ -189,7 +189,8 @@
     "promo_invalid": "Código promocional no válido",
     "promo_discount_row": "Código promocional ({{code}})",
     "terms_accept": "He leído las <terms>condiciones de alquiler</terms>",
-    "terms_required": "Confirma que has leído las condiciones de alquiler para continuar."
+    "terms_required": "Confirma que has leído las condiciones de alquiler para continuar.",
+    "member_discount_used": "El descuento de primera reserva ya se ha usado con este nombre, teléfono o email. Hemos recalculado el precio sin él: revisa el total y pulsa Pagar de nuevo."
   },
   "extras": {
     "title": "Extras opcionales",
@@ -302,16 +303,12 @@
   },
   "cancelBooking": {
     "title": "Cancela tu reserva",
-    "intro": "Introduce tu referencia de reserva y apellido, o tu email y apellido, para buscar tu reserva.",
+    "intro": "Introduce el número de reserva y el email con el que reservaste. Te enviaremos a ese email un código para confirmar la cancelación.",
     "form_ref": "Referencia de reserva",
     "form_ref_placeholder": "CVLC-XXXX",
-    "form_or": "o",
     "form_email": "Email",
-    "form_lastname": "Apellido",
-    "form_submit": "Buscar reserva",
-    "form_required": "Introduce tu referencia de reserva o email, además de tu apellido",
-    "error_not_found": "No se ha encontrado ninguna reserva. Comprueba tu referencia o datos.",
-    "error_ambiguous": "Hemos encontrado varias reservas con ese email. Usa tu referencia de reserva.",
+    "form_submit": "Recibir código",
+    "error_not_found": "No encontramos la reserva. Revisa el número y el email.",
     "error_already_cancelled": "Esta reserva ya ha sido cancelada.",
     "error_refund_failed": "No hemos podido procesar el reembolso ahora mismo. Inténtalo de nuevo o contacta con nosotros.",
     "error_generic": "Algo ha ido mal. Inténtalo de nuevo.",
@@ -325,7 +322,14 @@
     "quote_processing": "Procesando…",
     "done_title": "Reserva cancelada",
     "done_body": "Tu reserva ha sido cancelada. Recibirás un email de confirmación en breve — los reembolsos suelen tardar entre 5 y 10 días hábiles.",
-    "back_home": "Volver al inicio"
+    "back_home": "Volver al inicio",
+    "code_sent": "Hemos enviado un código de 6 dígitos a {{email}}. Es válido durante 15 minutos.",
+    "code_label": "Código del email",
+    "code_submit": "Continuar",
+    "code_resend": "Enviar el código de nuevo",
+    "error_code_wrong": "Código incorrecto. Revisa el email e inténtalo de nuevo.",
+    "error_code_expired": "El código ha caducado. Pide uno nuevo.",
+    "error_too_many": "Demasiados intentos. Espera un poco y vuelve a intentarlo."
   },
   "privacy": {
     "title": "Política de Privacidad",
@@ -398,7 +402,7 @@
     "no_balance": "Pendiente al recoger: 0 €. No queda nada por pagar.",
     "email_note": "Revisa tu bandeja de entrada: te hemos enviado la confirmación.",
     "ref": "Referencia de reserva",
-    "ref_note": "Guarda esta referencia: la necesitarás junto con tu apellido para cancelar.",
+    "ref_note": "Guarda este número: lo necesitarás junto con tu email para modificar o cancelar la reserva.",
     "ref_pending": "Se está generando y llegará en el correo de confirmación.",
     "amount_paid": "Importe pagado",
     "dates": "Fechas",
@@ -506,6 +510,7 @@
     "err_default": "Algo ha fallado. Inténtalo de nuevo.",
     "hint_promo_instead": "Has usado un código promocional: sustituye al descuento por iniciar sesión (no se suman)",
     "banner_used": "Sesión iniciada",
-    "hint_used": "El descuento por iniciar sesión ya se usó en una reserva anterior"
+    "hint_used": "El descuento por iniciar sesión ya se usó en una reserva anterior",
+    "err_too_many_requests": "Demasiados intentos. Espera un poco y vuelve a intentarlo."
   }
 }

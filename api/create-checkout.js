@@ -3,6 +3,10 @@ import { createBlobStore } from "./_lib/store.js";
 import { authSecret } from "./_lib/auth-secret.js";
 import { createUserStore, memberEligible, sessionFromRequest } from "./_lib/auth.js";
 import { occupiedDays } from "../shared/booking-changes.js";
+import { loadBlockedDates } from "./_lib/availability.js";
+import { activeHoldDays, saveHold, CHECKOUT_TTL_MS } from "./_lib/holds.js";
+import { checkoutKeys, createDiscountRegistry } from "./_lib/member-discount.js";
+import { promoPctAt } from "../shared/promo-codes.js";
 import { MIN_NOTICE_HOURS, startTooSoon } from "../shared/notice.js";
 import {
   BOOKING_MAX_DATE,
@@ -44,6 +48,21 @@ export default async function handler(req, res) {
     if (!startDate || !endDate || !guest?.email) {
       return res.status(400).json({ error: "Missing required fields" });
     }
+    // Guest fields go into Stripe metadata (500 characters per value) and into
+    // emails: plain strings of a sane length only.
+    const text = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+    const g = {
+      firstName: text(guest.firstName, 80),
+      lastName: text(guest.lastName, 80),
+      email: text(guest.email, 160),
+      phone: text(guest.phone, 40),
+      adults: Math.max(1, Math.min(9, Number.parseInt(guest.adults, 10) || 1)),
+      children: Math.max(0, Math.min(9, Number.parseInt(guest.children, 10) || 0)),
+      message: text(guest.message, 450),
+    };
+    if (!g.firstName || !g.lastName || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(g.email)) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
 
     // The checkbox in the calculator is enforced here too: a client that skips
     // it (stale page, crafted request) can not start a payment.
@@ -63,20 +82,22 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Dates are beyond the booking window" });
     }
 
-    // Two guests must not pay for the same days: refuse dates already taken by a
-    // booking made on this site. If the store can not be read the check is
-    // skipped rather than blocking every payment.
+    // Two guests must not pay for the same days: refuse dates taken by a booking
+    // made here, by Yescapa, or held by another checkout still in progress. If
+    // any of that can not be read, refuse too — better a retry than a double booking.
     try {
-      const taken = new Set();
-      for (const b of await createBlobStore().listBookings()) {
-        if (b.status === "cancelled") continue;
-        for (const day of occupiedDays(b.startDate, b.endDate)) taken.add(day);
+      const bookings = await createBlobStore().listBookings();
+      const { dates: blocked, yescapaOk } = await loadBlockedDates({ bookings });
+      if (!yescapaOk) {
+        return res.status(503).json({ error: "We could not check availability right now. Please try again in a minute.", code: "availability_unavailable" });
       }
-      if (occupiedDays(startDate, endDate).some((day) => taken.has(day))) {
+      for (const day of await activeHoldDays(Date.now(), { exceptEmail: g.email })) blocked.add(day);
+      if (occupiedDays(startDate, endDate).some((day) => blocked.has(day))) {
         return res.status(409).json({ error: "These dates are no longer available.", code: "dates_unavailable" });
       }
     } catch (err) {
-      console.error("create-checkout: availability check skipped -", err.message);
+      console.error("create-checkout: availability check failed -", err.message);
+      return res.status(503).json({ error: "We could not check availability right now. Please try again in a minute.", code: "availability_unavailable" });
     }
     if (!isValidTimeOption(pickupTime) || !isValidTimeOption(returnTime)) {
       return res.status(400).json({ error: "Invalid pickup or return time" });
@@ -95,24 +116,46 @@ export default async function handler(req, res) {
     // First booking only: the account must exist and not have used the discount yet.
     const sessionUser = sessionFromRequest(req, authSecret());
     let member = false;
+    let account = null;
     if (sessionUser) {
       try {
-        const found = await createUserStore().get(sessionUser.userId);
-        member = memberEligible(found?.user);
+        account = (await createUserStore().get(sessionUser.userId))?.user || null;
+        member = memberEligible(account);
       } catch (err) {
         console.error("create-checkout: could not read the guest account, no member discount -", err.message);
       }
     }
-    const quote = calculateQuote({
-      start,
-      end,
-      pickupTime,
-      returnTime,
-      extraIds,
-      promoCode,
-      prepaymentOption,
-      member,
-    });
+    const promoPct = promoPctAt(promoCode);
+    const quoteWith = (m) =>
+      calculateQuote({ start, end, pickupTime, returnTime, extraIds, promoCode, promoPct, prepaymentOption, member: m });
+
+    // The first-booking discount is per person, not per account: refuse it when
+    // this name, phone or email already had it (or is mid-checkout elsewhere).
+    const checkoutExpiresAt = Date.now() + CHECKOUT_TTL_MS;
+    let discountKeys = [];
+    if (member && quoteWith(true).memberDiscountApplied) {
+      discountKeys = checkoutKeys({ ...g, accountEmail: account?.email });
+      let allowed = false;
+      try {
+        const registry = createDiscountRegistry({ secret: authSecret() });
+        const taken = await registry.taken(discountKeys, { userId: sessionUser.userId });
+        allowed = !taken.length && (await registry.reserve(discountKeys, { userId: sessionUser.userId, expiresAt: checkoutExpiresAt }));
+        if (taken.length) console.log("create-checkout: member discount refused, already used by", taken.map((t) => t.key.split(":")[0]).join(","));
+      } catch (err) {
+        console.error("create-checkout: discount registry unavailable, no member discount -", err.message);
+      }
+      if (!allowed) {
+        member = false;
+        // The page showed the discounted price: say why it changed.
+        if (Number(clientTotalWithIva) === quoteWith(true).finalTotalWithIva) {
+          return res.status(409).json({
+            error: "The first-booking discount has already been used by this guest.",
+            code: "member_discount_used",
+          });
+        }
+      }
+    }
+    const quote = quoteWith(member);
 
     if (quote.nights < getMinNights(start)) {
       return res.status(400).json({ error: "Stay is shorter than the minimum for this season" });
@@ -155,7 +198,9 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      customer_email: guest.email,
+      customer_email: g.email,
+      // Stripe's minimum lifetime; the dates (and the discount) are held that long.
+      expires_at: Math.floor(checkoutExpiresAt / 1000),
       // The card is saved for the later charges the conditions allow (clause
       // 5.6: damage, surcharges, fines), so a Customer is always created.
       customer_creation: "always",
@@ -199,23 +244,31 @@ export default async function handler(req, res) {
         remainingAmount: String(remainingAmount),
         prepaymentOption: isFullPayment ? "full" : "deposit",
         promoCode: quote.appliedPromoCode || "",
+        promoPct: quote.appliedPromoCode ? String(quote.promoDiscountPct) : "",
         memberDiscount: quote.memberDiscountApplied ? "true" : "false",
         memberUserId: quote.memberDiscountApplied ? sessionUser.userId : "",
         acceptedTerms: "true",
         termsVersion: TERMS_VERSION,
-        guestFirstName: guest.firstName,
-        guestLastName: guest.lastName,
-        guestEmail: guest.email,
-        guestPhone: guest.phone,
-        adults: String(guest.adults),
-        children: String(guest.children),
-        message: guest.message || "",
+        guestFirstName: g.firstName,
+        guestLastName: g.lastName,
+        guestEmail: g.email,
+        guestPhone: g.phone,
+        adults: String(g.adults),
+        children: String(g.children),
+        message: g.message,
       },
     });
+
+    try {
+      await saveHold(session.id, { startDate, endDate, expiresAt: checkoutExpiresAt, email: g.email });
+    } catch (err) {
+      // The webhook re-checks the dates anyway; a missing hold only widens the race.
+      console.error("create-checkout: could not save the date hold -", err.message);
+    }
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error("Stripe create-checkout error:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: "Payment could not be started. Please try again." });
   }
 }

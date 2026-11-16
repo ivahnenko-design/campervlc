@@ -20,6 +20,8 @@ import {
 } from "./contracts.js";
 import { buildSignedPdf } from "./contract-pdf.js";
 import { signingLink } from "./contract-email.js";
+import { calendarFeedUrl } from "./calendar-key.js";
+import { siteUrl } from "./email.js";
 
 function reply(res, status, body) {
   return res.status(status).json(body);
@@ -119,6 +121,7 @@ export function createContractHandlers({
   sendSigned, // (contract, pdfBytes) => Promise
   loadBasePdf, // () => Promise<Uint8Array>
   listBookings = async () => [], // site bookings, for the admin list
+  onSigned = async () => {}, // (signedContract) => Promise, after the PDF is stored
   adminToken,
   secret,
   now = () => Date.now(),
@@ -129,6 +132,9 @@ export function createContractHandlers({
     try {
       if (req.method === "GET") {
         const id = typeof req.query?.id === "string" ? req.query.id : null;
+        if (req.query?.view === "calendar") {
+          return reply(res, 200, { url: calendarFeedUrl(siteUrl()) });
+        }
         if (req.query?.view === "bookings") {
           const rows = (await listBookings()).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
           return reply(res, 200, { bookings: rows });
@@ -260,6 +266,11 @@ export function createContractHandlers({
         // and never produces a second PDF.
         await store.save(signed, { etag: found.etag });
         await store.putPdf(signed, pdfBytes);
+        try {
+          await onSigned(signed);
+        } catch (err) {
+          console.error("after-sign check failed:", err.message);
+        }
         let emails = [];
         try {
           emails = await sendSigned(signed, pdfBytes);

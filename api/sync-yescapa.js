@@ -57,12 +57,11 @@ async function fetchYescapaDates() {
 }
 
 export default async function handler(req, res) {
-  // Vercel Cron passes Authorization header with CRON_SECRET
-  const authHeader = req.headers["authorization"];
-  if (
-    process.env.CRON_SECRET &&
-    authHeader !== `Bearer ${process.env.CRON_SECRET}`
-  ) {
+  // Cron only: Vercel Cron sends "Authorization: Bearer $CRON_SECRET". Without
+  // the secret configured the endpoint stays closed (it fetches Yescapa and
+  // writes to Blob, which nobody outside should be able to trigger).
+  const secret = process.env.CRON_SECRET;
+  if (!secret || req.headers["authorization"] !== `Bearer ${secret}`) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
@@ -74,6 +73,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ synced: dates.length });
   } catch (err) {
     console.error("Yescapa sync error:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: "sync_failed" });
   }
 }

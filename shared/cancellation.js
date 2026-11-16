@@ -42,9 +42,20 @@ export function retentionPct(daysToPickup) {
  * cancelled with 100% retention) is reported as `unpaidRetention` and is NOT
  * charged automatically.
  */
+/**
+ * The pickup date the retention scale counts from: the ORIGINAL one, or the
+ * current one if the guest moved the stay earlier. Moving a booking months
+ * ahead and then cancelling must not turn a 100% retention into 10%.
+ */
+export function retentionStartDate(booking) {
+  const original = booking.originalStartDate;
+  if (typeof original === "string" && original && original < booking.startDate) return original;
+  return booking.startDate;
+}
+
 export function isFreeWindow(booking, nowMs) {
   const hoursSinceBooking = (nowMs - Date.parse(booking.createdAt)) / 3_600_000;
-  return hoursSinceBooking <= FREE_CANCELLATION_HOURS && daysUntil(booking.startDate, nowMs) > FREE_CANCELLATION_MIN_DAYS;
+  return hoursSinceBooking <= FREE_CANCELLATION_HOURS && daysUntil(retentionStartDate(booking), nowMs) > FREE_CANCELLATION_MIN_DAYS;
 }
 
 export function cancellationQuote(booking, nowMs) {
@@ -52,7 +63,7 @@ export function cancellationQuote(booking, nowMs) {
   const paid = Number(booking.amountPaid ?? booking.depositAmount) || 0;
   const alreadyRetained = Number(booking.retainedTotal) || 0;
 
-  const daysToPickup = daysUntil(booking.startDate, nowMs);
+  const daysToPickup = daysUntil(retentionStartDate(booking), nowMs);
 
   const free = isFreeWindow(booking, nowMs);
   const pct = free ? 0 : retentionPct(daysToPickup);

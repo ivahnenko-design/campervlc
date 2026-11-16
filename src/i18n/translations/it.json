@@ -189,7 +189,8 @@
     "promo_invalid": "Codice promozionale non valido",
     "promo_discount_row": "Codice promozionale ({{code}})",
     "terms_accept": "Ho letto le <terms>condizioni di noleggio</terms>",
-    "terms_required": "Conferma di aver letto le condizioni di noleggio per continuare."
+    "terms_required": "Conferma di aver letto le condizioni di noleggio per continuare.",
+    "member_discount_used": "Lo sconto sulla prima prenotazione è già stato usato con questo nome, telefono o email. Il prezzo è stato ricalcolato senza: controlla il totale e premi di nuovo Paga."
   },
   "extras": {
     "title": "Extra opzionali",
@@ -302,16 +303,12 @@
   },
   "cancelBooking": {
     "title": "Cancella la tua prenotazione",
-    "intro": "Inserisci il codice di prenotazione e il cognome, oppure l'email e il cognome, per cercare la tua prenotazione.",
+    "intro": "Inserisci il numero di prenotazione e l'email con cui hai prenotato. Ti invieremo a quell'email un codice per confermare la cancellazione.",
     "form_ref": "Codice di prenotazione",
     "form_ref_placeholder": "CVLC-XXXX",
-    "form_or": "oppure",
     "form_email": "Email",
-    "form_lastname": "Cognome",
-    "form_submit": "Cerca prenotazione",
-    "form_required": "Inserisci il codice di prenotazione o l'email, oltre al cognome",
-    "error_not_found": "Nessuna prenotazione trovata. Controlla il codice o i dati inseriti.",
-    "error_ambiguous": "Abbiamo trovato più prenotazioni per questa email. Usa il codice di prenotazione.",
+    "form_submit": "Ricevi il codice",
+    "error_not_found": "Prenotazione non trovata. Controlla numero ed email.",
     "error_already_cancelled": "Questa prenotazione è già stata cancellata.",
     "error_refund_failed": "Non siamo riusciti a elaborare il rimborso in questo momento. Riprova o contattaci.",
     "error_generic": "Qualcosa è andato storto. Riprova.",
@@ -325,7 +322,14 @@
     "quote_processing": "Elaborazione…",
     "done_title": "Prenotazione cancellata",
     "done_body": "La tua prenotazione è stata cancellata. A breve riceverai un'email di conferma — i rimborsi richiedono generalmente 5–10 giorni lavorativi.",
-    "back_home": "Torna alla home"
+    "back_home": "Torna alla home",
+    "code_sent": "Abbiamo inviato un codice di 6 cifre a {{email}}. È valido per 15 minuti.",
+    "code_label": "Codice dell'email",
+    "code_submit": "Continua",
+    "code_resend": "Invia di nuovo il codice",
+    "error_code_wrong": "Codice errato. Controlla l'email e riprova.",
+    "error_code_expired": "Il codice è scaduto. Richiedine uno nuovo.",
+    "error_too_many": "Troppi tentativi. Attendi un po' e riprova."
   },
   "privacy": {
     "title": "Informativa sulla Privacy",
@@ -398,7 +402,7 @@
     "no_balance": "Saldo al ritiro: 0 €. Non resta nulla da pagare.",
     "email_note": "Controlla la tua casella di posta per l'email di conferma.",
     "ref": "Riferimento prenotazione",
-    "ref_note": "Conserva questo riferimento: ti servirà con il cognome per annullare.",
+    "ref_note": "Conserva questo numero: ti servirà insieme alla tua email per modificare o cancellare la prenotazione.",
     "ref_pending": "In fase di generazione: arriverà nell'email di conferma.",
     "amount_paid": "Importo pagato",
     "dates": "Date",
@@ -506,6 +510,7 @@
     "err_default": "Qualcosa è andato storto. Riprova.",
     "hint_promo_instead": "È applicato un codice promozionale: sostituisce lo sconto per l'accesso (non si sommano)",
     "banner_used": "Hai effettuato l'accesso",
-    "hint_used": "Lo sconto per l'accesso è già stato usato in una prenotazione precedente"
+    "hint_used": "Lo sconto per l'accesso è già stato usato in una prenotazione precedente",
+    "err_too_many_requests": "Troppi tentativi. Attendi un po' e riprova."
   }
 }

@@ -24,10 +24,11 @@ export function createBlobAccess(blob, initial = "private") {
     get access() {
       return access;
     },
-    // Overwrites by default; with `ifMatch` the write only lands if the ETag still matches.
+    // Overwrites by default; with `ifMatch` the write only lands if the ETag still
+    // matches, with `allowOverwrite: false` only if the blob does not exist yet.
     put(pathname, data, options = {}) {
       const opts = { contentType: "application/json", addRandomSuffix: false, ...options };
-      if (!opts.ifMatch) opts.allowOverwrite = true;
+      if (!opts.ifMatch && opts.allowOverwrite === undefined) opts.allowOverwrite = true;
       return withAccess((a) =>
         blob.put(pathname, typeof data === "string" ? data : JSON.stringify(data), { ...opts, access: a }),
       );

@@ -229,24 +229,14 @@ export const EXCLUSIVE_EXTRA_GROUPS = [
   ["km_200", "km_unlimited"],
 ];
 
-export const PROMO_CODES = { CAMPER10: 10, OWNERTEST: 99 };
+// Promo codes live in shared/promo-codes.js, which only the server imports:
+// this file is part of the public bundle. calculateQuote takes the percent a
+// code is worth (resolved by the server, or by the browser through the API).
 
 /** Percent off the first booking of a logged-in guest (the account is stamped when it is paid). Never combined with a promo code: a valid promo code replaces it, whatever its size. */
 export const MEMBER_DISCOUNT_PCT = 5;
-// Codes that stop working at a fixed moment (UTC). OWNERTEST is a temporary
-// owner test code for live checks; it is never listed anywhere on the site.
-export const PROMO_EXPIRES_AT = { OWNERTEST: "2026-10-09T20:00:00Z" };
 // Stripe refuses charges under 0.50 EUR; prices here are whole euros.
 export const MIN_CHARGE_EUR = 1;
-
-/** Percent off for a promo code at a moment in time, 0 when unknown or expired. */
-export function promoPctAt(code, atMs = Date.now()) {
-  const c = typeof code === "string" ? code.trim().toUpperCase() : "";
-  if (!c || !PROMO_CODES[c]) return 0;
-  const expires = PROMO_EXPIRES_AT[c];
-  if (expires && atMs >= Date.parse(expires)) return 0;
-  return PROMO_CODES[c];
-}
 // The 5% discount for paying 100% upfront ended on PREPAYMENT_DISCOUNT_ENDED_AT.
 // Bookings made before keep it when their dates or extras change.
 export const PREPAYMENT_DISCOUNT_PCT = 0;
@@ -331,8 +321,8 @@ export function calculateQuote({
   returnTime = DEFAULT_RETURN_TIME,
   extraIds = [],
   promoCode = null,
+  promoPct = 0,
   prepaymentOption = "deposit",
-  promoValidAtMs = Date.now(),
   member = false,
   prepaymentDiscountPct = PREPAYMENT_DISCOUNT_PCT,
 }) {
@@ -350,7 +340,8 @@ export function calculateQuote({
   const preDiscountTotal = price.total + extrasTotal + mandatoryTotal;
 
   const code = typeof promoCode === "string" ? promoCode.trim().toUpperCase() : "";
-  const codePct = promoPctAt(code, promoValidAtMs);
+  const pctIn = Number(promoPct);
+  const codePct = code && Number.isFinite(pctIn) && pctIn > 0 ? Math.min(pctIn, 100) : 0;
   const memberPct = member ? MEMBER_DISCOUNT_PCT : 0;
   // One discount per booking. A valid promo code always takes the place of the
   // member discount (even a smaller one); the member discount only applies without a code.

@@ -260,6 +260,8 @@ function Admin() {
   const [query, setQuery] = useState("");
   const [bFilter, setBFilter] = useState<"upcoming" | "past" | "cancelled">("upcoming");
   const [open, setOpen] = useState<Record<string, Detail | "loading">>({});
+  // Private bookings feed for Yescapa / a calendar app (secret key in the URL).
+  const [calendarUrl, setCalendarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -302,7 +304,11 @@ function Admin() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [c, b] = await Promise.all([api("/api/contract"), api("/api/contract?view=bookings")]);
+      const [c, b, cal] = await Promise.all([
+        api("/api/contract"),
+        api("/api/contract?view=bookings"),
+        api("/api/contract?view=calendar"),
+      ]);
       if (c.status === 401) {
         logout();
         setNotice({ kind: "err", text: "Неверный токен." });
@@ -315,6 +321,7 @@ function Admin() {
       if (!c.ok) throw new Error();
       setRows(((await c.json()) as { contracts: Row[] }).contracts);
       if (b.ok) setBookings(((await b.json()) as { bookings: Booking[] }).bookings);
+      if (cal.ok) setCalendarUrl(((await cal.json()) as { url: string | null }).url);
     } catch {
       setNotice({
         kind: "err",
@@ -641,6 +648,28 @@ function Admin() {
             onClose={() => setNewLink(null)}
           />
         </div>
+      )}
+
+      {calendarUrl && (
+        <details className="mt-4 rounded-xl border border-border p-3 text-sm">
+          <summary className="cursor-pointer font-semibold">Календарь броней сайта (для Yescapa)</summary>
+          <p className="mt-2 text-muted-foreground">
+            Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона. Никому
+            больше не передавайте — по ней видны даты всех броней.
+          </p>
+          <div className="mt-2 flex gap-2">
+            <input readOnly value={calendarUrl} className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs" onFocus={(e) => e.currentTarget.select()} />
+            <button
+              className={btn}
+              onClick={() => {
+                void navigator.clipboard?.writeText(calendarUrl);
+                setNotice({ kind: "ok", text: "Ссылка на календарь скопирована." });
+              }}
+            >
+              Копировать
+            </button>
+          </div>
+        </details>
       )}
 
       {upcoming.length > 0 && (

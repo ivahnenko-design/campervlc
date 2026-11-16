@@ -189,7 +189,8 @@
     "promo_invalid": "Invalid promo code",
     "promo_discount_row": "Promo code ({{code}})",
     "terms_accept": "I have read the <terms>rental conditions</terms>",
-    "terms_required": "Please confirm that you have read the rental conditions to continue."
+    "terms_required": "Please confirm that you have read the rental conditions to continue.",
+    "member_discount_used": "The first-booking discount has already been used for this name, phone or email. The price has been recalculated without it — check the total and press Pay again."
   },
   "extras": {
     "title": "Optional extras",
@@ -302,16 +303,12 @@
   },
   "cancelBooking": {
     "title": "Cancel Your Booking",
-    "intro": "Enter your booking reference and last name, or your email and last name, to look up your reservation.",
+    "intro": "Enter your booking reference and the email you booked with. We'll email you a code to confirm the cancellation.",
     "form_ref": "Booking reference",
     "form_ref_placeholder": "CVLC-XXXX",
-    "form_or": "or",
     "form_email": "Email",
-    "form_lastname": "Last name",
-    "form_submit": "Look up booking",
-    "form_required": "Enter your booking reference or email, plus your last name",
-    "error_not_found": "No matching booking found. Double-check your reference or details.",
-    "error_ambiguous": "We found multiple bookings for that email. Please use your booking reference instead.",
+    "form_submit": "Send me a code",
+    "error_not_found": "Booking not found. Check the reference and email.",
     "error_already_cancelled": "This booking has already been cancelled.",
     "error_refund_failed": "We couldn't process the refund right now. Please try again or contact us.",
     "error_generic": "Something went wrong. Please try again.",
@@ -325,7 +322,14 @@
     "quote_processing": "Processing…",
     "done_title": "Booking cancelled",
     "done_body": "Your booking has been cancelled. A confirmation email is on its way — refunds typically arrive within 5–10 business days.",
-    "back_home": "Back to homepage"
+    "back_home": "Back to homepage",
+    "code_sent": "We've sent a 6-digit code to {{email}}. It is valid for 15 minutes.",
+    "code_label": "Code from the email",
+    "code_submit": "Continue",
+    "code_resend": "Send the code again",
+    "error_code_wrong": "Wrong code. Check the email and try again.",
+    "error_code_expired": "The code has expired. Ask for a new one.",
+    "error_too_many": "Too many attempts. Wait a little and try again."
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -398,7 +402,7 @@
     "no_balance": "Balance due on pickup: €0. Nothing left to pay.",
     "email_note": "Check your inbox for the confirmation email.",
     "ref": "Booking reference",
-    "ref_note": "Save this reference — you'll need it with your last name to cancel.",
+    "ref_note": "Save this reference — you'll need it with your email to change or cancel the booking.",
     "ref_pending": "Being generated — it will arrive in your confirmation email.",
     "amount_paid": "Amount paid",
     "dates": "Dates",
@@ -506,6 +510,7 @@
     "err_default": "Something went wrong. Please try again.",
     "hint_promo_instead": "A promo code is applied: it replaces the logged-in discount (they do not add up)",
     "banner_used": "You are logged in",
-    "hint_used": "The login discount was already used on a previous booking"
+    "hint_used": "The login discount was already used on a previous booking",
+    "err_too_many_requests": "Too many attempts. Wait a little and try again."
   }
 }

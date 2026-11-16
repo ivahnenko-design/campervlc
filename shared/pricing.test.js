@@ -82,6 +82,7 @@ test("quote: promo and prepayment discounts run after extras, on the surcharged 
     returnTime: "14:00",
     extraIds: ["km_200", "bedding"],
     promoCode: "camper10",
+    promoPct: 10,
     prepaymentOption: "full",
     prepaymentDiscountPct: 5, // legacy bookings only
   });
@@ -127,15 +128,16 @@ test("parseIsoDate rejects malformed and rolled-over dates", () => {
 });
 
 test("OWNERTEST: 99% off until it expires, then ignored; floor keeps the charge >= 1 EUR", async () => {
-  const { calculateQuote, promoPctAt, parseIsoDate, PROMO_EXPIRES_AT } = await import("./pricing.js");
+  const { calculateQuote, parseIsoDate } = await import("./pricing.js");
+  const { promoPctAt, PROMO_EXPIRES_AT } = await import("./promo-codes.js");
   const base = { start: parseIsoDate("2026-11-16"), end: parseIsoDate("2026-11-23"), prepaymentOption: "full" };
   const before = Date.parse(PROMO_EXPIRES_AT.OWNERTEST) - 1000;
   const after = Date.parse(PROMO_EXPIRES_AT.OWNERTEST) + 1000;
-  const plain = calculateQuote({ ...base, promoValidAtMs: before });
-  const test = calculateQuote({ ...base, promoCode: "ownertest", promoValidAtMs: before });
+  const plain = calculateQuote(base);
+  const test = calculateQuote({ ...base, promoCode: "OWNERTEST", promoPct: promoPctAt("ownertest", before) });
   assert.equal(test.appliedPromoCode, "OWNERTEST");
   assert.ok(test.finalTotalWithIva >= 1 && test.finalTotalWithIva < plain.finalTotalWithIva * 0.05);
-  const expired = calculateQuote({ ...base, promoCode: "OWNERTEST", promoValidAtMs: after });
+  const expired = calculateQuote({ ...base, promoCode: "OWNERTEST", promoPct: promoPctAt("OWNERTEST", after) });
   assert.equal(expired.appliedPromoCode, null);
   assert.equal(expired.finalTotalWithIva, plain.finalTotalWithIva);
   assert.equal(promoPctAt("OWNERTEST", after), 0);

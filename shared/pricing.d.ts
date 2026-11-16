@@ -45,11 +45,8 @@ export interface ExtraItem {
 
 export const EXTRAS: readonly ExtraItem[];
 export const EXCLUSIVE_EXTRA_GROUPS: readonly (readonly ExtraId[])[];
-export const PROMO_CODES: Record<string, number>;
-export const PROMO_EXPIRES_AT: Record<string, string>;
 export const MIN_CHARGE_EUR: number;
 export const MEMBER_DISCOUNT_PCT: number;
-export function promoPctAt(code: string | null | undefined, atMs?: number): number;
 export const PREPAYMENT_DISCOUNT_PCT: number;
 export const LEGACY_PREPAYMENT_DISCOUNT_PCT: number;
 export const PREPAYMENT_DISCOUNT_ENDED_AT: string;
@@ -89,7 +86,8 @@ export interface QuoteInput {
   extraIds?: readonly string[];
   promoCode?: string | null;
   prepaymentOption?: PrepaymentOption | string;
-  promoValidAtMs?: number;
+  /** Percent a valid promo code is worth (0 = none); resolved by the server. */
+  promoPct?: number;
   member?: boolean;
   prepaymentDiscountPct?: number;
 }

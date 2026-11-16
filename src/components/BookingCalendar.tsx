@@ -26,7 +26,6 @@ import {
   BOOKING_MAX_DATE,
   DEFAULT_PICKUP_TIME,
   DEFAULT_RETURN_TIME,
-  promoPctAt,
   TIME_OPTIONS,
   type PrepaymentOption,
 } from "@/utils/pricing";
@@ -101,6 +100,12 @@ export function BookingCalendar() {
   const [promoInput, setPromoInput] = useState("");
   const [promoStatus, setPromoStatus] = useState<"idle" | "valid" | "invalid">("idle");
   const [appliedPromoCode, setAppliedPromoCode] = useState<string | null>(null);
+  // Percent the applied code is worth; the codes themselves stay on the server.
+  const [appliedPromoPct, setAppliedPromoPct] = useState(0);
+  const [promoChecking, setPromoChecking] = useState(false);
+  // Set when the server finds the first-booking discount already used by the
+  // same guest (name, phone or email): the price is shown without it from then on.
+  const [memberRefused, setMemberRefused] = useState(false);
 
   const months = [monthBase, addMonths(monthBase, 1)];
 
@@ -151,8 +156,9 @@ export function BookingCalendar() {
       returnTime,
       extraIds: Array.from(selectedExtras),
       promoCode: appliedPromoCode,
+      promoPct: appliedPromoPct,
       prepaymentOption,
-      member: !!auth.user?.discountAvailable,
+      member: !!auth.user?.discountAvailable && !memberRefused,
     });
   }, [
     range,
@@ -160,8 +166,10 @@ export function BookingCalendar() {
     returnTime,
     selectedExtras,
     appliedPromoCode,
+    appliedPromoPct,
     prepaymentOption,
     auth.user,
+    memberRefused,
   ]);
 
   const minNights = range.start ? getMinNights(range.start) : null;
@@ -175,14 +183,25 @@ export function BookingCalendar() {
   const finalTotal = price?.finalTotal ?? mandatoryTotal;
   const finalTotalWithIva = price?.finalTotalWithIva ?? 0;
 
-  const handleApplyPromo = () => {
+  const handleApplyPromo = async () => {
     const code = promoInput.trim().toUpperCase();
-    if (!code) return;
-    if (promoPctAt(code)) {
+    if (!code || promoChecking) return;
+    setPromoChecking(true);
+    let pct = 0;
+    try {
+      const res = await fetch(`/api/contract?scope=promo&code=${encodeURIComponent(code)}`);
+      if (res.ok) pct = Number((await res.json()).pct) || 0;
+    } catch {
+      pct = 0;
+    }
+    setPromoChecking(false);
+    if (pct > 0) {
       setAppliedPromoCode(code);
+      setAppliedPromoPct(pct);
       setPromoStatus("valid");
     } else {
       setAppliedPromoCode(null);
+      setAppliedPromoPct(0);
       setPromoStatus("invalid");
     }
   };
@@ -262,6 +281,14 @@ export function BookingCalendar() {
         }),
       });
       const data = await res.json();
+      if (!res.ok && data.code === "member_discount_used") {
+        // The price shown included the first-booking discount; show it again
+        // without it and let the guest decide.
+        setMemberRefused(true);
+        setCheckoutError(t("booking.member_discount_used"));
+        setCheckoutLoading(false);
+        return;
+      }
       if (!res.ok) throw new Error(data.error || "Payment error");
       track("add_payment_info", { currency: "EUR", value: finalTotalWithIva });
       window.location.href = data.url;
@@ -445,7 +472,7 @@ export function BookingCalendar() {
             <div className="mt-4">
               {auth.user ? (
                 <p className="rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600">
-                  {!auth.user.discountAvailable
+                  {!auth.user.discountAvailable || memberRefused
                     ? t("auth.hint_used")
                     : appliedPromoCode
                       ? t("auth.hint_promo_instead")
@@ -483,7 +510,8 @@ export function BookingCalendar() {
                 <button
                   type="button"
                   onClick={handleApplyPromo}
-                  className="shrink-0 rounded-lg border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition"
+                  disabled={promoChecking}
+                  className="shrink-0 disabled:opacity-60 rounded-lg border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition"
                 >
                   {t("booking.promo_apply")}
                 </button>
@@ -491,7 +519,7 @@ export function BookingCalendar() {
               {promoStatus === "valid" && appliedPromoCode && (
                 <p className="mt-1.5 flex items-center gap-1 text-xs text-emerald-500">
                   <Tag className="h-3 w-3" />
-                  {t("booking.promo_success", { pct: promoPctAt(appliedPromoCode) })}
+                  {t("booking.promo_success", { pct: appliedPromoPct })}
                 </p>
               )}
               {promoStatus === "invalid" && (

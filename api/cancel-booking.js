@@ -1,88 +1,52 @@
+// Guest cancellation endpoint (request code -> lookup with code -> confirm).
+// The logic lives in _lib/cancel.js; this file wires Stripe, Blob and Resend.
 import Stripe from "stripe";
-import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
-import { blobStore, list } from "./_lib/blob.js";
-import { cancellationQuote } from "../shared/cancellation.js";
-import { allocateRefund, paymentsOf } from "../shared/booking-changes.js";
+import { createBlobStore } from "./_lib/store.js";
+import { createCancelHandler } from "./_lib/cancel.js";
+import { esc, postToResend, siteUrl } from "./_lib/email.js";
+import { clientIp, hit } from "./_lib/rate-limit.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
 });
 
-async function loadBookings() {
-  try {
-    const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
-    if (!blobs.length) return [];
-    const bookings = [];
-    for (const blob of blobs) {
-      const read = await blobStore.readJson(blob.pathname);
-      if (read) bookings.push(read.data);
-    }
-    return bookings;
-  } catch (err) {
-    console.error("loadBookings failed:", err.message);
-    return [];
-  }
-}
+const FROM = "Camper Retreat VLC <info@campervlc.com>";
 
-async function saveBooking(booking) {
-  const key = `${BOOKINGS_PREFIX}${booking.id}.json`;
-  await blobStore.put(key, booking);
-}
-
-// Resend answers 4xx/5xx with a JSON error body, and fetch does NOT reject on
-// those statuses — an unchecked call silently "succeeds". Surface the status and
-// Resend's payload, then throw so the caller's rejection handling actually runs.
-// The API key lives in the request header and is never logged.
-async function postToResend(body) {
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "<response body unreadable>");
-    console.error(
-      `Resend send FAILED: ${res.status} ${res.statusText} · to=${body.to} · subject=${body.subject} · ${detail}`
-    );
-    throw new Error(`Resend ${res.status} for ${body.to}: ${detail}`);
-  }
-
-  return res.json().catch(() => ({}));
-}
-
-async function sendCancellationGuestEmail(booking) {
-  const {
-    guestFirstName,
-    guestEmail,
-    bookingRef,
-    retentionPct,
-    retainedAmount,
-    refundAmount,
-    freeCancellation,
-    startDate,
-    endDate,
-  } = booking;
-  const siteUrl = process.env.SITE_URL || "https://campervlc.com";
-
-  const refundLine = freeCancellation
-    ? `<p><strong>Free cancellation:</strong> you cancelled within 24 hours of booking and more than 7 days before pickup, so everything you paid (€${refundAmount}) is being refunded. It typically arrives within 5–10 business days.</p>`
-    : refundAmount > 0
-      ? `<p><strong>Refund:</strong> €${refundAmount}. Under clause 4.1 of the <a href="${siteUrl}/condiciones#cancelacion">rental conditions</a> we retain ${retentionPct}% of the total price (€${retainedAmount}). The refund is being processed and typically arrives within 5–10 business days.</p>`
-      : `<p>Under clause 4.1 of the <a href="${siteUrl}/condiciones#cancelacion">rental conditions</a> we retain ${retentionPct}% of the total price (€${retainedAmount}), which covers what you have paid, so there is nothing to refund. We do not charge any remaining balance automatically.</p>`;
-
-  const body = {
-    from: "Camper Retreat VLC <info@campervlc.com>",
-    to: guestEmail,
+async function sendCode(booking, code) {
+  await postToResend({
+    from: FROM,
+    to: booking.guestEmail,
     reply_to: "info@campervlc.com",
-    subject: `Booking cancelled – ${bookingRef}`,
+    subject: `${code} – cancellation code / código de cancelación · ${booking.bookingRef}`,
     html: `
-      <h2>Hi ${guestFirstName}, your booking has been cancelled</h2>
-      <p><strong>Booking reference:</strong> ${bookingRef}</p>
-      <p><strong>Dates:</strong> ${startDate} → ${endDate}</p>
+      <p>Hi ${esc(booking.guestFirstName)},</p>
+      <p>Someone (hopefully you) asked to cancel booking <strong>${esc(booking.bookingRef)}</strong> (${esc(booking.startDate)} → ${esc(booking.endDate)}). Your code:</p>
+      <p style="font-size:28px;letter-spacing:6px"><strong>${code}</strong></p>
+      <p>It is valid for 15 minutes. Nothing is cancelled until you enter it and confirm on the site. If you did not ask for this, ignore this email — your booking stays as it is.</p>
+      <hr />
+      <p>Hola ${esc(booking.guestFirstName)}: tu código para cancelar la reserva ${esc(booking.bookingRef)} es <strong>${code}</strong> (válido 15 minutos). Si no lo has pedido tú, ignora este correo: la reserva sigue igual.</p>
+      <p>— Camper Retreat VLC</p>
+    `,
+  });
+}
+
+function guestEmail(booking) {
+  const site = siteUrl();
+  const terms = `<a href="${site}/condiciones#cancelacion">rental conditions</a>`;
+  const refundLine = booking.freeCancellation
+    ? `<p><strong>Free cancellation:</strong> you cancelled within 24 hours of booking and more than 7 days before pickup, so everything you paid (€${booking.refundAmount}) is being refunded. It typically arrives within 5–10 business days.</p>`
+    : booking.refundAmount > 0
+      ? `<p><strong>Refund:</strong> €${booking.refundAmount}. Under clause 4.1 of the ${terms} we retain ${booking.retentionPct}% of the total price (€${booking.retainedAmount}). The refund is being processed and typically arrives within 5–10 business days.</p>`
+      : `<p>Under clause 4.1 of the ${terms} we retain ${booking.retentionPct}% of the total price (€${booking.retainedAmount}), which covers what you have paid, so there is nothing to refund. We do not charge any remaining balance automatically.</p>`;
+  return {
+    from: FROM,
+    to: booking.guestEmail,
+    reply_to: "info@campervlc.com",
+    subject: `Booking cancelled – ${booking.bookingRef}`,
+    html: `
+      <h2>Hi ${esc(booking.guestFirstName)}, your booking has been cancelled</h2>
+      <p><strong>Booking reference:</strong> ${esc(booking.bookingRef)}</p>
+      <p><strong>Dates:</strong> ${esc(booking.startDate)} → ${esc(booking.endDate)}</p>
       <hr />
       ${refundLine}
       <hr />
@@ -90,223 +54,42 @@ async function sendCancellationGuestEmail(booking) {
       <p>— Camper Retreat VLC team</p>
     `,
   };
-
-  await postToResend(body);
 }
 
-async function sendCancellationOwnerEmail(booking) {
-  const {
-    guestFirstName,
-    guestLastName,
-    bookingRef,
-    startDate,
-    endDate,
-    retentionPct,
-    retainedAmount,
-    refundAmount,
-    unpaidRetention,
-    freeCancellation,
-  } = booking;
-
-  const body = {
-    from: "Camper Retreat VLC <info@campervlc.com>",
+function ownerEmail(booking) {
+  const name = `${booking.guestFirstName} ${booking.guestLastName}`;
+  return {
+    from: FROM,
     to: process.env.OWNER_EMAIL,
     reply_to: "info@campervlc.com",
-    subject: `Booking cancelled: ${guestFirstName} ${guestLastName} · ${bookingRef}`,
+    subject: `Booking cancelled: ${name.replace(/[\r\n]/g, " ")} · ${booking.bookingRef}`,
     html: `
       <h2>A booking was cancelled</h2>
-      <p><strong>Guest:</strong> ${guestFirstName} ${guestLastName}</p>
-      <p><strong>Booking reference:</strong> ${bookingRef}</p>
-      <p><strong>Dates:</strong> ${startDate} → ${endDate}</p>
-      <p><strong>Retention (clause 4.1):</strong> ${freeCancellation ? "none — free cancellation within 24 h" : `${retentionPct}% of the total price (€${retainedAmount})`}</p>
-      <p><strong>Refund:</strong> €${refundAmount}</p>
-      ${unpaidRetention > 0 ? `<p><strong>Not collected:</strong> €${unpaidRetention} retained beyond what was paid (not charged automatically; claim it manually if you want it).</p>` : ""}
-      <p>The dates have been released and will free up in the calendar feed shortly.</p>
+      <p><strong>Guest:</strong> ${esc(name)}</p>
+      <p><strong>Booking reference:</strong> ${esc(booking.bookingRef)}</p>
+      <p><strong>Dates:</strong> ${esc(booking.startDate)} → ${esc(booking.endDate)}</p>
+      <p><strong>Retention (clause 4.1):</strong> ${booking.freeCancellation ? "none — free cancellation within 24 h" : `${booking.retentionPct}% of the total price (€${booking.retainedAmount})`}</p>
+      <p><strong>Refund:</strong> €${booking.refundAmount}</p>
+      ${booking.unpaidRetention > 0 ? `<p><strong>Not collected:</strong> €${booking.unpaidRetention} retained beyond what was paid (not charged automatically; claim it manually if you want it).</p>` : ""}
+      <p>Confirmed by the guest with a code sent to ${esc(booking.guestEmail)}. The dates have been released.</p>
     `,
   };
-
-  await postToResend(body);
 }
 
-function findBooking(bookings, { bookingRef, email, lastName }) {
-  const lastNameNorm = (lastName || "").trim().toLowerCase();
-  if (!lastNameNorm) {
-    return { error: "not_found" };
+async function sendEmails(booking) {
+  const results = await Promise.allSettled([postToResend(guestEmail(booking)), postToResend(ownerEmail(booking))]);
+  for (const r of results) {
+    if (r.status === "rejected") console.error("cancellation email failed for", booking.bookingRef, "-", r.reason?.message);
   }
-
-  if (bookingRef) {
-    const refNorm = bookingRef.trim().toUpperCase();
-    const match = bookings.find(
-      (b) => b.bookingRef === refNorm && (b.guestLastName || "").trim().toLowerCase() === lastNameNorm
-    );
-    return match ? { booking: match } : { error: "not_found" };
-  }
-
-  if (email) {
-    const emailNorm = email.trim().toLowerCase();
-    const allMatches = bookings.filter(
-      (b) =>
-        (b.guestEmail || "").trim().toLowerCase() === emailNorm &&
-        (b.guestLastName || "").trim().toLowerCase() === lastNameNorm
-    );
-    if (allMatches.length === 0) return { error: "not_found" };
-
-    // Disambiguate only among active bookings — a guest with one cancelled and
-    // one active booking under the same email shouldn't hit "ambiguous".
-    const activeMatches = allMatches.filter((b) => b.status !== "cancelled");
-    if (activeMatches.length > 1) return { error: "ambiguous" };
-    if (activeMatches.length === 1) return { booking: activeMatches[0] };
-
-    // No active bookings — surface the most recently cancelled one so the
-    // caller gets "already_cancelled" instead of a misleading "not_found".
-    const mostRecentCancelled = [...allMatches].sort(
-      (a, b) => new Date(b.cancelledAt || b.createdAt) - new Date(a.cancelledAt || a.createdAt)
-    )[0];
-    return { booking: mostRecentCancelled };
-  }
-
-  return { error: "not_found" };
 }
 
-function buildQuote(booking) {
-  const q = cancellationQuote(booking, Date.now());
-  return {
-    bookingRef: booking.bookingRef,
-    guestFirstName: booking.guestFirstName,
-    startDate: booking.startDate,
-    endDate: booking.endDate,
-    nights: booking.nights,
-    totalWithIva: q.total,
-    amountPaid: q.paid,
-    freeCancellation: q.free,
-    retentionPct: q.retentionPct,
-    retainedAmount: q.retained,
-    refundAmount: q.refund,
-    unpaidRetention: q.unpaidRetention,
-  };
-}
-
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  const { action, bookingRef, email, lastName } = req.body || {};
-
-  if (action !== "lookup" && action !== "confirm") {
-    return res.status(400).json({ error: "invalid_action" });
-  }
-
-  const hasRefPair = !!bookingRef && !!lastName;
-  const hasEmailPair = !!email && !!lastName;
-  if (!hasRefPair && !hasEmailPair) {
-    return res.status(400).json({ error: "missing_fields" });
-  }
-
-  const bookings = await loadBookings();
-  const found = findBooking(bookings, { bookingRef, email, lastName });
-
-  if (found.error === "ambiguous") {
-    return res.status(409).json({ error: "ambiguous" });
-  }
-  if (found.error === "not_found") {
-    return res.status(404).json({ error: "not_found" });
-  }
-
-  const booking = found.booking;
-
-  if (booking.status === "cancelled") {
-    return res.status(409).json({ error: "already_cancelled" });
-  }
-
-  if (action === "lookup") {
-    return res.status(200).json(buildQuote(booking));
-  }
-
-  // action === "confirm" — never trust any client-supplied percentage/amount,
-  // recompute from scratch since time may have passed since the lookup step.
-  const quote = cancellationQuote(booking, Date.now());
-  const amountCents = Math.round(quote.refund * 100);
-
-  let refundId = null;
-  const refundIds = [];
-
-  if (amountCents > 0) {
-    // A booking changed through /manage-booking can hold several payments
-    // (original + top-ups); refund the original first, never more than each holds.
-    let current = booking;
-    if (!paymentsOf(current).length) {
-      try {
-        const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId || booking.id);
-        current = { ...booking, paymentIntentId: session.payment_intent };
-      } catch (err) {
-        console.error("Failed to retrieve session for refund:", err.message);
-      }
-    }
-    const { parts, unallocated } = allocateRefund(current, quote.refund);
-    if (!parts.length || unallocated > 0) {
-      return res.status(500).json({
-        error: "no_payment_intent",
-        message: "Cannot process refund — contact support.",
-      });
-    }
-
-    for (const part of parts) {
-      try {
-        const refund = await stripe.refunds.create(
-          { payment_intent: part.paymentIntentId, amount: Math.round(part.amount * 100) },
-          { idempotencyKey: `refund-${booking.id}-${part.paymentIntentId}` }
-        );
-        console.log("stripe cancel refund ok", JSON.stringify({ bookingRef: booking.bookingRef, refundId: refund.id, paymentIntentId: part.paymentIntentId, amount: part.amount }));
-        refundIds.push(refund.id);
-      } catch (err) {
-        console.error("Stripe refund failed:", part.paymentIntentId, err.message);
-        return res.status(502).json({ error: "refund_failed", message: err.message });
-      }
-    }
-    refundId = refundIds[0] || null;
-  }
-
-  const updatedBooking = {
-    ...booking,
-    status: "cancelled",
-    cancelledAt: new Date().toISOString(),
-    freeCancellation: quote.free,
-    retentionPct: quote.retentionPct,
-    retainedAmount: quote.retained,
-    unpaidRetention: quote.unpaidRetention,
-    refundAmount: amountCents / 100,
-    // Share of the amount paid that came back (kept for older records/readers).
-    refundPct: quote.paid > 0 ? Math.round((quote.refund / quote.paid) * 100) : 0,
-    refundId,
-    refundIds,
-    pendingChange: null,
-  };
-
-  await saveBooking(updatedBooking);
-
-  // The refund is already issued and the booking already saved as cancelled, so
-  // an email failure must never turn a completed cancellation into a 500. Log it
-  // and still return success to the customer.
-  const emailResults = await Promise.allSettled([
-    sendCancellationGuestEmail(updatedBooking),
-    sendCancellationOwnerEmail(updatedBooking),
-  ]);
-  const [guestMail, ownerMail] = emailResults;
-  if (guestMail.status === "rejected") {
-    console.error("sendCancellationGuestEmail failed for", updatedBooking.bookingRef, "-", guestMail.reason);
-  }
-  if (ownerMail.status === "rejected") {
-    console.error("sendCancellationOwnerEmail failed for", updatedBooking.bookingRef, "-", ownerMail.reason);
-  }
-
-  return res.status(200).json({
-    bookingRef: updatedBooking.bookingRef,
-    freeCancellation: updatedBooking.freeCancellation,
-    retentionPct: updatedBooking.retentionPct,
-    retainedAmount: updatedBooking.retainedAmount,
-    refundAmount: updatedBooking.refundAmount,
-    unpaidRetention: updatedBooking.unpaidRetention,
-    status: "cancelled",
-  });
-}
+export default createCancelHandler({
+  store: createBlobStore(),
+  stripe,
+  secret: process.env.MANAGE_BOOKING_SECRET,
+  sendCode,
+  sendEmails,
+  allow: (key, opts) => hit(key, opts),
+  ipOf: clientIp,
+  now: () => Date.now(),
+});

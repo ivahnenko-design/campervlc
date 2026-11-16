@@ -189,7 +189,8 @@
     "promo_invalid": "Ungültiger Gutscheincode",
     "promo_discount_row": "Gutscheincode ({{code}})",
     "terms_accept": "Ich habe die <terms>Mietbedingungen</terms> gelesen",
-    "terms_required": "Bitte bestätige, dass du die Mietbedingungen gelesen hast, um fortzufahren."
+    "terms_required": "Bitte bestätige, dass du die Mietbedingungen gelesen hast, um fortzufahren.",
+    "member_discount_used": "Der Rabatt für die erste Buchung wurde für diesen Namen, diese Telefonnummer oder E-Mail bereits genutzt. Der Preis wurde ohne ihn neu berechnet – prüfe den Betrag und tippe erneut auf Bezahlen."
   },
   "extras": {
     "title": "Optionale Extras",
@@ -302,16 +303,12 @@
   },
   "cancelBooking": {
     "title": "Buchung stornieren",
-    "intro": "Gib deine Buchungsreferenz und deinen Nachnamen ein, oder deine E-Mail und deinen Nachnamen, um deine Buchung zu finden.",
+    "intro": "Gib deine Buchungsnummer und die E-Mail-Adresse ein, mit der du gebucht hast. Wir senden dir dorthin einen Code zur Bestätigung der Stornierung.",
     "form_ref": "Buchungsreferenz",
     "form_ref_placeholder": "CVLC-XXXX",
-    "form_or": "oder",
     "form_email": "E-Mail",
-    "form_lastname": "Nachname",
-    "form_submit": "Buchung suchen",
-    "form_required": "Gib deine Buchungsreferenz oder E-Mail sowie deinen Nachnamen ein",
-    "error_not_found": "Keine passende Buchung gefunden. Überprüfe deine Referenz oder Angaben.",
-    "error_ambiguous": "Wir haben mehrere Buchungen für diese E-Mail gefunden. Bitte nutze deine Buchungsreferenz.",
+    "form_submit": "Code anfordern",
+    "error_not_found": "Buchung nicht gefunden. Prüfe Nummer und E-Mail.",
     "error_already_cancelled": "Diese Buchung wurde bereits storniert.",
     "error_refund_failed": "Wir konnten die Rückerstattung gerade nicht verarbeiten. Bitte versuche es erneut oder kontaktiere uns.",
     "error_generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
@@ -325,7 +322,14 @@
     "quote_processing": "Wird verarbeitet…",
     "done_title": "Buchung storniert",
     "done_body": "Deine Buchung wurde storniert. Eine Bestätigungs-E-Mail ist unterwegs — Rückerstattungen dauern in der Regel 5–10 Werktage.",
-    "back_home": "Zur Startseite"
+    "back_home": "Zur Startseite",
+    "code_sent": "Wir haben einen 6-stelligen Code an {{email}} gesendet. Er ist 15 Minuten gültig.",
+    "code_label": "Code aus der E-Mail",
+    "code_submit": "Weiter",
+    "code_resend": "Code erneut senden",
+    "error_code_wrong": "Falscher Code. Prüfe die E-Mail und versuche es erneut.",
+    "error_code_expired": "Der Code ist abgelaufen. Fordere einen neuen an.",
+    "error_too_many": "Zu viele Versuche. Warte kurz und versuche es erneut."
   },
   "privacy": {
     "title": "Datenschutzerklaerung",
@@ -398,7 +402,7 @@
     "no_balance": "Restbetrag bei Abholung: 0 €. Es ist nichts mehr offen.",
     "email_note": "Sieh in deinem Postfach nach der Bestätigungsmail.",
     "ref": "Buchungsreferenz",
-    "ref_note": "Bewahre diese Referenz auf — du brauchst sie mit deinem Nachnamen zum Stornieren.",
+    "ref_note": "Bewahre diese Nummer auf – du brauchst sie zusammen mit deiner E-Mail, um die Buchung zu ändern oder zu stornieren.",
     "ref_pending": "Wird erstellt — sie kommt mit der Bestätigungsmail.",
     "amount_paid": "Gezahlter Betrag",
     "dates": "Zeitraum",
@@ -506,6 +510,7 @@
     "err_default": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     "hint_promo_instead": "Ein Aktionscode wird angewendet: Er ersetzt den Anmelde-Rabatt (keine Kombination)",
     "banner_used": "Du bist angemeldet",
-    "hint_used": "Der Anmelde-Rabatt wurde bereits bei einer früheren Buchung genutzt"
+    "hint_used": "Der Anmelde-Rabatt wurde bereits bei einer früheren Buchung genutzt",
+    "err_too_many_requests": "Zu viele Versuche. Warte kurz und versuche es erneut."
   }
 }

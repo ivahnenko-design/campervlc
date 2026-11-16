@@ -1,5 +1,7 @@
 import { blobStore, list } from "./_lib/blob.js";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
+import { calendarKeyOk } from "./_lib/calendar-key.js";
+import { createHash } from "node:crypto";
 
 function toIcalDate(dateStr) {
   // dateStr is "YYYY-MM-DD"
@@ -21,11 +23,14 @@ function generateIcal(bookings) {
 
       return [
         "BEGIN:VEVENT",
-        `UID:${b.id}@campervlc.com`,
+        // The UID is a hash: the booking id is the Stripe session id, which must
+        // not travel in a calendar feed.
+        `UID:${createHash("sha256").update(String(b.id)).digest("hex").slice(0, 24)}@campervlc.com`,
         `DTSTAMP:${now}Z`,
         `DTSTART;VALUE=DATE:${toIcalDate(b.startDate)}`,
         `DTEND;VALUE=DATE:${endStr}`,
-        `SUMMARY:Booked – ${b.guestFirstName} ${b.guestLastName}`,
+        // No guest names: the feed leaves the site (Yescapa, calendar apps).
+        `SUMMARY:Booked`,
         `STATUS:CONFIRMED`,
         "END:VEVENT",
       ].join("\r\n");
@@ -47,6 +52,9 @@ export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).end();
   }
+  if (!calendarKeyOk(req.query?.key)) {
+    return res.status(404).end();
+  }
 
   try {
     const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
@@ -66,6 +74,6 @@ export default async function handler(req, res) {
     return res.status(200).send(ical);
   } catch (err) {
     console.error("calendar.ics error:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).end();
   }
 }

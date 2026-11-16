@@ -11,7 +11,7 @@ export function manageBookingUrl(bookingRef) {
   return `${siteUrl()}/manage-booking?ref=${encodeURIComponent(bookingRef)}`;
 }
 
-function esc(value) {
+export function esc(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

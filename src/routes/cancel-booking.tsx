@@ -22,16 +22,10 @@ export const Route = createFileRoute("/cancel-booking")({
   component: CancelBookingPage,
 });
 
-const lookupSchema = z
-  .object({
-    bookingRef: z.string().trim().optional(),
-    email: z.string().trim().optional(),
-    lastName: z.string().trim().min(1),
-  })
-  .refine((d) => !!d.bookingRef || !!d.email, {
-    message: "form_required",
-    path: ["bookingRef"],
-  });
+const lookupSchema = z.object({
+  bookingRef: z.string().trim().min(1),
+  email: z.string().trim().email(),
+});
 
 type LookupData = z.infer<typeof lookupSchema>;
 
@@ -48,19 +42,45 @@ interface Quote {
   retainedAmount: number;
   refundAmount: number;
   unpaidRetention: number;
+  token: string;
 }
 
-type Stage = "lookup" | "quote" | "done";
+// lookup: reference + email -> a code is emailed to the booking's address
+// code:   the guest types it -> what cancelling costs + a cancel token
+type Stage = "lookup" | "code" | "quote" | "done";
+
+async function post(body: Record<string, unknown>) {
+  const res = await fetch("/api/cancel-booking", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  return { ok: res.ok, data };
+}
+
+const ERROR_KEYS: Record<string, string> = {
+  not_found: "cancelBooking.error_not_found",
+  already_cancelled: "cancelBooking.error_already_cancelled",
+  refund_failed: "cancelBooking.error_refund_failed",
+  no_payment_intent: "cancelBooking.error_refund_failed",
+  code_wrong: "cancelBooking.error_code_wrong",
+  code_expired: "cancelBooking.error_code_expired",
+  too_many_attempts: "cancelBooking.error_too_many",
+  too_many_requests: "cancelBooking.error_too_many",
+  session_expired: "cancelBooking.error_code_expired",
+};
+const errorKey = (code: string | null) => (code ? ERROR_KEYS[code] || "cancelBooking.error_generic" : null);
 
 function CancelBookingPage() {
   const { t } = useTranslation();
   const search = Route.useSearch();
   const [stage, setStage] = useState<Stage>("lookup");
   const [quote, setQuote] = useState<Quote | null>(null);
-  const [identity, setIdentity] = useState<{ bookingRef?: string; email?: string; lastName: string } | null>(null);
-  const [lookupError, setLookupError] = useState<string | null>(null);
-  const [confirmError, setConfirmError] = useState<string | null>(null);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [identity, setIdentity] = useState<LookupData | null>(null);
+  const [code, setCode] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const {
     register,
@@ -71,52 +91,65 @@ function CancelBookingPage() {
     defaultValues: { bookingRef: search.ref ?? "" },
   });
 
-  const onLookup = async (data: LookupData) => {
-    setLookupError(null);
+  const onRequest = async (data: LookupData) => {
+    setError(null);
     try {
-      const res = await fetch("/api/cancel-booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "lookup",
-          bookingRef: data.bookingRef || undefined,
-          email: data.email || undefined,
-          lastName: data.lastName,
-        }),
-      });
-      const body = await res.json();
-      if (!res.ok) {
-        setLookupError(body.error || "not_found");
+      const r = await post({ action: "request", bookingRef: data.bookingRef, email: data.email });
+      if (!r.ok) return setError(r.data.error || "generic");
+      setIdentity(data);
+      setCode("");
+      setStage("code");
+    } catch {
+      setError("generic");
+    }
+  };
+
+  const onCode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!identity) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const r = await post({ action: "lookup", ...identity, code });
+      if (!r.ok) {
+        setError(r.data.error || "generic");
         return;
       }
-      setQuote(body);
-      setIdentity({
-        bookingRef: data.bookingRef || undefined,
-        email: data.email || undefined,
-        lastName: data.lastName,
-      });
+      setQuote(r.data as Quote);
       setStage("quote");
     } catch {
-      setLookupError("generic");
+      setError("generic");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const onResend = async () => {
+    if (!identity) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const r = await post({ action: "request", ...identity });
+      if (!r.ok) setError(r.data.error || "generic");
+    } catch {
+      setError("generic");
+    } finally {
+      setBusy(false);
     }
   };
 
   const onConfirm = async () => {
-    if (!identity) return;
-    setConfirmLoading(true);
-    setConfirmError(null);
+    if (!quote) return;
+    setBusy(true);
+    setError(null);
     try {
-      const res = await fetch("/api/cancel-booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "confirm", ...identity }),
-      });
-      const body = await res.json();
-      if (!res.ok) {
-        setConfirmError(body.error || "generic");
-        setConfirmLoading(false);
+      const r = await post({ action: "confirm", token: quote.token });
+      if (!r.ok) {
+        setError(r.data.error || "generic");
+        setBusy(false);
         return;
       }
+      const body = r.data;
       setQuote((q) =>
         q
           ? {
@@ -131,26 +164,12 @@ function CancelBookingPage() {
       );
       setStage("done");
     } catch {
-      setConfirmError("generic");
-      setConfirmLoading(false);
+      setError("generic");
+      setBusy(false);
     }
   };
 
-  const lookupErrorKey = lookupError
-    ? {
-        not_found: "cancelBooking.error_not_found",
-        ambiguous: "cancelBooking.error_ambiguous",
-        already_cancelled: "cancelBooking.error_already_cancelled",
-      }[lookupError] || "cancelBooking.error_generic"
-    : null;
-
-  const confirmErrorKey = confirmError
-    ? {
-        already_cancelled: "cancelBooking.error_already_cancelled",
-        refund_failed: "cancelBooking.error_refund_failed",
-        no_payment_intent: "cancelBooking.error_refund_failed",
-      }[confirmError] || "cancelBooking.error_generic"
-    : null;
+  const errKey = errorKey(error);
 
   return (
     <div className="bg-background text-foreground min-h-screen">
@@ -161,32 +180,25 @@ function CancelBookingPage() {
         {stage === "lookup" && (
           <>
             <p className="text-muted-foreground mb-8 text-sm">{t("cancelBooking.intro")}</p>
-            <form onSubmit={handleSubmit(onLookup)} className="space-y-3">
-              <Field label={t("cancelBooking.form_ref")} error={errors.bookingRef?.message ? t(`cancelBooking.${errors.bookingRef.message}`) : undefined}>
+            <form onSubmit={handleSubmit(onRequest)} className="space-y-3">
+              <Field label={t("cancelBooking.form_ref")} error={errors.bookingRef ? t("booking.form_required") : undefined}>
                 <input
                   {...register("bookingRef")}
                   placeholder={t("cancelBooking.form_ref_placeholder")}
                   className={inputCls(!!errors.bookingRef)}
                 />
               </Field>
-              <div className="text-center text-xs uppercase tracking-widest text-muted-foreground">
-                {t("cancelBooking.form_or")}
-              </div>
-              <Field label={t("cancelBooking.form_email")}>
+              <Field label={t("cancelBooking.form_email")} error={errors.email ? t("booking.form_required") : undefined}>
                 <input
                   {...register("email")}
                   type="email"
+                  autoComplete="email"
                   placeholder="you@example.com"
-                  className={inputCls(false)}
+                  className={inputCls(!!errors.email)}
                 />
               </Field>
-              <Field label={t("cancelBooking.form_lastname")} error={errors.lastName?.message ? t("booking.form_required") : undefined}>
-                <input {...register("lastName")} className={inputCls(!!errors.lastName)} />
-              </Field>
 
-              {lookupErrorKey && (
-                <p className="text-sm text-rose-500">{t(lookupErrorKey)}</p>
-              )}
+              {errKey && <p className="text-sm text-rose-500">{t(errKey)}</p>}
 
               <button
                 type="submit"
@@ -198,6 +210,39 @@ function CancelBookingPage() {
               </button>
             </form>
           </>
+        )}
+
+        {stage === "code" && identity && (
+          <form onSubmit={onCode} className="space-y-4">
+            <p className="text-muted-foreground text-sm">{t("cancelBooking.code_sent", { email: identity.email })}</p>
+            <Field label={t("cancelBooking.code_label")}>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="000000"
+                className={inputCls(false) + " tracking-[0.4em] text-center text-lg"}
+              />
+            </Field>
+            {errKey && <p className="text-sm text-rose-500">{t(errKey)}</p>}
+            <button
+              type="submit"
+              disabled={busy || code.length !== 6}
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed transition"
+            >
+              {busy && <Loader2 className="h-4 w-4 animate-spin" />}
+              {t("cancelBooking.code_submit")}
+            </button>
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <button type="button" onClick={() => { setStage("lookup"); setError(null); }} className="underline hover:text-foreground">
+                {t("cancelBooking.quote_back")}
+              </button>
+              <button type="button" onClick={onResend} disabled={busy} className="underline hover:text-foreground disabled:opacity-60">
+                {t("cancelBooking.code_resend")}
+              </button>
+            </div>
+          </form>
         )}
 
         {stage === "quote" && quote && (
@@ -227,21 +272,19 @@ function CancelBookingPage() {
               </Link>
             </p>
 
-            {confirmErrorKey && (
-              <p className="text-sm text-rose-500 mb-3">{t(confirmErrorKey)}</p>
-            )}
+            {errKey && <p className="text-sm text-rose-500 mb-3">{t(errKey)}</p>}
 
             <button
               onClick={onConfirm}
-              disabled={confirmLoading}
+              disabled={busy}
               className="flex w-full items-center justify-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-semibold text-white hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed transition"
             >
-              {confirmLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-              {confirmLoading ? t("cancelBooking.quote_processing") : t("cancelBooking.quote_confirm")}
+              {busy && <Loader2 className="h-4 w-4 animate-spin" />}
+              {busy ? t("cancelBooking.quote_processing") : t("cancelBooking.quote_confirm")}
             </button>
             <button
-              onClick={() => setStage("lookup")}
-              disabled={confirmLoading}
+              onClick={() => { setStage("lookup"); setError(null); }}
+              disabled={busy}
               className="mt-3 flex w-full items-center justify-center rounded-full border border-border/60 px-5 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition"
             >
               {t("cancelBooking.quote_back")}

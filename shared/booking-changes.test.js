@@ -1,3 +1,4 @@
+import { promoPctAt } from "./promo-codes.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { calculateQuote, parseIsoDate, prepaymentPctFor, withIva } from "./pricing.js";
@@ -40,6 +41,7 @@ function makeBooking(overrides) {
     returnTime: b.returnTime,
     extraIds: b.extraIds,
     promoCode: b.promoCode,
+    promoPct: promoPctAt(b.promoCode),
     prepaymentOption: b.prepaymentOption,
     prepaymentDiscountPct: prepaymentPctFor(Date.parse(b.createdAt)),
   });
@@ -60,6 +62,7 @@ function quoteOf(b, dates) {
     returnTime: dates.returnTime ?? b.returnTime,
     extraIds: dates.extraIds ?? b.extraIds,
     promoCode: b.promoCode,
+    promoPct: promoPctAt(b.promoCode),
     prepaymentOption: b.prepaymentOption,
     prepaymentDiscountPct: prepaymentPctFor(Date.parse(b.createdAt)),
   });

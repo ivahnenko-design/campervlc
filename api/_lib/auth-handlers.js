@@ -54,8 +54,18 @@ export function createAuthHandlers({
   secret,
   googleClientId,
   discountPct,
+  allow = async () => true, // (key, {limit, windowMs}) => Promise<boolean>
+  ipOf = () => "unknown",
+  discountTaken = async () => false, // (email) => Promise<boolean>
   now = () => Date.now(),
 }) {
+  /** publicUser, with the discount hidden when this mailbox already had it. */
+  async function view(user) {
+    const pub = publicUser(user);
+    if (pub.discountAvailable && (await discountTaken(user.email))) pub.discountAvailable = false;
+    return pub;
+  }
+
   function setSession(res, user, secure) {
     res.setHeader("Set-Cookie", cookie(SESSION_COOKIE, sealValue(newSession(user, now()), secret), { maxAgeMs: SESSION_TTL_MS, secure }));
   }
@@ -69,7 +79,7 @@ export function createAuthHandlers({
     const user = recordLogin({ ...found.user, ...patch }, method, now());
     await users.save(user, { etag: found.etag });
     setSession(res, user, secure);
-    return publicUser(user);
+    return view(user);
   }
 
   async function sessionUser(req) {
@@ -81,12 +91,17 @@ export function createAuthHandlers({
   const actions = {
     async me(req) {
       const found = await sessionUser(req);
-      return { user: found ? publicUser(found.user) : null, discountPct, googleClientId: googleClientId || null };
+      return { user: found ? await view(found.user) : null, discountPct, googleClientId: googleClientId || null };
     },
 
     async "email-code"(req) {
       const email = normEmail(req.body?.email);
       if (!isEmail(email)) throw new AuthError("email_invalid");
+      // Each request emails an address of the caller's choosing: cap it per
+      // network so the site can not be used to flood mailboxes.
+      if (!(await allow(`email-code:${ipOf(req)}`, { limit: 8, windowMs: 3_600_000 }))) {
+        throw new AuthError("too_many_requests", 429);
+      }
       const found = await loadOrCreate(email);
       const { code, user } = issueLoginCode(found.user, { now: now(), secret });
       await users.save(user, { etag: found.etag });
@@ -98,6 +113,9 @@ export function createAuthHandlers({
       const email = normEmail(req.body?.email);
       const found = await users.get(userIdFor(email));
       if (!found) throw new AuthError("no_code");
+      if (!(await allow(`email-verify:${ipOf(req)}`, { limit: 30, windowMs: 3_600_000 }))) {
+        throw new AuthError("too_many_attempts", 429);
+      }
       const r = checkLoginCode(found.user, req.body?.code, { now: now(), secret });
       if (!r.ok) {
         if (r.user !== found.user) await users.save(r.user, { etag: found.etag });
@@ -158,7 +176,7 @@ export function createAuthHandlers({
       const user = { ...found.user, passkeys: [...(found.user.passkeys || []).filter((p) => p.id !== passkey.id), passkey] };
       await users.save(user, { etag: found.etag });
       res.setHeader("Set-Cookie", cookie(CHALLENGE_COOKIE, "", { maxAgeMs: 0, secure: rp.secure }));
-      return { user: publicUser(user) };
+      return { user: await view(user) };
     },
 
     async "passkey-login-options"(req, res, rp) {

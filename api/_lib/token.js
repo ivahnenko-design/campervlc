@@ -14,14 +14,16 @@ function sign(payload, secret) {
   return b64url(createHmac("sha256", secret).update(payload).digest());
 }
 
-export function issueToken(bookingId, nowMs, secret) {
+// `purpose` keeps tokens apart: a manage token (reference + email) can not be
+// used to cancel, which also needs the code emailed to the guest.
+export function issueToken(bookingId, nowMs, secret, purpose = "manage") {
   if (!secret) throw new Error("MANAGE_BOOKING_SECRET is not set");
-  const payload = b64url(JSON.stringify({ b: bookingId, exp: nowMs + TOKEN_TTL_MS }));
+  const payload = b64url(JSON.stringify({ b: bookingId, exp: nowMs + TOKEN_TTL_MS, p: purpose }));
   return `${payload}.${sign(payload, secret)}`;
 }
 
 /** @returns bookingId, or null when the token is malformed, forged or expired. */
-export function verifyToken(token, nowMs, secret) {
+export function verifyToken(token, nowMs, secret, purpose = "manage") {
   if (!secret || typeof token !== "string") return null;
   const [payload, sig, extra] = token.split(".");
   if (!payload || !sig || extra !== undefined) return null;
@@ -30,8 +32,8 @@ export function verifyToken(token, nowMs, secret) {
   const b = Buffer.from(expected);
   if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
   try {
-    const { b: bookingId, exp } = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
-    if (typeof bookingId !== "string" || typeof exp !== "number" || exp <= nowMs) return null;
+    const { b: bookingId, exp, p = "manage" } = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    if (typeof bookingId !== "string" || typeof exp !== "number" || exp <= nowMs || p !== purpose) return null;
     return bookingId;
   } catch {
     return null;
