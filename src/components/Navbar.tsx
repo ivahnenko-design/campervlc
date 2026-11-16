@@ -5,6 +5,9 @@ import { Check, Gift, Menu, X } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { guidesUi } from "@/data/guides";
+
+/** Guide with the season calendar and nightly prices, linked from the menu. */
+const PRICES_GUIDE = "mejor-epoca-autocaravana-valencia";
 import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
 import { LoginDialog } from "./LoginDialog";
 import { loadAuth, logout, openLogin, useAuth } from "@/lib/auth";
@@ -119,12 +122,12 @@ export function Navbar() {
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
               <CamperIcon className="h-5 w-5" />
             </span>
-            <span className="font-display text-lg leading-none">
+            <span className="font-display text-lg leading-none whitespace-nowrap">
               Camper Retreat <span className="text-primary">VLC</span>
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden xl:flex items-center gap-6 whitespace-nowrap">
             {SECTIONS.map((s) => (
               <a
                 key={s}
@@ -134,6 +137,13 @@ export function Navbar() {
                 {t(`nav.${s}`)}
               </a>
             ))}
+            <Link
+              to="/guias/$slug"
+              params={{ slug: PRICES_GUIDE }}
+              className={`text-sm hover:text-foreground transition-colors ${linkTone}`}
+            >
+              {t("nav.prices")}
+            </Link>
             <Link
               to="/guias"
               className={`text-sm hover:text-foreground transition-colors ${linkTone}`}
@@ -152,7 +162,7 @@ export function Navbar() {
               {t("nav.cta")}
             </a>
             <button
-              className="lg:hidden grid h-9 w-9 place-items-center rounded-md border border-border/60 text-foreground"
+              className="xl:hidden grid h-9 w-9 place-items-center rounded-md border border-border/60 text-foreground"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="menu"
             >
@@ -162,7 +172,7 @@ export function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden pb-4 flex flex-col gap-1 max-h-[calc(100dvh-6.25rem)] overflow-y-auto">
+          <div className="xl:hidden pb-4 flex flex-col gap-1 max-h-[calc(100dvh-6.25rem)] overflow-y-auto">
             {SECTIONS.map((s) => (
               <a
                 key={s}
@@ -173,6 +183,14 @@ export function Navbar() {
                 {t(`nav.${s}`)}
               </a>
             ))}
+            <Link
+              to="/guias/$slug"
+              params={{ slug: PRICES_GUIDE }}
+              onClick={() => setMobileOpen(false)}
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface/70"
+            >
+              {t("nav.prices")}
+            </Link>
             <Link
               to="/guias"
               onClick={() => setMobileOpen(false)}
