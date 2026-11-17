@@ -83,7 +83,7 @@ const SIGN_DATA = {
   licenseCountry: "Poland",
   licenseExpiry: "2030-01-01",
 };
-const CONSENTS = { readContract: true, electronicSignature: true, cardAuthorization: true, dataProtection: true };
+const CONSENTS = { readContract: true, electronicSignature: true, cardAuthorization: true, liabilityClauses: true, dataProtection: true };
 
 test("validateInvite cleans fields and rejects bad input", () => {
   const ok = validateInvite(INVITE);

@@ -6,9 +6,9 @@ import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from 
 import { blobStore, list } from "./blob.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
-// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v4.pdf.
-export const CONTRACT_VERSION = "2026-11-v4";
-export const CONTRACT_PDF_PATH = "/contracts/contrato-v4.pdf";
+// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v5.pdf.
+export const CONTRACT_VERSION = "2026-11-v5";
+export const CONTRACT_PDF_PATH = "/contracts/contrato-v5.pdf";
 
 export const OTP_TTL_MS = 10 * 60_000;
 export const OTP_RESEND_MS = 60_000;
@@ -227,11 +227,15 @@ export function validateSignData(input = {}) {
   return data;
 }
 
+// liabilityClauses (v5): the guest ticks, separately, the clauses that put towing,
+// impound, legal costs, ferry damage and downtime at their charge (5.5, 5.9, 7.4, 11.7).
+export const CONSENT_KEYS = ["readContract", "electronicSignature", "cardAuthorization", "liabilityClauses", "dataProtection"];
+
 export function requireConsents(input = {}) {
-  for (const key of ["readContract", "electronicSignature", "cardAuthorization", "dataProtection"]) {
+  for (const key of CONSENT_KEYS) {
     if (input[key] !== true) throw new ContractError("consent_required", `Missing consent: ${key}`);
   }
-  return { readContract: true, electronicSignature: true, cardAuthorization: true, dataProtection: true };
+  return Object.fromEntries(CONSENT_KEYS.map((k) => [k, true]));
 }
 
 const MAX_SIGNATURE_BYTES = 400_000;

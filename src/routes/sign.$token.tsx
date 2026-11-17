@@ -99,6 +99,8 @@ const TEXT: Record<
       electronicSignature:
         "I agree to sign electronically; it has the same validity as a paper signature (clause 16).",
       cardAuthorization: "I authorise later charges to my card as described in clause 5.6.",
+      liabilityClauses:
+        "I accept that, if I or my drivers are responsible, I pay towing, the pound and recovery of the vehicle, the lawyers and legal costs, damage on ferries, and compensation for the days the camper cannot be rented while it is repaired (clauses 5.5, 5.9, 7.4 and 11.7).",
       dataProtection: "I have been informed about the processing of my personal data (clause 15).",
     },
     sendCode: "Send me the confirmation code",
@@ -163,6 +165,8 @@ const TEXT: Record<
       electronicSignature:
         "Acepto firmar electrónicamente, con la misma validez que la firma en papel (apdo. 16).",
       cardAuthorization: "Autorizo los cargos posteriores en mi tarjeta descritos en el apdo. 5.6.",
+      liabilityClauses:
+        "Acepto que, si la causa es imputable a mí o a mis conductores, pago la grúa, el depósito y la recuperación del vehículo, los abogados y gastos judiciales, los daños en ferry y la indemnización por los días en que la autocaravana no pueda alquilarse mientras se repara (apdos. 5.5, 5.9, 7.4 y 11.7).",
       dataProtection: "He sido informado del tratamiento de mis datos personales (apdo. 15).",
     },
     sendCode: "Enviarme el código de confirmación",
@@ -227,6 +231,8 @@ const TEXT: Record<
       electronicSignature:
         "Я согласен(на) подписать электронно, подпись имеет ту же силу, что и на бумаге (п. 16).",
       cardAuthorization: "Я разрешаю последующие списания с моей карты по п. 5.6.",
+      liabilityClauses:
+        "Я согласен(на), что если виноват(а) я или мои водители, я оплачиваю эвакуатор, штрафстоянку и возврат автодома, адвокатов и судебные расходы, повреждения на пароме и компенсацию за дни, когда автодом нельзя сдавать, пока он в ремонте (пп. 5.5, 5.9, 7.4 и 11.7).",
       dataProtection: "Я ознакомлен(а) с обработкой персональных данных (п. 15).",
     },
     sendCode: "Отправить мне код подтверждения",
@@ -290,6 +296,8 @@ const TEXT: Record<
       electronicSignature:
         "Я погоджуюсь підписати електронно, підпис має ту саму силу, що й на папері (п. 16).",
       cardAuthorization: "Я дозволяю подальші списання з моєї картки за п. 5.6.",
+      liabilityClauses:
+        "Я погоджуюсь, що якщо винен(на) я або мої водії, я оплачую евакуатор, штрафмайданчик і повернення автобудинку, адвокатів і судові витрати, пошкодження на поромі та компенсацію за дні, коли автобудинок не можна здавати, поки він у ремонті (пп. 5.5, 5.9, 7.4 і 11.7).",
       dataProtection: "Я ознайомлений(а) з обробкою персональних даних (п. 15).",
     },
     sendCode: "Надіслати мені код підтвердження",
@@ -467,6 +475,7 @@ function SignPage() {
     "readContract",
     "electronicSignature",
     "cardAuthorization",
+    "liabilityClauses",
     "dataProtection",
   ].every((k) => consents[k]);
 

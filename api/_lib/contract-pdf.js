@@ -1,4 +1,4 @@
-// Builds the signed contract: the blank v4 contract PDF plus one extra page
+// Builds the signed contract: the blank contract PDF (CONTRACT_PDF_PATH) plus one extra page
 // with the signer's data, the consents, the drawn signature and the audit
 // facts (time, IP, hashes). pdf-lib's built-in fonts only cover WinAnsi, so
 // text is transliterated for the PDF; the original Unicode data stays in the
@@ -126,6 +126,10 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   para("- Ha leido y acepta el contrato (version indicada) y ha recibido una copia.", { indent: 4 });
   para("- Acepta firmar electronicamente con la misma validez que la firma en papel (apdo. 16).", { indent: 4 });
   para("- Autoriza el uso de la tarjeta aportada para los cargos posteriores del apdo. 5.6.", { indent: 4 });
+  para(
+    "- Acepta expresamente que, si la causa le es imputable a el o a sus conductores, paga la grua, el deposito y la recuperacion del vehiculo, los abogados y gastos judiciales, los danos durante el transporte en ferry y la indemnizacion por paralizacion (apdos. 5.5, 5.9, 7.4 y 11.7).",
+    { indent: 4 },
+  );
   para("- Ha sido informado del tratamiento de sus datos personales (apdo. 15).", { indent: 4 });
   y -= 6;
   rule();
