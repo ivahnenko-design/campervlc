@@ -314,6 +314,366 @@
         "text": "Prenota il camper e controlla il prezzo esatto per le tue date.",
         "button": "Verifica disponibilità e prenota"
       }
+    },
+    "paises-autocaravana-alquiler": {
+      "metaTitle": "Camper a noleggio all'estero: paesi ammessi e vietati",
+      "metaDescription": "Con permesso scritto il nostro camper di Valencia va in Portogallo, Francia e altri 27 paesi. Assicurazione, traghetti, vignette e perché no al Marocco.",
+      "h1": "In quali paesi puoi andare con un camper a noleggio da Valencia",
+      "heroImage": "H-1",
+      "intro": "Quasi tutti i clienti ci fanno la stessa domanda prima di prenotare: posso passare in Portogallo, salire in Francia o scendere in Marocco con il camper? Ecco la risposta completa, presa dal contratto di noleggio (punti 7.1-7.4), con quello che serve sapere in ogni paese su pedaggi, vignette e zone a basse emissioni. Il nostro camper è un McLouis Yearling 89 su Renault Master del 2024, diesel, alto 3,30 m, con 5 posti. Si guida con la patente B, quindi per pedaggi e vignette conta come veicolo fino a 3,5 t.",
+      "updated": "novembre 2026",
+      "sections": [
+        {
+          "h2": "Come funziona: Spagna di base, 29 paesi con permesso scritto",
+          "image": "ES-1",
+          "paragraphs": [
+            "Senza altre pratiche, il camper può circolare solo in Spagna (punto 7.1). Per uscire dal paese serve un'autorizzazione scritta preventiva del proprietario.",
+            "Chiedila al momento della prenotazione o, al più tardi, prima della partenza, su WhatsApp (+34 624 038 085) o via email (camper.retreat.alicante@gmail.com). Indica i paesi, le date indicative e se prenderai un traghetto. Ti mandiamo l'autorizzazione per iscritto e la tieni nel camper insieme al contratto.",
+            "Per i viaggi lunghi controlla i chilometri: ogni notte include 100 km, e nel calcolatore di prenotazione puoi aggiungere 200 km a notte o chilometraggio illimitato. Con l'autorizzazione puoi viaggiare in questi 29 paesi (punto 7.2):"
+          ],
+          "list": [
+            "Europa del sud: Portogallo, Francia, Andorra, Italia, Malta, Grecia e Cipro.",
+            "Europa centrale: Germania, Svizzera, Austria, Belgio, Paesi Bassi e Lussemburgo.",
+            "Europa del nord: Danimarca, Svezia, Norvegia, Finlandia e Islanda.",
+            "Paesi baltici ed Europa dell'Est: Lituania, Lettonia, Estonia, Polonia, Repubblica Ceca, Slovacchia e Ungheria.",
+            "Adriatico: Slovenia e Croazia.",
+            "Isole britanniche: Gran Bretagna e Irlanda."
+          ]
+        },
+        {
+          "h2": "L'assicurazione fuori dalla Spagna",
+          "paragraphs": [
+            "Il camper ha un'assicurazione kasko con una franchigia di 900 € per ogni voce di danno (punto 11.1). La copertura dei danni propri vale solo in Spagna, ad Andorra e nei paesi dell'Accordo Multilaterale di Garanzia, il sistema della carta verde condiviso dagli assicuratori europei. Tutti i 29 paesi della lista ne fanno parte.",
+            "In questi paesi la targa spagnola vale come prova di assicurazione e la carta verde non serve. Porta comunque sempre il certificato assicurativo, che sta con i documenti del veicolo.",
+            "Fuori dalla zona autorizzata non c'è copertura dei danni propri. Se succede qualcosa lì, paghi l'intero danno, senza il limite della franchigia (punto 11.4.d)."
+          ]
+        },
+        {
+          "h2": "Traghetti, porti e aeroporti: il punto 7.4",
+          "paragraphs": [
+            "Caricare il camper su un traghetto, un treno o qualsiasi altro mezzo richiede un'autorizzazione scritta preventiva (punti 6.1.h e 7.4). Inoltre l'assicurazione non copre i danni propri né l'incendio durante il trasporto via mare o via aria. Dall'inizio dell'imbarco alla fine dello sbarco, manovre in porto comprese, ogni danno lo paghi al costo reale, senza il limite della franchigia.",
+            "Dentro porti e aeroporti puoi circolare solo sugli accessi e nei parcheggi aperti al pubblico e sul percorso di imbarco autorizzato. Banchine, zone di carico, piste e aree operative sono vietate.",
+            "Questo vale anche per le Baleari. Le isole sono Spagna, ma ci si arriva in traghetto: serve la stessa autorizzazione e durante la traversata vale la stessa esclusione dell'assicurazione. Anche il treno dell'Eurotunnel sotto la Manica richiede un'autorizzazione scritta."
+          ]
+        },
+        {
+          "h2": "Pedaggi, vignette e addebiti che arrivano dopo",
+          "paragraphs": [
+            "Ogni paese fa pagare le strade a modo suo: casello, pedaggio elettronico sulla targa o vignetta a tempo. Dove c'è la vignetta, il camper rientra nella categoria dei veicoli fino a 3,5 t. Compra le vignette sul sito ufficiale di ciascun paese; molti siti intermediari aggiungono una commissione.",
+            "Alcuni pedaggi e tasse urbane arrivano settimane dopo, intestati al proprietario del veicolo. In base al contratto, questi importi vengono addebitati sulla tua carta fino a 12 mesi dopo il noleggio, sempre con il giustificativo (punto 5.6). Pagare in tempo durante il viaggio ti evita le maggiorazioni.",
+            "Tieni conto anche dei limiti del veicolo: massimo 110 km/h anche dove la strada consente di più, e niente passaggi sotto i 3,30 m di altezza (punto 6.4)."
+          ]
+        },
+        {
+          "h2": "Portogallo: pedaggi elettronici",
+          "image": "PT-1",
+          "paragraphs": [
+            "È la meta che ci chiedono di più e la più semplice: da Valencia ci si arriva su superstrade in una lunga giornata di guida.",
+            "Molte autostrade portoghesi hanno il pedaggio elettronico senza caselli: un portale legge la targa. Con targa spagnola bisogna associare una carta bancaria alla targa (EasyToll) o noleggiare un dispositivo Via Verde Visitors prima del primo tratto a pagamento. Il camper paga in classe 2.",
+            "Per il Portogallo il contratto chiede una cosa precisa: al rientro devi poter dimostrare di aver pagato i pedaggi. Altrimenti si addebitano i pedaggi non pagati più 50 € di spese di gestione (punto 7.2). Da vedere: la costa atlantica, dall'Algarve a Lisbona e Porto."
+          ]
+        },
+        {
+          "h2": "Francia: péage in classe 3 e bollino Crit'Air",
+          "image": "FR-1",
+          "paragraphs": [
+            "Le autostrade francesi hanno i caselli. I camper alti 3 m o più pagano la classe 3, e il nostro è alto 3,30 m. Senza telepedaggio, usa le corsie con pagamento a carta che hanno la sbarra di altezza.",
+            "Per entrare nelle zone a basse emissioni (ZFE) di città come Parigi o Lione serve il bollino Crit'Air, che si richiede sul sito ufficiale certificat-air.gouv.fr. Un diesel del 2024 riceve il Crit'Air 2.",
+            "Da vedere: i campi di lavanda di Valensole, in Provenza, che fioriscono all'inizio dell'estate."
+          ]
+        },
+        {
+          "h2": "Andorra: niente autostrade, con dogana",
+          "image": "AD-2",
+          "paragraphs": [
+            "Si entra da La Seu d'Urgell. In Andorra non ci sono autostrade né vignetta; il tunnel di Envalira, verso la Francia, è però a pedaggio.",
+            "Andorra non fa parte dell'Unione europea, quindi c'è la dogana all'entrata e al ritorno in Spagna, con limiti di acquisto per tabacco e alcolici. Le strade di montagna hanno discese lunghe: scendi con la marcia bassa per non surriscaldare i freni.",
+            "Da vedere: le cabinovie e le montagne di Grandvalira, d'inverno e d'estate."
+          ]
+        },
+        {
+          "h2": "Italia: autostrada in classe B e ZTL",
+          "image": "IT-4",
+          "paragraphs": [
+            "Le autostrade italiane hanno i caselli. I veicoli a due assi alti più di 1,30 m all'asse anteriore pagano la classe B, ed è il caso del camper.",
+            "Quasi tutti i centri storici hanno una ZTL, zona a traffico limitato controllata da telecamere. Se entri senza permesso, la multa arriva mesi dopo. Parcheggia fuori ed entra a piedi o con i mezzi pubblici.",
+            "Da vedere: Roma e il Colosseo. Lascia il camper in un campeggio in periferia ed entra in metro o in autobus. Dai porti italiani partono anche i traghetti per la Grecia e per Malta."
+          ]
+        },
+        {
+          "h2": "Svizzera: vignetta annuale obbligatoria",
+          "image": "CH-3",
+          "paragraphs": [
+            "Per le autostrade svizzere serve la vignetta, che esiste solo in versione annuale: 40 CHF per i veicoli fino a 3,5 t. Dal 2023 c'è la e-vignetta legata alla targa, che si compra sul sito ufficiale via.admin.ch.",
+            "La Svizzera non fa parte dell'Unione europea: c'è la dogana e possono chiederti il contratto e l'autorizzazione. I passi di montagna sono ripidi; in discesa usa il freno motore.",
+            "Da vedere: i laghi e i passi alpini, meglio d'estate, quando tutti i passi sono aperti."
+          ]
+        },
+        {
+          "h2": "Austria: vignetta e attesa di 18 giorni",
+          "image": "AT-4",
+          "paragraphs": [
+            "Autostrade e superstrade austriache richiedono la vignetta per i veicoli fino a 3,5 t. La vignetta digitale è legata alla targa e si compra nello shop ufficiale ASFINAG, per 1 giorno, 10 giorni, 2 mesi o un anno.",
+            "Attenzione ai tempi: la vignetta digitale di 2 mesi o annuale comprata online da privato inizia a valere 18 giorni dopo l'acquisto. Quelle da 1 e 10 giorni valgono subito. Alcune gallerie e tratte di montagna hanno un pedaggio a parte.",
+            "Da vedere: Vienna e la sua Opera di Stato."
+          ]
+        },
+        {
+          "h2": "Germania: autobahn senza pedaggio e bollino verde",
+          "image": "DE-2",
+          "paragraphs": [
+            "I veicoli fino a 3,5 t non pagano pedaggio né vignetta sulle autostrade tedesche; il pedaggio riguarda solo i veicoli più pesanti.",
+            "Circa 35 città hanno una zona ambientale (Umweltzone) e chiedono il bollino verde (Umweltplakette), anche ai veicoli stranieri. Senza bollino la multa è di 100 €. Chiedici se il camper ce l'ha già; altrimenti si ordina online prima del viaggio.",
+            "La Germania è il passaggio verso Danimarca, Polonia e Repubblica Ceca, e ha molte aree di sosta per camper (Stellplätze) ben attrezzate. Da vedere: il castello di Neuschwanstein, in Baviera, dal ponte di Maria (Marienbrücke)."
+          ]
+        },
+        {
+          "h2": "Belgio: zone LEZ con registrazione",
+          "image": "BE-1",
+          "paragraphs": [
+            "Le autostrade belghe non hanno pedaggio per i veicoli fino a 3,5 t.",
+            "Bruxelles, Anversa e Gand hanno una zona a basse emissioni (LEZ). Un diesel Euro 6 può entrare, ma i veicoli stranieri devono registrarsi prima, gratis. Bruxelles e le Fiandre (Anversa e Gand) hanno registri separati.",
+            "Da vedere: i canali di Bruges, da girare a piedi partendo da un parcheggio fuori dal centro."
+          ]
+        },
+        {
+          "h2": "Paesi Bassi: niente pedaggio autostradale",
+          "image": "NL-1",
+          "paragraphs": [
+            "Nei Paesi Bassi le autostrade non hanno pedaggio. Si paga solo in alcuni tunnel, come quello del Westerschelde, in Zelanda.",
+            "Diverse città hanno una zona ambientale (milieuzone) per i diesel più vecchi; il camper, diesel del 2024, rispetta la norma Euro 6. Parcheggiare in centro costa caro: usa i parcheggi P+R in periferia.",
+            "Da vedere: i mulini di Kinderdijk, vicino a Rotterdam."
+          ]
+        },
+        {
+          "h2": "Lussemburgo: niente pedaggi e gasolio economico",
+          "image": "LU-1",
+          "paragraphs": [
+            "Il Lussemburgo non ha pedaggi né vignetta, e il gasolio di solito costa meno che nei paesi vicini. È un buon posto per fare il pieno.",
+            "Da vedere: il quartiere del Grund, nella parte bassa della capitale."
+          ]
+        },
+        {
+          "h2": "Danimarca: ponti a pagamento",
+          "image": "DK-2",
+          "paragraphs": [
+            "Ci si arriva via terra dalla Germania. Le autostrade danesi sono senza pedaggio, ma i ponti del Grande Belt (Storebælt) e dell'Øresund, verso la Svezia, sono a pagamento. Su entrambi il camper paga in base alla lunghezza.",
+            "Da vedere: il porto di Nyhavn, a Copenaghen."
+          ]
+        },
+        {
+          "h2": "Svezia: tassa di congestione a Stoccolma e Göteborg",
+          "image": "SE-1",
+          "paragraphs": [
+            "Dalla Danimarca si entra dal ponte dell'Øresund, senza traghetto. In Svezia i pedaggi stradali sono quasi assenti, ma Stoccolma e Göteborg applicano una tassa di congestione rilevata dalle telecamere. Con targa straniera la fattura la emette Epass24 e arriva al proprietario del veicolo, che te la riaddebita.",
+            "Da vedere: Gamla Stan, il centro storico di Stoccolma."
+          ]
+        },
+        {
+          "h2": "Norvegia: AutoPASS e traghetti nei fiordi",
+          "image": "NO-6",
+          "paragraphs": [
+            "Quasi tutti i pedaggi norvegesi sono automatici (AutoPASS): una telecamera legge la targa. Registra il camper su Epass24 prima del viaggio per pagare con la carta ed evitare che le fatture arrivino dopo al proprietario.",
+            "Molti itinerari nei fiordi comprendono brevi traghetti. Contano come traghetti ai fini del punto 7.4: includili nella richiesta di autorizzazione e ricorda che l'assicurazione non copre i danni propri durante la traversata.",
+            "La Norvegia non fa parte dell'Unione europea, quindi c'è la dogana. Da vedere: la Strada dell'Atlantico, tra Molde e Kristiansund."
+          ]
+        },
+        {
+          "h2": "Finlandia: via terra o in traghetto",
+          "image": "FI-7",
+          "paragraphs": [
+            "In Finlandia non ci sono pedaggi stradali. Ci si arriva via terra girando intorno al golfo di Botnia dal nord della Svezia, oppure in traghetto da Stoccolma o da Tallinn. Se scegli il traghetto, ti serve l'autorizzazione del punto 7.4.",
+            "Da Valencia è un viaggio molto lungo: calcola bene i chilometri e valuta il chilometraggio illimitato. Da vedere: le renne della Lapponia finlandese, per esempio a Kilpisjärvi, nell'estremo nord-ovest."
+          ]
+        },
+        {
+          "h2": "Lituania: la porta dei paesi baltici",
+          "image": "LT-1",
+          "paragraphs": [
+            "Dalla Polonia si entra in Lituania sulla Via Baltica, che prosegue attraverso la Lettonia fino all'Estonia. Tutti e tre i paesi sono nell'Unione europea e nell'area Schengen.",
+            "Da vedere: il castello di Trakai, su un'isola del lago Galvė, a mezz'ora da Vilnius."
+          ]
+        },
+        {
+          "h2": "Lettonia: Riga a piedi",
+          "image": "LV-3",
+          "paragraphs": [
+            "La Lettonia è il tratto centrale della Via Baltica. Il centro storico di Riga è piccolo e ha vie strette: lascia il camper in un campeggio o in un parcheggio custodito ed entra a piedi.",
+            "Da vedere: la piazza del Municipio di Riga e la Casa delle Teste Nere."
+          ]
+        },
+        {
+          "h2": "Estonia: Tallinn e il traghetto per la Finlandia",
+          "image": "EE-3",
+          "paragraphs": [
+            "L'Estonia è la fine della Via Baltica. Da Tallinn partono i traghetti per Helsinki; per imbarcare il camper serve l'autorizzazione scritta.",
+            "Da vedere: il panorama sul centro storico di Tallinn dalla collina di Toompea."
+          ]
+        },
+        {
+          "h2": "Polonia: solo tre tratte a pagamento",
+          "image": "PL-2",
+          "paragraphs": [
+            "In Polonia non c'è vignetta. Dal 2023 le autostrade statali sono gratuite per i veicoli fino a 3,5 t. Si paga solo su tre tratte in concessione: la A1 Danzica-Toruń, la A2 Świecko-Konin e la A4 Katowice-Cracovia.",
+            "Da vedere: il castello del Wawel, a Cracovia, alla fine della tratta a pagamento della A4."
+          ]
+        },
+        {
+          "h2": "Repubblica Ceca: e-vignetta",
+          "image": "CZ-1",
+          "paragraphs": [
+            "Le autostrade ceche richiedono la e-vignetta per i veicoli fino a 3,5 t. È legata alla targa, non c'è adesivo, e si compra sul sito ufficiale edalnice.cz.",
+            "Da vedere: il ponte Carlo, a Praga."
+          ]
+        },
+        {
+          "h2": "Slovacchia: e-vignetta",
+          "image": "SK-1",
+          "paragraphs": [
+            "Come in Repubblica Ceca, autostrade e superstrade slovacche richiedono una e-vignetta legata alla targa. Si compra sul sito ufficiale eznamka.sk.",
+            "Da vedere: il castello di Bratislava, sopra il Danubio."
+          ]
+        },
+        {
+          "h2": "Ungheria: e-matrica in categoria D1",
+          "image": "HU-3",
+          "paragraphs": [
+            "Le autostrade ungheresi richiedono la e-matrica, la vignetta elettronica. I camper immatricolati come M1, fino a 3,5 t e con al massimo 7 posti, rientrano nella categoria D1. Controlla i dati sulla carta di circolazione prima di comprarla.",
+            "Da vedere: il ponte delle Catene di Budapest, illuminato di notte."
+          ]
+        },
+        {
+          "h2": "Slovenia: e-vignetta in base all'altezza",
+          "image": "SI-3",
+          "paragraphs": [
+            "La Slovenia richiede la e-vignetta (e-vinjeta) su autostrade e superstrade. Per i veicoli fino a 3,5 t la classe dipende dall'altezza all'asse anteriore, con il limite a 1,30 m. Comprala solo sul sito ufficiale di DARS e verifica lì la classe del camper.",
+            "Da vedere: il lago di Bled."
+          ]
+        },
+        {
+          "h2": "Croazia: pedaggio a tratte e il ponte di Pelješac",
+          "image": "HR-2",
+          "paragraphs": [
+            "Le autostrade croate sono a pedaggio. Nel 2026 si paga ancora al casello; il paese ha annunciato un sistema senza barriere a partire da marzo 2027. Un camper fino a 3,5 t di solito paga la classe II.",
+            "Attenzione sulla strada per Dubrovnik: la costa croata è interrotta dalla Bosnia ed Erzegovina a Neum, e la Bosnia non è ammessa. Usa il ponte di Pelješac, che evita quel tratto.",
+            "Da vedere: il centro storico murato di Dubrovnik."
+          ]
+        },
+        {
+          "h2": "Grecia: solo in traghetto dall'Italia",
+          "image": "GR-3",
+          "paragraphs": [
+            "Via terra, tutte le strade per la Grecia passano da paesi non ammessi, che sia attraverso i Balcani o la Bulgaria. L'unica opzione è il traghetto dai porti italiani dell'Adriatico, come Ancona, Bari o Brindisi, fino a Igoumenitsa o Patrasso, con l'autorizzazione del punto 7.4.",
+            "Le autostrade greche hanno i caselli. Da vedere: i monasteri delle Meteore."
+          ]
+        },
+        {
+          "h2": "Cipro: traghetto stagionale e guida a sinistra",
+          "image": "CY-2",
+          "paragraphs": [
+            "A Cipro si arriva solo via mare. Nel 2026 il traghetto Pireo-Limassol ha viaggiato nella stagione estiva, con una traversata di circa 31 ore. Controlla se ci sono partenze nelle tue date prima di chiedere l'autorizzazione.",
+            "A Cipro si guida a sinistra. L'autorizzazione copre la Repubblica di Cipro: non passare con il camper nel nord dell'isola.",
+            "Da vedere: la roccia di Afrodite (Petra tou Romiou), vicino a Pafo."
+          ]
+        },
+        {
+          "h2": "Malta: traghetto dalla Sicilia",
+          "image": "MT-4",
+          "paragraphs": [
+            "Ci si arriva con il traghetto di Virtu Ferries da Pozzallo, in Sicilia, a La Valletta; la traversata dura meno di due ore.",
+            "A Malta si guida a sinistra e le strade sono strette. Con il camper si sta più comodi nei campeggi e nelle zone fuori dai centri abitati. Da vedere: la Grotta Azzurra, sulla costa sud dell'isola."
+          ]
+        },
+        {
+          "h2": "Islanda: traghetto dalla Danimarca e solo asfalto",
+          "image": "IS-1",
+          "paragraphs": [
+            "Il traghetto di Smyril Line parte da Hirtshals, in Danimarca, per Seyðisfjörður e di solito fa scalo alle isole Fær Øer. Le Fær Øer non sono nella lista dei paesi autorizzati: lì il camper non deve sbarcare.",
+            "Il contratto vieta di circolare fuori dalla rete asfaltata (punto 6.1.e). In Islanda questo esclude le strade F di montagna e le piste sterrate. La strada ad anello intorno all'isola è asfaltata.",
+            "Da vedere: la cascata di Skógafoss, accanto alla strada ad anello."
+          ]
+        },
+        {
+          "h2": "Gran Bretagna: traghetto e guida a sinistra",
+          "image": "GB-1",
+          "paragraphs": [
+            "Dal nord della Spagna, Brittany Ferries collega Bilbao e Santander con Portsmouth e Plymouth. Si può anche attraversare dalla Francia in traghetto o con il treno dell'Eurotunnel, sempre con autorizzazione scritta.",
+            "Si guida a sinistra. A Londra il camper rispetta la ULEZ come diesel Euro 6, ma TfL chiede di registrare prima i veicoli stranieri. L'attraversamento di Dartford, a est di Londra, si paga online entro la mezzanotte del giorno dopo.",
+            "Il contratto parla di Gran Bretagna: se il tuo percorso passa per l'Irlanda del Nord, dillo quando chiedi l'autorizzazione. Da vedere: il Tower Bridge di Londra."
+          ]
+        },
+        {
+          "h2": "Irlanda: traghetto diretto da Bilbao",
+          "image": "IE-1",
+          "paragraphs": [
+            "Brittany Ferries collega Bilbao con Rosslare senza passare dalla Francia. Un'altra opzione è il traghetto Cherbourg-Rosslare.",
+            "Si guida a sinistra. L'autostrada M50, intorno a Dublino, ha un pedaggio senza barriere: si paga su eflow.ie entro le 20:00 del giorno dopo.",
+            "Da vedere: le scogliere di Moher."
+          ]
+        },
+        {
+          "h2": "Paesi vietati",
+          "paragraphs": [
+            "Con il camper non si può entrare in questi paesi, neanche con un permesso. Il contratto vieta anche i viaggi in paesi in guerra o in conflitto armato (punto 7.3).",
+            "Il Marocco è la domanda che sentiamo più spesso a Valencia, e la risposta è no. I motivi sono due. Il Marocco è fuori dall'ambito dell'assicurazione, quindi lì il camper non avrebbe copertura dei danni propri. E per arrivarci serve un traghetto, durante il quale l'assicurazione non copre nemmeno quei danni. Se vuoi visitare il Marocco, attraversa a piedi come passeggero e lascia il camper in un campeggio o in un parcheggio sul lato spagnolo.",
+            "Neanche Gibilterra è ammessa: è territorio britannico fuori dalla lista, anche se si trova accanto a La Línea."
+          ],
+          "list": [
+            "Marocco.",
+            "Gibilterra.",
+            "Turchia.",
+            "Albania, Serbia, Bosnia ed Erzegovina, Montenegro e Macedonia del Nord.",
+            "Moldavia, Ucraina, Bielorussia e Russia.",
+            "Bulgaria, Romania e Liechtenstein: lì vale solo l'assicurazione obbligatoria di responsabilità civile, senza copertura dei danni propri, quindi anche questi paesi non sono ammessi."
+          ]
+        },
+        {
+          "h2": "Cosa succede se ci vai lo stesso",
+          "paragraphs": [
+            "Entrare in un paese non autorizzato è una grave violazione del contratto (punto 7.3). Il proprietario può risolvere il contratto, chiedere la restituzione immediata del camper e, se serve, avvisare le autorità.",
+            "Danni e spese sono a tuo carico, e fuori dal territorio autorizzato perdi le coperture assicurative. Un urto che in Spagna ti costerebbe al massimo la franchigia di 900 € diventa il costo completo della riparazione.",
+            "Lo stesso vale se viaggi senza autorizzazione scritta in uno dei 29 paesi ammessi."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Posso andare in Portogallo con il camper a noleggio?",
+          "a": "Sì, con un'autorizzazione scritta preventiva, da chiedere alla prenotazione o prima di partire. Ai pedaggi elettronici il camper paga in classe 2: associa una carta alla targa o usa Via Verde Visitors, e conserva le ricevute. Se non puoi dimostrare il pagamento, si addebitano i pedaggi non pagati più 50 € di spese di gestione."
+        },
+        {
+          "q": "Posso passare in Marocco con il camper?",
+          "a": "No. Il Marocco è fuori dall'ambito dell'assicurazione, e durante il traghetto l'assicurazione non copre nemmeno i danni propri. Andarci con il camper è una grave violazione del contratto. Puoi attraversare a piedi come passeggero e lasciare il camper in Spagna."
+        },
+        {
+          "q": "Cosa mi serve per andare in Francia?",
+          "a": "L'autorizzazione scritta, una carta per i péage (il camper paga la classe 3) e il bollino Crit'Air se entri in una zona a basse emissioni come Parigi o Lione. Si richiede su certificat-air.gouv.fr; un diesel del 2024 riceve il Crit'Air 2."
+        },
+        {
+          "q": "Posso andare ad Andorra?",
+          "a": "Sì, con autorizzazione scritta. In Andorra non ci sono autostrade né vignetta, ma c'è la dogana all'entrata e al ritorno, con limiti per tabacco e alcolici."
+        },
+        {
+          "q": "Posso portare il camper a Maiorca, Ibiza o Minorca?",
+          "a": "Sì. Le Baleari sono Spagna, ma il traghetto richiede un'autorizzazione scritta preventiva. Dall'imbarco allo sbarco l'assicurazione non copre i danni propri né l'incendio, e ogni danno lo paghi al costo reale."
+        },
+        {
+          "q": "Quali documenti devo portare fuori dalla Spagna?",
+          "a": "La patente, il contratto di noleggio, l'autorizzazione scritta per i paesi del tuo percorso e i documenti del veicolo con il certificato assicurativo, che restano nel camper. Nei paesi dell'Accordo Multilaterale di Garanzia la targa spagnola vale come prova di assicurazione e la carta verde non viene richiesta."
+        },
+        {
+          "q": "Posso andare in Grecia su strada?",
+          "a": "Non via terra: tutte le strade attraversano paesi non ammessi. Si va in traghetto dall'Italia, con autorizzazione scritta."
+        },
+        {
+          "q": "Cosa succede se entro in un paese che non è nella lista?",
+          "a": "È una grave violazione: il proprietario può risolvere il contratto e chiedere la restituzione immediata, e rispondi di tutti i danni e le spese senza il limite della franchigia, perché lì non c'è copertura dei danni propri."
+        }
+      ],
+      "cta": {
+        "text": "Se il tuo viaggio esce dalla Spagna, indicaci i paesi alla prenotazione e ti prepariamo l'autorizzazione scritta.",
+        "button": "Verifica disponibilità e prenota"
+      }
     }
   }
 }

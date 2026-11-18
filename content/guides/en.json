@@ -314,6 +314,366 @@
         "text": "Book the motorhome and check the exact price for your dates.",
         "button": "Check availability and book"
       }
+    },
+    "paises-autocaravana-alquiler": {
+      "metaTitle": "Rental motorhome abroad: allowed and forbidden countries",
+      "metaDescription": "Our Valencia motorhome can go to Portugal, France and 27 more countries with written permission. Insurance, ferries, vignettes and why not Morocco.",
+      "h1": "Which countries can you drive a rental motorhome to from Valencia",
+      "heroImage": "H-1",
+      "intro": "Almost every customer asks us the same thing before booking: can I cross into Portugal, drive up to France or go down to Morocco with the motorhome? Here is the full answer, taken from the rental contract (clauses 7.1 to 7.4), plus what you need to know in each country about tolls, vignettes and low emission zones. Our motorhome is a McLouis Yearling 89 on a Renault Master from 2024, diesel, 3.30 m high, with 5 seats. You drive it on a category B licence, so for tolls and vignettes it counts as a vehicle up to 3.5 t.",
+      "updated": "November 2026",
+      "sections": [
+        {
+          "h2": "How it works: Spain by default, 29 countries with written permission",
+          "image": "ES-1",
+          "paragraphs": [
+            "Without any extra step, the motorhome may only be driven in Spain (clause 7.1). To leave the country you need the owner's prior written permission.",
+            "Ask for it when you book or, at the latest, before you set off, by WhatsApp (+34 624 038 085) or by email (camper.retreat.alicante@gmail.com). Tell us the countries, the rough dates and whether you plan to take a ferry. We send you the permission in writing and you keep it in the motorhome together with the contract.",
+            "For long trips, check your mileage: every night includes 100 km, and in the booking calculator you can add 200 km per night or unlimited mileage. With the permission you can travel to these 29 countries (clause 7.2):"
+          ],
+          "list": [
+            "Southern Europe: Portugal, France, Andorra, Italy, Malta, Greece and Cyprus.",
+            "Central Europe: Germany, Switzerland, Austria, Belgium, the Netherlands and Luxembourg.",
+            "Northern Europe: Denmark, Sweden, Norway, Finland and Iceland.",
+            "Baltic states and Eastern Europe: Lithuania, Latvia, Estonia, Poland, Czechia, Slovakia and Hungary.",
+            "Adriatic: Slovenia and Croatia.",
+            "British Isles: Great Britain and Ireland."
+          ]
+        },
+        {
+          "h2": "Insurance outside Spain",
+          "paragraphs": [
+            "The motorhome has fully comprehensive insurance with an excess of 900 € per damage item (clause 11.1). Own damage cover only applies in Spain, Andorra and the countries of the Multilateral Guarantee Agreement, the green card system shared by European insurers. All 29 countries on the list are inside it.",
+            "In those countries the Spanish number plate counts as proof of insurance and no green card is needed. Even so, always carry the insurance certificate, which travels with the vehicle documents.",
+            "Outside the authorised area there is no own damage cover. If something happens there, you pay the full damage, with no excess cap (clause 11.4.d)."
+          ]
+        },
+        {
+          "h2": "Ferries, ports and airports: clause 7.4",
+          "paragraphs": [
+            "Putting the motorhome on a ferry, a train or any other transport needs prior written permission (clauses 6.1.h and 7.4). On top of that, the insurance does not cover own damage or fire during sea or air transport. From the start of loading to the end of unloading, manoeuvres inside the port included, you pay any damage at its real cost, with no excess cap.",
+            "Inside ports and airports you may only drive on public access roads and car parks and on the authorised boarding route. Quays, loading areas, runways and operational areas are off limits.",
+            "This also applies to the Balearic Islands. They are Spain, but you reach them by ferry: you need the same permission and the same insurance exclusion applies during the crossing. The Eurotunnel train under the Channel also needs written permission."
+          ]
+        },
+        {
+          "h2": "Tolls, vignettes and charges that arrive later",
+          "paragraphs": [
+            "Each country charges for its roads in its own way: toll booths, electronic tolls by number plate or a time-based vignette. Where there is a vignette, the motorhome falls into the category for vehicles up to 3.5 t. Buy vignettes on each country's official website; plenty of reseller sites add a commission.",
+            "Some tolls and city charges arrive weeks later, addressed to the vehicle owner. Under the contract, those amounts are charged to your card up to 12 months after the rental, always with the supporting document (clause 5.6). Paying on time during the trip saves you surcharges.",
+            "Keep the vehicle's own limits in mind too: 110 km/h maximum even where the road allows more, and no passages lower than 3.30 m (clause 6.4)."
+          ]
+        },
+        {
+          "h2": "Portugal: electronic tolls",
+          "image": "PT-1",
+          "paragraphs": [
+            "It is the trip we are asked about most and the easiest one: from Valencia you get there on dual carriageways in one long day of driving.",
+            "Many Portuguese motorways have electronic tolls with no booths: a gantry reads the number plate. With a Spanish plate you need to link a bank card to the plate (EasyToll) or rent a Via Verde Visitors device before the first tolled stretch. The motorhome pays as class 2.",
+            "The contract asks for one specific thing for Portugal: when you come back you must be able to show that you paid the tolls. If you cannot, the outstanding tolls are charged plus a 50 € handling fee (clause 7.2). Worth seeing: the Atlantic coast, from the Algarve to Lisbon and Porto."
+          ]
+        },
+        {
+          "h2": "France: class 3 péage and the Crit'Air sticker",
+          "image": "FR-1",
+          "paragraphs": [
+            "French motorways have toll booths. Motorhomes 3 m high or more pay class 3, and ours is 3.30 m. Without a toll tag, use the card payment lanes that have a height gauge.",
+            "To enter the low emission zones (ZFE) of cities such as Paris or Lyon you need the Crit'Air sticker, which you order on the official site certificat-air.gouv.fr. A diesel from 2024 gets Crit'Air 2.",
+            "Worth seeing: the lavender fields of Valensole in Provence, which bloom in early summer."
+          ]
+        },
+        {
+          "h2": "Andorra: no motorways, with customs",
+          "image": "AD-2",
+          "paragraphs": [
+            "You get there via La Seu d'Urgell. Andorra has no motorways and no vignette; the Envalira tunnel towards France does charge a toll.",
+            "Andorra is not in the European Union, so there are customs checks on the way in and on the way back to Spain, with purchase limits for tobacco and alcohol. Mountain roads have long descents: go down in a low gear so the brakes do not overheat.",
+            "Worth seeing: the cable cars and mountains of Grandvalira, in winter and in summer."
+          ]
+        },
+        {
+          "h2": "Italy: class B autostrada and ZTL zones",
+          "image": "IT-4",
+          "paragraphs": [
+            "Italian motorways have toll booths. Two-axle vehicles more than 1.30 m high at the front axle pay class B, and that includes the motorhome.",
+            "Almost every city centre has a ZTL, a limited traffic zone watched by cameras. If you drive in without a permit, the fine arrives months later. Park outside and go in on foot or by public transport.",
+            "Worth seeing: Rome and the Colosseum. Leave the motorhome at a campsite on the outskirts and go in by metro or bus. Italian ports are also where the ferries to Greece and Malta leave from."
+          ]
+        },
+        {
+          "h2": "Switzerland: compulsory annual vignette",
+          "image": "CH-3",
+          "paragraphs": [
+            "To use Swiss motorways you need the vignette, which only comes as an annual one: 40 CHF for vehicles up to 3.5 t. Since 2023 there is an e-vignette linked to the number plate, sold on the official site via.admin.ch.",
+            "Switzerland is not in the European Union: there are customs checks and you may be asked for the contract and the permission. Mountain passes are steep; use engine braking on the way down.",
+            "Worth seeing: the Alpine lakes and passes, best in summer, when all the passes are open."
+          ]
+        },
+        {
+          "h2": "Austria: vignette and the 18-day wait",
+          "image": "AT-4",
+          "paragraphs": [
+            "Austrian motorways and expressways require a vignette for vehicles up to 3.5 t. The digital vignette is linked to the number plate and sold in the official ASFINAG shop, for 1 day, 10 days, 2 months or a year.",
+            "Watch the timing: a 2-month or annual digital vignette bought online as a private person only becomes valid 18 days after purchase. The 1-day and 10-day ones are valid straight away. Some tunnels and mountain sections have a separate toll.",
+            "Worth seeing: Vienna and its State Opera."
+          ]
+        },
+        {
+          "h2": "Germany: toll-free autobahn and the green sticker",
+          "image": "DE-2",
+          "paragraphs": [
+            "Vehicles up to 3.5 t pay no toll and need no vignette on German motorways; only heavier vehicles pay the toll.",
+            "Around 35 cities have an environmental zone (Umweltzone) and require the green sticker (Umweltplakette), foreign vehicles included. Without it the fine is 100 €. Ask us whether the motorhome already has one; if not, you can order it online before the trip.",
+            "Germany is the way through to Denmark, Poland and Czechia, and it has plenty of well equipped motorhome stopovers (Stellplätze). Worth seeing: Neuschwanstein Castle in Bavaria, from the Marienbrücke bridge."
+          ]
+        },
+        {
+          "h2": "Belgium: LEZ zones with prior registration",
+          "image": "BE-1",
+          "paragraphs": [
+            "Belgian motorways have no toll for vehicles up to 3.5 t.",
+            "Brussels, Antwerp and Ghent have a low emission zone (LEZ). A Euro 6 diesel may enter, but foreign vehicles have to register first, free of charge. Brussels and Flanders (Antwerp and Ghent) keep separate registers.",
+            "Worth seeing: the canals of Bruges, best explored on foot from a car park on the edge of town."
+          ]
+        },
+        {
+          "h2": "The Netherlands: no motorway tolls",
+          "image": "NL-1",
+          "paragraphs": [
+            "The Netherlands has no motorway tolls. You only pay in a few tunnels, such as the Westerschelde tunnel in Zeeland.",
+            "Several cities have an environmental zone (milieuzone) for older diesels; as a diesel from 2024, the motorhome meets the Euro 6 standard. Parking in city centres is expensive: use the P+R car parks on the outskirts.",
+            "Worth seeing: the windmills of Kinderdijk, near Rotterdam."
+          ]
+        },
+        {
+          "h2": "Luxembourg: no tolls and cheap diesel",
+          "image": "LU-1",
+          "paragraphs": [
+            "Luxembourg has no tolls and no vignette, and diesel usually costs less than in the neighbouring countries. It is a good place to fill the tank.",
+            "Worth seeing: the Grund district, in the lower part of the capital."
+          ]
+        },
+        {
+          "h2": "Denmark: toll bridges",
+          "image": "DK-2",
+          "paragraphs": [
+            "You get there by land from Germany. Danish motorways have no toll, but the Great Belt (Storebælt) bridge and the Øresund bridge to Sweden do. On both, the motorhome pays according to its length.",
+            "Worth seeing: the Nyhavn harbour in Copenhagen."
+          ]
+        },
+        {
+          "h2": "Sweden: congestion tax in Stockholm and Gothenburg",
+          "image": "SE-1",
+          "paragraphs": [
+            "From Denmark you cross the Øresund bridge, with no ferry. Sweden has hardly any road tolls, but Stockholm and Gothenburg charge a congestion tax by camera. For foreign plates the invoice is issued by Epass24 and goes to the vehicle owner, who passes it on to you.",
+            "Worth seeing: Gamla Stan, the old town of Stockholm."
+          ]
+        },
+        {
+          "h2": "Norway: AutoPASS and fjord ferries",
+          "image": "NO-6",
+          "paragraphs": [
+            "Almost all Norwegian tolls are automatic (AutoPASS): a camera reads the number plate. Register the motorhome with Epass24 before the trip so you can pay by card and the invoices do not reach the owner later.",
+            "Many fjord routes include short ferries. They count as ferries under clause 7.4: include them in your permission request and remember that the insurance does not cover own damage during the crossing.",
+            "Norway is not in the European Union, so there are customs checks. Worth seeing: the Atlantic Road, between Molde and Kristiansund."
+          ]
+        },
+        {
+          "h2": "Finland: by land or by ferry",
+          "image": "FI-7",
+          "paragraphs": [
+            "Finland has no road tolls. You get there by land around the Gulf of Bothnia through northern Sweden, or by ferry from Stockholm or Tallinn. If you choose the ferry, you need the permission described in clause 7.4.",
+            "It is a very long trip from Valencia: work out the kilometres carefully and consider unlimited mileage. Worth seeing: the reindeer of Finnish Lapland, for example around Kilpisjärvi in the far north-west."
+          ]
+        },
+        {
+          "h2": "Lithuania: the gateway to the Baltic states",
+          "image": "LT-1",
+          "paragraphs": [
+            "From Poland you enter Lithuania on the Via Baltica, which continues through Latvia to Estonia. All three countries are in the European Union and the Schengen area.",
+            "Worth seeing: Trakai Castle, on an island in Lake Galvė, half an hour from Vilnius."
+          ]
+        },
+        {
+          "h2": "Latvia: Riga on foot",
+          "image": "LV-3",
+          "paragraphs": [
+            "Latvia is the middle stretch of the Via Baltica. Riga's old town is small, with narrow streets: leave the motorhome at a campsite or a guarded car park and walk in.",
+            "Worth seeing: Riga's Town Hall Square and the House of the Blackheads."
+          ]
+        },
+        {
+          "h2": "Estonia: Tallinn and the ferry to Finland",
+          "image": "EE-3",
+          "paragraphs": [
+            "Estonia is the end of the Via Baltica. Ferries to Helsinki leave from Tallinn; to take the motorhome on board you need written permission.",
+            "Worth seeing: the views over Tallinn's old town from Toompea hill."
+          ]
+        },
+        {
+          "h2": "Poland: only three toll sections",
+          "image": "PL-2",
+          "paragraphs": [
+            "Poland has no vignette. Since 2023 state motorways have been free for vehicles up to 3.5 t. You only pay on three concession sections: the A1 Gdańsk-Toruń, the A2 Świecko-Konin and the A4 Katowice-Kraków.",
+            "Worth seeing: Wawel Castle in Kraków, at the end of the tolled stretch of the A4."
+          ]
+        },
+        {
+          "h2": "Czechia: e-vignette",
+          "image": "CZ-1",
+          "paragraphs": [
+            "Czech motorways require an e-vignette for vehicles up to 3.5 t. It is linked to the number plate, there is no sticker, and you buy it on the official site edalnice.cz.",
+            "Worth seeing: Charles Bridge in Prague."
+          ]
+        },
+        {
+          "h2": "Slovakia: e-vignette",
+          "image": "SK-1",
+          "paragraphs": [
+            "As in Czechia, Slovak motorways and expressways require an e-vignette linked to the number plate. You buy it on the official site eznamka.sk.",
+            "Worth seeing: Bratislava Castle above the Danube."
+          ]
+        },
+        {
+          "h2": "Hungary: e-matrica in category D1",
+          "image": "HU-3",
+          "paragraphs": [
+            "Hungarian motorways require an e-matrica, the electronic vignette. Motorhomes registered as M1, up to 3.5 t and with no more than 7 seats go in category D1. Check the details in the registration certificate before you buy it.",
+            "Worth seeing: the Chain Bridge in Budapest, lit up at night."
+          ]
+        },
+        {
+          "h2": "Slovenia: e-vignette by height",
+          "image": "SI-3",
+          "paragraphs": [
+            "Slovenia requires an e-vignette (e-vinjeta) on motorways and expressways. For vehicles up to 3.5 t, the class depends on the height at the front axle, with the limit at 1.30 m. Buy it only on the official DARS site and check the motorhome's class there.",
+            "Worth seeing: Lake Bled."
+          ]
+        },
+        {
+          "h2": "Croatia: tolls by section and the Pelješac bridge",
+          "image": "HR-2",
+          "paragraphs": [
+            "Croatian motorways are tolled. In 2026 you still pay at booths; the country has announced a barrier-free system from March 2027. A motorhome up to 3.5 t usually pays class II.",
+            "Take care on the way to Dubrovnik: the Croatian coast is cut by Bosnia and Herzegovina at Neum, and Bosnia is not allowed. Use the Pelješac bridge, which avoids that stretch.",
+            "Worth seeing: the walled old town of Dubrovnik."
+          ]
+        },
+        {
+          "h2": "Greece: only by ferry from Italy",
+          "image": "GR-3",
+          "paragraphs": [
+            "By land, every route to Greece goes through countries that are not allowed, either through the Balkans or through Bulgaria. The only option is the ferry from Italian Adriatic ports such as Ancona, Bari or Brindisi to Igoumenitsa or Patras, with the permission described in clause 7.4.",
+            "Greek motorways have toll booths. Worth seeing: the monasteries of Meteora."
+          ]
+        },
+        {
+          "h2": "Cyprus: seasonal ferry and driving on the left",
+          "image": "CY-2",
+          "paragraphs": [
+            "Cyprus can only be reached by sea. In 2026 the Piraeus-Limassol ferry ran in the summer season, with a crossing of about 31 hours. Check whether there are sailings on your dates before asking for permission.",
+            "In Cyprus you drive on the left. The permission covers the Republic of Cyprus: do not cross into the north of the island with the motorhome.",
+            "Worth seeing: Aphrodite's Rock (Petra tou Romiou), near Paphos."
+          ]
+        },
+        {
+          "h2": "Malta: ferry from Sicily",
+          "image": "MT-4",
+          "paragraphs": [
+            "You get there on the Virtu Ferries ferry from Pozzallo in Sicily to Valletta; the crossing takes less than two hours.",
+            "In Malta you drive on the left and the streets are narrow. The motorhome is more comfortable at campsites and in areas outside the towns. Worth seeing: the Blue Grotto, on the south coast of the island."
+          ]
+        },
+        {
+          "h2": "Iceland: ferry from Denmark and tarmac only",
+          "image": "IS-1",
+          "paragraphs": [
+            "The Smyril Line ferry sails from Hirtshals in Denmark to Seyðisfjörður and usually calls at the Faroe Islands. The Faroes are not on the list of authorised countries: the motorhome must not leave the ship there.",
+            "The contract forbids driving off the paved road network (clause 6.1.e). In Iceland that rules out the F mountain roads and gravel tracks. The ring road around the island is paved.",
+            "Worth seeing: the Skógafoss waterfall, right by the ring road."
+          ]
+        },
+        {
+          "h2": "Great Britain: ferry and driving on the left",
+          "image": "GB-1",
+          "paragraphs": [
+            "From northern Spain, Brittany Ferries links Bilbao and Santander with Portsmouth and Plymouth. You can also cross from France by ferry or on the Eurotunnel train, always with written permission.",
+            "You drive on the left. In London the motorhome meets the ULEZ standard as a Euro 6 diesel, but TfL asks for foreign vehicles to be registered in advance. The Dartford Crossing, east of London, is paid online by midnight the following day.",
+            "The contract says Great Britain: if your route goes through Northern Ireland, mention it when you ask for permission. Worth seeing: Tower Bridge in London."
+          ]
+        },
+        {
+          "h2": "Ireland: direct ferry from Bilbao",
+          "image": "IE-1",
+          "paragraphs": [
+            "Brittany Ferries links Bilbao with Rosslare without going through France. Another option is the Cherbourg-Rosslare ferry.",
+            "You drive on the left. The M50 motorway around Dublin has a barrier-free toll: pay it on eflow.ie before 20:00 the following day.",
+            "Worth seeing: the Cliffs of Moher."
+          ]
+        },
+        {
+          "h2": "Forbidden countries",
+          "paragraphs": [
+            "The motorhome may not enter these countries, not even with permission. The contract also forbids travelling to countries at war or in armed conflict (clause 7.3).",
+            "Morocco is the question we hear most often in Valencia, and the answer is no. There are two reasons. Morocco is outside the insurance territory, so the motorhome would have no own damage cover there. And getting there takes a ferry, during which the insurance does not cover that damage either. If you want to visit Morocco, cross as a foot passenger and leave the motorhome at a campsite or car park on the Spanish side.",
+            "Gibraltar is not allowed either: it is British territory that is not on the list, even though it sits right next to La Línea."
+          ],
+          "list": [
+            "Morocco.",
+            "Gibraltar.",
+            "Turkey.",
+            "Albania, Serbia, Bosnia and Herzegovina, Montenegro and North Macedonia.",
+            "Moldova, Ukraine, Belarus and Russia.",
+            "Bulgaria, Romania and Liechtenstein: only compulsory third-party liability insurance applies there, with no own damage cover, so they are not allowed either."
+          ]
+        },
+        {
+          "h2": "What happens if you go anyway",
+          "paragraphs": [
+            "Entering a country that is not authorised is a material breach of the contract (clause 7.3). The owner may terminate the contract, demand the immediate return of the motorhome and, if needed, inform the authorities.",
+            "Damage and costs are yours to pay, and outside the authorised territory you lose the insurance cover. A knock that in Spain would cost you at most the 900 € excess turns into the full cost of the repair.",
+            "The same applies if you travel to one of the 29 allowed countries without written permission."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Can I take the rental motorhome to Portugal?",
+          "a": "Yes, with prior written permission, which you ask for when you book or before you leave. On electronic tolls the motorhome pays as class 2: link a card to the number plate or use Via Verde Visitors, and keep the receipts. If you cannot show payment, the outstanding tolls are charged plus a 50 € handling fee."
+        },
+        {
+          "q": "Can I cross to Morocco with the motorhome?",
+          "a": "No. Morocco is outside the insurance territory, and during the ferry crossing the insurance does not cover own damage either. Taking the motorhome there is a material breach of the contract. You can cross as a foot passenger and leave the motorhome in Spain."
+        },
+        {
+          "q": "What do I need to travel to France?",
+          "a": "The written permission, a card for the péages (the motorhome pays class 3) and the Crit'Air sticker if you plan to enter a low emission zone such as Paris or Lyon. Order it on certificat-air.gouv.fr; a diesel from 2024 gets Crit'Air 2."
+        },
+        {
+          "q": "Can I go to Andorra?",
+          "a": "Yes, with written permission. Andorra has no motorways and no vignette, but there are customs checks on the way in and on the way back, with limits for tobacco and alcohol."
+        },
+        {
+          "q": "Can I take the motorhome to Mallorca, Ibiza or Menorca?",
+          "a": "Yes. The Balearic Islands are Spain, but the ferry needs prior written permission. From loading to unloading the insurance does not cover own damage or fire, and you pay any damage at its real cost."
+        },
+        {
+          "q": "Which documents do I need outside Spain?",
+          "a": "Your driving licence, the rental contract, the written permission for the countries on your route and the vehicle documents with the insurance certificate, which stay in the motorhome. In the countries of the Multilateral Guarantee Agreement the Spanish plate counts as proof of insurance and no green card is asked for."
+        },
+        {
+          "q": "Can I drive to Greece?",
+          "a": "Not overland: every route crosses countries that are not allowed. You go by ferry from Italy, with written permission."
+        },
+        {
+          "q": "What happens if I enter a country that is not on the list?",
+          "a": "It is a material breach: the owner may terminate the contract and demand the motorhome back immediately, and you are liable for all damage and costs with no excess cap, because there is no own damage cover there."
+        }
+      ],
+      "cta": {
+        "text": "If your trip leaves Spain, tell us the countries when you book and we will prepare the written permission.",
+        "button": "Check availability and book"
+      }
     }
   }
 }

@@ -314,6 +314,366 @@
         "text": "Reserva la autocaravana y revisa el precio exacto de tus fechas.",
         "button": "Ver disponibilidad y reservar"
       }
+    },
+    "paises-autocaravana-alquiler": {
+      "metaTitle": "Autocaravana de alquiler: países permitidos y prohibidos",
+      "metaDescription": "Con nuestra autocaravana de Valencia puedes ir a Portugal, Francia y 27 países más con permiso escrito. Seguro, ferris, viñetas y por qué Marruecos no.",
+      "h1": "A qué países puedes viajar con una autocaravana de alquiler desde Valencia",
+      "heroImage": "H-1",
+      "intro": "Casi todos los clientes nos hacen la misma pregunta antes de reservar: si pueden cruzar a Portugal, subir a Francia o bajar a Marruecos con la autocaravana. Aquí tienes la respuesta completa, sacada del contrato de alquiler (apartados 7.1 a 7.4), con lo que conviene saber en cada país sobre peajes, viñetas y zonas de bajas emisiones. Nuestra autocaravana es una McLouis Yearling 89 sobre Renault Master de 2024, diésel, de 3,30 m de altura y 5 plazas. Se conduce con el permiso B, así que en peajes y viñetas cuenta como vehículo de hasta 3,5 t.",
+      "updated": "noviembre de 2026",
+      "sections": [
+        {
+          "h2": "Cómo funciona: España por defecto y 29 países con permiso escrito",
+          "image": "ES-1",
+          "paragraphs": [
+            "Sin ningún trámite, la autocaravana solo puede circular por España (apartado 7.1). Para salir del país necesitas una autorización escrita previa del propietario.",
+            "Pídela al reservar o, como tarde, antes de salir, por WhatsApp (+34 624 038 085) o por email (camper.retreat.alicante@gmail.com). Indica los países, las fechas aproximadas y si vas a tomar algún ferry. Te enviamos la autorización por escrito y la llevas en la autocaravana junto con el contrato.",
+            "Para viajes largos, revisa el kilometraje: cada noche incluye 100 km, y en el calculador de reserva puedes añadir 200 km por noche o kilometraje ilimitado. Con la autorización puedes viajar a estos 29 países (apartado 7.2):"
+          ],
+          "list": [
+            "Sur de Europa: Portugal, Francia, Andorra, Italia, Malta, Grecia y Chipre.",
+            "Centro de Europa: Alemania, Suiza, Austria, Bélgica, Países Bajos (Holanda) y Luxemburgo.",
+            "Norte de Europa: Dinamarca, Suecia, Noruega, Finlandia e Islandia.",
+            "Países bálticos y Europa del Este: Lituania, Letonia, Estonia, Polonia, República Checa, Eslovaquia y Hungría.",
+            "Adriático: Eslovenia y Croacia.",
+            "Islas Británicas: Gran Bretaña e Irlanda."
+          ]
+        },
+        {
+          "h2": "El seguro fuera de España",
+          "paragraphs": [
+            "La autocaravana tiene seguro a todo riesgo con una franquicia de 900 € por cada parte de siniestro (apartado 11.1). La cobertura de daños propios solo se aplica en España, Andorra y los países del Acuerdo Multilateral de Garantía, el sistema de la carta verde que comparten las aseguradoras europeas. Los 29 países de la lista están dentro.",
+            "En esos países la matrícula española sirve como prueba de seguro y no hace falta carta verde. Aun así, lleva siempre el certificado del seguro, que va con la documentación del vehículo.",
+            "Fuera de la zona autorizada no hay cobertura de daños propios. Si pasa algo allí, pagas el daño completo, sin el límite de la franquicia (apartado 11.4.d)."
+          ]
+        },
+        {
+          "h2": "Ferris, puertos y aeropuertos: el apartado 7.4",
+          "paragraphs": [
+            "Subir la autocaravana a un ferry, a un tren o a cualquier otro transporte necesita autorización escrita previa (apartados 6.1.h y 7.4). Además, el seguro no cubre los daños propios ni el incendio durante el transporte por mar o por aire. Desde que empieza el embarque hasta que termina el desembarque, maniobras en el puerto incluidas, cualquier daño lo pagas por su coste real, sin el límite de la franquicia.",
+            "Dentro de puertos y aeropuertos solo puedes circular por los accesos y aparcamientos abiertos al público y por el camino de embarque autorizado. Muelles, zonas de carga, pistas y zonas de operaciones están prohibidos.",
+            "Esto también vale para Baleares. Las islas son España, pero se llega en ferry: necesitas la misma autorización y durante la travesía rige la misma exclusión del seguro. El tren del Eurotúnel, bajo el canal de la Mancha, también necesita autorización escrita."
+          ]
+        },
+        {
+          "h2": "Peajes, viñetas y cargos que llegan después",
+          "paragraphs": [
+            "Cada país cobra las carreteras a su manera: peaje en cabina, peaje electrónico por matrícula o viñeta por tiempo. Donde hay viñeta, la autocaravana entra en la categoría de vehículos de hasta 3,5 t. Compra las viñetas en la web oficial de cada país; hay muchas webs intermediarias que cobran comisión.",
+            "Algunos peajes y tasas urbanas llegan semanas después a nombre del propietario del vehículo. Según el contrato, esos importes se cargan en tu tarjeta hasta 12 meses después del alquiler, siempre con el justificante (apartado 5.6). Pagar a tiempo durante el viaje te ahorra recargos.",
+            "Ten en cuenta también los límites del propio vehículo: 110 km/h como máximo aunque la vía permita más, y nada de pasos de menos de 3,30 m de altura (apartado 6.4)."
+          ]
+        },
+        {
+          "h2": "Portugal: peajes electrónicos",
+          "image": "PT-1",
+          "paragraphs": [
+            "Es el destino que más nos piden y el más sencillo: desde Valencia se llega por autovía en un día largo de viaje.",
+            "Muchas autopistas portuguesas tienen peaje electrónico sin cabinas: un pórtico lee la matrícula. Con matrícula española hay que asociar una tarjeta bancaria a la matrícula (EasyToll) o alquilar un dispositivo Via Verde Visitors antes del primer tramo. La autocaravana paga como clase 2.",
+            "El contrato pide una cosa concreta para Portugal: a la vuelta tienes que poder demostrar que pagaste los peajes. Si no, se cobran los peajes pendientes más 50 € de gestión (apartado 7.2). Para ver: la costa atlántica, del Algarve a Lisboa y Oporto."
+          ]
+        },
+        {
+          "h2": "Francia: péage en clase 3 y etiqueta Crit'Air",
+          "image": "FR-1",
+          "paragraphs": [
+            "Las autopistas francesas son de peaje en cabina. Las autocaravanas de 3 m de altura o más pagan clase 3, y la nuestra mide 3,30 m. Si no llevas telepeaje, usa los carriles de pago con tarjeta que tienen gálibo de altura.",
+            "Para entrar en las zonas de bajas emisiones (ZFE) de ciudades como París o Lyon hace falta la etiqueta Crit'Air, que se pide en la web oficial certificat-air.gouv.fr. Un diésel de 2024 recibe la Crit'Air 2.",
+            "Para ver: los campos de lavanda de Valensole, en Provenza, que florecen a principios del verano."
+          ]
+        },
+        {
+          "h2": "Andorra: sin autopistas y con aduana",
+          "image": "AD-2",
+          "paragraphs": [
+            "Se llega por La Seu d'Urgell. En Andorra no hay autopistas ni viñeta; el túnel de Envalira, hacia Francia, sí es de peaje.",
+            "Andorra no está en la Unión Europea, así que hay aduana al entrar y al volver a España, con límites de compra para tabaco y alcohol. Las carreteras de montaña tienen bajadas largas: baja con marcha corta para no calentar los frenos.",
+            "Para ver: los telecabinas y las montañas de Grandvalira, en invierno y en verano."
+          ]
+        },
+        {
+          "h2": "Italia: autostrada en clase B y zonas ZTL",
+          "image": "IT-4",
+          "paragraphs": [
+            "Las autopistas italianas son de peaje en cabina. Los vehículos de dos ejes con más de 1,30 m de altura sobre el eje delantero pagan clase B, y es el caso de la autocaravana.",
+            "En el centro de casi todas las ciudades hay ZTL, zonas de tráfico limitado vigiladas con cámaras. Si entras sin permiso, la multa llega meses después. Aparca fuera y entra a pie o en transporte público.",
+            "Para ver: Roma y el Coliseo. Deja la autocaravana en un camping de las afueras y entra en metro o autobús. Desde los puertos italianos salen también los ferris a Grecia y a Malta."
+          ]
+        },
+        {
+          "h2": "Suiza: viñeta anual obligatoria",
+          "image": "CH-3",
+          "paragraphs": [
+            "Para usar las autopistas suizas hace falta la viñeta, que solo existe en versión anual: 40 CHF para vehículos de hasta 3,5 t. Desde 2023 hay e-viñeta ligada a la matrícula, que se compra en la web oficial via.admin.ch.",
+            "Suiza no está en la Unión Europea: hay aduana y te pueden pedir el contrato y la autorización. Los puertos de montaña tienen pendientes fuertes; usa el freno motor en las bajadas.",
+            "Para ver: los lagos y puertos alpinos, mejor en verano, cuando todos los puertos están abiertos."
+          ]
+        },
+        {
+          "h2": "Austria: viñeta y el plazo de 18 días",
+          "image": "AT-4",
+          "paragraphs": [
+            "Las autopistas y vías rápidas austriacas piden viñeta para vehículos de hasta 3,5 t. La viñeta digital va ligada a la matrícula y se compra en la tienda oficial de ASFINAG, para 1 día, 10 días, 2 meses o un año.",
+            "Atención al plazo: la viñeta digital de 2 meses o anual comprada online como particular empieza a valer 18 días después de la compra. Las de 1 y 10 días valen al momento. Algunos túneles y tramos de montaña tienen peaje aparte.",
+            "Para ver: Viena y su Ópera Estatal."
+          ]
+        },
+        {
+          "h2": "Alemania: autobahn sin peaje y etiqueta verde",
+          "image": "DE-2",
+          "paragraphs": [
+            "Para vehículos de hasta 3,5 t no hay peaje ni viñeta en las autopistas alemanas; el peaje solo lo pagan los vehículos más pesados.",
+            "Unas 35 ciudades tienen zona ambiental (Umweltzone) y exigen la etiqueta verde (Umweltplakette), también a los vehículos extranjeros. Sin ella, la multa es de 100 €. Pregúntanos si la autocaravana ya la lleva; si no, se pide online antes del viaje.",
+            "Alemania es el paso hacia Dinamarca, Polonia y la República Checa, y tiene muchas áreas de autocaravanas (Stellplätze) bien equipadas. Para ver: el castillo de Neuschwanstein, en Baviera, desde el puente de María (Marienbrücke)."
+          ]
+        },
+        {
+          "h2": "Bélgica: zonas LEZ con registro previo",
+          "image": "BE-1",
+          "paragraphs": [
+            "Las autopistas belgas no tienen peaje para vehículos de hasta 3,5 t.",
+            "Bruselas, Amberes y Gante tienen zona de bajas emisiones (LEZ). Un diésel Euro 6 puede entrar, pero los vehículos extranjeros tienen que registrarse antes, gratis. Bruselas y Flandes (Amberes y Gante) llevan registros separados.",
+            "Para ver: los canales de Brujas, que se recorren mejor a pie desde un aparcamiento de las afueras."
+          ]
+        },
+        {
+          "h2": "Países Bajos: sin peaje de autopista",
+          "image": "NL-1",
+          "paragraphs": [
+            "En los Países Bajos no hay peaje en las autopistas. Solo se paga en algunos túneles, como el de Westerschelde, en Zelanda.",
+            "Varias ciudades tienen zona ambiental (milieuzone) para diésel antiguos; la autocaravana, como diésel de 2024, cumple la norma Euro 6. Aparcar en el centro de las ciudades es caro: usa los aparcamientos P+R de las afueras.",
+            "Para ver: los molinos de Kinderdijk, cerca de Róterdam."
+          ]
+        },
+        {
+          "h2": "Luxemburgo: sin peajes y con gasóleo barato",
+          "image": "LU-1",
+          "paragraphs": [
+            "Luxemburgo no tiene peajes ni viñeta, y el gasóleo suele costar menos que en los países vecinos. Es buen sitio para llenar el depósito.",
+            "Para ver: el barrio del Grund, en la parte baja de la capital."
+          ]
+        },
+        {
+          "h2": "Dinamarca: puentes de pago",
+          "image": "DK-2",
+          "paragraphs": [
+            "Se llega por tierra desde Alemania. Las autopistas danesas no tienen peaje, pero los puentes del Gran Belt (Storebælt) y de Øresund, hacia Suecia, sí. En los dos la autocaravana paga según su longitud.",
+            "Para ver: el puerto de Nyhavn, en Copenhague."
+          ]
+        },
+        {
+          "h2": "Suecia: tasa de congestión en Estocolmo y Gotemburgo",
+          "image": "SE-1",
+          "paragraphs": [
+            "Desde Dinamarca se entra por el puente de Øresund, sin ferry. En Suecia casi no hay peajes de carretera, pero Estocolmo y Gotemburgo cobran una tasa de congestión por cámara. Con matrícula extranjera, la factura la emite Epass24 y llega al propietario del vehículo, que te la repercute.",
+            "Para ver: Gamla Stan, el casco antiguo de Estocolmo."
+          ]
+        },
+        {
+          "h2": "Noruega: AutoPASS y ferris de los fiordos",
+          "image": "NO-6",
+          "paragraphs": [
+            "Casi todos los peajes noruegos son automáticos (AutoPASS): una cámara lee la matrícula. Registra la autocaravana en Epass24 antes del viaje para pagar con tarjeta y evitar que las facturas lleguen después al propietario.",
+            "Muchas rutas por los fiordos incluyen ferris cortos. Cuentan como ferris a efectos del apartado 7.4: inclúyelos en la petición de autorización y recuerda que el seguro no cubre los daños propios durante la travesía.",
+            "Noruega no está en la Unión Europea, así que hay aduana. Para ver: la Carretera del Atlántico, entre Molde y Kristiansund."
+          ]
+        },
+        {
+          "h2": "Finlandia: por tierra o en ferry",
+          "image": "FI-7",
+          "paragraphs": [
+            "Finlandia no tiene peajes de carretera. Se llega por tierra rodeando el golfo de Botnia por el norte de Suecia, o en ferry desde Estocolmo o Tallin. Si eliges el ferry, necesitas la autorización del apartado 7.4.",
+            "Es un viaje muy largo desde Valencia: calcula bien los kilómetros y valora el kilometraje ilimitado. Para ver: los renos de la Laponia finlandesa, por ejemplo en Kilpisjärvi, en el extremo noroeste."
+          ]
+        },
+        {
+          "h2": "Lituania: la entrada a los países bálticos",
+          "image": "LT-1",
+          "paragraphs": [
+            "Desde Polonia se entra en Lituania por la Via Baltica, que sigue por Letonia hasta Estonia. Los tres países están en la Unión Europea y en el espacio Schengen.",
+            "Para ver: el castillo de Trakai, en una isla del lago Galvė, a media hora de Vilna."
+          ]
+        },
+        {
+          "h2": "Letonia: Riga a pie",
+          "image": "LV-3",
+          "paragraphs": [
+            "Letonia es el tramo central de la Via Baltica. El casco antiguo de Riga es pequeño y de calles estrechas: deja la autocaravana en un camping o en un aparcamiento vigilado y entra a pie.",
+            "Para ver: la plaza del Ayuntamiento de Riga y la Casa de los Cabezas Negras."
+          ]
+        },
+        {
+          "h2": "Estonia: Tallin y el ferry a Finlandia",
+          "image": "EE-3",
+          "paragraphs": [
+            "Estonia es el final de la Via Baltica. Desde Tallin salen los ferris a Helsinki; para subir la autocaravana necesitas autorización escrita.",
+            "Para ver: las vistas del casco antiguo de Tallin desde la colina de Toompea."
+          ]
+        },
+        {
+          "h2": "Polonia: solo tres tramos de peaje",
+          "image": "PL-2",
+          "paragraphs": [
+            "Polonia no tiene viñeta. Desde 2023 las autopistas estatales son gratuitas para vehículos de hasta 3,5 t. Solo se paga en tres tramos de concesión: la A1 Gdańsk-Toruń, la A2 Świecko-Konin y la A4 Katowice-Cracovia.",
+            "Para ver: el castillo de Wawel, en Cracovia, al final del tramo de pago de la A4."
+          ]
+        },
+        {
+          "h2": "República Checa: e-viñeta",
+          "image": "CZ-1",
+          "paragraphs": [
+            "Las autopistas checas piden e-viñeta para vehículos de hasta 3,5 t. Va ligada a la matrícula, no hay pegatina, y se compra en la web oficial edalnice.cz.",
+            "Para ver: el puente de Carlos, en Praga."
+          ]
+        },
+        {
+          "h2": "Eslovaquia: e-viñeta",
+          "image": "SK-1",
+          "paragraphs": [
+            "Como en la República Checa, las autopistas y vías rápidas eslovacas piden e-viñeta ligada a la matrícula. Se compra en la web oficial eznamka.sk.",
+            "Para ver: el castillo de Bratislava, sobre el Danubio."
+          ]
+        },
+        {
+          "h2": "Hungría: e-matrica en categoría D1",
+          "image": "HU-3",
+          "paragraphs": [
+            "Las autopistas húngaras piden e-matrica, la viñeta electrónica. Las autocaravanas registradas como M1, de hasta 3,5 t y con un máximo de 7 plazas van en la categoría D1. Comprueba los datos en el permiso de circulación antes de comprarla.",
+            "Para ver: el puente de las Cadenas de Budapest, iluminado de noche."
+          ]
+        },
+        {
+          "h2": "Eslovenia: e-viñeta según la altura",
+          "image": "SI-3",
+          "paragraphs": [
+            "Eslovenia pide e-viñeta (e-vinjeta) en autopistas y vías rápidas. Para vehículos de hasta 3,5 t, la clase depende de la altura sobre el eje delantero, con el límite en 1,30 m. Cómprala solo en la web oficial de DARS y comprueba allí la clase de la autocaravana.",
+            "Para ver: el lago de Bled."
+          ]
+        },
+        {
+          "h2": "Croacia: peaje por tramos y el puente de Pelješac",
+          "image": "HR-2",
+          "paragraphs": [
+            "Las autopistas croatas son de peaje. En 2026 se sigue pagando en cabina; el país ha anunciado un sistema sin barreras a partir de marzo de 2027. Una autocaravana de hasta 3,5 t suele pagar clase II.",
+            "Para llegar a Dubrovnik, ten cuidado: la costa croata queda cortada por Bosnia y Herzegovina en Neum, y Bosnia no está permitida. Usa el puente de Pelješac, que evita ese tramo.",
+            "Para ver: el casco viejo amurallado de Dubrovnik."
+          ]
+        },
+        {
+          "h2": "Grecia: solo en ferry desde Italia",
+          "image": "GR-3",
+          "paragraphs": [
+            "Por tierra, todas las rutas a Grecia pasan por países no permitidos, sea por los Balcanes o por Bulgaria. La única opción es el ferry desde puertos italianos del Adriático, como Ancona, Bari o Brindisi, hasta Igumenitsa o Patras, con la autorización del apartado 7.4.",
+            "Las autopistas griegas tienen peaje en cabina. Para ver: los monasterios de Meteora."
+          ]
+        },
+        {
+          "h2": "Chipre: ferry de temporada y conducción por la izquierda",
+          "image": "CY-2",
+          "paragraphs": [
+            "A Chipre solo se llega por mar. En 2026 el ferry Pireo-Limasol funcionó en temporada de verano, con una travesía de unas 31 horas. Comprueba si hay salidas en tus fechas antes de pedir la autorización.",
+            "En Chipre se conduce por la izquierda. La autorización cubre la República de Chipre: no cruces con la autocaravana al norte de la isla.",
+            "Para ver: la roca de Afrodita (Petra tou Romiou), cerca de Pafos."
+          ]
+        },
+        {
+          "h2": "Malta: ferry desde Sicilia",
+          "image": "MT-4",
+          "paragraphs": [
+            "Se llega en el ferry de Virtu Ferries desde Pozzallo, en Sicilia, hasta La Valeta; la travesía dura menos de dos horas.",
+            "En Malta se conduce por la izquierda y las calles son estrechas. La autocaravana va más cómoda en campings y zonas fuera de las ciudades. Para ver: la Gruta Azul, en la costa sur de la isla."
+          ]
+        },
+        {
+          "h2": "Islandia: ferry desde Dinamarca y solo asfalto",
+          "image": "IS-1",
+          "paragraphs": [
+            "El ferry de Smyril Line sale de Hirtshals, en Dinamarca, hacia Seyðisfjörður, y suele hacer escala en las islas Feroe. Las Feroe no están en la lista de países autorizados: la autocaravana no debe desembarcar allí.",
+            "El contrato prohíbe circular fuera de la red asfaltada (apartado 6.1.e). En Islandia eso deja fuera las carreteras F de montaña y las pistas de grava. La carretera de circunvalación de la isla está asfaltada.",
+            "Para ver: la cascada de Skógafoss, junto a la carretera de circunvalación."
+          ]
+        },
+        {
+          "h2": "Gran Bretaña: ferry y conducción por la izquierda",
+          "image": "GB-1",
+          "paragraphs": [
+            "Desde el norte de España, Brittany Ferries une Bilbao y Santander con Portsmouth y Plymouth. También se puede cruzar desde Francia en ferry o en el tren del Eurotúnel, siempre con autorización escrita.",
+            "Se conduce por la izquierda. En Londres, la autocaravana cumple la zona ULEZ como diésel Euro 6, pero TfL pide registrar antes los vehículos extranjeros. El cruce de Dartford, al este de Londres, se paga online hasta la medianoche del día siguiente.",
+            "El contrato habla de Gran Bretaña: si tu ruta pasa por Irlanda del Norte, dilo al pedir la autorización. Para ver: el Tower Bridge de Londres."
+          ]
+        },
+        {
+          "h2": "Irlanda: ferry directo desde Bilbao",
+          "image": "IE-1",
+          "paragraphs": [
+            "Brittany Ferries une Bilbao con Rosslare sin pasar por Francia. Otra opción es el ferry Cherburgo-Rosslare.",
+            "Se conduce por la izquierda. La autopista M50, alrededor de Dublín, tiene peaje sin barreras: se paga en eflow.ie antes de las 20:00 del día siguiente.",
+            "Para ver: los acantilados de Moher."
+          ]
+        },
+        {
+          "h2": "Países prohibidos",
+          "paragraphs": [
+            "Con la autocaravana no se puede entrar en estos países, ni siquiera con permiso. El contrato también prohíbe viajar a países en guerra o en conflicto (apartado 7.3).",
+            "Marruecos es la pregunta que más nos hacen desde Valencia, y la respuesta es no. Hay dos motivos. Marruecos está fuera del ámbito del seguro, así que allí la autocaravana no tendría cobertura de daños propios. Y para llegar hace falta un ferry, durante el cual el seguro tampoco cubre esos daños. Si quieres conocer Marruecos, cruza como pasajero a pie y deja la autocaravana en un camping o aparcamiento del lado español.",
+            "Gibraltar tampoco está permitido: es territorio británico fuera de la lista, aunque esté al lado de La Línea."
+          ],
+          "list": [
+            "Marruecos.",
+            "Gibraltar.",
+            "Turquía.",
+            "Albania, Serbia, Bosnia y Herzegovina, Montenegro y Macedonia del Norte.",
+            "Moldavia, Ucrania, Bielorrusia y Rusia.",
+            "Bulgaria, Rumanía y Liechtenstein: allí solo rige el seguro obligatorio de responsabilidad civil, sin cobertura de daños propios, así que tampoco están permitidos."
+          ]
+        },
+        {
+          "h2": "Qué pasa si vas igualmente",
+          "paragraphs": [
+            "Entrar en un país no autorizado es un incumplimiento grave del contrato (apartado 7.3). El propietario puede resolver el contrato, exigir la devolución inmediata de la autocaravana y, si hace falta, avisar a las autoridades.",
+            "Los daños y gastos corren de tu cuenta, y fuera del territorio autorizado pierdes las coberturas del seguro. Un golpe que en España te costaría como máximo la franquicia de 900 € pasa a costar la reparación completa.",
+            "Lo mismo vale si viajas sin la autorización escrita a uno de los 29 países permitidos."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Puedo ir a Portugal con la autocaravana de alquiler?",
+          "a": "Sí, con autorización escrita previa, que pides al reservar o antes de salir. En los peajes electrónicos la autocaravana paga como clase 2: asocia una tarjeta a la matrícula o usa Via Verde Visitors, y guarda los justificantes. Si no puedes demostrar el pago, se cobran los peajes pendientes más 50 € de gestión."
+        },
+        {
+          "q": "¿Puedo cruzar a Marruecos con la autocaravana?",
+          "a": "No. Marruecos está fuera del ámbito del seguro, y durante el ferry el seguro tampoco cubre los daños propios. Ir con la autocaravana es un incumplimiento grave del contrato. Puedes cruzar a pie como pasajero y dejar la autocaravana en España."
+        },
+        {
+          "q": "¿Qué necesito para viajar a Francia?",
+          "a": "La autorización escrita, una tarjeta para los péages (la autocaravana paga clase 3) y la etiqueta Crit'Air si vas a entrar en una zona de bajas emisiones como París o Lyon. Se pide en certificat-air.gouv.fr; un diésel de 2024 recibe la Crit'Air 2."
+        },
+        {
+          "q": "¿Puedo ir a Andorra?",
+          "a": "Sí, con autorización escrita. En Andorra no hay autopistas ni viñeta, pero hay aduana al entrar y al volver, con límites para tabaco y alcohol."
+        },
+        {
+          "q": "¿Puedo llevar la autocaravana a Mallorca, Ibiza o Menorca?",
+          "a": "Sí. Baleares son España, pero el ferry necesita autorización escrita previa. Desde el embarque hasta el desembarque el seguro no cubre los daños propios ni el incendio, y cualquier daño lo pagas por su coste real."
+        },
+        {
+          "q": "¿Qué documentos tengo que llevar fuera de España?",
+          "a": "El permiso de conducir, el contrato de alquiler, la autorización escrita para los países de tu ruta y la documentación del vehículo con el certificado del seguro, que va en la autocaravana. En los países del Acuerdo Multilateral de Garantía la matrícula española sirve como prueba de seguro y no se pide carta verde."
+        },
+        {
+          "q": "¿Puedo ir a Grecia por carretera?",
+          "a": "No por tierra: todas las rutas cruzan países no permitidos. Se va en ferry desde Italia, con autorización escrita."
+        },
+        {
+          "q": "¿Qué pasa si entro en un país que no está en la lista?",
+          "a": "Es un incumplimiento grave: el propietario puede resolver el contrato y pedir la devolución inmediata, y respondes de todos los daños y gastos sin el límite de la franquicia, porque allí no hay cobertura de daños propios."
+        }
+      ],
+      "cta": {
+        "text": "Si tu viaje sale de España, dinos los países al reservar y te preparamos la autorización por escrito.",
+        "button": "Consultar fechas y reservar"
+      }
     }
   }
 }

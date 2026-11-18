@@ -4,7 +4,8 @@ import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SeasonCalendar } from "@/components/SeasonCalendar";
-import { GUIDE_SLUGS, GUIDES_DATE_MODIFIED, getGuide, guidesUi } from "@/data/guides";
+import { GUIDE_SLUGS, getGuide, guideDateModified, guidesUi } from "@/data/guides";
+import { guidePhoto } from "@/data/guide-photos";
 import {
   DEFAULT_LANGUAGE,
   LANGUAGE_CODES,
@@ -29,6 +30,8 @@ export const Route = createFileRoute("/guias/$slug")({
     if (!guide) return { meta: [{ title: "Guía no encontrada" }] };
     const ui = guidesUi(lang);
     const url = urlFor(params.slug, lang);
+    const hero = guidePhoto(guide.heroImage);
+    const ogImage = hero ? `${SITE}${hero.src}` : `${SITE}/images/og-home.jpg`;
     return {
       meta: [
         { title: guide.metaTitle },
@@ -37,11 +40,18 @@ export const Route = createFileRoute("/guias/$slug")({
         { property: "og:description", content: guide.metaDescription },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
-        { property: "og:image", content: `${SITE}/images/og-home.jpg` },
+        { property: "og:image", content: ogImage },
+        ...(hero
+          ? [
+              { property: "og:image:width", content: String(hero.width) },
+              { property: "og:image:height", content: String(hero.height) },
+            ]
+          : []),
         { property: "og:site_name", content: "Camper Retreat VLC" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: guide.metaTitle },
         { name: "twitter:description", content: guide.metaDescription },
+        { name: "twitter:image", content: ogImage },
       ],
       links: [
         { rel: "canonical", href: url },
@@ -59,7 +69,8 @@ export const Route = createFileRoute("/guias/$slug")({
                 headline: guide.h1,
                 description: guide.metaDescription,
                 inLanguage: lang,
-                dateModified: GUIDES_DATE_MODIFIED,
+                dateModified: guideDateModified(params.slug),
+                ...(hero ? { image: ogImage } : {}),
                 url,
                 mainEntityOfPage: url,
                 author: { "@type": "Organization", name: "Camper Retreat VLC", url: SITE },
@@ -110,6 +121,7 @@ function GuidePage() {
   const ui = guidesUi(lang);
   const guide = getGuide(lang, slug)!;
   const others = GUIDE_SLUGS.filter((s) => s !== slug);
+  const hero = guidePhoto(guide.heroImage);
 
   return (
     <div className="bg-background text-foreground min-h-screen">
@@ -128,27 +140,62 @@ function GuidePage() {
           <p className="mt-3 text-xs text-muted-foreground/70">
             {ui.updated}: {guide.updated}
           </p>
+          {hero && (
+            <figure className="mt-8">
+              <div className="w-full aspect-[16/9] overflow-hidden rounded-2xl border border-border/60">
+                <img
+                  src={hero.src}
+                  alt={guide.h1}
+                  width={hero.width}
+                  height={hero.height}
+                  loading="eager"
+                  fetchPriority="high"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {hero.credit && <PhotoCredit text={hero.credit} href={hero.creditUrl} />}
+            </figure>
+          )}
           <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
 
           {slug === "mejor-epoca-autocaravana-valencia" && <SeasonCalendar year={2027} lang={lang} />}
 
-          {guide.sections.map((s) => (
-            <section key={s.h2} className="mt-12">
-              <h2 className="font-display text-2xl sm:text-3xl text-foreground mb-4">{s.h2}</h2>
-              {s.paragraphs.map((p) => (
-                <p key={p} className="mb-4 leading-relaxed text-foreground/85">
-                  {p}
-                </p>
-              ))}
-              {s.list && s.list.length > 0 && (
-                <ul className="mt-2 list-disc space-y-1.5 pl-5 text-foreground/85 marker:text-primary/70">
-                  {s.list.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
+          {guide.sections.map((s) => {
+            const photo = guidePhoto(s.image);
+            return (
+              <section key={s.h2} className="mt-12">
+                <h2 className="font-display text-2xl sm:text-3xl text-foreground mb-4">{s.h2}</h2>
+                {s.paragraphs.map((p) => (
+                  <p key={p} className="mb-4 leading-relaxed text-foreground/85">
+                    {p}
+                  </p>
+                ))}
+                {s.list && s.list.length > 0 && (
+                  <ul className="mt-2 list-disc space-y-1.5 pl-5 text-foreground/85 marker:text-primary/70">
+                    {s.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                {photo && (
+                  <figure className="mt-6">
+                    <div className="w-full aspect-[16/9] overflow-hidden rounded-2xl border border-border/60">
+                      <img
+                        src={photo.src}
+                        alt={s.h2}
+                        width={photo.width}
+                        height={photo.height}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    {photo.credit && <PhotoCredit text={photo.credit} href={photo.creditUrl} />}
+                  </figure>
+                )}
+              </section>
+            );
+          })}
 
           <section className="mt-14">
             <h2 className="font-display text-2xl sm:text-3xl text-foreground mb-5">{ui.faqTitle}</h2>
@@ -193,5 +240,17 @@ function GuidePage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function PhotoCredit({ text, href }: { text: string; href?: string }) {
+  const cls = "mt-2 text-right text-[11px] text-muted-foreground";
+  const label = `Foto: ${text}`;
+  return href ? (
+    <figcaption className={cls}>
+      <a href={href} target="_blank" rel="noopener noreferrer license" className="hover:text-primary">{label}</a>
+    </figcaption>
+  ) : (
+    <figcaption className={cls}>{label}</figcaption>
   );
 }

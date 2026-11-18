@@ -12,11 +12,15 @@ export interface GuideSection {
   h2: string;
   paragraphs: string[];
   list?: string[];
+  /** Photo code from src/data/guide-photos.ts, shown after the section text. */
+  image?: string;
 }
 export interface Guide {
   metaTitle: string;
   metaDescription: string;
   h1: string;
+  /** Photo code from src/data/guide-photos.ts, shown under the title and used as og:image. */
+  heroImage?: string;
   intro: string;
   updated: string;
   sections: GuideSection[];
@@ -62,6 +66,14 @@ const FILES: Record<LanguageCode, GuidesFile> = {
 export const GUIDE_SLUGS = Object.keys(es.guides);
 /** ISO date of the last content review, for Article.dateModified. */
 export const GUIDES_DATE_MODIFIED = "2026-10-08";
+/** Guides reviewed after GUIDES_DATE_MODIFIED. */
+const GUIDE_DATE_MODIFIED: Record<string, string> = {
+  "paises-autocaravana-alquiler": "2026-11-19",
+};
+
+export function guideDateModified(slug: string): string {
+  return GUIDE_DATE_MODIFIED[slug] ?? GUIDES_DATE_MODIFIED;
+}
 
 export function guidesUi(lang: LanguageCode): GuidesUi {
   return (FILES[lang] ?? FILES.es).ui;
