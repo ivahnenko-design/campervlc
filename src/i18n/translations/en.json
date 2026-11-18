@@ -124,6 +124,16 @@
       "parking": "Free parking for your own vehicle at our premises included",
       "gasBottles": "2 gas bottles included (for the fridge, heating, hot water and gas stove)",
       "toiletCapsules": "Toilet capsules included"
+    },
+    "showcase": {
+      "headline": "A motorhome in Valencia. The sea right there.",
+      "kitchen": "Kitchen",
+      "bedroom": "Bedroom",
+      "outside": "Outdoors",
+      "guests": "Guests",
+      "pick": "Choose",
+      "guestsValue": "up to 5",
+      "equipment": "See equipment"
     }
   },
   "how": {

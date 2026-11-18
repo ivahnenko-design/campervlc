@@ -124,6 +124,16 @@
       "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen",
       "gasBottles": "2 gasflessen inbegrepen (voor koelkast, verwarming, warm water en gasfornuis)",
       "toiletCapsules": "Toiletcapsules inbegrepen"
+    },
+    "showcase": {
+      "headline": "Camper in Valencia. De zee om de hoek.",
+      "kitchen": "Keuken",
+      "bedroom": "Slaapkamer",
+      "outside": "Buiten",
+      "guests": "Gasten",
+      "pick": "Kies",
+      "guestsValue": "tot 5",
+      "equipment": "Bekijk uitrusting"
     }
   },
   "how": {

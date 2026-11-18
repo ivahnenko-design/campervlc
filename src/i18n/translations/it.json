@@ -124,6 +124,16 @@
       "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso",
       "gasBottles": "2 bombole di gas incluse (per frigorifero, riscaldamento, acqua calda e piano cottura a gas)",
       "toiletCapsules": "Capsule per il WC incluse"
+    },
+    "showcase": {
+      "headline": "Camper a Valencia. Il mare a due passi.",
+      "kitchen": "Cucina",
+      "bedroom": "Camera",
+      "outside": "All'aperto",
+      "guests": "Ospiti",
+      "pick": "Scegli",
+      "guestsValue": "fino a 5",
+      "equipment": "Vedi dotazioni"
     }
   },
   "how": {

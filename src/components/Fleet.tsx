@@ -19,7 +19,10 @@ export function Fleet() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader title={t("fleet.title")} subtitle={t("fleet.subtitle")} />
 
-        <div className={`mt-12 grid gap-6 ${single ? "" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+        {single ? (
+          <Showcase camper={FLEET[0]} onDetails={() => setOpen(FLEET[0])} />
+        ) : (
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FLEET.map((c, i) => (
             <motion.article
               key={c.id}
@@ -76,10 +79,76 @@ export function Fleet() {
             </motion.article>
           ))}
         </div>
+        )}
       </div>
 
       {open && <SpecModal camper={open} onClose={() => setOpen(null)} />}
     </section>
+  );
+}
+
+/** Single-camper layout: big photo with headline, booking strip, three interior tiles. */
+function Showcase({ camper, onDetails }: { camper: Camper; onDetails: () => void }) {
+  const { t } = useTranslation();
+  const tiles = [
+    { src: "/images/tiles/kitchen.jpg", label: t("fleet.showcase.kitchen") },
+    { src: "/images/tiles/bedroom.jpg", label: t("fleet.showcase.bedroom") },
+    { src: "/images/tiles/outside.jpg", label: t("fleet.showcase.outside") },
+  ];
+  const field = (label: string, value: string) => (
+    <a href="#booking" className="block min-w-0 rounded-lg px-1 py-1 hover:bg-background/40 transition-colors">
+      <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{label}</div>
+      <div className="mt-0.5 truncate text-base font-semibold text-foreground sm:text-lg">{value}</div>
+    </a>
+  );
+  return (
+    <div className="mt-12">
+      <div className="relative overflow-hidden rounded-3xl border border-border/60">
+        <img src={camper.image} alt={camper.name} loading="lazy" className="h-[340px] w-full object-cover sm:h-[460px] lg:h-[520px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/10 to-background/80" />
+        <div className="absolute left-5 right-5 top-5 sm:left-10 sm:top-10">
+          <span className="mb-3 inline-block rounded-full bg-emerald-500/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+            ● {t("fleet.available")}
+          </span>
+          <h3 className="font-display max-w-2xl text-3xl leading-[1.05] text-foreground text-balance sm:text-5xl lg:text-6xl">
+            {t("fleet.showcase.headline")}
+          </h3>
+          <p className="mt-3 text-sm text-foreground/85 sm:text-base">McLouis Yearling 89G · {t("fleet.capacity", { n: camper.capacity })}</p>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-3 -mt-12 grid grid-cols-2 items-center gap-3 rounded-2xl border border-border/60 bg-surface p-4 shadow-2xl sm:mx-8 sm:-mt-14 sm:grid-cols-[1fr_1fr_0.7fr_auto] sm:gap-6 sm:p-5">
+        {field(t("hero.checkin"), t("fleet.showcase.pick"))}
+        {field(t("hero.checkout"), t("fleet.showcase.pick"))}
+        <div className="hidden sm:block">{field(t("fleet.showcase.guests"), t("fleet.showcase.guestsValue"))}</div>
+        <a
+          href="#booking"
+          className="col-span-2 inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground glow-amber sm:col-span-1"
+        >
+          {t("hero.priceFrom")}
+        </a>
+      </div>
+
+      <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
+        {tiles.map((tile) => (
+          <figure key={tile.src} className="relative overflow-hidden rounded-2xl border border-border/60">
+            <img src={tile.src} alt={tile.label} loading="lazy" className="aspect-square w-full object-cover sm:aspect-[16/10]" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-6 text-xs font-semibold text-white sm:px-4 sm:pb-3 sm:pt-8 sm:text-sm">
+              {tile.label}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div className="mt-5 flex justify-end">
+        <button
+          onClick={onDetails}
+          className="rounded-full border border-primary/40 px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+        >
+          {t("fleet.showcase.equipment")}
+        </button>
+      </div>
+    </div>
   );
 }
 

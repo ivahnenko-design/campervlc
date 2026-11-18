@@ -124,6 +124,16 @@
       "parking": "Aparcamiento gratuito para tu vehículo en nuestras instalaciones incluido",
       "gasBottles": "2 bombonas de gas incluidas (para la nevera, la calefacción, el agua caliente y la cocina de gas)",
       "toiletCapsules": "Cápsulas para el WC incluidas"
+    },
+    "showcase": {
+      "headline": "Autocaravana en Valencia. El mar a dos pasos.",
+      "kitchen": "Cocina",
+      "bedroom": "Dormitorio",
+      "outside": "Al aire libre",
+      "guests": "Viajeros",
+      "pick": "Elegir",
+      "guestsValue": "hasta 5",
+      "equipment": "Ver equipamiento"
     }
   },
   "how": {
