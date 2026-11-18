@@ -12,7 +12,6 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 - Mobilitätsgarantie des Herstellers des Fahrgestells mit Fahrerhaus.
 - Zwei Gasflaschen und Sanitärkapseln für die Chemietoilette.
 - Kostenloses Parken Ihres Autos auf unserem Gelände während der Mietdauer.
-- Haustiere ohne Aufpreis.
 - Ausstattung: Campingtisch und Campingstühle, drei Strandstühle, Sonnenschirm, Markise, Smart-TV, Küchenutensilien, Kopfkissen und Decken.
 
 ## Fahrzeug, Abholung und Fahrer
@@ -29,6 +28,7 @@ Dies sind die Vertragsbedingungen, die Sie bei der Abholung des Wohnmobils unter
 | Kaution (Kartenvorautorisierung oder Kartenbelastung) | 900 € |
 | Option 200 km pro Nacht | 20 € / Nacht |
 | Option unbegrenzte Kilometer | 40 € / Nacht |
+| Haustier | 50 € / Buchung |
 | Kilometer über das Inklusivkontingent hinaus | 0,30 € / km |
 | Rückgabe nach der Uhrzeit der Abholung, bis 6 Std. | 50 % eines Miettags |
 | Rückgabe nach der Uhrzeit der Abholung, mehr als 6 Std. | ein voller Miettag |
@@ -142,7 +142,7 @@ Kostenlose Stornierung innerhalb von 24 Stunden: Die Buchung kann innerhalb von 
 
 6.2. Der Mieter behandelt das Fahrzeug mit Sorgfalt, schließt es ab, kontrolliert regelmäßig Wasser- und Ölstand sowie den Reifendruck und vergewissert sich, dass sich das Wohnmobil in einem Zustand befindet, der ein sicheres Fahren erlaubt.
 
-6.3. Das Rauchen im Fahrzeug ist verboten. Haustiere sind ohne Aufpreis gestattet; sie stehen unter der Verantwortung des Mieters, der für die von ihnen verursachten Schäden haftet. Werden bei der Rückgabe Tabakgeruch, Tierhaare oder Tiergeruch oder Verschmutzungen festgestellt, die eine Spezialbehandlung erfordern, zahlt der Mieter die tatsächlichen und nachgewiesenen Kosten der erforderlichen Reinigung oder Ozonbehandlung, höchstens 300 €, zuzüglich des nachgewiesenen entgangenen Gewinns, falls das Fahrzeug aus diesem Grund nicht vermietet werden kann (höchstens 3 Miettage).
+6.3. Das Rauchen im Fahrzeug ist verboten. Haustiere sind gegen einen Zuschlag von 50 € pro Buchung gestattet; sie stehen unter der Verantwortung des Mieters, der für die von ihnen verursachten Schäden haftet. Werden bei der Rückgabe Tabakgeruch, Tierhaare oder Tiergeruch oder Verschmutzungen festgestellt, die eine Spezialbehandlung erfordern, zahlt der Mieter die tatsächlichen und nachgewiesenen Kosten der erforderlichen Reinigung oder Ozonbehandlung, höchstens 300 €, zuzüglich des nachgewiesenen entgangenen Gewinns, falls das Fahrzeug aus diesem Grund nicht vermietet werden kann (höchstens 3 Miettage).
 
 6.4. Höchstgeschwindigkeit: 110 km/h oder die durch Beschilderung angezeigte niedrigere Geschwindigkeit. Durchfahrten mit einer Höhe von weniger als 3,30 m dürfen nicht befahren werden; bei Abbiege- und Rangiermanövern ist die Fahrzeuglänge zu berücksichtigen.
 

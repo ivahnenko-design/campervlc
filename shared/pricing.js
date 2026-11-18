@@ -217,6 +217,7 @@ export const EXTRAS = [
   { id: "bbq",                   price: 15                   },
   { id: "festival",              price: 150                  },
   { id: "extra_driver",          price: 50                   },
+  { id: "pet",                   price: 50                   },
   { id: "km_200",                price: 20, perNight: true   },
   { id: "km_unlimited",          price: 40, perNight: true   },
 ];

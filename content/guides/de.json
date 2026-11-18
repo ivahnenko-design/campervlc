@@ -80,7 +80,6 @@
             "Mobilitätsgarantie des Fahrgestellherstellers.",
             "Zwei Gasflaschen und Tabs für die Chemietoilette.",
             "Kostenloser Parkplatz für dein Auto auf unserem Gelände während der Mietzeit.",
-            "Haustiere ohne Aufpreis.",
             "Campingtisch und -stühle, drei Strandstühle, Sonnenschirm und Markise, Smart TV, Küchenausstattung, Kissen und Decken."
           ]
         },
@@ -129,7 +128,7 @@
         },
         {
           "q": "Darf ich meinen Hund mitnehmen?",
-          "a": "Ja. Haustiere reisen ohne Aufpreis mit. Riecht das Wohnmobil bei der Rückgabe so stark nach Rauch oder Tieren, dass eine Spezialbehandlung nötig ist, berechnen wir die tatsächlichen Kosten, höchstens 300 €."
+          "a": "Ja. Haustiere reisen gegen einen Zuschlag von 50 € pro Buchung mit. Riecht das Wohnmobil bei der Rückgabe so stark nach Rauch oder Tieren, dass eine Spezialbehandlung nötig ist, berechnen wir die tatsächlichen Kosten, höchstens 300 €."
         },
         {
           "q": "Was passiert, wenn ich das Wohnmobil später zurückgebe?",
@@ -283,7 +282,7 @@
         {
           "h2": "Haustierfreundlich und ideal für Familien",
           "paragraphs": [
-            "Haustiere reisen ohne Aufpreis mit. Für Reisen mit Kindern stellen wir auf Anfrage kostenlos einen Kindersitz bereit."
+            "Haustiere reisen gegen einen Zuschlag von 50 € pro Buchung mit. Für Reisen mit Kindern stellen wir auf Anfrage kostenlos einen Kindersitz bereit."
           ]
         },
         {
@@ -308,7 +307,7 @@
         },
         {
           "q": "Sind Haustiere erlaubt?",
-          "a": "Ja. Haustiere sind ohne Aufpreis herzlich willkommen."
+          "a": "Ja. Haustiere sind gegen einen Zuschlag von 50 € pro Buchung herzlich willkommen."
         }
       ],
       "cta": {

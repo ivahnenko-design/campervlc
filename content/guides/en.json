@@ -80,7 +80,6 @@
             "The chassis manufacturer's mobility guarantee.",
             "Two gas bottles and chemical toilet capsules.",
             "Free parking for your car at our premises during the rental.",
-            "Pets at no extra cost.",
             "Camping table and chairs, three beach chairs, a parasol and awning, Smart TV, kitchenware, pillows and blankets."
           ]
         },
@@ -129,7 +128,7 @@
         },
         {
           "q": "Can I bring my dog?",
-          "a": "Yes. Pets travel at no extra cost. If on return there is a smell of tobacco or animals that requires special treatment, the actual cost is charged, up to a maximum of €300."
+          "a": "Yes. Pets travel for a 50 € supplement per booking. If on return there is a smell of tobacco or animals that requires special treatment, the actual cost is charged, up to a maximum of €300."
         },
         {
           "q": "What happens if I return the motorhome later?",
@@ -283,7 +282,7 @@
         {
           "h2": "Pet friendly and family travel",
           "paragraphs": [
-            "Pets travel at no extra cost. A free child seat is available on request for travelling with children."
+            "Pets travel for a 50 € supplement per booking. A free child seat is available on request for travelling with children."
           ]
         },
         {
@@ -308,7 +307,7 @@
         },
         {
           "q": "Is it pet friendly?",
-          "a": "Yes. Pets are welcome at no extra cost."
+          "a": "Yes. Pets are welcome, for a 50 € supplement per booking."
         }
       ],
       "cta": {

@@ -80,7 +80,6 @@
             "Garanzia di mobilità del costruttore del telaio.",
             "Due bombole del gas e capsule per il WC chimico.",
             "Parcheggio gratuito della tua auto nella nostra struttura per tutta la durata del noleggio.",
-            "Animali domestici senza costi aggiuntivi.",
             "Tavolo e sedie da campeggio, tre sedie da spiaggia, ombrellone e tendalino, Smart TV, stoviglie e utensili da cucina, cuscini e coperte."
           ]
         },
@@ -129,7 +128,7 @@
         },
         {
           "q": "Posso viaggiare con il mio cane?",
-          "a": "Sì. Gli animali domestici viaggiano senza costi aggiuntivi. Se alla riconsegna c'è odore di fumo o di animali che richiede un trattamento speciale, viene addebitato il costo effettivo, fino a un massimo di 300 €."
+          "a": "Sì. Gli animali domestici viaggiano con un supplemento di 50 € a prenotazione. Se alla riconsegna c'è odore di fumo o di animali che richiede un trattamento speciale, viene addebitato il costo effettivo, fino a un massimo di 300 €."
         },
         {
           "q": "Cosa succede se riconsegno il camper più tardi?",
@@ -283,7 +282,7 @@
         {
           "h2": "Pet friendly e viaggi in famiglia",
           "paragraphs": [
-            "Gli animali domestici viaggiano senza costi aggiuntivi. Su richiesta mettiamo a disposizione gratuitamente un seggiolino per bambini."
+            "Gli animali domestici viaggiano con un supplemento di 50 € a prenotazione. Su richiesta mettiamo a disposizione gratuitamente un seggiolino per bambini."
           ]
         },
         {
@@ -308,7 +307,7 @@
         },
         {
           "q": "È pet friendly?",
-          "a": "Sì. Gli animali domestici sono i benvenuti senza costi aggiuntivi."
+          "a": "Sì. Gli animali domestici sono i benvenuti, con un supplemento di 50 € a prenotazione."
         }
       ],
       "cta": {

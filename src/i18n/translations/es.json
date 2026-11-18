@@ -113,7 +113,7 @@
       "water": "Agua caliente, ducha y WC",
       "tv": "Smart TV 24 pulgadas",
       "child": "Silla infantil (gratis, bajo petición)",
-      "pet": "Pet friendly sin coste adicional",
+      "pet": "Mascotas: 50 € por reserva",
       "kitchenItems": "Platos, vasos, tazas de café, cucharas, cucharillas, tenedores, cuchillos de mesa, cuchillos de cocina y de sierra, tabla de cortar de madera, espátulas de cocina, 3 sartenes, cazo mediano, olla con tapa de cristal, ensaladera, sacacorchos y cafetera italiana.",
       "bedKit": "Kit de cama",
       "bedKitItems": "Almohadas y mantas"
@@ -227,7 +227,8 @@
     "festival": "Festival",
     "km_200": "Hasta 200 km/noche en lugar de 100",
     "km_unlimited": "Kilómetros ilimitados",
-    "sup_board": "Tabla SUP"
+    "sup_board": "Tabla SUP",
+    "pet": "Mascota"
   },
   "routes": {
     "title": "Rutas Populares desde Valencia",
@@ -272,7 +273,7 @@
     "q4": "¿Dónde se recoge y entrega la autocaravana?",
     "a4": "La recogida y la devolución son en Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "¿Puedo llevar mascotas?",
-    "a5": "Sí, las mascotas son bienvenidas sin coste adicional. Respondes de los daños que causen y no se puede fumar en el vehículo.",
+    "a5": "Sí, las mascotas son bienvenidas con un suplemento de 50 € por reserva. Respondes de los daños que causen y no se puede fumar en el vehículo.",
     "q6": "¿Cuántos kilómetros están incluidos?",
     "a6": "Incluye 100 km por noche de alquiler. Puedes ampliarlos hasta 200 km/noche (20 €/noche) o kilometraje ilimitado (40 €/noche). Los kilómetros por encima de lo incluido cuestan 0,30 €/km.",
     "q7": "¿Cuál es la estancia mínima?",

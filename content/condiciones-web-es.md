@@ -10,7 +10,6 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 - Garantía de movilidad del fabricante del chasis-cabina.
 - Dos bombonas de gas y cápsulas para el WC químico.
 - Aparcamiento gratuito de tu coche en nuestras instalaciones durante el alquiler.
-- Mascotas sin coste adicional.
 - Equipamiento: mesa y sillas de camping, tres sillas de playa, sombrilla, toldo, Smart TV, menaje de cocina, almohadas y mantas.
 
 ## Vehículo, recogida y conductores
@@ -27,6 +26,7 @@ Estas son las condiciones del contrato que firmarás al recoger la autocaravana.
 | Fianza (preautorización o cobro en tarjeta) | 900 € |
 | Opción 200 km por noche | 20 € / noche |
 | Opción kilometraje ilimitado | 40 € / noche |
+| Mascota | 50 € / reserva |
 | Kilómetros por encima de lo incluido | 0,30 € / km |
 | Devolución posterior a la hora de recogida, hasta 6 h | 50 % de una jornada |
 | Devolución posterior a la hora de recogida, más de 6 h | una jornada completa |
@@ -140,7 +140,7 @@ Cancelación gratuita en 24 horas: la reserva puede cancelarse sin coste alguno 
 
 6.2. El Arrendatario cuidará el vehículo con diligencia, lo cerrará con llave y controlará periódicamente niveles de agua y aceite y la presión de los neumáticos, comprobando que la autocaravana está en condiciones de circular con seguridad.
 
-6.3. Está prohibido fumar en el vehículo. Se admiten animales de compañía sin coste adicional, bajo la responsabilidad del Arrendatario, que responderá de los daños que causen. Si a la devolución se aprecia olor a tabaco, pelo u olor de animales, o suciedad que requiera tratamiento especial, el Arrendatario abonará el coste real y acreditado de la limpieza u ozonización necesaria, con un máximo de 300 €, más el lucro cesante acreditado si el vehículo no pudiera alquilarse por este motivo (máximo 3 jornadas de alquiler).
+6.3. Está prohibido fumar en el vehículo. Se admiten animales de compañía con un suplemento de 50 € por reserva, bajo la responsabilidad del Arrendatario, que responderá de los daños que causen. Si a la devolución se aprecia olor a tabaco, pelo u olor de animales, o suciedad que requiera tratamiento especial, el Arrendatario abonará el coste real y acreditado de la limpieza u ozonización necesaria, con un máximo de 300 €, más el lucro cesante acreditado si el vehículo no pudiera alquilarse por este motivo (máximo 3 jornadas de alquiler).
 
 6.4. Límite de velocidad: 110 km/h, o el inferior que indique la señalización. No circular por pasos de altura inferior a 3,30 m y tener en cuenta la longitud del vehículo en giros y maniobras.
 

@@ -113,7 +113,7 @@
       "water": "Warmwasser, Dusche und WC",
       "tv": "Smart TV 24 Zoll",
       "child": "Kindersitz (kostenlos, auf Anfrage)",
-      "pet": "Haustiere willkommen, ohne Aufpreis",
+      "pet": "Haustiere: 50 € pro Buchung",
       "kitchenItems": "Teller, Gläser, Kaffeetassen, Löffel, Kaffeelöffel, Gabeln, Tafelmesser, Küchen- und Sägemesser, Schneidebrett aus Holz, Küchenwender, 3 Pfannen, ein mittlerer Stieltopf, ein Topf mit Glasdeckel, eine Salatschüssel, ein Korkenzieher und eine italienische Espressokanne.",
       "bedKit": "Bett-Set",
       "bedKitItems": "Kissen und Decken"
@@ -227,7 +227,8 @@
     "festival": "Festival",
     "km_200": "Bis zu 200 km/Nacht statt 100",
     "km_unlimited": "Unbegrenzte Kilometer",
-    "sup_board": "SUP-Board"
+    "sup_board": "SUP-Board",
+    "pet": "Haustier"
   },
   "routes": {
     "title": "Beliebte Routen ab Valencia",
@@ -272,7 +273,7 @@
     "q4": "Wo Abholung und Rückgabe?",
     "a4": "Abholung und Rückgabe: Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Sind Haustiere erlaubt?",
-    "a5": "Ja, Haustiere sind ohne Aufpreis willkommen. Du haftest für Schäden, die sie verursachen; im Fahrzeug darf nicht geraucht werden.",
+    "a5": "Ja, Haustiere sind gegen einen Zuschlag von 50 € pro Buchung willkommen. Du haftest für Schäden, die sie verursachen; im Fahrzeug darf nicht geraucht werden.",
     "q6": "Wie viele Kilometer sind inkl.?",
     "a6": "100 km pro Mietnacht sind inklusive. Du kannst auf bis zu 200 km/Nacht (20 €/Nacht) oder unbegrenzte Kilometer (40 €/Nacht) erweitern. Kilometer über dem Inklusivkontingent kosten 0,30 €/km.",
     "q7": "Mindestaufenthalt?",

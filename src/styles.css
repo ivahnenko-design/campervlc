@@ -34,7 +34,7 @@
   --font-display: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
   --font-mono: "DM Mono", monospace;
-  --font-poster: "Archivo", "Inter", sans-serif;
+  --font-poster: "Archivo", "Roboto Condensed", "Inter", sans-serif;
 }
 
 :root {

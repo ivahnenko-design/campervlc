@@ -12,7 +12,6 @@ These are the terms of the contract you will sign when you collect the motorhome
 - The chassis-cab manufacturer's mobility guarantee.
 - Two gas bottles and capsules for the chemical toilet.
 - Free parking for your car at our premises during the rental.
-- Pets at no extra cost.
 - Equipment: camping table and chairs, three beach chairs, beach umbrella, awning, Smart TV, kitchenware, pillows and blankets.
 
 ## Vehicle, collection and drivers
@@ -29,6 +28,7 @@ These are the terms of the contract you will sign when you collect the motorhome
 | Security deposit (card pre-authorisation or charge) | 900 € |
 | 200 km per night option | 20 € / night |
 | Unlimited mileage option | 40 € / night |
+| Pet | 50 € / booking |
 | Kilometres beyond the included allowance | 0.30 € / km |
 | Return later than the collection time, up to 6 h | 50 % of one rental day |
 | Return later than the collection time, more than 6 h | one full rental day |
@@ -142,7 +142,7 @@ Free cancellation within 24 hours: the booking may be cancelled free of charge w
 
 6.2. The Lessee shall take diligent care of the vehicle, lock it, and periodically check the water and oil levels and the tyre pressure, making sure that the motorhome is in a condition to be driven safely.
 
-6.3. Smoking is prohibited in the vehicle. Pets are allowed at no extra cost, under the responsibility of the Lessee, who shall be liable for any damage they cause. If, on return, a smell of tobacco, animal hair or animal odour, or dirt requiring special treatment is found, the Lessee shall pay the actual and proven cost of the necessary cleaning or ozone treatment, up to a maximum of 300 €, plus the proven loss of earnings if the vehicle cannot be rented out for this reason (maximum 3 rental days).
+6.3. Smoking is prohibited in the vehicle. Pets are allowed for a supplement of 50 € per booking, under the responsibility of the Lessee, who shall be liable for any damage they cause. If, on return, a smell of tobacco, animal hair or animal odour, or dirt requiring special treatment is found, the Lessee shall pay the actual and proven cost of the necessary cleaning or ozone treatment, up to a maximum of 300 €, plus the proven loss of earnings if the vehicle cannot be rented out for this reason (maximum 3 rental days).
 
 6.4. Speed limit: 110 km/h, or any lower limit indicated by road signs. Do not drive through underpasses or passages lower than 3.30 m, and take the length of the vehicle into account when turning and manoeuvring.
 

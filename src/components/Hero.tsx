@@ -16,6 +16,8 @@ type HeroRoute = {
   nights: number | null;
   /** Draw a line through the stops (false = separate venues). */
   path: boolean;
+  /** Photo from the route article (src/data/routes-content.ts), shown in a free corner of the map. */
+  photo?: string;
   stops: Stop[];
 };
 
@@ -24,7 +26,7 @@ const VALENCIA: Stop = { name: "Valencia", lat: 39.47, lng: -0.38 };
 // Stops follow the order of the day-by-day guides in src/data/routes-content.ts.
 const ROUTES: HeroRoute[] = [
   {
-    id: "r1", slug: "costa-blanca", nights: 3, path: true,
+    id: "r1", slug: "costa-blanca", nights: 3, path: true, photo: "/images/routes/costa-blanca-hero.jpg",
     stops: [
       { name: "Cullera", lat: 39.16, lng: -0.25 },
       { name: "Gandía", lat: 38.97, lng: -0.18 },
@@ -168,6 +170,34 @@ function graticule(at: (lat: number, lng: number) => { x: number; y: number }, b
   return { minor, major, labels };
 }
 
+const PW = 210;
+const PH = 150;
+const PM = 18;
+
+/** The route photo, placed in whichever corner is farthest from every stop. */
+function MapPhoto({ href, pts }: { href: string; pts: { x: number; y: number }[] }) {
+  const corners = [
+    { x: W - PW - PM, y: H - PH - PM },
+    { x: PM, y: H - PH - PM },
+    { x: W - PW - PM, y: PM + 40 },
+    { x: PM, y: PM + 40 },
+  ];
+  const clearance = (c: { x: number; y: number }) =>
+    Math.min(...pts.map((p) => {
+      const dx = Math.max(c.x - 60 - p.x, 0, p.x - (c.x + PW + 60));
+      const dy = Math.max(c.y - 20 - p.y, 0, p.y - (c.y + PH + 20));
+      return Math.hypot(dx, dy);
+    }));
+  const c = corners.reduce((best, k) => (clearance(k) > clearance(best) ? k : best), corners[0]);
+  return (
+    <g>
+      <clipPath id="map-photo-clip"><rect x={c.x} y={c.y} width={PW} height={PH} rx="14" /></clipPath>
+      <image href={href} x={c.x} y={c.y} width={PW} height={PH} preserveAspectRatio="xMidYMid slice" clipPath="url(#map-photo-clip)" />
+      <rect x={c.x} y={c.y} width={PW} height={PH} rx="14" fill="none" stroke="var(--color-background)" strokeWidth="5" />
+    </g>
+  );
+}
+
 function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea: string }) {
   const reduce = useReducedMotion();
   const all = [VALENCIA, ...route.stops];
@@ -243,6 +273,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
               </g>
             );
           })}
+          {route.photo && <MapPhoto href={route.photo} pts={pts} />}
         </motion.g>
       </AnimatePresence>
     </svg>
@@ -261,7 +292,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14 lg:px-8">
         <div className="min-w-0">
           <p className="font-poster text-xl uppercase tracking-[0.06em] text-primary sm:text-2xl">{SLOGAN}</p>
-          <h1 className="font-poster mt-3 text-5xl uppercase leading-[0.92] text-foreground text-balance sm:text-6xl lg:text-7xl">
+          <h1 className="font-poster mt-3 text-5xl uppercase leading-[1.02] text-foreground text-balance sm:text-6xl lg:text-7xl">
             {t("hero.question")}
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">{t("hero.routesSub")}</p>
