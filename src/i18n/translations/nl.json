@@ -113,7 +113,7 @@
       "water": "Warm water, douche en toilet",
       "tv": "Smart TV van 24 inch",
       "child": "Kinderzitje (gratis, op aanvraag)",
-      "pet": "Huisdieren welkom zonder meerprijs",
+      "pet": "Huisdieren: 50 € per boeking",
       "kitchenItems": "Borden, glazen, koffiekopjes, lepels, koffielepels, vorken, tafelmessen, keuken- en kartelmessen, houten snijplank, keukenspatels, 3 koekenpannen, een middelgrote steelpan, een pan met glazen deksel, een slakom, een kurkentrekker en een Italiaans koffiezetapparaat.",
       "bedKit": "Bedset",
       "bedKitItems": "Kussens en dekens"
@@ -227,7 +227,8 @@
     "festival": "Festival",
     "km_200": "Tot 200 km/nacht in plaats van 100",
     "km_unlimited": "Onbeperkte kilometers",
-    "sup_board": "SUP-board"
+    "sup_board": "SUP-board",
+    "pet": "Huisdier"
   },
   "routes": {
     "title": "Populaire routes vanuit Valencia",
@@ -272,7 +273,7 @@
     "q4": "Waar ophalen en inleveren?",
     "a4": "Ophalen en inleveren: Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Mag ik huisdieren meenemen?",
-    "a5": "Ja, huisdieren zijn welkom zonder extra kosten. Je bent aansprakelijk voor schade die ze veroorzaken en roken in het voertuig is niet toegestaan.",
+    "a5": "Ja, huisdieren zijn welkom tegen een toeslag van 50 € per boeking. Je bent aansprakelijk voor schade die ze veroorzaken en roken in het voertuig is niet toegestaan.",
     "q6": "Hoeveel kilometers zijn inbegrepen?",
     "a6": "100 km per huurnacht is inbegrepen. Je kunt uitbreiden naar 200 km/nacht (20 €/nacht) of onbeperkt kilometers (40 €/nacht). Kilometers boven het inbegrepen aantal kosten 0,30 €/km.",
     "q7": "Minimumverblijf?",

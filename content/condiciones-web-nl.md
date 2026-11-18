@@ -12,7 +12,6 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 - Mobiliteitsgarantie van de fabrikant van het chassis-cabine.
 - Twee gasflessen en capsules voor het chemische toilet.
 - Gratis parkeren van je auto op ons terrein tijdens de huurperiode.
-- Huisdieren zonder meerkosten.
 - Uitrusting: campingtafel en -stoelen, drie strandstoelen, parasol, luifel, smart-tv, keukengerei, kussens en dekens.
 
 ## Voertuig, ophalen en bestuurders
@@ -29,6 +28,7 @@ Dit zijn de voorwaarden van het contract dat je ondertekent wanneer je de camper
 | Borg (voorautorisatie of afschrijving op de kaart) | 900 € |
 | Optie 200 km per nacht | 20 € / nacht |
 | Optie onbeperkt aantal kilometers | 40 € / nacht |
+| Huisdier | 50 € / boeking |
 | Kilometers boven het inbegrepen aantal | 0,30 € / km |
 | Terugbrengen na het ophaaltijdstip, tot 6 h | 50 % van een huurdag |
 | Terugbrengen na het ophaaltijdstip, meer dan 6 h | een volledige huurdag |
@@ -142,7 +142,7 @@ Kosteloos annuleren binnen 24 uur: de boeking kan zonder enige kosten worden gea
 
 6.2. De Huurder gaat zorgvuldig met het voertuig om, sluit het af en controleert regelmatig het water- en oliepeil en de bandenspanning, waarbij hij nagaat of de camper in een staat verkeert waarin hij veilig aan het verkeer kan deelnemen.
 
-6.3. Roken in het voertuig is verboden. Huisdieren zijn zonder meerkosten toegestaan, onder verantwoordelijkheid van de Huurder, die aansprakelijk is voor de schade die zij veroorzaken. Wordt bij de teruggave tabaksgeur, dierenhaar of dierengeur, of vuil waarvoor een speciale behandeling nodig is, vastgesteld, dan betaalt de Huurder de werkelijke en aangetoonde kosten van de noodzakelijke reiniging of ozonbehandeling, met een maximum van 300 €, vermeerderd met de aangetoonde gederfde winst indien het voertuig om die reden niet kan worden verhuurd (maximaal 3 huurdagen).
+6.3. Roken in het voertuig is verboden. Huisdieren zijn toegestaan tegen een toeslag van 50 € per boeking, onder verantwoordelijkheid van de Huurder, die aansprakelijk is voor de schade die zij veroorzaken. Wordt bij de teruggave tabaksgeur, dierenhaar of dierengeur, of vuil waarvoor een speciale behandeling nodig is, vastgesteld, dan betaalt de Huurder de werkelijke en aangetoonde kosten van de noodzakelijke reiniging of ozonbehandeling, met een maximum van 300 €, vermeerderd met de aangetoonde gederfde winst indien het voertuig om die reden niet kan worden verhuurd (maximaal 3 huurdagen).
 
 6.4. Maximumsnelheid: 110 km/h, of de lagere snelheid die door de bebording wordt aangegeven. Niet door doorgangen rijden met een hoogte van minder dan 3,30 m en bij bochten en manoeuvres rekening houden met de lengte van het voertuig.
 

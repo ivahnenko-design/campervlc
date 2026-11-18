@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Star, Users, Snowflake, Sun, PawPrint, ArrowRight, CalendarDays } from "lucide-react";
+import LAND from "@/data/iberia-land.json";
 import { EXTRAS, PRICES, longStayDiscountPct, withIva } from "@/utils/pricing";
 
 export const SLOGAN = "Rent. Retreat. Repeat.";
@@ -15,6 +16,8 @@ type HeroRoute = {
   nights: number | null;
   /** Draw a line through the stops (false = separate venues). */
   path: boolean;
+  /** Photo from the route article (src/data/routes-content.ts), shown in a free corner of the map. */
+  photo?: string;
   stops: Stop[];
 };
 
@@ -23,7 +26,7 @@ const VALENCIA: Stop = { name: "Valencia", lat: 39.47, lng: -0.38 };
 // Stops follow the order of the day-by-day guides in src/data/routes-content.ts.
 const ROUTES: HeroRoute[] = [
   {
-    id: "r1", slug: "costa-blanca", nights: 3, path: true,
+    id: "r1", slug: "costa-blanca", nights: 3, path: true, photo: "/images/routes/costa-blanca-hero.jpg",
     stops: [
       { name: "Cullera", lat: 39.16, lng: -0.25 },
       { name: "Gandía", lat: 38.97, lng: -0.18 },
@@ -76,6 +79,9 @@ const ROUTES: HeroRoute[] = [
   },
 ];
 
+/** "1095" → "1 095" with a no-break space, the same in every language. */
+const groupThousands = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
+
 const CLEANING = EXTRAS.find((e) => e.id === "cleaning_fee")?.price ?? 0;
 
 /** Whole trip at the low-season rate: nights, long-stay discount, cleaning, IVA. */
@@ -85,49 +91,147 @@ function tripPrice(nights: number) {
   return withIva(discounted + CLEANING);
 }
 
-// ── Map: an equirectangular projection fitted to the selected route ─────────
+// ── Map: an orthographic ("globe") projection fitted to the selected route ──
 const W = 600;
 const H = 640;
 const PAD = 70;
-const COS_LAT = Math.cos((40 * Math.PI) / 180);
+const RAD = Math.PI / 180;
+// Globe centre: middle of Spain, so meridians converge gently towards the north.
+const LAT0 = 40 * RAD;
+const LNG0 = -2 * RAD;
+
+function ortho(lat: number, lng: number) {
+  const f = lat * RAD;
+  const l = lng * RAD - LNG0;
+  return {
+    x: Math.cos(f) * Math.sin(l),
+    y: -(Math.cos(LAT0) * Math.sin(f) - Math.sin(LAT0) * Math.cos(f) * Math.cos(l)),
+  };
+}
 
 function project(points: Stop[]) {
-  const xs = points.map((p) => p.lng * COS_LAT);
-  const ys = points.map((p) => -p.lat);
-  let [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const ps = points.map((p) => ortho(p.lat, p.lng));
+  let [x0, x1, y0, y1] = [
+    Math.min(...ps.map((p) => p.x)), Math.max(...ps.map((p) => p.x)),
+    Math.min(...ps.map((p) => p.y)), Math.max(...ps.map((p) => p.y)),
+  ];
   // Never zoom closer than ~1.4° so short routes keep some context.
-  const minSpan = 1.4;
+  const minSpan = 1.4 * RAD;
   if (x1 - x0 < minSpan) { const c = (x0 + x1) / 2; x0 = c - minSpan / 2; x1 = c + minSpan / 2; }
   if (y1 - y0 < minSpan) { const c = (y0 + y1) / 2; y0 = c - minSpan / 2; y1 = c + minSpan / 2; }
   const k = Math.min((W - PAD * 2) / (x1 - x0), (H - PAD * 2) / (y1 - y0));
   const ox = (W - (x1 - x0) * k) / 2;
   const oy = (H - (y1 - y0) * k) / 2;
-  const at = (lat: number, lng: number) => ({ x: ox + (lng * COS_LAT - x0) * k, y: oy + (-lat - y0) * k });
-  return { at, k, bounds: { x0, x1, y0, y1 } };
+  const at = (lat: number, lng: number) => {
+    const p = ortho(lat, lng);
+    return { x: ox + (p.x - x0) * k, y: oy + (p.y - y0) * k };
+  };
+  const latMin = Math.min(...points.map((p) => p.lat));
+  const latMax = Math.max(...points.map((p) => p.lat));
+  const lngMin = Math.min(...points.map((p) => p.lng));
+  const lngMax = Math.max(...points.map((p) => p.lng));
+  return { at, span: Math.max(latMax - latMin, lngMax - lngMin, 1.4), box: { latMin, latMax, lngMin, lngMax } };
+}
+
+/** Fine graticule: thin lines every `step` degrees, slightly stronger whole degrees. */
+function graticule(at: (lat: number, lng: number) => { x: number; y: number }, box: { latMin: number; latMax: number; lngMin: number; lngMax: number }, span: number) {
+  const step = span > 5 ? 0.5 : span > 2.5 ? 0.25 : 0.2;
+  const m = Math.max(3, span);
+  const la0 = Math.floor((box.latMin - m) / step) * step;
+  const la1 = box.latMax + m;
+  const lo0 = Math.floor((box.lngMin - m) / step) * step;
+  const lo1 = box.lngMax + m;
+  const line = (pts: { x: number; y: number }[]) => pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join("");
+  const minor: string[] = [];
+  const major: string[] = [];
+  const isMajor = (v: number) => Math.abs(v - Math.round(v)) < 1e-6;
+  for (let la = la0; la <= la1 + 1e-9; la += step) {
+    const pts = [];
+    for (let lo = lo0; lo <= lo1 + 1e-9; lo += (lo1 - lo0) / 48) pts.push(at(la, lo));
+    (isMajor(la) ? major : minor).push(line(pts));
+  }
+  for (let lo = lo0; lo <= lo1 + 1e-9; lo += step) {
+    const pts = [];
+    for (let la = la0; la <= la1 + 1e-9; la += (la1 - la0) / 48) pts.push(at(la, lo));
+    (isMajor(lo) ? major : minor).push(line(pts));
+  }
+  const labels: { t: string; x: number; y: number }[] = [];
+  for (let la = Math.ceil(la0); la <= la1; la++) {
+    // Label each whole parallel where it crosses the left edge of the frame.
+    let best: { x: number; y: number } | null = null;
+    for (let lo = lo0; lo <= lo1; lo += 0.05) { const p = at(la, lo); if (p.x >= 8) { best = p; break; } }
+    if (best && best.y > 18 && best.y < H - 10) labels.push({ t: `${la}°N`, x: 10, y: best.y - 6 });
+  }
+  for (let lo = Math.ceil(lo0); lo <= lo1; lo++) {
+    let best: { x: number; y: number } | null = null;
+    for (let la = la0; la <= la1; la += 0.05) { const p = at(la, lo); if (p.y <= H - 8) { best = p; break; } }
+    if (best && best.x > 40 && best.x < W - 40) labels.push({ t: lo === 0 ? "0°" : `${Math.abs(lo)}°${lo < 0 ? "W" : "E"}`, x: best.x + 6, y: H - 12 });
+  }
+  return { minor, major, labels };
+}
+
+const PW = 210;
+const PH = 150;
+const PM = 18;
+
+/** The route photo, placed in whichever corner is farthest from every stop. */
+function MapPhoto({ href, pts }: { href: string; pts: { x: number; y: number }[] }) {
+  const corners = [
+    { x: W - PW - PM, y: H - PH - PM },
+    { x: PM, y: H - PH - PM },
+    { x: W - PW - PM, y: PM + 40 },
+    { x: PM, y: PM + 40 },
+  ];
+  const clearance = (c: { x: number; y: number }) =>
+    Math.min(...pts.map((p) => {
+      const dx = Math.max(c.x - 60 - p.x, 0, p.x - (c.x + PW + 60));
+      const dy = Math.max(c.y - 20 - p.y, 0, p.y - (c.y + PH + 20));
+      return Math.hypot(dx, dy);
+    }));
+  const c = corners.reduce((best, k) => (clearance(k) > clearance(best) ? k : best), corners[0]);
+  return (
+    <g>
+      <clipPath id="map-photo-clip"><rect x={c.x} y={c.y} width={PW} height={PH} rx="14" /></clipPath>
+      <image href={href} x={c.x} y={c.y} width={PW} height={PH} preserveAspectRatio="xMidYMid slice" clipPath="url(#map-photo-clip)" />
+      <rect x={c.x} y={c.y} width={PW} height={PH} rx="14" fill="none" stroke="var(--color-background)" strokeWidth="5" />
+    </g>
+  );
 }
 
 function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea: string }) {
   const reduce = useReducedMotion();
   const all = [VALENCIA, ...route.stops];
-  const { at, bounds } = useMemo(() => project(all), [route.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { at, grid, land } = useMemo(() => {
+    const pr = project(all);
+    const land = (LAND as number[][][])
+      .map((ring) => ring.map(([lng, lat], i) => { const q = pr.at(lat, lng); return `${i ? "L" : "M"}${q.x.toFixed(1)},${q.y.toFixed(1)}`; }).join("") + "Z")
+      .join("");
+    return { at: pr.at, grid: graticule(pr.at, pr.box, pr.span), land };
+  }, [route.id]); // eslint-disable-line react-hooks/exhaustive-deps
   const pts = all.map((s) => ({ ...s, ...at(s.lat, s.lng) }));
   const d = pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
-
-  // Whole-degree graticule inside the fitted bounds.
-  const lats: number[] = [];
-  for (let la = Math.ceil(-bounds.y1) - 1; la <= Math.floor(-bounds.y0) + 1; la++) lats.push(la);
-  const lngs: number[] = [];
-  for (let lo = Math.floor(bounds.x0 / COS_LAT) - 1; lo <= Math.ceil(bounds.x1 / COS_LAT) + 1; lo++) lngs.push(lo);
   const seaPos = at(39.75, 0.55);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="h-full w-full" role="img" aria-label={label}>
-      <g stroke="currentColor" className="text-border" strokeWidth="1" opacity="0.5">
-        {lats.map((la) => { const y = at(la, 0).y; return <line key={`la${la}`} x1="0" x2={W} y1={y} y2={y} />; })}
-        {lngs.map((lo) => { const x = at(40, lo).x; return <line key={`lo${lo}`} y1="0" y2={H} x1={x} x2={x} />; })}
+      <defs>
+        <radialGradient id="globe-glow" cx="50%" cy="45%" r="70%">
+          <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.07" />
+          <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      {/* Sea, then real land from Natural Earth 1:10m (src/data/iberia-land.json) */}
+      <rect width={W} height={H} fill="#1f3f66" />
+      <path d={land} fill="#122036" stroke="#5b7ea6" strokeWidth="1.2" strokeLinejoin="round" />
+      <rect width={W} height={H} fill="url(#globe-glow)" />
+      <g fill="none" stroke="currentColor" className="text-muted-foreground" strokeWidth="0.6" opacity="0.18">
+        {grid.minor.map((p, i) => <path key={`n${i}`} d={p} />)}
       </g>
-      <g className="fill-muted-foreground" fontSize="12" fontFamily="var(--font-mono)">
-        {lats.map((la) => { const y = at(la, 0).y; return y > 14 && y < H - 6 ? <text key={`t${la}`} x="10" y={y - 6}>{la}°N</text> : null; })}
+      <g fill="none" stroke="currentColor" className="text-muted-foreground" strokeWidth="1" opacity="0.4">
+        {grid.major.map((p, i) => <path key={`j${i}`} d={p} />)}
+      </g>
+      <g className="fill-muted-foreground" fontSize="11" fontFamily="var(--font-mono)" opacity="0.8">
+        {grid.labels.map((l) => <text key={l.t} x={l.x} y={l.y}>{l.t}</text>)}
       </g>
       {route.id !== "r2" && route.id !== "r3" && (
         <text x={Math.min(seaPos.x, W - 16)} y={seaPos.y} textAnchor={seaPos.x > W - 160 ? "end" : "start"} className="fill-muted-foreground" fontSize="15" fontStyle="italic" opacity="0.7">{sea}</text>
@@ -169,6 +273,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
               </g>
             );
           })}
+          {route.photo && <MapPhoto href={route.photo} pts={pts} />}
         </motion.g>
       </AnimatePresence>
     </svg>
@@ -176,8 +281,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
 }
 
 export function Hero() {
-  const { t, i18n } = useTranslation();
-  const fmt = new Intl.NumberFormat(i18n.language);
+  const { t } = useTranslation();
   const [active, setActive] = useState<HeroRoute["id"]>("r1");
   const route = ROUTES.find((r) => r.id === active) ?? ROUTES[0];
   const days = (r: HeroRoute) =>
@@ -188,23 +292,23 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14 lg:px-8">
         <div className="min-w-0">
           <p className="font-poster text-xl uppercase tracking-[0.06em] text-primary sm:text-2xl">{SLOGAN}</p>
-          <h1 className="font-poster mt-3 text-5xl uppercase leading-[0.92] text-foreground text-balance sm:text-6xl lg:text-7xl">
+          <h1 className="font-poster mt-3 text-5xl uppercase leading-[1.02] text-foreground text-balance sm:text-6xl lg:text-7xl">
             {t("hero.question")}
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">{t("hero.routesSub")}</p>
 
-          <div className="mt-7 grid gap-2.5" role="radiogroup" aria-label={t("routes.title")}>
+          <ul className="mt-7 grid gap-2.5" aria-label={t("routes.title")}>
             {ROUTES.map((r) => {
               const on = r.id === active;
               return (
-                <button
-                  key={r.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={on}
-                  onClick={() => setActive(r.id)}
+                <li key={r.id}>
+                <Link
+                  to="/rutas/$slug"
+                  params={{ slug: r.slug }}
+                  aria-current={on ? "true" : undefined}
                   onMouseEnter={() => setActive(r.id)}
-                  className={`flex items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  onFocus={() => setActive(r.id)}
+                  className={`group flex items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     on ? "border-primary bg-surface" : "border-border/60 bg-surface/40 hover:border-border"
                   }`}
                 >
@@ -212,13 +316,17 @@ export function Hero() {
                     <span className="block font-medium text-foreground">{t(`routes.${r.id}_name`)}</span>
                     <span className="block text-xs text-muted-foreground">{days(r)}</span>
                   </span>
-                  <span className="font-poster shrink-0 text-lg text-primary">
-                    {r.nights ? t("hero.tripFrom", { price: fmt.format(tripPrice(r.nights)) }) : "+150 €"}
+                  <span className="flex shrink-0 items-center gap-2">
+                    <span className="font-poster text-lg text-primary [word-spacing:0.18em]">
+                      {r.nights ? t("hero.tripFrom", { price: groupThousands(tripPrice(r.nights)) }) : "+150 €"}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                   </span>
-                </button>
+                </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
           <p className="mt-3 text-xs text-muted-foreground">
             {route.nights ? t("hero.tripNote", { n: route.nights }) : t("hero.festNote")}
           </p>

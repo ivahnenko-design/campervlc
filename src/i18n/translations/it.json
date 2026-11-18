@@ -113,7 +113,7 @@
       "water": "Acqua calda, doccia e WC",
       "tv": "Smart TV da 24 pollici",
       "child": "Seggiolino per bambini (gratuito, su richiesta)",
-      "pet": "Pet friendly senza costi aggiuntivi",
+      "pet": "Animali: 50 € a prenotazione",
       "kitchenItems": "Piatti, bicchieri, tazzine da caffè, cucchiai, cucchiaini, forchette, coltelli da tavola, coltelli da cucina e seghettati, tagliere di legno, spatole da cucina, 3 padelle, un pentolino medio, una pentola con coperchio di vetro, un'insalatiera, un cavatappi e una moka.",
       "bedKit": "Kit letto",
       "bedKitItems": "Cuscini e coperte"
@@ -227,7 +227,8 @@
     "festival": "Festival",
     "km_200": "Fino a 200 km/notte invece di 100",
     "km_unlimited": "Chilometri illimitati",
-    "sup_board": "Tavola SUP"
+    "sup_board": "Tavola SUP",
+    "pet": "Animale domestico"
   },
   "routes": {
     "title": "Itinerari popolari da Valencia",
@@ -272,7 +273,7 @@
     "q4": "Dove si ritira e riconsegna?",
     "a4": "Ritiro e riconsegna in Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Posso portare animali?",
-    "a5": "Sì, gli animali sono i benvenuti senza costi aggiuntivi. Rispondi dei danni che causano e nel veicolo non si può fumare.",
+    "a5": "Sì, gli animali sono i benvenuti con un supplemento di 50 € a prenotazione. Rispondi dei danni che causano e nel veicolo non si può fumare.",
     "q6": "Quanti km sono inclusi?",
     "a6": "Sono inclusi 100 km per ogni notte di noleggio. Puoi estenderli fino a 200 km/notte (20 €/notte) o chilometraggio illimitato (40 €/notte). I chilometri oltre il limite costano 0,30 €/km.",
     "q7": "Soggiorno minimo?",

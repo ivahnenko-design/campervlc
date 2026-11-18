@@ -80,7 +80,6 @@
             "Garantía de movilidad del fabricante del chasis.",
             "Dos bombonas de gas y cápsulas para el WC químico.",
             "Aparcamiento gratuito de tu coche en nuestras instalaciones durante el alquiler.",
-            "Mascotas sin coste adicional.",
             "Mesa y sillas de camping, tres sillas de playa, sombrilla y toldo, Smart TV, menaje de cocina, almohadas y mantas."
           ]
         },
@@ -129,7 +128,7 @@
         },
         {
           "q": "¿Puedo viajar con mi perro?",
-          "a": "Sí. Las mascotas viajan sin coste adicional. Si a la devolución hay olor a tabaco o a animales que requiera un tratamiento especial, se factura el coste real, con un máximo de 300 €."
+          "a": "Sí. Las mascotas viajan con un suplemento de 50 € por reserva. Si a la devolución hay olor a tabaco o a animales que requiera un tratamiento especial, se factura el coste real, con un máximo de 300 €."
         },
         {
           "q": "¿Qué pasa si devuelvo la autocaravana más tarde?",
@@ -283,7 +282,7 @@
         {
           "h2": "Pet friendly y viajes en familia",
           "paragraphs": [
-            "Las mascotas viajan sin coste adicional. Disponemos de silla infantil gratuita, bajo petición, para viajar con niños."
+            "Las mascotas viajan con un suplemento de 50 € por reserva. Disponemos de silla infantil gratuita, bajo petición, para viajar con niños."
           ]
         },
         {
@@ -308,7 +307,7 @@
         },
         {
           "q": "¿Es pet friendly?",
-          "a": "Sí. Las mascotas son bienvenidas sin coste adicional."
+          "a": "Sí. Las mascotas son bienvenidas, con un suplemento de 50 € por reserva."
         }
       ],
       "cta": {

@@ -34,7 +34,8 @@ export type ExtraId =
   | "extra_driver"
   | "km_200"
   | "km_unlimited"
-  | "sup_board";
+  | "sup_board"
+  | "pet";
 
 export interface ExtraItem {
   id: ExtraId;

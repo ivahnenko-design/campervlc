@@ -6,9 +6,9 @@ import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from 
 import { blobStore, list } from "./blob.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
-// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v5.pdf.
-export const CONTRACT_VERSION = "2026-11-v5";
-export const CONTRACT_PDF_PATH = "/contracts/contrato-v5.pdf";
+// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v6.pdf.
+export const CONTRACT_VERSION = "2026-11-v6";
+export const CONTRACT_PDF_PATH = "/contracts/contrato-v6.pdf";
 
 export const OTP_TTL_MS = 10 * 60_000;
 export const OTP_RESEND_MS = 60_000;

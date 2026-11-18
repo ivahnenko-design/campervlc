@@ -113,7 +113,7 @@
       "water": "Hot water, shower and toilet",
       "tv": "24-inch Smart TV",
       "child": "Child seat (free, on request)",
-      "pet": "Pet friendly at no extra cost",
+      "pet": "Pets: 50 € per booking",
       "kitchenItems": "Plates, glasses, coffee cups, spoons, coffee spoons, forks, table knives, kitchen and serrated knives, wooden chopping board, kitchen spatulas, 3 frying pans, a medium saucepan, a pot with a glass lid, a salad bowl, a corkscrew and an Italian coffee maker.",
       "bedKit": "Bed kit",
       "bedKitItems": "Pillows and blankets"
@@ -227,7 +227,8 @@
     "festival": "Festival",
     "km_200": "Up to 200 km/night instead of 100",
     "km_unlimited": "Unlimited mileage",
-    "sup_board": "SUP board"
+    "sup_board": "SUP board",
+    "pet": "Pet"
   },
   "routes": {
     "title": "Popular Routes from Valencia",
@@ -272,7 +273,7 @@
     "q4": "Where is the motorhome picked up and returned?",
     "a4": "Pick-up and return are at Carrer de Nino Bravo, 3, 46013 Valencia.",
     "q5": "Can I bring pets?",
-    "a5": "Yes, pets are welcome at no extra cost. You are responsible for any damage they cause, and smoking is not allowed in the vehicle.",
+    "a5": "Yes, pets are welcome for a 50 € supplement per booking. You are responsible for any damage they cause, and smoking is not allowed in the vehicle.",
     "q6": "How many kilometers are included?",
     "a6": "100 km per rental night are included. You can extend it with up to 200 km/night (20 €/night) or unlimited mileage (40 €/night). Kilometres above the allowance cost 0.30 €/km.",
     "q7": "What's the minimum stay?",

@@ -12,7 +12,6 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 - Garanzia di mobilità del costruttore del telaio cabinato.
 - Due bombole di gas e capsule per il WC chimico.
 - Parcheggio gratuito della tua auto presso la nostra sede durante il noleggio.
-- Animali domestici senza costi aggiuntivi.
 - Dotazione: tavolo e sedie da campeggio, tre sedie da spiaggia, ombrellone, tendalino, Smart TV, stoviglie e utensili da cucina, cuscini e coperte.
 
 ## Veicolo, ritiro e conducenti
@@ -29,6 +28,7 @@ Queste sono le condizioni del contratto che firmerai al ritiro del camper. Le pu
 | Cauzione (preautorizzazione o addebito sulla carta) | 900 € |
 | Opzione 200 km per notte | 20 € / notte |
 | Opzione chilometraggio illimitato | 40 € / notte |
+| Animale domestico | 50 € / prenotazione |
 | Chilometri oltre quelli inclusi | 0,30 € / km |
 | Restituzione oltre l'orario di ritiro, fino a 6 h | 50 % di una giornata |
 | Restituzione oltre l'orario di ritiro, più di 6 h | una giornata intera |
@@ -142,7 +142,7 @@ Cancellazione gratuita entro 24 ore: la prenotazione può essere cancellata senz
 
 6.2. Il Conduttore custodirà il veicolo con diligenza, lo chiuderà a chiave e controllerà periodicamente i livelli di acqua e olio e la pressione degli pneumatici, verificando che il camper sia in condizioni di circolare in sicurezza.
 
-6.3. È vietato fumare nel veicolo. Gli animali da compagnia sono ammessi senza costi aggiuntivi, sotto la responsabilità del Conduttore, che risponderà dei danni da essi causati. Se alla restituzione si riscontrano odore di fumo, peli o odore di animali, o sporcizia che richieda un trattamento speciale, il Conduttore pagherà il costo effettivo e comprovato della pulizia o dell'ozonizzazione necessaria, fino a un massimo di 300 €, oltre al mancato guadagno comprovato qualora il veicolo non potesse essere noleggiato per tale motivo (massimo 3 giornate di noleggio).
+6.3. È vietato fumare nel veicolo. Gli animali da compagnia sono ammessi con un supplemento di 50 € a prenotazione, sotto la responsabilità del Conduttore, che risponderà dei danni da essi causati. Se alla restituzione si riscontrano odore di fumo, peli o odore di animali, o sporcizia che richieda un trattamento speciale, il Conduttore pagherà il costo effettivo e comprovato della pulizia o dell'ozonizzazione necessaria, fino a un massimo di 300 €, oltre al mancato guadagno comprovato qualora il veicolo non potesse essere noleggiato per tale motivo (massimo 3 giornate di noleggio).
 
 6.4. Limite di velocità: 110 km/h, o quello inferiore indicato dalla segnaletica. Non transitare sotto passaggi di altezza inferiore a 3,30 m e tenere conto della lunghezza del veicolo nelle svolte e nelle manovre.
 
