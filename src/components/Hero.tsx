@@ -132,7 +132,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
       {route.id !== "r2" && route.id !== "r3" && (
         <text x={Math.min(seaPos.x, W - 16)} y={seaPos.y} textAnchor={seaPos.x > W - 160 ? "end" : "start"} className="fill-muted-foreground" fontSize="15" fontStyle="italic" opacity="0.7">{sea}</text>
       )}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.g key={route.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduce ? 0 : 0.25 }}>
           {route.path && (
             <motion.path
