@@ -221,8 +221,8 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
         </radialGradient>
       </defs>
       {/* Sea, then real land from Natural Earth 1:10m (src/data/iberia-land.json) */}
-      <rect width={W} height={H} fill="#1f3f66" />
-      <path d={land} fill="#122036" stroke="#5b7ea6" strokeWidth="1.2" strokeLinejoin="round" />
+      <rect width={W} height={H} fill="#122036" />
+      <path d={land} fill="#1f3f66" stroke="#5b7ea6" strokeWidth="1.2" strokeLinejoin="round" />
       <rect width={W} height={H} fill="url(#globe-glow)" />
       <g fill="none" stroke="currentColor" className="text-muted-foreground" strokeWidth="0.6" opacity="0.18">
         {grid.minor.map((p, i) => <path key={`n${i}`} d={p} />)}
