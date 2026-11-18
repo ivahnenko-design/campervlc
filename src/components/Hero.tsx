@@ -176,14 +176,15 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
 }
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const fmt = new Intl.NumberFormat(i18n.language);
   const [active, setActive] = useState<HeroRoute["id"]>("r1");
   const route = ROUTES.find((r) => r.id === active) ?? ROUTES[0];
   const days = (r: HeroRoute) =>
     `${t(`routes.${r.id}_dur`)} ${t(`routes.${r.id}_unit`, { defaultValue: t("routes.days") })}`;
 
   return (
-    <section id="top" className="relative w-full overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
+    <section id="top" className="relative w-full overflow-hidden pt-28 pb-4 sm:pt-32 lg:pb-8">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14 lg:px-8">
         <div className="min-w-0">
           <p className="font-poster text-xl uppercase tracking-[0.06em] text-primary sm:text-2xl">{SLOGAN}</p>
@@ -212,7 +213,7 @@ export function Hero() {
                     <span className="block text-xs text-muted-foreground">{days(r)}</span>
                   </span>
                   <span className="font-poster shrink-0 text-lg text-primary">
-                    {r.nights ? t("hero.tripFrom", { price: tripPrice(r.nights) }) : "+150 €"}
+                    {r.nights ? t("hero.tripFrom", { price: fmt.format(tripPrice(r.nights)) }) : "+150 €"}
                   </span>
                 </button>
               );
