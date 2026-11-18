@@ -5,11 +5,11 @@ import { Link } from "@tanstack/react-router";
 import { SectionHeader } from "./Fleet";
 
 const ROUTES = [
-  { id: "r1", gradient: "from-amber-500/30 to-rose-500/20", slug: "costa-blanca" },
-  { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco" },
-  { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia" },
-  { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona" },
-  { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027" },
+  { id: "r1", gradient: "from-amber-500/30 to-rose-500/20", slug: "costa-blanca", photo: "/images/routes/costa-blanca-hero.jpg" },
+  { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco", photo: "/images/routes/hero-pais-vasco.jpg" },
+  { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia", photo: "/images/routes/hero-andalucia.jpg" },
+  { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona", photo: "/images/routes/hero-valencia-barcelona.jpg" },
+  { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027", photo: undefined as string | undefined },
 ] as const;
 
 export function Routes() {
@@ -27,8 +27,15 @@ export function Routes() {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className={`relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br ${r.gradient} bg-surface p-6 sm:p-8`}
+              className={`relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br ${r.gradient} bg-surface p-6 sm:p-8 ${r.photo ? "min-h-[260px] flex flex-col justify-end" : ""}`}
             >
+              {r.photo && (
+                <>
+                  <img src={r.photo} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/10" />
+                </>
+              )}
+              <div className="relative">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-2xl text-foreground">{t(`routes.${r.id}_name`)}</h3>
                 <span className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2.5 py-0.5 text-xs text-foreground/80">
@@ -51,6 +58,7 @@ export function Routes() {
                   {t("routes.view")} <ArrowRight className="h-4 w-4" />
                 </span>
               )}
+              </div>
             </motion.article>
           ))}
         </div>

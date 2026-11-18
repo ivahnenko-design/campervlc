@@ -12,7 +12,7 @@
   "hero": {
     "line1": "Dein Zuhause auf Rädern.",
     "line2": "Die Straße, dein Ziel.",
-    "subheadline": "Miete unser Premium-Wohnmobil McLouis Yearling 89G in Valencia. Bis zu 5 Personen. Alles inklusive.",
+    "subheadline": "Miete unser Wohnmobil McLouis Yearling 89G in Valencia. Bis zu 5 Personen, Geschirr, Gas und WC-Zubehör inklusive.",
     "badges": {
       "rating": "4,9 auf Yescapa",
       "capacity": "Bis 5 Personen",
@@ -27,7 +27,7 @@
     "cta": "Verfügbarkeit prüfen",
     "priceFrom": "ab 90 €/Nacht",
     "question": "Wohin geht's ab Valencia?",
-    "routesSub": "Wähle eine Route: Wir zeigen freie Termine und den Preis der ganzen Reise in unserem McLouis Yearling 89G. Bis zu 5 Personen, alles inklusive.",
+    "routesSub": "Wähle eine Route, und wir zeigen freie Termine und den Preis der ganzen Reise in unserem McLouis Yearling 89G für bis zu 5 Personen.",
     "tripFrom": "ab {{price}} €",
     "tripNote": "Nächte: {{n}} · Nebensaison · inkl. Reinigung und MwSt.",
     "festNote": "6 Festivals · Zuschlag 150 €",
@@ -38,7 +38,7 @@
   },
   "fleet": {
     "title": "Unser Wohnmobil",
-    "subtitle": "Ein Wohnmobil, im Detail gepflegt, bereit für deine nächste Reise.",
+    "subtitle": "Ein Wohnmobil, Baujahr 2024. Wir bereiten es vor jeder Reise selbst vor und erklären dir alles bei der Übergabe.",
     "available": "Verfügbar",
     "capacity": "Bis zu {{n}} Personen",
     "from": "ab",
@@ -81,7 +81,7 @@
     "quick": {
       "seats": "5 Sitzplätze",
       "beds": "5 Schlafplätze",
-      "allIncluded": "Alles inklusive",
+      "allIncluded": "Im Preis enthalten",
       "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Länge × Breite × Höhe"
     },
@@ -119,7 +119,7 @@
       "bedKitItems": "Kissen und Decken"
     },
     "included": {
-      "title": "Alles inklusive",
+      "title": "Im Preis enthalten",
       "km": "100 km pro Mietnacht inklusive",
       "parking": "Kostenloses Parken für dein Fahrzeug auf unserem Gelände inklusive",
       "gasBottles": "2 Gasflaschen inklusive (für Kühlschrank, Heizung, Warmwasser und Gasherd)",
@@ -138,7 +138,7 @@
   "booking": {
     "title": "Buche deine Reise",
     "subtitle": "Wähle deine Daten, füge Optionen hinzu und zahle online. Die Bestätigung kommt per E-Mail.",
-    "eyebrow": "01 · Buchung",
+    "eyebrow": "Buchung",
     "checkin": "Abholung",
     "checkout": "Rückgabe",
     "pickup_time": "Abholzeit",
@@ -232,7 +232,7 @@
   },
   "routes": {
     "title": "Beliebte Routen ab Valencia",
-    "subtitle": "Inspiration für deinen nächsten Wohnmobil-Trip.",
+    "subtitle": "Routen Tag für Tag, mit Stopps, Stellplätzen und Entfernungen.",
     "days": "Tage",
     "view": "Route ansehen",
     "r1_name": "Costa Blanca",
@@ -299,10 +299,10 @@
   },
   "meta": {
     "title": "Wohnmobil mieten Valencia Spanien | Camper Retreat VLC",
-    "description": "Mieten Sie unser Wohnmobil in Valencia für bis zu 5 Personen ab 90€/Nacht. Alles inklusive. Online buchen in wenigen Minuten."
+    "description": "Miete unser Wohnmobil McLouis Yearling 89G in Valencia für bis zu 5 Personen ab 90 €/Nacht. Geschirr, Gas und Vollkasko inklusive. Online buchen."
   },
   "footer": {
-    "tagline": "Freiheit der Straße, aus Valencia.",
+    "tagline": "Wohnmobilvermietung in Valencia. Abholung in der Carrer de Nino Bravo, 3.",
     "privacy": "Datenschutz",
     "terms": "AGB",
     "conditions": "Bedingungen und Preise",

@@ -307,7 +307,6 @@ export function BookingCalendar() {
         <SectionHeader
           title={t("booking.title")}
           subtitle={t("booking.subtitle")}
-          eyebrow={t("booking.eyebrow")}
         />
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[1.3fr_1fr] lg:items-start">

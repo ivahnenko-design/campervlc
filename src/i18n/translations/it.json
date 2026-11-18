@@ -12,7 +12,7 @@
   "hero": {
     "line1": "La tua casa su ruote.",
     "line2": "La strada, la tua destinazione.",
-    "subheadline": "Noleggia il nostro camper premium McLouis Yearling 89G a Valencia. Fino a 5 persone. Tutto incluso.",
+    "subheadline": "Noleggia il nostro McLouis Yearling 89G a Valencia. Fino a 5 persone, con stoviglie, gas e prodotti per il WC inclusi.",
     "badges": {
       "rating": "4,9 su Yescapa",
       "capacity": "Fino a 5 persone",
@@ -27,7 +27,7 @@
     "cta": "Verifica disponibilità",
     "priceFrom": "da 90 €/notte",
     "question": "Dove andiamo da Valencia?",
-    "routesSub": "Scegli un itinerario: ti mostriamo le date libere e il prezzo dell'intero viaggio nel nostro McLouis Yearling 89G. Fino a 5 persone, tutto incluso.",
+    "routesSub": "Scegli un itinerario: ti mostriamo le date libere e il prezzo dell'intero viaggio nel nostro McLouis Yearling 89G, per un massimo di 5 persone.",
     "tripFrom": "da {{price}} €",
     "tripNote": "Notti: {{n}} · bassa stagione · pulizia e IVA incluse",
     "festNote": "6 festival · supplemento 150 €",
@@ -38,7 +38,7 @@
   },
   "fleet": {
     "title": "Il nostro camper",
-    "subtitle": "Un camper curato nei minimi dettagli, pronto per il tuo prossimo viaggio.",
+    "subtitle": "Un solo camper, del 2024. Lo prepariamo noi prima di ogni viaggio e te lo spieghiamo alla consegna.",
     "available": "Disponibile",
     "capacity": "Fino a {{n}} persone",
     "from": "da",
@@ -81,7 +81,7 @@
     "quick": {
       "seats": "5 posti di viaggio",
       "beds": "5 posti letto",
-      "allIncluded": "Tutto incluso",
+      "allIncluded": "Incluso nel prezzo",
       "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Lunghezza × larghezza × altezza"
     },
@@ -119,7 +119,7 @@
       "bedKitItems": "Cuscini e coperte"
     },
     "included": {
-      "title": "Tutto incluso",
+      "title": "Incluso nel prezzo",
       "km": "100 km per ogni notte di noleggio inclusi",
       "parking": "Parcheggio gratuito per il tuo veicolo presso la nostra sede incluso",
       "gasBottles": "2 bombole di gas incluse (per frigorifero, riscaldamento, acqua calda e piano cottura a gas)",
@@ -138,7 +138,7 @@
   "booking": {
     "title": "Prenota il tuo viaggio",
     "subtitle": "Scegli le date, aggiungi le opzioni e paga online: la conferma arriva via email.",
-    "eyebrow": "01 · Prenotazione",
+    "eyebrow": "Prenotazione",
     "checkin": "Ritiro",
     "checkout": "Riconsegna",
     "pickup_time": "Orario di ritiro",
@@ -232,7 +232,7 @@
   },
   "routes": {
     "title": "Itinerari popolari da Valencia",
-    "subtitle": "Ispirazione per la tua prossima fuga in camper.",
+    "subtitle": "Itinerari giorno per giorno con tappe, aree di sosta e distanze.",
     "days": "giorni",
     "view": "Vedi itinerario",
     "r1_name": "Costa Blanca",
@@ -299,10 +299,10 @@
   },
   "meta": {
     "title": "Noleggio Camper Valencia Spagna | Camper Retreat VLC",
-    "description": "Noleggia il nostro camper a Valencia per fino a 5 persone da 90€/notte. Tutto incluso. Prenota online in pochi minuti."
+    "description": "Noleggia il nostro camper McLouis Yearling 89G a Valencia per fino a 5 persone da 90 €/notte. Stoviglie, gas e assicurazione kasko inclusi. Prenota online."
   },
   "footer": {
-    "tagline": "La libertà della strada, da Valencia.",
+    "tagline": "Noleggio camper a Valencia. Ritiro in Carrer de Nino Bravo, 3.",
     "privacy": "Privacy",
     "terms": "Termini e condizioni",
     "conditions": "Condizioni e tariffe",

@@ -12,7 +12,7 @@
   "hero": {
     "line1": "Jouw huis op wielen.",
     "line2": "De weg, je bestemming.",
-    "subheadline": "Huur onze premium camper McLouis Yearling 89G in Valencia. Tot 5 personen. Alles inclusief.",
+    "subheadline": "Huur onze McLouis Yearling 89G in Valencia. Tot 5 personen, met servies, gas en toiletartikelen inbegrepen.",
     "badges": {
       "rating": "4,9 op Yescapa",
       "capacity": "Tot 5 personen",
@@ -27,7 +27,7 @@
     "cta": "Bekijk beschikbaarheid",
     "priceFrom": "vanaf €90/nacht",
     "question": "Waarheen vanuit Valencia?",
-    "routesSub": "Kies een route en we tonen de vrije data en de prijs van de hele reis in onze McLouis Yearling 89G. Tot 5 personen, alles inbegrepen.",
+    "routesSub": "Kies een route en we tonen de vrije data en de prijs van de hele reis in onze McLouis Yearling 89G, voor maximaal 5 personen.",
     "tripFrom": "vanaf €{{price}}",
     "tripNote": "Nachten: {{n}} · laagseizoen · incl. schoonmaak en btw",
     "festNote": "6 festivals · toeslag €150",
@@ -38,7 +38,7 @@
   },
   "fleet": {
     "title": "Onze camper",
-    "subtitle": "Eén camper, tot in detail verzorgd, klaar voor je volgende reis.",
+    "subtitle": "Eén camper, bouwjaar 2024. We maken hem zelf klaar voor elke reis en leggen alles uit bij het ophalen.",
     "available": "Beschikbaar",
     "capacity": "Tot {{n}} personen",
     "from": "vanaf",
@@ -81,7 +81,7 @@
     "quick": {
       "seats": "5 reiszitplaatsen",
       "beds": "5 slaapplaatsen",
-      "allIncluded": "Alles inbegrepen",
+      "allIncluded": "Inbegrepen in de prijs",
       "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Lengte × breedte × hoogte"
     },
@@ -119,7 +119,7 @@
       "bedKitItems": "Kussens en dekens"
     },
     "included": {
-      "title": "Alles inbegrepen",
+      "title": "Inbegrepen in de prijs",
       "km": "100 km per huurnacht inbegrepen",
       "parking": "Gratis parkeren voor je eigen voertuig op ons terrein inbegrepen",
       "gasBottles": "2 gasflessen inbegrepen (voor koelkast, verwarming, warm water en gasfornuis)",
@@ -138,7 +138,7 @@
   "booking": {
     "title": "Boek je reis",
     "subtitle": "Kies je data, voeg opties toe en betaal online. De bevestiging komt per e-mail.",
-    "eyebrow": "01 · Boeking",
+    "eyebrow": "Boeking",
     "checkin": "Ophalen",
     "checkout": "Inleveren",
     "pickup_time": "Ophaaltijd",
@@ -232,7 +232,7 @@
   },
   "routes": {
     "title": "Populaire routes vanuit Valencia",
-    "subtitle": "Inspiratie voor je volgende camper-escapade.",
+    "subtitle": "Routes per dag, met stops, camperplaatsen en afstanden.",
     "days": "dagen",
     "view": "Bekijk route",
     "r1_name": "Costa Blanca",
@@ -299,10 +299,10 @@
   },
   "meta": {
     "title": "Camper Huren Valencia Spanje | Camper Retreat VLC",
-    "description": "Huur onze camper in Valencia voor tot 5 personen vanaf €90/nacht. Alles inbegrepen. Boek online binnen enkele minuten."
+    "description": "Huur onze camper McLouis Yearling 89G in Valencia voor maximaal 5 personen vanaf €90/nacht. Servies, gas en allriskverzekering inbegrepen. Online boeken."
   },
   "footer": {
-    "tagline": "Vrijheid van de weg, vanuit Valencia.",
+    "tagline": "Camperverhuur in Valencia. Ophalen aan de Carrer de Nino Bravo, 3.",
     "privacy": "Privacybeleid",
     "terms": "Voorwaarden",
     "conditions": "Voorwaarden en tarieven",

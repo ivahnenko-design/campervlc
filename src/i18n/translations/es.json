@@ -12,7 +12,7 @@
   "hero": {
     "line1": "Tu hogar sobre ruedas.",
     "line2": "La carretera, tu destino.",
-    "subheadline": "¿Quieres alquilar una autocaravana en Valencia? Nuestra McLouis Yearling 89G tiene espacio para 5 personas. Todo incluido.",
+    "subheadline": "Alquila nuestra McLouis Yearling 89G en Valencia. Hasta 5 personas, con menaje, gas y productos para el WC incluidos.",
     "badges": {
       "rating": "4,9 en Yescapa",
       "capacity": "Hasta 5 personas",
@@ -27,7 +27,7 @@
     "cta": "Ver disponibilidad",
     "priceFrom": "desde 90 €/noche",
     "question": "¿A dónde vamos desde Valencia?",
-    "routesSub": "Elige una ruta y te mostramos las fechas libres y el precio del viaje completo en nuestra autocaravana McLouis Yearling 89G. Hasta 5 personas, todo incluido.",
+    "routesSub": "Elige una ruta y te mostramos las fechas libres y el precio del viaje completo en nuestra McLouis Yearling 89G, para hasta 5 personas.",
     "tripFrom": "desde {{price}} €",
     "tripNote": "Noches: {{n}} · temporada baja · limpieza e IVA incluidos",
     "festNote": "6 festivales · suplemento 150 €",
@@ -38,7 +38,7 @@
   },
   "fleet": {
     "title": "Nuestra autocaravana",
-    "subtitle": "Una autocaravana cuidada al detalle, lista para tu próximo viaje.",
+    "subtitle": "Una sola autocaravana, de 2024. La preparamos nosotros antes de cada viaje y te la explicamos en la entrega.",
     "available": "Disponible",
     "capacity": "Hasta {{n}} personas",
     "from": "desde",
@@ -81,7 +81,7 @@
     "quick": {
       "seats": "5 plazas de viaje",
       "beds": "5 plazas para dormir",
-      "allIncluded": "Todo incluido",
+      "allIncluded": "Incluido en el precio",
       "dims": "7,48 × 2,3 × 3,3 m",
       "dimsLabel": "Largo × ancho × alto"
     },
@@ -119,7 +119,7 @@
       "bedKitItems": "Almohadas y mantas"
     },
     "included": {
-      "title": "Todo incluido",
+      "title": "Incluido en el precio",
       "km": "100 km por noche de alquiler incluidos",
       "parking": "Aparcamiento gratuito para tu vehículo en nuestras instalaciones incluido",
       "gasBottles": "2 bombonas de gas incluidas (para la nevera, la calefacción, el agua caliente y la cocina de gas)",
@@ -138,7 +138,7 @@
   "booking": {
     "title": "Reserva tu viaje",
     "subtitle": "Elige las fechas, añade opciones y paga online; recibirás la confirmación por email.",
-    "eyebrow": "01 · Reserva",
+    "eyebrow": "Reserva",
     "checkin": "Salida",
     "checkout": "Llegada",
     "pickup_time": "Hora de recogida",
@@ -232,7 +232,7 @@
   },
   "routes": {
     "title": "Rutas Populares desde Valencia",
-    "subtitle": "Inspiración para tu próxima escapada en autocaravana.",
+    "subtitle": "Rutas día a día con paradas, áreas de autocaravanas y distancias.",
     "days": "días",
     "view": "Ver ruta",
     "r1_name": "Costa Blanca",
@@ -299,10 +299,10 @@
   },
   "meta": {
     "title": "Alquiler de Camper y Autocaravana en Valencia | Camper Retreat VLC",
-    "description": "Alquila nuestra autocaravana McLouis para hasta 5 personas desde 90€/noche. Todo incluido. Reserva online en minutos. Valencia, España."
+    "description": "Alquila nuestra autocaravana McLouis Yearling 89G en Valencia para hasta 5 personas desde 90 €/noche. Menaje, gas y seguro a todo riesgo incluidos. Reserva online."
   },
   "footer": {
-    "tagline": "La libertad de la carretera, desde Valencia.",
+    "tagline": "Alquiler de autocaravana en Valencia. Recogida en Carrer de Nino Bravo, 3.",
     "privacy": "Política de privacidad",
     "terms": "Términos y condiciones",
     "conditions": "Condiciones y tarifas",

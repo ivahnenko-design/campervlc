@@ -12,7 +12,7 @@
   "hero": {
     "line1": "Your home on wheels.",
     "line2": "The road, your destination.",
-    "subheadline": "Rent our premium McLouis Yearling 89G motorhome in Valencia. Up to 5 people. Everything included.",
+    "subheadline": "Rent our McLouis Yearling 89G in Valencia. Up to 5 people, with kitchenware, gas and toilet supplies included.",
     "badges": {
       "rating": "4.9 on Yescapa",
       "capacity": "Up to 5 people",
@@ -27,7 +27,7 @@
     "cta": "Check availability",
     "priceFrom": "from €90/night",
     "question": "Where to from Valencia?",
-    "routesSub": "Pick a route and we show the free dates and the price of the whole trip in our McLouis Yearling 89G. Up to 5 people, everything included.",
+    "routesSub": "Pick a route to see the free dates and the price of the whole trip in our McLouis Yearling 89G, for up to 5 people.",
     "tripFrom": "from €{{price}}",
     "tripNote": "Nights: {{n}} · low season · cleaning and VAT included",
     "festNote": "6 festivals · €150 surcharge",
@@ -38,7 +38,7 @@
   },
   "fleet": {
     "title": "Our camper",
-    "subtitle": "One motorhome cared for in every detail, ready for your next trip.",
+    "subtitle": "One motorhome, built in 2024. We prepare it ourselves before every trip and walk you through it at pick-up.",
     "available": "Available",
     "capacity": "Up to {{n}} people",
     "from": "from",
@@ -81,7 +81,7 @@
     "quick": {
       "seats": "5 travel seats",
       "beds": "5 sleeping places",
-      "allIncluded": "All included",
+      "allIncluded": "Included in the price",
       "dims": "7.48 × 2.3 × 3.3 m",
       "dimsLabel": "Length × width × height"
     },
@@ -119,7 +119,7 @@
       "bedKitItems": "Pillows and blankets"
     },
     "included": {
-      "title": "All included",
+      "title": "Included in the price",
       "km": "100 km per rental night included",
       "parking": "Free parking for your own vehicle at our premises included",
       "gasBottles": "2 gas bottles included (for the fridge, heating, hot water and gas stove)",
@@ -138,7 +138,7 @@
   "booking": {
     "title": "Book your trip",
     "subtitle": "Pick your dates, add options and pay online. Confirmation arrives by email.",
-    "eyebrow": "01 · Booking",
+    "eyebrow": "Booking",
     "checkin": "Check-in",
     "checkout": "Check-out",
     "pickup_time": "Pickup time",
@@ -232,7 +232,7 @@
   },
   "routes": {
     "title": "Popular Routes from Valencia",
-    "subtitle": "Inspiration for your next motorhome escape.",
+    "subtitle": "Day-by-day routes with stops, motorhome stopovers and distances.",
     "days": "days",
     "view": "View route",
     "r1_name": "Costa Blanca",
@@ -299,10 +299,10 @@
   },
   "meta": {
     "title": "Camper Van Rental Valencia Spain | Camper Retreat VLC",
-    "description": "Rent our premium motorhome in Valencia for up to 5 people from €90/night. Everything included. Book online in minutes."
+    "description": "Rent our McLouis Yearling 89G motorhome in Valencia for up to 5 people from €90/night. Kitchenware, gas and comprehensive insurance included. Book online."
   },
   "footer": {
-    "tagline": "Freedom on the road, from Valencia.",
+    "tagline": "Motorhome rental in Valencia. Pick-up at Carrer de Nino Bravo, 3.",
     "privacy": "Privacy policy",
     "terms": "Terms and conditions",
     "conditions": "Conditions and rates",

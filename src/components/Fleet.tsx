@@ -11,13 +11,15 @@ import { FLEET, type Camper } from "@/data/fleet";
 export function Fleet() {
   const { t } = useTranslation();
   const [open, setOpen] = useState<Camper | null>(null);
+  // With a single camper the card spans the row: photo left, details right.
+  const single = FLEET.length === 1;
 
   return (
     <section id="fleet" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader title={t("fleet.title")} subtitle={t("fleet.subtitle")} />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={`mt-12 grid gap-6 ${single ? "" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
           {FLEET.map((c, i) => (
             <motion.article
               key={c.id}
@@ -25,21 +27,21 @@ export function Fleet() {
               whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group overflow-hidden rounded-2xl border border-border/60 bg-surface"
+              className={`group overflow-hidden rounded-2xl border border-border/60 bg-surface ${single ? "lg:grid lg:grid-cols-[1.3fr_1fr]" : ""}`}
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className={`relative aspect-[4/3] overflow-hidden ${single ? "lg:aspect-auto lg:min-h-[420px]" : ""}`}>
                 <img
                   src={c.image}
                   alt={c.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 ${single ? "lg:absolute lg:inset-0" : ""}`}
                 />
                 <span className="absolute top-3 left-3 rounded-full bg-emerald-500/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
                   ● {t("fleet.available")}
                 </span>
               </div>
-              <div className="p-5">
-                <h3 className="font-display text-2xl text-foreground">{c.name}</h3>
+              <div className={single ? "flex flex-col justify-center p-6 lg:p-10" : "p-5"}>
+                <h3 className={`font-display text-foreground ${single ? "text-3xl lg:text-4xl" : "text-2xl"}`}>{c.name}</h3>
                 <p className="mt-1 flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="inline-flex items-center gap-1"><Users className="h-3.5 w-3.5" />{t("fleet.capacity", { n: c.capacity })}</span>
                   <span>·</span>
