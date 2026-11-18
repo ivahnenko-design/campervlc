@@ -170,6 +170,23 @@ function graticule(at: (lat: number, lng: number) => { x: number; y: number }, b
   return { minor, major, labels };
 }
 
+/** Catmull-Rom spline through every stop, as cubic Béziers: a soft road-like line. */
+function smoothPath(pts: { x: number; y: number }[], tension = 0.5) {
+  if (pts.length < 2) return "";
+  const f = (n: number) => n.toFixed(1);
+  let d = `M${f(pts[0].x)},${f(pts[0].y)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const c1 = { x: p1.x + ((p2.x - p0.x) / 6) * tension * 2, y: p1.y + ((p2.y - p0.y) / 6) * tension * 2 };
+    const c2 = { x: p2.x - ((p3.x - p1.x) / 6) * tension * 2, y: p2.y - ((p3.y - p1.y) / 6) * tension * 2 };
+    d += ` C${f(c1.x)},${f(c1.y)} ${f(c2.x)},${f(c2.y)} ${f(p2.x)},${f(p2.y)}`;
+  }
+  return d;
+}
+
 const PW = 210;
 const PH = 150;
 const PM = 18;
@@ -209,7 +226,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
     return { at: pr.at, grid: graticule(pr.at, pr.box, pr.span), land };
   }, [route.id]); // eslint-disable-line react-hooks/exhaustive-deps
   const pts = all.map((s) => ({ ...s, ...at(s.lat, s.lng) }));
-  const d = pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+  const d = smoothPath(pts);
   const seaPos = at(39.75, 0.55);
 
   return (
