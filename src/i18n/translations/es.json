@@ -25,10 +25,19 @@
     "nights": "noches",
     "estimated": "Estimado",
     "cta": "Ver disponibilidad",
-    "priceFrom": "desde 90 €/noche"
+    "priceFrom": "desde 90 €/noche",
+    "question": "¿A dónde vamos desde Valencia?",
+    "routesSub": "Elige una ruta y te mostramos las fechas libres y el precio del viaje completo en nuestra autocaravana McLouis Yearling 89G. Hasta 5 personas, todo incluido.",
+    "tripFrom": "desde {{price}} €",
+    "tripNote": "Noches: {{n}} · temporada baja · limpieza e IVA incluidos",
+    "festNote": "6 festivales · suplemento 150 €",
+    "chooseDates": "Elegir fechas",
+    "viewRoute": "Ruta día a día",
+    "sea": "Mar Mediterráneo",
+    "mapLabel": "Esquema de rutas desde Valencia"
   },
   "fleet": {
-    "title": "Nuestra Flota",
+    "title": "Nuestra autocaravana",
     "subtitle": "Una autocaravana cuidada al detalle, lista para tu próximo viaje.",
     "available": "Disponible",
     "capacity": "Hasta {{n}} personas",

@@ -71,8 +71,8 @@ function Index() {
         <HowItWorks />
         <SeasonStrip />
         <BookingCalendar />
-        <RoutesSection />
         <Reviews />
+        <RoutesSection />
         <FAQ />
         <Contact />
       </main>

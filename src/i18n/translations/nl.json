@@ -25,10 +25,19 @@
     "nights": "nachten",
     "estimated": "Geschat",
     "cta": "Bekijk beschikbaarheid",
-    "priceFrom": "vanaf €90/nacht"
+    "priceFrom": "vanaf €90/nacht",
+    "question": "Waarheen vanuit Valencia?",
+    "routesSub": "Kies een route en we tonen de vrije data en de prijs van de hele reis in onze McLouis Yearling 89G. Tot 5 personen, alles inbegrepen.",
+    "tripFrom": "vanaf €{{price}}",
+    "tripNote": "Nachten: {{n}} · laagseizoen · incl. schoonmaak en btw",
+    "festNote": "6 festivals · toeslag €150",
+    "chooseDates": "Kies data",
+    "viewRoute": "Route per dag",
+    "sea": "Middellandse Zee",
+    "mapLabel": "Routekaart vanuit Valencia"
   },
   "fleet": {
-    "title": "Onze vloot",
+    "title": "Onze camper",
     "subtitle": "Eén camper, tot in detail verzorgd, klaar voor je volgende reis.",
     "available": "Beschikbaar",
     "capacity": "Tot {{n}} personen",

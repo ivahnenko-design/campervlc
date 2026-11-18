@@ -25,10 +25,19 @@
     "nights": "nights",
     "estimated": "Estimated",
     "cta": "Check availability",
-    "priceFrom": "from €90/night"
+    "priceFrom": "from €90/night",
+    "question": "Where to from Valencia?",
+    "routesSub": "Pick a route and we show the free dates and the price of the whole trip in our McLouis Yearling 89G. Up to 5 people, everything included.",
+    "tripFrom": "from €{{price}}",
+    "tripNote": "Nights: {{n}} · low season · cleaning and VAT included",
+    "festNote": "6 festivals · €150 surcharge",
+    "chooseDates": "Choose dates",
+    "viewRoute": "Day-by-day route",
+    "sea": "Mediterranean Sea",
+    "mapLabel": "Route map from Valencia"
   },
   "fleet": {
-    "title": "Our Fleet",
+    "title": "Our camper",
     "subtitle": "One motorhome cared for in every detail, ready for your next trip.",
     "available": "Available",
     "capacity": "Up to {{n}} people",
