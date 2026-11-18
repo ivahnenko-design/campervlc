@@ -18,6 +18,8 @@ type HeroRoute = {
   path: boolean;
   /** Photo from the route article (src/data/routes-content.ts), shown in a free corner of the map. */
   photo?: string;
+  /** Author · licence for photos that need attribution. */
+  photoCredit?: string;
   stops: Stop[];
 };
 
@@ -26,7 +28,7 @@ const VALENCIA: Stop = { name: "Valencia", lat: 39.47, lng: -0.38 };
 // Stops follow the order of the day-by-day guides in src/data/routes-content.ts.
 const ROUTES: HeroRoute[] = [
   {
-    id: "r1", slug: "costa-blanca", nights: 3, path: true, photo: "/images/routes/costa-blanca-hero.jpg",
+    id: "r1", slug: "costa-blanca", nights: 3, path: true, photo: "/images/routes/costa-blanca-hero-map.jpg",
     stops: [
       { name: "Cullera", lat: 39.16, lng: -0.25 },
       { name: "Gandía", lat: 38.97, lng: -0.18 },
@@ -38,7 +40,8 @@ const ROUTES: HeroRoute[] = [
     ],
   },
   {
-    id: "r4", slug: "valencia-barcelona", nights: 4, path: true,
+    id: "r4", slug: "valencia-barcelona", nights: 4, path: true, photo: "/images/routes/hero-valencia-barcelona-map.jpg",
+    photoCredit: "Juan Emilio Prades Bel · CC BY 4.0",
     stops: [
       { name: "Peñíscola", lat: 40.36, lng: 0.41 },
       { name: "Delta de l'Ebre", lat: 40.72, lng: 0.8 },
@@ -48,7 +51,8 @@ const ROUTES: HeroRoute[] = [
     ],
   },
   {
-    id: "r2", slug: "pais-vasco", nights: 10, path: true,
+    id: "r2", slug: "pais-vasco", nights: 10, path: true, photo: "/images/routes/hero-pais-vasco-map.jpg",
+    photoCredit: "Juanedc · CC BY 2.0",
     stops: [
       { name: "Teruel", lat: 40.34, lng: -1.11 },
       { name: "Zaragoza", lat: 41.65, lng: -0.88 },
@@ -59,7 +63,7 @@ const ROUTES: HeroRoute[] = [
     ],
   },
   {
-    id: "r3", slug: "andalucia", nights: 10, path: true,
+    id: "r3", slug: "andalucia", nights: 10, path: true, photo: "/images/routes/hero-andalucia-map.jpg",
     stops: [
       { name: "Granada", lat: 37.18, lng: -3.6 },
       { name: "Ronda", lat: 36.74, lng: -5.17, side: "l" },
@@ -375,6 +379,7 @@ export function Hero() {
               {t(`routes.${route.id}_name`)} · {days(route)}
             </div>
           </div>
+          {route.photoCredit && <p className="mt-1.5 text-right text-[11px] text-muted-foreground">Foto: {route.photoCredit}</p>}
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
             <Badge icon={<Star className="h-3.5 w-3.5 fill-primary text-primary" />}>{t("hero.badges.rating")}</Badge>
             <Badge icon={<Users className="h-3.5 w-3.5" />}>{t("hero.badges.capacity")}</Badge>

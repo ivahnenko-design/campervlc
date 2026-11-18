@@ -5,6 +5,9 @@ export interface RouteDay {
   text: Record<Lang, string>;
   photoSlot: string;
   image?: string;
+  /** Author · licence · source, for photos that require attribution (CC BY / BY-SA). */
+  imageCredit?: string;
+  imageCreditUrl?: string;
   altText?: Record<Lang, string>;
 }
 
@@ -19,6 +22,8 @@ export interface RouteContent {
   heroTitle: Record<Lang, string>;
   heroSubtitle: Record<Lang, string>;
   heroImage?: string;
+  heroImageCredit?: string;
+  heroImageCreditUrl?: string;
   /** Placeholder id for the hero photo while no image file exists yet. */
   heroPhotoSlot?: string;
   intro: Record<Lang, string>;
@@ -325,6 +330,7 @@ const costaBlanca: RouteContent = {
 
 const valenciaBarcalona: RouteContent = {
   slug: "valencia-barcelona",
+  heroImage: "/images/routes/hero-valencia-barcelona.jpg", heroImageCredit: "Juan Emilio Prades Bel · CC BY 4.0 · Wikimedia Commons", heroImageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=177511199",
 
   metaTitle: {
     es: "Ruta Autocaravana Valencia Barcelona: Delta del Ebro y Costa Dorada en 4-5 Días | Camper Retreat VLC",
@@ -379,6 +385,7 @@ const valenciaBarcalona: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-peniscola",
+      image: "/images/routes/dia-1-peniscola.jpg", imageCredit: "Rastrojo (D•ES) · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=7486055",
       title: {
         es: "Día 1: Valencia → Sagunto → Peñíscola (150 km)",
         en: "Day 1: Valencia → Sagunto → Peñíscola (150 km)",
@@ -565,6 +572,7 @@ const valenciaBarcalona: RouteContent = {
 
 const paisVasco: RouteContent = {
   slug: "pais-vasco",
+  heroImage: "/images/routes/hero-pais-vasco.jpg", heroImageCredit: "Juanedc from Zaragoza, España · CC BY 2.0 · Wikimedia Commons", heroImageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=27827067",
   metaTitle: {
     es: "Ruta Autocaravana País Vasco desde Valencia: Norte de España en 10-12 Días | Camper Retreat VLC",
     en: "Campervan Route to the Basque Country from Valencia: Northern Spain in 10-12 Days | Camper Retreat VLC",
@@ -613,6 +621,7 @@ const paisVasco: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-teruel",
+      image: "/images/routes/dia-1-teruel.jpg", imageCredit: "Diego Delso · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=30766082",
       title: {
         es: "Día 1: Valencia — Teruel (145 km)",
         en: "Day 1: Valencia — Teruel (145 km)",
@@ -697,6 +706,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-6-gaztelugatxe-bilbao",
+      image: "/images/routes/dia-6-gaztelugatxe-bilbao.jpg",
       title: {
         es: "Días 6-7: San Sebastián — costa — Bilbao (100 km)",
         en: "Days 6-7: San Sebastián — coast — Bilbao (100 km)",
@@ -718,6 +728,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-8-rioja",
+      image: "/images/routes/dia-8-rioja.jpg",
       title: {
         es: "Día 8: Bilbao — La Rioja (130 km)",
         en: "Day 8: Bilbao — La Rioja (130 km)",
@@ -739,6 +750,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-9-soria",
+      image: "/images/routes/dia-9-soria.jpg",
       title: {
         es: "Día 9: La Rioja — Soria — Calatayud (250 km)",
         en: "Day 9: La Rioja — Soria — Calatayud (250 km)",
@@ -760,6 +772,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-10-regreso",
+      image: "/images/routes/dia-10-regreso.jpg",
       title: {
         es: "Día 10: Regreso a Valencia (230 km)",
         en: "Day 10: Return to Valencia (230 km)",
@@ -859,6 +872,7 @@ const paisVasco: RouteContent = {
 
 const andalucia: RouteContent = {
   slug: "andalucia",
+  heroImage: "/images/routes/hero-andalucia.jpg",
   metaTitle: {
     es: "Ruta Autocaravana Andalucía desde Valencia: Sur de España en 10-12 Días | Camper Retreat VLC",
     en: "Campervan Route through Andalusia from Valencia: Southern Spain in 10-12 Days | Camper Retreat VLC",
@@ -928,6 +942,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-2-alhambra",
+      image: "/images/routes/dia-2-alhambra.jpg",
       title: {
         es: "Día 2: Granada — un día entero",
         en: "Day 2: Granada — a full day",
@@ -970,6 +985,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-4-ronda",
+      image: "/images/routes/dia-4-ronda.jpg", imageCredit: "André Degryse · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=72938399",
       title: {
         es: "Día 4: Órgiva — Ronda (180 km)",
         en: "Day 4: Órgiva — Ronda (180 km)",
@@ -991,6 +1007,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-5-setenil-malaga",
+      image: "/images/routes/dia-5-setenil-malaga.jpg",
       title: {
         es: "Día 5: Ronda — pueblos blancos — Málaga (130 km)",
         en: "Day 5: Ronda — white villages — Málaga (130 km)",
@@ -1012,6 +1029,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-6-cabo-de-gata",
+      image: "/images/routes/dia-6-cabo-de-gata.jpg", imageCredit: "Benreis · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=22714318",
       title: {
         es: "Días 6-7: Málaga — Nerja — Cabo de Gata (220 km)",
         en: "Days 6-7: Málaga — Nerja — Cabo de Gata (220 km)",
@@ -1033,6 +1051,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-8-cartagena",
+      image: "/images/routes/dia-8-cartagena.jpg",
       title: {
         es: "Día 8: Cabo de Gata — Cartagena (150 km)",
         en: "Day 8: Cabo de Gata — Cartagena (150 km)",
@@ -1054,6 +1073,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-9-calblanque",
+      image: "/images/routes/dia-9-calblanque.jpg",
       title: {
         es: "Días 9-10: Cartagena — Calblanque — Valencia (300 km)",
         en: "Days 9-10: Cartagena — Calblanque — Valencia (300 km)",
@@ -1243,6 +1263,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "rototom-benicassim",
+      image: "/images/routes/rototom-benicassim.jpg", imageCredit: "Luca Valenta · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=74519017",
       title: {
         es: "Rototom Sunsplash — Benicàssim, 90 km",
         en: "Rototom Sunsplash — Benicàssim, 90 km",
@@ -1264,6 +1285,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "fib-benicassim",
+      image: "/images/routes/fib-benicassim.jpg", imageCredit: "TheBalticCount · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=107794148",
       title: {
         es: "FIB — Benicàssim, 90 km",
         en: "FIB — Benicàssim, 90 km",
@@ -1306,6 +1328,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "rocanrola-alicante",
+      image: "/images/routes/rocanrola-alicante.jpg", imageCredit: "Diego Delso · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=33861618",
       title: {
         es: "Rocanrola — Alicante, 170 km",
         en: "Rocanrola — Alicante, 170 km",

@@ -143,7 +143,7 @@ function RoutePageComponent() {
 
       {/* Hero photo */}
       {route.heroImage ? (
-        <div className="w-full aspect-[16/6] overflow-hidden border-b border-border/40">
+        <div className="relative w-full aspect-[16/6] overflow-hidden border-b border-border/40">
           <img
             src={route.heroImage}
             alt={t(route.heroTitle)}
@@ -153,6 +153,7 @@ function RoutePageComponent() {
             fetchPriority="high"
             className="w-full h-full object-cover"
           />
+          {route.heroImageCredit && <PhotoCredit text={route.heroImageCredit} href={route.heroImageCreditUrl} overlay />}
         </div>
       ) : (
         <div
@@ -179,16 +180,19 @@ function RoutePageComponent() {
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">{t(day.text)}</p>
               {day.image ? (
-                <div className="w-full aspect-[16/7] overflow-hidden rounded-2xl border border-border/60">
-                  <img
-                    src={day.image}
-                    alt={day.altText ? t(day.altText) : t(day.title)}
-                    width={1200}
-                    height={525}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <figure>
+                  <div className="w-full aspect-[16/7] overflow-hidden rounded-2xl border border-border/60">
+                    <img
+                      src={day.image}
+                      alt={day.altText ? t(day.altText) : t(day.title)}
+                      width={1200}
+                      height={525}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {day.imageCredit && <PhotoCredit text={day.imageCredit} href={day.imageCreditUrl} />}
+                </figure>
               ) : (
                 <div
                   className="route-photo-placeholder w-full aspect-[16/7] rounded-2xl bg-surface border border-border/60 flex items-center justify-center text-muted-foreground/30 text-sm"
@@ -243,5 +247,20 @@ function RoutePageComponent() {
 
       <Footer />
     </div>
+  );
+}
+
+/** Attribution line for CC BY / BY-SA photos. */
+function PhotoCredit({ text, href, overlay }: { text: string; href?: string; overlay?: boolean }) {
+  const cls = overlay
+    ? "absolute bottom-2 right-3 rounded bg-background/70 px-2 py-0.5 text-[11px] text-foreground/80 backdrop-blur"
+    : "mt-2 text-right text-[11px] text-muted-foreground";
+  const label = `Foto: ${text}`;
+  return href ? (
+    <figcaption className={cls}>
+      <a href={href} target="_blank" rel="noopener noreferrer license" className="hover:text-primary">{label}</a>
+    </figcaption>
+  ) : (
+    <figcaption className={cls}>{label}</figcaption>
   );
 }
