@@ -25,10 +25,19 @@
     "nights": "notti",
     "estimated": "Stimato",
     "cta": "Verifica disponibilità",
-    "priceFrom": "da 90 €/notte"
+    "priceFrom": "da 90 €/notte",
+    "question": "Dove andiamo da Valencia?",
+    "routesSub": "Scegli un itinerario: ti mostriamo le date libere e il prezzo dell'intero viaggio nel nostro McLouis Yearling 89G. Fino a 5 persone, tutto incluso.",
+    "tripFrom": "da {{price}} €",
+    "tripNote": "Notti: {{n}} · bassa stagione · pulizia e IVA incluse",
+    "festNote": "6 festival · supplemento 150 €",
+    "chooseDates": "Scegli le date",
+    "viewRoute": "Itinerario giorno per giorno",
+    "sea": "Mar Mediterraneo",
+    "mapLabel": "Mappa degli itinerari da Valencia"
   },
   "fleet": {
-    "title": "La nostra flotta",
+    "title": "Il nostro camper",
     "subtitle": "Un camper curato nei minimi dettagli, pronto per il tuo prossimo viaggio.",
     "available": "Disponibile",
     "capacity": "Fino a {{n}} persone",

@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
 import { INSTAGRAM_URL, buildWhatsAppLink } from "@/lib/constants";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { SLOGAN } from "./Hero";
 import { guidesUi } from "@/data/guides";
 import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
 
@@ -18,7 +19,8 @@ export function Footer() {
             <div className="font-display text-2xl">
               Camper Retreat <span className="text-primary">VLC</span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground max-w-xs">{t("footer.tagline")}</p>
+            <p className="font-poster mt-3 text-2xl uppercase text-primary">{SLOGAN}</p>
+            <p className="mt-1 text-sm text-muted-foreground max-w-xs">{t("footer.tagline")}</p>
           </div>
           <ul className="text-sm text-muted-foreground space-y-2 md:justify-self-center">
             <li><Link to="/guias" className="hover:text-foreground transition-colors">{guidesLabel}</Link></li>

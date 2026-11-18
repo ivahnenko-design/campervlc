@@ -34,6 +34,7 @@
   --font-display: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
   --font-mono: "DM Mono", monospace;
+  --font-poster: "Archivo", "Inter", sans-serif;
 }
 
 :root {
@@ -81,6 +82,7 @@
 }
 
 @utility font-display { font-family: var(--font-display); }
+@utility font-poster { font-family: var(--font-poster); font-stretch: 78%; font-weight: 900; letter-spacing: -0.01em; }
 @utility font-mono-num { font-family: var(--font-mono); font-feature-settings: "tnum"; }
 
 @utility text-balance { text-wrap: balance; }
