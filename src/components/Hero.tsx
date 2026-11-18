@@ -109,7 +109,7 @@ function ortho(lat: number, lng: number) {
   };
 }
 
-function project(points: Stop[]) {
+function project(points: Stop[], insetRight = 0, insetBottom = 0) {
   const ps = points.map((p) => ortho(p.lat, p.lng));
   let [x0, x1, y0, y1] = [
     Math.min(...ps.map((p) => p.x)), Math.max(...ps.map((p) => p.x)),
@@ -119,9 +119,9 @@ function project(points: Stop[]) {
   const minSpan = 1.4 * RAD;
   if (x1 - x0 < minSpan) { const c = (x0 + x1) / 2; x0 = c - minSpan / 2; x1 = c + minSpan / 2; }
   if (y1 - y0 < minSpan) { const c = (y0 + y1) / 2; y0 = c - minSpan / 2; y1 = c + minSpan / 2; }
-  const k = Math.min((W - PAD * 2) / (x1 - x0), (H - PAD * 2) / (y1 - y0));
-  const ox = (W - (x1 - x0) * k) / 2;
-  const oy = (H - (y1 - y0) * k) / 2;
+  const k = Math.min((W - insetRight - PAD * 2) / (x1 - x0), (H - insetBottom - PAD * 2) / (y1 - y0));
+  const ox = (W - insetRight - (x1 - x0) * k) / 2;
+  const oy = (H - insetBottom - (y1 - y0) * k) / 2;
   const at = (lat: number, lng: number) => {
     const p = ortho(lat, lng);
     return { x: ox + (p.x - x0) * k, y: oy + (p.y - y0) * k };
@@ -130,7 +130,7 @@ function project(points: Stop[]) {
   const latMax = Math.max(...points.map((p) => p.lat));
   const lngMin = Math.min(...points.map((p) => p.lng));
   const lngMax = Math.max(...points.map((p) => p.lng));
-  return { at, span: Math.max(latMax - latMin, lngMax - lngMin, 1.4), box: { latMin, latMax, lngMin, lngMax } };
+  return { at, k, span: Math.max(latMax - latMin, lngMax - lngMin, 1.4), box: { latMin, latMax, lngMin, lngMax } };
 }
 
 /** Fine graticule: thin lines every `step` degrees, slightly stronger whole degrees. */
@@ -191,21 +191,9 @@ const PW = 210;
 const PH = 150;
 const PM = 18;
 
-/** The route photo, placed in whichever corner is farthest from every stop. */
-function MapPhoto({ href, pts }: { href: string; pts: { x: number; y: number }[] }) {
-  const corners = [
-    { x: W - PW - PM, y: H - PH - PM },
-    { x: PM, y: H - PH - PM },
-    { x: W - PW - PM, y: PM + 40 },
-    { x: PM, y: PM + 40 },
-  ];
-  const clearance = (c: { x: number; y: number }) =>
-    Math.min(...pts.map((p) => {
-      const dx = Math.max(c.x - 60 - p.x, 0, p.x - (c.x + PW + 60));
-      const dy = Math.max(c.y - 20 - p.y, 0, p.y - (c.y + PH + 20));
-      return Math.hypot(dx, dy);
-    }));
-  const c = corners.reduce((best, k) => (clearance(k) > clearance(best) ? k : best), corners[0]);
+/** The route photo, always in the bottom-right corner of the map. */
+function MapPhoto({ href }: { href: string }) {
+  const c = { x: W - PW - PM, y: H - PH - PM };
   return (
     <g>
       <clipPath id="map-photo-clip"><rect x={c.x} y={c.y} width={PW} height={PH} rx="14" /></clipPath>
@@ -219,7 +207,22 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
   const reduce = useReducedMotion();
   const all = [VALENCIA, ...route.stops];
   const { at, grid, land } = useMemo(() => {
-    const pr = project(all);
+    // Keep stops and their labels clear of the photo in the bottom-right corner:
+    // if anything overlaps it, refit into the larger of the two free areas.
+    const hits = (p: ReturnType<typeof project>) =>
+      all.some((s) => {
+        const q = p.at(s.lat, s.lng);
+        const w = 20 + s.name.length * 9;
+        const right = s.side ? s.side === "r" : q.x < W * 0.62;
+        const [l, r] = right ? [q.x - 8, q.x + w] : [q.x - w, q.x + 8];
+        return r > W - PW - PM - 8 && l < W && q.y + 10 > H - PH - PM - 8;
+      });
+    let pr = project(all);
+    if (route.photo && hits(pr)) {
+      const a = project(all, PW + PM);
+      const b = project(all, 0, PH + PM);
+      pr = a.k >= b.k ? a : b;
+    }
     const land = (LAND as number[][][])
       .map((ring) => ring.map(([lng, lat], i) => { const q = pr.at(lat, lng); return `${i ? "L" : "M"}${q.x.toFixed(1)},${q.y.toFixed(1)}`; }).join("") + "Z")
       .join("");
@@ -290,7 +293,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
               </g>
             );
           })}
-          {route.photo && <MapPhoto href={route.photo} pts={pts} />}
+          {route.photo && <MapPhoto href={route.photo} />}
         </motion.g>
       </AnimatePresence>
     </svg>
