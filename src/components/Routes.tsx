@@ -9,7 +9,7 @@ const ROUTES = [
   { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco", photo: "/images/routes/hero-pais-vasco.jpg" },
   { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia", photo: "/images/routes/hero-andalucia.jpg" },
   { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona", photo: "/images/routes/hero-valencia-barcelona.jpg" },
-  { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027", photo: undefined as string | undefined },
+  { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027", photo: "/images/routes/festivales-2027-hero.jpg" as string | undefined },
 ] as const;
 
 export function Routes() {

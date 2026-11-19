@@ -385,28 +385,29 @@ const valenciaBarcalona: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-peniscola",
-      image: "/images/routes/dia-1-peniscola.jpg", imageCredit: "Rastrojo (D•ES) · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=7486055",
+      image: "/images/routes/dia-1-via-verde.jpg", imageCredit: "Juan Emilio Prades Bel · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=129908210",
       title: {
-        es: "Día 1: Valencia → Sagunto → Peñíscola (150 km)",
-        en: "Day 1: Valencia → Sagunto → Peñíscola (150 km)",
-        de: "Tag 1: Valencia → Sagunto → Peñíscola (150 km)",
-        it: "Giorno 1: Valencia → Sagunto → Peñíscola (150 km)",
-        nl: "Dag 1: Valencia → Sagunto → Peñíscola (150 km)",
-        ru: "День 1: Валенсия → Сагунто → Пеньискола (150 км)",
-        uk: "День 1: Валенсія → Сагунто → Пеньіскола (150 км)",
+        es: "Día 1: Valencia → Benicàssim → Peñíscola (150 km)",
+        en: "Day 1: Valencia → Benicàssim → Peñíscola (150 km)",
+        de: "Tag 1: Valencia → Benicàssim → Peñíscola (150 km)",
+        it: "Giorno 1: Valencia → Benicàssim → Peñíscola (150 km)",
+        nl: "Dag 1: Valencia → Benicàssim → Peñíscola (150 km)",
+        ru: "День 1: Валенсия → Беникассим → Пеньискола (150 км)",
+        uk: "День 1: Валенсія → Бенікассім → Пеньіскола (150 км)",
       },
       text: {
-        es: "Primera parada a 30 minutos de Valencia: Sagunto, con su teatro romano y una fortaleza de un kilómetro de largo en lo alto del cerro. El acceso es gratuito y desde arriba se ven los naranjales hasta el mar. Luego, hora y veinte por la AP-7 hasta Peñíscola. El casco antiguo se levanta sobre una roca rodeada de mar por tres lados, de ahí el apodo de Gibraltar Valenciano. Arriba está el castillo de los Templarios, donde se rodó Juego de Tronos; abajo, callejuelas encaladas y una playa pegada a las murallas. La vista del casco antiguo desde la playa norte es la postal clásica, mejor al atardecer. Noche: área de autocaravanas de Peñíscola, amplia, a 10 minutos a pie de la playa, con agua y vaciado.",
-        en: "First stop, 30 minutes from Valencia: Sagunto, with its Roman theatre and a kilometre-long hilltop fortress. Entry is free, and from the top you can see the orange groves all the way to the sea. Then an hour and twenty minutes up the AP-7 to Peñíscola. The old town sits on a rock with sea on three sides, which is where the nickname Gibraltar of Valencia comes from. At the top is the Knights Templar castle, used as a Game of Thrones filming location; below it, whitewashed lanes and a beach right against the walls. The view of the old town from the north beach is the classic postcard, best at sunset. Overnight: the Peñíscola motorhome area, spacious, 10 minutes' walk to the beach, with water and waste disposal.",
-        de: "Erste Station, 30 Minuten von Valencia entfernt: Sagunto mit seinem römischen Theater und einer kilometerlangen Burganlage auf dem Hügelkamm. Der Zugang ist kostenlos, und von oben sieht man die Orangenhaine bis zum Meer. Dann eine Stunde zwanzig auf der AP-7 bis Peñíscola. Die Altstadt steht auf einem Fels, von drei Seiten vom Meer umgeben, daher der Beiname Gibraltar Valencias. Oben die Templerburg, in der Game of Thrones gedreht wurde, darunter weiß getünchte Gassen und ein Strand direkt an der Stadtmauer. Der Blick auf die Altstadt vom Nordstrand ist die klassische Ansichtskarte, am besten im Abendlicht. Uebernachtung: Wohnmobilstellplatz Peñíscola, weitläufig, 10 Gehminuten zum Strand, mit Wasser und Entsorgung.",
-        it: "Prima tappa, a 30 minuti da Valencia: Sagunto, con il suo teatro romano e una fortezza di un chilometro in cima alla collina. L'ingresso è gratuito e dall'alto si vedono gli agrumeti fino al mare. Poi un'ora e venti sull'AP-7 fino a Peñíscola. Il centro storico sorge su una roccia circondata dal mare su tre lati, da qui il soprannome di Gibilterra valenciana. In alto il castello dei Templari, dove hanno girato Game of Thrones; sotto, i vicoli imbiancati a calce e una spiaggia attaccata alle mura. La vista sul centro storico dalla spiaggia nord è la cartolina classica, meglio al tramonto. Pernottamento: area camper di Peñíscola, ampia, a 10 minuti a piedi dalla spiaggia, con acqua e scarico.",
-        nl: "Eerste stop, 30 minuten van Valencia: Sagunto, met zijn Romeins theater en een kilometerslange vesting op de heuvelrug. De toegang is gratis en van boven zie je de sinaasappelgaarden tot aan de zee. Daarna een uur en twintig over de AP-7 naar Peñíscola. De oude stad staat op een rots met aan drie kanten zee, vandaar de bijnaam Gibraltar van Valencia. Bovenop het kasteel van de Tempeliers, waar Game of Thrones werd opgenomen; eronder gekalkte straatjes en een strand pal tegen de stadsmuur. Het uitzicht op de oude stad vanaf het noordstrand is de klassieke ansichtkaart, het mooist bij zonsondergang. Overnachting: camperplaats Peñíscola, ruim, 10 minuten lopen van het strand, met water en afvoer.",
-        ru: "Первая остановка в 30 минутах от Валенсии — Сагунто: римский театр и километровая крепость на гребне холма. Подъём бесплатный, сверху видны апельсиновые плантации до самого моря. Дальше час двадцать по AP-7 до Пеньисколы. Старый город стоит на скале, окружённой морем с трёх сторон, отсюда и прозвище — Гибралтар Валенсии. Наверху замок тамплиеров, где снимали Игру престолов, ниже — белёные улочки и пляж прямо у крепостных стен. Вид на старый город с северного пляжа — та самая открытка, лучше всего на закате. Ночёвка: área de autocaravanas Peñíscola, большая площадка в 10 минутах пешком от пляжа, с водой и сливом.",
-        uk: "Перша зупинка за 30 хвилин від Валенсії — Сагунто: римський театр і кілометрова фортеця на хребті пагорба. Підйом безкоштовний, згори видно апельсинові плантації аж до моря. Далі година двадцять по AP-7 до Пеньісколи. Старе місто стоїть на скелі, оточеній морем з трьох боків, звідси й прізвисько — Гібралтар Валенсії. Нагорі замок тамплієрів, де знімали Гру престолів, нижче — побілені вулички і пляж просто біля фортечних мурів. Вид на старе місто з північного пляжу — та сама листівка, найкраще на заході сонця. Ночівля: área de autocaravanas Peñíscola, великий майданчик за 10 хвилин пішки від пляжу, з водою та зливом.",
+        es: "Primera parada a 50 minutos de Valencia: Benicàssim. Deja la autocaravana en el pueblo y recorre a pie o en bici la Vía Verde del Mar hasta Oropesa del Mar: 5,7 km por la antigua vía del tren, pegada a los acantilados, con calas abajo y un túnel de unos 600 m (lleva linterna). El firme es llano, en parte asfaltado y en parte de grava compactada, así que sirve también para carritos. Ida y vuelta a pie son unas tres horas con parada para el baño. Luego, unos 45 minutos por la AP-7 hasta Peñíscola. El casco antiguo se levanta sobre una roca rodeada de mar por tres lados, de ahí el apodo de Gibraltar Valenciano. Arriba está el castillo de los Templarios, donde se rodó Juego de Tronos; abajo, callejuelas encaladas y una playa pegada a las murallas. La vista del casco antiguo desde la playa norte es la postal clásica, mejor al atardecer. Noche: área de autocaravanas de Peñíscola, amplia, a 10 minutos a pie de la playa, con agua y vaciado.",
+        en: "First stop, 50 minutes from Valencia: Benicàssim. Leave the motorhome in town and walk or cycle the Vía Verde del Mar to Oropesa del Mar: 5.7 km along the old railway line, right on the cliffs, with coves below and a tunnel of about 600 m (bring a torch). The surface is flat, partly tarmac and partly compacted gravel, so it works for pushchairs too. On foot, there and back takes about three hours with a swim stop. Then about 45 minutes up the AP-7 to Peñíscola. The old town sits on a rock with sea on three sides, which is where the nickname Gibraltar of Valencia comes from. At the top is the Knights Templar castle, used as a Game of Thrones filming location; below it, whitewashed lanes and a beach right against the walls. The view of the old town from the north beach is the classic postcard, best at sunset. Overnight: the Peñíscola motorhome area, spacious, 10 minutes' walk to the beach, with water and waste disposal.",
+        de: "Erste Station, 50 Minuten von Valencia entfernt: Benicàssim. Lass das Wohnmobil im Ort und geh zu Fuß oder mit dem Rad die Vía Verde del Mar bis Oropesa del Mar: 5,7 km auf der alten Bahntrasse direkt an der Steilküste, unten Buchten, unterwegs ein Tunnel von rund 600 m (Taschenlampe mitnehmen). Der Weg ist eben, teils asphaltiert, teils aus festem Kies, also auch für Kinderwagen geeignet. Zu Fuß hin und zurück dauert es mit Badepause etwa drei Stunden. Dann rund 45 Minuten auf der AP-7 bis Peñíscola. Die Altstadt steht auf einem Fels, von drei Seiten vom Meer umgeben, daher der Beiname Gibraltar Valencias. Oben die Templerburg, in der Game of Thrones gedreht wurde, darunter weiß getünchte Gassen und ein Strand direkt an der Stadtmauer. Der Blick auf die Altstadt vom Nordstrand ist die klassische Ansichtskarte, am besten im Abendlicht. Uebernachtung: Wohnmobilstellplatz Peñíscola, weitläufig, 10 Gehminuten zum Strand, mit Wasser und Entsorgung.",
+        it: "Prima tappa, a 50 minuti da Valencia: Benicàssim. Lascia il camper in paese e percorri a piedi o in bici la Vía Verde del Mar fino a Oropesa del Mar: 5,7 km sulla vecchia linea ferroviaria, a picco sulla scogliera, con calette sotto e una galleria di circa 600 m (porta una torcia). Il fondo è pianeggiante, in parte asfaltato e in parte di ghiaia compatta, adatto anche ai passeggini. A piedi, andata e ritorno richiedono circa tre ore con una sosta per il bagno. Poi circa 45 minuti sull'AP-7 fino a Peñíscola. Il centro storico sorge su una roccia circondata dal mare su tre lati, da qui il soprannome di Gibilterra valenciana. In alto il castello dei Templari, dove hanno girato Game of Thrones; sotto, i vicoli imbiancati a calce e una spiaggia attaccata alle mura. La vista sul centro storico dalla spiaggia nord è la cartolina classica, meglio al tramonto. Pernottamento: area camper di Peñíscola, ampia, a 10 minuti a piedi dalla spiaggia, con acqua e scarico.",
+        nl: "Eerste stop, 50 minuten van Valencia: Benicàssim. Laat de camper in het dorp staan en wandel of fiets de Vía Verde del Mar naar Oropesa del Mar: 5,7 km over de oude spoorlijn, pal langs de kliffen, met baaitjes eronder en een tunnel van ongeveer 600 m (neem een zaklamp mee). Het pad is vlak, deels geasfalteerd en deels van verdicht grind, dus ook geschikt voor kinderwagens. Te voet heen en terug duurt het met een zwemstop ongeveer drie uur. Daarna ongeveer 45 minuten over de AP-7 naar Peñíscola. De oude stad staat op een rots met aan drie kanten zee, vandaar de bijnaam Gibraltar van Valencia. Bovenop het kasteel van de Tempeliers, waar Game of Thrones werd opgenomen; eronder gekalkte straatjes en een strand pal tegen de stadsmuur. Het uitzicht op de oude stad vanaf het noordstrand is de klassieke ansichtkaart, het mooist bij zonsondergang. Overnachting: camperplaats Peñíscola, ruim, 10 minuten lopen van het strand, met water en afvoer.",
+        ru: "Первая остановка в 50 минутах от Валенсии: Беникассим. Оставьте автодом в городке и пройдите пешком или проедьте на велосипеде «Зелёный путь у моря» (Vía Verde del Mar) до Оропесы-дель-Мар. Это 5,7 км по бывшей железной дороге прямо над обрывами, внизу бухты, по пути тоннель длиной около 600 м, возьмите фонарик. Дорога ровная, частью асфальт, частью плотный гравий, так что пройдёт и детская коляска. Пешком туда и обратно около трёх часов с остановкой на купание. Дальше около 45 минут по AP-7 до Пеньисколы. Старый город стоит на скале, окружённой морем с трёх сторон, отсюда и прозвище — Гибралтар Валенсии. Наверху замок тамплиеров, где снимали Игру престолов, ниже — белёные улочки и пляж прямо у крепостных стен. Вид на старый город с северного пляжа — та самая открытка, лучше всего на закате. Ночёвка: área de autocaravanas Peñíscola, большая площадка в 10 минутах пешком от пляжа, с водой и сливом.",
+        uk: "Перша зупинка за 50 хвилин від Валенсії: Бенікассім. Залиште автобудинок у містечку й пройдіть пішки або проїдьте велосипедом «Зелений шлях біля моря» (Vía Verde del Mar) до Оропеси-дель-Мар. Це 5,7 км колишньою залізницею просто над урвищами, внизу бухти, дорогою тунель завдовжки близько 600 м, візьміть ліхтарик. Дорога рівна, частково асфальт, частково щільний гравій, тож проїде й дитячий візок. Пішки туди й назад близько трьох годин із зупинкою на купання. Далі близько 45 хвилин по AP-7 до Пеньісколи. Старе місто стоїть на скелі, оточеній морем з трьох боків, звідси й прізвисько — Гібралтар Валенсії. Нагорі замок тамплієрів, де знімали Гру престолів, нижче — побілені вулички і пляж просто біля фортечних мурів. Вид на старе місто з північного пляжу — та сама листівка, найкраще на заході сонця. Ночівля: área de autocaravanas Peñíscola, великий майданчик за 10 хвилин пішки від пляжу, з водою та зливом.",
       },
     },
     {
       photoSlot: "dia-2-delta-ebro",
+      image: "/images/routes/dia-2-delta-ebro.jpg",
       title: {
         es: "Día 2: Peñíscola → Delta del Ebro (80 km)",
         en: "Day 2: Peñíscola → Ebro Delta (80 km)",
@@ -428,6 +429,7 @@ const valenciaBarcalona: RouteContent = {
     },
     {
       photoSlot: "dia-3-tarragona-sitges",
+      image: "/images/routes/dia-3-tarragona-sitges.jpg",
       title: {
         es: "Día 3: Delta del Ebro → Tarragona → Sitges (120 km)",
         en: "Day 3: Ebro Delta → Tarragona → Sitges (120 km)",
@@ -449,6 +451,7 @@ const valenciaBarcalona: RouteContent = {
     },
     {
       photoSlot: "dia-4-barcelona",
+      image: "/images/routes/dia-4-barcelona.jpg", imageCredit: "Bernard Gagnon · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=9050140",
       title: {
         es: "Día 4: Sitges → Barcelona (40 km)",
         en: "Day 4: Sitges → Barcelona (40 km)",
@@ -470,6 +473,7 @@ const valenciaBarcalona: RouteContent = {
     },
     {
       photoSlot: "dia-5-regreso",
+      image: "/images/routes/dia-5-regreso.jpg", imageCredit: "Manel Zaera · CC BY-SA 2.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=2773802",
       title: {
         es: "Día 5: Barcelona → Valencia (350 km)",
         en: "Day 5: Barcelona → Valencia (350 km)",
@@ -643,6 +647,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-2-albarracin-zaragoza",
+      image: "/images/routes/dia-2-albarracin-zaragoza.jpg", imageCredit: "FRANCIS RAHER · CC BY 2.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=44293127",
       title: {
         es: "Día 2: Teruel — Albarracín — Zaragoza (220 km)",
         en: "Day 2: Teruel — Albarracín — Zaragoza (220 km)",
@@ -664,6 +669,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-3-pamplona",
+      image: "/images/routes/dia-3-pamplona.jpg", imageCredit: "Pamplona Ayuntamiento.JPG · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=738777",
       title: {
         es: "Día 3: Zaragoza — Pamplona (175 km)",
         en: "Day 3: Zaragoza — Pamplona (175 km)",
@@ -685,6 +691,7 @@ const paisVasco: RouteContent = {
     },
     {
       photoSlot: "dia-4-san-sebastian",
+      image: "/images/routes/dia-4-san-sebastian.jpg", imageCredit: "Tom Page from London, UK · CC BY-SA 2.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=44541844",
       title: {
         es: "Días 4-5: Pamplona — San Sebastián (80 km)",
         en: "Days 4-5: Pamplona — San Sebastián (80 km)",
@@ -921,6 +928,7 @@ const andalucia: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-granada",
+      image: "/images/routes/dia-1-granada.jpg",
       title: {
         es: "Día 1: Valencia — Granada (500 km)",
         en: "Day 1: Valencia — Granada (500 km)",
@@ -964,6 +972,7 @@ const andalucia: RouteContent = {
     },
     {
       photoSlot: "dia-3-alpujarra",
+      image: "/images/routes/dia-3-alpujarra.jpg", imageCredit: "Sebb · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=2710569",
       title: {
         es: "Día 3: Granada — Alpujarra — Órgiva (90 km)",
         en: "Day 3: Granada — Alpujarra — Órgiva (90 km)",
@@ -1186,6 +1195,7 @@ const andalucia: RouteContent = {
 
 const festivales2027: RouteContent = {
   slug: "festivales-2027",
+  heroImage: "/images/routes/festivales-2027-hero.jpg",
 
   metaTitle: {
     es: "Festivales en Autocaravana cerca de Valencia: Guía 2027 | Camper Retreat VLC",
@@ -1242,6 +1252,7 @@ const festivales2027: RouteContent = {
   days: [
     {
       photoSlot: "medusa-cullera",
+      image: "/images/routes/medusa-cullera.jpg", imageCredit: "Cullera · CC BY 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=7915008",
       title: {
         es: "Medusa Sunbeach — Cullera, 40 km",
         en: "Medusa Sunbeach — Cullera, 40 km",
@@ -1307,6 +1318,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "arenal-sound-burriana",
+      image: "/images/routes/arenal-sound-burriana.jpg", imageCredit: "El Ayudante · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=39495583",
       title: {
         es: "Arenal Sound — Burriana, 65 km",
         en: "Arenal Sound — Burriana, 65 km",
@@ -1350,6 +1362,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "low-festival-torrevieja",
+      image: "/images/routes/low-festival-torrevieja.jpg", imageCredit: "Thomas Dahlstrøm Nielsen · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=121449721",
       title: {
         es: "Low Festival — Torrevieja, 180 km",
         en: "Low Festival — Torrevieja, 180 km",

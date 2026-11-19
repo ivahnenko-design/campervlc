@@ -43,6 +43,7 @@ const ROUTES: HeroRoute[] = [
     id: "r4", slug: "valencia-barcelona", nights: 4, path: true, photo: "/images/routes/hero-valencia-barcelona-map.jpg",
     photoCredit: "Juan Emilio Prades Bel · CC BY 4.0",
     stops: [
+      { name: "Benicàssim", lat: 40.05, lng: 0.07 },
       { name: "Peñíscola", lat: 40.36, lng: 0.41 },
       { name: "Delta de l'Ebre", lat: 40.72, lng: 0.8 },
       { name: "Tarragona", lat: 41.12, lng: 1.25 },
@@ -73,7 +74,7 @@ const ROUTES: HeroRoute[] = [
     ],
   },
   {
-    id: "r5", slug: "festivales-2027", nights: null, path: false,
+    id: "r5", slug: "festivales-2027", nights: null, path: false, photo: "/images/routes/festivales-2027-hero-map.jpg",
     stops: [
       { name: "FIB · Rototom", lat: 40.05, lng: 0.07 },
       { name: "Arenal Sound", lat: 39.89, lng: -0.08 },
