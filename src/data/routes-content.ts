@@ -385,7 +385,7 @@ const valenciaBarcalona: RouteContent = {
   days: [
     {
       photoSlot: "dia-1-peniscola",
-      image: "/images/routes/dia-1-via-verde.jpg", imageCredit: "Juan Emilio Prades Bel · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=129908210",
+      image: "/images/routes/dia-1-via-verde.jpg",
       title: {
         es: "Día 1: Valencia → Benicàssim → Peñíscola (150 km)",
         en: "Day 1: Valencia → Benicàssim → Peñíscola (150 km)",
