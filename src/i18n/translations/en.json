@@ -133,7 +133,8 @@
       "guests": "Guests",
       "pick": "Choose",
       "guestsValue": "up to 5",
-      "equipment": "See equipment"
+      "equipment": "See equipment",
+      "photos": "{{n}} photos"
     }
   },
   "how": {

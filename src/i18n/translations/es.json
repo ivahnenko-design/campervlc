@@ -133,7 +133,8 @@
       "guests": "Viajeros",
       "pick": "Elegir",
       "guestsValue": "hasta 5",
-      "equipment": "Ver equipamiento"
+      "equipment": "Ver equipamiento",
+      "photos": "{{n}} fotos"
     }
   },
   "how": {

@@ -133,7 +133,8 @@
       "guests": "Гості",
       "pick": "Обрати",
       "guestsValue": "до 5",
-      "equipment": "Усе оснащення"
+      "equipment": "Усе оснащення",
+      "photos": "{{n}} фото"
     }
   },
   "how": {

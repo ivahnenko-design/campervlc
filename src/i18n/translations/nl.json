@@ -133,7 +133,8 @@
       "guests": "Gasten",
       "pick": "Kies",
       "guestsValue": "tot 5",
-      "equipment": "Bekijk uitrusting"
+      "equipment": "Bekijk uitrusting",
+      "photos": "{{n}} foto's"
     }
   },
   "how": {

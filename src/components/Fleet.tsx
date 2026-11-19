@@ -1,16 +1,19 @@
-import { useState, useCallback, useRef } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import {
   Bed, BedDouble, Snowflake, Sun, SunMedium, Tv, Bath, X, Users, MapPin,
-  ChevronLeft, ChevronRight, PawPrint, Ruler, PackageCheck, UtensilsCrossed,
+  PawPrint, Images, Ruler, PackageCheck, UtensilsCrossed,
   Gift, TreePalm, Thermometer, Droplets, Baby, SquareParking, CircleCheck,
   Flame, Sparkles, Gauge } from "lucide-react";
 import { FLEET, type Camper } from "@/data/fleet";
+import { GALLERY } from "@/data/gallery";
+import { Lightbox } from "./Lightbox";
 
 export function Fleet() {
   const { t } = useTranslation();
   const [open, setOpen] = useState<Camper | null>(null);
+  const [galleryAt, setGalleryAt] = useState<number | null>(null);
   // With a single camper the card spans the row: photo left, details right.
   const single = FLEET.length === 1;
 
@@ -20,7 +23,7 @@ export function Fleet() {
         <SectionHeader title={t("fleet.title")} subtitle={t("fleet.subtitle")} />
 
         {single ? (
-          <Showcase camper={FLEET[0]} onDetails={() => setOpen(FLEET[0])} />
+          <Showcase camper={FLEET[0]} onDetails={() => setOpen(FLEET[0])} onPhoto={setGalleryAt} />
         ) : (
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FLEET.map((c, i) => (
@@ -83,24 +86,37 @@ export function Fleet() {
       </div>
 
       {open && <SpecModal camper={open} onClose={() => setOpen(null)} />}
+      {galleryAt !== null && (
+        <Lightbox photos={GALLERY} start={galleryAt} alt={FLEET[0].name} closeLabel={t("fleet.close")} onClose={() => setGalleryAt(null)} />
+      )}
     </section>
   );
 }
 
 /** Single-camper layout: big photo with headline, booking strip, three interior tiles. */
-function Showcase({ camper, onDetails }: { camper: Camper; onDetails: () => void }) {
+function Showcase({ camper, onDetails, onPhoto }: { camper: Camper; onDetails: () => void; onPhoto: (i: number) => void }) {
   const { t } = useTranslation();
   const tiles = [
-    { src: "/images/tiles/kitchen.jpg", label: t("fleet.showcase.kitchen") },
-    { src: "/images/tiles/bedroom.jpg", label: t("fleet.showcase.bedroom") },
-    { src: "/images/tiles/outside.jpg", label: t("fleet.showcase.outside") },
+    // `at` = position of the same photo in GALLERY, so the viewer opens on it.
+    { src: "/images/tiles/kitchen.jpg", label: t("fleet.showcase.kitchen"), at: 16 },
+    { src: "/images/tiles/bedroom.jpg", label: t("fleet.showcase.bedroom"), at: 11 },
+    { src: "/images/tiles/outside.jpg", label: t("fleet.showcase.outside"), at: 8 },
   ];
   return (
     <div className="mt-12">
       <div className="relative overflow-hidden rounded-3xl border border-border/60">
-        <img src={camper.image} alt={camper.name} loading="lazy" className="h-[340px] w-full object-cover sm:h-[460px] lg:h-[520px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/10 to-background/80" />
-        <div className="absolute left-5 right-5 top-5 sm:left-10 sm:top-10">
+        <button type="button" onClick={() => onPhoto(0)} className="block w-full cursor-zoom-in" aria-label={t("fleet.showcase.photos", { n: GALLERY.length })}>
+          <img src={camper.image} alt={camper.name} loading="lazy" className="h-[340px] w-full object-cover sm:h-[460px] lg:h-[520px]" />
+        </button>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/80 via-background/10 to-background/80" />
+        <button
+          type="button"
+          onClick={() => onPhoto(0)}
+          className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-background/85 px-4 py-2 text-sm font-medium text-foreground backdrop-blur hover:bg-background transition"
+        >
+          <Images className="h-4 w-4" /> {t("fleet.showcase.photos", { n: GALLERY.length })}
+        </button>
+        <div className="pointer-events-none absolute left-5 right-5 top-5 sm:left-10 sm:top-10">
           <span className="mb-3 inline-block rounded-full bg-emerald-500/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
             ● {t("fleet.available")}
           </span>
@@ -113,7 +129,7 @@ function Showcase({ camper, onDetails }: { camper: Camper; onDetails: () => void
 
       <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
         {tiles.map((tile) => (
-          <figure key={tile.src} className="relative overflow-hidden rounded-2xl border border-border/60">
+          <figure key={tile.src} onClick={() => onPhoto(tile.at)} className="relative cursor-zoom-in overflow-hidden rounded-2xl border border-border/60">
             <img src={tile.src} alt={tile.label} loading="lazy" className="aspect-square w-full object-cover sm:aspect-[16/10]" />
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-6 text-xs font-semibold text-white sm:px-4 sm:pb-3 sm:pt-8 sm:text-sm">
               {tile.label}
@@ -139,131 +155,6 @@ function Chip({ icon, children }: { icon: React.ReactNode; children: React.React
     <li className="inline-flex items-center gap-1 rounded-md bg-background/60 px-2 py-1 border border-border/40">
       {icon}{children}
     </li>
-  );
-}
-
-const GALLERY_IMAGES = [
-  // Hero shots
-  "/images/IMG_9452.jpg",
-  "/images/IMG_9453.jpg",
-  // New lifestyle photos
-  "/images/Camper Retreat .jpg",
-  "/images/Camper Retreat cafe.jpg",
-  "/images/Camper Retreat cafee.jpg",
-  "/images/Camper Retreat jugo.jpg",
-  "/images/Camper Retreat Patatas.jpg",
-  "/images/JUL00889.jpg",
-  "/images/JUL00938.jpg",
-  "/images/JUL00949.jpg",
-  "/images/JUL00950.jpg",
-  // Interior & detail series
-  "/images/231030205257_mclouis-yearling-83-025-copy.jpg",
-  "/images/231030205257_mclouis-yearling-83-029-copy.jpg",
-  "/images/231030205257_mclouis-yearling-83-032-copy.jpg",
-  "/images/231030205257_mclouis-yearling-83-033-copy.jpg",
-  "/images/231030205257_mclouis-yearling-83-040-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-044-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-048-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-050-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-051-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-053-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-056-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-059-copy.jpg",
-  "/images/231030201158_mclouis-yearling-83-060-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-061-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-062-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-069-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-071-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-072-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-073-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-076-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-077-copy.jpg",
-  "/images/231030203958_mclouis-yearling-83-080-copy.jpg",
-  // Floor plan
-  "/images/879-PIANTA-GIORNO(con-letto-basculante)_h0x300.png",
-];
-
-function GallerySlider({ name }: { name: string }) {
-  const [idx, setIdx] = useState(0);
-  const [isPortrait, setIsPortrait] = useState(false);
-  const total = GALLERY_IMAGES.length;
-  const touchStartX = useRef<number | null>(null);
-
-  const prev = useCallback(() => { setIsPortrait(false); setIdx((i) => (i - 1 + total) % total); }, [total]);
-  const next = useCallback(() => { setIsPortrait(false); setIdx((i) => (i + 1) % total); }, [total]);
-
-  const onImgLoad = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
-    const { naturalWidth, naturalHeight } = e.currentTarget;
-    setIsPortrait(naturalHeight > naturalWidth);
-  }, []);
-
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  }, []);
-
-  const onTouchEnd = useCallback((e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 50) next();
-    else if (diff < -50) prev();
-    touchStartX.current = null;
-  }, [next, prev]);
-
-  return (
-    <div
-      className="relative w-full h-screen md:h-[400px]"
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      <img
-        key={idx}
-        src={GALLERY_IMAGES[idx]}
-        alt={`${name} — photo ${idx + 1}`}
-        onLoad={onImgLoad}
-        className={`h-full w-full ${isPortrait ? "object-cover" : "object-contain bg-black"}`}
-      />
-
-      {/* Prev / Next */}
-      <button
-        onClick={prev}
-        aria-label="Previous photo"
-        className="absolute left-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-background/70 text-foreground backdrop-blur hover:bg-background/90 transition"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
-      <button
-        onClick={next}
-        aria-label="Next photo"
-        className="absolute right-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-background/70 text-foreground backdrop-blur hover:bg-background/90 transition"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
-
-      {/* Counter */}
-      <div className="absolute top-3 left-3 rounded-full bg-background/70 px-2.5 py-1 text-xs font-mono-num text-foreground backdrop-blur">
-        {idx + 1} / {total}
-      </div>
-
-      {/* Dots — show max 9 centered around current */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
-        {Array.from({ length: Math.min(total, 9) }, (_, i) => {
-          const offset = Math.max(0, Math.min(total - 9, idx - 4));
-          const dotIdx = offset + i;
-          return (
-            <button
-              key={dotIdx}
-              onClick={() => setIdx(dotIdx)}
-              aria-label={`Photo ${dotIdx + 1}`}
-              className={`rounded-full transition-all ${
-                dotIdx === idx
-                  ? "w-4 h-2 bg-primary"
-                  : "w-2 h-2 bg-white/60 hover:bg-white/90"
-              }`}
-            />
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
@@ -311,17 +202,13 @@ function SpecModal({ camper, onClose }: { camper: Camper; onClose: () => void })
         onClick={(e) => e.stopPropagation()}
         className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-surface shadow-2xl"
       >
-        <div className="relative overflow-hidden">
-          <GallerySlider name={camper.name} />
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur z-10"
-            aria-label={t("fleet.close")}
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-background/80 text-foreground backdrop-blur z-10"
+          aria-label={t("fleet.close")}
+        >
+          <X className="h-4 w-4" />
+        </button>
         <div className="p-6 sm:p-8">
           <h3 className="font-display text-3xl text-foreground">{camper.name}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
