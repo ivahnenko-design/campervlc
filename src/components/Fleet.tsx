@@ -95,12 +95,6 @@ function Showcase({ camper, onDetails }: { camper: Camper; onDetails: () => void
     { src: "/images/tiles/bedroom.jpg", label: t("fleet.showcase.bedroom") },
     { src: "/images/tiles/outside.jpg", label: t("fleet.showcase.outside") },
   ];
-  const field = (label: string, value: string) => (
-    <a href="#booking" className="block min-w-0 rounded-lg px-1 py-1 hover:bg-background/40 transition-colors">
-      <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{label}</div>
-      <div className="mt-0.5 truncate text-base font-semibold text-foreground sm:text-lg">{value}</div>
-    </a>
-  );
   return (
     <div className="mt-12">
       <div className="relative overflow-hidden rounded-3xl border border-border/60">
@@ -115,18 +109,6 @@ function Showcase({ camper, onDetails }: { camper: Camper; onDetails: () => void
           </h3>
           <p className="mt-3 text-sm text-foreground/85 sm:text-base">McLouis Yearling 89G · {t("fleet.capacity", { n: camper.capacity })}</p>
         </div>
-      </div>
-
-      <div className="relative z-10 mx-3 -mt-12 grid grid-cols-2 items-center gap-3 rounded-2xl border border-border/60 bg-surface p-4 shadow-2xl sm:mx-8 sm:-mt-14 sm:grid-cols-[1fr_1fr_0.7fr_auto] sm:gap-6 sm:p-5">
-        {field(t("hero.checkin"), t("fleet.showcase.pick"))}
-        {field(t("hero.checkout"), t("fleet.showcase.pick"))}
-        <div className="hidden sm:block">{field(t("fleet.showcase.guests"), t("fleet.showcase.guestsValue"))}</div>
-        <a
-          href="#booking"
-          className="col-span-2 inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground glow-amber sm:col-span-1"
-        >
-          {t("hero.priceFrom")}
-        </a>
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
