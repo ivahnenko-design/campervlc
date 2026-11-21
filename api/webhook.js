@@ -1,3 +1,6 @@
+import { autoCreateContract } from "./_lib/contract-auto.js";
+import { createContractStore } from "./_lib/contracts.js";
+import { getSigningProvider } from "./_lib/signing-provider.js";
 import Stripe from "stripe";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 import { blobStore, list } from "./_lib/blob.js";
@@ -381,6 +384,7 @@ export default async function handler(req, res) {
       memberDiscount: m.memberDiscount === "true",
       acceptedTerms: m.acceptedTerms === "true",
       termsVersion: m.termsVersion || null,
+      language: m.language || "es",
       guestFirstName: m.guestFirstName,
       guestLastName: m.guestLastName,
       guestEmail: m.guestEmail,
@@ -436,6 +440,18 @@ export default async function handler(req, res) {
     }
     if (ownerEmailResult.status === "rejected") {
       console.error("sendOwnerEmail failed for", booking.id, "-", ownerEmailResult.reason);
+    }
+
+    // The rental contract and its signing link go out right away, in the guest's language.
+    try {
+      const made = await autoCreateContract(booking, { store: createContractStore(), provider: getSigningProvider() });
+      console.log("auto contract for", booking.bookingRef, JSON.stringify(made));
+    } catch (err) {
+      console.error("auto contract FAILED for", booking.bookingRef, "-", err.message);
+      await ownerAlert(
+        `Contrato no enviado: ${booking.bookingRef}`,
+        `<p>No se pudo crear o enviar el contrato de la reserva <strong>${booking.bookingRef}</strong>. Créalo desde /admin/contratos.</p>`,
+      ).catch(() => {});
     }
 
     // The login discount is for the first booking only, per person: use it up on

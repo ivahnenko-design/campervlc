@@ -62,14 +62,17 @@ const OWNER = () => process.env.CONTRACT_OWNER_EMAIL || "camper.retreat.alicante
 export const signingLink = (token, lang) =>
   `${siteUrl()}/sign/${encodeURIComponent(token)}${lang ? `?lang=${encodeURIComponent(lang)}` : ""}`;
 
+const REMINDER_PREFIX = { en: "Reminder: ", es: "Recordatorio: ", ru: "Напоминание: ", uk: "Нагадування: ", de: "Erinnerung: ", it: "Promemoria: ", nl: "Herinnering: " };
+
 export async function sendInviteEmail(contract, token, deps = {}) {
   const send = deps.send || postToResend;
   const t = tr(contract.language);
+  const prefix = deps.reminder ? REMINDER_PREFIX[contract.language] || REMINDER_PREFIX.en : "";
   await send({
     from: FROM,
     to: contract.email,
     reply_to: REPLY_TO,
-    subject: t.inviteSubject,
+    subject: prefix + t.inviteSubject,
     html: t.inviteBody(contract, signingLink(token, contract.language)),
   });
 }
@@ -95,4 +98,18 @@ export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
     }),
   ]);
   return results.map((r) => r.status);
+}
+
+/** Owner: pickups in the next 2 days whose contract is still unsigned. */
+export async function sendUnsignedSoonEmail(rows, deps = {}) {
+  const send = deps.send || postToResend;
+  const items = rows
+    .map((c) => `<li><strong>${esc(c.startDate)} ${esc(c.pickupTime || "")}</strong> · ${esc(c.guestName)} · ${esc(c.email)}${c.phone ? ` · ${esc(c.phone)}` : ""}${c.bookingRef ? ` · ${esc(c.bookingRef)}` : ""}</li>`)
+    .join("");
+  await send({
+    from: FROM,
+    to: OWNER(),
+    subject: `Contratos sin firmar: ${rows.length} recogida(s) en los próximos 2 días`,
+    html: `<p>Estos clientes recogen la autocaravana pronto y todavía no han firmado el contrato:</p><ul>${items}</ul><p>Puedes reenviar el enlace o copiarlo para WhatsApp en ${esc(siteUrl())}/admin/contratos.</p>`,
+  });
 }

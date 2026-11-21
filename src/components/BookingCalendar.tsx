@@ -278,6 +278,7 @@ export function BookingCalendar() {
           prepaymentOption,
           promoCode: appliedPromoCode,
           acceptedTerms,
+          language: (i18n.language || "es").slice(0, 2),
         }),
       });
       const data = await res.json();

@@ -249,6 +249,7 @@ export default async function handler(req, res) {
         memberUserId: quote.memberDiscountApplied ? sessionUser.userId : "",
         acceptedTerms: "true",
         termsVersion: TERMS_VERSION,
+        language: ["es", "en", "de", "it", "nl", "ru", "uk"].includes(req.body?.language) ? req.body.language : "es",
         guestFirstName: g.firstName,
         guestLastName: g.lastName,
         guestEmail: g.email,

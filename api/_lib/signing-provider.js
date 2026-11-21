@@ -12,8 +12,8 @@ import { sendInviteEmail } from "./contract-email.js";
 export function createOwnProvider({ send } = {}) {
   return {
     name: "own",
-    async invite(contract, token) {
-      await sendInviteEmail(contract, token, { send });
+    async invite(contract, token, opts = {}) {
+      await sendInviteEmail(contract, token, { send, reminder: !!opts.reminder });
     },
   };
 }
