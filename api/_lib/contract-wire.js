@@ -8,6 +8,7 @@ import { authSecret } from "./auth-secret.js";
 import { contractKeys, createDiscountRegistry } from "./member-discount.js";
 import { CONTRACT_PDF_PATH } from "./contracts.js";
 import { createBlobStore } from "./store.js";
+import { createImportStore, gmailScript, importKey } from "./yescapa-import.js";
 
 async function loadBasePdf() {
   const res = await fetch(`${siteUrl()}${CONTRACT_PDF_PATH}`);
@@ -48,6 +49,11 @@ export const contractHandlers = createContractHandlers({
   loadBasePdf,
   listBookings: () => createBlobStore().listBookings(),
   onSigned: checkMemberDiscount,
+  imports: createImportStore(),
+  importSetup: () => {
+    const key = importKey();
+    return key ? { key, script: gmailScript(`${siteUrl()}/api/contract?scope=import`, key) } : null;
+  },
   adminToken: process.env.ADMIN_TOKEN,
   secret: process.env.CONTRACT_SECRET || process.env.ADMIN_TOKEN,
 });

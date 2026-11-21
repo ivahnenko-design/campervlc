@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { formFromParsed, GmailSetup, ImportsPanel, missingFields, YescapaPaste, type ImportDraft, type Parsed } from "@/components/admin/YescapaImport";
 import {
   Check,
   Copy,
@@ -262,6 +263,11 @@ function Admin() {
   const [open, setOpen] = useState<Record<string, Detail | "loading">>({});
   // Private bookings feed for Yescapa / a calendar app (secret key in the URL).
   const [calendarUrl, setCalendarUrl] = useState<string | null>(null);
+  // Yescapa: screenshot/text import box, email drafts and the Gmail forwarder setup.
+  const [showYescapa, setShowYescapa] = useState(false);
+  const [imports, setImports] = useState<ImportDraft[]>([]);
+  const [importSetup, setImportSetup] = useState<{ key: string; script: string } | null>(null);
+  const [importId, setImportId] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -304,10 +310,11 @@ function Admin() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [c, b, cal] = await Promise.all([
+      const [c, b, cal, imp] = await Promise.all([
         api("/api/contract"),
         api("/api/contract?view=bookings"),
         api("/api/contract?view=calendar"),
+        api("/api/contract?view=imports"),
       ]);
       if (c.status === 401) {
         logout();
@@ -322,6 +329,11 @@ function Admin() {
       setRows(((await c.json()) as { contracts: Row[] }).contracts);
       if (b.ok) setBookings(((await b.json()) as { bookings: Booking[] }).bookings);
       if (cal.ok) setCalendarUrl(((await cal.json()) as { url: string | null }).url);
+      if (imp.ok) {
+        const j = (await imp.json()) as { imports: ImportDraft[]; setup: { key: string; script: string } | null };
+        setImports(j.imports || []);
+        setImportSetup(j.setup);
+      }
     } catch {
       setNotice({
         kind: "err",
@@ -391,7 +403,7 @@ function Admin() {
     try {
       const r = await api("/api/contract", {
         method: "POST",
-        body: JSON.stringify({ action: "create", ...form }),
+        body: JSON.stringify({ action: "create", ...form, ...(importId ? { importId } : {}) }),
       });
       const j = (await r.json()) as {
         id?: string;
@@ -415,12 +427,32 @@ function Admin() {
       });
       setForm(EMPTY);
       setShowForm(false);
+      setImportId(null);
       await load();
     } catch (err) {
       setNotice({ kind: "err", text: (err as Error).message });
     } finally {
       setBusy(false);
     }
+  }
+
+  function applyParsed(p: Parsed, fromImport: string | null) {
+    setForm(formFromParsed(p));
+    setImportId(fromImport);
+    setShowYescapa(false);
+    setTab("contracts");
+    setShowForm(true);
+    const miss = missingFields(p);
+    setNotice(
+      miss.length
+        ? { kind: "err", text: `Проверьте форму: не нашёл ${miss.join(", ")}. Остальное заполнено.` }
+        : { kind: "ok", text: "Форма заполнена из брони Yescapa. Проверьте данные и создайте договор." },
+    );
+  }
+
+  async function dismissImport(d: ImportDraft) {
+    await api("/api/contract", { method: "POST", body: JSON.stringify({ action: "import_dismiss", importId: d.id }) });
+    setImports((xs) => xs.filter((x) => x.id !== d.id));
   }
 
   async function reissue(r: Row) {
@@ -672,6 +704,9 @@ function Admin() {
         </details>
       )}
 
+      <ImportsPanel imports={imports} onUse={(d) => applyParsed(d.parsed, d.id)} onDismiss={(d) => void dismissImport(d)} />
+      <GmailSetup setup={importSetup} onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })} />
+
       {upcoming.length > 0 && (
         <section className="mt-5 rounded-xl border border-border p-3">
           <h2 className="text-sm font-semibold">Ближайшие 14 дней</h2>
@@ -715,10 +750,20 @@ function Admin() {
 
       {tab === "contracts" && (
         <section className="mt-4">
+          {showYescapa && !showForm && (
+            <div className="mb-3">
+              <YescapaPaste onParsed={(p) => applyParsed(p, null)} onClose={() => setShowYescapa(false)} />
+            </div>
+          )}
           {!showForm ? (
-            <button className={`${btnPrimary} w-full`} onClick={() => setShowForm(true)}>
-              <Plus className="h-4 w-4" /> Новый договор
-            </button>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <button className={`${btnPrimary} w-full`} onClick={() => setShowForm(true)}>
+                <Plus className="h-4 w-4" /> Новый договор
+              </button>
+              <button className={`${btn} w-full`} onClick={() => setShowYescapa(true)}>
+                <Plus className="h-4 w-4" /> Заказ с Yescapa (скриншот)
+              </button>
+            </div>
           ) : (
             <form onSubmit={create} className="rounded-xl border border-border p-4">
               <div className="flex items-center justify-between">

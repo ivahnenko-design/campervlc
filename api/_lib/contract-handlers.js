@@ -122,6 +122,8 @@ export function createContractHandlers({
   loadBasePdf, // () => Promise<Uint8Array>
   listBookings = async () => [], // site bookings, for the admin list
   onSigned = async () => {}, // (signedContract) => Promise, after the PDF is stored
+  imports = null, // Yescapa email drafts: { list, get, save }
+  importSetup = () => null, // () => { key, script } for the Gmail forwarder
   adminToken,
   secret,
   now = () => Date.now(),
@@ -134,6 +136,10 @@ export function createContractHandlers({
         const id = typeof req.query?.id === "string" ? req.query.id : null;
         if (req.query?.view === "calendar") {
           return reply(res, 200, { url: calendarFeedUrl(siteUrl()) });
+        }
+        if (req.query?.view === "imports") {
+          const drafts = imports ? (await imports.list()).filter((d) => d.status === "new") : [];
+          return reply(res, 200, { imports: drafts, setup: importSetup() });
         }
         if (req.query?.view === "bookings") {
           const rows = (await listBookings()).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
@@ -169,7 +175,17 @@ export function createContractHandlers({
           emailSent = false;
           console.error("invite email failed:", err.message);
         }
+        if (imports && typeof body.importId === "string" && body.importId) {
+          const d = await imports.get(body.importId).catch(() => null);
+          if (d) await imports.save({ ...d.draft, status: "done", contractId: contract.id }, { etag: d.etag }).catch(() => {});
+        }
         return reply(res, 201, { id: contract.id, link, emailSent });
+      }
+      if (action === "import_dismiss") {
+        const d = imports ? await imports.get(String(body.importId || "")) : null;
+        if (!d) return reply(res, 404, { error: "Not found", code: "not_found" });
+        await imports.save({ ...d.draft, status: "dismissed" }, { etag: d.etag });
+        return reply(res, 200, { ok: true });
       }
       if (action === "resend" || action === "cancel") {
         const found = await store.get(String(body.id || ""));
