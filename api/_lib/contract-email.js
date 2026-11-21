@@ -14,7 +14,7 @@ const T = {
     inviteSubject: "Sign your motorhome rental contract",
     inviteBody: (c, link) =>
       `<p>Hello ${esc(c.guestName)},</p><p>Your rental of the Camper Retreat VLC motorhome (${esc(c.startDate)} → ${esc(c.endDate)}) is confirmed. Please read and sign the rental contract online before pickup. It takes about 5 minutes: you fill in your details and driving licence data, confirm with a one-time code sent to this email and sign with your finger.</p><p><a href="${esc(link)}">Open the contract and sign</a></p><p>The link is personal; please do not share it. Questions: just reply to this email or WhatsApp +34 624 038 085.</p>`,
-    codeSubject: "Your confirmation code",
+    codeSubject: (c) => `${c} is your code to sign the rental contract`,
     codeBody: (code) =>
       `<p>Your one-time code to sign the rental contract:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>It is valid for 10 minutes. If you did not request it, ignore this email.</p>`,
     signedSubject: "Your signed rental contract",
@@ -25,7 +25,7 @@ const T = {
     inviteSubject: "Firma tu contrato de alquiler de autocaravana",
     inviteBody: (c, link) =>
       `<p>Hola ${esc(c.guestName)},</p><p>Tu alquiler de la autocaravana de Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) está confirmado. Lee y firma el contrato de alquiler online antes de la recogida. Son unos 5 minutos: rellenas tus datos y los de tu permiso de conducir, confirmas con un código de un solo uso que recibirás en este email y firmas con el dedo.</p><p><a href="${esc(link)}">Abrir el contrato y firmar</a></p><p>El enlace es personal; no lo compartas. Dudas: responde a este email o escribe por WhatsApp al +34 624 038 085.</p>`,
-    codeSubject: "Tu código de confirmación",
+    codeSubject: (c) => `${c} es tu código para firmar el contrato`,
     codeBody: (code) =>
       `<p>Tu código de un solo uso para firmar el contrato de alquiler:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Es válido durante 10 minutos. Si no lo has pedido, ignora este email.</p>`,
     signedSubject: "Tu contrato de alquiler firmado",
@@ -36,7 +36,7 @@ const T = {
     inviteSubject: "Подпишите договор аренды автодома",
     inviteBody: (c, link) =>
       `<p>Здравствуйте, ${esc(c.guestName)}!</p><p>Ваша аренда автодома Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) подтверждена. Пожалуйста, прочитайте и подпишите договор онлайн до получения автодома. Это займёт около 5 минут: вы заполните свои данные и данные водительских прав, подтвердите одноразовым кодом из письма и распишетесь пальцем.</p><p><a href="${esc(link)}">Открыть договор и подписать</a></p><p>Ссылка личная, не передавайте её другим. Вопросы: ответьте на это письмо или напишите в WhatsApp +34 624 038 085.</p>`,
-    codeSubject: "Ваш код подтверждения",
+    codeSubject: (c) => `${c}: код для подписи договора аренды`,
     codeBody: (code) =>
       `<p>Одноразовый код для подписания договора аренды:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Код действует 10 минут. Если вы его не запрашивали, проигнорируйте письмо.</p>`,
     signedSubject: "Ваш подписанный договор аренды",
@@ -47,7 +47,7 @@ const T = {
     inviteSubject: "Підпишіть договір оренди автобудинку",
     inviteBody: (c, link) =>
       `<p>Вітаємо, ${esc(c.guestName)}!</p><p>Вашу оренду автобудинку Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) підтверджено. Будь ласка, прочитайте та підпишіть договір онлайн до отримання автобудинку. Це займе близько 5 хвилин: ви заповните свої дані та дані водійського посвідчення, підтвердите одноразовим кодом з листа й розпишетеся пальцем.</p><p><a href="${esc(link)}">Відкрити договір і підписати</a></p><p>Посилання особисте, не передавайте його іншим. Питання: дайте відповідь на цей лист або напишіть у WhatsApp +34 624 038 085.</p>`,
-    codeSubject: "Ваш код підтвердження",
+    codeSubject: (c) => `${c}: код для підпису договору оренди`,
     codeBody: (code) =>
       `<p>Одноразовий код для підписання договору оренди:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Код дійсний 10 хвилин. Якщо ви його не запитували, проігноруйте лист.</p>`,
     signedSubject: "Ваш підписаний договір оренди",
@@ -80,7 +80,7 @@ export async function sendInviteEmail(contract, token, deps = {}) {
 export async function sendCodeEmail(contract, code, deps = {}) {
   const send = deps.send || postToResend;
   const t = tr(contract.language);
-  await send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.codeSubject, html: t.codeBody(code) });
+  await send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.codeSubject(code), html: t.codeBody(code) });
 }
 
 export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
