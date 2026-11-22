@@ -62,3 +62,17 @@ notifications@yescapa.com`);
   assert.equal(r.pickupTime, "15:00");
   assert.equal(r.returnTime, "11:00");
 });
+
+test("reads the camper's number plate", async () => {
+  const { findPlate } = await import("./yescapa-parse.js");
+  assert.equal(parseYescapaBooking(PAGE).plate, "1022MPG");
+  // OCR: spaces, dashes, a 0 read as O, lower case.
+  assert.equal(findPlate("Referencia #3499169\nVehículo 1022 MPG\n27 de noviembre"), "1022MPG");
+  assert.equal(findPlate("Vehiculo: 1O22-mpg"), "1022MPG");
+  assert.equal(findPlate("Vehicle 4321 BCD"), "4321BCD");
+  // A model name after the label is not a plate.
+  assert.equal(findPlate("Vehicle: McLouis Yearling\nTravellers 2"), undefined);
+  // No label: a known plate anywhere in the text.
+  assert.equal(findPlate("Your booking for 1022 MPG is confirmed"), "1022MPG");
+  assert.equal(parseYescapaBooking("Booking no. 3500001\nFrom 05/06/2027 to 12/06/2027").plate, undefined);
+});

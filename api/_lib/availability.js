@@ -1,11 +1,10 @@
 // Dates the camper is taken: the Yescapa ICS feed plus this site's own
 // bookings. Same parsing rules as src/lib/ical.functions.ts, which feeds the
 // booking calendar, so the two never disagree about a day.
+// Each camper has its own calendar: only its bookings and its Yescapa listing count.
 import { occupiedDays } from "../../shared/booking-changes.js";
-
-// Same fallback the booking calendar uses (src/lib/ical.functions.ts).
-const DEFAULT_ICS_URL =
-  "https://www.yescapa.es/ical/xSqLp9AFgxkt4tuxKhsOkVE_dUttqO8l-4__qnei4Ki3kkmlB7plh-YL29aXUxqO/export/";
+import { DEFAULT_VEHICLE_ID, vehicleOf } from "../../shared/vehicles.js";
+import { yescapaFeedUrl } from "./vehicles.js";
 
 function toIsoDay(yyyymmdd) {
   return `${yyyymmdd.slice(0, 4)}-${yyyymmdd.slice(4, 6)}-${yyyymmdd.slice(6, 8)}`;
@@ -70,21 +69,28 @@ export function parseIcs(text) {
   return dates;
 }
 
-/**
- * @returns { dates: Set<string>, yescapaOk: boolean }
- * yescapaOk=false means the feed could not be read — callers must not approve
- * new dates on an incomplete calendar.
- */
-export async function loadBlockedDates({ bookings, exceptBookingId, fetchImpl = fetch, env = process.env }) {
+/** Days taken by this camper's site bookings (not cancelled, except one booking). */
+export function bookedDays(bookings, { vehicleId = DEFAULT_VEHICLE_ID, exceptBookingId } = {}) {
   const dates = new Set();
   for (const b of bookings) {
-    if (b.id === exceptBookingId || b.status === "cancelled") continue;
+    if (b.id === exceptBookingId || b.status === "cancelled" || vehicleOf(b) !== vehicleId) continue;
     for (const day of occupiedDays(b.startDate, b.endDate)) dates.add(day);
   }
+  return dates;
+}
+
+/**
+ * @returns { dates: Set<string>, yescapaOk: boolean }
+ * yescapaOk=false means the feed could not be read (or the camper's feed is not
+ * configured) — callers must not approve new dates on an incomplete calendar.
+ */
+export async function loadBlockedDates({ bookings, exceptBookingId, vehicleId = DEFAULT_VEHICLE_ID, fetchImpl = fetch, env = process.env }) {
+  const dates = bookedDays(bookings, { vehicleId, exceptBookingId });
 
   let yescapaOk = false;
   try {
-    const url = env.YESCAPA_ICS_URL || env.YESCAPA_ICAL_URL || DEFAULT_ICS_URL;
+    const url = yescapaFeedUrl(vehicleId, env);
+    if (!url) throw new Error(`no Yescapa feed configured for ${vehicleId}`);
     const res = await fetchImpl(url, { headers: { Accept: "text/calendar, text/plain, */*" } });
     if (res.ok) {
       for (const day of parseIcs(await res.text())) dates.add(day);

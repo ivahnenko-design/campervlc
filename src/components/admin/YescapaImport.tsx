@@ -17,6 +17,8 @@ export interface Parsed {
   total?: number;
   yescapaRef?: string;
   language?: string;
+  /** Number plate of the booked camper ("1022MPG"). */
+  plate?: string;
   found: string[];
 }
 
@@ -25,6 +27,8 @@ export interface ImportDraft {
   receivedAt: number;
   subject: string;
   parsed: Parsed;
+  /** Camper matched by plate; null when unknown (owner decides). */
+  vehicleId?: string | null;
 }
 
 const NEEDED: [keyof Parsed, string][] = [
@@ -189,6 +193,7 @@ export function ImportsPanel({
               <span className="text-muted-foreground">
                 {p.startDate || "?"} → {p.endDate || "?"}
                 {p.yescapaRef ? ` · #${p.yescapaRef}` : ""}
+                {p.plate ? ` · ${p.plate}` : ""}
               </span>
               {miss.length > 0 && <span className="text-xs text-amber-500">не найдено: {miss.join(", ")}</span>}
               <span className="ml-auto flex gap-2">

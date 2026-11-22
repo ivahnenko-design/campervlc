@@ -7,6 +7,7 @@ import { loadBlockedDates } from "./_lib/availability.js";
 import { activeHoldDays, saveHold, CHECKOUT_TTL_MS } from "./_lib/holds.js";
 import { checkoutKeys, createDiscountRegistry } from "./_lib/member-discount.js";
 import { promoPctAt } from "../shared/promo-codes.js";
+import { DEFAULT_VEHICLE_ID, activeVehicles, cityName, getVehicle, isActiveVehicleId } from "../shared/vehicles.js";
 import { MIN_NOTICE_HOURS, startTooSoon } from "../shared/notice.js";
 import {
   BOOKING_MAX_DATE,
@@ -43,7 +44,15 @@ export default async function handler(req, res) {
       prepaymentOption,
       promoCode,
       acceptedTerms,
+      vehicleId: requestedVehicleId,
     } = req.body;
+
+    // Which camper: old clients send nothing and book vehicle 1.
+    const vehicleId = requestedVehicleId == null || requestedVehicleId === "" ? DEFAULT_VEHICLE_ID : requestedVehicleId;
+    if (!isActiveVehicleId(vehicleId)) {
+      return res.status(400).json({ error: "Unknown camper", code: "vehicle_invalid" });
+    }
+    const vehicle = getVehicle(vehicleId);
 
     if (!startDate || !endDate || !guest?.email) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -87,11 +96,11 @@ export default async function handler(req, res) {
     // any of that can not be read, refuse too — better a retry than a double booking.
     try {
       const bookings = await createBlobStore().listBookings();
-      const { dates: blocked, yescapaOk } = await loadBlockedDates({ bookings });
+      const { dates: blocked, yescapaOk } = await loadBlockedDates({ bookings, vehicleId });
       if (!yescapaOk) {
         return res.status(503).json({ error: "We could not check availability right now. Please try again in a minute.", code: "availability_unavailable" });
       }
-      for (const day of await activeHoldDays(Date.now(), { exceptEmail: g.email })) blocked.add(day);
+      for (const day of await activeHoldDays(Date.now(), { vehicleId, exceptEmail: g.email })) blocked.add(day);
       if (occupiedDays(startDate, endDate).some((day) => blocked.has(day))) {
         return res.status(409).json({ error: "These dates are no longer available.", code: "dates_unavailable" });
       }
@@ -190,6 +199,8 @@ export default async function handler(req, res) {
     } = quote;
     const isFullPayment = quote.prepaymentOption === "full";
     const dateRange = `${startDate} ${pickupTime} → ${endDate} ${returnTime}`;
+    // With several campers the guest sees on the payment page which one they pay for.
+    const camperNote = activeVehicles().length > 1 ? ` ${vehicle.name} (${cityName(vehicle, "en")}).` : "";
 
     const origin =
       process.env.SITE_URL ||
@@ -220,8 +231,8 @@ export default async function handler(req, res) {
                 ? "Camper Retreat VLC — Full payment"
                 : "Camper Retreat VLC — Deposit (50%)",
               description: isFullPayment
-                ? `${dateRange} · ${nights} nights. Paid in full, nothing due on pickup.`
-                : `${dateRange} · ${nights} nights. Remaining €${remainingAmount} due on pickup.`,
+                ? `${dateRange} · ${nights} nights. Paid in full, nothing due on pickup.${camperNote}`
+                : `${dateRange} · ${nights} nights. Remaining €${remainingAmount} due on pickup.${camperNote}`,
             },
             unit_amount: depositAmount * 100,
           },
@@ -231,6 +242,7 @@ export default async function handler(req, res) {
       success_url: `${origin}/booking-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/#booking`,
       metadata: {
+        vehicleId,
         startDate,
         endDate,
         pickupTime,
@@ -261,7 +273,7 @@ export default async function handler(req, res) {
     });
 
     try {
-      await saveHold(session.id, { startDate, endDate, expiresAt: checkoutExpiresAt, email: g.email });
+      await saveHold(session.id, { startDate, endDate, expiresAt: checkoutExpiresAt, email: g.email, vehicleId });
     } catch (err) {
       // The webhook re-checks the dates anyway; a missing hold only widens the race.
       console.error("create-checkout: could not save the date hold -", err.message);

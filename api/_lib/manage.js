@@ -20,6 +20,7 @@ import {
 import { EXTRAS, normalizeExtraIds } from "../../shared/pricing.js";
 import { issueToken, verifyToken } from "./token.js";
 import { StoreConflictError } from "./store.js";
+import { vehicleOf } from "../../shared/vehicles.js";
 
 const REF_PATTERN = /^CVLC-[0-9A-Z]{4,8}$/;
 const CHANGE_ID_PATTERN = /^[A-Za-z0-9_-]{8,64}$/;
@@ -103,7 +104,7 @@ function logStripe(label, data) {
  * @param deps.store        { listBookings, getBooking, saveBooking }
  * @param deps.stripe       Stripe client (refunds.create, checkout.sessions.create, checkout.sessions.retrieve)
  * @param deps.tokenSecret  HMAC secret for session tokens (MANAGE_BOOKING_SECRET)
- * @param deps.loadBlocked  ({ bookings, exceptBookingId }) => { dates: Set, yescapaOk }
+ * @param deps.loadBlocked  ({ bookings, exceptBookingId, vehicleId }) => { dates: Set, yescapaOk }
  * @param deps.sendEmails   (booking, change) => Promise
  * @param deps.now          () => epoch ms
  * @param deps.siteUrl      () => origin for Stripe return URLs
@@ -183,8 +184,9 @@ export function createManageHandlers(deps) {
     }
   }
 
-  async function blockedFor(bookings, bookingId) {
-    return loadBlocked({ bookings, exceptBookingId: bookingId });
+  // Only the booking's own camper counts (its bookings and its Yescapa feed).
+  async function blockedFor(bookings, booking) {
+    return loadBlocked({ bookings, exceptBookingId: booking.id, vehicleId: vehicleOf(booking) });
   }
 
   async function refundParts(booking, plan, changeId) {
@@ -321,7 +323,7 @@ export function createManageHandlers(deps) {
 
     const nowMs = now();
     const booking = found.match;
-    const { dates } = await blockedFor(found.bookings, booking.id);
+    const { dates } = await blockedFor(found.bookings, booking);
     // The booking's own days stay selectable even if Yescapa echoes them back.
     const own = new Set(occupiedDays(booking.startDate, booking.endDate));
     const blockedDates = [...dates].filter((d) => !own.has(d)).sort();
@@ -365,7 +367,7 @@ export function createManageHandlers(deps) {
 
     if (action === "view") {
       const bookings = await store.listBookings();
-      const { dates } = await blockedFor(bookings, booking.id);
+      const { dates } = await blockedFor(bookings, booking);
       const own = new Set(occupiedDays(booking.startDate, booking.endDate));
       return res.status(200).json({
         booking: bookingView(booking, nowMs),
@@ -376,7 +378,7 @@ export function createManageHandlers(deps) {
     const request = sanitizeRequest(change);
     const datesRequested = ["startDate", "endDate"].some((k) => request[k] && request[k] !== booking[k]);
     const bookings = await store.listBookings();
-    const { dates: blockedDates, yescapaOk } = await blockedFor(bookings, booking.id);
+    const { dates: blockedDates, yescapaOk } = await blockedFor(bookings, booking);
     if (datesRequested && !yescapaOk) {
       return res.status(503).json({ code: "availability_unavailable" });
     }

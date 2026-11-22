@@ -135,7 +135,10 @@
       "guestsValue": "fino a 5",
       "equipment": "Vedi dotazioni",
       "photos": "{{n}} foto"
-    }
+    },
+    "city_choose": "Dove vuoi ritirare il camper?",
+    "subtitle_multi": "Ogni camper si ritira nella sua città. Scegli prima la città, poi guarda le date libere di quel camper.",
+    "title_multi": "I nostri camper"
   },
   "how": {
     "title": "Come funziona",

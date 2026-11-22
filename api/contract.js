@@ -2,7 +2,8 @@
 //  - ?scope=auth   guest accounts: email code, Google, passkeys, session (see _lib/auth-handlers.js)
 //  - ?scope=import Yescapa booking emails from the owner's Gmail script (x-import-key)
 //  - ?scope=promo  is a promo code valid? -> { pct } (the codes themselves never reach the browser)
-//  - x-admin-token header   owner: create/resend/cancel contracts, list, download signed PDFs
+//  - ?scope=admin  staff (site account in ADMIN_EMAILS / MANAGER_EMAILS, see _lib/staff.js)
+//                  or the legacy x-admin-token header: contracts, bookings, Yescapa imports
 //  - otherwise     guest signing page /sign/:token: read, email code, sign
 import { contractHandlers } from "./_lib/contract-wire.js";
 import { authHandler } from "./_lib/auth-wire.js";
@@ -21,6 +22,6 @@ export default function handler(req, res) {
   if (req.query?.scope === "auth") return authHandler(req, res);
   if (req.query?.scope === "promo") return promoHandler(req, res);
   if (req.query?.scope === "import") return importHandler(req, res);
-  const isAdmin = req.headers && "x-admin-token" in req.headers;
+  const isAdmin = req.query?.scope === "admin" || (req.headers && "x-admin-token" in req.headers);
   return isAdmin ? contractHandlers.admin(req, res) : contractHandlers.guest(req, res);
 }

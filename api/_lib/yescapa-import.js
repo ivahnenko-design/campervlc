@@ -7,6 +7,8 @@ import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { blobStore, list } from "./blob.js";
 import { parseYescapaBooking } from "../../shared/yescapa-parse.js";
 import { esc, postToResend, siteUrl } from "./email.js";
+import { activeVehicles, vehicleByPlate, vehicleLabel } from "../../shared/vehicles.js";
+import { ownerTo } from "./vehicles.js";
 
 export const IMPORT_PREFIX = process.env.IMPORTS_BLOB_PREFIX || "campervlc-imports/";
 
@@ -37,6 +39,18 @@ export function htmlToText(html) {
     .replace(/\n\s*\n+/g, "\n");
 }
 
+/**
+ * The camper of a Yescapa booking: the one with the plate Yescapa shows
+ * ("Vehículo 1022MPG"). Without a plate it is only certain while there is one
+ * active camper; otherwise null (the company owner decides in the admin).
+ */
+export function importVehicleId(parsed) {
+  const byPlate = vehicleByPlate(parsed?.plate);
+  if (byPlate?.active) return byPlate.id;
+  const active = activeVehicles();
+  return !parsed?.plate && active.length === 1 ? active[0].id : null;
+}
+
 export function makeDraft({ subject = "", text = "", html = "", messageId = "", from = "" }, now = Date.now()) {
   const body = String(text || "").trim() || htmlToText(html);
   const parsed = parseYescapaBooking(`${subject}\n${body}`);
@@ -48,6 +62,7 @@ export function makeDraft({ subject = "", text = "", html = "", messageId = "", 
     subject: String(subject).slice(0, 200),
     from: String(from).slice(0, 200),
     parsed,
+    vehicleId: importVehicleId(parsed),
     snippet: body.slice(0, 4000),
     contractId: null,
   };
@@ -83,7 +98,9 @@ export function createImportStore(prefix = IMPORT_PREFIX) {
 
 async function notifyOwner(draft) {
   const p = draft.parsed || {};
-  const to = process.env.CONTRACT_OWNER_EMAIL || process.env.OWNER_EMAIL || "camper.retreat.alicante@gmail.com";
+  const company = process.env.CONTRACT_OWNER_EMAIL || process.env.OWNER_EMAIL || "camper.retreat.alicante@gmail.com";
+  // Goes to the owner of the camper; unknown camper: the company owner.
+  const to = draft.vehicleId ? ownerTo(draft.vehicleId, company) : company;
   await postToResend({
     from: "Camper Retreat VLC <info@campervlc.com>",
     to,
@@ -91,7 +108,8 @@ async function notifyOwner(draft) {
     html: `<p>Ha llegado una reserva de Yescapa. Revisa los datos y crea el contrato con un clic:</p>
       <ul><li>${esc(p.guestName || "—")}</li><li>${esc(p.email || "—")} · ${esc(p.phone || "—")}</li>
       <li>${esc(p.startDate || "?")} ${esc(p.pickupTime || "")} → ${esc(p.endDate || "?")} ${esc(p.returnTime || "")}</li>
-      <li>Ref. Yescapa ${esc(p.yescapaRef || "—")}</li></ul>
+      <li>Ref. Yescapa ${esc(p.yescapaRef || "—")}</li>
+      <li>Vehículo: ${esc(draft.vehicleId ? vehicleLabel(draft.vehicleId) : p.plate ? `${p.plate} (desconocido)` : "—")}</li></ul>
       <p><a href="${esc(siteUrl())}/admin/contratos">Abrir el panel</a></p>`,
   });
 }

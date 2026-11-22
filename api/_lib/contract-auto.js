@@ -4,6 +4,7 @@
 //  - a daily job reminds guests who have not signed yet (7 and 2 days before
 //    pickup) and tells the owner which pickups in the next 2 days are unsigned.
 import { createContract, reissueToken, LANGS } from "./contracts.js";
+import { vehicleOf } from "../../shared/vehicles.js";
 
 const DAY = 86_400_000;
 
@@ -30,6 +31,7 @@ export function contractInputFromBooking(booking) {
     language: LANGS.includes(booking.language) ? booking.language : "es",
     priceTotal: Number.isFinite(booking.totalWithIva) ? booking.totalWithIva : null,
     bookingRef: booking.bookingRef || "",
+    vehicleId: vehicleOf(booking),
   };
 }
 

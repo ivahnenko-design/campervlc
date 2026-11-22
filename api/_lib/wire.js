@@ -13,7 +13,7 @@ export const handlers = createManageHandlers({
   store,
   stripe,
   tokenSecret: process.env.MANAGE_BOOKING_SECRET,
-  loadBlocked: ({ bookings, exceptBookingId }) => loadBlockedDates({ bookings, exceptBookingId }),
+  loadBlocked: ({ bookings, exceptBookingId, vehicleId }) => loadBlockedDates({ bookings, exceptBookingId, vehicleId }),
   sendEmails: (booking, change) => sendChangeEmails(booking, change),
   now: () => Date.now(),
   siteUrl,

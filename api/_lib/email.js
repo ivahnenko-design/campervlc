@@ -1,4 +1,6 @@
 // Booking-change emails, sent through Resend from info@campervlc.com.
+import { vehicleLabel, vehicleOf } from "../../shared/vehicles.js";
+import { ownerTo } from "./vehicles.js";
 
 const FROM = "Camper Retreat VLC <info@campervlc.com>";
 const REPLY_TO = "info@campervlc.com";
@@ -105,7 +107,7 @@ export function buildChangeEmails(booking, change) {
 
   const owner = {
     from: FROM,
-    to: process.env.OWNER_EMAIL,
+    to: ownerTo(vehicleOf(booking), process.env.OWNER_EMAIL),
     reply_to: REPLY_TO,
     subject: `Booking changed: ${booking.guestFirstName} ${booking.guestLastName} · ${booking.bookingRef}`,
     html: `
@@ -116,6 +118,7 @@ export function buildChangeEmails(booking, change) {
           : ""
       }
       <p><strong>Booking reference:</strong> ${esc(booking.bookingRef)}</p>
+      <p><strong>Camper:</strong> ${esc(vehicleLabel(vehicleOf(booking)))}</p>
       <p><strong>Guest:</strong> ${esc(booking.guestFirstName)} ${esc(booking.guestLastName)} · ${esc(booking.guestEmail)} · ${esc(booking.guestPhone)}</p>
       <p><strong>Dates:</strong> ${esc(range(old))} (${old.nights} nights) → <strong>${esc(range(now))}</strong> (${now.nights} nights)</p>
       <p><strong>Extras added:</strong> ${esc(added.join(", ") || "none")} · <strong>removed:</strong> ${esc(removed.join(", ") || "none")}</p>

@@ -17,7 +17,10 @@ import {
 } from "date-fns";
 import { ChevronLeft, ChevronRight, CreditCard, Sparkles, Tag } from "lucide-react";
 import { SectionHeader } from "./Fleet";
-import { AVAILABILITY, EXCLUSIVE_EXTRA_GROUPS, EXTRAS, FLEET, type ExtraId } from "@/data/fleet";
+import { EXCLUSIVE_EXTRA_GROUPS, EXTRAS, type ExtraId } from "@/data/fleet";
+import { useChosenCamper } from "@/lib/vehicle-choice";
+import { CitySwitch } from "./CitySwitch";
+import { DEFAULT_VEHICLE_ID } from "../../shared/vehicles.js";
 import {
   calculateQuote,
   getSeason,
@@ -40,15 +43,12 @@ function isoDay(d: Date) {
   return format(d, "yyyy-MM-dd");
 }
 
-function useBookedSet(camperId: string) {
-  const local = useMemo(() => {
-    const a = AVAILABILITY.find((x) => x.camperId === camperId);
-    return a?.bookedDates ?? [];
-  }, [camperId]);
-
+/** Days this camper is taken: its Yescapa listing plus its bookings made on this site. */
+function useBookedSet(vehicleId: string) {
+  const isDefault = vehicleId === DEFAULT_VEHICLE_ID;
   const { data } = useQuery({
-    queryKey: ["yescapa-ical"],
-    queryFn: () => fetchYescapaBookedDates(),
+    queryKey: ["yescapa-ical", vehicleId],
+    queryFn: () => fetchYescapaBookedDates({ data: { vehicleId } }),
     staleTime: 30 * 60_000,
     refetchInterval: 30 * 60_000,
     refetchIntervalInBackground: true,
@@ -58,9 +58,10 @@ function useBookedSet(camperId: string) {
 
   // Bookings made on this site; Yescapa only learns about them later, if at all.
   const { data: own } = useQuery({
-    queryKey: ["own-bookings"],
+    queryKey: ["own-bookings", vehicleId],
     queryFn: async (): Promise<{ dates: string[] }> => {
-      const res = await fetch("/api/availability");
+      // Vehicle 1 keeps the URL it always had (and its CDN cache).
+      const res = await fetch(isDefault ? "/api/availability" : `/api/availability?vehicle=${encodeURIComponent(vehicleId)}`);
       if (!res.ok) return { dates: [] };
       return res.json();
     },
@@ -70,11 +71,11 @@ function useBookedSet(camperId: string) {
   });
 
   return useMemo(() => {
-    const set = new Set<string>(local);
+    const set = new Set<string>();
     for (const d of data?.dates ?? []) set.add(d);
     for (const d of own?.dates ?? []) set.add(d);
     return set;
-  }, [local, data, own]);
+  }, [data, own]);
 }
 
 interface Range {
@@ -85,12 +86,16 @@ interface Range {
 export function BookingCalendar() {
   const { t, i18n } = useTranslation();
   const auth = useAuth();
-  const camper = FLEET[0];
+  const camper = useChosenCamper();
   const booked = useBookedSet(camper.id);
 
   const today = startOfDay(new Date());
   const [monthBase, setMonthBase] = useState<Date>(startOfMonth(today));
   const [range, setRange] = useState<Range>({ start: null, end: null });
+  // Another camper has another calendar: start the date choice again.
+  useEffect(() => {
+    setRange({ start: null, end: null });
+  }, [camper.id]);
   const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
   const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
   const [selectedExtras, setSelectedExtras] = useState<Set<ExtraId>>(
@@ -279,6 +284,7 @@ export function BookingCalendar() {
           promoCode: appliedPromoCode,
           acceptedTerms,
           language: (i18n.language || "es").slice(0, 2),
+          vehicleId: camper.id,
         }),
       });
       const data = await res.json();
@@ -309,6 +315,7 @@ export function BookingCalendar() {
           title={t("booking.title")}
           subtitle={t("booking.subtitle")}
         />
+        <CitySwitch className="mt-6" />
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[1.3fr_1fr] lg:items-start">
           {/* Calendar + pickup/return time */}

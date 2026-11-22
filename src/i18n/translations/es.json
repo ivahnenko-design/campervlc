@@ -135,7 +135,10 @@
       "guestsValue": "hasta 5",
       "equipment": "Ver equipamiento",
       "photos": "{{n}} fotos"
-    }
+    },
+    "city_choose": "¿Dónde quieres recoger la autocaravana?",
+    "subtitle_multi": "Cada autocaravana se recoge en su ciudad. Elige primero la ciudad y luego mira las fechas libres de esa autocaravana.",
+    "title_multi": "Nuestras autocaravanas"
   },
   "how": {
     "title": "Cómo Funciona",

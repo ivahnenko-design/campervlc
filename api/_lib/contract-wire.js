@@ -6,12 +6,12 @@ import { getSigningProvider } from "./signing-provider.js";
 import { esc, postToResend, siteUrl } from "./email.js";
 import { authSecret } from "./auth-secret.js";
 import { contractKeys, createDiscountRegistry } from "./member-discount.js";
-import { CONTRACT_PDF_PATH } from "./contracts.js";
+import { contractPdfPathOf } from "./contracts.js";
 import { createBlobStore } from "./store.js";
 import { createImportStore, gmailScript, importKey } from "./yescapa-import.js";
 
-async function loadBasePdf() {
-  const res = await fetch(`${siteUrl()}${CONTRACT_PDF_PATH}`);
+async function loadBasePdf(contract) {
+  const res = await fetch(`${siteUrl()}${contractPdfPathOf(contract)}`);
   if (!res.ok) throw new Error(`Base contract PDF not available (${res.status})`);
   return new Uint8Array(await res.arrayBuffer());
 }
@@ -55,5 +55,6 @@ export const contractHandlers = createContractHandlers({
     return key ? { key, script: gmailScript(`${siteUrl()}/api/contract?scope=import`, key) } : null;
   },
   adminToken: process.env.ADMIN_TOKEN,
+  sessionSecret: authSecret(),
   secret: process.env.CONTRACT_SECRET || process.env.ADMIN_TOKEN,
 });

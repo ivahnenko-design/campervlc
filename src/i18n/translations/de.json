@@ -135,7 +135,10 @@
       "guestsValue": "bis 5",
       "equipment": "Ausstattung ansehen",
       "photos": "{{n}} Fotos"
-    }
+    },
+    "city_choose": "Wo möchtest du das Wohnmobil abholen?",
+    "subtitle_multi": "Jedes Wohnmobil wird in seiner eigenen Stadt abgeholt. Wähle zuerst die Stadt, dann die freien Termine dieses Wohnmobils.",
+    "title_multi": "Unsere Wohnmobile"
   },
   "how": {
     "title": "So funktioniert es",

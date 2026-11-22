@@ -1,4 +1,6 @@
 import { blobStore } from "./_lib/blob.js";
+import { yescapaFeedUrl } from "./_lib/vehicles.js";
+import { DEFAULT_VEHICLE_ID, activeVehicles } from "../shared/vehicles.js";
 
 function parseIcsDate(str) {
   // Handles VALUE=DATE (YYYYMMDD) and datetime (YYYYMMDDTHHmmssZ)
@@ -22,9 +24,9 @@ function expandRange(start, end) {
   return dates;
 }
 
-async function fetchYescapaDates() {
-  const url = process.env.YESCAPA_ICAL_URL || process.env.YESCAPA_ICS_URL;
-  if (!url) throw new Error("YESCAPA_ICAL_URL not set");
+async function fetchYescapaDates(vehicleId) {
+  const url = yescapaFeedUrl(vehicleId);
+  if (!url) throw new Error(`Yescapa feed of ${vehicleId} not set`);
 
   const res = await fetch(url, {
     headers: { "User-Agent": "CamperRetreatVLC/1.0" },
@@ -66,11 +68,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const dates = await fetchYescapaDates();
-    await blobStore.put("campervlc-yescapa-cache.json", { dates, updatedAt: new Date().toISOString() });
-
-    console.log(`Yescapa sync: ${dates.length} dates cached`);
-    return res.status(200).json({ synced: dates.length });
+    // One cache per camper; vehicle 1 keeps its old file name.
+    const synced = {};
+    for (const v of activeVehicles()) {
+      const dates = await fetchYescapaDates(v.id);
+      const name = v.id === DEFAULT_VEHICLE_ID ? "campervlc-yescapa-cache.json" : `campervlc-yescapa-cache-${v.id}.json`;
+      await blobStore.put(name, { vehicleId: v.id, dates, updatedAt: new Date().toISOString() });
+      synced[v.id] = dates.length;
+    }
+    console.log("Yescapa sync:", JSON.stringify(synced));
+    return res.status(200).json({ synced: synced[DEFAULT_VEHICLE_ID] ?? 0, vehicles: synced });
   } catch (err) {
     console.error("Yescapa sync error:", err);
     return res.status(500).json({ error: "sync_failed" });
