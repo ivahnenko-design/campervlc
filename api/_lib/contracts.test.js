@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import zlib from "node:zlib";
 import { PDFDocument } from "pdf-lib";
 import {
+  CONSENT_KEYS,
+  CONTRACT_PDF_PATH,
+  CONTRACT_VERSION,
   ContractError,
   OTP_MAX_ATTEMPTS,
   checkOtp,
@@ -12,8 +15,10 @@ import {
   issueOtp,
   matchesToken,
   tokenId,
+  requireConsents,
   validateInvite,
 } from "./contracts.js";
+import { VEHICLES } from "../../shared/vehicles.js";
 import { createContractHandlers } from "./contract-handlers.js";
 import { createOwnProvider, createExternalProvider } from "./signing-provider.js";
 import { pdfText } from "./contract-pdf.js";
@@ -83,7 +88,7 @@ const SIGN_DATA = {
   licenseCountry: "Poland",
   licenseExpiry: "2030-01-01",
 };
-const CONSENTS = { readContract: true, electronicSignature: true, cardAuthorization: true, liabilityClauses: true, dataProtection: true };
+const CONSENTS = { readContract: true, electronicSignature: true, cardAuthorization: true, liabilityClauses: true, dataProtection: true, languageNotice: true };
 
 test("validateInvite cleans fields and rejects bad input", () => {
   const ok = validateInvite(INVITE);
@@ -93,6 +98,15 @@ test("validateInvite cleans fields and rejects bad input", () => {
   assert.throws(() => validateInvite({ ...INVITE, email: "nope" }), (e) => e.code === "email_invalid");
   assert.throws(() => validateInvite({ ...INVITE, endDate: "2026-12-10" }), (e) => e.code === "dates_invalid");
   assert.throws(() => validateInvite({ ...INVITE, guestName: "" }), (e) => e.code === "guest_name_required");
+});
+
+test("v7: bilingual contract PDF for every camper and the language consent is required", () => {
+  assert.equal(CONTRACT_VERSION, "2026-11-v7");
+  assert.equal(CONTRACT_PDF_PATH, "/contracts/contrato-v7.pdf");
+  for (const v of VEHICLES) assert.equal(v.contractPdfPath, CONTRACT_PDF_PATH, v.id);
+  assert.ok(CONSENT_KEYS.includes("languageNotice"));
+  assert.deepEqual(Object.keys(requireConsents(CONSENTS)).sort(), [...CONSENT_KEYS].sort());
+  assert.throws(() => requireConsents({ ...CONSENTS, languageNotice: false }), (e) => e instanceof ContractError && e.code === "consent_required");
 });
 
 test("token authenticates the contract and carries its id", () => {

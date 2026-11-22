@@ -273,6 +273,10 @@ Gli indennizzi sono cumulabili entro il limite massimo complessivo del 30 % del 
 
 16.2. Le comunicazioni e le giustificazioni previste dal presente contratto potranno essere effettuate per posta elettronica all'indirizzo indicato, che il Conduttore si impegna a mantenere attivo durante il contratto e fino a 12 mesi dopo la sua conclusione.
 
+### 17. Lingua
+
+17.1. Il presente contratto è redatto in spagnolo e in inglese. In caso di discrepanza o di dubbio interpretativo prevale la versione spagnola. Il Conduttore dichiara di aver potuto leggere le presenti condizioni in una lingua che comprende.
+
 ---
 
 Dubbi su qualche condizione? Scrivici su WhatsApp al +34 624 038 085 prima di prenotare.

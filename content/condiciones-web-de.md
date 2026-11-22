@@ -273,6 +273,10 @@ Die Entschädigungen sind kumulierbar, insgesamt jedoch auf höchstens 30 % des 
 
 16.2. Die in diesem Vertrag vorgesehenen Mitteilungen und Nachweise können per E-Mail an die angegebene Adresse erfolgen, die der Mieter sich verpflichtet, während des Vertrags und bis zu 12 Monate nach dessen Ende betriebsbereit zu halten.
 
+### 17. Sprache
+
+17.1. Dieser Vertrag wird in spanischer und englischer Sprache abgefasst. Bei Abweichungen oder Zweifeln bei der Auslegung ist die spanische Fassung maßgeblich. Der Mieter erklärt, dass er diese Bedingungen in einer Sprache lesen konnte, die er versteht.
+
 ---
 
 Fragen zu einer Bedingung? Schreiben Sie uns vor der Buchung per WhatsApp an +34 624 038 085.

@@ -271,6 +271,10 @@ Las compensaciones son acumulables con el máximo conjunto del 30 % del precio d
 
 16.2. Las comunicaciones y justificaciones previstas en este contrato podrán realizarse por correo electrónico a la dirección indicada, que el Arrendatario se compromete a mantener operativa durante el contrato y hasta 12 meses después de su finalización.
 
+### 17. Idioma
+
+17.1. El presente contrato se redacta en español e inglés. En caso de discrepancia o duda de interpretación prevalece la versión en español. El Arrendatario declara haber podido leer estas condiciones en un idioma que comprende.
+
 ---
 
 ¿Dudas sobre alguna condición? Escríbenos por WhatsApp al +34 624 038 085 antes de reservar.
