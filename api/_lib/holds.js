@@ -6,6 +6,7 @@ import { createHash } from "node:crypto";
 import { del, list } from "@vercel/blob";
 import { blobStore } from "./blob.js";
 import { occupiedDays } from "../../shared/booking-changes.js";
+import { DEFAULT_VEHICLE_ID, vehicleOf } from "../../shared/vehicles.js";
 
 export const HOLDS_PREFIX = process.env.HOLDS_BLOB_PREFIX || "campervlc-holds/";
 /** Stripe needs expires_at at least 30 minutes ahead; one minute of slack. */
@@ -16,18 +17,31 @@ const pathFor = (sessionId) => `${HOLDS_PREFIX}${sessionId}.json`;
 export const holdOwner = (email) =>
   createHash("sha256").update(`hold:${String(email || "").trim().toLowerCase()}`).digest("hex").slice(0, 24);
 
-export async function saveHold(sessionId, { startDate, endDate, expiresAt, email }) {
-  await blobStore.put(pathFor(sessionId), { sessionId, startDate, endDate, expiresAt, owner: holdOwner(email) });
+export async function saveHold(sessionId, { startDate, endDate, expiresAt, email, vehicleId = DEFAULT_VEHICLE_ID }) {
+  await blobStore.put(pathFor(sessionId), { sessionId, vehicleId, startDate, endDate, expiresAt, owner: holdOwner(email) });
 }
 
 /**
- * Days held by checkouts still open at `now`. The guest's own holds (same
- * email: they closed the payment page and try again) do not block them.
- * Expired holds are cleaned up on the way.
+ * Days blocked by these holds for one camper at `now`: expired holds, holds of
+ * other campers (holds without vehicleId are vehicle 1's), the given checkout
+ * session and the guest's own holds (same email: they closed the payment page
+ * and try again) do not count.
  */
-export async function activeHoldDays(now, { exceptSessionId = null, exceptEmail = null } = {}) {
+export function holdDays(holds, now, { vehicleId = DEFAULT_VEHICLE_ID, exceptSessionId = null, exceptEmail = null } = {}) {
   const mine = exceptEmail ? holdOwner(exceptEmail) : null;
   const days = new Set();
+  for (const hold of holds) {
+    if (!hold || hold.expiresAt <= now) continue;
+    if (vehicleOf(hold) !== vehicleId) continue;
+    if (hold.sessionId === exceptSessionId || (mine && hold.owner === mine)) continue;
+    for (const day of occupiedDays(hold.startDate, hold.endDate)) days.add(day);
+  }
+  return days;
+}
+
+/** Days held by checkouts of this camper still open at `now`. Expired holds are cleaned up on the way. */
+export async function activeHoldDays(now, { vehicleId = DEFAULT_VEHICLE_ID, exceptSessionId = null, exceptEmail = null } = {}) {
+  const holds = [];
   const expired = [];
   let cursor;
   do {
@@ -35,17 +49,13 @@ export async function activeHoldDays(now, { exceptSessionId = null, exceptEmail 
     for (const b of page.blobs) {
       const hold = (await blobStore.readJson(b.pathname))?.data;
       if (!hold) continue;
-      if (hold.expiresAt <= now) {
-        expired.push(b.url);
-        continue;
-      }
-      if (hold.sessionId === exceptSessionId || (mine && hold.owner === mine)) continue;
-      for (const day of occupiedDays(hold.startDate, hold.endDate)) days.add(day);
+      if (hold.expiresAt <= now) expired.push(b.url);
+      else holds.push(hold);
     }
     cursor = page.hasMore ? page.cursor : undefined;
   } while (cursor);
   if (expired.length) await del(expired).catch((err) => console.warn("holds: cleanup failed -", err.message));
-  return days;
+  return holdDays(holds, now, { vehicleId, exceptSessionId, exceptEmail });
 }
 
 export async function releaseHold(sessionId) {

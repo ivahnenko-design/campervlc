@@ -5,6 +5,8 @@ import { createBlobStore } from "./_lib/store.js";
 import { createCancelHandler } from "./_lib/cancel.js";
 import { esc, postToResend, siteUrl } from "./_lib/email.js";
 import { clientIp, hit } from "./_lib/rate-limit.js";
+import { vehicleLabel, vehicleOf } from "../shared/vehicles.js";
+import { ownerTo } from "./_lib/vehicles.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -60,12 +62,13 @@ function ownerEmail(booking) {
   const name = `${booking.guestFirstName} ${booking.guestLastName}`;
   return {
     from: FROM,
-    to: process.env.OWNER_EMAIL,
+    to: ownerTo(vehicleOf(booking), process.env.OWNER_EMAIL),
     reply_to: "info@campervlc.com",
     subject: `Booking cancelled: ${name.replace(/[\r\n]/g, " ")} · ${booking.bookingRef}`,
     html: `
       <h2>A booking was cancelled</h2>
       <p><strong>Guest:</strong> ${esc(name)}</p>
+      <p><strong>Camper:</strong> ${esc(vehicleLabel(vehicleOf(booking)))}</p>
       <p><strong>Booking reference:</strong> ${esc(booking.bookingRef)}</p>
       <p><strong>Dates:</strong> ${esc(booking.startDate)} → ${esc(booking.endDate)}</p>
       <p><strong>Retention (clause 4.1):</strong> ${booking.freeCancellation ? "none — free cancellation within 24 h" : `${booking.retentionPct}% of the total price (€${booking.retainedAmount})`}</p>

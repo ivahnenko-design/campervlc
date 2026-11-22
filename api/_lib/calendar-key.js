@@ -4,6 +4,7 @@
 // without it the key is derived from a secret the site already has, so the
 // feed keeps working and the owner reads the full URL in /admin/contratos.
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { DEFAULT_VEHICLE_ID } from "../../shared/vehicles.js";
 
 export function calendarFeedKey(env = process.env) {
   if (env.CALENDAR_FEED_KEY) return env.CALENDAR_FEED_KEY;
@@ -20,7 +21,10 @@ export function calendarKeyOk(given, env = process.env) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-export function calendarFeedUrl(site, env = process.env) {
+/** Vehicle 1 keeps the URL it always had; other campers add &vehicle=<id>. */
+export function calendarFeedUrl(site, env = process.env, vehicleId = null) {
   const key = calendarFeedKey(env);
-  return key ? `${site}/api/calendar.ics?key=${encodeURIComponent(key)}` : null;
+  if (!key) return null;
+  const extra = vehicleId && vehicleId !== DEFAULT_VEHICLE_ID ? `&vehicle=${encodeURIComponent(vehicleId)}` : "";
+  return `${site}/api/calendar.ics?key=${encodeURIComponent(key)}${extra}`;
 }

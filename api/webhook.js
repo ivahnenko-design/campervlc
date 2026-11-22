@@ -14,6 +14,8 @@ import { checkoutKeys, createDiscountRegistry } from "./_lib/member-discount.js"
 import { loadBlockedDates } from "./_lib/availability.js";
 import { releaseHold } from "./_lib/holds.js";
 import { occupiedDays } from "../shared/booking-changes.js";
+import { cityName, vehicleLabel, vehicleOf } from "../shared/vehicles.js";
+import { ownerTo } from "./_lib/vehicles.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",
@@ -73,9 +75,10 @@ async function saveBooking(booking, { onlyIfNew = false } = {}) {
   await blobStore.put(key, booking, onlyIfNew ? { allowOverwrite: false } : {});
 }
 
-async function ownerAlert(subject, html) {
+/** Alert to the owner of the booking's camper (vehicle 1: OWNER_EMAIL, as before). */
+async function ownerAlert(subject, html, booking = null) {
   try {
-    await postToResend({ from: "Camper Retreat VLC <info@campervlc.com>", to: process.env.OWNER_EMAIL, subject, html });
+    await postToResend({ from: "Camper Retreat VLC <info@campervlc.com>", to: ownerTo(vehicleOf(booking), process.env.OWNER_EMAIL), subject, html });
   } catch (err) {
     console.error("owner alert failed:", subject, "-", err.message);
   }
@@ -97,7 +100,8 @@ async function refundDoubleBooking(booking, clash) {
   await ownerAlert(
     `Double booking refunded: ${booking.startDate}–${booking.endDate}`,
     `<p>A guest paid for dates that were already taken (${esc(clash.join(", "))}). ${refundId ? `The payment was refunded automatically (${esc(refundId)}).` : "<strong>The automatic refund FAILED — refund it in Stripe.</strong>"} No booking was created.</p>
-     <p>Guest: ${esc(booking.guestFirstName)} ${esc(booking.guestLastName)} · ${esc(booking.guestEmail)} · ${esc(booking.guestPhone)}<br/>Stripe session: ${esc(booking.id)}</p>`,
+     <p>Guest: ${esc(booking.guestFirstName)} ${esc(booking.guestLastName)} · ${esc(booking.guestEmail)} · ${esc(booking.guestPhone)}<br/>Camper: ${esc(vehicleLabel(vehicleOf(booking)))}<br/>Stripe session: ${esc(booking.id)}</p>`,
+    booking,
   );
   try {
     await postToResend({
@@ -145,6 +149,7 @@ async function recordMemberDiscount(booking, memberUserId) {
       await ownerAlert(
         `First-booking discount given twice: ${booking.bookingRef}`,
         `<p>Booking ${esc(booking.bookingRef)} (${esc(booking.guestFirstName)} ${esc(booking.guestLastName)}) got the 5% first-booking discount, but the same ${esc([...new Set(clashes.map((c) => c.key.split(":")[0]))].join(", "))} already had it on another booking. Two checkouts were probably paid at the same time. You may ask the guest for the difference.</p>`,
+        booking,
       );
     }
   } catch (err) {
@@ -206,7 +211,7 @@ async function sendGuestEmail(booking) {
   const paymentLine = isFullPayment
     ? `<p><strong>Paid in full:</strong> €${depositAmount} ✅ — nothing due on pickup.</p>`
     : `<p><strong>Deposit paid (50%):</strong> €${depositAmount} ✅</p>
-      <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in Valencia.</p>`;
+      <p><strong>Remaining balance (50%):</strong> €${remainingAmount} — due on pickup of the campervan in ${esc(cityName(vehicleOf(booking), "en"))}.</p>`;
 
   const promoLine = promoCode
     ? `<p><strong>Promo code applied:</strong> ${esc(promoCode)}</p>`
@@ -269,12 +274,13 @@ async function sendOwnerEmail(booking) {
 
   const body = {
     from: "Camper Retreat VLC <info@campervlc.com>",
-    to: process.env.OWNER_EMAIL,
+    to: ownerTo(vehicleOf(booking), process.env.OWNER_EMAIL),
     reply_to: "info@campervlc.com",
     subject: `New booking: ${`${guestFirstName} ${guestLastName}`.replace(/[\r\n]/g, " ")} · ${bookingRef} · ${startDate}–${endDate}`,
     html: `
       <h2>New booking received</h2>
       <p style="font-size:18px"><strong>Booking reference: ${bookingRef}</strong></p>
+      <p><strong>Camper:</strong> ${esc(vehicleLabel(vehicleOf(booking)))}</p>
       <p><strong>Guest:</strong> ${esc(guestFirstName)} ${esc(guestLastName)}</p>
       <p><strong>Email:</strong> ${esc(guestEmail)}</p>
       <p><strong>WhatsApp/Phone:</strong> ${esc(guestPhone)}</p>
@@ -362,8 +368,11 @@ export default async function handler(req, res) {
     const existingBookings = await loadBookings();
     const bookingRef = await getUniqueBookingRef(existingBookings);
 
+    // Checkouts opened before there were several campers carry no vehicleId: vehicle 1.
+    const vehicleId = vehicleOf({ vehicleId: m.vehicleId });
     const booking = {
       id: session.id,
+      vehicleId,
       bookingRef,
       status: "confirmed",
       createdAt: new Date().toISOString(),
@@ -406,7 +415,7 @@ export default async function handler(req, res) {
     // payment goes back and the owner is told; no booking is created.
     let clash = [];
     try {
-      const { dates } = await loadBlockedDates({ bookings: existingBookings });
+      const { dates } = await loadBlockedDates({ bookings: existingBookings, vehicleId });
       clash = occupiedDays(booking.startDate, booking.endDate).filter((d) => dates.has(d));
     } catch (err) {
       console.error("webhook: availability re-check failed for", session.id, "-", err.message);
@@ -451,6 +460,7 @@ export default async function handler(req, res) {
       await ownerAlert(
         `Contrato no enviado: ${booking.bookingRef}`,
         `<p>No se pudo crear o enviar el contrato de la reserva <strong>${booking.bookingRef}</strong>. Créalo desde /admin/contratos.</p>`,
+        booking,
       ).catch(() => {});
     }
 

@@ -2,6 +2,7 @@ import { blobStore, list } from "./_lib/blob.js";
 import { BOOKINGS_PREFIX } from "./_lib/prefix.js";
 import { calendarKeyOk } from "./_lib/calendar-key.js";
 import { createHash } from "node:crypto";
+import { DEFAULT_VEHICLE_ID, getVehicle, vehicleOf } from "../shared/vehicles.js";
 
 function toIcalDate(dateStr) {
   // dateStr is "YYYY-MM-DD"
@@ -55,20 +56,23 @@ export default async function handler(req, res) {
   if (!calendarKeyOk(req.query?.key)) {
     return res.status(404).end();
   }
+  // One feed per camper (one Yescapa listing each): ?vehicle=<id>, vehicle 1 without it.
+  const vehicleId = typeof req.query?.vehicle === "string" && req.query.vehicle ? req.query.vehicle : DEFAULT_VEHICLE_ID;
+  if (!getVehicle(vehicleId)) return res.status(404).end();
 
   try {
     const { blobs } = await list({ prefix: BOOKINGS_PREFIX });
     const allBookings = (
       await Promise.all(blobs.map(async (blob) => (await blobStore.readJson(blob.pathname))?.data))
     ).filter(Boolean);
-    const bookings = allBookings.filter((b) => b.status !== "cancelled");
+    const bookings = allBookings.filter((b) => b.status !== "cancelled" && vehicleOf(b) === vehicleId);
 
     const ical = generateIcal(bookings);
 
     res.setHeader("Content-Type", "text/calendar; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
-      'attachment; filename="campervlc-bookings.ics"'
+      `attachment; filename="campervlc-bookings${vehicleId === DEFAULT_VEHICLE_ID ? "" : `-${vehicleId}`}.ics"`
     );
     res.setHeader("Cache-Control", "public, s-maxage=900, stale-while-revalidate=3600");
     return res.status(200).send(ical);
