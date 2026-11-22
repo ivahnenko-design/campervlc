@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { ActaEditor } from "@/components/admin/ActaEditor";
 import { formFromParsed, GmailSetup, ImportsPanel, missingFields, YescapaPaste, type ImportDraft, type Parsed } from "@/components/admin/YescapaImport";
 import { LoginDialog } from "@/components/LoginDialog";
 import { loadAuth, logout as logoutAccount, openLogin, useAuth } from "@/lib/auth";
 import { vehicleByPlate } from "../../shared/vehicles.js";
 import {
   Check,
+  ClipboardCheck,
   Copy,
   FileText,
   Loader2,
@@ -294,6 +296,9 @@ function Admin() {
   const [imports, setImports] = useState<ImportDraft[]>([]);
   const [importSetup, setImportSetup] = useState<{ key: string; script: string } | null>(null);
   const [importId, setImportId] = useState<string | null>(null);
+  // Handover reports: "<contractId>-<kind>" -> draft | signed, and the one open full-screen.
+  const [actaStatus, setActaStatus] = useState<Record<string, "draft" | "signed">>({});
+  const [actaOpen, setActaOpen] = useState<{ contractId: string; kind: "checkin" | "checkout" } | null>(null);
 
   const storedToken = () => {
     try {
@@ -326,6 +331,32 @@ function Admin() {
       }),
     [token],
   );
+
+  // Same credentials, ?scope=acta (handover reports).
+  const actaApi = useCallback(
+    (path: string, init: RequestInit = {}) =>
+      fetch(`/api/contract?scope=acta${path ? `&${path}` : ""}`, {
+        ...init,
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { "x-admin-token": token } : {}),
+          ...(init.headers || {}),
+        },
+      }),
+    [token],
+  );
+
+  const loadActas = useCallback(async () => {
+    try {
+      const r = await actaApi("view=summary");
+      if (!r.ok) return;
+      const j = (await r.json()) as { actas: { contractId: string; kind: string; status: "draft" | "signed" }[] };
+      setActaStatus(Object.fromEntries(j.actas.map((a) => [`${a.contractId}-${a.kind}`, a.status])));
+    } catch {
+      /* the list works without it */
+    }
+  }, [actaApi]);
 
   useEffect(() => {
     void loadAuth();
@@ -393,6 +424,7 @@ function Admin() {
       }
       if (!c.ok) throw new Error();
       setRows(((await c.json()) as { contracts: Row[] }).contracts);
+      void loadActas();
       if (b.ok) setBookings(((await b.json()) as { bookings: Booking[] }).bookings);
       if (cal?.ok) setFeeds(((await cal.json()) as { feeds?: Feed[] }).feeds || []);
       if (imp.ok) {
@@ -408,7 +440,7 @@ function Admin() {
     } finally {
       setLoading(false);
     }
-  }, [api, me]);
+  }, [api, me, loadActas]);
 
   useEffect(() => {
     if (phase === "ready") void load();
@@ -754,6 +786,20 @@ function Admin() {
   }
 
   // ── main ──
+  if (actaOpen) {
+    return (
+      <ActaEditor
+        contractId={actaOpen.contractId}
+        kind={actaOpen.kind}
+        api={actaApi}
+        onClose={() => {
+          setActaOpen(null);
+          void loadActas();
+        }}
+      />
+    );
+  }
+
   return (
     <main className="mx-auto max-w-3xl bg-background px-4 pb-16 pt-6 text-foreground">
       <header className="flex items-center justify-between gap-2">
@@ -1073,6 +1119,29 @@ function Admin() {
                       {d ? "Скрыть" : r.status === "signed" ? "Данные клиента" : "История"}
                     </button>
                   </div>
+                  {r.status !== "cancelled" && (
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      {(["checkin", "checkout"] as const).map((kind) => {
+                        const st = actaStatus[`${r.id}-${kind}`];
+                        return (
+                          <button
+                            key={kind}
+                            onClick={() => setActaOpen({ contractId: r.id, kind })}
+                            className={`flex min-h-12 flex-col items-start justify-center rounded-xl border px-3 py-1.5 text-left text-sm ${
+                              st === "signed" ? "border-emerald-600/50 bg-emerald-600/5" : st === "draft" ? "border-amber-500/60 bg-amber-500/5" : "border-border"
+                            }`}
+                          >
+                            <span className="flex items-center gap-1.5 font-medium">
+                              <ClipboardCheck className="h-4 w-4" /> {kind === "checkin" ? "Акт выдачи" : "Акт возврата"}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {st === "signed" ? "подписан · PDF" : st === "draft" ? "черновик" : "нет"}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
 
                   {d === "loading" && <Loader2 className="mt-3 h-4 w-4 animate-spin" />}
                   {d && d !== "loading" && (
