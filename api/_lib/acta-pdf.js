@@ -244,7 +244,7 @@ export async function buildActaPdf({ acta, checkin = null, contract, vehicle, di
     row("Kilómetros recorridos", cmp.kmDriven != null ? `${cmp.kmDriven} km (${cmp.kmIn} -> ${cmp.kmOut})` : "-");
     row("Incluidos", cmp.kmIncluded == null ? "ilimitado" : `${cmp.kmIncluded} km (${cmp.nights} noches)`);
     row("Exceso", `${cmp.kmExtra} km`);
-    row("Combustible", `${fuelLabel(cmp.fuelIn)} -> ${fuelLabel(cmp.fuelOut)} (${cmp.fuelDiff == null ? "-" : `${cmp.fuelDiff > 0 ? "+" : ""}${cmp.fuelDiff}/8`})`);
+    row("Combustible", `${fuelLabel(cmp.fuelIn)} -> ${fuelLabel(cmp.fuelOut)} (${cmp.fuelDiff == null ? "-" : `${cmp.fuelDiff > 0 ? "+" : ""}${cmp.fuelDiff}/4`})`);
     row("Puntos no conformes", cmp.failedItems.map((key) => CHECKLIST.find((c) => c.key === key)?.es).join(", ") || "ninguno");
     row("Daños nuevos", cmp.newMarks.length ? String(cmp.newMarks.length) : "ninguno");
     row("Retraso", cmp.lateMinutes ? `${Math.floor(cmp.lateMinutes / 60)} h ${cmp.lateMinutes % 60} min` : "no");

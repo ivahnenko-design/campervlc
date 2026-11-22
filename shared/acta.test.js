@@ -14,13 +14,12 @@ import {
 
 const rental = { startDate: "2027-03-01", endDate: "2027-03-05", returnTime: "10:00", extras: [] };
 const okList = { freshWater: true, greyWater: true, cassette: true, interiorClean: true, keys: true };
-const checkin = { odometerKm: 50_000, fuel: 8, checklist: okList, marks: [{ id: "a", x: 0.2, y: 0.3, type: "scratch", note: "" }] };
+const checkin = { odometerKm: 50_000, fuel: 4, checklist: okList, marks: [{ id: "a", x: 0.2, y: 0.3, type: "scratch", note: "" }] };
 
-test("fuel label in eighths with the usual fractions", () => {
-  assert.equal(fuelLabel(8), "8/8 (lleno)");
-  assert.equal(fuelLabel(6), "6/8 (¾)");
-  assert.equal(fuelLabel(3), "3/8");
-  assert.equal(fuelLabel(4, "ru"), "4/8 (½)");
+test("fuel label in quarters (4-mark gauge)", () => {
+  assert.equal(fuelLabel(4), "4/4 (lleno)");
+  assert.equal(fuelLabel(3), "3/4 (¾)");
+  assert.equal(fuelLabel(2, "ru"), "2/4 (½)");
   assert.equal(fuelLabel(null), "-");
 });
 
@@ -36,7 +35,7 @@ test("km allowance: 100/night, 200/night option, unlimited", () => {
 });
 
 test("a clean return suggests nothing", () => {
-  const out = { odometerKm: 50_350, fuel: 8, checklist: okList, marks: [], datetime: "2027-03-05T10:10" };
+  const out = { odometerKm: 50_350, fuel: 4, checklist: okList, marks: [], datetime: "2027-03-05T10:10" };
   const cmp = compareActas(checkin, out, rental);
   assert.equal(cmp.kmDriven, 350);
   assert.equal(cmp.kmIncluded, 400);
@@ -52,7 +51,7 @@ test("a clean return suggests nothing", () => {
 test("extra km, fuel, waters and late return are priced from the tariffs", () => {
   const out = {
     odometerKm: 50_520, // 520 driven, 400 included -> 120 extra
-    fuel: 5, // 3 eighths missing
+    fuel: 1, // 3 quarters missing
     checklist: { ...okList, greyWater: false, cassette: false, freshWater: false },
     marks: [],
     datetime: "2027-03-05T12:20", // 2 h 20 late -> 3 h
@@ -73,7 +72,7 @@ test("extra km, fuel, waters and late return are priced from the tariffs", () =>
 });
 
 test("200 km option and unlimited change the allowance", () => {
-  const out = { odometerKm: 50_700, fuel: 8, checklist: okList, marks: [] };
+  const out = { odometerKm: 50_700, fuel: 4, checklist: okList, marks: [] };
   assert.equal(compareActas(checkin, out, { ...rental, extras: ["km_200"] }).kmExtra, 0);
   assert.equal(compareActas(checkin, out, { ...rental, extras: [] }).kmExtra, 300);
   assert.equal(compareActas(checkin, out, { ...rental, kmPlan: "unlimited" }).kmExtra, 0);
@@ -81,7 +80,7 @@ test("200 km option and unlimited change the allowance", () => {
 });
 
 test("real-cost items have no amount but carry the contract maximum", () => {
-  const out = { odometerKm: 50_100, fuel: 8, checklist: { ...okList, interiorClean: false, keys: false, kitchenware: false }, smell: true, marks: [] };
+  const out = { odometerKm: 50_100, fuel: 4, checklist: { ...okList, interiorClean: false, keys: false, kitchenware: false }, smell: true, marks: [] };
   const { items, open, total } = suggestedCharges(compareActas(checkin, out, rental));
   const by = Object.fromEntries(items.map((i) => [i.key, i]));
   assert.equal(by.cleaning.amount, null);
@@ -94,7 +93,7 @@ test("real-cost items have no amount but carry the contract maximum", () => {
 });
 
 test("pets without the option: 50 EUR; with the option: nothing", () => {
-  const out = { odometerKm: 50_100, fuel: 8, checklist: okList, marks: [], petsOnBoard: true };
+  const out = { odometerKm: 50_100, fuel: 4, checklist: okList, marks: [], petsOnBoard: true };
   assert.equal(suggestedCharges(compareActas(checkin, out, rental)).items[0]?.key, "pet");
   assert.deepEqual(suggestedCharges(compareActas(checkin, out, { ...rental, extras: ["pet"] })).items, []);
 });
@@ -106,7 +105,7 @@ test("new damage = check-out marks not repeating a check-in mark", () => {
     { id: "d", x: 0.7, y: 0.8, type: "scratch", note: "elsewhere" },
   ];
   assert.deepEqual(newDamageMarks(checkin.marks, marks).map((m) => m.id), ["c", "d"]);
-  const cmp = compareActas(checkin, { odometerKm: 50_001, fuel: 8, checklist: okList, marks }, rental);
+  const cmp = compareActas(checkin, { odometerKm: 50_001, fuel: 4, checklist: okList, marks }, rental);
   const dmg = suggestedCharges(cmp).items.find((i) => i.key === "damage");
   assert.equal(dmg.amount, null);
   assert.match(dmg.es, /Daños nuevos: 2/);
@@ -116,7 +115,7 @@ test("late return: grace, hourly rate and the 3-days-per-day cap", () => {
   assert.equal(wallMinutes("2027-03-05T10:00") + 60, wallMinutes("2027-03-05T11:00"));
   assert.equal(wallMinutes("nope"), null);
   const late = (datetime, dayRate) =>
-    suggestedCharges(compareActas(checkin, { odometerKm: 50_001, fuel: 8, checklist: okList, marks: [], datetime }, rental), { dayRate }).items.find((i) => i.key === "late");
+    suggestedCharges(compareActas(checkin, { odometerKm: 50_001, fuel: 4, checklist: okList, marks: [], datetime }, rental), { dayRate }).items.find((i) => i.key === "late");
   assert.equal(late("2027-03-05T10:15", 100), undefined); // within the grace
   assert.equal(late("2027-03-05T10:16", 100).amount, 50);
   assert.equal(late("2027-03-05T20:00", 200).amount, 500); // 10 h, under the cap of 3 x 200
@@ -125,7 +124,7 @@ test("late return: grace, hourly rate and the 3-days-per-day cap", () => {
 });
 
 test("no check-in: no km, fuel compared with a full tank", () => {
-  const cmp = compareActas(null, { odometerKm: 60_000, fuel: 6, checklist: {}, marks: [] }, rental);
+  const cmp = compareActas(null, { odometerKm: 60_000, fuel: 2, checklist: {}, marks: [] }, rental);
   assert.equal(cmp.kmDriven, null);
   assert.equal(cmp.kmExtra, 0);
   assert.equal(cmp.fuelDiff, -2);

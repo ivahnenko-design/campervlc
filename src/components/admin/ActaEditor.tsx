@@ -84,7 +84,7 @@ type Api = (path: string, init?: RequestInit) => Promise<Response>;
 // ── helpers ─────────────────────────────────────────────────────────────────
 
 const TITLE: Record<ActaKind, string> = { checkin: "Акт выдачи", checkout: "Акт возврата" };
-const FUEL = ["Пусто", "1/8", "¼", "3/8", "½", "5/8", "¾", "7/8", "Полный"];
+const FUEL = ["Пусто", "¼", "½", "¾", "Полный"];
 const KM_PLAN_LABEL: Record<KmPlan, string> = {
   "100": "100 км/сутки",
   "200": "200 км/сутки",
@@ -726,10 +726,10 @@ export function ActaEditor({
             />
           </label>
           <p className="mt-3 text-sm text-muted-foreground">
-            Топливо (восьмые)
-            {kind === "checkout" ? ` · при выдаче: ${fuelText(checkin?.fuel ?? 8)}` : ""}
+            Топливо (деления указателя)
+            {kind === "checkout" ? ` · при выдаче: ${fuelText(checkin?.fuel ?? 4)}` : ""}
           </p>
-          <div className="mt-1 grid grid-cols-5 gap-1.5 sm:grid-cols-9">
+          <div className="mt-1 grid grid-cols-5 gap-1.5">
             {FUEL.map((label, i) => (
               <button
                 key={i}
@@ -1085,7 +1085,7 @@ export function ActaEditor({
               <dd>
                 {fuelText(summary.cmp.fuelIn)} → {fuelText(summary.cmp.fuelOut)}
                 {summary.cmp.fuelDiff
-                  ? ` (${summary.cmp.fuelDiff > 0 ? "+" : ""}${summary.cmp.fuelDiff}/8)`
+                  ? ` (${summary.cmp.fuelDiff > 0 ? "+" : ""}${summary.cmp.fuelDiff}/4)`
                   : ""}
               </dd>
               <dt className="text-muted-foreground">Не в порядке</dt>

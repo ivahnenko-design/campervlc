@@ -42,7 +42,7 @@ export function newActa(contract, kind, { vehicleId, extras = [], staffEmail = n
     staffEmail,
     datetime: null, // wall-clock "YYYY-MM-DDTHH:mm" (Spain)
     odometerKm: null,
-    fuel: null, // eighths 0..8
+    fuel: null, // quarters 0..4 (the gauge has 4 marks)
     checklist: Object.fromEntries(CHECKLIST_KEYS.map((k) => [k, null])),
     smell: null,
     petsOnBoard: null,
@@ -98,7 +98,7 @@ export function validateActaPatch(input = {}) {
     if (v === null || v === "") out.fuel = null;
     else {
       const n = Number(v);
-      if (!Number.isInteger(n) || n < 0 || n > 8) throw new ContractError("fuel_invalid", "Fuel must be 0..8 eighths");
+      if (!Number.isInteger(n) || n < 0 || n > 4) throw new ContractError("fuel_invalid", "Fuel must be 0..4 quarters");
       out.fuel = n;
     }
   }

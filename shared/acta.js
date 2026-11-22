@@ -56,7 +56,7 @@ export const TARIFFS = {
   kmIncludedPerNight: 100,
   kmPlan200PerNight: 200,
   extraKm: 0.3, // € per km over the allowance
-  fuelPerEighth: 25, // € per missing mark ("raya") of the gauge
+  fuelPerMark: 25, // € per missing mark ("raya") of the gauge (4 marks: ¼ each)
   fuelService: 10, // € refuelling service
   greyWater: 20,
   cassette: 90,
@@ -72,14 +72,16 @@ export const TARIFFS = {
 };
 
 // ── fuel ────────────────────────────────────────────────────────────────────
-const FRACTION = { 0: "vacío", 2: "¼", 4: "½", 6: "¾", 8: "lleno" };
-const FRACTION_RU = { 0: "пусто", 2: "¼", 4: "½", 6: "¾", 8: "полный" };
+/** The fuel gauge of the campers has 4 marks: the level is stored as 0..4 quarters. */
+export const FUEL_MARKS = 4;
+const FRACTION = { 0: "vacío", 1: "¼", 2: "½", 3: "¾", 4: "lleno" };
+const FRACTION_RU = { 0: "пусто", 1: "¼", 2: "½", 3: "¾", 4: "полный" };
 
-/** 6 -> "6/8 (¾)", 8 -> "8/8 (lleno)", 3 -> "3/8". */
-export function fuelLabel(eighths, lang = "es") {
-  if (!Number.isInteger(eighths)) return "-";
-  const f = (lang === "ru" ? FRACTION_RU : FRACTION)[eighths];
-  return f ? `${eighths}/8 (${f})` : `${eighths}/8`;
+/** 3 -> "3/4 (¾)", 4 -> "4/4 (lleno)". */
+export function fuelLabel(marks, lang = "es") {
+  if (!Number.isInteger(marks)) return "-";
+  const f = (lang === "ru" ? FRACTION_RU : FRACTION)[marks];
+  return f ? `${marks}/${FUEL_MARKS} (${f})` : `${marks}/${FUEL_MARKS}`;
 }
 
 // ── mileage ────────────────────────────────────────────────────────────────
@@ -139,7 +141,7 @@ export function compareActas(checkin, checkout, rental = {}) {
   const kmExtra = kmDriven != null && included != null ? Math.max(0, kmDriven - included) : 0;
 
   // The camper is handed over full (3.7); without a check-in, full is the baseline.
-  const fuelIn = Number.isInteger(checkin?.fuel) ? checkin.fuel : 8;
+  const fuelIn = Number.isInteger(checkin?.fuel) ? checkin.fuel : FUEL_MARKS;
   const fuelOut = Number.isInteger(checkout?.fuel) ? checkout.fuel : null;
   const fuelDiff = fuelOut == null ? null : fuelOut - fuelIn;
 
@@ -195,7 +197,7 @@ export function suggestedCharges(cmp, { dayRate = null } = {}) {
   }
   if (cmp.fuelDiff != null && cmp.fuelDiff < 0) {
     const n = -cmp.fuelDiff;
-    add("fuel", `Combustible: faltan ${n}/8 × 25 € + 10 € de servicio`, `Топливо: не хватает ${n}/8 × 25 € + 10 € сервис`, n * T.fuelPerEighth + T.fuelService);
+    add("fuel", `Combustible: faltan ${n}/${FUEL_MARKS} × 25 € + 10 € de servicio`, `Топливо: не хватает ${n}/${FUEL_MARKS} × 25 € + 10 € сервис`, n * T.fuelPerMark + T.fuelService);
   }
   const failed = new Set(cmp.failedItems);
   if (failed.has("greyWater")) add("greyWater", "Aguas grises sin vaciar", "Серая вода не слита", T.greyWater);

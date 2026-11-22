@@ -60,9 +60,9 @@ function setup() {
 // ── validation ──────────────────────────────────────────────────────────────
 
 test("draft patch: partial, cleaned, out-of-range values refused", () => {
-  assert.deepEqual(validateActaPatch({ fuel: 6 }), { fuel: 6 });
+  assert.deepEqual(validateActaPatch({ fuel: 3 }), { fuel: 3 });
   assert.deepEqual(validateActaPatch({ odometerKm: "51234", fuel: "" }), { odometerKm: 51234, fuel: null });
-  assert.throws(() => validateActaPatch({ fuel: 9 }), /0..8/);
+  assert.throws(() => validateActaPatch({ fuel: 5 }), /0..4/);
   assert.throws(() => validateActaPatch({ odometerKm: -1 }), /Odometer/);
   assert.throws(() => validateActaPatch({ odometerKm: 1.5 }), /Odometer/);
   assert.throws(() => validateActaPatch({ datetime: "2027-03-01 25:00" }), /Date/);
@@ -88,7 +88,7 @@ test("signing needs km, fuel, time and both names; check-out km not below check-
   const a = newActa(CONTRACTS[0], "checkout", { vehicleId: "vlc-yearling", now: 1 });
   assert.equal(a.guestName, "Анна Smith");
   assert.throws(() => requireSignable(a), /Odometer/);
-  const ok = applyPatch(a, { odometerKm: 100, fuel: 8, datetime: "2027-03-05T10:00", staffName: "Sergii" });
+  const ok = applyPatch(a, { odometerKm: 100, fuel: 4, datetime: "2027-03-05T10:00", staffName: "Sergii" });
   assert.doesNotThrow(() => requireSignable(ok));
   assert.throws(() => requireSignable(ok, { checkin: { odometerKm: 200 } }), /lower/);
   assert.throws(() => requireSignable({ ...ok, staffName: "" }), /Staff/);
@@ -139,7 +139,7 @@ test("access: no login 401, guests 401, managers only their campers", async () =
 
 test("summary lists only the actas of visible campers", async () => {
   const { call } = setup();
-  await call("boss@example.com", "POST", { body: { action: "save", contractId: "aaaaaaaaaaaa", kind: "checkin", acta: { fuel: 8 } } });
+  await call("boss@example.com", "POST", { body: { action: "save", contractId: "aaaaaaaaaaaa", kind: "checkin", acta: { fuel: 4 } } });
   await call("partner@example.com", "POST", { body: { action: "save", contractId: "cccccccccccc", kind: "checkin", acta: { fuel: 4 } } });
   const boss = (await call("boss@example.com", "GET", { query: { view: "summary" } })).body.actas;
   const partner = (await call("partner@example.com", "GET", { query: { view: "summary" } })).body.actas;
@@ -150,7 +150,7 @@ test("summary lists only the actas of visible campers", async () => {
 
 test("a cancelled contract gets no new acta", async () => {
   const { call } = setup();
-  const r = await call("boss@example.com", "POST", { body: { action: "save", contractId: "dddddddddddd", kind: "checkin", acta: { fuel: 8 } } });
+  const r = await call("boss@example.com", "POST", { body: { action: "save", contractId: "dddddddddddd", kind: "checkin", acta: { fuel: 4 } } });
   assert.equal(r.code, 409);
 });
 
@@ -167,7 +167,7 @@ test("check-in: draft prefilled from the booking, photo, sign -> PDF + 2 emails,
   assert.equal(g.body.vehicle.diagram.path, "/images/acta/vlc-yearling.png");
 
   const s = await call("boss@example.com", "POST", {
-    body: { action: "save", contractId: "aaaaaaaaaaaa", kind: "checkin", acta: { odometerKm: 50000, fuel: 8, datetime: "2027-03-01T10:05", checklist: OK, marks: [{ id: "a", x: 0.3, y: 0.6, type: "scratch", note: "puerta" }] } },
+    body: { action: "save", contractId: "aaaaaaaaaaaa", kind: "checkin", acta: { odometerKm: 50000, fuel: 4, datetime: "2027-03-01T10:05", checklist: OK, marks: [{ id: "a", x: 0.3, y: 0.6, type: "scratch", note: "puerta" }] } },
   });
   assert.equal(s.code, 200);
   assert.equal(s.body.acta.kmPlan, "200");
@@ -220,7 +220,7 @@ test("check-in: draft prefilled from the booking, photo, sign -> PDF + 2 emails,
       action: "save",
       contractId: "aaaaaaaaaaaa",
       kind: "checkout",
-      acta: { odometerKm: 51200, fuel: 5, datetime: "2027-03-05T12:30", checklist: { ...OK, cassette: false }, marks: [{ id: "b", x: 0.7, y: 0.2, type: "dent", note: "parachoques" }], petsOnBoard: true, staffName: "Sergii" },
+      acta: { odometerKm: 51200, fuel: 2, datetime: "2027-03-05T12:30", checklist: { ...OK, cassette: false }, marks: [{ id: "b", x: 0.7, y: 0.2, type: "dent", note: "parachoques" }], petsOnBoard: true, staffName: "Sergii" },
     },
   });
   const low = await call("boss@example.com", "POST", { body: { action: "sign", contractId: "aaaaaaaaaaaa", kind: "checkout", acta: { odometerKm: 49000 }, staffSignature: pngUrl, guestSignature: pngUrl } });
