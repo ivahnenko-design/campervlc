@@ -21,6 +21,15 @@ export interface Vehicle {
   ownerKey: "owner" | "partner" | string;
   yescapaIcalEnv: string | null;
   contractPdfPath: string;
+  /** Outline drawing for damage marks in the handover report (acta); null = none yet. */
+  diagram: VehicleDiagram | null;
+}
+
+export interface VehicleDiagram {
+  /** Public path of the PNG, e.g. "/images/acta/vlc-yearling.png". */
+  path: string;
+  width: number;
+  height: number;
 }
 
 export const VEHICLES: Vehicle[];

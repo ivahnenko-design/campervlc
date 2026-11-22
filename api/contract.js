@@ -4,8 +4,10 @@
 //  - ?scope=promo  is a promo code valid? -> { pct } (the codes themselves never reach the browser)
 //  - ?scope=admin  staff (site account in ADMIN_EMAILS / MANAGER_EMAILS, see _lib/staff.js)
 //                  or the legacy x-admin-token header: contracts, bookings, Yescapa imports
+//  - ?scope=acta   staff too: handover reports at pickup / return (see _lib/acta-handlers.js)
 //  - otherwise     guest signing page /sign/:token: read, email code, sign
 import { contractHandlers } from "./_lib/contract-wire.js";
+import { actaHandler } from "./_lib/acta-wire.js";
 import { authHandler } from "./_lib/auth-wire.js";
 import { promoPctAt } from "../shared/promo-codes.js";
 import { createImportHandler } from "./_lib/yescapa-import.js";
@@ -22,6 +24,7 @@ export default function handler(req, res) {
   if (req.query?.scope === "auth") return authHandler(req, res);
   if (req.query?.scope === "promo") return promoHandler(req, res);
   if (req.query?.scope === "import") return importHandler(req, res);
+  if (req.query?.scope === "acta") return actaHandler(req, res);
   const isAdmin = req.query?.scope === "admin" || (req.headers && "x-admin-token" in req.headers);
   return isAdmin ? contractHandlers.admin(req, res) : contractHandlers.guest(req, res);
 }
