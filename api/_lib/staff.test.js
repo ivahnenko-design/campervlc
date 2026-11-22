@@ -25,7 +25,7 @@ const cookieFor = (email) =>
 
 test("staff roles come from ADMIN_EMAILS and MANAGER_EMAILS", () => {
   const cfg = staffConfig(ENV);
-  assert.deepEqual(cfg.admins, ["boss@example.com", "second@example.com"]);
+  assert.deepEqual(cfg.admins, ["boss@example.com", "second@example.com", "camper.retreat.alicante@gmail.com"]);
   assert.deepEqual(cfg.managers, [
     { email: "partner@example.com", vehicleIds: ["alc-partner"] },
     { email: "helper@example.com", vehicleIds: ["vlc-yearling", "alc-partner"] },
@@ -135,7 +135,7 @@ test("admin lists are filtered by the manager's campers", async () => {
   assert.equal((await call(boss, "GET", { view: "calendar" })).code, 200);
   const bossMe = await call(boss, "GET", { view: "me" });
   assert.equal(bossMe.body.role, "owner");
-  assert.deepEqual(bossMe.body.staff.admins, ["boss@example.com", "second@example.com"]);
+  assert.deepEqual(bossMe.body.staff.admins, ["boss@example.com", "second@example.com", "camper.retreat.alicante@gmail.com"]);
 
   // Legacy token: everything, as before.
   assert.equal((await call({ "x-admin-token": "tok" }, "GET")).body.contracts.length, 3);

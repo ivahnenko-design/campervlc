@@ -10,6 +10,9 @@ import { timingSafeEqual } from "node:crypto";
 import { VEHICLES, activeVehicles, getVehicle } from "../../shared/vehicles.js";
 import { normEmail, sessionFromRequest } from "./auth.js";
 
+/** Company mailbox: the default owner address in contract-email.js too. */
+export const COMPANY_EMAIL = "camper.retreat.alicante@gmail.com";
+
 const splitList = (v) =>
   String(v || "")
     .split(/[,\s]+/)
@@ -18,7 +21,16 @@ const splitList = (v) =>
 
 /** Parsed staff lists. Unknown vehicle ids are dropped (logged). */
 export function staffConfig(env = process.env) {
-  const admins = splitList(env.ADMIN_EMAILS);
+  // The company mailbox (where bookings and contracts already go) is always an admin,
+  // so the owner can log in before ADMIN_EMAILS is set in Vercel.
+  const admins = [
+    ...new Set([
+      ...splitList(env.ADMIN_EMAILS),
+      ...splitList(env.OWNER_EMAIL),
+      ...splitList(env.CONTRACT_OWNER_EMAIL),
+      COMPANY_EMAIL,
+    ]),
+  ];
   const managers = [];
   for (const entry of String(env.MANAGER_EMAILS || "").split(";")) {
     const i = entry.indexOf(":");
