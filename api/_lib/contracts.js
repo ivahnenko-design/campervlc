@@ -7,9 +7,10 @@ import { blobStore, list } from "./blob.js";
 import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
-// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v6.pdf.
-export const CONTRACT_VERSION = "2026-11-v6";
-export const CONTRACT_PDF_PATH = "/contracts/contrato-v6.pdf";
+// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v7.pdf
+// (v7: Spanish | English side by side; clause 17: the Spanish version prevails).
+export const CONTRACT_VERSION = "2026-11-v7";
+export const CONTRACT_PDF_PATH = "/contracts/contrato-v7.pdf";
 
 /** Blank contract of the camper (shared/vehicles.js contractPdfPath); vehicle 1: CONTRACT_PDF_PATH. */
 export function contractPdfPathOf(contract) {
@@ -246,7 +247,16 @@ export function validateSignData(input = {}) {
 
 // liabilityClauses (v5): the guest ticks, separately, the clauses that put towing,
 // impound, legal costs, ferry damage and downtime at their charge (5.5, 5.9, 7.4, 11.7).
-export const CONSENT_KEYS = ["readContract", "electronicSignature", "cardAuthorization", "liabilityClauses", "dataProtection"];
+// languageNotice (v7): the guest read the conditions in a language they understand
+// and knows that the Spanish version of the contract prevails (clause 17).
+export const CONSENT_KEYS = [
+  "readContract",
+  "electronicSignature",
+  "cardAuthorization",
+  "liabilityClauses",
+  "dataProtection",
+  "languageNotice",
+];
 
 export function requireConsents(input = {}) {
   for (const key of CONSENT_KEYS) {

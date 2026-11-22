@@ -48,6 +48,8 @@ const TEXT: Record<
     signHere: string;
     clear: string;
     consents: Record<string, string>;
+    /** Text of the link to /condiciones inside the languageNotice consent ({link}). */
+    conditionsLink: string;
     sendCode: string;
     codeSent: (hint: string) => string;
     codeLabel: string;
@@ -102,7 +104,10 @@ const TEXT: Record<
       liabilityClauses:
         "I accept that, if I or my drivers are responsible, I pay towing, the pound and recovery of the vehicle, the lawyers and legal costs, damage on ferries, and compensation for the days the camper cannot be rented while it is repaired (clauses 5.5, 5.9, 7.4 and 11.7).",
       dataProtection: "I have been informed about the processing of my personal data (clause 15).",
+      languageNotice:
+        "I have read the rental conditions in a language I understand ({link}) and I know that the Spanish version of the contract prevails (clause 17).",
     },
+    conditionsLink: "Conditions in your language",
     sendCode: "Send me the confirmation code",
     codeSent: (h) => `We sent a 6-digit code to ${h}.`,
     codeLabel: "Confirmation code",
@@ -168,7 +173,10 @@ const TEXT: Record<
       liabilityClauses:
         "Acepto que, si la causa es imputable a mí o a mis conductores, pago la grúa, el depósito y la recuperación del vehículo, los abogados y gastos judiciales, los daños en ferry y la indemnización por los días en que la autocaravana no pueda alquilarse mientras se repara (apdos. 5.5, 5.9, 7.4 y 11.7).",
       dataProtection: "He sido informado del tratamiento de mis datos personales (apdo. 15).",
+      languageNotice:
+        "He leído las condiciones del alquiler en un idioma que comprendo ({link}) y sé que prevalece la versión en español del contrato (apdo. 17).",
     },
+    conditionsLink: "Condiciones en tu idioma",
     sendCode: "Enviarme el código de confirmación",
     codeSent: (h) => `Hemos enviado un código de 6 dígitos a ${h}.`,
     codeLabel: "Código de confirmación",
@@ -234,7 +242,10 @@ const TEXT: Record<
       liabilityClauses:
         "Я согласен(на), что если виноват(а) я или мои водители, я оплачиваю эвакуатор, штрафстоянку и возврат автодома, адвокатов и судебные расходы, повреждения на пароме и компенсацию за дни, когда автодом нельзя сдавать, пока он в ремонте (пп. 5.5, 5.9, 7.4 и 11.7).",
       dataProtection: "Я ознакомлен(а) с обработкой персональных данных (п. 15).",
+      languageNotice:
+        "Я прочитал(а) условия аренды на понятном мне языке ({link}) и знаю, что приоритет имеет испанская версия договора (п. 17).",
     },
+    conditionsLink: "Условия на вашем языке",
     sendCode: "Отправить мне код подтверждения",
     codeSent: (h) => `Мы отправили 6-значный код на ${h}.`,
     codeLabel: "Код подтверждения",
@@ -299,7 +310,10 @@ const TEXT: Record<
       liabilityClauses:
         "Я погоджуюсь, що якщо винен(на) я або мої водії, я оплачую евакуатор, штрафмайданчик і повернення автобудинку, адвокатів і судові витрати, пошкодження на поромі та компенсацію за дні, коли автобудинок не можна здавати, поки він у ремонті (пп. 5.5, 5.9, 7.4 і 11.7).",
       dataProtection: "Я ознайомлений(а) з обробкою персональних даних (п. 15).",
+      languageNotice:
+        "Я прочитав(ла) умови оренди мовою, яку розумію ({link}), і знаю, що пріоритет має іспанська версія договору (п. 17).",
     },
+    conditionsLink: "Умови вашою мовою",
     sendCode: "Надіслати мені код підтвердження",
     codeSent: (h) => `Ми надіслали 6-значний код на ${h}.`,
     codeLabel: "Код підтвердження",
@@ -364,7 +378,10 @@ const TEXT: Record<
       liabilityClauses:
         "Ich akzeptiere: Wenn ich oder meine Fahrer verantwortlich sind, zahle ich Abschleppen, Verwahrstelle und Rückholung des Fahrzeugs, Anwälte und Gerichtskosten, Schäden auf Fähren sowie die Entschädigung für die Tage, an denen das Wohnmobil wegen der Reparatur nicht vermietet werden kann (Ziffern 5.5, 5.9, 7.4 und 11.7).",
       dataProtection: "Ich wurde über die Verarbeitung meiner personenbezogenen Daten informiert (Ziffer 15).",
+      languageNotice:
+        "Ich habe die Mietbedingungen in einer Sprache gelesen, die ich verstehe ({link}), und weiß, dass die spanische Fassung des Vertrags maßgeblich ist (Ziffer 17).",
     },
+    conditionsLink: "Bedingungen in deiner Sprache",
     sendCode: "Bestätigungscode senden",
     codeSent: (h) => `Wir haben einen 6-stelligen Code an ${h} gesendet.`,
     codeLabel: "Bestätigungscode",
@@ -430,7 +447,10 @@ const TEXT: Record<
       liabilityClauses:
         "Accetto che, se la responsabilità è mia o dei miei conducenti, pago carro attrezzi, deposito e recupero del veicolo, avvocati e spese legali, danni sui traghetti e l'indennizzo per i giorni in cui il camper non si può noleggiare perché in riparazione (clausole 5.5, 5.9, 7.4 e 11.7).",
       dataProtection: "Sono stato informato sul trattamento dei miei dati personali (clausola 15).",
+      languageNotice:
+        "Ho letto le condizioni di noleggio in una lingua che comprendo ({link}) e so che prevale la versione spagnola del contratto (clausola 17).",
     },
+    conditionsLink: "Condizioni nella tua lingua",
     sendCode: "Inviami il codice di conferma",
     codeSent: (h) => `Abbiamo inviato un codice di 6 cifre a ${h}.`,
     codeLabel: "Codice di conferma",
@@ -496,7 +516,10 @@ const TEXT: Record<
       liabilityClauses:
         "Ik aanvaard dat ik, als ik of mijn bestuurders verantwoordelijk zijn, betaal voor wegslepen, depot en ophalen van het voertuig, advocaten en proceskosten, schade op veerboten en de vergoeding voor de dagen dat de camper door reparatie niet verhuurd kan worden (artikelen 5.5, 5.9, 7.4 en 11.7).",
       dataProtection: "Ik ben geïnformeerd over de verwerking van mijn persoonsgegevens (artikel 15).",
+      languageNotice:
+        "Ik heb de huurvoorwaarden gelezen in een taal die ik begrijp ({link}) en ik weet dat de Spaanse versie van het contract prevaleert (artikel 17).",
     },
+    conditionsLink: "Voorwaarden in jouw taal",
     sendCode: "Stuur me de bevestigingscode",
     codeSent: (h) => `We hebben een code van 6 cijfers gestuurd naar ${h}.`,
     codeLabel: "Bevestigingscode",
@@ -611,6 +634,26 @@ function SignaturePad({
   );
 }
 
+// The languageNotice consent links to the published conditions in the guest's
+// language (the contract PDF itself is Spanish | English).
+function withConditionsLink(label: string, linkText: string, lang: Lang) {
+  const [before, after = ""] = label.split("{link}");
+  return (
+    <>
+      {before}
+      <a
+        href={`/condiciones?lang=${lang}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-2"
+      >
+        {linkText}
+      </a>
+      {after}
+    </>
+  );
+}
+
 const BASE_FIELDS = [
   "fullName",
   "docNumber",
@@ -641,7 +684,8 @@ function SignPage() {
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
-  const t = TEXT[pickLang(search.lang, contract?.language)];
+  const lang = pickLang(search.lang, contract?.language);
+  const t = TEXT[lang];
 
   useEffect(() => {
     fetch(`/api/contract?token=${encodeURIComponent(token)}`)
@@ -675,6 +719,7 @@ function SignPage() {
     "cardAuthorization",
     "liabilityClauses",
     "dataProtection",
+    "languageNotice",
   ].every((k) => consents[k]);
 
   async function askCode() {
@@ -844,7 +889,7 @@ function SignPage() {
               checked={!!consents[k]}
               onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
             />
-            <span>{label}</span>
+            <span>{k === "languageNotice" ? withConditionsLink(label, t.conditionsLink, lang) : label}</span>
           </label>
         ))}
       </section>

@@ -40,7 +40,7 @@ export const VEHICLES = [
     // Env var with the iCal export URL of this camper's Yescapa listing.
     yescapaIcalEnv: "YESCAPA_ICS_URL",
     // Blank rental contract (public/...) the guest signs for this camper.
-    contractPdfPath: "/contracts/contrato-v6.pdf",
+    contractPdfPath: "/contracts/contrato-v7.pdf",
   },
   {
     // Placeholder for the partner's camper, rented from Alicante. Fill in the
@@ -70,7 +70,7 @@ export const VEHICLES = [
     comingSoon: { from: "2026-12" },
     ownerKey: "partner",
     yescapaIcalEnv: "YESCAPA_ICS_URL_ALC",
-    contractPdfPath: "/contracts/contrato-v6.pdf",
+    contractPdfPath: "/contracts/contrato-v7.pdf",
   },
 ];
 

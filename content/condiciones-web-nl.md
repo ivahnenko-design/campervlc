@@ -273,6 +273,10 @@ De compensaties zijn cumuleerbaar tot een gezamenlijk maximum van 30 % van de da
 
 16.2. De in dit contract bedoelde mededelingen en onderbouwingen kunnen per e-mail worden gedaan aan het vermelde adres, dat de Huurder zich verbindt operationeel te houden gedurende het contract en tot 12 maanden na afloop daarvan.
 
+### 17. Taal
+
+17.1. Dit contract is opgesteld in het Spaans en het Engels. Bij verschillen of twijfel over de uitleg prevaleert de Spaanse versie. De Huurder verklaart deze voorwaarden te hebben kunnen lezen in een taal die hij begrijpt.
+
 ---
 
 Vragen over een van de voorwaarden? Stuur ons vóór het boeken een WhatsApp-bericht op +34 624 038 085.

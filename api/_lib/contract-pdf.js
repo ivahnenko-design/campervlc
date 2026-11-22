@@ -134,6 +134,10 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     { indent: 4 },
   );
   para("- Ha sido informado del tratamiento de sus datos personales (apdo. 15).", { indent: 4 });
+  para(
+    "- Ha podido leer las condiciones en un idioma que comprende y sabe que prevalece la version en espanol del contrato (apdo. 17).",
+    { indent: 4 },
+  );
   y -= 6;
   rule();
 

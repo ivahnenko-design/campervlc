@@ -273,6 +273,10 @@ The compensation amounts are cumulative, subject to a combined maximum of 30 % o
 
 16.2. The communications and supporting documentation provided for in this contract may be sent by e-mail to the address given, which the Lessee undertakes to keep operational during the contract and for up to 12 months after its end.
 
+### 17. Language
+
+17.1. This contract is drawn up in Spanish and English. In the event of any discrepancy or doubt as to interpretation, the Spanish version shall prevail. The Lessee declares that they have been able to read these conditions in a language they understand.
+
 ---
 
 Questions about any of the conditions? Message us on WhatsApp at +34 624 038 085 before booking.
