@@ -41,6 +41,8 @@ export const VEHICLES = [
     yescapaIcalEnv: "YESCAPA_ICS_URL",
     // Blank rental contract (public/...) the guest signs for this camper.
     contractPdfPath: "/contracts/contrato-v6.pdf",
+    // Outline drawing (public/...) the handover report marks damage on; null = a plain list.
+    diagram: { path: "/images/acta/vlc-yearling.png", width: 570, height: 710 },
   },
   {
     // Placeholder for the partner's camper, rented from Alicante. Fill in the
@@ -71,6 +73,7 @@ export const VEHICLES = [
     ownerKey: "partner",
     yescapaIcalEnv: "YESCAPA_ICS_URL_ALC",
     contractPdfPath: "/contracts/contrato-v6.pdf",
+    diagram: null,
   },
 ];
 
