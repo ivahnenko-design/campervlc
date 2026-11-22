@@ -1,5 +1,5 @@
-// Emails of the signing flow, sent through Resend. Guest emails come in es/en/ru/uk
-// (any other language falls back to English); the owner copy is Spanish.
+// Emails of the signing flow, sent through Resend. Guest emails come in
+// es/en/ru/uk/de/it/nl (any other language falls back to English); the owner copy is Spanish.
 import { postToResend, siteUrl } from "./email.js";
 import { vehicleLabel, vehicleOf } from "../../shared/vehicles.js";
 import { ownerRecipients } from "./vehicles.js";
@@ -55,6 +55,39 @@ const T = {
     signedSubject: "Ваш підписаний договір оренди",
     signedBody: (c) =>
       `<p>Вітаємо, ${esc(c.guestName)}!</p><p>Дякуємо. Договір оренди підписано, він доданий у PDF. Візьміть його в подорож разом з водійським посвідченням і документом, що посвідчує особу: поліція може попросити їх показати.</p><p>Camper Retreat VLC</p>`,
+  },
+  de: {
+    inviteSubject: "Unterschreibe deinen Mietvertrag für das Wohnmobil",
+    inviteBody: (c, link) =>
+      `<p>Hallo ${esc(c.guestName)},</p><p>Deine Miete des Wohnmobils von Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) ist bestätigt. Bitte lies und unterschreibe den Mietvertrag vor der Abholung online. Das dauert etwa 5 Minuten: Du trägst deine Daten und die Führerscheindaten ein, bestätigst mit einem Einmalcode, den du an diese E-Mail-Adresse bekommst, und unterschreibst mit dem Finger.</p><p><a href="${esc(link)}">Vertrag öffnen und unterschreiben</a></p><p>Der Link ist persönlich, bitte gib ihn nicht weiter. Fragen: Antworte einfach auf diese E-Mail oder schreib per WhatsApp an +34 624 038 085.</p>`,
+    codeSubject: (c) => `${c} ist dein Code zum Unterschreiben des Mietvertrags`,
+    codeBody: (code) =>
+      `<p>Dein Einmalcode zum Unterschreiben des Mietvertrags:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Er gilt 10 Minuten. Wenn du ihn nicht angefordert hast, ignoriere diese E-Mail.</p>`,
+    signedSubject: "Dein unterschriebener Mietvertrag",
+    signedBody: (c) =>
+      `<p>Hallo ${esc(c.guestName)},</p><p>Danke. Dein Mietvertrag ist unterschrieben und als PDF angehängt. Hab ihn während der Reise zusammen mit Führerschein und Ausweis dabei; die Polizei kann danach fragen.</p><p>Camper Retreat VLC</p>`,
+  },
+  it: {
+    inviteSubject: "Firma il contratto di noleggio del camper",
+    inviteBody: (c, link) =>
+      `<p>Ciao ${esc(c.guestName)},</p><p>Il noleggio del camper di Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) è confermato. Leggi e firma online il contratto di noleggio prima del ritiro. Bastano circa 5 minuti: inserisci i tuoi dati e quelli della patente, confermi con un codice monouso che ricevi a questa email e firmi con il dito.</p><p><a href="${esc(link)}">Apri il contratto e firma</a></p><p>Il link è personale, non condividerlo. Domande: rispondi a questa email o scrivici su WhatsApp al +34 624 038 085.</p>`,
+    codeSubject: (c) => `${c} è il tuo codice per firmare il contratto`,
+    codeBody: (code) =>
+      `<p>Il tuo codice monouso per firmare il contratto di noleggio:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Vale 10 minuti. Se non l'hai richiesto, ignora questa email.</p>`,
+    signedSubject: "Il tuo contratto di noleggio firmato",
+    signedBody: (c) =>
+      `<p>Ciao ${esc(c.guestName)},</p><p>Grazie. Il contratto di noleggio è firmato e lo trovi in allegato in PDF. Tienilo con te durante il viaggio insieme a patente e documento d'identità; la polizia può chiederlo.</p><p>Camper Retreat VLC</p>`,
+  },
+  nl: {
+    inviteSubject: "Onderteken je huurcontract voor de camper",
+    inviteBody: (c, link) =>
+      `<p>Hallo ${esc(c.guestName)},</p><p>Je huur van de camper van Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) is bevestigd. Lees en onderteken het huurcontract online vóór het ophalen. Het duurt ongeveer 5 minuten: je vult je gegevens en rijbewijsgegevens in, bevestigt met een eenmalige code die je op dit e-mailadres krijgt en ondertekent met je vinger.</p><p><a href="${esc(link)}">Contract openen en ondertekenen</a></p><p>De link is persoonlijk, deel hem niet. Vragen: beantwoord deze e-mail of stuur een WhatsApp naar +34 624 038 085.</p>`,
+    codeSubject: (c) => `${c} is je code om het huurcontract te ondertekenen`,
+    codeBody: (code) =>
+      `<p>Je eenmalige code om het huurcontract te ondertekenen:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Hij is 10 minuten geldig. Heb je hem niet aangevraagd, negeer dan deze e-mail.</p>`,
+    signedSubject: "Je ondertekende huurcontract",
+    signedBody: (c) =>
+      `<p>Hallo ${esc(c.guestName)},</p><p>Bedankt. Je huurcontract is ondertekend en als PDF bijgevoegd. Houd het tijdens de reis bij je, samen met je rijbewijs en identiteitsbewijs; de politie kan erom vragen.</p><p>Camper Retreat VLC</p>`,
   },
 };
 
