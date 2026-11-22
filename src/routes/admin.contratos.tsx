@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { formFromParsed, GmailSetup, ImportsPanel, missingFields, YescapaPaste, type ImportDraft, type Parsed } from "@/components/admin/YescapaImport";
+import { LoginDialog } from "@/components/LoginDialog";
+import { loadAuth, logout as logoutAccount, openLogin, useAuth } from "@/lib/auth";
+import { vehicleByPlate } from "../../shared/vehicles.js";
 import {
   Check,
   Copy,
@@ -30,6 +33,7 @@ type Status = "pending" | "signed" | "cancelled";
 
 interface Row {
   id: string;
+  vehicleId: string;
   status: Status;
   guestName: string;
   email: string;
@@ -61,6 +65,7 @@ interface Detail extends Row {
 
 interface Booking {
   id: string;
+  vehicleId: string;
   bookingRef: string;
   status: string;
   startDate: string;
@@ -82,7 +87,23 @@ interface Booking {
   paymentIntentId: string | null;
 }
 
-type Form = typeof EMPTY;
+type Form = typeof EMPTY & { vehicleId?: string };
+
+/** What the server says about the logged-in staff member (GET ?view=me). */
+interface Me {
+  role: "owner" | "manager";
+  email: string | null;
+  via: "token" | "session";
+  vehicles: { id: string; name: string; city: string; plate: string; label: string }[];
+  multiVehicle: boolean;
+  staff: null | { admins: string[]; managers: { email: string; vehicleIds: string[] }[]; token: boolean };
+}
+interface Feed {
+  id: string;
+  label: string;
+  city: string;
+  url: string | null;
+}
 
 // ── helpers ─────────────────────────────────────────────────────────────────
 
@@ -239,8 +260,13 @@ function LinkBox({
 // ── page ────────────────────────────────────────────────────────────────────
 
 function Admin() {
+  // Login: the site account (email code / Google / passkey) of a staff member;
+  // the old shared ADMIN_TOKEN still works as a fallback for the owner.
+  const auth = useAuth();
   const [token, setToken] = useState("");
-  const [authed, setAuthed] = useState(false);
+  const [phase, setPhase] = useState<"checking" | "login" | "noaccess" | "ready">("checking");
+  const [me, setMe] = useState<Me | null>(null);
+  const [showToken, setShowToken] = useState(false);
   const [remember, setRemember] = useState(true);
   const [tab, setTab] = useState<"contracts" | "bookings">("contracts");
   const [rows, setRows] = useState<Row[]>([]);
@@ -262,73 +288,113 @@ function Admin() {
   const [bFilter, setBFilter] = useState<"upcoming" | "past" | "cancelled">("upcoming");
   const [open, setOpen] = useState<Record<string, Detail | "loading">>({});
   // Private bookings feed for Yescapa / a calendar app (secret key in the URL).
-  const [calendarUrl, setCalendarUrl] = useState<string | null>(null);
+  const [feeds, setFeeds] = useState<Feed[]>([]);
   // Yescapa: screenshot/text import box, email drafts and the Gmail forwarder setup.
   const [showYescapa, setShowYescapa] = useState(false);
   const [imports, setImports] = useState<ImportDraft[]>([]);
   const [importSetup, setImportSetup] = useState<{ key: string; script: string } | null>(null);
   const [importId, setImportId] = useState<string | null>(null);
 
-  useEffect(() => {
+  const storedToken = () => {
     try {
-      const t = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
-      if (t) {
-        setToken(t);
-        setAuthed(true);
-      }
+      return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY) || "";
     } catch {
-      /* storage blocked */
+      return ""; /* storage blocked */
     }
-  }, []);
-
-  const api = useCallback(
-    (path: string, init: RequestInit = {}) =>
-      fetch(path, {
-        ...init,
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-token": token,
-          ...(init.headers || {}),
-        },
-      }),
-    [token],
-  );
-
-  const logout = useCallback(() => {
+  };
+  const forgetToken = () => {
     try {
       localStorage.removeItem(TOKEN_KEY);
       sessionStorage.removeItem(TOKEN_KEY);
     } catch {
       /* ignore */
     }
-    setAuthed(false);
+  };
+
+  // Every admin call: ?scope=admin + the session cookie (same origin), and the
+  // legacy token header only when one is saved on this device.
+  const api = useCallback(
+    (path: string, init: RequestInit = {}) =>
+      fetch(`/api/contract?scope=admin${path ? `&${path}` : ""}`, {
+        ...init,
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { "x-admin-token": token } : {}),
+          ...(init.headers || {}),
+        },
+      }),
+    [token],
+  );
+
+  useEffect(() => {
+    void loadAuth();
+    setToken(storedToken());
+  }, []);
+
+  /** Who am I for the admin: staff role and campers, or the login / no-access screen. */
+  const checkAccess = useCallback(async () => {
+    try {
+      const r = await api("view=me");
+      if (r.status === 503) {
+        setPhase("login");
+        return setNotice({ kind: "err", text: "Доступ в админку не настроен: задайте ADMIN_EMAILS (или ADMIN_TOKEN) в Vercel." });
+      }
+      if (r.status === 401) {
+        if (token) {
+          forgetToken();
+          setToken("");
+          setNotice({ kind: "err", text: "Сохранённый токен не подошёл. Войдите через аккаунт сайта." });
+          return;
+        }
+        setPhase(auth.user ? "noaccess" : "login");
+        return;
+      }
+      if (!r.ok) throw new Error();
+      setMe((await r.json()) as Me);
+      setPhase("ready");
+    } catch {
+      setPhase("login");
+      setNotice({ kind: "err", text: "Не удалось связаться с сервером. Обновите страницу." });
+    }
+  }, [api, token, auth.user]);
+
+  // Re-check when the session or the saved token changes (e.g. right after logging in).
+  useEffect(() => {
+    if (!auth.loaded) return;
+    void checkAccess();
+  }, [auth.loaded, auth.user, token, checkAccess]);
+
+  const logout = useCallback(() => {
+    forgetToken();
     setToken("");
+    setMe(null);
+    setPhase("login");
     setRows([]);
     setBookings([]);
-  }, []);
+    setImports([]);
+    setFeeds([]);
+    if (auth.user) void logoutAccount().catch(() => {});
+  }, [auth.user]);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const [c, b, cal, imp] = await Promise.all([
-        api("/api/contract"),
-        api("/api/contract?view=bookings"),
-        api("/api/contract?view=calendar"),
-        api("/api/contract?view=imports"),
+        api(""),
+        api("view=bookings"),
+        me?.role === "owner" ? api("view=calendar") : Promise.resolve(null),
+        api("view=imports"),
       ]);
       if (c.status === 401) {
-        logout();
-        setNotice({ kind: "err", text: "Неверный токен." });
-        return;
-      }
-      if (c.status === 503) {
-        setNotice({ kind: "err", text: "ADMIN_TOKEN не настроен в Vercel." });
+        setPhase("login");
+        setNotice({ kind: "err", text: "Сессия закончилась, войдите снова." });
         return;
       }
       if (!c.ok) throw new Error();
       setRows(((await c.json()) as { contracts: Row[] }).contracts);
       if (b.ok) setBookings(((await b.json()) as { bookings: Booking[] }).bookings);
-      if (cal.ok) setCalendarUrl(((await cal.json()) as { url: string | null }).url);
+      if (cal?.ok) setFeeds(((await cal.json()) as { feeds?: Feed[] }).feeds || []);
       if (imp.ok) {
         const j = (await imp.json()) as { imports: ImportDraft[]; setup: { key: string; script: string } | null };
         setImports(j.imports || []);
@@ -342,21 +408,30 @@ function Admin() {
     } finally {
       setLoading(false);
     }
-  }, [api, logout]);
+  }, [api, me]);
 
   useEffect(() => {
-    if (authed) void load();
-  }, [authed, load]);
+    if (phase === "ready") void load();
+  }, [phase, load]);
 
-  function login(e: React.FormEvent) {
+  function loginWithToken(e: React.FormEvent) {
     e.preventDefault();
+    const value = (e.currentTarget as HTMLFormElement).querySelector("input")?.value.trim() || "";
+    if (!value) return;
     try {
-      (remember ? localStorage : sessionStorage).setItem(TOKEN_KEY, token);
+      (remember ? localStorage : sessionStorage).setItem(TOKEN_KEY, value);
     } catch {
       /* ignore */
     }
-    setAuthed(true);
+    setNotice(null);
+    setToken(value);
   }
+
+  // ── campers ──
+  const myVehicles = me?.vehicles || [];
+  const showVehicle = !!me?.multiVehicle; // labels and the select only with several campers
+  const vehicleName = (id: string) => myVehicles.find((v) => v.id === id)?.label || id;
+  const defaultVehicleId = myVehicles[0]?.id;
 
   // ── contracts ──
   const counts = useMemo(() => {
@@ -401,9 +476,14 @@ function Admin() {
     setBusy(true);
     setNotice(null);
     try {
-      const r = await api("/api/contract", {
+      const r = await api("", {
         method: "POST",
-        body: JSON.stringify({ action: "create", ...form, ...(importId ? { importId } : {}) }),
+        body: JSON.stringify({
+          action: "create",
+          ...form,
+          vehicleId: form.vehicleId || defaultVehicleId,
+          ...(importId ? { importId } : {}),
+        }),
       });
       const j = (await r.json()) as {
         id?: string;
@@ -411,6 +491,7 @@ function Admin() {
         emailSent?: boolean;
         error?: string;
       };
+      if (r.status === 403) throw new Error("Нет доступа к этому автодому.");
       if (!r.ok || !j.link || !j.id) throw new Error(j.error || "Ошибка");
       setNewLink({
         id: j.id,
@@ -436,13 +517,21 @@ function Admin() {
     }
   }
 
-  function applyParsed(p: Parsed, fromImport: string | null) {
-    setForm(formFromParsed(p));
+  function applyParsed(p: Parsed, fromImport: string | null, draftVehicleId?: string | null) {
+    // The camper: from the email draft, else by the plate Yescapa shows ("Vehículo 1022MPG").
+    const byPlate = p.plate ? vehicleByPlate(p.plate)?.id : undefined;
+    const wanted = draftVehicleId || byPlate;
+    const mine = wanted && myVehicles.some((v) => v.id === wanted) ? wanted : defaultVehicleId;
+    setForm({ ...formFromParsed(p), vehicleId: mine });
     setImportId(fromImport);
     setShowYescapa(false);
     setTab("contracts");
     setShowForm(true);
     const miss = missingFields(p);
+    if (p.plate && wanted !== mine) {
+      setNotice({ kind: "err", text: `Номер ${p.plate} не совпадает с вашими автодомами. Проверьте автодом в форме.` });
+      return;
+    }
     setNotice(
       miss.length
         ? { kind: "err", text: `Проверьте форму: не нашёл ${miss.join(", ")}. Остальное заполнено.` }
@@ -451,12 +540,12 @@ function Admin() {
   }
 
   async function dismissImport(d: ImportDraft) {
-    await api("/api/contract", { method: "POST", body: JSON.stringify({ action: "import_dismiss", importId: d.id }) });
+    await api("", { method: "POST", body: JSON.stringify({ action: "import_dismiss", importId: d.id }) });
     setImports((xs) => xs.filter((x) => x.id !== d.id));
   }
 
   async function reissue(r: Row) {
-    const res = await api("/api/contract", {
+    const res = await api("", {
       method: "POST",
       body: JSON.stringify({ action: "resend", id: r.id }),
     });
@@ -475,7 +564,7 @@ function Admin() {
 
   async function cancel(r: Row) {
     if (!window.confirm(`Отменить договор для ${r.guestName}? Ссылка перестанет работать.`)) return;
-    const res = await api("/api/contract", {
+    const res = await api("", {
       method: "POST",
       body: JSON.stringify({ action: "cancel", id: r.id }),
     });
@@ -490,7 +579,7 @@ function Admin() {
       return;
     }
     setOpen((o) => ({ ...o, [id]: "loading" }));
-    const res = await api(`/api/contract?id=${id}&detail=1`);
+    const res = await api(`id=${id}&detail=1`);
     if (!res.ok) {
       setOpen(({ [id]: _, ...rest }) => rest);
       return setNotice({ kind: "err", text: "Не удалось открыть детали." });
@@ -501,7 +590,7 @@ function Admin() {
 
   async function pdf(id: string) {
     const win = window.open("", "_blank");
-    const res = await api(`/api/contract?id=${id}&pdf=1`);
+    const res = await api(`id=${id}&pdf=1`);
     if (!res.ok) {
       win?.close();
       return setNotice({ kind: "err", text: "PDF не найден." });
@@ -517,6 +606,7 @@ function Admin() {
       rows.find(
         (r) =>
           r.status !== "cancelled" &&
+          r.vehicleId === b.vehicleId &&
           ((b.bookingRef && r.bookingRef === b.bookingRef) ||
             (r.email === b.guestEmail.toLowerCase() && r.startDate === b.startDate)),
       ),
@@ -546,6 +636,7 @@ function Admin() {
       returnTime: b.returnTime || "10:00",
       priceTotal: String(b.totalWithIva ?? ""),
       bookingRef: b.bookingRef,
+      vehicleId: b.vehicleId,
     });
     setTab("contracts");
     setShowForm(true);
@@ -576,18 +667,20 @@ function Admin() {
     ) => {
       if (date >= today && date <= limit) items.push({ date, time, kind, name, signed });
     };
+    // With several campers, say which one (its city).
+    const where = (id: string) => (showVehicle ? ` · ${myVehicles.find((v) => v.id === id)?.city || id}` : "");
     for (const r of rows) {
       if (r.status === "cancelled") continue;
-      add(r.startDate, r.pickupTime, "Выдача", r.guestName, r.status === "signed");
-      add(r.endDate, r.returnTime, "Возврат", r.guestName, null);
+      add(r.startDate, r.pickupTime, "Выдача", r.guestName + where(r.vehicleId), r.status === "signed");
+      add(r.endDate, r.returnTime, "Возврат", r.guestName + where(r.vehicleId), null);
     }
     for (const b of bookings) {
       if (b.status === "cancelled" || contractFor(b)) continue;
-      add(b.startDate, b.pickupTime || "", "Выдача", `${b.guestName} (сайт)`, false);
-      add(b.endDate, b.returnTime || "", "Возврат", `${b.guestName} (сайт)`, null);
+      add(b.startDate, b.pickupTime || "", "Выдача", `${b.guestName} (сайт)${where(b.vehicleId)}`, false);
+      add(b.endDate, b.returnTime || "", "Возврат", `${b.guestName} (сайт)${where(b.vehicleId)}`, null);
     }
     return items.sort((a, b) => (a.date + a.time < b.date + b.time ? -1 : 1)).slice(0, 6);
-  }, [rows, bookings, contractFor]);
+  }, [rows, bookings, contractFor, showVehicle, myVehicles]);
 
   const field = (
     k: keyof Form,
@@ -607,34 +700,55 @@ function Admin() {
     </label>
   );
 
-  // ── login screen ──
-  if (!authed) {
+  // ── login screens ──
+  if (phase !== "ready") {
     return (
       <main className="mx-auto max-w-sm bg-background px-4 py-16 text-foreground">
         <h1 className="font-display text-2xl">Админка</h1>
         <p className="mt-1 text-sm text-muted-foreground">Camper Retreat VLC</p>
-        <form onSubmit={login}>
-          <input
-            className={`${inputCls} mt-5`}
-            type="password"
-            placeholder="Токен (ADMIN_TOKEN)"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-            autoComplete="current-password"
-          />
-          <label className="mt-3 flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-            />{" "}
-            Запомнить на этом устройстве
-          </label>
-          <button disabled={!token} className={`${btnPrimary} mt-4 w-full`}>
-            Войти
-          </button>
-        </form>
+        {phase === "checking" && <Loader2 className="mt-6 h-5 w-5 animate-spin text-muted-foreground" />}
+        {phase === "noaccess" && (
+          <div className="mt-6 rounded-xl border border-border p-4 text-sm">
+            <p>
+              У аккаунта <strong>{auth.user?.email}</strong> нет доступа к админке.
+            </p>
+            <p className="mt-2 text-muted-foreground">
+              Попросите владельца добавить этот e-mail в ADMIN_EMAILS или MANAGER_EMAILS, либо войдите другим
+              аккаунтом.
+            </p>
+            <button className={`${btn} mt-4`} onClick={logout}>
+              <LogOut className="h-4 w-4" /> Выйти
+            </button>
+          </div>
+        )}
+        {phase === "login" && (
+          <>
+            <button className={`${btnPrimary} mt-6 w-full`} onClick={() => openLogin()}>
+              Войти через аккаунт сайта
+            </button>
+            <p className="mt-2 text-xs text-muted-foreground">Код на e-mail, Google или ключ доступа (passkey).</p>
+            <button className="mt-6 text-xs text-muted-foreground underline" onClick={() => setShowToken((v) => !v)}>
+              Войти по токену (старый способ)
+            </button>
+            {showToken && (
+              <form onSubmit={loginWithToken}>
+                <input
+                  className={`${inputCls} mt-3`}
+                  type="password"
+                  placeholder="Токен (ADMIN_TOKEN)"
+                  autoComplete="current-password"
+                />
+                <label className="mt-3 flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> Запомнить
+                  на этом устройстве
+                </label>
+                <button className={`${btnPrimary} mt-4 w-full`}>Войти</button>
+              </form>
+            )}
+          </>
+        )}
         {notice && <p className="mt-3 text-sm text-destructive">{notice.text}</p>}
+        <LoginDialog />
       </main>
     );
   }
@@ -643,7 +757,14 @@ function Admin() {
   return (
     <main className="mx-auto max-w-3xl bg-background px-4 pb-16 pt-6 text-foreground">
       <header className="flex items-center justify-between gap-2">
-        <h1 className="font-display text-2xl">Админка</h1>
+        <div>
+          <h1 className="font-display text-2xl">Админка</h1>
+          {me?.email && (
+            <p className="text-xs text-muted-foreground">
+              {me.email} · {me.role === "owner" ? "владелец" : `менеджер: ${myVehicles.map((v) => v.city).join(", ") || "—"}`}
+            </p>
+          )}
+        </div>
         <div className="flex gap-2">
           <button
             className={btn}
@@ -682,29 +803,57 @@ function Admin() {
         </div>
       )}
 
-      {calendarUrl && (
+      {feeds.length > 0 && (
         <details className="mt-4 rounded-xl border border-border p-3 text-sm">
           <summary className="cursor-pointer font-semibold">Календарь броней сайта (для Yescapa)</summary>
           <p className="mt-2 text-muted-foreground">
             Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона. Никому
             больше не передавайте — по ней видны даты всех броней.
+            {feeds.length > 1 ? " У каждого автодома своя ссылка: вставьте её в объявление этого автодома." : ""}
           </p>
-          <div className="mt-2 flex gap-2">
-            <input readOnly value={calendarUrl} className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs" onFocus={(e) => e.currentTarget.select()} />
-            <button
-              className={btn}
-              onClick={() => {
-                void navigator.clipboard?.writeText(calendarUrl);
-                setNotice({ kind: "ok", text: "Ссылка на календарь скопирована." });
-              }}
-            >
-              Копировать
-            </button>
-          </div>
+          {feeds.map((f) =>
+            f.url ? (
+              <div key={f.id} className="mt-2">
+                {feeds.length > 1 && <p className="mb-1 text-xs text-muted-foreground">{f.label}</p>}
+                <div className="flex gap-2">
+                  <input readOnly value={f.url} className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs" onFocus={(e) => e.currentTarget.select()} />
+                  <button
+                    className={btn}
+                    onClick={() => {
+                      void navigator.clipboard?.writeText(f.url || "");
+                      setNotice({ kind: "ok", text: "Ссылка на календарь скопирована." });
+                    }}
+                  >
+                    Копировать
+                  </button>
+                </div>
+              </div>
+            ) : null,
+          )}
         </details>
       )}
 
-      <ImportsPanel imports={imports} onUse={(d) => applyParsed(d.parsed, d.id)} onDismiss={(d) => void dismissImport(d)} />
+      {me?.staff && (
+        <details className="mt-4 rounded-xl border border-border p-3 text-sm">
+          <summary className="cursor-pointer font-semibold">Доступ к админке</summary>
+          <p className="mt-2 text-muted-foreground">Только для просмотра. Меняется в Vercel: ADMIN_EMAILS и MANAGER_EMAILS.</p>
+          <ul className="mt-2 space-y-1">
+            {me.staff.admins.map((e) => (
+              <li key={`a-${e}`}>
+                {e} · <span className="text-muted-foreground">владелец, всё</span>
+              </li>
+            ))}
+            {me.staff.managers.map((m) => (
+              <li key={`m-${m.email}`}>
+                {m.email} · <span className="text-muted-foreground">менеджер: {m.vehicleIds.map(vehicleName).join(", ")}</span>
+              </li>
+            ))}
+            {me.staff.token && <li className="text-muted-foreground">+ общий токен ADMIN_TOKEN (полный доступ)</li>}
+          </ul>
+        </details>
+      )}
+
+      <ImportsPanel imports={imports} onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)} onDismiss={(d) => void dismissImport(d)} />
       <GmailSetup setup={importSetup} onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })} />
 
       {upcoming.length > 0 && (
@@ -773,6 +922,22 @@ function Admin() {
                 </button>
               </div>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {myVehicles.length > 1 && (
+                  <label className="block text-sm sm:col-span-2">
+                    <span className="mb-1 block text-muted-foreground">Автодом *</span>
+                    <select
+                      className={inputCls}
+                      value={form.vehicleId || defaultVehicleId}
+                      onChange={(e) => setForm({ ...form, vehicleId: e.target.value })}
+                    >
+                      {myVehicles.map((v) => (
+                        <option key={v.id} value={v.id}>
+                          {v.city} · {v.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
                 {field("guestName", "Имя клиента *")}
                 {field("email", "E-mail клиента *", "email", { inputMode: "email" })}
                 {field("phone", "Телефон (для WhatsApp)", "tel", {
@@ -872,6 +1037,7 @@ function Admin() {
                     <Badge status={r.status} />
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
+                    {showVehicle ? `${vehicleName(r.vehicleId)} · ` : ""}
                     {SOURCE_LABEL[r.source] || r.source}
                     {r.bookingRef ? ` · ${r.bookingRef}` : ""} · {r.language.toUpperCase()} ·{" "}
                     {r.email}
@@ -982,6 +1148,7 @@ function Admin() {
                     </div>
                     <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">
                       {b.bookingRef}
+                      {showVehicle ? ` · ${vehicleName(b.vehicleId)}` : ""}
                     </span>
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
