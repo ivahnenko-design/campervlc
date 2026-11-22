@@ -1,6 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
+import { DEFAULT_VEHICLE_ID, getVehicle } from "../../shared/vehicles.js";
 
-const ICAL_URL = process.env.YESCAPA_ICS_URL || "https://www.yescapa.es/ical/xSqLp9AFgxkt4tuxKhsOkVE_dUttqO8l-4__qnei4Ki3kkmlB7plh-YL29aXUxqO/export/";
+const DEFAULT_ICAL_URL = "https://www.yescapa.es/ical/xSqLp9AFgxkt4tuxKhsOkVE_dUttqO8l-4__qnei4Ki3kkmlB7plh-YL29aXUxqO/export/";
+
+/** iCal URL of the camper's Yescapa listing (same rules as api/_lib/vehicles.js yescapaFeedUrl). */
+function icalUrl(vehicleId: string): string | null {
+  const v = getVehicle(vehicleId);
+  if (!v) return null;
+  const own = v.yescapaIcalEnv ? process.env[v.yescapaIcalEnv] : undefined;
+  if (own) return own;
+  if (v.id === DEFAULT_VEHICLE_ID) return process.env.YESCAPA_ICS_URL || process.env.YESCAPA_ICAL_URL || DEFAULT_ICAL_URL;
+  return null;
+}
 
 function toIsoDay(yyyymmdd: string): string {
   // "20260704" -> "2026-07-04"
@@ -73,10 +84,16 @@ function parseIcs(text: string): string[] {
   return Array.from(dates).sort();
 }
 
-export const fetchYescapaBookedDates = createServerFn({ method: "GET" }).handler(
-  async (): Promise<{ dates: string[]; error?: string }> => {
+export const fetchYescapaBookedDates = createServerFn({ method: "GET" })
+  .validator((input: { vehicleId?: string } | undefined) => ({
+    vehicleId: typeof input?.vehicleId === "string" && getVehicle(input.vehicleId) ? input.vehicleId : DEFAULT_VEHICLE_ID,
+  }))
+  .handler(
+  async ({ data: input }): Promise<{ dates: string[]; error?: string }> => {
+    const url = icalUrl(input.vehicleId);
+    if (!url) return { dates: [], error: "feed not configured" };
     try {
-      const res = await fetch(ICAL_URL, {
+      const res = await fetch(url, {
         headers: { Accept: "text/calendar, text/plain, */*" },
       });
       if (!res.ok) {

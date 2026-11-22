@@ -135,7 +135,10 @@
       "guestsValue": "tot 5",
       "equipment": "Bekijk uitrusting",
       "photos": "{{n}} foto's"
-    }
+    },
+    "city_choose": "Waar wil je de camper ophalen?",
+    "subtitle_multi": "Elke camper haal je op in zijn eigen stad. Kies eerst de stad en bekijk dan de vrije data van die camper.",
+    "title_multi": "Onze campers"
   },
   "how": {
     "title": "Zo werkt het",
