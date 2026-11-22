@@ -880,8 +880,16 @@ function MonthGrid({
   for (let d = 1; d <= end.getDate(); d++)
     days.push(new Date(start.getFullYear(), start.getMonth(), d));
 
-  const monthLabel = month.toLocaleDateString(locale, { month: "long", year: "numeric" });
-  const dayLabels = ["L", "M", "X", "J", "V", "S", "D"];
+  // "Ноябрь 2026", "November 2026" (no "г." after the year), first letter upper-case.
+  const monthName = month.toLocaleDateString(locale, { month: "long" });
+  const monthLabel = `${monthName.charAt(0).toUpperCase()}${monthName.slice(1)} ${month.getFullYear()}`;
+  // Monday-first two-letter weekdays in the page language, as in the season calendar
+  // (2024-01-01 was a Monday): "Пн Вт…", "Mo Di…", "Lu Ma…".
+  const wd = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" });
+  const dayLabels = Array.from({ length: 7 }, (_, i) => {
+    const t = wd.format(new Date(Date.UTC(2024, 0, 1 + i))).replace(".", "");
+    return t.charAt(0).toUpperCase() + t.slice(1, 2);
+  });
 
   const inRange = (d: Date) => {
     if (range.start && range.end)
@@ -891,12 +899,12 @@ function MonthGrid({
 
   return (
     <div>
-      <div className="mb-3 text-center font-display text-lg text-foreground capitalize">
+      <div className="mb-3 text-center font-display text-lg text-foreground">
         {monthLabel}
       </div>
       <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
-        {dayLabels.map((l) => (
-          <div key={l} className="py-1">
+        {dayLabels.map((l, i) => (
+          <div key={i} className="py-1">
             {l}
           </div>
         ))}
