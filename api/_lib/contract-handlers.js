@@ -119,7 +119,7 @@ export function createContractHandlers({
   provider, // { invite(contract, token) }
   sendCode, // (contract, code) => Promise
   sendSigned, // (contract, pdfBytes) => Promise
-  loadBasePdf, // () => Promise<Uint8Array>
+  loadBasePdf, // (contract) => Promise<Uint8Array>, the blank contract of its camper
   listBookings = async () => [], // site bookings, for the admin list
   onSigned = async () => {}, // (signedContract) => Promise, after the PDF is stored
   imports = null, // Yescapa email drafts: { list, get, save }
@@ -256,7 +256,7 @@ export function createContractHandlers({
           const status = checked.reason === "too_many_attempts" ? 429 : 400;
           throw new ContractError(checked.reason, `Code check failed: ${checked.reason}`, status);
         }
-        const basePdfBytes = await loadBasePdf();
+        const basePdfBytes = await loadBasePdf(found.contract);
         const basePdfHash = sha256(basePdfBytes);
         const signatureHash = sha256(signaturePng);
         const ip = firstIp(req);

@@ -2,6 +2,7 @@
 // screenshot of the booking page, the page text copied with Cmd+A / Cmd+C,
 // or the body of a Yescapa notification email. Pure function, shared by the
 // admin page (browser) and the email import endpoint (server).
+import { VEHICLES, normalizePlate } from "./vehicles.js";
 
 const MONTHS = {
   enero: 1, febrero: 2, marzo: 3, abril: 4, mayo: 5, junio: 6, julio: 7, agosto: 8,
@@ -62,10 +63,35 @@ function money(s) {
   return Number.isFinite(n) ? n : null;
 }
 
+const PLATE_LABEL = /(?:veh[íi]culo|vehicle|v[ée]hicule|fahrzeug|veicolo|voertuig|matr[íi]cula|plate|immatriculation|kennzeichen)\s*:?\s*([^\n]{0,40})/gi;
+
+/**
+ * Number plate of the booked camper ("Vehículo 1022MPG" on Yescapa). OCR may
+ * split it ("1022 MPG"), add a dash or read a 0 as O. Returns "1022MPG" or undefined.
+ */
+export function findPlate(text) {
+  for (const m of String(text || "").matchAll(PLATE_LABEL)) {
+    const tail = m[1];
+    // Spanish plate: 4 digits + 3 letters.
+    const es = tail.match(/(?:^|[^0-9A-Za-z])([0-9OoIl]{4})\s*-?\s*([A-Za-z]{3})(?![0-9A-Za-z])/);
+    if (es && /\d/.test(es[1])) {
+      return es[1].replace(/[Oo]/g, "0").replace(/[Il]/g, "1") + es[2].toUpperCase();
+    }
+    // Anything else: the first token with digits and letters (5-8 characters).
+    for (const tok of tail.split(/\s{2,}|[,;|]/)) {
+      const p = normalizePlate(tok.split(/\s+/).slice(0, 2).join(""));
+      if (p.length >= 5 && p.length <= 8 && /\d/.test(p) && /[A-Z]/.test(p)) return p;
+    }
+  }
+  // No label (a different page layout): a known plate anywhere in the text.
+  const flat = normalizePlate(text);
+  return VEHICLES.find((v) => v.plate && flat.includes(normalizePlate(v.plate)))?.plate;
+}
+
 /**
  * @returns {{guestName?:string,email?:string,phone?:string,startDate?:string,endDate?:string,
  *   pickupTime?:string,returnTime?:string,travellers?:number,payout?:number,total?:number,
- *   yescapaRef?:string,language?:string,found:string[]}}
+ *   yescapaRef?:string,language?:string,plate?:string,found:string[]}}
  */
 export function parseYescapaBooking(raw) {
   const text = String(raw || "").replace(/\r/g, "").replace(/[ \t ]+/g, " ");
@@ -118,6 +144,8 @@ export function parseYescapaBooking(raw) {
 
   // The avatar initial sits on the same line in screenshots: "S Saul Jara".
   if (r.guestName) r.guestName = r.guestName.replace(/^\p{Lu}\s+(?=\p{Lu})/u, "");
+
+  r.plate = findPlate(text);
 
   if (r.phone) {
     const hit = PHONE_LANG.find(([p]) => r.phone.replace(/\s/g, "").startsWith(p));

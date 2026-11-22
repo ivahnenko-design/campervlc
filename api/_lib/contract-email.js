@@ -1,6 +1,8 @@
 // Emails of the signing flow, sent through Resend. Guest emails come in es/en/ru/uk
 // (any other language falls back to English); the owner copy is Spanish.
 import { postToResend, siteUrl } from "./email.js";
+import { vehicleLabel, vehicleOf } from "../../shared/vehicles.js";
+import { ownerRecipients } from "./vehicles.js";
 
 const FROM = "Camper Retreat VLC <info@campervlc.com>";
 const REPLY_TO = "info@campervlc.com";
@@ -58,6 +60,8 @@ const T = {
 
 const tr = (lang) => T[lang] || T.en;
 const OWNER = () => process.env.CONTRACT_OWNER_EMAIL || "camper.retreat.alicante@gmail.com";
+/** Owner of the contract's camper (vehicle 1: the company owner, as before). */
+const ownerOf = (contract) => ownerRecipients(vehicleOf(contract), OWNER())[0] || OWNER();
 
 export const signingLink = (token, lang) =>
   `${siteUrl()}/sign/${encodeURIComponent(token)}${lang ? `?lang=${encodeURIComponent(lang)}` : ""}`;
@@ -91,24 +95,33 @@ export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
     send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.signedSubject, html: t.signedBody(contract), attachments: [attachment] }),
     send({
       from: FROM,
-      to: OWNER(),
+      to: ownerOf(contract),
       subject: `Contrato firmado: ${contract.guestName} (${contract.startDate} → ${contract.endDate})`,
-      html: `<p>Contrato ${esc(contract.id)} firmado por ${esc(contract.guestName)} (${esc(contract.email)}). Fuente: ${esc(contract.source)}. PDF adjunto.</p>`,
+      html: `<p>Contrato ${esc(contract.id)} firmado por ${esc(contract.guestName)} (${esc(contract.email)}). Fuente: ${esc(contract.source)}. Vehículo: ${esc(vehicleLabel(vehicleOf(contract)))}. PDF adjunto.</p>`,
       attachments: [attachment],
     }),
   ]);
   return results.map((r) => r.status);
 }
 
-/** Owner: pickups in the next 2 days whose contract is still unsigned. */
+/** Owner: pickups in the next 2 days whose contract is still unsigned. One email per camper owner. */
 export async function sendUnsignedSoonEmail(rows, deps = {}) {
+  const byOwner = new Map();
+  for (const c of rows) {
+    const to = ownerOf(c);
+    byOwner.set(to, [...(byOwner.get(to) || []), c]);
+  }
+  for (const [to, list] of byOwner) await sendUnsignedSoonTo(to, list, deps);
+}
+
+async function sendUnsignedSoonTo(to, rows, deps) {
   const send = deps.send || postToResend;
   const items = rows
     .map((c) => `<li><strong>${esc(c.startDate)} ${esc(c.pickupTime || "")}</strong> · ${esc(c.guestName)} · ${esc(c.email)}${c.phone ? ` · ${esc(c.phone)}` : ""}${c.bookingRef ? ` · ${esc(c.bookingRef)}` : ""}</li>`)
     .join("");
   await send({
     from: FROM,
-    to: OWNER(),
+    to,
     subject: `Contratos sin firmar: ${rows.length} recogida(s) en los próximos 2 días`,
     html: `<p>Estos clientes recogen la autocaravana pronto y todavía no han firmado el contrato:</p><ul>${items}</ul><p>Puedes reenviar el enlace o copiarlo para WhatsApp en ${esc(siteUrl())}/admin/contratos.</p>`,
   });

@@ -4,11 +4,17 @@
 // in contract-handlers.js so this file can be tested without network.
 import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
 import { blobStore, list } from "./blob.js";
+import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
 // Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v6.pdf.
 export const CONTRACT_VERSION = "2026-11-v6";
 export const CONTRACT_PDF_PATH = "/contracts/contrato-v6.pdf";
+
+/** Blank contract of the camper (shared/vehicles.js contractPdfPath); vehicle 1: CONTRACT_PDF_PATH. */
+export function contractPdfPathOf(contract) {
+  return getVehicle(vehicleOf(contract))?.contractPdfPath || CONTRACT_PDF_PATH;
+}
 
 export const OTP_TTL_MS = 10 * 60_000;
 export const OTP_RESEND_MS = 60_000;
@@ -58,12 +64,16 @@ export function validateInvite(input = {}) {
   const returnTime = input.returnTime ? clean(input.returnTime, 5) : "10:00";
   if (!HHMM.test(pickupTime) || !HHMM.test(returnTime)) throw new ContractError("times_invalid");
   const source = SOURCES.includes(input.source) ? input.source : "other";
+  // Which camper: none given = vehicle 1 (old admin pages, old bookings).
+  const vehicleId = input.vehicleId == null || input.vehicleId === "" ? DEFAULT_VEHICLE_ID : input.vehicleId;
+  if (!isActiveVehicleId(vehicleId)) throw new ContractError("vehicle_invalid");
   const language = LANGS.includes(input.language) ? input.language : "en";
   const priceTotal = input.priceTotal === "" || input.priceTotal == null ? null : Number(input.priceTotal);
   if (priceTotal !== null && (!Number.isFinite(priceTotal) || priceTotal < 0 || priceTotal > 100000)) {
     throw new ContractError("price_invalid");
   }
   return {
+    vehicleId,
     guestName,
     email,
     phone: clean(input.phone, 40),
@@ -147,8 +157,15 @@ export function publicView(contract) {
     source: contract.source,
     bookingRef: contract.bookingRef,
     emailHint: contract.email.replace(/^(.).*(@.*)$/, "$1***$2"),
-    pdfPath: CONTRACT_PDF_PATH,
+    pdfPath: contractPdfPathOf(contract),
+    vehicle: vehicleView(contract),
   };
+}
+
+/** The camper as the guest and the PDF see it. */
+export function vehicleView(contract) {
+  const v = getVehicle(vehicleOf(contract));
+  return { id: v.id, name: v.name, plate: v.plateDisplay, city: v.city.es };
 }
 
 // ── one-time code by email ──────────────────────────────────────────────────

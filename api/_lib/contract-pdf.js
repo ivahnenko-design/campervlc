@@ -4,6 +4,7 @@
 // text is transliterated for the PDF; the original Unicode data stays in the
 // JSON record.
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { vehicleView } from "./contracts.js";
 
 const CYR = {
   а: "a", б: "b", в: "v", г: "g", ґ: "g", д: "d", е: "e", є: "ye", ё: "e", ж: "zh", з: "z", и: "i", і: "i", ї: "yi",
@@ -115,6 +116,8 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   rule();
 
   text("Alquiler", { size: 10.5, f: bold });
+  const vehicle = vehicleView(contract);
+  row("Vehiculo", [vehicle.name, vehicle.plate && `matricula ${vehicle.plate}`].filter(Boolean).join(" - "));
   row("Entrega", `${contract.startDate} ${contract.pickupTime}`);
   row("Devolucion", `${contract.endDate} ${contract.returnTime}`);
   row("Precio total (IVA incl.)", contract.priceTotal != null ? `${contract.priceTotal} EUR` : "segun reserva");
