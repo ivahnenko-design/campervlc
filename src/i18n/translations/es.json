@@ -138,7 +138,22 @@
     },
     "city_choose": "¿Dónde quieres recoger la autocaravana?",
     "subtitle_multi": "Cada autocaravana se recoge en su ciudad. Elige primero la ciudad y luego mira las fechas libres de esa autocaravana.",
-    "title_multi": "Nuestras autocaravanas"
+    "title_multi": "Nuestras autocaravanas",
+    "soon": {
+      "eyebrow": "Próximamente · Alicante",
+      "title": "Knaus Boxlife 600 DQ",
+      "text": "Nuestra segunda camper, nueva, para 4 personas, con recogida en Alicante. Empezamos a alquilarla a mediados de diciembre de 2026.",
+      "chips": [
+        "4 plazas para viajar y 4 para dormir",
+        "5,99 m de largo · 2,82 m de alto",
+        "Calefacción diésel Truma",
+        "Nevera de compresor de 84 l",
+        "Baño con ducha y WC",
+        "Cámara de marcha atrás y toldo"
+      ],
+      "cta": "Quiero reservarla de las primeras",
+      "wa": "Hola. Me interesa la Knaus Boxlife 600 DQ en Alicante. Avisadme cuando se pueda reservar."
+    }
   },
   "how": {
     "title": "Cómo Funciona",

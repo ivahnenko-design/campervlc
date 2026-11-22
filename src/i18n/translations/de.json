@@ -138,7 +138,22 @@
     },
     "city_choose": "Wo möchtest du das Wohnmobil abholen?",
     "subtitle_multi": "Jedes Wohnmobil wird in seiner eigenen Stadt abgeholt. Wähle zuerst die Stadt, dann die freien Termine dieses Wohnmobils.",
-    "title_multi": "Unsere Wohnmobile"
+    "title_multi": "Unsere Wohnmobile",
+    "soon": {
+      "eyebrow": "Bald · Alicante",
+      "title": "Knaus Boxlife 600 DQ",
+      "text": "Unser zweiter Campervan, neu, für 4 Personen, Übergabe in Alicante. Vermietung ab Mitte Dezember 2026.",
+      "chips": [
+        "4 Sitz- und 4 Schlafplätze",
+        "5,99 m lang · 2,82 m hoch",
+        "Truma-Dieselheizung",
+        "84-l-Kompressorkühlschrank",
+        "Bad mit Dusche und WC",
+        "Rückfahrkamera und Markise"
+      ],
+      "cta": "Ich möchte zu den Ersten gehören",
+      "wa": "Hallo! Ich interessiere mich für den Knaus Boxlife 600 DQ in Alicante. Bitte sagt mir Bescheid, sobald man ihn buchen kann."
+    }
   },
   "how": {
     "title": "So funktioniert es",

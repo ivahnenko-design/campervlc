@@ -138,7 +138,22 @@
     },
     "city_choose": "Where do you want to pick up the camper?",
     "subtitle_multi": "Each camper is picked up in its own city. Choose the city first, then check that camper's free dates.",
-    "title_multi": "Our campers"
+    "title_multi": "Our campers",
+    "soon": {
+      "eyebrow": "Coming soon · Alicante",
+      "title": "Knaus Boxlife 600 DQ",
+      "text": "Our second camper van, brand new, for 4 people, with pick-up in Alicante. Rentals start in mid-December 2026.",
+      "chips": [
+        "4 travel seats and 4 berths",
+        "5.99 m long · 2.82 m high",
+        "Truma diesel heating",
+        "84 l compressor fridge",
+        "Bathroom with shower and WC",
+        "Reversing camera and awning"
+      ],
+      "cta": "I want to be among the first to book",
+      "wa": "Hi! I'm interested in the Knaus Boxlife 600 DQ in Alicante. Please let me know when it can be booked."
+    }
   },
   "how": {
     "title": "How It Works",

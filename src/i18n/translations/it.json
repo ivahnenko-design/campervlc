@@ -138,7 +138,22 @@
     },
     "city_choose": "Dove vuoi ritirare il camper?",
     "subtitle_multi": "Ogni camper si ritira nella sua città. Scegli prima la città, poi guarda le date libere di quel camper.",
-    "title_multi": "I nostri camper"
+    "title_multi": "I nostri camper",
+    "soon": {
+      "eyebrow": "Prossimamente · Alicante",
+      "title": "Knaus Boxlife 600 DQ",
+      "text": "Il nostro secondo camper van, nuovo, per 4 persone, con ritiro ad Alicante. Lo noleggiamo da metà dicembre 2026.",
+      "chips": [
+        "4 posti viaggio e 4 posti letto",
+        "5,99 m di lunghezza · 2,82 m di altezza",
+        "Riscaldamento diesel Truma",
+        "Frigo a compressore da 84 l",
+        "Bagno con doccia e WC",
+        "Retrocamera e tendalino"
+      ],
+      "cta": "Voglio prenotarlo tra i primi",
+      "wa": "Ciao! Mi interessa il Knaus Boxlife 600 DQ ad Alicante. Avvisatemi quando sarà prenotabile."
+    }
   },
   "how": {
     "title": "Come funziona",

@@ -4,6 +4,7 @@
 export type Lang = "es" | "en" | "de" | "it" | "nl" | "ru" | "uk";
 
 export interface Vehicle {
+  comingSoon?: { from: string };
   id: string;
   active: boolean;
   city: Record<Lang, string> & { slug: string };
@@ -36,3 +37,5 @@ export function vehicleByPlate(plate: unknown): Vehicle | null;
 export function vehicleByCity(slug: unknown): Vehicle | null;
 export function cityName(vehicle: Vehicle | string, lang?: string): string;
 export function vehicleLabel(vehicle: Vehicle | string): string;
+
+export function comingSoonVehicles(): Vehicle[];

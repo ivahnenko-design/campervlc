@@ -138,7 +138,22 @@
     },
     "city_choose": "Waar wil je de camper ophalen?",
     "subtitle_multi": "Elke camper haal je op in zijn eigen stad. Kies eerst de stad en bekijk dan de vrije data van die camper.",
-    "title_multi": "Onze campers"
+    "title_multi": "Onze campers",
+    "soon": {
+      "eyebrow": "Binnenkort · Alicante",
+      "title": "Knaus Boxlife 600 DQ",
+      "text": "Onze tweede buscamper, nieuw, voor 4 personen, ophalen in Alicante. Verhuur vanaf half december 2026.",
+      "chips": [
+        "4 zit- en 4 slaapplaatsen",
+        "5,99 m lang · 2,82 m hoog",
+        "Truma-dieselverwarming",
+        "Compressorkoelkast van 84 l",
+        "Badkamer met douche en wc",
+        "Achteruitrijcamera en luifel"
+      ],
+      "cta": "Ik wil hem als een van de eersten boeken",
+      "wa": "Hallo! Ik heb interesse in de Knaus Boxlife 600 DQ in Alicante. Laat het me weten zodra hij te boeken is."
+    }
   },
   "how": {
     "title": "Zo werkt het",

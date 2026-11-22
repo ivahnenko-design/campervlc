@@ -62,10 +62,12 @@ export const VEHICLES = [
     coords: { lat: 38.3452, lng: -0.481 },
     plate: "",
     plateDisplay: "",
-    brand: "",
-    model: "",
-    name: "",
-    capacity: 0,
+    brand: "Knaus",
+    model: "Boxlife 600 DQ Platinum Selection",
+    name: "Knaus Boxlife 600 DQ",
+    capacity: 4,
+    // Announced on the home page ("coming soon") while not bookable yet.
+    comingSoon: { from: "2026-12" },
     ownerKey: "partner",
     yescapaIcalEnv: "YESCAPA_ICS_URL_ALC",
     contractPdfPath: "/contracts/contrato-v6.pdf",
@@ -82,6 +84,11 @@ const byId = new Map(VEHICLES.map((v) => [v.id, v]));
 
 export function getVehicle(id) {
   return byId.get(id) || null;
+}
+
+/** Announced campers: not bookable yet, shown as "coming soon". */
+export function comingSoonVehicles() {
+  return VEHICLES.filter((v) => !v.active && v.comingSoon);
 }
 
 export function activeVehicles() {

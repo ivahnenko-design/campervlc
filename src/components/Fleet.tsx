@@ -10,6 +10,8 @@ import { type Camper } from "@/data/fleet";
 import { MULTI_CAMPER, useChosenCamper } from "@/lib/vehicle-choice";
 import { CitySwitch } from "./CitySwitch";
 import { Lightbox } from "./Lightbox";
+import { buildWhatsAppLink } from "@/lib/constants";
+import { comingSoonVehicles } from "../../shared/vehicles.js";
 
 export function Fleet() {
   const { t } = useTranslation();
@@ -24,6 +26,7 @@ export function Fleet() {
         {/* Several campers: the guest picks the city first (same choice as the booking calendar). */}
         <CitySwitch className="mt-8" />
         <Showcase key={camper.id} camper={camper} onDetails={() => setOpen(camper)} onPhoto={setGalleryAt} />
+        <ComingSoon />
       </div>
 
       {open && <SpecModal camper={open} onClose={() => setOpen(null)} />}
@@ -251,5 +254,35 @@ export function SectionHeader({ title, subtitle, eyebrow }: { title: string; sub
       <h2 className="font-display text-3xl sm:text-5xl text-foreground text-balance">{title}</h2>
       {subtitle && <p className="mt-3 text-base text-muted-foreground">{subtitle}</p>}
     </motion.div>
+  );
+}
+
+/** Announced camper that can't be booked yet: specs and a WhatsApp "tell me first". */
+function ComingSoon() {
+  const { t } = useTranslation();
+  if (!comingSoonVehicles().length) return null;
+  const chips = t("fleet.soon.chips", { returnObjects: true }) as string[];
+  return (
+    <section className="mt-12 overflow-hidden rounded-3xl border border-primary/40 bg-gradient-to-br from-primary/15 via-surface to-surface p-6 sm:p-10">
+      <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{t("fleet.soon.eyebrow")}</div>
+      <h3 className="font-display mt-2 text-3xl text-foreground sm:text-4xl">{t("fleet.soon.title")}</h3>
+      <p className="mt-3 max-w-2xl text-muted-foreground">{t("fleet.soon.text")}</p>
+      <ul className="mt-5 flex flex-wrap gap-2 text-sm text-foreground/90">
+        {Array.isArray(chips) &&
+          chips.map((c) => (
+            <li key={c} className="rounded-full border border-border/60 bg-background/50 px-3 py-1">
+              {c}
+            </li>
+          ))}
+      </ul>
+      <a
+        href={buildWhatsAppLink(t("fleet.soon.wa"))}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground glow-amber"
+      >
+        {t("fleet.soon.cta")}
+      </a>
+    </section>
   );
 }
