@@ -2,7 +2,6 @@
 // a contract for a booking, e.g. from Yescapa, resend the link, download the
 // signed PDF) and the guest endpoint behind /sign/:token (read, email code, sign).
 // Dependencies are injected so tests run without Blob, Resend or the network.
-import { timingSafeEqual } from "node:crypto";
 import {
   ContractError,
   checkOtp,
@@ -22,6 +21,8 @@ import { buildSignedPdf } from "./contract-pdf.js";
 import { signingLink } from "./contract-email.js";
 import { calendarFeedUrl } from "./calendar-key.js";
 import { siteUrl } from "./email.js";
+import { adminAccess, adminConfigured, canSee, staffConfig, staffVehicles, visibleTo } from "./staff.js";
+import { activeVehicles, vehicleLabel, vehicleOf } from "../../shared/vehicles.js";
 
 function reply(res, status, body) {
   return res.status(status).json(body);
@@ -36,16 +37,17 @@ function fail(res, err) {
   return reply(res, 500, { error: "Internal error", code: "internal" });
 }
 
-function adminOk(req, adminToken) {
-  if (!adminToken) return false;
-  const given = Buffer.from(String(req.headers?.["x-admin-token"] || ""));
-  const want = Buffer.from(adminToken);
-  return given.length === want.length && timingSafeEqual(given, want);
-}
+const forbidden = (res) => reply(res, 403, { error: "Not your camper", code: "forbidden" });
+
+/** Yescapa drafts: the camper found by plate, or null (company owner decides). */
+const draftVehicle = (d) => (typeof d.vehicleId === "string" ? d.vehicleId : null);
+
+const vehicleRow = (v) => ({ id: v.id, name: v.name, city: v.city.es, plate: v.plateDisplay, label: vehicleLabel(v) });
 
 function adminRow(c) {
   return {
     id: c.id,
+    vehicleId: vehicleOf(c),
     status: c.status,
     guestName: c.guestName,
     email: c.email,
@@ -89,6 +91,7 @@ function adminDetail(c) {
 function bookingRow(b) {
   return {
     id: b.id,
+    vehicleId: vehicleOf(b),
     bookingRef: b.bookingRef || "",
     status: b.status,
     createdAt: b.createdAt || null,
@@ -125,47 +128,81 @@ export function createContractHandlers({
   imports = null, // Yescapa email drafts: { list, get, save }
   importSetup = () => null, // () => { key, script } for the Gmail forwarder
   adminToken,
+  sessionSecret = null, // guest-session key: staff log in with their site account
+  env = process.env, // ADMIN_EMAILS / MANAGER_EMAILS
   secret,
   now = () => Date.now(),
 }) {
   async function admin(req, res) {
-    if (!adminToken) return reply(res, 503, { error: "ADMIN_TOKEN is not configured", code: "admin_disabled" });
-    if (!adminOk(req, adminToken)) return reply(res, 401, { error: "Unauthorized", code: "unauthorized" });
+    res.setHeader?.("Cache-Control", "no-store");
+    if (!adminConfigured(adminToken, env)) return reply(res, 503, { error: "No admin access is configured", code: "admin_disabled" });
+    const staff = adminAccess(req, { adminToken, sessionSecret, env, now: now() });
+    if (!staff) return reply(res, 401, { error: "Unauthorized", code: "unauthorized" });
+    const owner = staff.role === "owner";
+    // Cookie-authenticated changes must come from our own page (JSON fetch), not a cross-site form.
+    if (staff.via === "session" && req.method === "POST" && !/application\/json/i.test(String(req.headers?.["content-type"] || ""))) {
+      return reply(res, 415, { error: "JSON only", code: "bad_content_type" });
+    }
     try {
       if (req.method === "GET") {
         const id = typeof req.query?.id === "string" ? req.query.id : null;
+        if (req.query?.view === "me") {
+          const cfg = owner ? staffConfig(env) : null;
+          return reply(res, 200, {
+            role: staff.role,
+            email: staff.email,
+            via: staff.via,
+            vehicles: staffVehicles(staff).map(vehicleRow),
+            multiVehicle: activeVehicles().length > 1,
+            // Owner only: who has access, straight from the environment.
+            staff: cfg ? { admins: cfg.admins, managers: cfg.managers, token: !!adminToken } : null,
+          });
+        }
         if (req.query?.view === "calendar") {
-          return reply(res, 200, { url: calendarFeedUrl(siteUrl()) });
+          if (!owner) return forbidden(res);
+          const feeds = activeVehicles().map((v) => ({ ...vehicleRow(v), url: calendarFeedUrl(siteUrl(), process.env, v.id) }));
+          return reply(res, 200, { url: feeds[0]?.url || null, feeds });
         }
         if (req.query?.view === "imports") {
-          const drafts = imports ? (await imports.list()).filter((d) => d.status === "new") : [];
-          return reply(res, 200, { imports: drafts, setup: importSetup() });
+          const drafts = imports ? visibleTo(staff, (await imports.list()).filter((d) => d.status === "new"), draftVehicle) : [];
+          return reply(res, 200, { imports: drafts, setup: owner ? importSetup() : null });
         }
         if (req.query?.view === "bookings") {
-          const rows = (await listBookings()).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
+          const rows = visibleTo(staff, await listBookings(), vehicleOf).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
           return reply(res, 200, { bookings: rows });
         }
         if (id && req.query?.detail) {
           const found = await store.get(id);
           if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
+          if (!canSee(staff, vehicleOf(found.contract))) return forbidden(res);
           return reply(res, 200, { contract: adminDetail(found.contract) });
         }
         if (id && req.query?.pdf) {
           const found = await store.get(id);
+          if (found && !canSee(staff, vehicleOf(found.contract))) return forbidden(res);
           const pdf = found ? await store.getPdf(found.contract) : null;
           if (!pdf) return reply(res, 404, { error: "No signed PDF", code: "not_found" });
           res.setHeader("Content-Type", "application/pdf");
           res.setHeader("Content-Disposition", `attachment; filename="contrato-${id}.pdf"`);
           return res.status(200).send(pdf);
         }
-        return reply(res, 200, { contracts: (await store.list()).map(adminRow) });
+        return reply(res, 200, { contracts: visibleTo(staff, await store.list(), vehicleOf).map(adminRow) });
       }
       if (req.method !== "POST") return reply(res, 405, { error: "Method not allowed" });
 
       const body = req.body || {};
       const action = body.action || "create";
       if (action === "create") {
-        const { contract, token } = createContract(body, { now: now(), provider: provider.name });
+        // A manager works with his campers only; without a choice, his first one.
+        const vehicleId = body.vehicleId || (owner ? undefined : staffVehicles(staff)[0]?.id);
+        if (vehicleId && !canSee(staff, vehicleId)) return forbidden(res);
+        if (!vehicleId && !owner) return forbidden(res);
+        let draft = null;
+        if (imports && typeof body.importId === "string" && body.importId) {
+          draft = await imports.get(body.importId).catch(() => null);
+          if (draft && !canSee(staff, draftVehicle(draft.draft))) return forbidden(res);
+        }
+        const { contract, token } = createContract({ ...body, vehicleId }, { now: now(), provider: provider.name });
         await store.save(contract);
         const link = signingLink(token, contract.language);
         let emailSent = true;
@@ -175,21 +212,22 @@ export function createContractHandlers({
           emailSent = false;
           console.error("invite email failed:", err.message);
         }
-        if (imports && typeof body.importId === "string" && body.importId) {
-          const d = await imports.get(body.importId).catch(() => null);
-          if (d) await imports.save({ ...d.draft, status: "done", contractId: contract.id }, { etag: d.etag }).catch(() => {});
+        if (draft) {
+          await imports.save({ ...draft.draft, status: "done", contractId: contract.id }, { etag: draft.etag }).catch(() => {});
         }
         return reply(res, 201, { id: contract.id, link, emailSent });
       }
       if (action === "import_dismiss") {
         const d = imports ? await imports.get(String(body.importId || "")) : null;
         if (!d) return reply(res, 404, { error: "Not found", code: "not_found" });
+        if (!canSee(staff, draftVehicle(d.draft))) return forbidden(res);
         await imports.save({ ...d.draft, status: "dismissed" }, { etag: d.etag });
         return reply(res, 200, { ok: true });
       }
       if (action === "resend" || action === "cancel") {
         const found = await store.get(String(body.id || ""));
         if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
+        if (!canSee(staff, vehicleOf(found.contract))) return forbidden(res);
         if (action === "cancel") {
           if (found.contract.status !== "pending") throw new ContractError("not_pending", "Only a pending contract can be cancelled", 409);
           const cancelled = { ...found.contract, status: "cancelled", audit: [...found.contract.audit, { t: now(), ev: "cancelled" }] };

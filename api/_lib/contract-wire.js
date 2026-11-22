@@ -55,5 +55,6 @@ export const contractHandlers = createContractHandlers({
     return key ? { key, script: gmailScript(`${siteUrl()}/api/contract?scope=import`, key) } : null;
   },
   adminToken: process.env.ADMIN_TOKEN,
+  sessionSecret: authSecret(),
   secret: process.env.CONTRACT_SECRET || process.env.ADMIN_TOKEN,
 });
