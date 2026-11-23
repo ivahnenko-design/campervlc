@@ -8,9 +8,10 @@ import { EXTRAS, PRICES, longStayDiscountPct, withIva } from "@/utils/pricing";
 
 export const SLOGAN = "Rent. Retreat. Repeat.";
 
-type Stop = { name: string; lat: number; lng: number; side?: "l" | "r" };
+/** dy: vertical label nudge in map px, for stops that sit almost on top of each other. */
+type Stop = { name: string; lat: number; lng: number; side?: "l" | "r"; dy?: number };
 type HeroRoute = {
-  id: "r1" | "r2" | "r3" | "r4" | "r5";
+  id: "r1" | "r2" | "r3" | "r4" | "r5" | "r6" | "r7" | "r8";
   slug: string;
   /** Nights used for the "whole trip from" price; null = no fixed trip (festivals). */
   nights: number | null;
@@ -71,6 +72,44 @@ const ROUTES: HeroRoute[] = [
       { name: "Málaga", lat: 36.72, lng: -4.42 },
       { name: "Cabo de Gata", lat: 36.72, lng: -2.19 },
       { name: "Cartagena", lat: 37.6, lng: -0.99 },
+    ],
+  },
+  {
+    id: "r8", slug: "costa-cantabrica", nights: 6, path: true, photo: "/images/routes/costa-cantabrica-hero-map.jpg",
+    // Castro Urdiales, Liencres and Llanes sit too close to these at this zoom to label legibly.
+    stops: [
+      { name: "Bilbao", lat: 43.26, lng: -2.93, side: "r", dy: 4 },
+      { name: "Gaztelugatxe", lat: 43.45, lng: -2.78, side: "r", dy: -8 },
+      { name: "Santander", lat: 43.46, lng: -3.81, side: "l" },
+      { name: "Cabezón de la Sal", lat: 43.31, lng: -4.24, side: "l", dy: 6 },
+      { name: "Oviedo", lat: 43.36, lng: -5.84, side: "l" },
+    ],
+  },
+  {
+    id: "r6", slug: "portugal-norte", nights: 10, path: true, photo: "/images/routes/portugal-norte-hero-map.jpg",
+    stops: [
+      { name: "Salamanca", lat: 40.97, lng: -5.66 },
+      { name: "Douro (Pinhão)", lat: 41.19, lng: -7.55 },
+      { name: "Porto", lat: 41.15, lng: -8.61, side: "l" },
+      { name: "Aveiro", lat: 40.64, lng: -8.65, side: "l" },
+      { name: "Nazaré", lat: 39.6, lng: -9.07, side: "l" },
+      { name: "Sintra", lat: 38.8, lng: -9.39, side: "l", dy: -7 },
+      { name: "Lisboa", lat: 38.72, lng: -9.14, side: "l", dy: 9 },
+      { name: "Évora", lat: 38.57, lng: -7.91 },
+      { name: "Mérida", lat: 38.92, lng: -6.34 },
+    ],
+  },
+  {
+    id: "r7", slug: "portugal-sur", nights: 7, path: true, photo: "/images/routes/portugal-sur-hero-map.jpg",
+    photoCredit: "Tobi 87 · CC BY-SA 3.0",
+    stops: [
+      { name: "Córdoba", lat: 37.88, lng: -4.78 },
+      { name: "Sevilla", lat: 37.39, lng: -5.98 },
+      { name: "Tavira", lat: 37.13, lng: -7.65, side: "r", dy: -16 },
+      { name: "Benagil", lat: 37.09, lng: -8.43, side: "r", dy: 16 },
+      { name: "Lagos", lat: 37.1, lng: -8.67, side: "r", dy: -16 },
+      { name: "Sagres", lat: 37.01, lng: -8.94, side: "l" },
+      { name: "Évora", lat: 38.57, lng: -7.91 },
     ],
   },
   {
@@ -258,7 +297,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
       <g className="fill-muted-foreground" fontSize="11" fontFamily="var(--font-mono)" opacity="0.8">
         {grid.labels.map((l) => <text key={l.t} x={l.x} y={l.y}>{l.t}</text>)}
       </g>
-      {route.id !== "r2" && route.id !== "r3" && (
+      {!["r2", "r3", "r6", "r7", "r8"].includes(route.id) && (
         <text x={Math.min(seaPos.x, W - 16)} y={seaPos.y} textAnchor={seaPos.x > W - 160 ? "end" : "start"} className="fill-muted-foreground" fontSize="15" fontStyle="italic" opacity="0.7">{sea}</text>
       )}
       <AnimatePresence mode="wait" initial={false}>
@@ -284,7 +323,7 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
                 {i === 0 && <circle cx={p.x} cy={p.y} r="16" fill="none" className="stroke-primary" strokeWidth="2" opacity="0.5" />}
                 <text
                   x={p.x + (right ? 14 : -14)}
-                  y={p.y + 5}
+                  y={p.y + 5 + (p.dy ?? 0)}
                   textAnchor={right ? "start" : "end"}
                   className={i === 0 ? "fill-primary" : "fill-foreground"}
                   fontSize={i === 0 ? 18 : 15}

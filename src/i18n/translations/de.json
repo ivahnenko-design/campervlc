@@ -284,7 +284,19 @@
     "r5_dur": "6",
     "r5_unit": "Festivals",
     "r5_high": "Medusa · Rototom · FIB · Arenal Sound · Rocanrola · Low",
-    "r5_tag": "Im Wohnmobil schlafen statt im Zelt auf Steinen"
+    "r5_tag": "Im Wohnmobil schlafen statt im Zelt auf Steinen",
+    "r8_name": "Kantabrische Küste",
+    "r8_dur": "7",
+    "r8_high": "Bilbao · Gaztelugatxe · Santander · Costa Quebrada · Mammutbäume · Oviedo",
+    "r8_tag": "Grüne Wiesen, Mammutbäume und Cidre, weit weg von der Sommerhitze",
+    "r6_name": "Nordportugal",
+    "r6_dur": "11",
+    "r6_high": "Douro · Porto · Nazaré · Sintra · Lissabon · Évora · Mérida",
+    "r6_tag": "Lissabon, der Atlantik und Portwein auf den Douro-Terrassen",
+    "r7_name": "Algarve und Sevilla",
+    "r7_dur": "8",
+    "r7_high": "Córdoba · Sevilla · Tavira · Benagil · Lagos · Sagres",
+    "r7_tag": "Eine Woche bis zu den goldenen Klippen am Atlantik"
   },
   "reviews": {
     "title": "Was unsere Reisenden sagen",

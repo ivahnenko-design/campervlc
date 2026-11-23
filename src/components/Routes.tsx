@@ -9,6 +9,9 @@ const ROUTES = [
   { id: "r2", gradient: "from-coral/40 to-primary/20", slug: "pais-vasco", photo: "/images/routes/hero-pais-vasco.jpg" },
   { id: "r3", gradient: "from-violet-500/30 to-indigo-500/20", slug: "andalucia", photo: "/images/routes/hero-andalucia.jpg" },
   { id: "r4", gradient: "from-pink-400/30 to-cyan-500/20", slug: "valencia-barcelona", photo: "/images/routes/hero-valencia-barcelona.jpg" },
+  { id: "r8", gradient: "from-emerald-500/30 to-sky-500/20", slug: "costa-cantabrica", photo: "/images/routes/costa-cantabrica-hero.jpg" as string | undefined },
+  { id: "r6", gradient: "from-sky-500/30 to-emerald-500/20", slug: "portugal-norte", photo: "/images/routes/portugal-norte-hero.jpg" as string | undefined },
+  { id: "r7", gradient: "from-amber-400/30 to-sky-500/20", slug: "portugal-sur", photo: "/images/routes/portugal-sur-hero.jpg" as string | undefined },
   { id: "r5", gradient: "from-fuchsia-500/30 to-amber-400/20", slug: "festivales-2027", photo: "/images/routes/festivales-2027-hero.jpg" as string | undefined },
 ] as const;
 

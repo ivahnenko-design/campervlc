@@ -182,6 +182,54 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/pais-vasco"/>
   </url>
 
+  <!-- Route: Costa Cantábrica -->
+  <url>
+    <loc>https://campervlc.com/rutas/costa-cantabrica</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/costa-cantabrica"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/costa-cantabrica?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/costa-cantabrica?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/costa-cantabrica?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/costa-cantabrica?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/costa-cantabrica?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/costa-cantabrica?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/costa-cantabrica"/>
+  </url>
+
+  <!-- Route: Portugal Norte -->
+  <url>
+    <loc>https://campervlc.com/rutas/portugal-norte</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/portugal-norte"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/portugal-norte?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/portugal-norte?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/portugal-norte?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/portugal-norte?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/portugal-norte?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/portugal-norte?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/portugal-norte"/>
+  </url>
+
+  <!-- Route: Portugal Sur (Algarve) -->
+  <url>
+    <loc>https://campervlc.com/rutas/portugal-sur</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://campervlc.com/rutas/portugal-sur"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://campervlc.com/rutas/portugal-sur?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://campervlc.com/rutas/portugal-sur?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://campervlc.com/rutas/portugal-sur?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://campervlc.com/rutas/portugal-sur?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://campervlc.com/rutas/portugal-sur?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://campervlc.com/rutas/portugal-sur?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://campervlc.com/rutas/portugal-sur"/>
+  </url>
+
 
   <!-- Legal pages -->
   <url>

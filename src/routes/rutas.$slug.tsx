@@ -136,7 +136,7 @@ function RoutePageComponent() {
 
           <p className="mt-5 flex items-start gap-1.5 text-xs text-muted-foreground/70">
             <BadgeCheck className="h-3.5 w-3.5 shrink-0 mt-px text-primary/60" aria-hidden="true" />
-            <span>{ROUTE_BYLINE[lang] ?? ROUTE_BYLINE.es}</span>
+            <span>{route.byline ? t(route.byline) : (ROUTE_BYLINE[lang] ?? ROUTE_BYLINE.es)}</span>
           </p>
         </div>
       </section>

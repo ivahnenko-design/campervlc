@@ -284,7 +284,19 @@
     "r5_dur": "6",
     "r5_unit": "festivales",
     "r5_high": "Medusa · Rototom · FIB · Arenal Sound · Rocanrola · Low",
-    "r5_tag": "Dormir en tu autocaravana y no en una tienda sobre las piedras"
+    "r5_tag": "Dormir en tu autocaravana y no en una tienda sobre las piedras",
+    "r8_name": "Costa Cantábrica",
+    "r8_dur": "7",
+    "r8_high": "Bilbao · Gaztelugatxe · Santander · Costa Quebrada · Secuoyas · Oviedo",
+    "r8_tag": "Prados verdes, secuoyas y sidra lejos del calor del verano",
+    "r6_name": "Portugal Norte",
+    "r6_dur": "11",
+    "r6_high": "Duero · Oporto · Nazaré · Sintra · Lisboa · Évora · Mérida",
+    "r6_tag": "Lisboa, el Atlántico y vino de Oporto en las terrazas del Duero",
+    "r7_name": "Algarve y Sevilla",
+    "r7_dur": "8",
+    "r7_high": "Córdoba · Sevilla · Tavira · Benagil · Lagos · Sagres",
+    "r7_tag": "Una semana hasta los acantilados dorados del Atlántico"
   },
   "reviews": {
     "title": "Lo que dicen nuestros viajeros",

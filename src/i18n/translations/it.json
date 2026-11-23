@@ -284,7 +284,19 @@
     "r5_dur": "6",
     "r5_unit": "festival",
     "r5_high": "Medusa · Rototom · FIB · Arenal Sound · Rocanrola · Low",
-    "r5_tag": "Dormire in camper e non in tenda sui sassi"
+    "r5_tag": "Dormire in camper e non in tenda sui sassi",
+    "r8_name": "Costa Cantabrica",
+    "r8_dur": "7",
+    "r8_high": "Bilbao · Gaztelugatxe · Santander · Costa Quebrada · Sequoie · Oviedo",
+    "r8_tag": "Prati verdi, sequoie e sidro, lontano dal caldo dell'estate",
+    "r6_name": "Portogallo del Nord",
+    "r6_dur": "11",
+    "r6_high": "Douro · Porto · Nazaré · Sintra · Lisbona · Évora · Mérida",
+    "r6_tag": "Lisbona, l'Atlantico e il vino Porto sulle terrazze del Douro",
+    "r7_name": "Algarve e Siviglia",
+    "r7_dur": "8",
+    "r7_high": "Cordova · Siviglia · Tavira · Benagil · Lagos · Sagres",
+    "r7_tag": "Una settimana fino alle scogliere dorate dell'Atlantico"
   },
   "reviews": {
     "title": "Cosa dicono i nostri viaggiatori",
