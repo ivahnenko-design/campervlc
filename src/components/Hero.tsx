@@ -382,7 +382,7 @@ export function Hero() {
                   </span>
                   <span className="flex shrink-0 items-center gap-2">
                     <span className="font-poster text-lg text-primary [word-spacing:0.18em]">
-                      {r.nights ? t("hero.tripFrom", { price: groupThousands(tripPrice(r.nights)) }) : "+150 €"}
+                      {r.nights ? t("hero.tripFrom", { price: groupThousands(tripPrice(r.nights)) }) : t("hero.tripFrom", { price: "420" })}
                     </span>
                     <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                   </span>

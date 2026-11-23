@@ -2475,13 +2475,13 @@ const festivales2027: RouteContent = {
   },
 
   metaDescription: {
-    es: "Festivales en autocaravana en 200 km alrededor de Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola y Low Festival. Guía de festivales Valencia 2027 con zonas camper, fechas y precios. Camper festival España desde 90 €/noche.",
-    en: "Festivals by campervan within 200 km of Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola and Low Festival. 2027 dates, camper zones and honest caveats. Campervan rental in Valencia from 99 €/night.",
-    de: "Festivals im Wohnmobil im Umkreis von 200 km um Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola und Low Festival. Termine 2027, Camper-Zonen und ehrliche Hinweise. Wohnmobilmiete ab 99 €/Nacht.",
-    it: "Festival in camper entro 200 km da Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola e Low Festival. Date 2027, aree camper e avvertenze oneste. Noleggio camper a Valencia da 99 €/notte.",
-    nl: "Festivals met de camper binnen 200 km van Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola en Low Festival. Data 2027, camperzones en eerlijke kanttekeningen. Camperhuur vanaf 99 €/nacht.",
-    ru: "Фестивали в автодоме в радиусе 200 км от Валенсии: Medusa, Rototom, FIB, Arenal Sound, Rocanrola и Low Festival. Даты 2027, кемпер-зоны и честные оговорки. Аренда автодома от 99 €/сутки.",
-    uk: "Фестивалі в автодомі в радіусі 200 км від Валенсії: Medusa, Rototom, FIB, Arenal Sound, Rocanrola і Low Festival. Дати 2027, кемпер-зони та чесні застереження. Оренда автодома від 99 €/добу.",
+    es: "Festivales en autocaravana en 200 km alrededor de Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola y Low Festival. Guía de festivales Valencia 2027 con zonas camper, fechas y precios. Camper para festivales desde 420 € (3 noches + suplemento, IVA aparte).",
+    en: "Festivals by campervan within 200 km of Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola and Low Festival. 2027 dates, camper zones and honest caveats. Festival campervan from 420 € (3 nights + festival fee, VAT extra).",
+    de: "Festivals im Wohnmobil im Umkreis von 200 km um Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola und Low Festival. Termine 2027, Camper-Zonen und ehrliche Hinweise. Festival-Wohnmobil ab 420 € (3 Nächte + Zuschlag, zzgl. MwSt.).",
+    it: "Festival in camper entro 200 km da Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola e Low Festival. Date 2027, aree camper e avvertenze oneste. Camper per festival da 420 € (3 notti + supplemento, IVA esclusa).",
+    nl: "Festivals met de camper binnen 200 km van Valencia: Medusa, Rototom, FIB, Arenal Sound, Rocanrola en Low Festival. Data 2027, camperzones en eerlijke kanttekeningen. Festivalcamper vanaf €420 (3 nachten + toeslag, excl. btw).",
+    ru: "Фестивали в автодоме в радиусе 200 км от Валенсии: Medusa, Rototom, FIB, Arenal Sound, Rocanrola и Low Festival. Даты 2027, кемпер-зоны и честные оговорки. Автодом на фестиваль от 420 € (3 ночи и сбор, НДС отдельно).",
+    uk: "Фестивалі в автодомі в радіусі 200 км від Валенсії: Medusa, Rototom, FIB, Arenal Sound, Rocanrola і Low Festival. Дати 2027, кемпер-зони та чесні застереження. Автодім на фестиваль від 420 € (3 ночі та збір, ПДВ окремо).",
   },
 
   heroTitle: {
@@ -2721,13 +2721,13 @@ const festivales2027: RouteContent = {
   ],
 
   ctaText: {
-    es: "Nuestro McLouis Yearling 89G encaja en este formato: hasta cinco plazas para dormir, ducha y aseo dentro, nevera con congelador y panel solar para las jornadas autónomas. A finales de abril, cuando se celebra Rocanrola, el alquiler sale desde 99 € por noche.",
-    en: "Our McLouis Yearling 89G fits this format: up to five sleeping places, shower and toilet inside, a fridge with freezer and a solar panel for self-sufficient days. At the end of April, when Rocanrola takes place, the rental starts at 99 € a night.",
-    de: "Unser McLouis Yearling 89G passt zu diesem Format: bis zu fünf Schlafplätze, Dusche und WC innen, Kühlschrank mit Gefrierfach und Solarpanel für autarke Tage. Ende April, wenn Rocanrola stattfindet, beginnt die Miete bei 99 € pro Nacht.",
-    it: "Il nostro McLouis Yearling 89G si adatta a questo formato: fino a cinque posti letto, doccia e servizi interni, frigo con congelatore e pannello solare per le giornate in autonomia. A fine aprile, quando si tiene Rocanrola, il noleggio parte da 99 € a notte.",
-    nl: "Onze McLouis Yearling 89G past bij dit format: tot vijf slaapplaatsen, douche en toilet binnen, koelkast met vriesvak en zonnepaneel voor autonome dagen. Eind april, wanneer Rocanrola plaatsvindt, begint de huur bij 99 € per nacht.",
-    ru: "Наш McLouis Yearling 89G подходит для этого формата: до пяти спальных мест, душ и туалет внутри, холодильник с морозилкой и солнечная панель для автономных суток. В конце апреля, когда проходит Rocanrola, аренда стоит от 99 € в сутки.",
-    uk: "Наш McLouis Yearling 89G підходить для цього формату: до п'яти спальних місць, душ і туалет усередині, холодильник з морозилкою і сонячна панель для автономної доби. Наприкінці квітня, коли проходить Rocanrola, оренда коштує від 99 € за добу.",
+    es: "Nuestro McLouis Yearling 89G encaja en este formato: hasta cinco plazas para dormir, ducha y aseo dentro, nevera con congelador y panel solar para las jornadas autónomas. A finales de abril, cuando se celebra Rocanrola, un festival en autocaravana sale desde 420 €: 3 noches más el suplemento de festival, IVA aparte.",
+    en: "Our McLouis Yearling 89G fits this format: up to five sleeping places, shower and toilet inside, a fridge with freezer and a solar panel for self-sufficient days. At the end of April, when Rocanrola takes place, a festival in the campervan starts at 420 €: 3 nights plus the festival fee, VAT extra.",
+    de: "Unser McLouis Yearling 89G passt zu diesem Format: bis zu fünf Schlafplätze, Dusche und WC innen, Kühlschrank mit Gefrierfach und Solarpanel für autarke Tage. Ende April, wenn Rocanrola stattfindet, kostet ein Festival im Wohnmobil ab 420 €: 3 Nächte plus Festivalzuschlag, zzgl. MwSt.",
+    it: "Il nostro McLouis Yearling 89G si adatta a questo formato: fino a cinque posti letto, doccia e servizi interni, frigo con congelatore e pannello solare per le giornate in autonomia. A fine aprile, quando si tiene Rocanrola, un festival in camper parte da 420 €: 3 notti più il supplemento festival, IVA esclusa.",
+    nl: "Onze McLouis Yearling 89G past bij dit format: tot vijf slaapplaatsen, douche en toilet binnen, koelkast met vriesvak en zonnepaneel voor autonome dagen. Eind april, wanneer Rocanrola plaatsvindt, kost een festival met de camper vanaf €420: 3 nachten plus de festivaltoeslag, excl. btw.",
+    ru: "Наш McLouis Yearling 89G подходит для этого формата: до пяти спальных мест, душ и туалет внутри, холодильник с морозилкой и солнечная панель для автономных суток. В конце апреля, когда проходит Rocanrola, фестиваль в автодоме стоит от 420 €: 3 ночи плюс фестивальный сбор, НДС отдельно.",
+    uk: "Наш McLouis Yearling 89G підходить для цього формату: до п'яти спальних місць, душ і туалет усередині, холодильник з морозилкою і сонячна панель для автономної доби. Наприкінці квітня, коли проходить Rocanrola, фестиваль в автодомі коштує від 420 €: 3 ночі плюс фестивальний збір, ПДВ окремо.",
   },
   ctaButton: {
     es: "Reservar fechas",
