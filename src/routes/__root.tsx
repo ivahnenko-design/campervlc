@@ -121,7 +121,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@id": "https://campervlc.com/#business",
               name: "Camper Retreat VLC",
               url: "https://campervlc.com/",
-              logo: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
+              logo: "https://campervlc.com/logo.png",
               image: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
               description:
                 "Alquiler de autocaravana McLouis Yearling 89G en Valencia. Hasta 5 personas, con menaje, gas y seguro a todo riesgo incluidos. Reserva online.",

@@ -76,7 +76,7 @@ export const Route = createFileRoute("/rutas/$slug")({
               name: "Camper Retreat VLC",
               logo: {
                 "@type": "ImageObject",
-                url: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
+                url: "https://campervlc.com/logo.png",
               },
             },
             url: ogUrl,

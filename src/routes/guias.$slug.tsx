@@ -17,7 +17,7 @@ import {
 
 const SITE = "https://campervlc.com";
 const LOGO =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp";
+  "https://campervlc.com/logo.png";
 
 // Spanish at the bare path, the other languages at ?lang=xx (same scheme as the sitemap).
 const urlFor = (slug: string, lang: LanguageCode) =>

@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle } from "lucide-react";
 import { INSTAGRAM_URL, buildWhatsAppLink } from "@/lib/constants";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { BrandMark } from "./BrandMark";
 import { SLOGAN } from "./Hero";
 import { guidesUi } from "@/data/guides";
 import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
@@ -16,8 +17,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3 items-start">
           <div>
-            <div className="font-display text-2xl">
-              Camper Retreat <span className="text-primary">VLC</span>
+            <div className="flex items-center gap-3 font-display text-2xl">
+              <BrandMark className="h-10 w-10 shrink-0 text-primary" />
+              <span>Camper Retreat <span className="text-primary">VLC</span></span>
             </div>
             <p className="font-poster mt-3 text-2xl uppercase text-primary">{SLOGAN}</p>
             <p className="mt-1 text-sm text-muted-foreground max-w-xs">{t("footer.tagline")}</p>

@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
-  <rect width="220" height="220" fill="#0f1b2d" />
-  <g fill="none" stroke="#f5a623" stroke-width="12" stroke-linejoin="round" stroke-linecap="round">
-    <!-- Van silhouette: roof -> rear -> bottom -> hood -> windshield (closing diagonal) -->
-    <path d="M85,53 L195,53 L195,138 L25,138 L45,88 Z" />
-    <!-- Window -->
-    <rect x="140" y="73" width="32" height="32" />
-    <!-- Wheels -->
-    <circle cx="60" cy="146" r="20" />
-    <circle cx="165" cy="146" r="20" />
-    <!-- Baseline connecting the wheels -->
-    <line x1="15" y1="166" x2="205" y2="166" />
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 124"><rect width="124" height="124" rx="28" fill="#0d1b2a"/><g transform="translate(0 2)" fill="none" stroke="#f4a827" stroke-width="5.5" stroke-linecap="round"><path d="M58 60a4 4 0 0 1 8 0a8 8 0 0 1-16 0a12 12 0 0 1 24 0a16 16 0 0 1-32 0a20 20 0 0 1 40 0"/><path d="M90 60h8M86.3 74l6.9 4M76 84.3l4 6.9M62 88v8M48 84.3l-4 6.9M37.7 74l-6.9 4M34 60h-8M37.7 46l-6.9-4M48 35.7l-4-6.9M62 32v-8M76 35.7l4-6.9M86.3 46l6.9-4"/></g></svg>

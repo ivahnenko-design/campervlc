@@ -10,28 +10,8 @@ import { guidesUi } from "@/data/guides";
 const PRICES_GUIDE = "mejor-epoca-autocaravana-valencia";
 import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
 import { LoginDialog } from "./LoginDialog";
+import { BrandMark } from "./BrandMark";
 import { loadAuth, logout, openLogin, useAuth } from "@/lib/auth";
-
-function CamperIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 32 20"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M2 14V6h18l6 4v4" />
-      <path d="M2 14h28" />
-      <circle cx="8" cy="15.5" r="2.5" />
-      <circle cx="24" cy="15.5" r="2.5" />
-      <path d="M20 6v4h6" />
-      <path d="M5 9h6" />
-    </svg>
-  );
-}
 
 const SECTIONS = ["fleet", "booking", "routes", "reviews", "faq", "contact"] as const;
 
@@ -119,8 +99,8 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-foreground">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
-              <CamperIcon className="h-5 w-5" />
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#0d1b2a] text-[#f4a827]">
+              <BrandMark className="h-7 w-7" strokeWidth={7} />
             </span>
             <span className="font-display text-lg leading-none whitespace-nowrap">
               Camper Retreat <span className="text-primary">VLC</span>
