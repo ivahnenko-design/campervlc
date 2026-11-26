@@ -2519,7 +2519,7 @@ const festivales2027: RouteContent = {
   days: [
     {
       photoSlot: "medusa-cullera",
-      image: "/images/routes/medusa-cullera.jpg", imageCredit: "Cullera · CC BY 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=7915008",
+      image: "/images/routes/medusa-cullera.jpg", imageCredit: "Medusafestival · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Medusa_Festival_2018_Mainstage.jpg",
       title: {
         es: "Medusa Sunbeach — Cullera, 40 km",
         en: "Medusa Sunbeach — Cullera, 40 km",
@@ -2541,7 +2541,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "rototom-benicassim",
-      image: "/images/routes/rototom-benicassim.jpg", imageCredit: "Luca Valenta · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=74519017",
+      image: "/images/routes/rototom-benicassim.jpg", imageCredit: "Luca Valenta · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Rototom_Sunsplash_2018_Main_Stage.jpg",
       title: {
         es: "Rototom Sunsplash — Benicàssim, 90 km",
         en: "Rototom Sunsplash — Benicàssim, 90 km",
@@ -2563,7 +2563,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "fib-benicassim",
-      image: "/images/routes/fib-benicassim.jpg", imageCredit: "TheBalticCount · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=107794148",
+      image: "/images/routes/fib-benicassim.jpg", imageCredit: "Batiste Safont · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Publico_6.jpg",
       title: {
         es: "FIB — Benicàssim, 90 km",
         en: "FIB — Benicàssim, 90 km",
@@ -2585,7 +2585,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "arenal-sound-burriana",
-      image: "/images/routes/arenal-sound-burriana.jpg", imageCredit: "El Ayudante · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=39495583",
+      image: "/images/routes/arenal-sound-burriana.jpg", imageCredit: "EquipoTemblor · CC0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:20190802_DORIAN_Arenal_Sound.jpg",
       title: {
         es: "Arenal Sound — Burriana, 65 km",
         en: "Arenal Sound — Burriana, 65 km",
@@ -2607,7 +2607,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "rocanrola-alicante",
-      image: "/images/routes/rocanrola-alicante.jpg", imageCredit: "Diego Delso · CC BY-SA 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=33861618",
+      image: "/images/routes/rocanrola-alicante.jpg", imageCredit: "Miguel Angel Villar · CC BY 2.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Concierto_Santana_-_Alicante_2018_(31663218978).jpg",
       title: {
         es: "Rocanrola — Alicante, 170 km",
         en: "Rocanrola — Alicante, 170 km",
@@ -2629,7 +2629,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "low-festival-torrevieja",
-      image: "/images/routes/low-festival-torrevieja.jpg", imageCredit: "Thomas Dahlstrøm Nielsen · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/w/index.php?curid=121449721",
+      image: "/images/routes/low-festival-torrevieja.jpg", imageCredit: "Ximonic (Simo Räsänen) · CC BY-SA 4.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Coastal_cityscape_from_Kiosco_El_Tintero,_Playa_del_Cura,_Torrevieja,_Alicante,_Spain,_2022_January.jpg",
       title: {
         es: "Low Festival — Torrevieja, 180 km",
         en: "Low Festival — Torrevieja, 180 km",
@@ -2651,7 +2651,7 @@ const festivales2027: RouteContent = {
     },
     {
       photoSlot: "monegros-fraga",
-      image: "/images/routes/monegros-fraga.jpg", imageCredit: "Smoobs · CC BY 2.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Desierto_de_los_Monegros.jpg",
+      image: "/images/routes/monegros-fraga.jpg", imageCredit: "Monegros Desert Festival · CC BY 3.0 · Wikimedia Commons", imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Festival_Monegros_Desert.jpg",
       title: {
         es: "Monegros Desert Festival — Fraga (Huesca), 300 km",
         en: "Monegros Desert Festival — Fraga (Huesca), 300 km",
@@ -2671,13 +2671,13 @@ const festivales2027: RouteContent = {
         uk: "Найекстремальніший у списку і єдиний за межами Валенсійської громади: понад 22 години електронної музики без перерви посеред пустелі Монегрос, біля траси N-II (км 416, Фрага). Фестиваль 2027 року починається в суботу 31 липня о 14:00 і закінчується в неділю 1 серпня о 12:00, на ньому понад 50 000 людей. Для автодомів є окрема парковка з покажчиками: на інших парковках обмеження за висотою, на в'їзді треба показати квиток, електрики й води немає. Кемпінг заборонено, тож жодних маркіз, столів і стільців надворі — сплять усередині машини. У 2026 році парковка відкривалася в п'ятницю о 10:00 і звільнялася в неділю о 22:00; час на 2027 рік звірте, коли вийде карта фестивалю. У пустелі немає тіні: перед входом вимкніть усе, щоб вистачило акумулятора, і візьміть води із запасом. Лише з 18 років, з документом. У листопаді 2026 року звичайний квиток коштував 81 € (акція Black Friday), офіційні автобуси — від 28 €. Від Валенсії близько 300 км, 3 год 30 хв. Сайт: monegrosfestival.com",
       },
       altText: {
-        es: "Paisaje del desierto de los Monegros, cerca de Fraga",
-        en: "Landscape of the Monegros desert near Fraga",
-        de: "Landschaft der Monegros-Wüste bei Fraga",
-        it: "Paesaggio del deserto dei Monegros vicino a Fraga",
-        nl: "Landschap van de Monegros-woestijn bij Fraga",
-        ru: "Пейзаж пустыни Монегрос возле Фраги",
-        uk: "Краєвид пустелі Монегрос біля Фраги",
+        es: "Público en el Monegros Desert Festival, en el desierto cerca de Fraga",
+        en: "Crowd at Monegros Desert Festival in the desert near Fraga",
+        de: "Publikum beim Monegros Desert Festival in der Wüste bei Fraga",
+        it: "Pubblico al Monegros Desert Festival nel deserto vicino a Fraga",
+        nl: "Publiek op Monegros Desert Festival in de woestijn bij Fraga",
+        ru: "Зрители Monegros Desert Festival в пустыне возле Фраги",
+        uk: "Глядачі Monegros Desert Festival у пустелі біля Фраги",
       },
     },
   ],
