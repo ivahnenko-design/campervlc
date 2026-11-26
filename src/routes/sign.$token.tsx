@@ -4,6 +4,7 @@ import { CheckCircle, Loader2 } from "lucide-react";
 import { BookingCabinet, type CabinetContract } from "@/components/BookingCabinet";
 import { ContractPreview } from "@/components/ContractPreview";
 import { CHECK_TEXT } from "@/components/sign-check-text";
+import { readMrz } from "@/components/mrz-reader";
 import { signRuleProblems } from "../../shared/sign-rules.js";
 import { DocScanner, type ScanTexts } from "@/components/DocScanner";
 
@@ -951,7 +952,9 @@ function SignPage() {
   // Fields read from the document photos (the guest checks and corrects them).
   const [ocr, setOcr] = useState<"idle" | "reading" | "filled" | "unread">("idle");
   const [ocrWarnings, setOcrWarnings] = useState<string[]>([]);
+  const [ocrLicence, setOcrLicence] = useState(false);
   const autoFilled = useRef(new Set<string>());
+  const photos = useRef<Partial<Record<DocSlot, string>>>({});
   const [uploadsVersion, setUploadsVersion] = useState(0);
   // The form opens once the guest has scrolled through the contract preview.
   const [readNow, setReadNow] = useState(false);
@@ -1023,31 +1026,44 @@ function SignPage() {
   // Once every required photo is in, read them and fill the empty fields.
   async function readDocs() {
     setOcr("reading");
+    let fields: Record<string, string> = {};
+    let warnings: string[] = [];
+    // 1. The MRZ of the passport / ID, read in this browser (free, nothing sent).
+    try {
+      const shots = [photos.current.idBack, photos.current.idFront].filter(Boolean) as string[];
+      fields = (await readMrz(shots)) || {};
+    } catch {
+      /* fall through to the server */
+    }
+    // 2. The server, when document recognition is switched on there (also reads the licence).
     try {
       const j = (await post({ action: "extract" })) as {
         ok?: boolean;
         fields?: Record<string, string>;
         warnings?: string[];
       };
-      if ((j as { reason?: string }).reason === "off") return setOcr("idle");
-      if (!j.ok || !j.fields) return setOcr("unread");
-      const fields = j.fields;
-      setForm((f) => {
-        const next = { ...f };
-        for (const [k, v] of Object.entries(fields)) {
-          if (k === "docType" || !v) continue;
-          if (!(f[k] || "").trim() || autoFilled.current.has(k)) {
-            next[k] = v;
-            autoFilled.current.add(k);
-          }
-        }
-        return next;
-      });
-      setOcrWarnings(j.warnings || []);
-      setOcr("filled");
+      if (j.ok && j.fields) {
+        fields = { ...j.fields, ...fields };
+        warnings = j.warnings || [];
+      }
     } catch {
-      setOcr("unread");
+      /* recognition is optional */
     }
+    if (!Object.keys(fields).length) return setOcr("unread");
+    setForm((f) => {
+      const next = { ...f };
+      for (const [k, v] of Object.entries(fields)) {
+        if (k === "docType" || !v) continue;
+        if (!(f[k] || "").trim() || autoFilled.current.has(k)) {
+          next[k] = v;
+          autoFilled.current.add(k);
+        }
+      }
+      return next;
+    });
+    setOcrWarnings(warnings);
+    setOcrLicence(!!fields.licenseExpiry);
+    setOcr("filled");
   }
 
   async function askCode() {
@@ -1231,6 +1247,7 @@ function SignPage() {
                   texts={d}
                   onImage={async (image) => {
                     setUploaded((u) => ({ ...u, [slot]: false }));
+                    photos.current[slot] = image;
                     await post({ action: "doc", slot, image });
                     setUploaded((u) => ({ ...u, [slot]: true }));
                     setUploadsVersion((v) => v + 1);
@@ -1249,7 +1266,9 @@ function SignPage() {
             )}
             {ocr === "filled" && (
               <div className="mt-2 rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-sm">
-                <p>{c.filled}</p>
+                <p>
+                  {c.filled} {!ocrLicence && c.fillRest}
+                </p>
                 {ocrWarnings.map((w) => (
                   <p key={w} className="mt-1 text-destructive">
                     {(c.warnings as Record<string, string>)[w] || w}

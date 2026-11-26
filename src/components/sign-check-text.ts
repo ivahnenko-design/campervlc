@@ -9,6 +9,7 @@ export interface CheckTexts {
   reading: string;
   filled: string;
   unread: string;
+  fillRest: string;
   warnings: Record<"name_mismatch" | "birth_mismatch" | "mrz_unreadable", string>;
   rules: Record<
     | "age_under_25"
@@ -30,16 +31,21 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     bSinceLabel: "Category B held since",
     bSinceHint: "Back of the licence, table of categories: row B, column 10.",
     reading: "Reading your documents...",
-    filled: "We filled in the fields from your document photos. Please check them and correct anything that is wrong.",
+    filled:
+      "We filled in the fields from your document photos. Please check them and correct anything that is wrong.",
     unread: "We could not read the photos. Please fill in the fields yourself.",
+    fillRest: "Fill in the remaining fields (address, licence) yourself.",
     warnings: {
-      name_mismatch: "The surname on your ID and on your licence do not match. Make sure both documents belong to the same person.",
+      name_mismatch:
+        "The surname on your ID and on your licence do not match. Make sure both documents belong to the same person.",
       birth_mismatch: "The date of birth on your ID and on your licence do not match.",
-      mrz_unreadable: "The code lines of your document could not be checked. Please check the document number carefully.",
+      mrz_unreadable:
+        "The code lines of your document could not be checked. Please check the document number carefully.",
     },
     rules: {
       age_under_25: "Under the contract, drivers must be at least 25 on the pickup day.",
-      license_too_new: "Category B must have been held for at least 2 years on the pickup day (insurance condition).",
+      license_too_new:
+        "Category B must have been held for at least 2 years on the pickup day (insurance condition).",
       license_expired: "The licence must be valid until the return day.",
       doc_expired: "The document must be valid until the return day.",
       date_future: "This date cannot be in the future.",
@@ -54,16 +60,23 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     bSinceLabel: "Clase B obtenida en",
     bSinceHint: "Reverso del permiso, tabla de clases: fila B, columna 10.",
     reading: "Leyendo tus documentos...",
-    filled: "Hemos rellenado los campos con las fotos de tus documentos. Revísalos y corrige lo que no esté bien.",
+    filled:
+      "Hemos rellenado los campos con las fotos de tus documentos. Revísalos y corrige lo que no esté bien.",
     unread: "No hemos podido leer las fotos. Rellena los campos a mano.",
+    fillRest: "Rellena tú los demás campos (dirección, permiso de conducir).",
     warnings: {
-      name_mismatch: "El apellido del documento de identidad y el del permiso no coinciden. Comprueba que ambos documentos son de la misma persona.",
-      birth_mismatch: "La fecha de nacimiento del documento de identidad y la del permiso no coinciden.",
-      mrz_unreadable: "No se han podido comprobar las líneas de código del documento. Revisa bien el número.",
+      name_mismatch:
+        "El apellido del documento de identidad y el del permiso no coinciden. Comprueba que ambos documentos son de la misma persona.",
+      birth_mismatch:
+        "La fecha de nacimiento del documento de identidad y la del permiso no coinciden.",
+      mrz_unreadable:
+        "No se han podido comprobar las líneas de código del documento. Revisa bien el número.",
     },
     rules: {
-      age_under_25: "Según el contrato, el conductor debe tener al menos 25 años el día de la recogida.",
-      license_too_new: "La clase B debe tener al menos 2 años de antigüedad el día de la recogida (condición del seguro).",
+      age_under_25:
+        "Según el contrato, el conductor debe tener al menos 25 años el día de la recogida.",
+      license_too_new:
+        "La clase B debe tener al menos 2 años de antigüedad el día de la recogida (condición del seguro).",
       license_expired: "El permiso debe estar en vigor hasta el día de la devolución.",
       doc_expired: "El documento debe estar en vigor hasta el día de la devolución.",
       date_future: "Esta fecha no puede ser futura.",
@@ -80,14 +93,17 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     reading: "Распознаём ваши документы...",
     filled: "Мы заполнили поля по фото документов. Проверьте их и исправьте, если что-то не так.",
     unread: "Не удалось распознать фото. Заполните поля вручную.",
+    fillRest: "Остальные поля (адрес, права) заполните сами.",
     warnings: {
-      name_mismatch: "Фамилия в документе и в правах не совпадает. Проверьте, что это документы одного человека.",
+      name_mismatch:
+        "Фамилия в документе и в правах не совпадает. Проверьте, что это документы одного человека.",
       birth_mismatch: "Дата рождения в документе и в правах не совпадает.",
       mrz_unreadable: "Не удалось проверить кодовые строки документа. Внимательно проверьте номер.",
     },
     rules: {
       age_under_25: "По договору водителю должно быть не меньше 25 лет на день получения автодома.",
-      license_too_new: "Категория B должна быть получена не менее чем за 2 года до получения автодома (условие страховки).",
+      license_too_new:
+        "Категория B должна быть получена не менее чем за 2 года до получения автодома (условие страховки).",
       license_expired: "Права должны действовать до дня возврата автодома.",
       doc_expired: "Документ должен действовать до дня возврата автодома.",
       date_future: "Эта дата не может быть в будущем.",
@@ -104,19 +120,24 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     reading: "Розпізнаємо ваші документи...",
     filled: "Ми заповнили поля за фото документів. Перевірте їх і виправте, якщо щось не так.",
     unread: "Не вдалося розпізнати фото. Заповніть поля вручну.",
+    fillRest: "Решту полів (адреса, посвідчення) заповніть самі.",
     warnings: {
-      name_mismatch: "Прізвище в документі та в посвідченні не збігається. Перевірте, що це документи однієї людини.",
+      name_mismatch:
+        "Прізвище в документі та в посвідченні не збігається. Перевірте, що це документи однієї людини.",
       birth_mismatch: "Дата народження в документі та в посвідченні не збігається.",
       mrz_unreadable: "Не вдалося перевірити кодові рядки документа. Уважно перевірте номер.",
     },
     rules: {
-      age_under_25: "За договором водієві має бути не менше 25 років на день отримання автобудинку.",
-      license_too_new: "Категорію B має бути отримано не менше ніж за 2 роки до отримання автобудинку (умова страховки).",
+      age_under_25:
+        "За договором водієві має бути не менше 25 років на день отримання автобудинку.",
+      license_too_new:
+        "Категорію B має бути отримано не менше ніж за 2 роки до отримання автобудинку (умова страховки).",
       license_expired: "Посвідчення має діяти до дня повернення автобудинку.",
       doc_expired: "Документ має діяти до дня повернення автобудинку.",
       date_future: "Ця дата не може бути в майбутньому.",
       date_order: "Перевірте дату: вона не узгоджується з іншими датами.",
-      doc_number_invalid: "Номер DNI/NIE не проходить перевірку контрольної літери. Перевірте його.",
+      doc_number_invalid:
+        "Номер DNI/NIE не проходить перевірку контрольної літери. Перевірте його.",
       phone_invalid: "Вкажіть телефон у міжнародному форматі, наприклад +34 600 000 000.",
     },
     fixFields: "Виправте поля, позначені червоним.",
@@ -126,40 +147,53 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     bSinceLabel: "Klasse B erteilt am",
     bSinceHint: "Rückseite des Führerscheins, Klassentabelle: Zeile B, Spalte 10.",
     reading: "Deine Dokumente werden gelesen...",
-    filled: "Wir haben die Felder anhand deiner Dokumentfotos ausgefüllt. Bitte prüfe sie und korrigiere, was nicht stimmt.",
+    filled:
+      "Wir haben die Felder anhand deiner Dokumentfotos ausgefüllt. Bitte prüfe sie und korrigiere, was nicht stimmt.",
     unread: "Die Fotos konnten nicht gelesen werden. Bitte fülle die Felder selbst aus.",
+    fillRest: "Die übrigen Felder (Adresse, Führerschein) füllst du selbst aus.",
     warnings: {
-      name_mismatch: "Der Nachname im Ausweis und im Führerschein stimmt nicht überein. Prüfe, ob beide Dokumente derselben Person gehören.",
+      name_mismatch:
+        "Der Nachname im Ausweis und im Führerschein stimmt nicht überein. Prüfe, ob beide Dokumente derselben Person gehören.",
       birth_mismatch: "Das Geburtsdatum im Ausweis und im Führerschein stimmt nicht überein.",
-      mrz_unreadable: "Die Codezeilen des Dokuments konnten nicht geprüft werden. Bitte prüfe die Dokumentnummer genau.",
+      mrz_unreadable:
+        "Die Codezeilen des Dokuments konnten nicht geprüft werden. Bitte prüfe die Dokumentnummer genau.",
     },
     rules: {
       age_under_25: "Laut Vertrag müssen Fahrer am Abholtag mindestens 25 Jahre alt sein.",
-      license_too_new: "Die Klasse B muss am Abholtag seit mindestens 2 Jahren bestehen (Versicherungsbedingung).",
+      license_too_new:
+        "Die Klasse B muss am Abholtag seit mindestens 2 Jahren bestehen (Versicherungsbedingung).",
       license_expired: "Der Führerschein muss bis zum Rückgabetag gültig sein.",
       doc_expired: "Das Dokument muss bis zum Rückgabetag gültig sein.",
       date_future: "Dieses Datum darf nicht in der Zukunft liegen.",
       date_order: "Prüfe dieses Datum: Es passt nicht zu den anderen Daten.",
-      doc_number_invalid: "Diese DNI/NIE-Nummer besteht die Prüfbuchstaben-Kontrolle nicht. Bitte prüfe sie.",
+      doc_number_invalid:
+        "Diese DNI/NIE-Nummer besteht die Prüfbuchstaben-Kontrolle nicht. Bitte prüfe sie.",
       phone_invalid: "Gib die Telefonnummer im internationalen Format an, z. B. +34 600 000 000.",
     },
     fixFields: "Bitte korrigiere die rot markierten Felder.",
-    contact: "Wenn du denkst, dass das ein Fehler ist, schreib uns per WhatsApp an +34 624 038 085.",
+    contact:
+      "Wenn du denkst, dass das ein Fehler ist, schreib uns per WhatsApp an +34 624 038 085.",
   },
   it: {
     bSinceLabel: "Categoria B conseguita il",
     bSinceHint: "Retro della patente, tabella delle categorie: riga B, colonna 10.",
     reading: "Stiamo leggendo i tuoi documenti...",
-    filled: "Abbiamo compilato i campi dalle foto dei documenti. Controllali e correggi ciò che non è giusto.",
+    filled:
+      "Abbiamo compilato i campi dalle foto dei documenti. Controllali e correggi ciò che non è giusto.",
     unread: "Non siamo riusciti a leggere le foto. Compila i campi a mano.",
+    fillRest: "Compila tu gli altri campi (indirizzo, patente).",
     warnings: {
-      name_mismatch: "Il cognome sul documento d'identità e sulla patente non coincide. Verifica che i documenti siano della stessa persona.",
+      name_mismatch:
+        "Il cognome sul documento d'identità e sulla patente non coincide. Verifica che i documenti siano della stessa persona.",
       birth_mismatch: "La data di nascita sul documento d'identità e sulla patente non coincide.",
-      mrz_unreadable: "Non è stato possibile verificare le righe di codice del documento. Controlla bene il numero.",
+      mrz_unreadable:
+        "Non è stato possibile verificare le righe di codice del documento. Controlla bene il numero.",
     },
     rules: {
-      age_under_25: "Secondo il contratto, il conducente deve avere almeno 25 anni il giorno del ritiro.",
-      license_too_new: "La categoria B deve essere conseguita da almeno 2 anni il giorno del ritiro (condizione dell'assicurazione).",
+      age_under_25:
+        "Secondo il contratto, il conducente deve avere almeno 25 anni il giorno del ritiro.",
+      license_too_new:
+        "La categoria B deve essere conseguita da almeno 2 anni il giorno del ritiro (condizione dell'assicurazione).",
       license_expired: "La patente deve essere valida fino al giorno della riconsegna.",
       doc_expired: "Il documento deve essere valido fino al giorno della riconsegna.",
       date_future: "Questa data non può essere nel futuro.",
@@ -174,16 +208,23 @@ export const CHECK_TEXT: Record<Lang, CheckTexts> = {
     bSinceLabel: "Categorie B behaald op",
     bSinceHint: "Achterkant van het rijbewijs, tabel met categorieën: rij B, kolom 10.",
     reading: "We lezen je documenten...",
-    filled: "We hebben de velden ingevuld op basis van de foto's van je documenten. Controleer ze en corrigeer wat niet klopt.",
+    filled:
+      "We hebben de velden ingevuld op basis van de foto's van je documenten. Controleer ze en corrigeer wat niet klopt.",
     unread: "We konden de foto's niet lezen. Vul de velden zelf in.",
+    fillRest: "Vul de overige velden (adres, rijbewijs) zelf in.",
     warnings: {
-      name_mismatch: "De achternaam op je identiteitsbewijs en op je rijbewijs komen niet overeen. Controleer of beide documenten van dezelfde persoon zijn.",
-      birth_mismatch: "De geboortedatum op je identiteitsbewijs en op je rijbewijs komen niet overeen.",
-      mrz_unreadable: "De codelijnen van het document konden niet worden gecontroleerd. Controleer het documentnummer goed.",
+      name_mismatch:
+        "De achternaam op je identiteitsbewijs en op je rijbewijs komen niet overeen. Controleer of beide documenten van dezelfde persoon zijn.",
+      birth_mismatch:
+        "De geboortedatum op je identiteitsbewijs en op je rijbewijs komen niet overeen.",
+      mrz_unreadable:
+        "De codelijnen van het document konden niet worden gecontroleerd. Controleer het documentnummer goed.",
     },
     rules: {
-      age_under_25: "Volgens het contract moeten bestuurders op de ophaaldag minstens 25 jaar zijn.",
-      license_too_new: "Categorie B moet op de ophaaldag minstens 2 jaar in bezit zijn (voorwaarde van de verzekering).",
+      age_under_25:
+        "Volgens het contract moeten bestuurders op de ophaaldag minstens 25 jaar zijn.",
+      license_too_new:
+        "Categorie B moet op de ophaaldag minstens 2 jaar in bezit zijn (voorwaarde van de verzekering).",
       license_expired: "Het rijbewijs moet geldig zijn tot de dag van inleveren.",
       doc_expired: "Het document moet geldig zijn tot de dag van inleveren.",
       date_future: "Deze datum kan niet in de toekomst liggen.",

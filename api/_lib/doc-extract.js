@@ -5,6 +5,7 @@
 // what was read from the printed text.
 import Anthropic from "@anthropic-ai/sdk";
 import { jsonSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/json-schema";
+import { parseMrz } from "../../shared/mrz.js";
 
 const MODEL = "claude-opus-5-5";
 
@@ -89,55 +90,8 @@ Rules:
 - identity.mrz: the machine-readable zone lines (the lines with <<<), separated by \\n, exactly; "" if none.
 - licence: the driving licence. On EU licences: 1 surname, 2 given names, 3 date of birth, 4a issue date, 4b expiry date, 5 licence number. categoryBDate is the date in column 10 (date of first issue) of the row for category B on the back; "" if the back is not shown. A screenshot of an official app (e.g. miDGT) counts as the licence.`;
 
-// ── MRZ (ICAO 9303) ─────────────────────────────────────────────────────────
-
-const charValue = (c) => (c === "<" ? 0 : /\d/.test(c) ? Number(c) : c.charCodeAt(0) - 55);
-function checkDigit(s) {
-  const w = [7, 3, 1];
-  let sum = 0;
-  for (let i = 0; i < s.length; i++) sum += charValue(s[i]) * w[i % 3];
-  return String(sum % 10);
-}
-function mrzDate(yymmdd, future) {
-  if (!/^\d{6}$/.test(yymmdd)) return "";
-  const yy = Number(yymmdd.slice(0, 2));
-  const nowYY = new Date().getUTCFullYear() % 100;
-  const century = future ? 2000 : yy > nowYY ? 1900 : 2000;
-  return `${century + yy}-${yymmdd.slice(2, 4)}-${yymmdd.slice(4, 6)}`;
-}
-const field = (s) => s.replace(/<+$/g, "").replace(/</g, " ").trim();
-
-/** Passport (2 x 44) or ID card (3 x 30) MRZ with valid check digits, else null. */
-export function parseMrz(text) {
-  const lines = String(text || "")
-    .toUpperCase()
-    .split(/\n/)
-    .map((l) => l.replace(/\s/g, ""))
-    .filter((l) => l.length >= 28);
-  if (lines.length === 2 && lines[0].length === 44 && lines[1].length === 44) {
-    const [, b] = lines;
-    const num = b.slice(0, 9);
-    const ok = checkDigit(num) === b[9] && checkDigit(b.slice(13, 19)) === b[19] && checkDigit(b.slice(21, 27)) === b[27];
-    if (!ok) return null;
-    return { documentNumber: field(num), nationalityCode: b.slice(10, 13), birthDate: mrzDate(b.slice(13, 19), false), expiryDate: mrzDate(b.slice(21, 27), true) };
-  }
-  if (lines.length === 3 && lines.every((l) => l.length === 30)) {
-    const [a, b] = lines;
-    const num = a.slice(5, 14);
-    const ok = checkDigit(num) === a[14] && checkDigit(b.slice(0, 6)) === b[6] && checkDigit(b.slice(8, 14)) === b[14];
-    if (!ok) return null;
-    // Spanish DNI/TIE: the personal number (DNI/NIE) sits in the optional data of line 1.
-    const optional = field(a.slice(15, 30));
-    return {
-      documentNumber: field(num),
-      personalNumber: optional,
-      nationalityCode: b.slice(15, 18),
-      birthDate: mrzDate(b.slice(0, 6), false),
-      expiryDate: mrzDate(b.slice(8, 14), true),
-    };
-  }
-  return null;
-}
+// MRZ parsing is shared with the signing page (shared/mrz.js).
+export { parseMrz };
 
 // ── form fields ─────────────────────────────────────────────────────────────
 
