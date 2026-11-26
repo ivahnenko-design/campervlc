@@ -5,6 +5,7 @@
 // JSON record.
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { contractPdfPathOf, vehicleView } from "./contracts.js";
+import { EXTRA_LABELS, kmPlanFromExtras, rentalNights } from "../../shared/acta.js";
 
 const CYR = {
   а: "a", б: "b", в: "v", г: "g", ґ: "g", д: "d", е: "e", є: "ye", ё: "e", ж: "zh", з: "z", и: "i", і: "i", ї: "yi",
@@ -152,7 +153,14 @@ const FILL_BLANKS = {
       { page: 0, key: "pickup", boxes: [[126.1, 223.4, 773.6, 783.4], [407.5, 504.8, 773.6, 783.4]], maxX: [291, 558] },
       { page: 1, key: "return", boxes: [[163.4, 260.7, 37.1, 46.9], [419.0, 516.3, 37.1, 46.9]], maxX: [291, 558] },
       { page: 1, key: "price", boxes: [[186.2, 283.5, 73.9, 83.6], [434.7, 532.0, 73.9, 83.6]], maxX: [291, 558] },
+      { page: 1, key: "kmTotal", boxes: [[201.6, 245.6, 180.4, 190.1], [449.8, 493.9, 180.4, 190.1]], maxX: [291, 558] },
     ],
+    // ☐ 100 km/night / 200 km/night / unlimited (page 2), Spanish and English column
+    kmBoxes: {
+      100: [[119.4, 171.3, 126.5, 179.1], [374.0, 171.3, 381.1, 179.1]],
+      200: [[185.9, 171.3, 193.1, 179.1], [437.7, 171.3, 444.8, 179.1]],
+      unlimited: [[36.7, 182.5, 43.9, 190.4], [535.8, 171.3, 542.9, 179.1]],
+    },
     sourceBoxes: {
       web: [[150.7, 751.8, 157.9, 759.6], [396.0, 751.8, 403.2, 759.6]],
       yescapa: [[219.5, 751.8, 226.6, 759.6], [464.8, 751.8, 471.9, 759.6]],
@@ -187,7 +195,23 @@ function blankValues(contract, data, signedAt) {
     pickup: `${dmy(contract.startDate)} ${contract.pickupTime || ""}`.trim(),
     return: `${dmy(contract.endDate)} ${contract.returnTime || ""}`.trim(),
     price: contract.priceTotal != null ? `${contract.priceTotal} EUR` : "",
+    kmTotal: kmTotalText(contract),
   };
+}
+
+/** "300 km" (100 or 200 per night) or "ilimitado / unlimited". */
+function kmTotalText(contract) {
+  const plan = kmPlanFromExtras(contract.extras);
+  if (plan === "unlimited") return "ilimitado / unlimited";
+  return `${Number(plan) * rentalNights(contract.startDate, contract.endDate)} km`;
+}
+
+/** Options booked, in Spanish, without the mileage plan. */
+function extrasText(contract) {
+  return (contract.extras || [])
+    .filter((x) => !x.startsWith("km_"))
+    .map((x) => EXTRA_LABELS[x]?.es || x)
+    .join(", ");
 }
 
 function fillBlanks(pdf, font, contract, data, signedAt) {
@@ -223,12 +247,12 @@ function fillBlanks(pdf, font, contract, data, signedAt) {
       });
     }
   }
-  const boxes = spec.sourceBoxes[contract.source] || spec.sourceBoxes.other;
-  for (const [x0, top, x1, bottom] of boxes) {
-    const page = pages[0];
+  const tick = (page, [x0, top, x1, bottom]) => {
     const size = 8;
     page.drawText("X", { x: x0 + (x1 - x0 - font.widthOfTextAtSize("X", size)) / 2, y: H - bottom + 1.6, size, font, color: ink });
-  }
+  };
+  for (const box of spec.sourceBoxes[contract.source] || spec.sourceBoxes.other) tick(pages[0], box);
+  if (spec.kmBoxes) for (const box of spec.kmBoxes[kmPlanFromExtras(contract.extras)]) tick(pages[1], box);
 }
 
 const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
@@ -311,6 +335,8 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   row("Devolucion", `${contract.endDate} ${contract.returnTime}`);
   row("Precio total (IVA incl.)", contract.priceTotal != null ? `${contract.priceTotal} EUR` : "segun reserva");
   row("Origen de la reserva", contract.source);
+  row("Kilometraje incluido", kmTotalText(contract));
+  if (extrasText(contract)) row("Opciones contratadas", extrasText(contract));
   y -= 4;
   rule();
 

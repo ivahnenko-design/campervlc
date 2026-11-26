@@ -53,6 +53,7 @@ const vehicleRow = (v) => ({ id: v.id, name: v.name, city: v.city.es, plate: v.p
 function adminRow(c) {
   return {
     id: c.id,
+    extras: c.extras || [],
     number: c.number || c.id,
     vehicleId: vehicleOf(c),
     status: c.status,

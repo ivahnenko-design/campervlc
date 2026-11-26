@@ -28,6 +28,7 @@ export interface CabinetContract {
   source?: string;
   bookingRef?: string;
   emailHint: string;
+  extras?: string[];
   signedAt?: number | null;
   signerName?: string | null;
   vehicle?: {
@@ -41,6 +42,134 @@ export interface CabinetContract {
 }
 
 const WHATSAPP = "+34 624 038 085";
+
+// Booked options and mileage, as on the site's booking page.
+const OPTION: Record<string, Record<Lang, string>> = {
+  bedding: {
+    en: "Bed linen",
+    es: "Ropa de cama",
+    ru: "Постельное бельё",
+    uk: "Постільна білизна",
+    de: "Bettwäsche",
+    it: "Biancheria da letto",
+    nl: "Beddengoed",
+  },
+  towels: {
+    en: "Towels",
+    es: "Toallas",
+    ru: "Полотенца",
+    uk: "Рушники",
+    de: "Handtücher",
+    it: "Asciugamani",
+    nl: "Handdoeken",
+  },
+  bicycle: {
+    en: "Bicycle",
+    es: "Bicicleta",
+    ru: "Велосипед",
+    uk: "Велосипед",
+    de: "Fahrrad",
+    it: "Bicicletta",
+    nl: "Fiets",
+  },
+  sup_board: {
+    en: "Paddle board",
+    es: "Tabla de paddle surf",
+    ru: "SUP-доска",
+    uk: "SUP-дошка",
+    de: "SUP-Board",
+    it: "Tavola SUP",
+    nl: "SUP-board",
+  },
+  bbq: {
+    en: "Barbecue",
+    es: "Barbacoa",
+    ru: "Барбекю",
+    uk: "Барбекю",
+    de: "Grill",
+    it: "Barbecue",
+    nl: "Barbecue",
+  },
+  festival: {
+    en: "Festival pack",
+    es: "Pack festival",
+    ru: "Фестивальный пакет",
+    uk: "Фестивальний пакет",
+    de: "Festival-Paket",
+    it: "Pacchetto festival",
+    nl: "Festivalpakket",
+  },
+  extra_driver: {
+    en: "Additional driver",
+    es: "Conductor adicional",
+    ru: "Доп. водитель",
+    uk: "Додатковий водій",
+    de: "Zusatzfahrer",
+    it: "Conducente aggiuntivo",
+    nl: "Extra bestuurder",
+  },
+  pet: {
+    en: "Pet",
+    es: "Mascota",
+    ru: "Питомец",
+    uk: "Домашня тварина",
+    de: "Haustier",
+    it: "Animale domestico",
+    nl: "Huisdier",
+  },
+};
+const KM_TEXT: Record<
+  Lang,
+  { label: string; opts: string; unlimited: string; perDay: (n: number, total: number) => string }
+> = {
+  en: {
+    label: "Mileage",
+    opts: "Options",
+    unlimited: "Unlimited",
+    perDay: (n, t) => `${n} km/day · ${t} km in total`,
+  },
+  es: {
+    label: "Kilometraje",
+    opts: "Opciones",
+    unlimited: "Ilimitado",
+    perDay: (n, t) => `${n} km/día · ${t} km en total`,
+  },
+  ru: {
+    label: "Пробег",
+    opts: "Опции",
+    unlimited: "Без ограничения",
+    perDay: (n, t) => `${n} км/сутки · всего ${t} км`,
+  },
+  uk: {
+    label: "Пробіг",
+    opts: "Опції",
+    unlimited: "Без обмеження",
+    perDay: (n, t) => `${n} км/добу · усього ${t} км`,
+  },
+  de: {
+    label: "Kilometer",
+    opts: "Optionen",
+    unlimited: "Unbegrenzt",
+    perDay: (n, t) => `${n} km/Tag · ${t} km insgesamt`,
+  },
+  it: {
+    label: "Chilometraggio",
+    opts: "Opzioni",
+    unlimited: "Illimitato",
+    perDay: (n, t) => `${n} km/giorno · ${t} km in totale`,
+  },
+  nl: {
+    label: "Kilometers",
+    opts: "Opties",
+    unlimited: "Onbeperkt",
+    perDay: (n, t) => `${n} km/dag · ${t} km in totaal`,
+  },
+};
+const nightsBetween = (a: string, b: string) =>
+  Math.max(
+    0,
+    Math.round((Date.parse(`${b}T12:00:00Z`) - Date.parse(`${a}T12:00:00Z`)) / 86_400_000),
+  );
 const WHATSAPP_LINK = "https://wa.me/34624038085";
 
 const T: Record<
@@ -328,6 +457,8 @@ export function BookingCabinet({
       : null;
   const pdfUrl = `/api/contract?token=${encodeURIComponent(token)}&pdf=1`;
   const name = contract.signerName || contract.guestName;
+  const extras = contract.extras || [];
+  const options = extras.filter((x) => !x.startsWith("km_"));
 
   return (
     <div>
@@ -398,6 +529,22 @@ export function BookingCabinet({
                 {contract.bookingRef}
                 {contract.source === "yescapa" ? " · Yescapa" : ""}
               </dd>
+            </>
+          )}
+          <dt className="text-muted-foreground">{KM_TEXT[lang].label}</dt>
+          <dd>
+            {extras.includes("km_unlimited")
+              ? KM_TEXT[lang].unlimited
+              : KM_TEXT[lang].perDay(
+                  extras.includes("km_200") ? 200 : 100,
+                  (extras.includes("km_200") ? 200 : 100) *
+                    nightsBetween(contract.startDate, contract.endDate),
+                )}
+          </dd>
+          {options.length > 0 && (
+            <>
+              <dt className="text-muted-foreground">{KM_TEXT[lang].opts}</dt>
+              <dd>{options.map((o) => OPTION[o]?.[lang] || o).join(", ")}</dd>
             </>
           )}
           {contract.priceTotal != null && (

@@ -147,6 +147,12 @@ export function parseYescapaBooking(raw) {
 
   r.plate = findPlate(text);
 
+  // Mileage option: "Opción kilométrica 100 km/d" / "200 km/d" / unlimited.
+  const kmLine = text.match(/(?:opci[óo]n kilom[ée]trica|kilometraje|mileage(?: option)?|kilom[ée]trage)[\s\S]{0,40}/i)?.[0] || "";
+  if (/ilimitad|illimit|unlimited|unbegrenzt|onbeperkt/i.test(kmLine)) r.extras = ["km_unlimited"];
+  else if (/\b200\s*km/i.test(kmLine)) r.extras = ["km_200"];
+  else if (/\b100\s*km/i.test(kmLine)) r.extras = [];
+
   if (r.phone) {
     const hit = PHONE_LANG.find(([p]) => r.phone.replace(/\s/g, "").startsWith(p));
     if (hit) r.language = hit[1];

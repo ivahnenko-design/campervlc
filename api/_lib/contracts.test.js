@@ -128,6 +128,11 @@ test("licence: number optional, issue and expiry dates required", () => {
   assert.throws(() => validateSignData({ ...noIssued, docType: "passport" }), (e) => e instanceof ContractError && e.code === "field_required");
 });
 
+test("invite keeps known options (mileage plan + extras) only", () => {
+  assert.deepEqual(validateInvite({ ...INVITE, extras: ["km_200", "pet", "pet", "rocket"] }).extras, ["km_200", "pet"]);
+  assert.deepEqual(validateInvite(INVITE).extras, []);
+});
+
 test("human contract number: pickup date + surname(s)", () => {
   assert.equal(contractNumber("2026-11-27", "Saúl Jara Sánchez"), "20261127_JARA-SANCHEZ");
   assert.equal(contractNumber("2026-12-10", "Sergii Ivakhnenko (TEST 3)"), "20261210_IVAKHNENKO");

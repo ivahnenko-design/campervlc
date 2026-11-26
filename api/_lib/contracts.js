@@ -5,6 +5,7 @@
 import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
 import { blobStore, list } from "./blob.js";
 import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
+import { EXTRA_LABELS } from "../../shared/acta.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
 // Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v8.pdf
@@ -98,6 +99,9 @@ export function validateInvite(input = {}) {
     priceTotal,
     bookingRef: clean(input.bookingRef, 60),
     note: clean(input.note, 300),
+    // Booked options in the vocabulary of the site's bookings (km_200 / km_unlimited
+    // = mileage plan; none of them = 100 km per night).
+    extras: Array.isArray(input.extras) ? [...new Set(input.extras.filter((x) => x in EXTRA_LABELS))] : [],
   };
 }
 
@@ -224,6 +228,7 @@ export function publicView(contract) {
     vehicle: vehicleView(contract),
     preview: contractPreviewOf(contract),
     readAt: contract.audit?.find((a) => a.ev === "contract_read")?.t || null,
+    extras: contract.extras || [],
     signedAt: contract.signed?.at || null,
     signerName: contract.signed?.data?.fullName || null,
   };

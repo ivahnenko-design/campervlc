@@ -19,6 +19,8 @@ export interface Parsed {
   language?: string;
   /** Number plate of the booked camper ("1022MPG"). */
   plate?: string;
+  /** Booked options; km_200 / km_unlimited = mileage plan (none = 100 km/day). */
+  extras?: string[];
   found: string[];
 }
 
@@ -59,6 +61,7 @@ export function formFromParsed(p: Parsed) {
     returnTime: p.returnTime || "10:00",
     priceTotal: price != null ? String(price) : "",
     bookingRef: p.yescapaRef ? `YES-${p.yescapaRef}` : "",
+    extras: p.extras || [],
   };
 }
 
@@ -80,7 +83,13 @@ async function ocr(file: Blob, onProgress: (p: number) => void) {
   }
 }
 
-export function YescapaPaste({ onParsed, onClose }: { onParsed: (p: Parsed) => void; onClose: () => void }) {
+export function YescapaPaste({
+  onParsed,
+  onClose,
+}: {
+  onParsed: (p: Parsed) => void;
+  onClose: () => void;
+}) {
   const [text, setText] = useState("");
   const [busy, setBusy] = useState<number | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -95,7 +104,9 @@ export function YescapaPaste({ onParsed, onClose }: { onParsed: (p: Parsed) => v
         setText(t);
         onParsed(parseYescapaBooking(t) as Parsed);
       } catch {
-        setErr("Не удалось распознать картинку. Скопируйте текст страницы Yescapa (Cmd+A, Cmd+C) и вставьте сюда.");
+        setErr(
+          "Не удалось распознать картинку. Скопируйте текст страницы Yescapa (Cmd+A, Cmd+C) и вставьте сюда.",
+        );
       } finally {
         setBusy(null);
       }
@@ -128,8 +139,8 @@ export function YescapaPaste({ onParsed, onClose }: { onParsed: (p: Parsed) => v
         </button>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">
-        Откройте бронь на Yescapa и вставьте сюда скриншот (Cmd+V) или перетащите файл. Можно и текст страницы:
-        Cmd+A, Cmd+C на странице брони, затем Cmd+V сюда. Текст распознаётся точнее.
+        Откройте бронь на Yescapa и вставьте сюда скриншот (Cmd+V) или перетащите файл. Можно и
+        текст страницы: Cmd+A, Cmd+C на странице брони, затем Cmd+V сюда. Текст распознаётся точнее.
       </p>
       <textarea
         id="yescapa-text"
@@ -146,10 +157,20 @@ export function YescapaPaste({ onParsed, onClose }: { onParsed: (p: Parsed) => v
       )}
       {err && <p className="mt-2 text-sm text-red-500">{err}</p>}
       <div className="mt-3 flex flex-wrap gap-2">
-        <button type="button" className={btn} disabled={!text.trim() || busy !== null} onClick={() => onParsed(parseYescapaBooking(text) as Parsed)}>
+        <button
+          type="button"
+          className={btn}
+          disabled={!text.trim() || busy !== null}
+          onClick={() => onParsed(parseYescapaBooking(text) as Parsed)}
+        >
           <ClipboardPaste className="h-4 w-4" /> Заполнить договор из текста
         </button>
-        <button type="button" className={btn} disabled={busy !== null} onClick={() => fileRef.current?.click()}>
+        <button
+          type="button"
+          className={btn}
+          disabled={busy !== null}
+          onClick={() => fileRef.current?.click()}
+        >
           <ImageUp className="h-4 w-4" /> Выбрать скриншот
         </button>
         <input
@@ -188,19 +209,29 @@ export function ImportsPanel({
           const p = d.parsed;
           const miss = missingFields(p);
           return (
-            <li key={d.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg bg-background/60 p-2">
+            <li
+              key={d.id}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg bg-background/60 p-2"
+            >
               <span className="font-medium">{p.guestName || "Без имени"}</span>
               <span className="text-muted-foreground">
                 {p.startDate || "?"} → {p.endDate || "?"}
                 {p.yescapaRef ? ` · #${p.yescapaRef}` : ""}
                 {p.plate ? ` · ${p.plate}` : ""}
               </span>
-              {miss.length > 0 && <span className="text-xs text-amber-500">не найдено: {miss.join(", ")}</span>}
+              {miss.length > 0 && (
+                <span className="text-xs text-amber-500">не найдено: {miss.join(", ")}</span>
+              )}
               <span className="ml-auto flex gap-2">
                 <button type="button" className={btn} onClick={() => onUse(d)}>
                   Создать договор
                 </button>
-                <button type="button" className={btn} onClick={() => onDismiss(d)} aria-label="Скрыть">
+                <button
+                  type="button"
+                  className={btn}
+                  onClick={() => onDismiss(d)}
+                  aria-label="Скрыть"
+                >
                   <X className="h-4 w-4" />
                 </button>
               </span>
@@ -212,20 +243,43 @@ export function ImportsPanel({
   );
 }
 
-export function GmailSetup({ setup, onCopied }: { setup: { key: string; script: string } | null; onCopied: () => void }) {
+export function GmailSetup({
+  setup,
+  onCopied,
+}: {
+  setup: { key: string; script: string } | null;
+  onCopied: () => void;
+}) {
   if (!setup) return null;
   return (
     <details className="mt-4 rounded-xl border border-border p-3 text-sm">
       <summary className="cursor-pointer font-semibold">Автоимпорт броней Yescapa из Gmail</summary>
       <ol className="mt-2 list-decimal space-y-1 pl-5 text-muted-foreground">
-        <li>Откройте script.google.com под тем Gmail, куда приходят письма Yescapa, и нажмите «Новый проект».</li>
+        <li>
+          Откройте script.google.com под тем Gmail, куда приходят письма Yescapa, и нажмите «Новый
+          проект».
+        </li>
         <li>Удалите всё в редакторе и вставьте код ниже (кнопка «Копировать»).</li>
-        <li>Сохраните, выберите функцию «setup» и нажмите «Выполнить». Google попросит доступ к почте: разрешите.</li>
-        <li>Готово: каждые 10 минут новые письма Yescapa о бронях появятся здесь, в блоке «Новые брони Yescapa».</li>
+        <li>
+          Сохраните, выберите функцию «setup» и нажмите «Выполнить». Google попросит доступ к почте:
+          разрешите.
+        </li>
+        <li>
+          Готово: каждые 10 минут новые письма Yescapa о бронях появятся здесь, в блоке «Новые брони
+          Yescapa».
+        </li>
       </ol>
-      <p className="mt-2 text-xs text-muted-foreground">В коде есть секретный ключ. Никому не передавайте этот код.</p>
+      <p className="mt-2 text-xs text-muted-foreground">
+        В коде есть секретный ключ. Никому не передавайте этот код.
+      </p>
       <div className="mt-2 flex gap-2">
-        <textarea readOnly value={setup.script} rows={6} className="w-full rounded-md border border-border bg-background p-2 font-mono text-xs" onFocus={(e) => e.currentTarget.select()} />
+        <textarea
+          readOnly
+          value={setup.script}
+          rows={6}
+          className="w-full rounded-md border border-border bg-background p-2 font-mono text-xs"
+          onFocus={(e) => e.currentTarget.select()}
+        />
         <button
           type="button"
           className={btn}

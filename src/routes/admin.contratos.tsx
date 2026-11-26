@@ -27,6 +27,7 @@ import {
   Search,
   X,
 } from "lucide-react";
+import { EXTRA_LABELS } from "../../shared/acta.js";
 
 export const Route = createFileRoute("/admin/contratos")({
   head: () => ({
@@ -44,6 +45,7 @@ type Status = "pending" | "signed" | "cancelled";
 
 interface Row {
   id: string;
+  extras?: string[];
   number?: string;
   vehicleId: string;
   status: Status;
@@ -139,7 +141,20 @@ const EMPTY = {
   returnTime: "10:00",
   priceTotal: "",
   bookingRef: "",
+  /** km_200 / km_unlimited (mileage plan; none = 100 km/day) and booked options. */
+  extras: [] as string[],
 };
+
+const OPTION_KEYS = [
+  "bedding",
+  "towels",
+  "bicycle",
+  "sup_board",
+  "bbq",
+  "festival",
+  "extra_driver",
+  "pet",
+];
 
 const STATUS_LABEL: Record<Status, string> = {
   pending: "Ждёт подписи",
@@ -716,6 +731,7 @@ function Admin() {
       priceTotal: String(b.totalWithIva ?? ""),
       bookingRef: b.bookingRef,
       vehicleId: b.vehicleId,
+      extras: (b.extraIds || []).filter((x) => x !== "cleaning_fee"),
     });
     setTab("contracts");
     setShowForm(true);
@@ -1119,6 +1135,54 @@ function Admin() {
                 {field("returnTime", "Время возврата", "time")}
                 {field("priceTotal", "Сумма, € (с НДС)", "number", { inputMode: "decimal" })}
                 <label className="block text-sm">
+                  <span className="mb-1 block text-muted-foreground">Пробег</span>
+                  <select
+                    className={inputCls}
+                    value={
+                      form.extras.includes("km_unlimited")
+                        ? "km_unlimited"
+                        : form.extras.includes("km_200")
+                          ? "km_200"
+                          : ""
+                    }
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        extras: [
+                          ...form.extras.filter((x) => !x.startsWith("km_")),
+                          ...(e.target.value ? [e.target.value] : []),
+                        ],
+                      })
+                    }
+                  >
+                    <option value="">100 км в сутки (включено)</option>
+                    <option value="km_200">200 км в сутки</option>
+                    <option value="km_unlimited">Без ограничения</option>
+                  </select>
+                </label>
+                <fieldset className="text-sm sm:col-span-2">
+                  <legend className="mb-1 text-muted-foreground">Доп. опции</legend>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                    {OPTION_KEYS.map((k) => (
+                      <label key={k} className="flex items-center gap-1.5">
+                        <input
+                          type="checkbox"
+                          checked={form.extras.includes(k)}
+                          onChange={(e) =>
+                            setForm({
+                              ...form,
+                              extras: e.target.checked
+                                ? [...form.extras, k]
+                                : form.extras.filter((x) => x !== k),
+                            })
+                          }
+                        />
+                        {EXTRA_LABELS[k]?.ru || k}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <label className="block text-sm">
                   <span className="mb-1 block text-muted-foreground">Источник</span>
                   <select
                     className={inputCls}
@@ -1207,6 +1271,11 @@ function Admin() {
                   </div>
                   {r.number && r.number !== r.id && (
                     <p className="mt-0.5 font-mono text-xs">№ {r.number}</p>
+                  )}
+                  {r.extras && r.extras.length > 0 && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {r.extras.map((x) => EXTRA_LABELS[x]?.ru || x).join(" · ")}
+                    </p>
                   )}
                   <p className="mt-1 text-xs text-muted-foreground">
                     {showVehicle ? `${vehicleName(r.vehicleId)} · ` : ""}

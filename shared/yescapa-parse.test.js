@@ -76,3 +76,9 @@ test("reads the camper's number plate", async () => {
   assert.equal(findPlate("Your booking for 1022 MPG is confirmed"), "1022MPG");
   assert.equal(parseYescapaBooking("Booking no. 3500001\nFrom 05/06/2027 to 12/06/2027").plate, undefined);
 });
+
+test("mileage option of the booking", () => {
+  assert.deepEqual(parseYescapaBooking("Opción kilométrica\n100 km/d\nEs decir 300 km en total").extras, []);
+  assert.deepEqual(parseYescapaBooking("Opción kilométrica 200 km/d").extras, ["km_200"]);
+  assert.deepEqual(parseYescapaBooking("Opción kilométrica\nKilometraje ilimitado").extras, ["km_unlimited"]);
+});

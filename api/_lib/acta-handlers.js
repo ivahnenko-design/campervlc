@@ -88,7 +88,10 @@ export function createActaHandler({
 
   async function prefill(contract) {
     const booking = bookingForContract(contract, await listBookings().catch(() => []));
-    const extras = (booking?.extraIds || []).filter((id) => id !== "cleaning_fee");
+    // Options typed into the contract (Yescapa bookings) win over the site booking.
+    const extras = Array.isArray(contract.extras) && contract.extras.length
+      ? contract.extras
+      : (booking?.extraIds || []).filter((id) => id !== "cleaning_fee");
     return { extras, kmPlan: kmPlanFromExtras(extras), bookingRef: booking?.bookingRef || null };
   }
 
