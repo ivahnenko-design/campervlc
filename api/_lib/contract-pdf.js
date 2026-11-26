@@ -76,7 +76,7 @@ async function stampSignatureBlock(pdf, font, contract, data, signaturePng, owne
   if (!block) return;
   const page = pdf.getPages()[block.page];
   if (!page) return;
-  const ink = rgb(0.05, 0.1, 0.3);
+  const ink = rgb(0, 0, 0);
   const put = async (png, spot) => {
     if (!png) return;
     const img = await pdf.embedPng(png);
@@ -196,7 +196,7 @@ function fillBlanks(pdf, font, contract, data, signedAt) {
   const pages = pdf.getPages();
   if (pages.length < 2) return; // not the real contract (tests use a stub)
   const white = rgb(1, 1, 1);
-  const ink = rgb(0.05, 0.1, 0.3);
+  const ink = rgb(0, 0, 0);
   const cover = (page, x0, x1, top, bottom) =>
     page.drawRectangle({ x: x0 - 0.5, y: H - bottom, width: x1 - x0 + 1, height: bottom - top, color: white });
   // Write `text` from x0 on the line whose box is top..bottom; shrink to fit before maxX.
@@ -248,8 +248,9 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   const pdf = await PDFDocument.load(basePdfBytes);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
-  fillBlanks(pdf, font, contract, data, meta?.signedAt ?? Date.now());
-  await stampSignatureBlock(pdf, font, contract, data, signaturePng, owner);
+  // Filled-in values: bold black, like a typed paper contract.
+  fillBlanks(pdf, bold, contract, data, meta?.signedAt ?? Date.now());
+  await stampSignatureBlock(pdf, bold, contract, data, signaturePng, owner);
   const page = pdf.addPage([595.28, 841.89]);
   const M = 48;
   const W = page.getWidth() - M * 2;
