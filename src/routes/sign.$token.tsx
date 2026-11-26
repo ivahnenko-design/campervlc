@@ -79,6 +79,7 @@ const TEXT: Record<
       fullName: "Full name",
       docType: "Document",
       docNumber: "Document number",
+      docExpiry: "Document expiry date",
       birthDate: "Date of birth",
       nationality: "Nationality",
       street: "Street and number",
@@ -148,6 +149,7 @@ const TEXT: Record<
       fullName: "Nombre y apellidos",
       docType: "Documento",
       docNumber: "Número de documento",
+      docExpiry: "Caducidad del documento",
       birthDate: "Fecha de nacimiento",
       nationality: "Nacionalidad",
       street: "Calle y número",
@@ -217,6 +219,7 @@ const TEXT: Record<
       fullName: "Фамилия и имя",
       docType: "Документ",
       docNumber: "Номер документа",
+      docExpiry: "Срок действия документа",
       birthDate: "Дата рождения",
       nationality: "Гражданство",
       street: "Улица и дом",
@@ -285,6 +288,7 @@ const TEXT: Record<
       fullName: "Прізвище та ім'я",
       docType: "Документ",
       docNumber: "Номер документа",
+      docExpiry: "Термін дії документа",
       birthDate: "Дата народження",
       nationality: "Громадянство",
       street: "Вулиця і будинок",
@@ -353,6 +357,7 @@ const TEXT: Record<
       fullName: "Vor- und Nachname",
       docType: "Dokument",
       docNumber: "Dokumentnummer",
+      docExpiry: "Dokument gültig bis",
       birthDate: "Geburtsdatum",
       nationality: "Staatsangehörigkeit",
       street: "Straße und Hausnummer",
@@ -422,6 +427,7 @@ const TEXT: Record<
       fullName: "Nome e cognome",
       docType: "Documento",
       docNumber: "Numero del documento",
+      docExpiry: "Scadenza del documento",
       birthDate: "Data di nascita",
       nationality: "Nazionalità",
       street: "Via e numero civico",
@@ -491,6 +497,7 @@ const TEXT: Record<
       fullName: "Voor- en achternaam",
       docType: "Document",
       docNumber: "Documentnummer",
+      docExpiry: "Document geldig tot",
       birthDate: "Geboortedatum",
       nationality: "Nationaliteit",
       street: "Straat en huisnummer",
@@ -803,6 +810,7 @@ function withConditionsLink(label: string, linkText: string, lang: Lang) {
 const BASE_FIELDS = [
   "fullName",
   "docNumber",
+  "docExpiry",
   "birthDate",
   "nationality",
   "street",
@@ -814,7 +822,7 @@ const BASE_FIELDS = [
   "licenseCountry",
   "licenseExpiry",
 ] as const;
-const DATE_FIELDS = new Set(["birthDate", "licenseExpiry"]);
+const DATE_FIELDS = new Set(["birthDate", "docExpiry", "licenseExpiry"]);
 
 function SignPage() {
   const { token } = Route.useParams();

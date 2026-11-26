@@ -90,6 +90,7 @@ const SIGN_DATA = {
   licenseNumber: "L123",
   licenseCountry: "Poland",
   licenseExpiry: "2030-01-01",
+  docExpiry: "2031-05-05",
 };
 const CONSENTS = { readContract: true, electronicSignature: true, cardAuthorization: true, liabilityClauses: true, dataProtection: true, languageNotice: true };
 

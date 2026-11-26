@@ -258,6 +258,9 @@ export async function sendCodeEmail(contract, code, deps = {}) {
 export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
   const send = deps.send || postToResend;
   const t = tr(contract.language);
+  // Greet the guest with the name they signed with, not the one typed in the admin.
+  const signedName = contract.signed?.data?.fullName;
+  if (signedName) contract = { ...contract, guestName: signedName };
   const attachment = { filename: `contrato-alquiler-${contract.id}.pdf`, content: Buffer.from(pdfBytes).toString("base64") };
   const results = await Promise.allSettled([
     send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.signedSubject, html: signedHtml(contract), attachments: [attachment] }),

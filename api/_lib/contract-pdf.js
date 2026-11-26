@@ -85,6 +85,116 @@ async function stampSignatureBlock(pdf, font, contract, data, signaturePng, owne
   page.drawText(pdfText(docText), { x: block.lesseeDoc.x, y: block.lesseeDoc.y, size: 8, font, color: ink });
 }
 
+// The blanks of the particular conditions (pages 1-2) are filled in like a
+// paper contract: the dotted line is covered with white and the value written
+// over it. Boxes from pdftotext -bbox of contrato-v7.pdf (top-left origin,
+// points); toPdf() flips them. The version line under the title is hidden.
+const H = 841.92;
+const FILL_BLANKS = {
+  "/contracts/contrato-v7.pdf": {
+    hide: [{ page: 0, x0: 140, x1: 456, top: 73.5, bottom: 84 }],
+    fields: [
+      // page 1: place and date, lessee, additional driver, booking
+      { page: 0, key: "placeDate", boxes: [[92.4, 189.7, 117.4, 127.1], [364.0, 461.3, 117.4, 127.1]], maxX: [291, 558] },
+      { page: 0, key: "fullName", line: 320.6 },
+      { page: 0, key: "doc", line: 333.4 },
+      { page: 0, key: "docDates", line: 345.4 },
+      { page: 0, key: "licenseNumber", line: 358.1 },
+      { page: 0, key: "licenseCountry", line: 381.4 },
+      { page: 0, key: "licenseDates", line: 394.1 },
+      { page: 0, key: "birth", line: 406.1 },
+      { page: 0, key: "nationality", line: 418.9 },
+      { page: 0, key: "address", line: 430.9 },
+      { page: 0, key: "contact", line: 454.9 },
+      { page: 0, key: "taxResidence", line: 466.9 },
+      { page: 0, key: "extraDriverName", line: 497.6 },
+      { page: 0, key: "extraDriverDoc", line: 509.6 },
+      { page: 0, key: "extraDriverLicense", line: 522.4 },
+      { page: 0, key: "bookingRef", boxes: [[126.4, 161.2, 776.6, 786.4], [395.5, 430.3, 776.6, 786.4]], maxX: [291, 558] },
+      // page 2: dates and price
+      { page: 1, key: "pickup", boxes: [[126.1, 223.4, 37.1, 46.9], [407.5, 504.8, 37.1, 46.9]], maxX: [291, 558] },
+      { page: 1, key: "return", boxes: [[163.4, 260.7, 62.6, 72.4], [419.0, 516.3, 62.6, 72.4]], maxX: [291, 558] },
+      { page: 1, key: "price", boxes: [[186.2, 283.5, 99.4, 109.1], [434.7, 532.0, 99.4, 109.1]], maxX: [291, 558] },
+    ],
+    // ☐ campervlc.com / Yescapa / other, Spanish and English column
+    sourceBoxes: {
+      web: [[150.7, 767.5, 157.9, 775.4], [396.0, 767.5, 403.2, 775.4]],
+      yescapa: [[219.5, 767.5, 226.6, 775.4], [464.8, 767.5, 471.9, 775.4]],
+      other: [[261.4, 767.5, 268.5, 775.4], [506.7, 767.5, 513.8, 775.4]],
+    },
+  },
+};
+
+const dmy = (iso) => (/^\d{4}-\d{2}-\d{2}$/.test(iso || "") ? iso.split("-").reverse().join("/") : iso || "");
+
+function blankValues(contract, data, signedAt) {
+  const docLabel = DOC_LABEL[data.docType] || "";
+  const address = [data.street, data.postalCode, data.city, data.country].filter(Boolean).join(", ");
+  const v = vehicleView(contract);
+  return {
+    placeDate: `${v.city || "Valencia"}, ${dmy(new Date(signedAt).toISOString().slice(0, 10))} (firma electronica / e-signature)`,
+    fullName: data.fullName,
+    doc: `${docLabel} ${data.docNumber}`.trim(),
+    docDates: data.docExpiry ? `- / ${dmy(data.docExpiry)}` : "",
+    licenseNumber: data.licenseNumber,
+    licenseCountry: data.licenseCountry,
+    licenseDates: `- / ${dmy(data.licenseExpiry)}`,
+    birth: [dmy(data.birthDate), data.birthCountry].filter(Boolean).join(", "),
+    nationality: data.nationality,
+    address,
+    contact: [data.phone, contract.email].filter(Boolean).join(" / "),
+    taxResidence: data.taxResidence || data.country,
+    extraDriverName: data.extraDriverName,
+    extraDriverDoc: data.extraDriverDoc,
+    extraDriverLicense: data.extraDriverLicense,
+    bookingRef: contract.bookingRef || "",
+    pickup: `${dmy(contract.startDate)} ${contract.pickupTime || ""}`.trim(),
+    return: `${dmy(contract.endDate)} ${contract.returnTime || ""}`.trim(),
+    price: contract.priceTotal != null ? `${contract.priceTotal} EUR` : "",
+  };
+}
+
+function fillBlanks(pdf, font, contract, data, signedAt) {
+  const spec = FILL_BLANKS[contractPdfPathOf(contract)];
+  if (!spec) return;
+  const pages = pdf.getPages();
+  if (pages.length < 2) return; // not the real contract (tests use a stub)
+  const white = rgb(1, 1, 1);
+  const ink = rgb(0.05, 0.1, 0.3);
+  const cover = (page, x0, x1, top, bottom) =>
+    page.drawRectangle({ x: x0 - 0.5, y: H - bottom, width: x1 - x0 + 1, height: bottom - top, color: white });
+  // Write `text` from x0 on the line whose box is top..bottom; shrink to fit before maxX.
+  const write = (page, text, x0, maxX, bottom) => {
+    let size = 8.8;
+    const t = pdfText(text);
+    while (size > 5.5 && font.widthOfTextAtSize(t, size) > maxX - x0) size -= 0.3;
+    page.drawText(t, { x: x0, y: H - bottom + 2.2, size, font, color: ink });
+  };
+  for (const h of spec.hide) cover(pages[h.page], h.x0, h.x1, h.top, h.bottom);
+  const values = blankValues(contract, data, signedAt);
+  for (const f of spec.fields) {
+    const value = values[f.key];
+    if (!value) continue;
+    const page = pages[f.page];
+    if (f.line != null) {
+      // Full-width dotted line of the English column.
+      cover(page, 304.2, 498.8, f.line, f.line + 9.8);
+      write(page, value, 304.2, 558, f.line + 9.8);
+    } else {
+      f.boxes.forEach(([x0, x1, top, bottom], i) => {
+        cover(page, x0, x1, top, bottom);
+        write(page, value, x0, f.maxX[i], bottom);
+      });
+    }
+  }
+  const boxes = spec.sourceBoxes[contract.source] || spec.sourceBoxes.other;
+  for (const [x0, top, x1, bottom] of boxes) {
+    const page = pages[0];
+    const size = 8;
+    page.drawText("X", { x: x0 + (x1 - x0 - font.widthOfTextAtSize("X", size)) / 2, y: H - bottom + 1.6, size, font, color: ink });
+  }
+}
+
 const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
 
 /**
@@ -102,6 +212,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   const pdf = await PDFDocument.load(basePdfBytes);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+  fillBlanks(pdf, font, contract, data, meta?.signedAt ?? Date.now());
   await stampSignatureBlock(pdf, font, contract, data, signaturePng, owner);
   const page = pdf.addPage([595.28, 841.89]);
   const M = 48;
@@ -140,7 +251,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
 
   text("Arrendatario (conductor principal)", { size: 10.5, f: bold });
   row("Nombre y apellidos", data.fullName);
-  row("Documento", `${DOC_LABEL[data.docType] || data.docType} ${data.docNumber}`);
+  row("Documento", `${DOC_LABEL[data.docType] || data.docType} ${data.docNumber}${data.docExpiry ? `, caduca ${data.docExpiry}` : ""}`);
   row("Fecha de nacimiento", data.birthDate);
   row("Nacionalidad", data.nationality);
   row("Domicilio", `${data.street}, ${data.postalCode} ${data.city}, ${data.country}`);
@@ -238,7 +349,8 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
       const cx = M + (i % 2) * (cellW + 16);
       const cyTop = ay - Math.floor(i / 2) * (cellH + 16);
       annex.drawText(DOC_TITLES[slot], { x: cx, y: cyTop - 10, size: 9, font: bold, color: grey });
-      const img = await pdf.embedJpg(docs[slot]);
+      // A fresh copy: pdf-lib's JPEG reader ignores the byteOffset of a Buffer view.
+      const img = await pdf.embedJpg(new Uint8Array(docs[slot]));
       const areaH = cellH - 18;
       const scale = Math.min(cellW / img.width, areaH / img.height);
       const w = img.width * scale;

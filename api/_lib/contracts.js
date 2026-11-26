@@ -216,6 +216,7 @@ export function checkOtp(contract, code, { now = Date.now(), secret } = {}) {
 const REQUIRED = [
   ["fullName", 120],
   ["docNumber", 40],
+  ["docExpiry", 10],
   ["nationality", 60],
   ["street", 160],
   ["city", 80],
@@ -239,7 +240,7 @@ export function validateSignData(input = {}) {
   for (const [key, max] of OPTIONAL) data[key] = clean(input[key], max);
   data.docType = DOC_TYPES.includes(input.docType) ? input.docType : null;
   if (!data.docType) throw new ContractError("field_required", "Missing docType");
-  if (!ISO_DATE.test(data.birthDate) || !ISO_DATE.test(data.licenseExpiry)) {
+  if (![data.birthDate, data.docExpiry, data.licenseExpiry].every((d) => ISO_DATE.test(d))) {
     throw new ContractError("date_invalid", "Birth date or license expiry is not a valid date");
   }
   return data;
