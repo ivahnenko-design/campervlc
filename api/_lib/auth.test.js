@@ -227,3 +227,14 @@ test("the login discount is for the first booking only: eligible until the accou
   assert.equal(memberEligible(null), false, "no account, no discount");
   assert.equal(memberEligible(undefined), false);
 });
+
+test("me marks staff accounts so the menu shows the admin link", async () => {
+  const env = { ADMIN_EMAILS: "boss@example.com", MANAGER_EMAILS: "" };
+  for (const [email, staff] of [["boss@example.com", "owner"], ["guest@example.com", undefined]]) {
+    const { call, sent } = setup({ env });
+    await call("email-code", { email });
+    const ok = await call("email-verify", { email, code: sent[0].code });
+    const me = await call("me", undefined, { cookie: sessionCookie(ok) }, "GET");
+    assert.equal(me.body.user.staff, staff);
+  }
+});

@@ -27,6 +27,7 @@ import {
   sessionFromRequest,
   userIdFor,
 } from "./auth.js";
+import { resolveStaff } from "./staff.js";
 
 const ALLOWED_HOSTS = /^(www\.)?campervlc\.com$|^localhost(:\d+)?$|^127\.0\.0\.1(:\d+)?$/;
 
@@ -58,11 +59,14 @@ export function createAuthHandlers({
   ipOf = () => "unknown",
   discountTaken = async () => false, // (email) => Promise<boolean>
   now = () => Date.now(),
+  env = process.env, // ADMIN_EMAILS / MANAGER_EMAILS: staff see the admin link
 }) {
   /** publicUser, with the discount hidden when this mailbox already had it. */
   async function view(user) {
     const pub = publicUser(user);
     if (pub.discountAvailable && (await discountTaken(user.email))) pub.discountAvailable = false;
+    const staff = resolveStaff(user.email, env);
+    if (staff) pub.staff = staff.role;
     return pub;
   }
 

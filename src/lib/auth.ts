@@ -9,6 +9,8 @@ export interface AuthUser {
   google: boolean;
   discountAvailable: boolean;
   passkeys: { id: string; createdAt: number; device: string }[];
+  /** Set for staff accounts (ADMIN_EMAILS / MANAGER_EMAILS): shows the admin link. */
+  staff?: "owner" | "manager";
 }
 
 interface AuthState {

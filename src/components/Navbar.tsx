@@ -1,7 +1,7 @@
 import { track } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, Gift, Menu, X } from "lucide-react";
+import { Check, Gift, LayoutDashboard, Menu, X } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { guidesUi } from "@/data/guides";
@@ -71,6 +71,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const { user } = useAuth();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   // On the home page, scroll to the calendar in place. From any other page the
@@ -134,6 +135,15 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
+            {user?.staff && (
+              <a
+                href="/admin/contratos"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border/60 px-3 py-2 text-sm font-medium text-foreground hover:bg-surface/70 transition"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Админка
+              </a>
+            )}
             <a
               href="/#booking"
               onClick={goToBooking}
@@ -178,6 +188,15 @@ export function Navbar() {
             >
               {guidesLabel}
             </Link>
+            {user?.staff && (
+              <a
+                href="/admin/contratos"
+                className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-surface/70"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Админка
+              </a>
+            )}
             <a
               href="/#booking"
               onClick={goToBooking}
