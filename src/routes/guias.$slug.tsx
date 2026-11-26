@@ -10,6 +10,7 @@ import {
   DEFAULT_LANGUAGE,
   LANGUAGE_CODES,
   LANGUAGE_QUERY_PARAM,
+  hrefWithLanguage,
   normalizeLanguage,
   resolveLanguage,
   type LanguageCode,
@@ -212,7 +213,7 @@ function GuidePage() {
           <div className="mt-16 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/5 via-surface to-coral/5 p-8 text-center">
             <p className="mb-6 text-muted-foreground">{guide.cta.text}</p>
             <a
-              href="/#booking"
+              href={hrefWithLanguage("/#booking", i18n.language)}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 transition"
             >
               {guide.cta.button} <ArrowRight className="h-4 w-4" />

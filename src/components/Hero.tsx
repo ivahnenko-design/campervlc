@@ -356,8 +356,14 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14 lg:px-8">
         <div className="min-w-0">
           <p className="font-poster text-xl uppercase tracking-[0.06em] text-primary sm:text-2xl">{SLOGAN}</p>
-          <h1 className="font-poster mt-3 text-5xl uppercase leading-[1.02] text-foreground text-balance sm:text-6xl lg:text-7xl">
-            {t("hero.question")}
+          {/* The H1 carries the search phrase (small line) and the poster question. */}
+          <h1 className="mt-3">
+            <span className="block font-sans text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:text-sm">
+              {t("hero.h1Keyword")}
+            </span>
+            <span className="font-poster mt-2 block text-5xl uppercase leading-[1.02] text-foreground text-balance sm:text-6xl lg:text-7xl">
+              {t("hero.question")}
+            </span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">{t("hero.routesSub")}</p>
 

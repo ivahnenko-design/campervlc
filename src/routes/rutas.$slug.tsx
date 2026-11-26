@@ -10,7 +10,7 @@ import {
   type Lang,
   type RouteContent,
 } from "@/data/routes-content";
-import { DEFAULT_LANGUAGE, resolveLanguage } from "@/i18n/language";
+import { DEFAULT_LANGUAGE, hrefWithLanguage, resolveLanguage } from "@/i18n/language";
 
 export const Route = createFileRoute("/rutas/$slug")({
   head: ({ params }) => {
@@ -237,7 +237,7 @@ function RoutePageComponent() {
             {t(route.ctaText)}
           </p>
           <a
-            href="/#booking"
+            href={hrefWithLanguage("/#booking", i18n.language)}
             className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 transition"
           >
             {t(route.ctaButton)} <ArrowRight className="h-4 w-4" />

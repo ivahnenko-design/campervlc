@@ -7,13 +7,13 @@ import {
   HeadContent,
   Scripts,
   useRouterState,
+  retainSearchParams,
 } from "@tanstack/react-router";
 import { useEffect, useMemo, type ReactNode } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
 import appCss from "../styles.css?url";
-import es from "../i18n/translations/es.json";
-import { FAQ_ITEMS } from "../data/faq";
+import { LanguageSuggestion } from "../components/LanguageSuggestion";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import {
   getI18nForLanguage,
@@ -85,6 +85,14 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  // The language of a page is in its URL (?lang=xx, none for Spanish). Every
+  // <Link> keeps it, so a crawler on the English page follows links to the
+  // English pages, not to the Spanish ones.
+  validateSearch: (search: Record<string, unknown>): { lang?: string } => {
+    const lang = normalizeLanguage(typeof search.lang === "string" ? search.lang : undefined);
+    return lang && lang !== "es" ? { lang } : {};
+  },
+  search: { middlewares: [retainSearchParams(["lang"])] },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -122,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               name: "Camper Retreat VLC",
               url: "https://campervlc.com/",
               logo: "https://campervlc.com/logo.png",
-              image: "https://storage.googleapis.com/gpt-engineer-file-uploads/7AUCddPgEWP1Sj3FUNVJ85dltA63/social-images/social-1782331138031-logonew.webp",
+              image: ["https://campervlc.com/images/og-home.jpg", "https://campervlc.com/images/fleet/yearling-main.jpg"],
               description:
                 "Alquiler de autocaravana McLouis Yearling 89G en Valencia. Hasta 5 personas, con menaje, gas y seguro a todo riesgo incluidos. Reserva online.",
               telephone: "+34624038085",
@@ -140,11 +148,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 longitude: -0.3583681,
               },
               sameAs: ["https://www.instagram.com/camper.retreat.vlc"],
+              // Google Business Profile of this place (CID from the Maps share link).
+              hasMap: "https://maps.google.com/?cid=11642764074792522133",
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "reservations",
                 telephone: "+34624038085",
-                contactOption: "TollFree",
                 availableLanguage: ["Spanish", "English", "German", "Italian", "Dutch", "Russian", "Ukrainian"],
               },
               openingHoursSpecification: {
@@ -160,9 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             {
               "@type": "Product",
               name: "McLouis Yearling 89G - Alquiler autocaravana Valencia",
-              image: [
-                "https://yescapa.twic.pics/rental/picture/b21e5a9f-a4d1-446d-b92c-c86a11a0e037_1728652498",
-              ],
+              image: ["https://campervlc.com/images/fleet/yearling-main.jpg"],
               description:
                 "Alquiler de autocaravana para 5 personas en Valencia. A/C, ducha, cocina completa, panel solar, pet friendly.",
               brand: { "@type": "Brand", name: "McLouis" },
@@ -176,21 +183,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               },
             },
           ],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: FAQ_ITEMS.map((n) => ({
-            "@type": "Question",
-            name: (es.faq as Record<string, string>)[`q${n}`],
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: (es.faq as Record<string, string>)[`a${n}`],
-            },
-          })),
         }),
       },
     ],
@@ -245,6 +237,7 @@ function RootComponent() {
       <QueryClientProvider client={queryClient}>
         <RootHead />
         <Outlet />
+        <LanguageSuggestion />
       </QueryClientProvider>
     </I18nextProvider>
   );
@@ -268,9 +261,14 @@ function RootHead() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Remember a language only when it was chosen: an explicit ?lang= in the URL
+  // (or the switcher, which saves it itself). A plain Spanish visit is not a
+  // choice, so a first-time visitor can still be offered their own language.
   useEffect(() => {
     const lang = normalizeLanguage(i18n.language);
-    if (lang) persistLanguage(lang);
+    if (!lang) return;
+    document.documentElement.lang = lang;
+    if (new URLSearchParams(window.location.search).has(LANGUAGE_QUERY_PARAM)) persistLanguage(lang);
   }, [i18n.language]);
 
   // The home-page title/description below belong to "/" only. Every other

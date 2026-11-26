@@ -1,9 +1,5 @@
 import { createIsomorphicFn } from "@tanstack/react-start";
-import {
-  getCookie,
-  getRequestHeader,
-  getRequestUrl,
-} from "@tanstack/react-start/server";
+import { getCookie, getRequestUrl } from "@tanstack/react-start/server";
 
 export const LANGUAGES = [
   { code: "es", flag: "🇪🇸", label: "ES" },
@@ -65,7 +61,7 @@ function readDocumentCookie(name: string): string | null {
 /**
  * Resolves the language for the current render.
  *
- * Server: ?lang= → cookie → Accept-Language → default.
+ * Server: ?lang= → cookie → default (never Accept-Language, see above).
  * Client: the <html lang> the server just rendered, so hydration always
  * matches. Only when that is missing does it fall back to its own chain.
  */
@@ -77,11 +73,13 @@ export const resolveLanguage = createIsomorphicFn()
       );
       if (fromQuery) return fromQuery;
 
+      // A language the visitor chose before (cookie). Crawlers never carry it,
+      // so for them a URL without ?lang= is always the Spanish page its
+      // canonical / hreflang say it is. The browser language is NOT used on the
+      // server (it made "/" return English to some crawlers); the client offers
+      // a switch instead (LanguageSuggestion).
       const fromCookie = normalizeLanguage(getCookie(LANGUAGE_COOKIE));
       if (fromCookie) return fromCookie;
-
-      const fromHeader = pickFromAcceptLanguage(getRequestHeader("accept-language"));
-      if (fromHeader) return fromHeader;
     } catch {
       // Rendered outside a request context (e.g. prerender) — fall through.
     }
@@ -131,4 +129,13 @@ export function persistLanguage(lang: LanguageCode): void {
   } catch {
     // ignore
   }
+}
+
+/** Same URL with ?lang= set for `lang` (removed for Spanish, the default). */
+export function hrefWithLanguage(href: string, lang: string | null | undefined): string {
+  const code = normalizeLanguage(lang);
+  const url = new URL(href, "https://campervlc.com");
+  if (code && code !== DEFAULT_LANGUAGE) url.searchParams.set(LANGUAGE_QUERY_PARAM, code);
+  else url.searchParams.delete(LANGUAGE_QUERY_PARAM);
+  return `${url.pathname}${url.search}${url.hash}`;
 }

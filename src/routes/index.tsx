@@ -13,6 +13,7 @@ import it from "@/i18n/translations/it.json";
 import nl from "@/i18n/translations/nl.json";
 import ru from "@/i18n/translations/ru.json";
 import uk from "@/i18n/translations/uk.json";
+import { FAQ_ITEMS } from "@/data/faq";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Fleet } from "@/components/Fleet";
@@ -26,9 +27,24 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 const SITE = "https://campervlc.com";
+const T = { es, en, de, it, nl, ru, uk } as const;
 const META: Record<LanguageCode, { title: string; description: string }> = {
   es: es.meta, en: en.meta, de: de.meta, it: it.meta, nl: nl.meta, ru: ru.meta, uk: uk.meta,
 };
+
+/** FAQPage data in the page's language: the same questions the FAQ section shows. */
+function faqSchema(lang: LanguageCode) {
+  const faq = T[lang].faq as Record<string, string>;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((n) => ({
+      "@type": "Question",
+      name: faq[`q${n}`],
+      acceptedAnswer: { "@type": "Answer", text: faq[`a${n}`] },
+    })),
+  };
+}
 
 // Spanish lives at "/", the other languages at "/?lang=xx" (the URLs in the sitemap).
 const homeUrl = (lang: LanguageCode) =>
@@ -51,6 +67,7 @@ export const Route = createFileRoute("/")({
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
       ],
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(faqSchema(lang)) }],
       links: [
         { rel: "canonical", href: url },
         { rel: "alternate", hrefLang: "x-default", href: homeUrl(DEFAULT_LANGUAGE) },

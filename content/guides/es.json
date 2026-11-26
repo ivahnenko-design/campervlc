@@ -8,7 +8,7 @@
     "routes": "Rutas en autocaravana desde Valencia",
     "breadcrumbHome": "Inicio",
     "book": "Reservar ahora",
-    "indexTitle": "Guías para alquilar una autocaravana en Valencia",
+    "indexTitle": "Guías para alquilar camper en Valencia",
     "indexDescription": "Requisitos, precios por temporada, mejor época y equipamiento de nuestra autocaravana McLouis para 5 personas en Valencia.",
     "calTitle": "Calendario de temporadas 2027",
     "calLow": "Baja",
@@ -22,8 +22,8 @@
   },
   "guides": {
     "alquilar-autocaravana-valencia": {
-      "metaTitle": "Alquilar una autocaravana en Valencia: requisitos, precio y fianza | Camper Retreat VLC",
-      "metaDescription": "Todo lo que necesitas para alquilar una camper o autocaravana en Valencia: edad, carnet, precio por noche, qué incluye, fianza de 900 €, kilómetros y cancelación.",
+      "metaTitle": "Alquiler autocaravana Valencia: requisitos, precio y fianza",
+      "metaDescription": "Alquiler de autocaravana o camper en Valencia: edad, carnet, precio por noche, qué incluye, fianza de 900 €, kilómetros y cancelación.",
       "h1": "Alquilar una autocaravana en Valencia: requisitos, precio y fianza",
       "intro": "Si buscas alquilar una camper o autocaravana en Valencia, esta guía resume lo que necesitas saber antes de reservar: quién puede conducir, cuánto cuesta cada noche, qué incluye el precio, cómo funciona la fianza y qué pasa si cambias de planes. Los datos son los de nuestra autocaravana McLouis Yearling 89 para hasta 5 personas.",
       "updated": "octubre de 2026",
@@ -145,8 +145,8 @@
       }
     },
     "mejor-epoca-autocaravana-valencia": {
-      "metaTitle": "Mejor época para viajar en autocaravana por Valencia: temporadas y precios 2027 | Camper Retreat VLC",
-      "metaDescription": "Cuándo alquilar una autocaravana en Valencia: temporadas baja, media, alta y superalta de 2027, precios por noche, estancia mínima, Fallas, Semana Santa y verano.",
+      "metaTitle": "Alquiler autocaravana Valencia: mejor época y precios 2027",
+      "metaDescription": "Cuándo alquilar autocaravana en Valencia: temporadas baja, media, alta y superalta 2027, precios por noche, estancia mínima, Fallas, Semana Santa y verano.",
       "h1": "Mejor época para viajar en autocaravana por Valencia: temporadas y precios 2027",
       "intro": "Valencia y la costa mediterránea se pueden recorrer en autocaravana todo el año. Lo que cambia con la fecha es el ambiente, la afluencia y el precio. Esta guía te ayuda a elegir cuándo viajar y muestra el calendario de temporadas de nuestra autocaravana en 2027.",
       "updated": "octubre de 2026",
@@ -237,8 +237,8 @@
       }
     },
     "autocaravana-5-plazas-valencia": {
-      "metaTitle": "Autocaravana 5 plazas con ducha, A/C y pet friendly en Valencia: equipamiento | Camper Retreat VLC",
-      "metaDescription": "Ficha de la autocaravana McLouis Yearling 89 para alquilar en Valencia: 5 plazas, aire acondicionado, calefacción, ducha, WC, nevera con congelador, Smart TV y equipamiento incluido.",
+      "metaTitle": "Alquiler autocaravana 5 plazas Valencia: ducha y A/C",
+      "metaDescription": "Alquiler de autocaravana McLouis Yearling 89 en Valencia: 5 plazas, aire acondicionado, calefacción, ducha, WC, nevera con congelador y Smart TV incluidos.",
       "h1": "Autocaravana de 5 plazas con ducha, aire acondicionado y pet friendly en Valencia",
       "intro": "Esta es la ficha completa de la autocaravana que alquilamos en Valencia: una McLouis Yearling 89 sobre Renault Master de 2024, pensada para viajar hasta 5 personas con todo el equipamiento incluido.",
       "updated": "octubre de 2026",

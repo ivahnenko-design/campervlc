@@ -7,13 +7,14 @@
   "scripts": {
     "dev": "vite dev",
     "check:content": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs",
-    "prebuild": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs && node scripts/check-guides.mjs",
+    "prebuild": "node scripts/check-conditions.mjs && node scripts/check-curly-quotes.mjs && node scripts/check-guides.mjs && node scripts/sitemap.mjs --check",
     "test": "node --test shared/pricing.test.js shared/cancellation.test.js shared/booking-changes.test.js api/_lib/manage.test.js api/_lib/blob.test.js api/_lib/review.test.js api/_lib/contracts.test.js api/_lib/contract-auto.test.js shared/yescapa-parse.test.js api/_lib/auth.test.js api/_lib/security.test.js api/_lib/vehicles.test.js api/_lib/staff.test.js shared/acta.test.js shared/sign-rules.test.js shared/mrz.test.js api/_lib/doc-extract.test.js api/_lib/actas.test.js",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sitemap": "node scripts/sitemap.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.14.0",

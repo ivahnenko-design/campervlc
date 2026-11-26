@@ -8,7 +8,7 @@ import { guidesUi } from "@/data/guides";
 
 /** Guide with the season calendar and nightly prices, linked from the menu. */
 const PRICES_GUIDE = "mejor-epoca-autocaravana-valencia";
-import { DEFAULT_LANGUAGE, normalizeLanguage } from "@/i18n/language";
+import { DEFAULT_LANGUAGE, hrefWithLanguage, normalizeLanguage } from "@/i18n/language";
 import { LoginDialog } from "./LoginDialog";
 import { BrandMark } from "./BrandMark";
 import { loadAuth, logout, openLogin, useAuth } from "@/lib/auth";
@@ -112,7 +112,7 @@ export function Navbar() {
             {SECTIONS.map((s) => (
               <a
                 key={s}
-                href={`/#${s}`}
+                href={hrefWithLanguage(`/#${s}`, i18n.language)}
                 className={`text-sm hover:text-foreground transition-colors ${linkTone}`}
               >
                 {t(`nav.${s}`)}
@@ -145,7 +145,7 @@ export function Navbar() {
               </a>
             )}
             <a
-              href="/#booking"
+              href={hrefWithLanguage("/#booking", i18n.language)}
               onClick={goToBooking}
               className="hidden sm:inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground glow-amber hover:brightness-110 transition"
             >
@@ -166,7 +166,7 @@ export function Navbar() {
             {SECTIONS.map((s) => (
               <a
                 key={s}
-                href={`/#${s}`}
+                href={hrefWithLanguage(`/#${s}`, i18n.language)}
                 onClick={() => setMobileOpen(false)}
                 className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface/70"
               >
@@ -198,7 +198,7 @@ export function Navbar() {
               </a>
             )}
             <a
-              href="/#booking"
+              href={hrefWithLanguage("/#booking", i18n.language)}
               onClick={goToBooking}
               className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
             >

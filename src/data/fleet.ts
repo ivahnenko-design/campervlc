@@ -28,7 +28,7 @@ export interface Camper {
 /** Page-only data per vehicle id. Add an entry when a new camper gets photos. */
 const UI: Record<string, Omit<Camper, "id" | "name" | "location" | "capacity" | "vehicle">> = {
   "vlc-yearling": {
-    image: "https://yescapa.twic.pics/rental/picture/b21e5a9f-a4d1-446d-b92c-c86a11a0e037_1728652498",
+    image: "/images/fleet/yearling-main.jpg",
     photos: GALLERY,
     tiles: [
       { src: "/images/tiles/kitchen.jpg", labelKey: "kitchen", at: 16 },
