@@ -830,6 +830,8 @@ function SignPage() {
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
   const [uploaded, setUploaded] = useState<Partial<Record<DocSlot, boolean>>>({});
+  // After a failed "send code" every missing item is outlined in red.
+  const [tried, setTried] = useState(false);
 
   const lang = pickLang(search.lang, contract?.language);
   const t = TEXT[lang];
@@ -871,12 +873,30 @@ function SignPage() {
     "languageNotice",
   ].every((k) => consents[k]);
 
+  const docsDone = docSlotsFor(form.docType).every((k) => uploaded[k]);
+
   async function askCode() {
     setError(null);
-    if (!filled) return setError(t.fillAll);
-    if (!docSlotsFor(form.docType).every((k) => uploaded[k])) return setError(d.needDocs);
-    if (!signature) return setError(t.needSignature);
-    if (!allConsents) return setError(t.errors.consent_required);
+    const problem = !filled
+      ? t.fillAll
+      : !docsDone
+        ? d.needDocs
+        : !signature
+          ? t.needSignature
+          : !allConsents
+            ? t.errors.consent_required
+            : null;
+    if (problem) {
+      setTried(true);
+      setError(problem);
+      // Bring the first missing item into view once React has outlined it.
+      requestAnimationFrame(() => {
+        const el = document.querySelector<HTMLElement>("[data-missing='true']");
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (el instanceof HTMLInputElement) el.focus({ preventScroll: true });
+      });
+      return;
+    }
     setBusy(true);
     try {
       const j = await post({ action: "code" });
@@ -993,18 +1013,25 @@ function SignPage() {
               ))}
             </select>
           </label>
-          {BASE_FIELDS.map((k) => (
-            <label key={k} className="block text-sm">
-              <span className="mb-1 block text-muted-foreground">{t.labels[k]}</span>
-              <input
-                className={inputCls}
-                type={DATE_FIELDS.has(k) ? "date" : k === "phone" ? "tel" : "text"}
-                value={form[k] || ""}
-                onChange={(e) => set(k, e.target.value)}
-                autoComplete="off"
-              />
-            </label>
-          ))}
+          {BASE_FIELDS.map((k) => {
+            const missing = tried && !(form[k] || "").trim();
+            return (
+              <label key={k} className="block text-sm">
+                <span className={`mb-1 block ${missing ? "text-destructive" : "text-muted-foreground"}`}>
+                  {t.labels[k]} <span className="text-destructive">*</span>
+                </span>
+                <input
+                  className={`${inputCls} ${missing ? "border-destructive ring-1 ring-destructive" : ""}`}
+                  type={DATE_FIELDS.has(k) ? "date" : k === "phone" ? "tel" : "text"}
+                  value={form[k] || ""}
+                  onChange={(e) => set(k, e.target.value)}
+                  autoComplete="off"
+                  aria-invalid={missing || undefined}
+                  data-missing={missing || undefined}
+                />
+              </label>
+            );
+          })}
         </div>
 
         <h3 className="mt-5 text-sm font-semibold">{t.extraDriver}</h3>
@@ -1032,6 +1059,7 @@ function SignPage() {
               key={slot}
               label={slot === "idFront" && form.docType === "passport" ? d.passportPage : d.labels[slot]}
               passport={slot === "idFront" && form.docType === "passport"}
+              missing={tried && !uploaded[slot]}
               texts={d}
               onImage={async (image) => {
                 setUploaded((u) => ({ ...u, [slot]: false }));
@@ -1045,14 +1073,21 @@ function SignPage() {
 
       <section className="mt-5">
         <h2 className="font-semibold">{t.signHere}</h2>
-        <div className="mt-2">
+        <div
+          className={`mt-2 rounded-lg ${tried && !signature ? "ring-2 ring-destructive" : ""}`}
+          data-missing={(tried && !signature) || undefined}
+        >
           <SignaturePad onChange={setSignature} clearLabel={t.clear} />
         </div>
       </section>
 
       <section className="mt-5 space-y-2 text-sm">
         {Object.entries(t.consents).map(([k, label]) => (
-          <label key={k} className="flex items-start gap-2">
+          <label
+            key={k}
+            className={`flex items-start gap-2 ${tried && !consents[k] ? "rounded-md text-destructive ring-1 ring-destructive" : ""}`}
+            data-missing={(tried && !consents[k]) || undefined}
+          >
             <input
               type="checkbox"
               className="mt-1"

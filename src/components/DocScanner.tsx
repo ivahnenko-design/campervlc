@@ -63,11 +63,14 @@ const canUseCamera = () =>
 export function DocScanner({
   label,
   passport = false,
+  missing = false,
   texts,
   onImage,
 }: {
   label: string;
   passport?: boolean;
+  /** Outline in red: the guest tried to continue without this photo. */
+  missing?: boolean;
   texts: ScanTexts;
   /** Uploads the JPEG data URL; rejects on failure. */
   onImage: (dataUrl: string) => Promise<void>;
@@ -100,9 +103,14 @@ export function DocScanner({
   }
 
   return (
-    <div className="rounded-xl border border-border p-3">
+    <div
+      className={`rounded-xl border p-3 ${missing ? "border-destructive ring-1 ring-destructive" : "border-border"}`}
+      data-missing={missing || undefined}
+    >
       <div className="flex items-center justify-between gap-2">
-        <span className="text-sm font-medium">{label}</span>
+        <span className={`text-sm font-medium ${missing ? "text-destructive" : ""}`}>
+          {label} <span className="text-destructive">*</span>
+        </span>
         {state === "done" && (
           <span className="flex items-center gap-1 text-xs text-green-500">
             <CheckCircle className="h-4 w-4" /> {texts.uploaded}
