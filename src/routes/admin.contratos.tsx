@@ -2,7 +2,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ActaEditor } from "@/components/admin/ActaEditor";
 import { DocPhotos, OwnerSignature } from "@/components/admin/OwnerSignature";
-import { formFromParsed, GmailSetup, ImportsPanel, missingFields, YescapaPaste, type ImportDraft, type Parsed } from "@/components/admin/YescapaImport";
+import {
+  formFromParsed,
+  GmailSetup,
+  ImportsPanel,
+  missingFields,
+  YescapaPaste,
+  type ImportDraft,
+  type Parsed,
+} from "@/components/admin/YescapaImport";
 import { LoginDialog } from "@/components/LoginDialog";
 import { loadAuth, logout as logoutAccount, openLogin, useAuth } from "@/lib/auth";
 import { vehicleByPlate } from "../../shared/vehicles.js";
@@ -36,6 +44,7 @@ type Status = "pending" | "signed" | "cancelled";
 
 interface Row {
   id: string;
+  number?: string;
   vehicleId: string;
   status: Status;
   guestName: string;
@@ -100,7 +109,11 @@ interface Me {
   via: "token" | "session";
   vehicles: { id: string; name: string; city: string; plate: string; label: string }[];
   multiVehicle: boolean;
-  staff: null | { admins: string[]; managers: { email: string; vehicleIds: string[] }[]; token: boolean };
+  staff: null | {
+    admins: string[];
+    managers: { email: string; vehicleIds: string[] }[];
+    token: boolean;
+  };
   ownerSignature?: boolean | null;
   ownerSignerName?: string | null;
 }
@@ -162,6 +175,7 @@ const FIELD_LABEL: Record<string, string> = {
   licenseNumber: "Права №",
   licenseCountry: "Права выданы",
   licenseIssued: "Права выданы (дата)",
+  licenseBSince: "Категория B с",
   licenseExpiry: "Права до",
   extraDriverName: "Доп. водитель",
   extraDriverDoc: "Документ доп. водителя",
@@ -303,7 +317,10 @@ function Admin() {
   const [importId, setImportId] = useState<string | null>(null);
   // Handover reports: "<contractId>-<kind>" -> draft | signed, and the one open full-screen.
   const [actaStatus, setActaStatus] = useState<Record<string, "draft" | "signed">>({});
-  const [actaOpen, setActaOpen] = useState<{ contractId: string; kind: "checkin" | "checkout" } | null>(null);
+  const [actaOpen, setActaOpen] = useState<{
+    contractId: string;
+    kind: "checkin" | "checkout";
+  } | null>(null);
 
   const storedToken = () => {
     try {
@@ -356,8 +373,12 @@ function Admin() {
     try {
       const r = await actaApi("view=summary");
       if (!r.ok) return;
-      const j = (await r.json()) as { actas: { contractId: string; kind: string; status: "draft" | "signed" }[] };
-      setActaStatus(Object.fromEntries(j.actas.map((a) => [`${a.contractId}-${a.kind}`, a.status])));
+      const j = (await r.json()) as {
+        actas: { contractId: string; kind: string; status: "draft" | "signed" }[];
+      };
+      setActaStatus(
+        Object.fromEntries(j.actas.map((a) => [`${a.contractId}-${a.kind}`, a.status])),
+      );
     } catch {
       /* the list works without it */
     }
@@ -374,13 +395,19 @@ function Admin() {
       const r = await api("view=me");
       if (r.status === 503) {
         setPhase("login");
-        return setNotice({ kind: "err", text: "Доступ в админку не настроен: задайте ADMIN_EMAILS (или ADMIN_TOKEN) в Vercel." });
+        return setNotice({
+          kind: "err",
+          text: "Доступ в админку не настроен: задайте ADMIN_EMAILS (или ADMIN_TOKEN) в Vercel.",
+        });
       }
       if (r.status === 401) {
         if (token) {
           forgetToken();
           setToken("");
-          setNotice({ kind: "err", text: "Сохранённый токен не подошёл. Войдите через аккаунт сайта." });
+          setNotice({
+            kind: "err",
+            text: "Сохранённый токен не подошёл. Войдите через аккаунт сайта.",
+          });
           return;
         }
         setPhase(auth.user ? "noaccess" : "login");
@@ -433,7 +460,10 @@ function Admin() {
       if (b.ok) setBookings(((await b.json()) as { bookings: Booking[] }).bookings);
       if (cal?.ok) setFeeds(((await cal.json()) as { feeds?: Feed[] }).feeds || []);
       if (imp.ok) {
-        const j = (await imp.json()) as { imports: ImportDraft[]; setup: { key: string; script: string } | null };
+        const j = (await imp.json()) as {
+          imports: ImportDraft[];
+          setup: { key: string; script: string } | null;
+        };
         setImports(j.imports || []);
         setImportSetup(j.setup);
       }
@@ -484,7 +514,7 @@ function Admin() {
       .filter(
         (r) =>
           !q ||
-          [r.guestName, r.email, r.bookingRef, r.phone].some((v) =>
+          [r.guestName, r.email, r.bookingRef, r.phone, r.number].some((v) =>
             (v || "").toLowerCase().includes(q),
           ),
       )
@@ -566,18 +596,30 @@ function Admin() {
     setShowForm(true);
     const miss = missingFields(p);
     if (p.plate && wanted !== mine) {
-      setNotice({ kind: "err", text: `Номер ${p.plate} не совпадает с вашими автодомами. Проверьте автодом в форме.` });
+      setNotice({
+        kind: "err",
+        text: `Номер ${p.plate} не совпадает с вашими автодомами. Проверьте автодом в форме.`,
+      });
       return;
     }
     setNotice(
       miss.length
-        ? { kind: "err", text: `Проверьте форму: не нашёл ${miss.join(", ")}. Остальное заполнено.` }
-        : { kind: "ok", text: "Форма заполнена из брони Yescapa. Проверьте данные и создайте договор." },
+        ? {
+            kind: "err",
+            text: `Проверьте форму: не нашёл ${miss.join(", ")}. Остальное заполнено.`,
+          }
+        : {
+            kind: "ok",
+            text: "Форма заполнена из брони Yescapa. Проверьте данные и создайте договор.",
+          },
     );
   }
 
   async function dismissImport(d: ImportDraft) {
-    await api("", { method: "POST", body: JSON.stringify({ action: "import_dismiss", importId: d.id }) });
+    await api("", {
+      method: "POST",
+      body: JSON.stringify({ action: "import_dismiss", importId: d.id }),
+    });
     setImports((xs) => xs.filter((x) => x.id !== d.id));
   }
 
@@ -705,16 +747,35 @@ function Admin() {
       if (date >= today && date <= limit) items.push({ date, time, kind, name, signed });
     };
     // With several campers, say which one (its city).
-    const where = (id: string) => (showVehicle ? ` · ${myVehicles.find((v) => v.id === id)?.city || id}` : "");
+    const where = (id: string) =>
+      showVehicle ? ` · ${myVehicles.find((v) => v.id === id)?.city || id}` : "";
     for (const r of rows) {
       if (r.status === "cancelled") continue;
-      add(r.startDate, r.pickupTime, "Выдача", r.guestName + where(r.vehicleId), r.status === "signed");
+      add(
+        r.startDate,
+        r.pickupTime,
+        "Выдача",
+        r.guestName + where(r.vehicleId),
+        r.status === "signed",
+      );
       add(r.endDate, r.returnTime, "Возврат", r.guestName + where(r.vehicleId), null);
     }
     for (const b of bookings) {
       if (b.status === "cancelled" || contractFor(b)) continue;
-      add(b.startDate, b.pickupTime || "", "Выдача", `${b.guestName} (сайт)${where(b.vehicleId)}`, false);
-      add(b.endDate, b.returnTime || "", "Возврат", `${b.guestName} (сайт)${where(b.vehicleId)}`, null);
+      add(
+        b.startDate,
+        b.pickupTime || "",
+        "Выдача",
+        `${b.guestName} (сайт)${where(b.vehicleId)}`,
+        false,
+      );
+      add(
+        b.endDate,
+        b.returnTime || "",
+        "Возврат",
+        `${b.guestName} (сайт)${where(b.vehicleId)}`,
+        null,
+      );
     }
     return items.sort((a, b) => (a.date + a.time < b.date + b.time ? -1 : 1)).slice(0, 6);
   }, [rows, bookings, contractFor, showVehicle, myVehicles]);
@@ -743,15 +804,17 @@ function Admin() {
       <main className="mx-auto max-w-sm bg-background px-4 py-16 text-foreground">
         <h1 className="font-display text-2xl">Админка</h1>
         <p className="mt-1 text-sm text-muted-foreground">Camper Retreat VLC</p>
-        {phase === "checking" && <Loader2 className="mt-6 h-5 w-5 animate-spin text-muted-foreground" />}
+        {phase === "checking" && (
+          <Loader2 className="mt-6 h-5 w-5 animate-spin text-muted-foreground" />
+        )}
         {phase === "noaccess" && (
           <div className="mt-6 rounded-xl border border-border p-4 text-sm">
             <p>
               У аккаунта <strong>{auth.user?.email}</strong> нет доступа к админке.
             </p>
             <p className="mt-2 text-muted-foreground">
-              Попросите владельца добавить этот e-mail в ADMIN_EMAILS или MANAGER_EMAILS, либо войдите другим
-              аккаунтом.
+              Попросите владельца добавить этот e-mail в ADMIN_EMAILS или MANAGER_EMAILS, либо
+              войдите другим аккаунтом.
             </p>
             <button className={`${btn} mt-4`} onClick={logout}>
               <LogOut className="h-4 w-4" /> Выйти
@@ -763,8 +826,13 @@ function Admin() {
             <button className={`${btnPrimary} mt-6 w-full`} onClick={() => openLogin()}>
               Войти через аккаунт сайта
             </button>
-            <p className="mt-2 text-xs text-muted-foreground">Код на e-mail, Google или ключ доступа (passkey).</p>
-            <button className="mt-6 text-xs text-muted-foreground underline" onClick={() => setShowToken((v) => !v)}>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Код на e-mail, Google или ключ доступа (passkey).
+            </p>
+            <button
+              className="mt-6 text-xs text-muted-foreground underline"
+              onClick={() => setShowToken((v) => !v)}
+            >
               Войти по токену (старый способ)
             </button>
             {showToken && (
@@ -776,8 +844,12 @@ function Admin() {
                   autoComplete="current-password"
                 />
                 <label className="mt-3 flex items-center gap-2 text-sm">
-                  <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> Запомнить
-                  на этом устройстве
+                  <input
+                    type="checkbox"
+                    checked={remember}
+                    onChange={(e) => setRemember(e.target.checked)}
+                  />{" "}
+                  Запомнить на этом устройстве
                 </label>
                 <button className={`${btnPrimary} mt-4 w-full`}>Войти</button>
               </form>
@@ -812,7 +884,10 @@ function Admin() {
           <h1 className="font-display text-2xl">Админка</h1>
           {me?.email && (
             <p className="text-xs text-muted-foreground">
-              {me.email} · {me.role === "owner" ? "владелец" : `менеджер: ${myVehicles.map((v) => v.city).join(", ") || "—"}`}
+              {me.email} ·{" "}
+              {me.role === "owner"
+                ? "владелец"
+                : `менеджер: ${myVehicles.map((v) => v.city).join(", ") || "—"}`}
             </p>
           )}
         </div>
@@ -856,18 +931,29 @@ function Admin() {
 
       {feeds.length > 0 && (
         <details className="mt-4 rounded-xl border border-border p-3 text-sm">
-          <summary className="cursor-pointer font-semibold">Календарь броней сайта (для Yescapa)</summary>
+          <summary className="cursor-pointer font-semibold">
+            Календарь броней сайта (для Yescapa)
+          </summary>
           <p className="mt-2 text-muted-foreground">
-            Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона. Никому
-            больше не передавайте — по ней видны даты всех броней.
-            {feeds.length > 1 ? " У каждого автодома своя ссылка: вставьте её в объявление этого автодома." : ""}
+            Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона.
+            Никому больше не передавайте — по ней видны даты всех броней.
+            {feeds.length > 1
+              ? " У каждого автодома своя ссылка: вставьте её в объявление этого автодома."
+              : ""}
           </p>
           {feeds.map((f) =>
             f.url ? (
               <div key={f.id} className="mt-2">
-                {feeds.length > 1 && <p className="mb-1 text-xs text-muted-foreground">{f.label}</p>}
+                {feeds.length > 1 && (
+                  <p className="mb-1 text-xs text-muted-foreground">{f.label}</p>
+                )}
                 <div className="flex gap-2">
-                  <input readOnly value={f.url} className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs" onFocus={(e) => e.currentTarget.select()} />
+                  <input
+                    readOnly
+                    value={f.url}
+                    className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs"
+                    onFocus={(e) => e.currentTarget.select()}
+                  />
                   <button
                     className={btn}
                     onClick={() => {
@@ -887,7 +973,9 @@ function Admin() {
       {me?.staff && (
         <details className="mt-4 rounded-xl border border-border p-3 text-sm">
           <summary className="cursor-pointer font-semibold">Доступ к админке</summary>
-          <p className="mt-2 text-muted-foreground">Только для просмотра. Меняется в Vercel: ADMIN_EMAILS и MANAGER_EMAILS.</p>
+          <p className="mt-2 text-muted-foreground">
+            Только для просмотра. Меняется в Vercel: ADMIN_EMAILS и MANAGER_EMAILS.
+          </p>
           <ul className="mt-2 space-y-1">
             {me.staff.admins.map((e) => (
               <li key={`a-${e}`}>
@@ -896,10 +984,15 @@ function Admin() {
             ))}
             {me.staff.managers.map((m) => (
               <li key={`m-${m.email}`}>
-                {m.email} · <span className="text-muted-foreground">менеджер: {m.vehicleIds.map(vehicleName).join(", ")}</span>
+                {m.email} ·{" "}
+                <span className="text-muted-foreground">
+                  менеджер: {m.vehicleIds.map(vehicleName).join(", ")}
+                </span>
               </li>
             ))}
-            {me.staff.token && <li className="text-muted-foreground">+ общий токен ADMIN_TOKEN (полный доступ)</li>}
+            {me.staff.token && (
+              <li className="text-muted-foreground">+ общий токен ADMIN_TOKEN (полный доступ)</li>
+            )}
           </ul>
         </details>
       )}
@@ -909,12 +1002,25 @@ function Admin() {
           api={api}
           has={!!me.ownerSignature}
           name={me.ownerSignerName || "Ivakhnenko Sergii"}
-          onSaved={(ok) => setNotice(ok ? { kind: "ok", text: "Подпись сохранена." } : { kind: "err", text: "Не удалось сохранить подпись." })}
+          onSaved={(ok) =>
+            setNotice(
+              ok
+                ? { kind: "ok", text: "Подпись сохранена." }
+                : { kind: "err", text: "Не удалось сохранить подпись." },
+            )
+          }
         />
       )}
 
-      <ImportsPanel imports={imports} onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)} onDismiss={(d) => void dismissImport(d)} />
-      <GmailSetup setup={importSetup} onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })} />
+      <ImportsPanel
+        imports={imports}
+        onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)}
+        onDismiss={(d) => void dismissImport(d)}
+      />
+      <GmailSetup
+        setup={importSetup}
+        onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })}
+      />
 
       {upcoming.length > 0 && (
         <section className="mt-5 rounded-xl border border-border p-3">
@@ -961,7 +1067,10 @@ function Admin() {
         <section className="mt-4">
           {showYescapa && !showForm && (
             <div className="mb-3">
-              <YescapaPaste onParsed={(p) => applyParsed(p, null)} onClose={() => setShowYescapa(false)} />
+              <YescapaPaste
+                onParsed={(p) => applyParsed(p, null)}
+                onClose={() => setShowYescapa(false)}
+              />
             </div>
           )}
           {!showForm ? (
@@ -1096,6 +1205,9 @@ function Admin() {
                     </div>
                     <Badge status={r.status} />
                   </div>
+                  {r.number && r.number !== r.id && (
+                    <p className="mt-0.5 font-mono text-xs">№ {r.number}</p>
+                  )}
                   <p className="mt-1 text-xs text-muted-foreground">
                     {showVehicle ? `${vehicleName(r.vehicleId)} · ` : ""}
                     {SOURCE_LABEL[r.source] || r.source}
@@ -1142,14 +1254,23 @@ function Admin() {
                             key={kind}
                             onClick={() => setActaOpen({ contractId: r.id, kind })}
                             className={`flex min-h-12 flex-col items-start justify-center rounded-xl border px-3 py-1.5 text-left text-sm ${
-                              st === "signed" ? "border-emerald-600/50 bg-emerald-600/5" : st === "draft" ? "border-amber-500/60 bg-amber-500/5" : "border-border"
+                              st === "signed"
+                                ? "border-emerald-600/50 bg-emerald-600/5"
+                                : st === "draft"
+                                  ? "border-amber-500/60 bg-amber-500/5"
+                                  : "border-border"
                             }`}
                           >
                             <span className="flex items-center gap-1.5 font-medium">
-                              <ClipboardCheck className="h-4 w-4" /> {kind === "checkin" ? "Акт выдачи" : "Акт возврата"}
+                              <ClipboardCheck className="h-4 w-4" />{" "}
+                              {kind === "checkin" ? "Акт выдачи" : "Акт возврата"}
                             </span>
                             <span className="text-xs text-muted-foreground">
-                              {st === "signed" ? "подписан · PDF" : st === "draft" ? "черновик" : "нет"}
+                              {st === "signed"
+                                ? "подписан · PDF"
+                                : st === "draft"
+                                  ? "черновик"
+                                  : "нет"}
                             </span>
                           </button>
                         );
@@ -1174,7 +1295,9 @@ function Admin() {
                           <dd>{d.signed.ip || "—"}</dd>
                         </dl>
                       )}
-                      {d.signed?.docs && d.signed.docs.length > 0 && <DocPhotos api={api} id={d.id} slots={d.signed.docs} />}
+                      {d.signed?.docs && d.signed.docs.length > 0 && (
+                        <DocPhotos api={api} id={d.id} slots={d.signed.docs} />
+                      )}
                       <ol className="space-y-0.5 text-xs text-muted-foreground">
                         {d.audit.map((a, i) => (
                           <li key={i}>

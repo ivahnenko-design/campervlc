@@ -282,7 +282,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
 
   text("HOJA DE DATOS Y FIRMA ELECTRONICA", { size: 14, f: bold });
   text(`Contrato de alquiler de autocaravana sin conductor - version ${contract.version} - CAMPER RETREAT S.L.`, { size: 8.5, color: grey });
-  text(`Referencia: ${contract.id}${contract.bookingRef ? ` - Reserva ${contract.bookingRef}` : ""}`, { size: 8.5, color: grey });
+  text(`Contrato n.º ${contract.number || contract.id}${contract.bookingRef ? ` - Reserva ${contract.bookingRef}` : ""}`, { size: 8.5, color: grey });
   y -= 6;
   rule();
 
@@ -296,7 +296,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   row("Email", contract.email);
   row(
     "Permiso de conducir",
-    `${data.licenseNumber ? `${data.licenseNumber} ` : ""}(${data.licenseCountry})${data.licenseIssued ? `, expedido ${data.licenseIssued}` : ""}, caduca ${data.licenseExpiry}`,
+    `${data.licenseNumber ? `${data.licenseNumber} ` : ""}(${data.licenseCountry})${data.licenseIssued ? `, expedido ${data.licenseIssued}` : ""}, caduca ${data.licenseExpiry}${data.licenseBSince ? `, clase B desde ${data.licenseBSince}` : ""}`,
   );
   if (data.extraDriverName) {
     row("Conductor adicional", `${data.extraDriverName} - doc. ${data.extraDriverDoc || "-"} - permiso ${data.extraDriverLicense || "-"}`);
@@ -381,7 +381,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     let ay = annex.getHeight() - M;
     annex.drawText("ANEXO: COPIA DE LOS DOCUMENTOS DEL ARRENDATARIO", { x: M, y: ay, size: 13, font: bold, color: ink });
     ay -= 14;
-    annex.drawText(pdfText(`${data.fullName} - contrato ${contract.id} - aportadas por el Arrendatario al firmar (apdo. 15.4)`), {
+    annex.drawText(pdfText(`${data.fullName} - contrato ${contract.number || contract.id} - aportadas por el Arrendatario al firmar (apdo. 15.4)`), {
       x: M, y: ay, size: 8.5, font, color: grey,
     });
     ay -= 16;
@@ -402,7 +402,7 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     }
   }
 
-  pdf.setTitle(`Contrato de alquiler ${contract.id}`);
+  pdf.setTitle(`Contrato de alquiler ${contract.number || contract.id}`);
   pdf.setAuthor("CAMPER RETREAT S.L.");
   pdf.setSubject(`Contrato firmado electronicamente - version ${contract.version}`);
   return pdf.save();

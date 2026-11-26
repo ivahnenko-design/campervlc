@@ -11,6 +11,8 @@ import {
   OTP_MAX_ATTEMPTS,
   checkOtp,
   contractPdfPathOf,
+  contractNumber,
+  uniqueContractNumber,
   validateSignData,
   createContract,
   createMemoryContractStore,
@@ -92,6 +94,7 @@ const SIGN_DATA = {
   licenseNumber: "L123",
   licenseCountry: "Poland",
   licenseIssued: "2015-01-01",
+  licenseBSince: "2005-06-01",
   licenseExpiry: "2030-01-01",
   docExpiry: "2031-05-05",
 };
@@ -123,6 +126,14 @@ test("licence: number optional, issue and expiry dates required", () => {
   const { licenseIssued, ...noIssued } = SIGN_DATA;
   assert.ok(licenseIssued);
   assert.throws(() => validateSignData({ ...noIssued, docType: "passport" }), (e) => e instanceof ContractError && e.code === "field_required");
+});
+
+test("human contract number: pickup date + surname(s)", () => {
+  assert.equal(contractNumber("2026-11-27", "Saúl Jara Sánchez"), "20261127_JARA-SANCHEZ");
+  assert.equal(contractNumber("2026-12-10", "Sergii Ivakhnenko (TEST 3)"), "20261210_IVAKHNENKO");
+  assert.equal(contractNumber("2026-12-10", "Сергей Ивахненко"), "20261210_IVAKHNENKO");
+  assert.equal(uniqueContractNumber("X", [{ id: "a", number: "X" }, { id: "b", number: "X-2" }], "c"), "X-3");
+  assert.equal(uniqueContractNumber("X", [{ id: "a", number: "X" }], "a"), "X");
 });
 
 test("a contract keeps the blank of the version it was created with", () => {
@@ -263,6 +274,11 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   const ownerSig = res();
   await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret", "content-type": "application/json" }, body: { action: "owner_signature", signature: `data:image/png;base64,${fakePng().split(",")[1] ?? ""}` } }, ownerSig);
 
+  const ex = res();
+  await h.guest({ method: "POST", body: { token, action: "extract" } }, ex);
+  assert.equal(ex.code, 200);
+  assert.equal(ex.body.ok, false, "recognition is off in tests (no extractDocs)");
+
   const read = res();
   await h.guest({ method: "POST", body: { token, action: "read" } }, read);
   assert.equal(read.code, 200);
@@ -277,6 +293,7 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
 
   const stored = (await store.get(created.body.id)).contract;
   assert.equal(stored.status, "signed");
+  assert.match(stored.number, /^\d{8}_[A-Z-]+$/);
   assert.equal(stored.signed.ip, "203.0.113.7");
   assert.equal(stored.signed.data.docNumber, "AB1234567");
   assert.ok(store.pdfs.get(created.body.id).length > 1000);

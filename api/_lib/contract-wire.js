@@ -2,6 +2,7 @@
 import { createContractStore } from "./contracts.js";
 import { createContractHandlers } from "./contract-handlers.js";
 import { sendCodeEmail, sendSignedEmails, signingLink } from "./contract-email.js";
+import { extractDocFields } from "./doc-extract.js";
 import { getSigningProvider } from "./signing-provider.js";
 import { esc, postToResend, siteUrl } from "./email.js";
 import { authSecret } from "./auth-secret.js";
@@ -50,6 +51,8 @@ export const contractHandlers = createContractHandlers({
   loadBasePdf,
   listBookings: () => createBlobStore().listBookings(),
   onSigned: checkMemberDiscount,
+  // Document recognition runs only with an Anthropic API key in the environment.
+  extractDocs: process.env.ANTHROPIC_API_KEY ? (docs) => extractDocFields(docs) : null,
   imports: createImportStore(),
   importSetup: () => {
     const key = importKey();

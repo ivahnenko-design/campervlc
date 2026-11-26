@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { BookingCabinet, type CabinetContract } from "@/components/BookingCabinet";
 import { ContractPreview } from "@/components/ContractPreview";
+import { CHECK_TEXT } from "@/components/sign-check-text";
+import { signRuleProblems } from "../../shared/sign-rules.js";
 import { DocScanner, type ScanTexts } from "@/components/DocScanner";
 
 export const Route = createFileRoute("/sign/$token")({
@@ -917,11 +919,18 @@ const MAIN_FIELDS = [
   "licenseNumber",
   "licenseCountry",
   "licenseIssued",
+  "licenseBSince",
   "licenseExpiry",
 ] as const;
 const OPTIONAL_FIELDS = new Set<string>(["licenseNumber"]);
 const BASE_FIELDS = MAIN_FIELDS.filter((k) => !OPTIONAL_FIELDS.has(k));
-const DATE_FIELDS = new Set(["birthDate", "docExpiry", "licenseIssued", "licenseExpiry"]);
+const DATE_FIELDS = new Set([
+  "birthDate",
+  "docExpiry",
+  "licenseIssued",
+  "licenseBSince",
+  "licenseExpiry",
+]);
 
 function SignPage() {
   const { token } = Route.useParams();
@@ -939,6 +948,11 @@ function SignPage() {
   const [uploaded, setUploaded] = useState<Partial<Record<DocSlot, boolean>>>({});
   // After a failed "send code" every missing item is outlined in red.
   const [tried, setTried] = useState(false);
+  // Fields read from the document photos (the guest checks and corrects them).
+  const [ocr, setOcr] = useState<"idle" | "reading" | "filled" | "unread">("idle");
+  const [ocrWarnings, setOcrWarnings] = useState<string[]>([]);
+  const autoFilled = useRef(new Set<string>());
+  const [uploadsVersion, setUploadsVersion] = useState(0);
   // The form opens once the guest has scrolled through the contract preview.
   const [readNow, setReadNow] = useState(false);
   const markRead = useCallback(() => {
@@ -950,6 +964,7 @@ function SignPage() {
   const lang = pickLang(search.lang, contract?.language);
   const t = TEXT[lang];
   const d = DOCS_TEXT[lang];
+  const c = CHECK_TEXT[lang];
 
   useEffect(() => {
     fetch(`/api/contract?token=${encodeURIComponent(token)}`)
@@ -958,13 +973,18 @@ function SignPage() {
         const j = (await r.json()) as { contract: ContractView };
         setContract(j.contract);
         setForm((f) => ({ ...f, fullName: f.fullName ?? j.contract.guestName }));
+        // The admin typed this name; the name read from the passport may replace it.
+        autoFilled.current.add("fullName");
       })
       .catch(() => setLoadFailed(true));
   }, [token]);
 
   const set = useCallback((k: string, v: string) => setForm((f) => ({ ...f, [k]: v })), []);
   const errText = (code?: string) =>
-    (d.errors as Record<string, string>)[code || ""] || t.errors[code || ""] || t.errors.default;
+    (d.errors as Record<string, string>)[code || ""] ||
+    (c.rules as Record<string, string>)[code || ""] ||
+    t.errors[code || ""] ||
+    t.errors.default;
 
   async function post(body: Record<string, unknown>) {
     const r = await fetch("/api/contract", {
@@ -988,18 +1008,61 @@ function SignPage() {
   ].every((k) => consents[k]);
 
   const docsDone = docSlotsFor(form.docType).every((k) => uploaded[k]);
+  // Age, licence held 2 years, documents valid for the rental, ID check letter.
+  const ruleProblems = contract
+    ? signRuleProblems(form, { startDate: contract.startDate, endDate: contract.endDate })
+    : [];
+  const ruleFor = (k: string) => ruleProblems.find((p) => p.field === k)?.code;
+
+  // Every time a photo is (re)uploaded and all required ones are in, read them.
+  useEffect(() => {
+    if (uploadsVersion && docsDone) void readDocs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadsVersion]);
+
+  // Once every required photo is in, read them and fill the empty fields.
+  async function readDocs() {
+    setOcr("reading");
+    try {
+      const j = (await post({ action: "extract" })) as {
+        ok?: boolean;
+        fields?: Record<string, string>;
+        warnings?: string[];
+      };
+      if ((j as { reason?: string }).reason === "off") return setOcr("idle");
+      if (!j.ok || !j.fields) return setOcr("unread");
+      const fields = j.fields;
+      setForm((f) => {
+        const next = { ...f };
+        for (const [k, v] of Object.entries(fields)) {
+          if (k === "docType" || !v) continue;
+          if (!(f[k] || "").trim() || autoFilled.current.has(k)) {
+            next[k] = v;
+            autoFilled.current.add(k);
+          }
+        }
+        return next;
+      });
+      setOcrWarnings(j.warnings || []);
+      setOcr("filled");
+    } catch {
+      setOcr("unread");
+    }
+  }
 
   async function askCode() {
     setError(null);
-    const problem = !filled
-      ? t.fillAll
-      : !docsDone
-        ? d.needDocs
-        : !signature
-          ? t.needSignature
-          : !allConsents
-            ? t.errors.consent_required
-            : null;
+    const problem = !docsDone
+      ? d.needDocs
+      : !filled
+        ? t.fillAll
+        : ruleProblems.length
+          ? `${c.fixFields} ${c.contact}`
+          : !signature
+            ? t.needSignature
+            : !allConsents
+              ? t.errors.consent_required
+              : null;
     if (problem) {
       setTried(true);
       setError(problem);
@@ -1136,8 +1199,9 @@ function SignPage() {
       {(!contract.preview || contract.readAt || readNow) && (
         <>
           <section className="mt-5">
-            <h2 className="font-semibold">{t.yourData}</h2>
-            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+            <h2 className="font-semibold">{d.title}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{d.intro}</p>
+            <div className="mt-3 max-w-xs">
               <label className="block text-sm">
                 <span className="mb-1 block text-muted-foreground">{t.labels.docType}</span>
                 <select
@@ -1152,15 +1216,62 @@ function SignPage() {
                   ))}
                 </select>
               </label>
+            </div>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {docSlotsFor(form.docType).map((slot) => (
+                <DocScanner
+                  key={slot}
+                  label={
+                    slot === "idFront" && form.docType === "passport"
+                      ? d.passportPage
+                      : d.labels[slot]
+                  }
+                  passport={slot === "idFront" && form.docType === "passport"}
+                  missing={tried && !uploaded[slot]}
+                  texts={d}
+                  onImage={async (image) => {
+                    setUploaded((u) => ({ ...u, [slot]: false }));
+                    await post({ action: "doc", slot, image });
+                    setUploaded((u) => ({ ...u, [slot]: true }));
+                    setUploadsVersion((v) => v + 1);
+                  }}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-5">
+            <h2 className="font-semibold">{t.yourData}</h2>
+            {ocr === "reading" && (
+              <p className="mt-2 flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-sm">
+                <Loader2 className="h-4 w-4 animate-spin" /> {c.reading}
+              </p>
+            )}
+            {ocr === "filled" && (
+              <div className="mt-2 rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-sm">
+                <p>{c.filled}</p>
+                {ocrWarnings.map((w) => (
+                  <p key={w} className="mt-1 text-destructive">
+                    {(c.warnings as Record<string, string>)[w] || w}
+                  </p>
+                ))}
+              </div>
+            )}
+            {ocr === "unread" && (
+              <p className="mt-2 rounded-lg bg-muted px-3 py-2 text-sm">{c.unread}</p>
+            )}
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
               {MAIN_FIELDS.map((k) => {
                 const required = !OPTIONAL_FIELDS.has(k);
-                const missing = required && tried && !(form[k] || "").trim();
+                const rule = (form[k] || "").trim() ? ruleFor(k) : undefined;
+                const missing = (required && tried && !(form[k] || "").trim()) || (!!rule && tried);
                 return (
                   <label key={k} className="block text-sm">
                     <span
                       className={`mb-1 block ${missing ? "text-destructive" : "text-muted-foreground"}`}
                     >
-                      {t.labels[k]} {required && <span className="text-destructive">*</span>}
+                      {k === "licenseBSince" ? c.bSinceLabel : t.labels[k]}{" "}
+                      {required && <span className="text-destructive">*</span>}
                     </span>
                     <input
                       className={`${inputCls} ${missing ? "border-destructive ring-1 ring-destructive" : ""}`}
@@ -1171,6 +1282,16 @@ function SignPage() {
                       aria-invalid={missing || undefined}
                       data-missing={missing || undefined}
                     />
+                    {k === "licenseBSince" && (
+                      <span className="mt-1 block text-xs text-muted-foreground">
+                        {c.bSinceHint}
+                      </span>
+                    )}
+                    {rule && (
+                      <span className="mt-1 block text-xs text-destructive">
+                        {(c.rules as Record<string, string>)[rule]}
+                      </span>
+                    )}
                   </label>
                 );
               })}
@@ -1188,31 +1309,6 @@ function SignPage() {
                     autoComplete="off"
                   />
                 </label>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-5">
-            <h2 className="font-semibold">{d.title}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">{d.intro}</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {docSlotsFor(form.docType).map((slot) => (
-                <DocScanner
-                  key={slot}
-                  label={
-                    slot === "idFront" && form.docType === "passport"
-                      ? d.passportPage
-                      : d.labels[slot]
-                  }
-                  passport={slot === "idFront" && form.docType === "passport"}
-                  missing={tried && !uploaded[slot]}
-                  texts={d}
-                  onImage={async (image) => {
-                    setUploaded((u) => ({ ...u, [slot]: false }));
-                    await post({ action: "doc", slot, image });
-                    setUploaded((u) => ({ ...u, [slot]: true }));
-                  }}
-                />
               ))}
             </div>
           </section>

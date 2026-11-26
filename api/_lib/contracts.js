@@ -111,12 +111,51 @@ export function tokenId(token) {
   return m ? m[1] : null;
 }
 
+const CYR_LAT = {
+  а: "a", б: "b", в: "v", г: "g", ґ: "g", д: "d", е: "e", є: "ye", ё: "e", ж: "zh", з: "z", и: "i", і: "i", ї: "yi",
+  й: "y", к: "k", л: "l", м: "m", н: "n", о: "o", п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "kh", ц: "ts",
+  ч: "ch", ш: "sh", щ: "shch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya",
+};
+
+/**
+ * Human contract number: pickup date without separators + surname(s), e.g.
+ * 20261210_IVAKHNENKO or 20261127_JARA-SANCHEZ. The first word of the name is
+ * taken as the given name; text in brackets is ignored.
+ */
+export function contractNumber(startDate, name) {
+  const date = String(startDate || "").replace(/-/g, "");
+  const words = String(name || "")
+    .replace(/\([^)]*\)/g, " ")
+    .toLowerCase()
+    .split("")
+    .map((ch) => (CYR_LAT[ch] !== undefined ? CYR_LAT[ch] : ch))
+    .join("")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9\s-]/g, " ")
+    .split(/[\s-]+/)
+    .filter(Boolean);
+  const surname = (words.length > 1 ? words.slice(1) : words).join("-").slice(0, 40) || "CLIENTE";
+  return `${date}_${surname}`;
+}
+
+/** contractNumber, with -2, -3 ... when another contract already has it. */
+export function uniqueContractNumber(base, others, selfId) {
+  const taken = new Set(others.filter((c) => c.id !== selfId).map((c) => c.number));
+  if (!taken.has(base)) return base;
+  for (let n = 2; ; n++) if (!taken.has(`${base}-${n}`)) return `${base}-${n}`;
+}
+
+export const numberOf = (contract) => contract.number || contract.id;
+
 export function createContract(input, { now = Date.now(), provider = "own" } = {}) {
   const fields = validateInvite(input);
   const id = randomBytes(6).toString("hex");
   const token = newToken(id);
   const contract = {
     id,
+    number: contractNumber(fields.startDate, fields.guestName),
     ...fields,
     version: CONTRACT_VERSION,
     provider,
@@ -157,6 +196,7 @@ export function matchesToken(contract, token, now = Date.now()) {
 export function publicView(contract) {
   return {
     id: contract.id,
+    number: numberOf(contract),
     status: contract.status,
     version: contract.version,
     language: contract.language,
@@ -249,6 +289,7 @@ const REQUIRED = [
   ["phone", 40],
   ["licenseCountry", 60],
   ["licenseIssued", 10],
+  ["licenseBSince", 10],
   ["licenseExpiry", 10],
   ["birthDate", 10],
 ];
@@ -264,7 +305,7 @@ export function validateSignData(input = {}) {
   for (const [key, max] of OPTIONAL) data[key] = clean(input[key], max);
   data.docType = DOC_TYPES.includes(input.docType) ? input.docType : null;
   if (!data.docType) throw new ContractError("field_required", "Missing docType");
-  if (![data.birthDate, data.docExpiry, data.licenseIssued, data.licenseExpiry].every((d) => ISO_DATE.test(d))) {
+  if (![data.birthDate, data.docExpiry, data.licenseIssued, data.licenseBSince, data.licenseExpiry].every((d) => ISO_DATE.test(d))) {
     throw new ContractError("date_invalid", "Birth date or license expiry is not a valid date");
   }
   return data;

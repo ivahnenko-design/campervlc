@@ -5,6 +5,8 @@
 import {
   ContractError,
   checkOtp,
+  contractNumber,
+  uniqueContractNumber,
   DOC_SLOTS,
   createContract,
   decodeDocJpeg,
@@ -26,6 +28,7 @@ import { calendarFeedUrl } from "./calendar-key.js";
 import { siteUrl } from "./email.js";
 import { adminAccess, adminConfigured, canSee, staffConfig, staffVehicles, visibleTo } from "./staff.js";
 import { activeVehicles, vehicleLabel, vehicleOf } from "../../shared/vehicles.js";
+import { signRuleProblems } from "../../shared/sign-rules.js";
 
 function reply(res, status, body) {
   return res.status(status).json(body);
@@ -50,6 +53,7 @@ const vehicleRow = (v) => ({ id: v.id, name: v.name, city: v.city.es, plate: v.p
 function adminRow(c) {
   return {
     id: c.id,
+    number: c.number || c.id,
     vehicleId: vehicleOf(c),
     status: c.status,
     guestName: c.guestName,
@@ -136,6 +140,7 @@ export function createContractHandlers({
   env = process.env, // ADMIN_EMAILS / MANAGER_EMAILS
   secret,
   ownerSignerName = process.env.CONTRACT_OWNER_SIGNER || "Ivakhnenko Sergii",
+  extractDocs = null, // (docs by slot) => {fields, warnings} | null; null: recognition switched off
   now = () => Date.now(),
 }) {
   async function admin(req, res) {
@@ -339,9 +344,36 @@ export function createContractHandlers({
         return reply(res, 200, { ok: true });
       }
 
+      // Read the uploaded document photos and suggest the form fields (guest checks them).
+      if (body.action === "extract") {
+        if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
+        if (!extractDocs) return reply(res, 200, { ok: false, reason: "off" });
+        const used = found.contract.audit.filter((a) => a.ev === "docs_read").length;
+        if (used >= 8) return reply(res, 200, { ok: false, reason: "limit" });
+        const docs = {};
+        for (const slot of DOC_SLOTS) {
+          const jpg = await store.getDoc(found.contract.id, slot);
+          if (jpg) docs[slot] = jpg;
+        }
+        if (!Object.keys(docs).length) return reply(res, 200, { ok: false, reason: "no_photos" });
+        let result = null;
+        try {
+          result = await extractDocs(docs);
+        } catch (err) {
+          console.error("document reading failed:", err.message);
+        }
+        const logged = { ...found.contract, audit: [...found.contract.audit, { t, ev: "docs_read", ok: !!result }] };
+        await store.save(logged, { etag: found.etag }).catch(() => {});
+        if (!result) return reply(res, 200, { ok: false, reason: "unread" });
+        return reply(res, 200, { ok: true, ...result });
+      }
+
       if (body.action === "sign") {
         if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
         const data = validateSignData(body.data);
+        // Age, licence held 2 years, documents valid for the rental, ID check letter.
+        const problem = signRuleProblems(data, found.contract)[0];
+        if (problem) throw new ContractError(problem.code, `Rule failed: ${problem.field} ${problem.code}`);
         const consents = requireConsents(body.consents);
         const signaturePng = decodeSignaturePng(body.signature);
         const docs = {};
@@ -364,9 +396,16 @@ export function createContractHandlers({
         const userAgent = String(req.headers?.["user-agent"] || "");
         const docHashes = Object.fromEntries(Object.entries(docs).map(([slot, jpg]) => [slot, sha256(jpg)]));
         const ownerSignaturePng = await store.getOwnerSignature?.().catch(() => null);
+        // Final number from the name the guest signed with (unique among all contracts).
+        const number = uniqueContractNumber(
+          contractNumber(found.contract.startDate, data.fullName),
+          await store.list(),
+          found.contract.id,
+        );
+        const contractNow = { ...found.contract, number };
         const pdfBytes = await buildSignedPdf({
           basePdfBytes,
-          contract: found.contract,
+          contract: contractNow,
           data,
           signaturePng,
           docs,
@@ -380,7 +419,7 @@ export function createContractHandlers({
             signatureHash,
           },
         });
-        const signed = markSigned(found.contract, {
+        const signed = markSigned(contractNow, {
           data,
           consents,
           signatureHash,

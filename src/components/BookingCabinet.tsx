@@ -18,6 +18,7 @@ type Lang = "es" | "en" | "ru" | "uk" | "de" | "it" | "nl";
 
 export interface CabinetContract {
   id: string;
+  number?: string;
   language: string;
   guestName: string;
   startDate: string;
@@ -341,7 +342,10 @@ export function BookingCabinet({
       )}
 
       <h1 className="font-display text-2xl">{t.title}</h1>
-      <p className="mt-1 text-sm text-muted-foreground">{name}</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {name}
+        {contract.number ? ` · № ${contract.number}` : ""}
+      </p>
 
       {finished && <p className="mt-4 rounded-lg bg-muted px-3 py-2 text-sm">{t.finished}</p>}
 
