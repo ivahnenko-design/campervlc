@@ -36,7 +36,7 @@ test("Spanish TIE: NIE taken from the optional data", () => {
 test("real Spanish TIE read by Tesseract: K/L filler and misread NIE letter", () => {
   const ocr = " IRESPE300343779Y94334277<<<<KL<\n8312239M2703040UKR<<<KLKLLLLKLKLK5\nIVAKHNENKO<<SERGII<<<<<<<<LL<LK ";
   const f = mrzToFields(parseMrz(ocr));
-  assert.deepEqual(f, { docType: "nie", docNumber: "Y9433427Z", fullName: "SERGII IVAKHNENKO", birthDate: "1983-12-23", docExpiry: "2027-03-04", nationality: "Ukraine" });
+  assert.deepEqual(f, { docType: "nie", docNumber: "Y9433427Z", fullName: "SERGII IVAKHNENKO", surname: "IVAKHNENKO", birthDate: "1983-12-23", docExpiry: "2027-03-04", nationality: "Ukraine" });
 });
 
 test("the same TIE as read in the browser: extra digit in the NIE, K/L noise in the names", () => {
