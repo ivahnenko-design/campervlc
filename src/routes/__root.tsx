@@ -119,6 +119,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children:
           "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-83QK16R5R5');",
       },
+      // Google Ads tag (account 241-125-4841 "Camper Retreat VLC"), same dataLayer.
+      {
+        src: "https://www.googletagmanager.com/gtm.js?id=GTM-M6H6KPCD",
+        async: true,
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
