@@ -1,7 +1,7 @@
 // Wires the contract handlers to the real Blob store, Resend and the site.
 import { createContractStore } from "./contracts.js";
 import { createContractHandlers } from "./contract-handlers.js";
-import { sendCodeEmail, sendSignedEmails } from "./contract-email.js";
+import { sendCodeEmail, sendSignedEmails, signingLink } from "./contract-email.js";
 import { getSigningProvider } from "./signing-provider.js";
 import { esc, postToResend, siteUrl } from "./email.js";
 import { authSecret } from "./auth-secret.js";
@@ -45,7 +45,8 @@ export const contractHandlers = createContractHandlers({
   store: createContractStore(),
   provider: getSigningProvider(),
   sendCode: (contract, code) => sendCodeEmail(contract, code),
-  sendSigned: (contract, pdf) => sendSignedEmails(contract, pdf),
+  sendSigned: (contract, pdf, token) =>
+    sendSignedEmails(contract, pdf, { link: token ? signingLink(token, contract.language) : null }),
   loadBasePdf,
   listBookings: () => createBlobStore().listBookings(),
   onSigned: checkMemberDiscount,

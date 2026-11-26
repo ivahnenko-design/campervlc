@@ -165,13 +165,24 @@ export function publicView(contract) {
     emailHint: contract.email.replace(/^(.).*(@.*)$/, "$1***$2"),
     pdfPath: contractPdfPathOf(contract),
     vehicle: vehicleView(contract),
+    signedAt: contract.signed?.at || null,
+    signerName: contract.signed?.data?.fullName || null,
   };
 }
 
 /** The camper as the guest and the PDF see it. */
 export function vehicleView(contract) {
   const v = getVehicle(vehicleOf(contract));
-  return { id: v.id, name: v.name, plate: v.plateDisplay, city: v.city.es };
+  return {
+    id: v.id,
+    name: v.name,
+    plate: v.plateDisplay,
+    city: v.city.es,
+    pickupAddress: v.pickupAddress || "",
+    coords: v.coords || null,
+    // { company, policy, assistancePhone } once known; the booking page shows what is set.
+    insurance: v.insurance || null,
+  };
 }
 
 // ── one-time code by email ──────────────────────────────────────────────────

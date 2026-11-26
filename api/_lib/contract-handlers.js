@@ -293,6 +293,14 @@ export function createContractHandlers({
     try {
       if (req.method === "GET") {
         const found = await load(req.query?.token);
+        // The signed copy, for the guest's booking page (the link from the email is the key).
+        if (req.query?.pdf) {
+          const pdf = found.contract.status === "signed" ? await store.getPdf(found.contract) : null;
+          if (!pdf) return reply(res, 404, { error: "No signed PDF", code: "not_found" });
+          res.setHeader("Content-Type", "application/pdf");
+          res.setHeader("Content-Disposition", `attachment; filename="contrato-alquiler-${found.contract.id}.pdf"`);
+          return res.status(200).send(pdf);
+        }
         // First opening only, so the owner sees "opened" without a write per page view.
         if (found.contract.status === "pending" && !found.contract.viewedAt) {
           const t = now();
@@ -377,7 +385,7 @@ export function createContractHandlers({
         }
         let emails = [];
         try {
-          emails = await sendSigned(signed, pdfBytes);
+          emails = await sendSigned(signed, pdfBytes, body.token);
         } catch (err) {
           console.error("signed copy email failed:", err.message);
         }

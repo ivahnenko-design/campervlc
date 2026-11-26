@@ -282,6 +282,19 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id: created.body.id, pdf: "1" } }, dl);
   assert.equal(dl.code, 200);
   assert.equal(dl.headers["Content-Type"], "application/pdf");
+
+  // The same link is the guest's booking page: it shows the signed state and serves the copy.
+  const page = res();
+  await h.guest({ method: "GET", query: { token } }, page);
+  assert.equal(page.body.contract.status, "signed");
+  assert.equal(page.body.contract.signerName, SIGN_DATA.fullName);
+  const copy = res();
+  await h.guest({ method: "GET", query: { token, pdf: "1" } }, copy);
+  assert.equal(copy.code, 200);
+  assert.equal(copy.headers["Content-Type"], "application/pdf");
+  const stranger = res();
+  await h.guest({ method: "GET", query: { token: `${created.body.id}.${"z".repeat(24)}`, pdf: "1" } }, stranger);
+  assert.equal(stranger.code, 404);
 });
 
 test("resend replaces the link; cancel closes a pending contract", async () => {

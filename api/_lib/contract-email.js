@@ -107,13 +107,13 @@ const CREAM = "#FBF8F2";
 const WHATSAPP = "+34 624 038 085";
 
 const L = {
-  en: { pickup: "Pickup", ret: "Return", camper: "Motorhome", ref: "Booking", questions: "Questions? Reply to this email or WhatsApp" },
-  es: { pickup: "Recogida", ret: "Devolución", camper: "Autocaravana", ref: "Reserva", questions: "¿Dudas? Responde a este email o escríbenos por WhatsApp" },
-  ru: { pickup: "Получение", ret: "Возврат", camper: "Автодом", ref: "Бронь", questions: "Вопросы? Ответьте на это письмо или напишите в WhatsApp" },
-  uk: { pickup: "Отримання", ret: "Повернення", camper: "Автобудинок", ref: "Бронювання", questions: "Питання? Дайте відповідь на цей лист або напишіть у WhatsApp" },
-  de: { pickup: "Abholung", ret: "Rückgabe", camper: "Wohnmobil", ref: "Buchung", questions: "Fragen? Antworte auf diese E-Mail oder schreib per WhatsApp" },
-  it: { pickup: "Ritiro", ret: "Riconsegna", camper: "Camper", ref: "Prenotazione", questions: "Domande? Rispondi a questa email o scrivici su WhatsApp" },
-  nl: { pickup: "Ophalen", ret: "Inleveren", camper: "Camper", ref: "Boeking", questions: "Vragen? Beantwoord deze e-mail of stuur een WhatsApp" },
+  en: { cabinet: "My booking", pickup: "Pickup", ret: "Return", camper: "Motorhome", ref: "Booking", questions: "Questions? Reply to this email or WhatsApp" },
+  es: { cabinet: "Mi reserva", pickup: "Recogida", ret: "Devolución", camper: "Autocaravana", ref: "Reserva", questions: "¿Dudas? Responde a este email o escríbenos por WhatsApp" },
+  ru: { cabinet: "Моя бронь", pickup: "Получение", ret: "Возврат", camper: "Автодом", ref: "Бронь", questions: "Вопросы? Ответьте на это письмо или напишите в WhatsApp" },
+  uk: { cabinet: "Моє бронювання", pickup: "Отримання", ret: "Повернення", camper: "Автобудинок", ref: "Бронювання", questions: "Питання? Дайте відповідь на цей лист або напишіть у WhatsApp" },
+  de: { cabinet: "Meine Buchung", pickup: "Abholung", ret: "Rückgabe", camper: "Wohnmobil", ref: "Buchung", questions: "Fragen? Antworte auf diese E-Mail oder schreib per WhatsApp" },
+  it: { cabinet: "La mia prenotazione", pickup: "Ritiro", ret: "Riconsegna", camper: "Camper", ref: "Prenotazione", questions: "Domande? Rispondi a questa email o scrivici su WhatsApp" },
+  nl: { cabinet: "Mijn boeking", pickup: "Ophalen", ret: "Inleveren", camper: "Camper", ref: "Boeking", questions: "Vragen? Beantwoord deze e-mail of stuur een WhatsApp" },
 };
 
 const LOCALE = { en: "en-GB", es: "es-ES", ru: "ru-RU", uk: "uk-UA", de: "de-DE", it: "it-IT", nl: "nl-NL" };
@@ -219,10 +219,13 @@ function codeHtml(contract, code) {
   return brandedHtml({ lang, title: t.codeSubject(code), preheader: t.codeSubject(code), body });
 }
 
-function signedHtml(contract) {
+function signedHtml(contract, link = null) {
   const lang = T[contract.language] ? contract.language : "en";
   const t = T[lang];
-  const body = t.signedBody(contract).replace(/<p>Camper Retreat VLC<\/p>$/, "") + summaryCard(contract, lang);
+  const body =
+    t.signedBody(contract).replace(/<p>Camper Retreat VLC<\/p>$/, "") +
+    summaryCard(contract, lang) +
+    (link ? button(esc(link), L[lang].cabinet) : "");
   return brandedHtml({ lang, title: t.signedSubject, preheader: t.signedSubject, body });
 }
 
@@ -263,7 +266,7 @@ export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
   if (signedName) contract = { ...contract, guestName: signedName };
   const attachment = { filename: `contrato-alquiler-${contract.id}.pdf`, content: Buffer.from(pdfBytes).toString("base64") };
   const results = await Promise.allSettled([
-    send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.signedSubject, html: signedHtml(contract), attachments: [attachment] }),
+    send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: t.signedSubject, html: signedHtml(contract, deps.link), attachments: [attachment] }),
     send({
       from: FROM,
       to: ownerOf(contract),

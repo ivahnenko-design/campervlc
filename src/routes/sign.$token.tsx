@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle, Loader2 } from "lucide-react";
+import { BookingCabinet, type CabinetContract } from "@/components/BookingCabinet";
 import { DocScanner, type ScanTexts } from "@/components/DocScanner";
 
 export const Route = createFileRoute("/sign/$token")({
@@ -30,6 +31,11 @@ interface ContractView {
   priceTotal: number | null;
   emailHint: string;
   pdfPath: string;
+  source?: string;
+  bookingRef?: string;
+  signedAt?: number | null;
+  signerName?: string | null;
+  vehicle?: CabinetContract["vehicle"];
 }
 
 const TEXT: Record<
@@ -931,6 +937,9 @@ function SignPage() {
         data[k] = (form[k] || "").trim();
       }
       await post({ action: "sign", code: code.trim(), data, consents, signature });
+      // Reload: the same link now opens the booking page with the signed copy.
+      const r = await fetch(`/api/contract?token=${encodeURIComponent(token)}`);
+      if (r.ok) setContract(((await r.json()) as { contract: ContractView }).contract);
       setDone(true);
     } catch (e) {
       setError(errText((e as { code?: string }).code));
@@ -952,6 +961,13 @@ function SignPage() {
         <Loader2 className="h-5 w-5 animate-spin" />
       </Shell>
     );
+  if (contract.status === "signed") {
+    return (
+      <Shell>
+        <BookingCabinet contract={contract} token={token} lang={lang} justSigned={done} />
+      </Shell>
+    );
+  }
   if (done) {
     return (
       <Shell>
@@ -966,7 +982,7 @@ function SignPage() {
   if (contract.status !== "pending") {
     return (
       <Shell>
-        <p className="text-sm">{contract.status === "signed" ? t.signedAlready : t.invalid}</p>
+        <p className="text-sm">{t.invalid}</p>
       </Shell>
     );
   }
