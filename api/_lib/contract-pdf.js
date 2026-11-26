@@ -354,6 +354,9 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
 
   text("Registro de la firma", { size: 10.5, f: bold });
   row("Fecha y hora", fmtTime(meta.signedAt));
+  if (meta.readAt) {
+    row("Lectura del contrato", `${fmtTime(meta.readAt)} - el Arrendatario recorrio el texto completo del contrato en la pagina de firma`);
+  }
   row("Direccion IP", meta.ip || "-");
   row("Dispositivo", meta.userAgent || "-");
   row("Verificacion", "Codigo de un solo uso enviado al email del Arrendatario");

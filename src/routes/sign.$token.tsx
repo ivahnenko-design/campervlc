@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { BookingCabinet, type CabinetContract } from "@/components/BookingCabinet";
+import { ContractPreview } from "@/components/ContractPreview";
 import { DocScanner, type ScanTexts } from "@/components/DocScanner";
 
 export const Route = createFileRoute("/sign/$token")({
@@ -36,6 +37,8 @@ interface ContractView {
   signedAt?: number | null;
   signerName?: string | null;
   vehicle?: CabinetContract["vehicle"];
+  preview?: { base: string; pages: number } | null;
+  readAt?: number | null;
 }
 
 const TEXT: Record<
@@ -394,7 +397,8 @@ const TEXT: Record<
       cardAuthorization: "Ich erlaube spätere Belastungen meiner Karte gemäß Ziffer 5.6.",
       liabilityClauses:
         "Ich akzeptiere: Wenn ich oder meine Fahrer verantwortlich sind, zahle ich Abschleppen, Verwahrstelle und Rückholung des Fahrzeugs, Anwälte und Gerichtskosten, Schäden auf Fähren sowie die Entschädigung für die Tage, an denen das Wohnmobil wegen der Reparatur nicht vermietet werden kann (Ziffern 5.5, 5.9, 7.4 und 11.7).",
-      dataProtection: "Ich wurde über die Verarbeitung meiner personenbezogenen Daten informiert (Ziffer 15).",
+      dataProtection:
+        "Ich wurde über die Verarbeitung meiner personenbezogenen Daten informiert (Ziffer 15).",
       languageNotice:
         "Ich habe die Mietbedingungen in einer Sprache gelesen, die ich verstehe ({link}), und weiß, dass die spanische Fassung des Vertrags maßgeblich ist (Ziffer 17).",
     },
@@ -405,7 +409,8 @@ const TEXT: Record<
     sign: "Vertrag unterschreiben",
     signing: "Wird unterschrieben...",
     doneTitle: "Vertrag unterschrieben",
-    doneBody: "Danke. Wir haben dir eine PDF-Kopie per E-Mail geschickt. Hab sie während der Reise dabei.",
+    doneBody:
+      "Danke. Wir haben dir eine PDF-Kopie per E-Mail geschickt. Hab sie während der Reise dabei.",
     signedAlready: "Dieser Vertrag ist bereits unterschrieben.",
     invalid:
       "Dieser Link ist ungültig oder abgelaufen. Schreib uns bitte per WhatsApp: +34 624 038 085.",
@@ -462,7 +467,8 @@ const TEXT: Record<
       readContract: "Ho letto e accetto il contratto di noleggio.",
       electronicSignature:
         "Accetto di firmare elettronicamente; la firma ha lo stesso valore di quella su carta (clausola 16).",
-      cardAuthorization: "Autorizzo gli addebiti successivi sulla mia carta come descritto alla clausola 5.6.",
+      cardAuthorization:
+        "Autorizzo gli addebiti successivi sulla mia carta come descritto alla clausola 5.6.",
       liabilityClauses:
         "Accetto che, se la responsabilità è mia o dei miei conducenti, pago carro attrezzi, deposito e recupero del veicolo, avvocati e spese legali, danni sui traghetti e l'indennizzo per i giorni in cui il camper non si può noleggiare perché in riparazione (clausole 5.5, 5.9, 7.4 e 11.7).",
       dataProtection: "Sono stato informato sul trattamento dei miei dati personali (clausola 15).",
@@ -476,10 +482,10 @@ const TEXT: Record<
     sign: "Firma il contratto",
     signing: "Firma in corso...",
     doneTitle: "Contratto firmato",
-    doneBody: "Grazie. Ti abbiamo inviato una copia in PDF via email. Tienila con te durante il viaggio.",
+    doneBody:
+      "Grazie. Ti abbiamo inviato una copia in PDF via email. Tienila con te durante il viaggio.",
     signedAlready: "Questo contratto è già firmato.",
-    invalid:
-      "Questo link non è valido o è scaduto. Scrivici su WhatsApp al +34 624 038 085.",
+    invalid: "Questo link non è valido o è scaduto. Scrivici su WhatsApp al +34 624 038 085.",
     needSignature: "Disegna la tua firma.",
     fillAll: "Compila tutti i campi obbligatori.",
     errors: {
@@ -533,10 +539,12 @@ const TEXT: Record<
       readContract: "Ik heb het huurcontract gelezen en ga ermee akkoord.",
       electronicSignature:
         "Ik ga akkoord met elektronisch ondertekenen; dit geldt als een handtekening op papier (artikel 16).",
-      cardAuthorization: "Ik geef toestemming voor latere afschrijvingen van mijn kaart volgens artikel 5.6.",
+      cardAuthorization:
+        "Ik geef toestemming voor latere afschrijvingen van mijn kaart volgens artikel 5.6.",
       liabilityClauses:
         "Ik aanvaard dat ik, als ik of mijn bestuurders verantwoordelijk zijn, betaal voor wegslepen, depot en ophalen van het voertuig, advocaten en proceskosten, schade op veerboten en de vergoeding voor de dagen dat de camper door reparatie niet verhuurd kan worden (artikelen 5.5, 5.9, 7.4 en 11.7).",
-      dataProtection: "Ik ben geïnformeerd over de verwerking van mijn persoonsgegevens (artikel 15).",
+      dataProtection:
+        "Ik ben geïnformeerd over de verwerking van mijn persoonsgegevens (artikel 15).",
       languageNotice:
         "Ik heb de huurvoorwaarden gelezen in een taal die ik begrijp ({link}) en ik weet dat de Spaanse versie van het contract prevaleert (artikel 17).",
     },
@@ -549,8 +557,7 @@ const TEXT: Record<
     doneTitle: "Contract ondertekend",
     doneBody: "Bedankt. We hebben je een PDF-kopie gemaild. Houd die tijdens de reis bij je.",
     signedAlready: "Dit contract is al ondertekend.",
-    invalid:
-      "Deze link is ongeldig of verlopen. Neem contact op via WhatsApp: +34 624 038 085.",
+    invalid: "Deze link is ongeldig of verlopen. Neem contact op via WhatsApp: +34 624 038 085.",
     needSignature: "Teken je handtekening.",
     fillAll: "Vul alle verplichte velden in.",
     errors: {
@@ -568,7 +575,6 @@ const TEXT: Record<
   },
 };
 
-
 // Photos of the ID document and the driving licence (contract clause 15.4).
 type DocSlot = "idFront" | "idBack" | "licenseFront" | "licenseBack";
 const DOCS_TEXT: Record<
@@ -584,8 +590,14 @@ const DOCS_TEXT: Record<
 > = {
   en: {
     title: "Photos of your documents",
-    intro: "Your ID or passport and your driving licence, both sides. Take them on a flat, well-lit surface without glare; all text must be readable. They are stored privately and only used for this rental (clause 15.4).",
-    labels: { idFront: "ID document, front", idBack: "ID document, back", licenseFront: "Driving licence, front", licenseBack: "Driving licence, back" },
+    intro:
+      "Your ID or passport and your driving licence, both sides. Take them on a flat, well-lit surface without glare; all text must be readable. They are stored privately and only used for this rental (clause 15.4).",
+    labels: {
+      idFront: "ID document, front",
+      idBack: "ID document, back",
+      licenseFront: "Driving licence, front",
+      licenseBack: "Driving licence, back",
+    },
     passportPage: "Passport, photo page",
     scan: "Scan with camera",
     upload: "Upload photo",
@@ -598,12 +610,21 @@ const DOCS_TEXT: Record<
     cancel: "Close",
     noCamera: "The camera is not available. Upload a photo instead.",
     needDocs: "Please add the photos of your documents.",
-    errors: { docs_required: "Please add the photos of your documents.", doc_invalid: "The photo is not valid. Take it again." },
+    errors: {
+      docs_required: "Please add the photos of your documents.",
+      doc_invalid: "The photo is not valid. Take it again.",
+    },
   },
   es: {
     title: "Fotos de tus documentos",
-    intro: "Tu DNI, NIE o pasaporte y tu permiso de conducir, por ambas caras. Hazlas sobre una superficie plana, con buena luz y sin reflejos; todo el texto debe leerse. Se guardan de forma privada y solo se usan para este alquiler (apdo. 15.4).",
-    labels: { idFront: "Documento de identidad, anverso", idBack: "Documento de identidad, reverso", licenseFront: "Permiso de conducir, anverso", licenseBack: "Permiso de conducir, reverso" },
+    intro:
+      "Tu DNI, NIE o pasaporte y tu permiso de conducir, por ambas caras. Hazlas sobre una superficie plana, con buena luz y sin reflejos; todo el texto debe leerse. Se guardan de forma privada y solo se usan para este alquiler (apdo. 15.4).",
+    labels: {
+      idFront: "Documento de identidad, anverso",
+      idBack: "Documento de identidad, reverso",
+      licenseFront: "Permiso de conducir, anverso",
+      licenseBack: "Permiso de conducir, reverso",
+    },
     passportPage: "Pasaporte, página de la foto",
     scan: "Escanear con la cámara",
     upload: "Subir foto",
@@ -616,12 +637,21 @@ const DOCS_TEXT: Record<
     cancel: "Cerrar",
     noCamera: "La cámara no está disponible. Sube una foto.",
     needDocs: "Añade las fotos de tus documentos.",
-    errors: { docs_required: "Añade las fotos de tus documentos.", doc_invalid: "La foto no es válida. Hazla de nuevo." },
+    errors: {
+      docs_required: "Añade las fotos de tus documentos.",
+      doc_invalid: "La foto no es válida. Hazla de nuevo.",
+    },
   },
   ru: {
     title: "Фото документов",
-    intro: "Паспорт или ID и водительское удостоверение с обеих сторон. Снимайте на ровной поверхности при хорошем свете, без бликов: весь текст должен читаться. Фото хранятся закрыто и используются только для этой аренды (п. 15.4).",
-    labels: { idFront: "Документ (ID), лицевая сторона", idBack: "Документ (ID), оборотная сторона", licenseFront: "Водительское удостоверение, лицевая сторона", licenseBack: "Водительское удостоверение, оборотная сторона" },
+    intro:
+      "Паспорт или ID и водительское удостоверение с обеих сторон. Снимайте на ровной поверхности при хорошем свете, без бликов: весь текст должен читаться. Фото хранятся закрыто и используются только для этой аренды (п. 15.4).",
+    labels: {
+      idFront: "Документ (ID), лицевая сторона",
+      idBack: "Документ (ID), оборотная сторона",
+      licenseFront: "Водительское удостоверение, лицевая сторона",
+      licenseBack: "Водительское удостоверение, оборотная сторона",
+    },
     passportPage: "Паспорт, страница с фото",
     scan: "Сканировать камерой",
     upload: "Загрузить фото",
@@ -634,12 +664,21 @@ const DOCS_TEXT: Record<
     cancel: "Закрыть",
     noCamera: "Камера недоступна. Загрузите фото.",
     needDocs: "Добавьте фото документов.",
-    errors: { docs_required: "Добавьте фото документов.", doc_invalid: "Фото не подходит. Сделайте его заново." },
+    errors: {
+      docs_required: "Добавьте фото документов.",
+      doc_invalid: "Фото не подходит. Сделайте его заново.",
+    },
   },
   uk: {
     title: "Фото документів",
-    intro: "Паспорт або ID та водійське посвідчення з обох боків. Знімайте на рівній поверхні за гарного світла, без відблисків: увесь текст має читатися. Фото зберігаються закрито й використовуються лише для цієї оренди (п. 15.4).",
-    labels: { idFront: "Документ (ID), лицьовий бік", idBack: "Документ (ID), зворотний бік", licenseFront: "Водійське посвідчення, лицьовий бік", licenseBack: "Водійське посвідчення, зворотний бік" },
+    intro:
+      "Паспорт або ID та водійське посвідчення з обох боків. Знімайте на рівній поверхні за гарного світла, без відблисків: увесь текст має читатися. Фото зберігаються закрито й використовуються лише для цієї оренди (п. 15.4).",
+    labels: {
+      idFront: "Документ (ID), лицьовий бік",
+      idBack: "Документ (ID), зворотний бік",
+      licenseFront: "Водійське посвідчення, лицьовий бік",
+      licenseBack: "Водійське посвідчення, зворотний бік",
+    },
     passportPage: "Паспорт, сторінка з фото",
     scan: "Сканувати камерою",
     upload: "Завантажити фото",
@@ -652,12 +691,21 @@ const DOCS_TEXT: Record<
     cancel: "Закрити",
     noCamera: "Камера недоступна. Завантажте фото.",
     needDocs: "Додайте фото документів.",
-    errors: { docs_required: "Додайте фото документів.", doc_invalid: "Фото не підходить. Зробіть його знову." },
+    errors: {
+      docs_required: "Додайте фото документів.",
+      doc_invalid: "Фото не підходить. Зробіть його знову.",
+    },
   },
   de: {
     title: "Fotos deiner Dokumente",
-    intro: "Ausweis oder Reisepass und Führerschein, jeweils beide Seiten. Fotografiere sie auf einer flachen Unterlage, bei gutem Licht und ohne Spiegelungen; der ganze Text muss lesbar sein. Sie werden vertraulich gespeichert und nur für diese Miete verwendet (Ziffer 15.4).",
-    labels: { idFront: "Ausweis, Vorderseite", idBack: "Ausweis, Rückseite", licenseFront: "Führerschein, Vorderseite", licenseBack: "Führerschein, Rückseite" },
+    intro:
+      "Ausweis oder Reisepass und Führerschein, jeweils beide Seiten. Fotografiere sie auf einer flachen Unterlage, bei gutem Licht und ohne Spiegelungen; der ganze Text muss lesbar sein. Sie werden vertraulich gespeichert und nur für diese Miete verwendet (Ziffer 15.4).",
+    labels: {
+      idFront: "Ausweis, Vorderseite",
+      idBack: "Ausweis, Rückseite",
+      licenseFront: "Führerschein, Vorderseite",
+      licenseBack: "Führerschein, Rückseite",
+    },
     passportPage: "Reisepass, Seite mit Foto",
     scan: "Mit Kamera scannen",
     upload: "Foto hochladen",
@@ -670,12 +718,21 @@ const DOCS_TEXT: Record<
     cancel: "Schließen",
     noCamera: "Die Kamera ist nicht verfügbar. Lade stattdessen ein Foto hoch.",
     needDocs: "Bitte füge die Fotos deiner Dokumente hinzu.",
-    errors: { docs_required: "Bitte füge die Fotos deiner Dokumente hinzu.", doc_invalid: "Das Foto ist ungültig. Bitte neu aufnehmen." },
+    errors: {
+      docs_required: "Bitte füge die Fotos deiner Dokumente hinzu.",
+      doc_invalid: "Das Foto ist ungültig. Bitte neu aufnehmen.",
+    },
   },
   it: {
     title: "Foto dei tuoi documenti",
-    intro: "Carta d'identità o passaporto e patente di guida, fronte e retro. Scattale su una superficie piana, con buona luce e senza riflessi; tutto il testo deve essere leggibile. Sono conservate in modo riservato e usate solo per questo noleggio (punto 15.4).",
-    labels: { idFront: "Documento d'identità, fronte", idBack: "Documento d'identità, retro", licenseFront: "Patente di guida, fronte", licenseBack: "Patente di guida, retro" },
+    intro:
+      "Carta d'identità o passaporto e patente di guida, fronte e retro. Scattale su una superficie piana, con buona luce e senza riflessi; tutto il testo deve essere leggibile. Sono conservate in modo riservato e usate solo per questo noleggio (punto 15.4).",
+    labels: {
+      idFront: "Documento d'identità, fronte",
+      idBack: "Documento d'identità, retro",
+      licenseFront: "Patente di guida, fronte",
+      licenseBack: "Patente di guida, retro",
+    },
     passportPage: "Passaporto, pagina con la foto",
     scan: "Scansiona con la fotocamera",
     upload: "Carica foto",
@@ -688,12 +745,21 @@ const DOCS_TEXT: Record<
     cancel: "Chiudi",
     noCamera: "La fotocamera non è disponibile. Carica una foto.",
     needDocs: "Aggiungi le foto dei tuoi documenti.",
-    errors: { docs_required: "Aggiungi le foto dei tuoi documenti.", doc_invalid: "La foto non è valida. Rifalla." },
+    errors: {
+      docs_required: "Aggiungi le foto dei tuoi documenti.",
+      doc_invalid: "La foto non è valida. Rifalla.",
+    },
   },
   nl: {
     title: "Foto's van je documenten",
-    intro: "Je identiteitskaart of paspoort en je rijbewijs, beide kanten. Maak ze op een vlakke ondergrond, met goed licht en zonder schittering; alle tekst moet leesbaar zijn. Ze worden vertrouwelijk bewaard en alleen voor deze huur gebruikt (artikel 15.4).",
-    labels: { idFront: "Identiteitsbewijs, voorkant", idBack: "Identiteitsbewijs, achterkant", licenseFront: "Rijbewijs, voorkant", licenseBack: "Rijbewijs, achterkant" },
+    intro:
+      "Je identiteitskaart of paspoort en je rijbewijs, beide kanten. Maak ze op een vlakke ondergrond, met goed licht en zonder schittering; alle tekst moet leesbaar zijn. Ze worden vertrouwelijk bewaard en alleen voor deze huur gebruikt (artikel 15.4).",
+    labels: {
+      idFront: "Identiteitsbewijs, voorkant",
+      idBack: "Identiteitsbewijs, achterkant",
+      licenseFront: "Rijbewijs, voorkant",
+      licenseBack: "Rijbewijs, achterkant",
+    },
     passportPage: "Paspoort, pagina met foto",
     scan: "Scannen met camera",
     upload: "Foto uploaden",
@@ -706,15 +772,30 @@ const DOCS_TEXT: Record<
     cancel: "Sluiten",
     noCamera: "De camera is niet beschikbaar. Upload een foto.",
     needDocs: "Voeg de foto's van je documenten toe.",
-    errors: { docs_required: "Voeg de foto's van je documenten toe.", doc_invalid: "De foto is ongeldig. Maak hem opnieuw." },
+    errors: {
+      docs_required: "Voeg de foto's van je documenten toe.",
+      doc_invalid: "De foto is ongeldig. Maak hem opnieuw.",
+    },
   },
 };
 
 const docSlotsFor = (docType: string | undefined): DocSlot[] =>
-  docType === "passport" ? ["idFront", "licenseFront", "licenseBack"] : ["idFront", "idBack", "licenseFront", "licenseBack"];
+  docType === "passport"
+    ? ["idFront", "licenseFront", "licenseBack"]
+    : ["idFront", "idBack", "licenseFront", "licenseBack"];
 
 const pickLang = (...candidates: (string | undefined)[]): Lang => {
-  for (const c of candidates) if (c === "es" || c === "en" || c === "ru" || c === "uk" || c === "de" || c === "it" || c === "nl") return c;
+  for (const c of candidates)
+    if (
+      c === "es" ||
+      c === "en" ||
+      c === "ru" ||
+      c === "uk" ||
+      c === "de" ||
+      c === "it" ||
+      c === "nl"
+    )
+      return c;
   return "en";
 };
 
@@ -858,6 +939,13 @@ function SignPage() {
   const [uploaded, setUploaded] = useState<Partial<Record<DocSlot, boolean>>>({});
   // After a failed "send code" every missing item is outlined in red.
   const [tried, setTried] = useState(false);
+  // The form opens once the guest has scrolled through the contract preview.
+  const [readNow, setReadNow] = useState(false);
+  const markRead = useCallback(() => {
+    setReadNow(true);
+    post({ action: "read" }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const lang = pickLang(search.lang, contract?.language);
   const t = TEXT[lang];
@@ -1032,151 +1120,175 @@ function SignPage() {
         </a>
       </section>
 
-      <section className="mt-5">
-        <h2 className="font-semibold">{t.yourData}</h2>
-        <div className="mt-2 grid gap-3 sm:grid-cols-2">
-          <label className="block text-sm">
-            <span className="mb-1 block text-muted-foreground">{t.labels.docType}</span>
-            <select
-              className={inputCls}
-              value={form.docType}
-              onChange={(e) => set("docType", e.target.value)}
-            >
-              {Object.entries(t.docTypes).map(([k, v]) => (
-                <option key={k} value={k}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </label>
-          {MAIN_FIELDS.map((k) => {
-            const required = !OPTIONAL_FIELDS.has(k);
-            const missing = required && tried && !(form[k] || "").trim();
-            return (
-              <label key={k} className="block text-sm">
-                <span className={`mb-1 block ${missing ? "text-destructive" : "text-muted-foreground"}`}>
-                  {t.labels[k]} {required && <span className="text-destructive">*</span>}
-                </span>
-                <input
-                  className={`${inputCls} ${missing ? "border-destructive ring-1 ring-destructive" : ""}`}
-                  type={DATE_FIELDS.has(k) ? "date" : k === "phone" ? "tel" : "text"}
-                  value={form[k] || ""}
-                  onChange={(e) => set(k, e.target.value)}
-                  autoComplete="off"
-                  aria-invalid={missing || undefined}
-                  data-missing={missing || undefined}
-                />
-              </label>
-            );
-          })}
-        </div>
-
-        <h3 className="mt-5 text-sm font-semibold">{t.extraDriver}</h3>
-        <div className="mt-2 grid gap-3 sm:grid-cols-3">
-          {(["extraDriverName", "extraDriverDoc", "extraDriverLicense"] as const).map((k) => (
-            <label key={k} className="block text-sm">
-              <span className="mb-1 block text-muted-foreground">{t.labels[k]}</span>
-              <input
-                className={inputCls}
-                value={form[k] || ""}
-                onChange={(e) => set(k, e.target.value)}
-                autoComplete="off"
-              />
-            </label>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-5">
-        <h2 className="font-semibold">{d.title}</h2>
-        <p className="mt-1 text-xs text-muted-foreground">{d.intro}</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {docSlotsFor(form.docType).map((slot) => (
-            <DocScanner
-              key={slot}
-              label={slot === "idFront" && form.docType === "passport" ? d.passportPage : d.labels[slot]}
-              passport={slot === "idFront" && form.docType === "passport"}
-              missing={tried && !uploaded[slot]}
-              texts={d}
-              onImage={async (image) => {
-                setUploaded((u) => ({ ...u, [slot]: false }));
-                await post({ action: "doc", slot, image });
-                setUploaded((u) => ({ ...u, [slot]: true }));
-              }}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-5">
-        <h2 className="font-semibold">{t.signHere}</h2>
-        <div
-          className={`mt-2 rounded-lg ${tried && !signature ? "ring-2 ring-destructive" : ""}`}
-          data-missing={(tried && !signature) || undefined}
-        >
-          <SignaturePad onChange={setSignature} clearLabel={t.clear} />
-        </div>
-      </section>
-
-      <section className="mt-5 space-y-2 text-sm">
-        {Object.entries(t.consents).map(([k, label]) => (
-          <label
-            key={k}
-            className={`flex items-start gap-2 ${tried && !consents[k] ? "rounded-md text-destructive ring-1 ring-destructive" : ""}`}
-            data-missing={(tried && !consents[k]) || undefined}
-          >
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={!!consents[k]}
-              onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
-            />
-            <span>{k === "languageNotice" ? withConditionsLink(label, t.conditionsLink, lang) : label}</span>
-          </label>
-        ))}
-      </section>
-
-      {error && (
-        <p
-          role="alert"
-          className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"
-        >
-          {error}
-        </p>
+      {contract.preview && (
+        <ContractPreview
+          preview={contract.preview}
+          pdfPath={contract.pdfPath}
+          lang={lang}
+          read={!!contract.readAt || readNow}
+          onRead={markRead}
+        />
       )}
 
-      {!codeSent ? (
-        <button
-          type="button"
-          disabled={busy}
-          onClick={askCode}
-          className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-        >
-          {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.sendCode}
-        </button>
-      ) : (
-        <div className="mt-5 rounded-xl border border-border p-4">
-          <p className="text-sm">{t.codeSent(codeSent)}</p>
-          <label className="mt-3 block text-sm">
-            <span className="mb-1 block text-muted-foreground">{t.codeLabel}</span>
-            <input
-              className={inputCls}
-              inputMode="numeric"
-              autoComplete="one-time-code"
-              maxLength={6}
-              value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            />
-          </label>
-          <button
-            type="button"
-            disabled={busy || code.length !== 6}
-            onClick={sign}
-            className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-          >
-            {busy ? t.signing : t.sign}
-          </button>
-        </div>
+      {(!contract.preview || contract.readAt || readNow) && (
+        <>
+          <section className="mt-5">
+            <h2 className="font-semibold">{t.yourData}</h2>
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              <label className="block text-sm">
+                <span className="mb-1 block text-muted-foreground">{t.labels.docType}</span>
+                <select
+                  className={inputCls}
+                  value={form.docType}
+                  onChange={(e) => set("docType", e.target.value)}
+                >
+                  {Object.entries(t.docTypes).map(([k, v]) => (
+                    <option key={k} value={k}>
+                      {v}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              {MAIN_FIELDS.map((k) => {
+                const required = !OPTIONAL_FIELDS.has(k);
+                const missing = required && tried && !(form[k] || "").trim();
+                return (
+                  <label key={k} className="block text-sm">
+                    <span
+                      className={`mb-1 block ${missing ? "text-destructive" : "text-muted-foreground"}`}
+                    >
+                      {t.labels[k]} {required && <span className="text-destructive">*</span>}
+                    </span>
+                    <input
+                      className={`${inputCls} ${missing ? "border-destructive ring-1 ring-destructive" : ""}`}
+                      type={DATE_FIELDS.has(k) ? "date" : k === "phone" ? "tel" : "text"}
+                      value={form[k] || ""}
+                      onChange={(e) => set(k, e.target.value)}
+                      autoComplete="off"
+                      aria-invalid={missing || undefined}
+                      data-missing={missing || undefined}
+                    />
+                  </label>
+                );
+              })}
+            </div>
+
+            <h3 className="mt-5 text-sm font-semibold">{t.extraDriver}</h3>
+            <div className="mt-2 grid gap-3 sm:grid-cols-3">
+              {(["extraDriverName", "extraDriverDoc", "extraDriverLicense"] as const).map((k) => (
+                <label key={k} className="block text-sm">
+                  <span className="mb-1 block text-muted-foreground">{t.labels[k]}</span>
+                  <input
+                    className={inputCls}
+                    value={form[k] || ""}
+                    onChange={(e) => set(k, e.target.value)}
+                    autoComplete="off"
+                  />
+                </label>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-5">
+            <h2 className="font-semibold">{d.title}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{d.intro}</p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {docSlotsFor(form.docType).map((slot) => (
+                <DocScanner
+                  key={slot}
+                  label={
+                    slot === "idFront" && form.docType === "passport"
+                      ? d.passportPage
+                      : d.labels[slot]
+                  }
+                  passport={slot === "idFront" && form.docType === "passport"}
+                  missing={tried && !uploaded[slot]}
+                  texts={d}
+                  onImage={async (image) => {
+                    setUploaded((u) => ({ ...u, [slot]: false }));
+                    await post({ action: "doc", slot, image });
+                    setUploaded((u) => ({ ...u, [slot]: true }));
+                  }}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-5">
+            <h2 className="font-semibold">{t.signHere}</h2>
+            <div
+              className={`mt-2 rounded-lg ${tried && !signature ? "ring-2 ring-destructive" : ""}`}
+              data-missing={(tried && !signature) || undefined}
+            >
+              <SignaturePad onChange={setSignature} clearLabel={t.clear} />
+            </div>
+          </section>
+
+          <section className="mt-5 space-y-2 text-sm">
+            {Object.entries(t.consents).map(([k, label]) => (
+              <label
+                key={k}
+                className={`flex items-start gap-2 ${tried && !consents[k] ? "rounded-md text-destructive ring-1 ring-destructive" : ""}`}
+                data-missing={(tried && !consents[k]) || undefined}
+              >
+                <input
+                  type="checkbox"
+                  className="mt-1"
+                  checked={!!consents[k]}
+                  onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
+                />
+                <span>
+                  {k === "languageNotice"
+                    ? withConditionsLink(label, t.conditionsLink, lang)
+                    : label}
+                </span>
+              </label>
+            ))}
+          </section>
+
+          {error && (
+            <p
+              role="alert"
+              className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            >
+              {error}
+            </p>
+          )}
+
+          {!codeSent ? (
+            <button
+              type="button"
+              disabled={busy}
+              onClick={askCode}
+              className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+            >
+              {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.sendCode}
+            </button>
+          ) : (
+            <div className="mt-5 rounded-xl border border-border p-4">
+              <p className="text-sm">{t.codeSent(codeSent)}</p>
+              <label className="mt-3 block text-sm">
+                <span className="mb-1 block text-muted-foreground">{t.codeLabel}</span>
+                <input
+                  className={inputCls}
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  maxLength={6}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+                />
+              </label>
+              <button
+                type="button"
+                disabled={busy || code.length !== 6}
+                onClick={sign}
+                className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+              >
+                {busy ? t.signing : t.sign}
+              </button>
+            </div>
+          )}
+        </>
       )}
     </Shell>
   );

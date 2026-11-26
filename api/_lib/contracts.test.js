@@ -263,6 +263,11 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   const ownerSig = res();
   await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret", "content-type": "application/json" }, body: { action: "owner_signature", signature: `data:image/png;base64,${fakePng().split(",")[1] ?? ""}` } }, ownerSig);
 
+  const read = res();
+  await h.guest({ method: "POST", body: { token, action: "read" } }, read);
+  assert.equal(read.code, 200);
+  assert.ok((await store.get(created.body.id)).contract.audit.some((a) => a.ev === "contract_read"));
+
   tick(5_000);
   const ok = res();
   const req = { method: "POST", headers: { "x-forwarded-for": "203.0.113.7, 10.0.0.1", "user-agent": "TestAgent/1" }, body: { token, action: "sign", code, data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } };

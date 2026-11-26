@@ -329,6 +329,16 @@ export function createContractHandlers({
         return reply(res, 200, { ok: true, slot: body.slot });
       }
 
+      // The guest scrolled through the whole contract on the signing page (once).
+      if (body.action === "read") {
+        if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
+        if (!found.contract.audit.some((a) => a.ev === "contract_read")) {
+          const read = { ...found.contract, audit: [...found.contract.audit, { t, ev: "contract_read" }] };
+          await store.save(read, { etag: found.etag });
+        }
+        return reply(res, 200, { ok: true });
+      }
+
       if (body.action === "sign") {
         if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
         const data = validateSignData(body.data);
@@ -361,7 +371,14 @@ export function createContractHandlers({
           signaturePng,
           docs,
           owner: { name: ownerSignerName, signaturePng: ownerSignaturePng || null },
-          meta: { signedAt: t, ip, userAgent, basePdfHash, signatureHash },
+          meta: {
+            signedAt: t,
+            readAt: found.contract.audit.find((a) => a.ev === "contract_read")?.t || null,
+            ip,
+            userAgent,
+            basePdfHash,
+            signatureHash,
+          },
         });
         const signed = markSigned(found.contract, {
           data,

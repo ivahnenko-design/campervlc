@@ -16,6 +16,12 @@ const PDF_BY_VERSION = {
   "2026-11-v7": "/contracts/contrato-v7.pdf",
   "2026-11-v8": "/contracts/contrato-v8.pdf",
 };
+// Page images of the blank, shown on the signing page so the guest reads the
+// contract before filling in anything (public/contracts/v8/page-01.webp ...).
+const PREVIEW_BY_VERSION = {
+  "2026-11-v8": { base: "/contracts/v8/page-", pages: 15 },
+};
+export const contractPreviewOf = (contract) => PREVIEW_BY_VERSION[contract?.version] || null;
 
 /** Blank contract of the camper (shared/vehicles.js contractPdfPath); vehicle 1: CONTRACT_PDF_PATH. */
 export function contractPdfPathOf(contract) {
@@ -165,6 +171,8 @@ export function publicView(contract) {
     emailHint: contract.email.replace(/^(.).*(@.*)$/, "$1***$2"),
     pdfPath: contractPdfPathOf(contract),
     vehicle: vehicleView(contract),
+    preview: contractPreviewOf(contract),
+    readAt: contract.audit?.find((a) => a.ev === "contract_read")?.t || null,
     signedAt: contract.signed?.at || null,
     signerName: contract.signed?.data?.fullName || null,
   };
