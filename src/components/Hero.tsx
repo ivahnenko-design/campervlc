@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
@@ -347,6 +347,10 @@ function RouteMap({ route, label, sea }: { route: HeroRoute; label: string; sea:
 export function Hero() {
   const { t } = useTranslation();
   const [active, setActive] = useState<HeroRoute["id"]>("r1");
+  // Touch screens: the first tap on a route only selects it (map, price,
+  // buttons below update); a tap on the already selected route opens it.
+  // Captured on pointerdown, before the emulated mouseenter/focus select it.
+  const tap = useRef<{ touch: boolean; wasActive: boolean }>({ touch: false, wasActive: false });
   const route = ROUTES.find((r) => r.id === active) ?? ROUTES[0];
   const days = (r: HeroRoute) =>
     `${t(`routes.${r.id}_dur`)} ${t(`routes.${r.id}_unit`, { defaultValue: t("routes.days") })}`;
@@ -376,6 +380,16 @@ export function Hero() {
                   to="/rutas/$slug"
                   params={{ slug: r.slug }}
                   aria-current={on ? "true" : undefined}
+                  onPointerDown={(e) => {
+                    tap.current = { touch: e.pointerType !== "mouse", wasActive: on };
+                  }}
+                  onClick={(e) => {
+                    if (tap.current.touch && !tap.current.wasActive) {
+                      e.preventDefault();
+                      setActive(r.id);
+                    }
+                    tap.current = { touch: false, wasActive: false };
+                  }}
                   onMouseEnter={() => setActive(r.id)}
                   onFocus={() => setActive(r.id)}
                   className={`group flex items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
