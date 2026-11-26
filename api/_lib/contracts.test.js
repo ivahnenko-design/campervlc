@@ -11,6 +11,7 @@ import {
   OTP_MAX_ATTEMPTS,
   checkOtp,
   contractPdfPathOf,
+  validateSignData,
   createContract,
   createMemoryContractStore,
   decodeSignaturePng,
@@ -90,6 +91,7 @@ const SIGN_DATA = {
   phone: "+48123456789",
   licenseNumber: "L123",
   licenseCountry: "Poland",
+  licenseIssued: "2015-01-01",
   licenseExpiry: "2030-01-01",
   docExpiry: "2031-05-05",
 };
@@ -112,6 +114,15 @@ test("v8: bilingual contract PDF for every camper and the language consent is re
   assert.ok(CONSENT_KEYS.includes("languageNotice"));
   assert.deepEqual(Object.keys(requireConsents(CONSENTS)).sort(), [...CONSENT_KEYS].sort());
   assert.throws(() => requireConsents({ ...CONSENTS, languageNotice: false }), (e) => e instanceof ContractError && e.code === "consent_required");
+});
+
+test("licence: number optional, issue and expiry dates required", () => {
+  const { licenseNumber, ...noNumber } = SIGN_DATA;
+  assert.ok(licenseNumber);
+  assert.equal(validateSignData({ ...noNumber, docType: "passport" }).licenseNumber, "");
+  const { licenseIssued, ...noIssued } = SIGN_DATA;
+  assert.ok(licenseIssued);
+  assert.throws(() => validateSignData({ ...noIssued, docType: "passport" }), (e) => e instanceof ContractError && e.code === "field_required");
 });
 
 test("a contract keeps the blank of the version it was created with", () => {

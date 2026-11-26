@@ -174,7 +174,7 @@ function blankValues(contract, data, signedAt) {
     docDates: data.docExpiry ? `- / ${dmy(data.docExpiry)}` : "",
     licenseNumber: data.licenseNumber,
     licenseCountry: data.licenseCountry,
-    licenseDates: `- / ${dmy(data.licenseExpiry)}`,
+    licenseDates: `${data.licenseIssued ? dmy(data.licenseIssued) : "-"} / ${dmy(data.licenseExpiry)}`,
     birth: [dmy(data.birthDate), data.birthCountry].filter(Boolean).join(", "),
     nationality: data.nationality,
     address,
@@ -293,7 +293,10 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   row("Domicilio", `${data.street}, ${data.postalCode} ${data.city}, ${data.country}`);
   row("Telefono", data.phone);
   row("Email", contract.email);
-  row("Permiso de conducir", `${data.licenseNumber} (${data.licenseCountry}), caduca ${data.licenseExpiry}`);
+  row(
+    "Permiso de conducir",
+    `${data.licenseNumber ? `${data.licenseNumber} ` : ""}(${data.licenseCountry})${data.licenseIssued ? `, expedido ${data.licenseIssued}` : ""}, caduca ${data.licenseExpiry}`,
+  );
   if (data.extraDriverName) {
     row("Conductor adicional", `${data.extraDriverName} - doc. ${data.extraDriverDoc || "-"} - permiso ${data.extraDriverLicense || "-"}`);
   }

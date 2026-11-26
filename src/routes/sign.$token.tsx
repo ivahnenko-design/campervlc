@@ -93,8 +93,9 @@ const TEXT: Record<
       postalCode: "Postal code",
       country: "Country",
       phone: "Phone",
-      licenseNumber: "Driving licence number",
+      licenseNumber: "Driving licence number (if shown)",
       licenseCountry: "Licence issued in (country)",
+      licenseIssued: "Licence issue date",
       licenseExpiry: "Licence expiry date",
       extraDriverName: "Name",
       extraDriverDoc: "Document number",
@@ -163,8 +164,9 @@ const TEXT: Record<
       postalCode: "Código postal",
       country: "País",
       phone: "Teléfono",
-      licenseNumber: "Número de permiso de conducir",
+      licenseNumber: "Número de permiso de conducir (si figura)",
       licenseCountry: "Permiso expedido en (país)",
+      licenseIssued: "Fecha de expedición del permiso",
       licenseExpiry: "Caducidad del permiso",
       extraDriverName: "Nombre",
       extraDriverDoc: "Número de documento",
@@ -233,8 +235,9 @@ const TEXT: Record<
       postalCode: "Индекс",
       country: "Страна",
       phone: "Телефон",
-      licenseNumber: "Номер водительских прав",
+      licenseNumber: "Номер водительских прав (если есть)",
       licenseCountry: "Страна выдачи прав",
+      licenseIssued: "Дата выдачи прав",
       licenseExpiry: "Срок действия прав",
       extraDriverName: "Имя",
       extraDriverDoc: "Номер документа",
@@ -302,8 +305,9 @@ const TEXT: Record<
       postalCode: "Індекс",
       country: "Країна",
       phone: "Телефон",
-      licenseNumber: "Номер водійського посвідчення",
+      licenseNumber: "Номер водійського посвідчення (якщо є)",
       licenseCountry: "Країна видачі посвідчення",
+      licenseIssued: "Дата видачі посвідчення",
       licenseExpiry: "Термін дії посвідчення",
       extraDriverName: "Ім'я",
       extraDriverDoc: "Номер документа",
@@ -371,8 +375,9 @@ const TEXT: Record<
       postalCode: "Postleitzahl",
       country: "Land",
       phone: "Telefon",
-      licenseNumber: "Führerscheinnummer",
+      licenseNumber: "Führerscheinnummer (falls vorhanden)",
       licenseCountry: "Führerschein ausgestellt in (Land)",
+      licenseIssued: "Führerschein ausgestellt am",
       licenseExpiry: "Führerschein gültig bis",
       extraDriverName: "Name",
       extraDriverDoc: "Dokumentnummer",
@@ -441,8 +446,9 @@ const TEXT: Record<
       postalCode: "CAP",
       country: "Paese",
       phone: "Telefono",
-      licenseNumber: "Numero della patente",
+      licenseNumber: "Numero della patente (se presente)",
       licenseCountry: "Patente rilasciata in (paese)",
+      licenseIssued: "Data di rilascio della patente",
       licenseExpiry: "Scadenza della patente",
       extraDriverName: "Nome",
       extraDriverDoc: "Numero del documento",
@@ -511,8 +517,9 @@ const TEXT: Record<
       postalCode: "Postcode",
       country: "Land",
       phone: "Telefoon",
-      licenseNumber: "Rijbewijsnummer",
+      licenseNumber: "Rijbewijsnummer (indien vermeld)",
       licenseCountry: "Rijbewijs afgegeven in (land)",
+      licenseIssued: "Rijbewijs afgegeven op",
       licenseExpiry: "Rijbewijs geldig tot",
       extraDriverName: "Naam",
       extraDriverDoc: "Documentnummer",
@@ -813,7 +820,9 @@ function withConditionsLink(label: string, linkText: string, lang: Lang) {
   );
 }
 
-const BASE_FIELDS = [
+// The guest's own fields, in the order shown. Not every licence shows a number,
+// so that one is optional; its issue and expiry dates are required.
+const MAIN_FIELDS = [
   "fullName",
   "docNumber",
   "docExpiry",
@@ -826,9 +835,12 @@ const BASE_FIELDS = [
   "phone",
   "licenseNumber",
   "licenseCountry",
+  "licenseIssued",
   "licenseExpiry",
 ] as const;
-const DATE_FIELDS = new Set(["birthDate", "docExpiry", "licenseExpiry"]);
+const OPTIONAL_FIELDS = new Set<string>(["licenseNumber"]);
+const BASE_FIELDS = MAIN_FIELDS.filter((k) => !OPTIONAL_FIELDS.has(k));
+const DATE_FIELDS = new Set(["birthDate", "docExpiry", "licenseIssued", "licenseExpiry"]);
 
 function SignPage() {
   const { token } = Route.useParams();
@@ -928,7 +940,7 @@ function SignPage() {
     try {
       const data: Record<string, string> = {};
       for (const k of [
-        ...BASE_FIELDS,
+        ...MAIN_FIELDS,
         "docType",
         "extraDriverName",
         "extraDriverDoc",
@@ -1037,12 +1049,13 @@ function SignPage() {
               ))}
             </select>
           </label>
-          {BASE_FIELDS.map((k) => {
-            const missing = tried && !(form[k] || "").trim();
+          {MAIN_FIELDS.map((k) => {
+            const required = !OPTIONAL_FIELDS.has(k);
+            const missing = required && tried && !(form[k] || "").trim();
             return (
               <label key={k} className="block text-sm">
                 <span className={`mb-1 block ${missing ? "text-destructive" : "text-muted-foreground"}`}>
-                  {t.labels[k]} <span className="text-destructive">*</span>
+                  {t.labels[k]} {required && <span className="text-destructive">*</span>}
                 </span>
                 <input
                   className={`${inputCls} ${missing ? "border-destructive ring-1 ring-destructive" : ""}`}

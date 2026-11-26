@@ -161,6 +161,7 @@ const FIELD_LABEL: Record<string, string> = {
   phone: "Телефон",
   licenseNumber: "Права №",
   licenseCountry: "Права выданы",
+  licenseIssued: "Права выданы (дата)",
   licenseExpiry: "Права до",
   extraDriverName: "Доп. водитель",
   extraDriverDoc: "Документ доп. водителя",

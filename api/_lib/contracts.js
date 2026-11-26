@@ -239,12 +239,12 @@ const REQUIRED = [
   ["postalCode", 20],
   ["country", 60],
   ["phone", 40],
-  ["licenseNumber", 40],
   ["licenseCountry", 60],
+  ["licenseIssued", 10],
   ["licenseExpiry", 10],
   ["birthDate", 10],
 ];
-const OPTIONAL = [["extraDriverName", 120], ["extraDriverDoc", 40], ["extraDriverLicense", 40]];
+const OPTIONAL = [["licenseNumber", 40], ["extraDriverName", 120], ["extraDriverDoc", 40], ["extraDriverLicense", 40]];
 
 /** @returns the cleaned data the contract is signed with */
 export function validateSignData(input = {}) {
@@ -256,7 +256,7 @@ export function validateSignData(input = {}) {
   for (const [key, max] of OPTIONAL) data[key] = clean(input[key], max);
   data.docType = DOC_TYPES.includes(input.docType) ? input.docType : null;
   if (!data.docType) throw new ContractError("field_required", "Missing docType");
-  if (![data.birthDate, data.docExpiry, data.licenseExpiry].every((d) => ISO_DATE.test(d))) {
+  if (![data.birthDate, data.docExpiry, data.licenseIssued, data.licenseExpiry].every((d) => ISO_DATE.test(d))) {
     throw new ContractError("date_invalid", "Birth date or license expiry is not a valid date");
   }
   return data;
