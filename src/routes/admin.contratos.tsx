@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ActaEditor } from "@/components/admin/ActaEditor";
+import { DocPhotos, OwnerSignature } from "@/components/admin/OwnerSignature";
 import { formFromParsed, GmailSetup, ImportsPanel, missingFields, YescapaPaste, type ImportDraft, type Parsed } from "@/components/admin/YescapaImport";
 import { LoginDialog } from "@/components/LoginDialog";
 import { loadAuth, logout as logoutAccount, openLogin, useAuth } from "@/lib/auth";
@@ -61,6 +62,7 @@ interface Detail extends Row {
     ip: string;
     userAgent: string;
     data: Record<string, string>;
+    docs?: string[];
   };
   audit: { t: number; ev: string; ip?: string }[];
 }
@@ -99,6 +101,8 @@ interface Me {
   vehicles: { id: string; name: string; city: string; plate: string; label: string }[];
   multiVehicle: boolean;
   staff: null | { admins: string[]; managers: { email: string; vehicleIds: string[] }[]; token: boolean };
+  ownerSignature?: boolean | null;
+  ownerSignerName?: string | null;
 }
 interface Feed {
   id: string;
@@ -899,6 +903,15 @@ function Admin() {
         </details>
       )}
 
+      {me?.role === "owner" && (
+        <OwnerSignature
+          api={api}
+          has={!!me.ownerSignature}
+          name={me.ownerSignerName || "Ivakhnenko Sergii"}
+          onSaved={(ok) => setNotice(ok ? { kind: "ok", text: "Подпись сохранена." } : { kind: "err", text: "Не удалось сохранить подпись." })}
+        />
+      )}
+
       <ImportsPanel imports={imports} onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)} onDismiss={(d) => void dismissImport(d)} />
       <GmailSetup setup={importSetup} onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })} />
 
@@ -1160,6 +1173,7 @@ function Admin() {
                           <dd>{d.signed.ip || "—"}</dd>
                         </dl>
                       )}
+                      {d.signed?.docs && d.signed.docs.length > 0 && <DocPhotos api={api} id={d.id} slots={d.signed.docs} />}
                       <ol className="space-y-0.5 text-xs text-muted-foreground">
                         {d.audit.map((a, i) => (
                           <li key={i}>

@@ -279,7 +279,33 @@ export function decodeSignaturePng(dataUrl) {
   return bytes;
 }
 
-export function markSigned(contract, { data, consents, signatureHash, pdfHash, basePdfHash, ip, userAgent, now = Date.now() }) {
+// ── document photos ─────────────────────────────────────────────────────────
+// The guest photographs the ID document and the driving licence (both sides;
+// a passport only has the photo page). JPEGs, stored privately next to the
+// contract and hashed into the signed record.
+
+export const DOC_SLOTS = ["idFront", "idBack", "licenseFront", "licenseBack"];
+const MAX_DOC_BYTES = 3_000_000;
+const MIN_DOC_BYTES = 5_000;
+
+/** Slots the guest must upload for the chosen document type. */
+export function requiredDocSlots(docType) {
+  return docType === "passport" ? ["idFront", "licenseFront", "licenseBack"] : [...DOC_SLOTS];
+}
+
+/** @returns {Buffer} JPEG bytes of a "data:image/jpeg;base64,..." photo */
+export function decodeDocJpeg(dataUrl) {
+  const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(typeof dataUrl === "string" ? dataUrl : "");
+  if (!m) throw new ContractError("doc_invalid", "Photo is missing or not a JPEG");
+  const bytes = Buffer.from(m[1], "base64");
+  const isJpeg = bytes.length > 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  if (!isJpeg || bytes.length > MAX_DOC_BYTES || bytes.length < MIN_DOC_BYTES) {
+    throw new ContractError("doc_invalid", "Photo is not valid");
+  }
+  return bytes;
+}
+
+export function markSigned(contract, { data, consents, signatureHash, pdfHash, basePdfHash, docHashes = {}, ip, userAgent, now = Date.now() }) {
   return {
     ...contract,
     status: "signed",
@@ -291,6 +317,7 @@ export function markSigned(contract, { data, consents, signatureHash, pdfHash, b
       signatureHash,
       pdfHash,
       basePdfHash,
+      docHashes,
       ip: clean(ip, 64),
       userAgent: clean(userAgent, 300),
       pdfPath: `${CONTRACT_PREFIX}${contract.id}.pdf`,
@@ -328,15 +355,30 @@ export function createContractStore({ prefix = CONTRACT_PREFIX } = {}) {
     async getPdf(contract) {
       return blobStore.readBuffer(`${prefix}${contract.id}.pdf`);
     },
+    async putDoc(id, slot, bytes) {
+      await blobStore.putRaw(`${prefix}docs/${id}-${slot}.jpg`, Buffer.from(bytes), { contentType: "image/jpeg" });
+    },
+    async getDoc(id, slot) {
+      return blobStore.readBuffer(`${prefix}docs/${id}-${slot}.jpg`);
+    },
+    async putOwnerSignature(bytes) {
+      await blobStore.putRaw(`${prefix}owner-signature.png`, Buffer.from(bytes), { contentType: "image/png" });
+    },
+    async getOwnerSignature() {
+      return blobStore.readBuffer(`${prefix}owner-signature.png`);
+    },
   };
 }
 
 export function createMemoryContractStore(initial = []) {
   const rows = new Map(initial.map((c) => [c.id, JSON.stringify(c)]));
   const pdfs = new Map();
+  const docs = new Map();
+  let ownerSignature = null;
   return {
     rows,
     pdfs,
+    docs,
     async get(id) {
       return rows.has(id) ? { contract: JSON.parse(rows.get(id)), etag: "e" } : null;
     },
@@ -351,6 +393,18 @@ export function createMemoryContractStore(initial = []) {
     },
     async getPdf(contract) {
       return pdfs.get(contract.id) || null;
+    },
+    async putDoc(id, slot, bytes) {
+      docs.set(`${id}-${slot}`, Buffer.from(bytes));
+    },
+    async getDoc(id, slot) {
+      return docs.get(`${id}-${slot}`) || null;
+    },
+    async putOwnerSignature(bytes) {
+      ownerSignature = Buffer.from(bytes);
+    },
+    async getOwnerSignature() {
+      return ownerSignature;
     },
   };
 }

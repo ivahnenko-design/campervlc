@@ -4,7 +4,7 @@
 // text is transliterated for the PDF; the original Unicode data stays in the
 // JSON record.
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import { vehicleView } from "./contracts.js";
+import { contractPdfPathOf, vehicleView } from "./contracts.js";
 
 const CYR = {
   а: "a", б: "b", в: "v", г: "g", ґ: "g", д: "d", е: "e", є: "ye", ё: "e", ж: "zh", з: "z", и: "i", і: "i", ї: "yi",
@@ -50,6 +50,41 @@ function wrap(font, text, size, maxWidth) {
   return lines;
 }
 
+
+// Where the blank contract has its own signature block ("FIRMAS"): the
+// signatures and names are also stamped there, over the "Fdo. ____" lines.
+// Coordinates in PDF points from the bottom-left, measured with pdftotext -bbox.
+const SIGNATURE_BLOCKS = {
+  "/contracts/contrato-v7.pdf": {
+    page: 12,
+    lessor: { x: 95, line: 841.92 - 211, width: 160 },
+    lessee: { x: 371, line: 841.92 - 211, width: 160 },
+    lessorName: { x: 37, y: 841.92 - 234 },
+    lesseeDoc: { x: 432, y: 841.92 - 221.5 },
+  },
+};
+
+async function stampSignatureBlock(pdf, font, contract, data, signaturePng, owner) {
+  const block = SIGNATURE_BLOCKS[contractPdfPathOf(contract)];
+  if (!block) return;
+  const page = pdf.getPages()[block.page];
+  if (!page) return;
+  const ink = rgb(0.05, 0.1, 0.3);
+  const put = async (png, spot) => {
+    if (!png) return;
+    const img = await pdf.embedPng(png);
+    const scale = Math.min(spot.width / img.width, 34 / img.height);
+    page.drawImage(img, { x: spot.x, y: spot.line - 2, width: img.width * scale, height: img.height * scale });
+  };
+  await put(signaturePng, block.lessee);
+  if (owner) {
+    await put(owner.signaturePng, block.lessor);
+    page.drawText(pdfText(owner.name), { x: block.lessorName.x, y: block.lessorName.y, size: 8.5, font, color: ink });
+  }
+  const docText = `${DOC_LABEL[data.docType] || ""} ${data.docNumber}`.trim();
+  page.drawText(pdfText(docText), { x: block.lesseeDoc.x, y: block.lesseeDoc.y, size: 8, font, color: ink });
+}
+
 const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
 
 /**
@@ -58,13 +93,16 @@ const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.
  * @param {object} args.contract the record (before it is marked signed)
  * @param {object} args.data cleaned signer data
  * @param {Buffer} args.signaturePng drawn signature
+ * @param {Record<string, Buffer>} [args.docs] JPEG photos of the ID and licence by slot
+ * @param {{name: string, signaturePng: Buffer|null}} [args.owner] who signs for the company
  * @param {object} args.meta { signedAt, ip, userAgent, basePdfHash, signatureHash }
  * @returns {Promise<Uint8Array>}
  */
-export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePng, meta }) {
+export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePng, docs = {}, owner = null, meta }) {
   const pdf = await PDFDocument.load(basePdfBytes);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+  await stampSignatureBlock(pdf, font, contract, data, signaturePng, owner);
   const page = pdf.addPage([595.28, 841.89]);
   const M = 48;
   const W = page.getWidth() - M * 2;
@@ -141,16 +179,28 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   y -= 6;
   rule();
 
-  text("Firma", { size: 10.5, f: bold });
-  const img = await pdf.embedPng(signaturePng);
-  const maxW = 230;
-  const maxH = 80;
-  const scale = Math.min(maxW / img.width, maxH / img.height, 1);
-  const w = img.width * scale;
-  const h = img.height * scale;
-  page.drawRectangle({ x: M, y: y - h - 6, width: maxW + 10, height: h + 12, borderColor: grey, borderWidth: 0.5 });
-  page.drawImage(img, { x: M + 5, y: y - h, width: w, height: h });
-  y -= h + 22;
+  // Two signatures side by side: the guest (drawn now) and the company.
+  const boxW = (W - 20) / 2;
+  const boxH = 84;
+  const top = y;
+  const sigBox = async (x, title, name, png) => {
+    page.drawText(pdfText(title), { x, y: top, size: 10.5, font: bold, color: ink });
+    const by = top - 14 - boxH;
+    page.drawRectangle({ x, y: by, width: boxW, height: boxH, borderColor: grey, borderWidth: 0.5 });
+    if (png) {
+      const img = await pdf.embedPng(png);
+      const scale = Math.min((boxW - 12) / img.width, (boxH - 12) / img.height, 1);
+      const w = img.width * scale;
+      const h = img.height * scale;
+      page.drawImage(img, { x: x + (boxW - w) / 2, y: by + (boxH - h) / 2, width: w, height: h });
+    }
+    page.drawText(pdfText(name), { x, y: by - 12, size: 9, font, color: ink });
+  };
+  await sigBox(M, "Firma del Arrendatario", data.fullName, signaturePng);
+  if (owner) {
+    await sigBox(M + boxW + 20, "Por el Arrendador, CAMPER RETREAT S.L.", owner.name, owner.signaturePng);
+  }
+  y = top - 14 - boxH - 30;
 
   text("Registro de la firma", { size: 10.5, f: bold });
   row("Fecha y hora", fmtTime(meta.signedAt));
@@ -164,6 +214,38 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     "Los datos originales del Arrendatario se conservan en el registro electronico de Camper Retreat S.L. junto con el historial de la operacion. Este documento se envia a ambas partes por email.",
     { size: 8, color: grey },
   );
+
+  const DOC_TITLES = {
+    idFront: "Documento de identidad - anverso",
+    idBack: "Documento de identidad - reverso",
+    licenseFront: "Permiso de conducir - anverso",
+    licenseBack: "Permiso de conducir - reverso",
+  };
+  const photos = Object.keys(DOC_TITLES).filter((k) => docs[k]);
+  if (photos.length) {
+    const annex = pdf.addPage([595.28, 841.89]);
+    let ay = annex.getHeight() - M;
+    annex.drawText("ANEXO: COPIA DE LOS DOCUMENTOS DEL ARRENDATARIO", { x: M, y: ay, size: 13, font: bold, color: ink });
+    ay -= 14;
+    annex.drawText(pdfText(`${data.fullName} - contrato ${contract.id} - aportadas por el Arrendatario al firmar (apdo. 15.4)`), {
+      x: M, y: ay, size: 8.5, font, color: grey,
+    });
+    ay -= 16;
+    const cellW = (W - 16) / 2;
+    const cellH = (ay - M - 2 * 16) / 2;
+    for (let i = 0; i < photos.length; i++) {
+      const slot = photos[i];
+      const cx = M + (i % 2) * (cellW + 16);
+      const cyTop = ay - Math.floor(i / 2) * (cellH + 16);
+      annex.drawText(DOC_TITLES[slot], { x: cx, y: cyTop - 10, size: 9, font: bold, color: grey });
+      const img = await pdf.embedJpg(docs[slot]);
+      const areaH = cellH - 18;
+      const scale = Math.min(cellW / img.width, areaH / img.height);
+      const w = img.width * scale;
+      const h = img.height * scale;
+      annex.drawImage(img, { x: cx + (cellW - w) / 2, y: cyTop - 16 - areaH + (areaH - h), width: w, height: h });
+    }
+  }
 
   pdf.setTitle(`Contrato de alquiler ${contract.id}`);
   pdf.setAuthor("CAMPER RETREAT S.L.");

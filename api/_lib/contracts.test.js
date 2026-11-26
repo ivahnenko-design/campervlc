@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import zlib from "node:zlib";
+import { readFileSync } from "node:fs";
 import { PDFDocument } from "pdf-lib";
 import {
   CONSENT_KEYS,
@@ -72,6 +73,8 @@ function fakePng() {
   ]);
   return `data:image/png;base64,${png.toString("base64")}`;
 }
+
+const DOC_JPEG = `data:image/jpeg;base64,${readFileSync(new URL("./fixtures/doc.jpg", import.meta.url)).toString("base64")}`;
 
 const SIGN_DATA = {
   fullName: "Anna Kowalska",
@@ -225,6 +228,23 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   assert.equal(noConsent.code, 400);
   assert.equal(noConsent.body.code, "consent_required");
 
+  const noDocs = res();
+  await h.guest({ method: "POST", headers: {}, body: { token, action: "sign", code, data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } }, noDocs);
+  assert.equal(noDocs.code, 400);
+  assert.equal(noDocs.body.code, "docs_required");
+
+  const badDoc = res();
+  await h.guest({ method: "POST", body: { token, action: "doc", slot: "idFront", image: "data:image/jpeg;base64,AAAA" } }, badDoc);
+  assert.equal(badDoc.code, 400);
+  for (const slot of ["idFront", "licenseFront", "licenseBack"]) {
+    const up = res();
+    await h.guest({ method: "POST", body: { token, action: "doc", slot, image: DOC_JPEG } }, up);
+    assert.equal(up.code, 200, JSON.stringify(up.body));
+  }
+
+  const ownerSig = res();
+  await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret", "content-type": "application/json" }, body: { action: "owner_signature", signature: `data:image/png;base64,${fakePng().split(",")[1] ?? ""}` } }, ownerSig);
+
   tick(5_000);
   const ok = res();
   const req = { method: "POST", headers: { "x-forwarded-for": "203.0.113.7, 10.0.0.1", "user-agent": "TestAgent/1" }, body: { token, action: "sign", code, data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } };
@@ -239,7 +259,13 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   assert.ok(store.pdfs.get(created.body.id).length > 1000);
   assert.equal(sent.signed.length, 1);
   const out = await PDFDocument.load(store.pdfs.get(created.body.id));
-  assert.equal(out.getPageCount(), 2, "blank contract + signature sheet");
+  assert.equal(out.getPageCount(), 3, "blank contract + signature sheet + document annex");
+  assert.deepEqual(Object.keys(stored.signed.docHashes).sort(), ["idFront", "licenseBack", "licenseFront"]);
+
+  const photo = res();
+  await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id: created.body.id, doc: "idFront" } }, photo);
+  assert.equal(photo.code, 200);
+  assert.equal(photo.headers["Content-Type"], "image/jpeg");
 
   const again = res();
   await h.guest(req, again);

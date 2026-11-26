@@ -5,7 +5,9 @@
 import {
   ContractError,
   checkOtp,
+  DOC_SLOTS,
   createContract,
+  decodeDocJpeg,
   decodeSignaturePng,
   issueOtp,
   markSigned,
@@ -13,6 +15,7 @@ import {
   publicView,
   reissueToken,
   requireConsents,
+  requiredDocSlots,
   sha256,
   tokenId,
   validateSignData,
@@ -81,6 +84,7 @@ function adminDetail(c) {
           ip: c.signed.ip,
           userAgent: c.signed.userAgent,
           pdfHash: c.signed.pdfHash,
+          docs: Object.keys(c.signed.docHashes || {}),
         }
       : null,
     audit: (c.audit || []).map(({ t, ev, ip }) => ({ t, ev, ...(ip ? { ip } : {}) })),
@@ -131,6 +135,7 @@ export function createContractHandlers({
   sessionSecret = null, // guest-session key: staff log in with their site account
   env = process.env, // ADMIN_EMAILS / MANAGER_EMAILS
   secret,
+  ownerSignerName = process.env.CONTRACT_OWNER_SIGNER || "Ivakhnenko Sergii",
   now = () => Date.now(),
 }) {
   async function admin(req, res) {
@@ -156,6 +161,8 @@ export function createContractHandlers({
             multiVehicle: activeVehicles().length > 1,
             // Owner only: who has access, straight from the environment.
             staff: cfg ? { admins: cfg.admins, managers: cfg.managers, token: !!adminToken } : null,
+            ownerSignature: owner ? !!(await store.getOwnerSignature?.()) : null,
+            ownerSignerName: owner ? ownerSignerName : null,
           });
         }
         if (req.query?.view === "calendar") {
@@ -170,6 +177,23 @@ export function createContractHandlers({
         if (req.query?.view === "bookings") {
           const rows = visibleTo(staff, await listBookings(), vehicleOf).map(bookingRow).sort((a, b) => (a.startDate < b.startDate ? -1 : 1));
           return reply(res, 200, { bookings: rows });
+        }
+        if (req.query?.view === "owner-signature") {
+          if (!owner) return forbidden(res);
+          const png = await store.getOwnerSignature?.();
+          if (!png) return reply(res, 404, { error: "No signature yet", code: "not_found" });
+          res.setHeader("Content-Type", "image/png");
+          return res.status(200).send(png);
+        }
+        if (id && typeof req.query?.doc === "string") {
+          if (!DOC_SLOTS.includes(req.query.doc)) return reply(res, 400, { error: "Unknown document", code: "bad_doc" });
+          const found = await store.get(id);
+          if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
+          if (!canSee(staff, vehicleOf(found.contract))) return forbidden(res);
+          const jpg = await store.getDoc(id, req.query.doc);
+          if (!jpg) return reply(res, 404, { error: "No photo", code: "not_found" });
+          res.setHeader("Content-Type", "image/jpeg");
+          return res.status(200).send(jpg);
         }
         if (id && req.query?.detail) {
           const found = await store.get(id);
@@ -216,6 +240,12 @@ export function createContractHandlers({
           await imports.save({ ...draft.draft, status: "done", contractId: contract.id }, { etag: draft.etag }).catch(() => {});
         }
         return reply(res, 201, { id: contract.id, link, emailSent });
+      }
+      if (action === "owner_signature") {
+        if (!owner) return forbidden(res);
+        const png = decodeSignaturePng(body.signature);
+        await store.putOwnerSignature(png);
+        return reply(res, 200, { ok: true });
       }
       if (action === "import_dismiss") {
         const d = imports ? await imports.get(String(body.importId || "")) : null;
@@ -283,11 +313,26 @@ export function createContractHandlers({
         return reply(res, 200, { sent: true, emailHint: publicView(issued.contract).emailHint });
       }
 
+      if (body.action === "doc") {
+        if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
+        if (!DOC_SLOTS.includes(body.slot)) throw new ContractError("doc_invalid", "Unknown document side");
+        const jpg = decodeDocJpeg(body.image);
+        await store.putDoc(found.contract.id, body.slot, jpg);
+        return reply(res, 200, { ok: true, slot: body.slot });
+      }
+
       if (body.action === "sign") {
         if (found.contract.status !== "pending") throw new ContractError("not_pending", "Already signed", 409);
         const data = validateSignData(body.data);
         const consents = requireConsents(body.consents);
         const signaturePng = decodeSignaturePng(body.signature);
+        const docs = {};
+        for (const slot of DOC_SLOTS) {
+          const jpg = await store.getDoc(found.contract.id, slot);
+          if (jpg) docs[slot] = jpg;
+        }
+        const missing = requiredDocSlots(data.docType).filter((slot) => !docs[slot]);
+        if (missing.length) throw new ContractError("docs_required", `Missing document photos: ${missing.join(", ")}`);
         const checked = checkOtp(found.contract, body.code, { now: t, secret });
         if (!checked.ok) {
           if (checked.contract !== found.contract) await store.save(checked.contract, { etag: found.etag });
@@ -299,11 +344,15 @@ export function createContractHandlers({
         const signatureHash = sha256(signaturePng);
         const ip = firstIp(req);
         const userAgent = String(req.headers?.["user-agent"] || "");
+        const docHashes = Object.fromEntries(Object.entries(docs).map(([slot, jpg]) => [slot, sha256(jpg)]));
+        const ownerSignaturePng = await store.getOwnerSignature?.().catch(() => null);
         const pdfBytes = await buildSignedPdf({
           basePdfBytes,
           contract: found.contract,
           data,
           signaturePng,
+          docs,
+          owner: { name: ownerSignerName, signaturePng: ownerSignaturePng || null },
           meta: { signedAt: t, ip, userAgent, basePdfHash, signatureHash },
         });
         const signed = markSigned(found.contract, {
@@ -312,6 +361,7 @@ export function createContractHandlers({
           signatureHash,
           pdfHash: sha256(pdfBytes),
           basePdfHash,
+          docHashes,
           ip,
           userAgent,
           now: t,

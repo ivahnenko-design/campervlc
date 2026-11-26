@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle, Loader2 } from "lucide-react";
+import { DocScanner, type ScanTexts } from "@/components/DocScanner";
 
 export const Route = createFileRoute("/sign/$token")({
   validateSearch: (s: Record<string, unknown>): { lang?: string } => ({
@@ -547,6 +548,151 @@ const TEXT: Record<
   },
 };
 
+
+// Photos of the ID document and the driving licence (contract clause 15.4).
+type DocSlot = "idFront" | "idBack" | "licenseFront" | "licenseBack";
+const DOCS_TEXT: Record<
+  Lang,
+  ScanTexts & {
+    title: string;
+    intro: string;
+    labels: Record<DocSlot, string>;
+    passportPage: string;
+    needDocs: string;
+    errors: { docs_required: string; doc_invalid: string };
+  }
+> = {
+  en: {
+    title: "Photos of your documents",
+    intro: "Your ID or passport and your driving licence, both sides. Take them on a flat, well-lit surface without glare; all text must be readable. They are stored privately and only used for this rental (clause 15.4).",
+    labels: { idFront: "ID document, front", idBack: "ID document, back", licenseFront: "Driving licence, front", licenseBack: "Driving licence, back" },
+    passportPage: "Passport, photo page",
+    scan: "Scan with camera",
+    upload: "Upload photo",
+    retake: "Retake",
+    uploading: "Uploading…",
+    uploaded: "Uploaded",
+    failed: "The photo could not be uploaded. Try again.",
+    frameHint: "Fit the document inside the frame, avoid glare, hold still.",
+    shoot: "Take photo",
+    cancel: "Close",
+    noCamera: "The camera is not available. Upload a photo instead.",
+    needDocs: "Please add the photos of your documents.",
+    errors: { docs_required: "Please add the photos of your documents.", doc_invalid: "The photo is not valid. Take it again." },
+  },
+  es: {
+    title: "Fotos de tus documentos",
+    intro: "Tu DNI, NIE o pasaporte y tu permiso de conducir, por ambas caras. Hazlas sobre una superficie plana, con buena luz y sin reflejos; todo el texto debe leerse. Se guardan de forma privada y solo se usan para este alquiler (apdo. 15.4).",
+    labels: { idFront: "Documento de identidad, anverso", idBack: "Documento de identidad, reverso", licenseFront: "Permiso de conducir, anverso", licenseBack: "Permiso de conducir, reverso" },
+    passportPage: "Pasaporte, página de la foto",
+    scan: "Escanear con la cámara",
+    upload: "Subir foto",
+    retake: "Repetir",
+    uploading: "Subiendo…",
+    uploaded: "Subida",
+    failed: "No se ha podido subir la foto. Inténtalo de nuevo.",
+    frameHint: "Encaja el documento en el marco, evita los reflejos y no te muevas.",
+    shoot: "Hacer foto",
+    cancel: "Cerrar",
+    noCamera: "La cámara no está disponible. Sube una foto.",
+    needDocs: "Añade las fotos de tus documentos.",
+    errors: { docs_required: "Añade las fotos de tus documentos.", doc_invalid: "La foto no es válida. Hazla de nuevo." },
+  },
+  ru: {
+    title: "Фото документов",
+    intro: "Паспорт или ID и водительское удостоверение с обеих сторон. Снимайте на ровной поверхности при хорошем свете, без бликов: весь текст должен читаться. Фото хранятся закрыто и используются только для этой аренды (п. 15.4).",
+    labels: { idFront: "Документ (ID), лицевая сторона", idBack: "Документ (ID), оборотная сторона", licenseFront: "Водительское удостоверение, лицевая сторона", licenseBack: "Водительское удостоверение, оборотная сторона" },
+    passportPage: "Паспорт, страница с фото",
+    scan: "Сканировать камерой",
+    upload: "Загрузить фото",
+    retake: "Переснять",
+    uploading: "Загрузка…",
+    uploaded: "Загружено",
+    failed: "Не удалось загрузить фото. Попробуйте ещё раз.",
+    frameHint: "Поместите документ в рамку, избегайте бликов, не двигайте телефон.",
+    shoot: "Сделать снимок",
+    cancel: "Закрыть",
+    noCamera: "Камера недоступна. Загрузите фото.",
+    needDocs: "Добавьте фото документов.",
+    errors: { docs_required: "Добавьте фото документов.", doc_invalid: "Фото не подходит. Сделайте его заново." },
+  },
+  uk: {
+    title: "Фото документів",
+    intro: "Паспорт або ID та водійське посвідчення з обох боків. Знімайте на рівній поверхні за гарного світла, без відблисків: увесь текст має читатися. Фото зберігаються закрито й використовуються лише для цієї оренди (п. 15.4).",
+    labels: { idFront: "Документ (ID), лицьовий бік", idBack: "Документ (ID), зворотний бік", licenseFront: "Водійське посвідчення, лицьовий бік", licenseBack: "Водійське посвідчення, зворотний бік" },
+    passportPage: "Паспорт, сторінка з фото",
+    scan: "Сканувати камерою",
+    upload: "Завантажити фото",
+    retake: "Перезняти",
+    uploading: "Завантаження…",
+    uploaded: "Завантажено",
+    failed: "Не вдалося завантажити фото. Спробуйте ще раз.",
+    frameHint: "Розмістіть документ у рамці, уникайте відблисків, не рухайте телефон.",
+    shoot: "Зробити знімок",
+    cancel: "Закрити",
+    noCamera: "Камера недоступна. Завантажте фото.",
+    needDocs: "Додайте фото документів.",
+    errors: { docs_required: "Додайте фото документів.", doc_invalid: "Фото не підходить. Зробіть його знову." },
+  },
+  de: {
+    title: "Fotos deiner Dokumente",
+    intro: "Ausweis oder Reisepass und Führerschein, jeweils beide Seiten. Fotografiere sie auf einer flachen Unterlage, bei gutem Licht und ohne Spiegelungen; der ganze Text muss lesbar sein. Sie werden vertraulich gespeichert und nur für diese Miete verwendet (Ziffer 15.4).",
+    labels: { idFront: "Ausweis, Vorderseite", idBack: "Ausweis, Rückseite", licenseFront: "Führerschein, Vorderseite", licenseBack: "Führerschein, Rückseite" },
+    passportPage: "Reisepass, Seite mit Foto",
+    scan: "Mit Kamera scannen",
+    upload: "Foto hochladen",
+    retake: "Neu aufnehmen",
+    uploading: "Wird hochgeladen…",
+    uploaded: "Hochgeladen",
+    failed: "Das Foto konnte nicht hochgeladen werden. Bitte erneut versuchen.",
+    frameHint: "Dokument in den Rahmen legen, Spiegelungen vermeiden, ruhig halten.",
+    shoot: "Foto aufnehmen",
+    cancel: "Schließen",
+    noCamera: "Die Kamera ist nicht verfügbar. Lade stattdessen ein Foto hoch.",
+    needDocs: "Bitte füge die Fotos deiner Dokumente hinzu.",
+    errors: { docs_required: "Bitte füge die Fotos deiner Dokumente hinzu.", doc_invalid: "Das Foto ist ungültig. Bitte neu aufnehmen." },
+  },
+  it: {
+    title: "Foto dei tuoi documenti",
+    intro: "Carta d'identità o passaporto e patente di guida, fronte e retro. Scattale su una superficie piana, con buona luce e senza riflessi; tutto il testo deve essere leggibile. Sono conservate in modo riservato e usate solo per questo noleggio (punto 15.4).",
+    labels: { idFront: "Documento d'identità, fronte", idBack: "Documento d'identità, retro", licenseFront: "Patente di guida, fronte", licenseBack: "Patente di guida, retro" },
+    passportPage: "Passaporto, pagina con la foto",
+    scan: "Scansiona con la fotocamera",
+    upload: "Carica foto",
+    retake: "Rifai",
+    uploading: "Caricamento…",
+    uploaded: "Caricata",
+    failed: "Non è stato possibile caricare la foto. Riprova.",
+    frameHint: "Inquadra il documento nella cornice, evita i riflessi e resta fermo.",
+    shoot: "Scatta",
+    cancel: "Chiudi",
+    noCamera: "La fotocamera non è disponibile. Carica una foto.",
+    needDocs: "Aggiungi le foto dei tuoi documenti.",
+    errors: { docs_required: "Aggiungi le foto dei tuoi documenti.", doc_invalid: "La foto non è valida. Rifalla." },
+  },
+  nl: {
+    title: "Foto's van je documenten",
+    intro: "Je identiteitskaart of paspoort en je rijbewijs, beide kanten. Maak ze op een vlakke ondergrond, met goed licht en zonder schittering; alle tekst moet leesbaar zijn. Ze worden vertrouwelijk bewaard en alleen voor deze huur gebruikt (artikel 15.4).",
+    labels: { idFront: "Identiteitsbewijs, voorkant", idBack: "Identiteitsbewijs, achterkant", licenseFront: "Rijbewijs, voorkant", licenseBack: "Rijbewijs, achterkant" },
+    passportPage: "Paspoort, pagina met foto",
+    scan: "Scannen met camera",
+    upload: "Foto uploaden",
+    retake: "Opnieuw",
+    uploading: "Uploaden…",
+    uploaded: "Geüpload",
+    failed: "De foto kon niet worden geüpload. Probeer het opnieuw.",
+    frameHint: "Plaats het document in het kader, vermijd schittering en houd stil.",
+    shoot: "Foto maken",
+    cancel: "Sluiten",
+    noCamera: "De camera is niet beschikbaar. Upload een foto.",
+    needDocs: "Voeg de foto's van je documenten toe.",
+    errors: { docs_required: "Voeg de foto's van je documenten toe.", doc_invalid: "De foto is ongeldig. Maak hem opnieuw." },
+  },
+};
+
+const docSlotsFor = (docType: string | undefined): DocSlot[] =>
+  docType === "passport" ? ["idFront", "licenseFront", "licenseBack"] : ["idFront", "idBack", "licenseFront", "licenseBack"];
+
 const pickLang = (...candidates: (string | undefined)[]): Lang => {
   for (const c of candidates) if (c === "es" || c === "en" || c === "ru" || c === "uk" || c === "de" || c === "it" || c === "nl") return c;
   return "en";
@@ -683,9 +829,11 @@ function SignPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [uploaded, setUploaded] = useState<Partial<Record<DocSlot, boolean>>>({});
 
   const lang = pickLang(search.lang, contract?.language);
   const t = TEXT[lang];
+  const d = DOCS_TEXT[lang];
 
   useEffect(() => {
     fetch(`/api/contract?token=${encodeURIComponent(token)}`)
@@ -699,7 +847,8 @@ function SignPage() {
   }, [token]);
 
   const set = useCallback((k: string, v: string) => setForm((f) => ({ ...f, [k]: v })), []);
-  const errText = (code?: string) => t.errors[code || ""] || t.errors.default;
+  const errText = (code?: string) =>
+    (d.errors as Record<string, string>)[code || ""] || t.errors[code || ""] || t.errors.default;
 
   async function post(body: Record<string, unknown>) {
     const r = await fetch("/api/contract", {
@@ -725,6 +874,7 @@ function SignPage() {
   async function askCode() {
     setError(null);
     if (!filled) return setError(t.fillAll);
+    if (!docSlotsFor(form.docType).every((k) => uploaded[k])) return setError(d.needDocs);
     if (!signature) return setError(t.needSignature);
     if (!allConsents) return setError(t.errors.consent_required);
     setBusy(true);
@@ -869,6 +1019,26 @@ function SignPage() {
                 autoComplete="off"
               />
             </label>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-5">
+        <h2 className="font-semibold">{d.title}</h2>
+        <p className="mt-1 text-xs text-muted-foreground">{d.intro}</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {docSlotsFor(form.docType).map((slot) => (
+            <DocScanner
+              key={slot}
+              label={slot === "idFront" && form.docType === "passport" ? d.passportPage : d.labels[slot]}
+              passport={slot === "idFront" && form.docType === "passport"}
+              texts={d}
+              onImage={async (image) => {
+                setUploaded((u) => ({ ...u, [slot]: false }));
+                await post({ action: "doc", slot, image });
+                setUploaded((u) => ({ ...u, [slot]: true }));
+              }}
+            />
           ))}
         </div>
       </section>
