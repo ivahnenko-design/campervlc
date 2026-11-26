@@ -62,6 +62,13 @@ const SIGNATURE_BLOCKS = {
     lessorName: { x: 37, y: 841.92 - 234 },
     lesseeDoc: { x: 432, y: 841.92 - 221.5 },
   },
+  "/contracts/contrato-v8.pdf": {
+    page: 12,
+    lessor: { x: 95, line: 841.92 - 567.2, width: 160 },
+    lessee: { x: 371, line: 841.92 - 567.2, width: 160 },
+    lessorName: { x: 37, y: 841.92 - 590.3 },
+    lesseeDoc: { x: 432, y: 841.92 - 577.7 },
+  },
 };
 
 async function stampSignatureBlock(pdf, font, contract, data, signaturePng, owner) {
@@ -121,6 +128,35 @@ const FILL_BLANKS = {
       web: [[150.7, 767.5, 157.9, 775.4], [396.0, 767.5, 403.2, 775.4]],
       yescapa: [[219.5, 767.5, 226.6, 775.4], [464.8, 767.5, 471.9, 775.4]],
       other: [[261.4, 767.5, 268.5, 775.4], [506.7, 767.5, 513.8, 775.4]],
+    },
+  },
+  "/contracts/contrato-v8.pdf": {
+    hide: [],
+    fields: [
+      { page: 0, key: "placeDate", boxes: [[92.4, 189.7, 100.9, 110.6], [364.0, 461.3, 100.9, 110.6]], maxX: [291, 558] },
+      { page: 0, key: "fullName", line: 304.9 },
+      { page: 0, key: "doc", line: 317.6 },
+      { page: 0, key: "docDates", line: 329.6 },
+      { page: 0, key: "licenseNumber", line: 342.4 },
+      { page: 0, key: "licenseCountry", line: 365.6 },
+      { page: 0, key: "licenseDates", line: 377.6 },
+      { page: 0, key: "birth", line: 390.4 },
+      { page: 0, key: "nationality", line: 402.4 },
+      { page: 0, key: "address", line: 415.1 },
+      { page: 0, key: "contact", line: 438.4 },
+      { page: 0, key: "taxResidence", line: 451.1 },
+      { page: 0, key: "extraDriverName", line: 481.9 },
+      { page: 0, key: "extraDriverDoc", line: 493.9 },
+      { page: 0, key: "extraDriverLicense", line: 506.6 },
+      { page: 0, key: "bookingRef", boxes: [[126.4, 161.2, 760.9, 770.6], [395.5, 430.3, 760.9, 770.6]], maxX: [291, 558] },
+      { page: 0, key: "pickup", boxes: [[126.1, 223.4, 773.6, 783.4], [407.5, 504.8, 773.6, 783.4]], maxX: [291, 558] },
+      { page: 1, key: "return", boxes: [[163.4, 260.7, 37.1, 46.9], [419.0, 516.3, 37.1, 46.9]], maxX: [291, 558] },
+      { page: 1, key: "price", boxes: [[186.2, 283.5, 73.9, 83.6], [434.7, 532.0, 73.9, 83.6]], maxX: [291, 558] },
+    ],
+    sourceBoxes: {
+      web: [[150.7, 751.8, 157.9, 759.6], [396.0, 751.8, 403.2, 759.6]],
+      yescapa: [[219.5, 751.8, 226.6, 759.6], [464.8, 751.8, 471.9, 759.6]],
+      other: [[261.4, 751.8, 268.5, 759.6], [506.7, 751.8, 513.8, 759.6]],
     },
   },
 };

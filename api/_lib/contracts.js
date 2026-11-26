@@ -7,14 +7,19 @@ import { blobStore, list } from "./blob.js";
 import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
 
 export const CONTRACT_PREFIX = process.env.CONTRACTS_BLOB_PREFIX || "campervlc-contracts/";
-// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v7.pdf
+// Matches TERMS_VERSION in create-checkout.js and public/contracts/contrato-v8.pdf
 // (v7: Spanish | English side by side; clause 17: the Spanish version prevails).
-export const CONTRACT_VERSION = "2026-11-v7";
-export const CONTRACT_PDF_PATH = "/contracts/contrato-v7.pdf";
+export const CONTRACT_VERSION = "2026-11-v8";
+export const CONTRACT_PDF_PATH = "/contracts/contrato-v8.pdf";
+// A contract is always signed on the blank of the version it was created with.
+const PDF_BY_VERSION = {
+  "2026-11-v7": "/contracts/contrato-v7.pdf",
+  "2026-11-v8": "/contracts/contrato-v8.pdf",
+};
 
 /** Blank contract of the camper (shared/vehicles.js contractPdfPath); vehicle 1: CONTRACT_PDF_PATH. */
 export function contractPdfPathOf(contract) {
-  return getVehicle(vehicleOf(contract))?.contractPdfPath || CONTRACT_PDF_PATH;
+  return PDF_BY_VERSION[contract?.version] || getVehicle(vehicleOf(contract))?.contractPdfPath || CONTRACT_PDF_PATH;
 }
 
 export const OTP_TTL_MS = 10 * 60_000;

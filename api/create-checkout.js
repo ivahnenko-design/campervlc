@@ -21,7 +21,7 @@ import {
 
 // Version of the rental conditions the guest ticks "I have read" for
 // (content/condiciones-web-*.md). Bump it when the contract text changes.
-const TERMS_VERSION = "2026-11-v7";
+const TERMS_VERSION = "2026-11-v8";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-06-30.basil",

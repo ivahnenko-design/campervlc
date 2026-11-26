@@ -10,6 +10,7 @@ import {
   ContractError,
   OTP_MAX_ATTEMPTS,
   checkOtp,
+  contractPdfPathOf,
   createContract,
   createMemoryContractStore,
   decodeSignaturePng,
@@ -104,13 +105,18 @@ test("validateInvite cleans fields and rejects bad input", () => {
   assert.throws(() => validateInvite({ ...INVITE, guestName: "" }), (e) => e.code === "guest_name_required");
 });
 
-test("v7: bilingual contract PDF for every camper and the language consent is required", () => {
-  assert.equal(CONTRACT_VERSION, "2026-11-v7");
-  assert.equal(CONTRACT_PDF_PATH, "/contracts/contrato-v7.pdf");
+test("v8: bilingual contract PDF for every camper and the language consent is required", () => {
+  assert.equal(CONTRACT_VERSION, "2026-11-v8");
+  assert.equal(CONTRACT_PDF_PATH, "/contracts/contrato-v8.pdf");
   for (const v of VEHICLES) assert.equal(v.contractPdfPath, CONTRACT_PDF_PATH, v.id);
   assert.ok(CONSENT_KEYS.includes("languageNotice"));
   assert.deepEqual(Object.keys(requireConsents(CONSENTS)).sort(), [...CONSENT_KEYS].sort());
   assert.throws(() => requireConsents({ ...CONSENTS, languageNotice: false }), (e) => e instanceof ContractError && e.code === "consent_required");
+});
+
+test("a contract keeps the blank of the version it was created with", () => {
+  assert.equal(contractPdfPathOf({ version: "2026-11-v7", vehicleId: VEHICLES[0].id }), "/contracts/contrato-v7.pdf");
+  assert.equal(contractPdfPathOf({ version: "2026-11-v8", vehicleId: VEHICLES[0].id }), "/contracts/contrato-v8.pdf");
 });
 
 test("token authenticates the contract and carries its id", () => {
