@@ -347,10 +347,11 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     }
     page.drawText(pdfText(name), { x, y: by - 12, size: 9, font, color: ink });
   };
-  await sigBox(M, "Firma del Arrendatario", data.fullName, signaturePng);
+  // Lessor on the left, lessee on the right, as in the FIRMAS block of the contract.
   if (owner) {
-    await sigBox(M + boxW + 20, "Por el Arrendador, CAMPER RETREAT S.L.", owner.name, owner.signaturePng);
+    await sigBox(M, "Por el Arrendador, CAMPER RETREAT S.L.", owner.name, owner.signaturePng);
   }
+  await sigBox(M + boxW + 20, "Firma del Arrendatario", data.fullName, signaturePng);
   y = top - 14 - boxH - 30;
 
   text("Registro de la firma", { size: 10.5, f: bold });
