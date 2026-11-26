@@ -1,5 +1,4 @@
 import {
-  AlertTriangle,
   CalendarDays,
   CheckCircle,
   Download,
@@ -491,12 +490,6 @@ export function BookingCabinet({
               )}
             </div>
           )}
-          <div className="rounded-xl border border-border p-3">
-            <a href="tel:112" className="flex items-center gap-1.5 font-semibold">
-              <AlertTriangle className="h-4 w-4 text-destructive" /> 112
-            </a>
-            <p className="mt-0.5 text-xs text-muted-foreground">{t.emergency}</p>
-          </div>
         </div>
       </section>
     </div>

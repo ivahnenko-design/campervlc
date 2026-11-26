@@ -1112,6 +1112,7 @@ function SignPage() {
         "extraDriverName",
         "extraDriverDoc",
         "extraDriverLicense",
+        "surname",
       ]) {
         data[k] = (form[k] || "").trim();
       }
@@ -1120,6 +1121,8 @@ function SignPage() {
       const r = await fetch(`/api/contract?token=${encodeURIComponent(token)}`);
       if (r.ok) setContract(((await r.json()) as { contract: ContractView }).contract);
       setDone(true);
+      // The booking page replaces the form: start it from the top.
+      window.scrollTo({ top: 0 });
     } catch (e) {
       setError(errText((e as { code?: string }).code));
     } finally {

@@ -175,6 +175,7 @@ export function mrzToFields(m) {
     docType: m.kind === "passport" ? "passport" : NIE.test(number) ? "nie" : DNI.test(number) ? "dni" : "id_card",
     docNumber: number,
     fullName: [m.givenNames, m.surname].filter(Boolean).join(" "),
+    surname: m.surname,
     birthDate: m.birthDate,
     docExpiry: m.expiryDate,
     nationality: countryName(m.nationality),

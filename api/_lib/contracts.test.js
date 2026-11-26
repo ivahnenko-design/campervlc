@@ -132,6 +132,8 @@ test("human contract number: pickup date + surname(s)", () => {
   assert.equal(contractNumber("2026-11-27", "Saúl Jara Sánchez"), "20261127_JARA-SANCHEZ");
   assert.equal(contractNumber("2026-12-10", "Sergii Ivakhnenko (TEST 3)"), "20261210_IVAKHNENKO");
   assert.equal(contractNumber("2026-12-10", "Сергей Ивахненко"), "20261210_IVAKHNENKO");
+  assert.equal(contractNumber("2026-12-10", "IVAKHNENKO Sergii"), "20261210_IVAKHNENKO", "surname in capitals");
+  assert.equal(contractNumber("2026-12-10", "SERGII IVAKHNENKO", "IVAKHNENKO"), "20261210_IVAKHNENKO", "surname from the MRZ");
   assert.equal(uniqueContractNumber("X", [{ id: "a", number: "X" }, { id: "b", number: "X-2" }], "c"), "X-3");
   assert.equal(uniqueContractNumber("X", [{ id: "a", number: "X" }], "a"), "X");
 });

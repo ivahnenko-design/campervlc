@@ -122,22 +122,33 @@ const CYR_LAT = {
  * 20261210_IVAKHNENKO or 20261127_JARA-SANCHEZ. The first word of the name is
  * taken as the given name; text in brackets is ignored.
  */
-export function contractNumber(startDate, name) {
+export function contractNumber(startDate, name, surname = "") {
   const date = String(startDate || "").replace(/-/g, "");
-  const words = String(name || "")
-    .replace(/\([^)]*\)/g, " ")
-    .toLowerCase()
-    .split("")
-    .map((ch) => (CYR_LAT[ch] !== undefined ? CYR_LAT[ch] : ch))
-    .join("")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase()
-    .replace(/[^A-Z0-9\s-]/g, " ")
-    .split(/[\s-]+/)
-    .filter(Boolean);
-  const surname = (words.length > 1 ? words.slice(1) : words).join("-").slice(0, 40) || "CLIENTE";
-  return `${date}_${surname}`;
+  const toWords = (v) =>
+    String(v || "")
+      .replace(/\([^)]*\)/g, " ")
+      .toLowerCase()
+      .split("")
+      .map((ch) => (CYR_LAT[ch] !== undefined ? CYR_LAT[ch] : ch))
+      .join("")
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9\s-]/g, " ")
+      .split(/[\s-]+/)
+      .filter(Boolean);
+  // Surname: given (read from the passport), else the words written in capitals
+  // ("IVAKHNENKO Sergii"), else everything after the first word.
+  const raw = String(name || "").replace(/\([^)]*\)/g, " ").split(/\s+/).filter(Boolean);
+  const caps = raw.filter((w) => w.length > 1 && /\p{L}/u.test(w) && w === w.toUpperCase());
+  let words;
+  if (surname) words = toWords(surname);
+  else if (caps.length && caps.length < raw.length) words = toWords(caps.join(" "));
+  else {
+    const all = toWords(name);
+    words = all.length > 1 ? all.slice(1) : all;
+  }
+  return `${date}_${words.join("-").slice(0, 40) || "CLIENTE"}`;
 }
 
 /** contractNumber, with -2, -3 ... when another contract already has it. */
@@ -293,7 +304,7 @@ const REQUIRED = [
   ["licenseExpiry", 10],
   ["birthDate", 10],
 ];
-const OPTIONAL = [["licenseNumber", 40], ["extraDriverName", 120], ["extraDriverDoc", 40], ["extraDriverLicense", 40]];
+const OPTIONAL = [["licenseNumber", 40], ["extraDriverName", 120], ["extraDriverDoc", 40], ["extraDriverLicense", 40], ["surname", 80]];
 
 /** @returns the cleaned data the contract is signed with */
 export function validateSignData(input = {}) {

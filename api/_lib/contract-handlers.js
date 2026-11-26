@@ -398,7 +398,12 @@ export function createContractHandlers({
         const ownerSignaturePng = await store.getOwnerSignature?.().catch(() => null);
         // Final number from the name the guest signed with (unique among all contracts).
         const number = uniqueContractNumber(
-          contractNumber(found.contract.startDate, data.fullName),
+          contractNumber(
+            found.contract.startDate,
+            data.fullName,
+            // Surname read from the passport MRZ, if the name was not changed since.
+            data.surname && data.fullName.toUpperCase().includes(data.surname.toUpperCase()) ? data.surname : "",
+          ),
           await store.list(),
           found.contract.id,
         );
