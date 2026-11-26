@@ -1110,14 +1110,17 @@ function SignPage() {
             </>
           )}
         </dl>
-        <a
-          href={contract.pdfPath}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-block text-primary underline"
-        >
-          {t.openContract}
-        </a>
+        {/* With the preview below, its own "Open as PDF" link is the only one. */}
+        {!contract.preview && (
+          <a
+            href={contract.pdfPath}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-block text-primary underline"
+          >
+            {t.openContract}
+          </a>
+        )}
       </section>
 
       {contract.preview && (
