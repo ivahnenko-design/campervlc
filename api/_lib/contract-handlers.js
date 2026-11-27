@@ -109,7 +109,7 @@ function adminDetail(c) {
       : null,
     // In-person signing: what the guest sent, what staff checked, the guest signature.
     submission: c.submission
-      ? { at: c.submission.at, data: c.submission.data, docs: Object.keys(c.submission.docHashes || {}) }
+      ? { at: c.submission.at, data: c.submission.data, docs: Object.keys(c.submission.docHashes || {}), byStaff: c.submission.byStaff || null }
       : null,
     verification: c.verification
       ? { at: c.verification.at, by: c.verification.by, name: c.verification.name, data: c.verification.data, edits: c.verification.edits || [] }
@@ -266,7 +266,10 @@ export function createContractHandlers({
         if (id && req.query?.pdf) {
           const found = await store.get(id);
           if (found && !canSee(staff, vehicleOf(found.contract))) return forbidden(res);
-          const pdf = found ? await store.getPdf(found.contract) : null;
+          // The copy with the return annex when there is one (?original=1: as signed at pickup).
+          const pdf = found
+            ? (!req.query.original && (await store.getFinalPdf?.(found.contract).catch(() => null))) || (await store.getPdf(found.contract))
+            : null;
           if (!pdf) return reply(res, 404, { error: "No signed PDF", code: "not_found" });
           res.setHeader("Content-Type", "application/pdf");
           res.setHeader("Content-Disposition", `attachment; filename="contrato-${id}.pdf"`);
@@ -340,17 +343,38 @@ export function createContractHandlers({
         }
         return reply(res, 200, { link: signingLink(token, contract.language), emailSent });
       }
-      if (["verify", "unverify", "kiosk", "countersign"].includes(action)) {
+      if (["verify", "unverify", "kiosk", "countersign", "doc"].includes(action)) {
         const found = await store.get(String(body.id || ""));
         if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
         if (!canSee(staff, vehicleOf(found.contract))) return forbidden(res);
         const staffName = owner ? ownerSignerName : String(body.name || "").trim().slice(0, 120) || staff.email || "";
         const t = now();
+        // Staff photograph the documents themselves (the guest sent nothing before pickup).
+        if (action === "doc") {
+          if (!OPEN_STATUSES.includes(found.contract.status)) throw new ContractError("not_open", "The data is already checked", 409);
+          if (!DOC_SLOTS.includes(body.slot)) throw new ContractError("doc_invalid", "Unknown document side");
+          await store.putDoc(found.contract.id, body.slot, decodeDocJpeg(body.image));
+          return reply(res, 200, { ok: true, slot: body.slot });
+        }
         if (action === "verify") {
           const data = validateSignData(body.data);
           const problem = signRuleProblems(data, found.contract)[0];
           if (problem) throw new ContractError(problem.code, `Rule failed: ${problem.field} ${problem.code}`);
-          const verified = markVerified(found.contract, { data, checks: body.checks || {}, by: staff.email || "admin-token", name: staffName, now: t });
+          let base = found.contract;
+          if (base.status === "pending") {
+            // Typed by staff from the original documents at pickup: the photos are required too.
+            const docHashes = {};
+            for (const slot of DOC_SLOTS) {
+              const jpg = await store.getDoc(base.id, slot);
+              if (jpg) docHashes[slot] = sha256(jpg);
+            }
+            const missing = requiredDocSlots(data.docType).filter((slot) => !docHashes[slot]);
+            if (missing.length) throw new ContractError("docs_required", `Missing document photos: ${missing.join(", ")}`);
+            base = markSubmitted(base, { data, docHashes, ip: firstIp(req), userAgent: String(req.headers?.["user-agent"] || ""), now: t });
+            base = { ...base, submission: { ...base.submission, byStaff: staff.email || "admin-token" } };
+            base.audit[base.audit.length - 1] = { ...base.audit[base.audit.length - 1], ev: "filled_by_staff", by: staff.email || "admin-token" };
+          }
+          const verified = markVerified(base, { data, checks: body.checks || {}, by: staff.email || "admin-token", name: staffName, now: t });
           await store.save(verified, { etag: found.etag });
           return reply(res, 200, { contract: adminDetail(verified) });
         }
@@ -500,7 +524,10 @@ export function createContractHandlers({
         const c = found.contract;
         // The signed copy, for the guest's booking page (the link from the email is the key).
         if (req.query?.pdf) {
-          const pdf = c.status === "signed" && found.via === "guest" ? await store.getPdf(c) : null;
+          const pdf =
+            c.status === "signed" && found.via === "guest"
+              ? (await store.getFinalPdf?.(c).catch(() => null)) || (await store.getPdf(c))
+              : null;
           if (!pdf) return reply(res, 404, { error: "No signed PDF", code: "not_found" });
           res.setHeader("Content-Type", "application/pdf");
           res.setHeader("Content-Disposition", `attachment; filename="contrato-alquiler-${c.number || c.id}.pdf"`);

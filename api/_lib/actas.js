@@ -118,6 +118,9 @@ export function validateActaPatch(input = {}) {
     out.marks = input.marks.map(validMark);
   }
   if (has("notes")) out.notes = clean(input.notes, 2000);
+  // Return: amounts agreed to withhold (printed on annex I-B), guest present at the inspection.
+  if (has("chargesText")) out.chargesText = clean(input.chargesText, 300);
+  if (has("guestPresent")) out.guestPresent = triBool(input.guestPresent);
   if (has("staffName")) out.staffName = clean(input.staffName, 120);
   if (has("guestName")) out.guestName = clean(input.guestName, 120);
   return out;

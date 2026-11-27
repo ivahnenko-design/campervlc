@@ -1390,7 +1390,7 @@ function Admin() {
                         ? "Скрыть"
                         : r.status === "signed"
                           ? "Данные клиента"
-                          : IN_PERSON.includes(r.status)
+                          : IN_PERSON.includes(r.status) || r.status === "pending"
                             ? "Выдача и подписание"
                             : "История"}
                     </button>

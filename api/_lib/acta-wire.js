@@ -19,7 +19,7 @@ export const actaHandler = createActaHandler({
   contracts: createContractStore(),
   listBookings: () => createBlobStore().listBookings(),
   loadDiagram,
-  sendEmails: (contract, acta, pdf) => sendActaEmails(contract, acta, pdf),
+  sendEmails: (contract, acta, pdf, contractPdf) => sendActaEmails(contract, acta, pdf, { contractPdf }),
   adminToken: process.env.ADMIN_TOKEN,
   sessionSecret: authSecret(),
 });

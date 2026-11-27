@@ -569,6 +569,13 @@ export function createContractStore({ prefix = CONTRACT_PREFIX } = {}) {
     async getPdf(contract) {
       return blobStore.readBuffer(`${prefix}${contract.id}.pdf`);
     },
+    // The signed contract with annex I-B filled at the return (the original stays as it was).
+    async putFinalPdf(contract, bytes) {
+      await blobStore.putRaw(`${prefix}${contract.id}-final.pdf`, Buffer.from(bytes), { contentType: "application/pdf" });
+    },
+    async getFinalPdf(contract) {
+      return blobStore.readBuffer(`${prefix}${contract.id}-final.pdf`);
+    },
     async putDoc(id, slot, bytes) {
       await blobStore.putRaw(`${prefix}docs/${id}-${slot}.jpg`, Buffer.from(bytes), { contentType: "image/jpeg" });
     },
@@ -621,6 +628,12 @@ export function createMemoryContractStore(initial = []) {
     },
     async getPdf(contract) {
       return pdfs.get(contract.id) || null;
+    },
+    async putFinalPdf(contract, bytes) {
+      pdfs.set(`${contract.id}-final`, Buffer.from(bytes));
+    },
+    async getFinalPdf(contract) {
+      return pdfs.get(`${contract.id}-final`) || null;
     },
     async putDoc(id, slot, bytes) {
       docs.set(`${id}-${slot}`, Buffer.from(bytes));

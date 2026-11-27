@@ -72,6 +72,7 @@ const ERR: Record<string, string> = {
   not_verified: "Сначала сверьте данные.",
   not_guest_signed: "Клиент ещё не подписал.",
   field_required: "Заполните обязательные поля.",
+  docs_required: "Сфотографируйте документы (все отмеченные *).",
   date_invalid: "Проверьте даты.",
 };
 
@@ -181,6 +182,109 @@ function Pad({ onChange }: { onChange: (png: string | null) => void }) {
   );
 }
 
+const SLOT_LABEL: Record<string, string> = {
+  idFront: "Документ: лицевая / страница с фото",
+  idBack: "Документ: оборот",
+  licenseFront: "Права: лицевая",
+  licenseBack: "Права: оборот",
+};
+const slotsFor = (docType: string) =>
+  docType === "passport"
+    ? ["idFront", "licenseFront", "licenseBack"]
+    : ["idFront", "idBack", "licenseFront", "licenseBack"];
+
+/** Photo -> JPEG data URL, longest side at most 1600 px (the server takes up to 3 MB). */
+async function toJpeg(file: File): Promise<string> {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = () => reject(new Error("bad image"));
+      i.src = url;
+    });
+    const k = Math.min(1, 1600 / Math.max(img.width, img.height));
+    const c = document.createElement("canvas");
+    c.width = Math.round(img.width * k);
+    c.height = Math.round(img.height * k);
+    c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
+    return c.toDataURL("image/jpeg", 0.85);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+/** Staff photograph the guest's documents at pickup; the passport / ID zone fills the form. */
+function StaffPhotos({
+  api,
+  id,
+  docType,
+  notify,
+  onMrz,
+}: {
+  api: Api;
+  id: string;
+  docType: string;
+  notify: (kind: "ok" | "err", text: string) => void;
+  onMrz: (fields: Record<string, string>) => void;
+}) {
+  const [shots, setShots] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState<string | null>(null);
+  async function take(slot: string, file: File | undefined) {
+    if (!file) return;
+    setBusy(slot);
+    try {
+      const image = await toJpeg(file);
+      const r = await api("", {
+        method: "POST",
+        body: JSON.stringify({ action: "doc", id, slot, image }),
+      });
+      if (!r.ok) return notify("err", "Фото не сохранилось, попробуйте ещё раз.");
+      const next = { ...shots, [slot]: image };
+      setShots(next);
+      if (slot === "idFront" || slot === "idBack") {
+        const { readMrz } = await import("@/components/mrz-reader");
+        const f = await readMrz([next.idBack, next.idFront].filter(Boolean) as string[]).catch(
+          () => null,
+        );
+        if (f) {
+          onMrz(f);
+          notify("ok", "Данные прочитаны с документа — проверьте и дополните.");
+        }
+      }
+    } finally {
+      setBusy(null);
+    }
+  }
+  return (
+    <div className="mt-2 grid grid-cols-2 gap-2">
+      {slotsFor(docType).map((slot) => (
+        <label key={slot} className="block cursor-pointer text-xs">
+          <span className="mb-1 block text-muted-foreground">{SLOT_LABEL[slot]} *</span>
+          {shots[slot] ? (
+            <img
+              src={shots[slot]}
+              alt=""
+              className="h-24 w-full rounded-lg border border-emerald-600/50 object-cover"
+            />
+          ) : (
+            <span className="flex h-24 w-full items-center justify-center rounded-lg border border-dashed border-border text-muted-foreground">
+              {busy === slot ? <Loader2 className="h-4 w-4 animate-spin" /> : "📷 Снять"}
+            </span>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="hidden"
+            onChange={(e) => void take(slot, e.target.files?.[0])}
+          />
+        </label>
+      ))}
+    </div>
+  );
+}
+
 export function HandoverPanel({
   api,
   detail,
@@ -203,7 +307,7 @@ export function HandoverPanel({
   notify: (kind: "ok" | "err", text: string) => void;
 }) {
   const sent = detail.verification?.data || detail.submission?.data || {};
-  const [data, setData] = useState<Record<string, string>>({ ...sent });
+  const [data, setData] = useState<Record<string, string>>({ docType: "passport", ...sent });
   const [checks, setChecks] = useState<Record<string, boolean>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [sig, setSig] = useState<string | null>(null);
@@ -240,14 +344,9 @@ export function HandoverPanel({
     }
   }
 
-  if (!detail.submission) {
-    return (
-      <p className="rounded-lg bg-muted px-3 py-2 text-sm">
-        Клиент ещё не отправил данные и фото документов по своей ссылке. Без них подписание при
-        выдаче недоступно — можно переслать ссылку кнопкой «Новая ссылка».
-      </p>
-    );
-  }
+  // The guest sent nothing before pickup: staff type the data from the originals
+  // and photograph the documents here.
+  const staffFill = !detail.submission;
 
   return (
     <div className="space-y-3">
@@ -282,13 +381,38 @@ export function HandoverPanel({
           </div>
         ) : (
           <>
-            <p className="text-xs text-muted-foreground">
-              Клиент отправил {ts(detail.submission.at)}. Возьмите у клиента оригиналы и сравните.
-              Опечатку можно исправить прямо здесь — исправление попадёт в журнал.
-            </p>
-            <div className="mt-2">
-              <DocPhotos api={api} id={detail.id} slots={detail.submission.docs} />
-            </div>
+            {staffFill || !detail.submission ? (
+              <>
+                <p className="rounded-lg bg-amber-500/10 px-3 py-2 text-xs">
+                  Клиент не отправил данные заранее. Заполните их сами по оригиналам документов и
+                  сфотографируйте документы — фото паспорта/ID заполнит часть полей автоматически.
+                </p>
+                <StaffPhotos
+                  api={api}
+                  id={detail.id}
+                  docType={data.docType || "passport"}
+                  notify={notify}
+                  onMrz={(f) =>
+                    setData((d) => {
+                      const next = { ...d };
+                      for (const [k, v] of Object.entries(f))
+                        if (v && !(d[k] || "").trim()) next[k] = v;
+                      return next;
+                    })
+                  }
+                />
+              </>
+            ) : (
+              <>
+                <p className="text-xs text-muted-foreground">
+                  Клиент отправил {ts(detail.submission.at)}. Возьмите у клиента оригиналы и
+                  сравните. Опечатку можно исправить прямо здесь — исправление попадёт в журнал.
+                </p>
+                <div className="mt-2">
+                  <DocPhotos api={api} id={detail.id} slots={detail.submission.docs} />
+                </div>
+              </>
+            )}
             <label className="mt-3 block text-sm">
               <span className="mb-1 block text-muted-foreground">Тип документа</span>
               <select

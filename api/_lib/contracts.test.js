@@ -475,3 +475,26 @@ test("admin views: site bookings sorted by date, contract detail without secrets
   assert.ok(d.body.contract.viewedAt);
   assert.equal(d.body.contract.audit.filter((a) => a.ev === "viewed").length, 1, "only the first opening is written");
 });
+
+test("staff fill in the data and photograph the documents when the guest sent nothing", async () => {
+  const { h, store, sent } = await setup();
+  const created = res();
+  await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret" }, body: INVITE }, created);
+  const id = created.body.id;
+  const noDocs = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "verify", id, data: SIGN_DATA, checks: ALL_CHECKS } }, noDocs);
+  assert.equal(noDocs.body.code, "docs_required");
+  for (const slot of ["idFront", "licenseFront", "licenseBack"]) {
+    const up = res();
+    await h.admin({ method: "POST", headers: ADMIN, body: { action: "doc", id, slot, image: DOC_JPEG } }, up);
+    assert.equal(up.code, 200, JSON.stringify(up.body));
+  }
+  const ok = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "verify", id, data: SIGN_DATA, checks: ALL_CHECKS } }, ok);
+  assert.equal(ok.code, 200, JSON.stringify(ok.body));
+  const c = (await store.get(id)).contract;
+  assert.equal(c.status, "verified");
+  assert.ok(c.submission.byStaff);
+  assert.ok(c.audit.some((a) => a.ev === "filled_by_staff"));
+  assert.equal(sent.submitted.length, 0);
+});

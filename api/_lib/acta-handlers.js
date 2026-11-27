@@ -28,6 +28,7 @@ import {
   validateActaPatch,
 } from "./actas.js";
 import { buildActaPdf } from "./acta-pdf.js";
+import { buildContractWithReturn } from "./contract-pdf.js";
 import { actaFileName } from "./acta-email.js";
 import { adminAccess, adminConfigured, canSee, visibleTo } from "./staff.js";
 import { dayRateFor, kmPlanFromExtras } from "../../shared/acta.js";
@@ -226,13 +227,30 @@ export function createActaHandler({
     const staffSignature = decodeSignaturePng(body.staffSignature);
     const guestSignature = decodeSignaturePng(body.guestSignature);
     const patch = body.acta ? validateActaPatch(body.acta) : {};
-    return signActa({ actas, loadDiagram, contract, kind, by: staff.email, patch, staffSignature, guestSignature, now });
+    const out = await signActa({ actas, loadDiagram, contract, kind, by: staff.email, patch, staffSignature, guestSignature, now });
+    return { ...out, staffSignature, guestSignature };
   }
 
-  async function emailSigned(contract, acta, pdfBytes, staff) {
+  /** Return report of a signed contract: the contract copy with annex I-B (page 15) filled in. */
+  async function contractWithReturn(contract, acta, staffSignature, guestSignature) {
+    if (acta.kind !== "checkout" || contract.status !== "signed" || !contracts.getPdf) return null;
+    try {
+      const signedPdfBytes = await contracts.getPdf(contract);
+      if (!signedPdfBytes) return null;
+      const checkin = (await actas.get(contract.id, "checkin"))?.acta || null;
+      const bytes = await buildContractWithReturn({ signedPdfBytes, contract, acta, checkin, staffSignature, guestSignature });
+      if (bytes) await contracts.putFinalPdf(contract, bytes);
+      return bytes;
+    } catch (err) {
+      console.error("contract with return annex failed:", err.message);
+      return null;
+    }
+  }
+
+  async function emailSigned(contract, acta, pdfBytes, staff, contractPdf = null) {
     let statuses = [];
     try {
-      statuses = await sendEmails(contract, acta, pdfBytes);
+      statuses = await sendEmails(contract, acta, pdfBytes, contractPdf);
     } catch (err) {
       console.error("acta email failed:", err.message);
     }
@@ -287,8 +305,9 @@ export function createActaHandler({
       return reply(res, 200, { acta: actaView(acta) });
     }
     if (body.action === "sign") {
-      const { signed, pdfBytes } = await sign(body, staff, contract, kind);
-      const emailed = await emailSigned(contract, signed, pdfBytes, staff);
+      const { signed, pdfBytes, staffSignature, guestSignature } = await sign(body, staff, contract, kind);
+      const contractPdf = await contractWithReturn(contract, signed, staffSignature, guestSignature);
+      const emailed = await emailSigned(contract, signed, pdfBytes, staff, contractPdf);
       return reply(res, 200, { acta: actaView(signed), emailed });
     }
     if (body.action === "email") {

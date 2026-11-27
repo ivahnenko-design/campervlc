@@ -80,18 +80,25 @@ export function guestActaEmail(contract, acta) {
 export async function sendActaEmails(contract, acta, pdfBytes, deps = {}) {
   const send = deps.send || postToResend;
   const env = deps.env || process.env;
-  const attachment = { filename: actaFileName(acta), content: Buffer.from(pdfBytes).toString("base64") };
+  const attachments = [{ filename: actaFileName(acta), content: Buffer.from(pdfBytes).toString("base64") }];
+  // Return: also the contract with annex I-B filled in and signed.
+  if (deps.contractPdf) {
+    attachments.push({
+      filename: `contrato-${contract.number || contract.id}-con-devolucion.pdf`,
+      content: Buffer.from(deps.contractPdf).toString("base64"),
+    });
+  }
   const g = guestActaEmail(contract, acta);
   const company = env.CONTRACT_OWNER_EMAIL || COMPANY_EMAIL;
   const what = acta.kind === "checkin" ? "Acta de entrega" : "Acta de devolución";
   const results = await Promise.allSettled([
-    send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: g.subject, html: g.html, attachments: [attachment] }),
+    send({ from: FROM, to: contract.email, reply_to: REPLY_TO, subject: g.subject, html: g.html, attachments }),
     send({
       from: FROM,
       to: ownerTo(acta.vehicleId, company, env),
       subject: `${what} firmada: ${contract.guestName} (${contract.startDate} → ${contract.endDate})`,
       html: `<p>${esc(what)} del contrato ${esc(contract.id)} firmada por ${esc(acta.guestName)} y ${esc(acta.staffName)}${acta.staffEmail ? ` (${esc(acta.staffEmail)})` : ""}. Vehículo: ${esc(vehicleLabel(acta.vehicleId))}. Km: ${esc(acta.odometerKm)}. Combustible: ${esc(acta.fuel)}/8. PDF adjunto.</p>`,
-      attachments: [attachment],
+      attachments,
     }),
   ]);
   return results.map((r) => r.status);
