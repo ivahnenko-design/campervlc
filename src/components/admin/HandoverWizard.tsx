@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, Camera, Check, FileText, Loader2, X } from "lucide-react";
+import { ArrowLeft, Camera, Check, FileText, Loader2, RotateCw, X } from "lucide-react";
 import { CHECK_TEXT } from "@/components/sign-check-text";
 import { signRuleProblems } from "../../../shared/sign-rules.js";
 
@@ -454,6 +454,40 @@ export function HandoverWizard({
     }
   }
 
+  /** The phone camera often saves a document shot from above sideways: turn it 90° and save again. */
+  async function rotatePhoto(slot: string) {
+    const src = photos[slot];
+    if (!src) return;
+    setBusy(slot);
+    setError(null);
+    try {
+      const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const i = new Image();
+        i.onload = () => resolve(i);
+        i.onerror = () => reject(new Error("bad image"));
+        i.src = src;
+      });
+      const c = document.createElement("canvas");
+      c.width = img.naturalHeight;
+      c.height = img.naturalWidth;
+      const ctx = c.getContext("2d")!;
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(Math.PI / 2);
+      ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
+      const image = c.toDataURL("image/jpeg", 0.9);
+      const r = await api("", {
+        method: "POST",
+        body: JSON.stringify({ action: "doc", id: contractId, slot, image }),
+      });
+      if (!r.ok) return setError("Не удалось сохранить повёрнутое фото. Попробуйте ещё раз.");
+      setPhotos((p) => ({ ...p, [slot]: image }));
+    } catch {
+      setError("Не удалось повернуть фото.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
   const rules = useMemo(
     () =>
       detail
@@ -611,44 +645,61 @@ export function HandoverWizard({
             <section className={card}>
               <h2 className="font-semibold">Сфотографируйте документы</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Нажмите на рамку. Фото сохраняется сразу; с паспорта или ID данные заполнятся сами.
+                Нажмите на рамку. Фото сохраняется сразу. Если оно легло боком — «Повернуть»;
+                нажмите на само фото, чтобы переснять.
               </p>
               <div className="mt-3 grid grid-cols-2 gap-3">
                 {slots.map((slot) => (
-                  <label key={slot} className="block cursor-pointer">
+                  <div key={slot}>
                     <span className="mb-1 flex min-h-8 items-end text-xs text-muted-foreground">
                       {SLOT_LABEL[slot]}
                     </span>
-                    {photos[slot] ? (
-                      <span className="relative block">
-                        <img
-                          src={photos[slot]}
-                          alt=""
-                          className="h-28 w-full rounded-xl border-2 border-emerald-600 object-cover"
-                        />
-                        <Check className="absolute right-1.5 top-1.5 h-6 w-6 rounded-full bg-emerald-600 p-1 text-white" />
-                      </span>
-                    ) : (
-                      <span className="flex h-28 w-full flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-border text-sm text-muted-foreground">
-                        {busy === slot ? (
-                          <Loader2 className="h-6 w-6 animate-spin" />
-                        ) : (
-                          <Camera className="h-7 w-7" />
-                        )}
-                        {busy === slot ? "Сохраняем…" : "Снять"}
-                      </span>
+                    <label className="block cursor-pointer">
+                      {photos[slot] ? (
+                        <span className="relative block">
+                          <img
+                            src={photos[slot]}
+                            alt=""
+                            className="h-32 w-full rounded-xl border-2 border-emerald-600 bg-black object-contain"
+                          />
+                          {busy === slot ? (
+                            <Loader2 className="absolute right-1.5 top-1.5 h-6 w-6 animate-spin rounded-full bg-background p-1" />
+                          ) : (
+                            <Check className="absolute right-1.5 top-1.5 h-6 w-6 rounded-full bg-emerald-600 p-1 text-white" />
+                          )}
+                        </span>
+                      ) : (
+                        <span className="flex h-32 w-full flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-border text-sm text-muted-foreground">
+                          {busy === slot ? (
+                            <Loader2 className="h-6 w-6 animate-spin" />
+                          ) : (
+                            <Camera className="h-7 w-7" />
+                          )}
+                          {busy === slot ? "Сохраняем…" : "Снять"}
+                        </span>
+                      )}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        className="hidden"
+                        onChange={(e) => {
+                          void takePhoto(slot, e.target.files?.[0]);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
+                    {photos[slot] && open && (
+                      <button
+                        type="button"
+                        disabled={!!busy}
+                        onClick={() => void rotatePhoto(slot)}
+                        className="mt-1.5 flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg border border-border text-sm disabled:opacity-50"
+                      >
+                        <RotateCw className="h-4 w-4" /> Повернуть
+                      </button>
                     )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      capture="environment"
-                      className="hidden"
-                      onChange={(e) => {
-                        void takePhoto(slot, e.target.files?.[0]);
-                        e.target.value = "";
-                      }}
-                    />
-                  </label>
+                  </div>
                 ))}
               </div>
               {detail.submission && !detail.submission.byStaff && (
