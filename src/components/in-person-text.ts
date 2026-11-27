@@ -20,6 +20,7 @@ export interface InPersonText {
   kioskDoneTitle: string;
   kioskDoneBody: string;
   notOpen: string;
+  noEmail: string;
 }
 
 export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
@@ -47,6 +48,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Please hand the device back. The contract signed by both parties will arrive by email.",
     notOpen: "Your details are already being checked. Please contact us to change anything.",
+    noEmail: "I can't open my email now — sign without the code",
   },
   es: {
     intro:
@@ -72,6 +74,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Devuelve el dispositivo, por favor. Recibirás por email el contrato firmado por ambas partes.",
     notOpen: "Tus datos ya se están comprobando. Escríbenos si necesitas cambiar algo.",
+    noEmail: "No puedo abrir mi email ahora: firmar sin código",
   },
   ru: {
     intro:
@@ -97,6 +100,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Верните, пожалуйста, устройство. Договор, подписанный обеими сторонами, придёт на почту.",
     notOpen: "Ваши данные уже проверяются. Напишите нам, если нужно что-то изменить.",
+    noEmail: "Не могу открыть почту сейчас — подписать без кода",
   },
   uk: {
     intro:
@@ -122,6 +126,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Поверніть, будь ласка, пристрій. Договір, підписаний обома сторонами, надійде на пошту.",
     notOpen: "Ваші дані вже перевіряються. Напишіть нам, якщо потрібно щось змінити.",
+    noEmail: "Не можу відкрити пошту зараз — підписати без коду",
   },
   de: {
     intro:
@@ -147,6 +152,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Bitte gib das Gerät zurück. Der von beiden Seiten unterschriebene Vertrag kommt per E-Mail.",
     notOpen: "Deine Daten werden bereits geprüft. Schreib uns, wenn du etwas ändern musst.",
+    noEmail: "Ich kann meine E-Mails gerade nicht öffnen – ohne Code unterschreiben",
   },
   it: {
     intro:
@@ -171,6 +177,7 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Restituisci il dispositivo, per favore. Riceverai via email il contratto firmato da entrambe le parti.",
     notOpen: "I tuoi dati sono già in verifica. Scrivici se devi cambiare qualcosa.",
+    noEmail: "Non posso aprire l'email ora: firma senza codice",
   },
   nl: {
     intro:
@@ -196,5 +203,6 @@ export const IN_PERSON_TEXT: Record<Lang, InPersonText> = {
     kioskDoneBody:
       "Geef het apparaat terug, alsjeblieft. Het door beide partijen ondertekende contract komt per e-mail.",
     notOpen: "Je gegevens worden al gecontroleerd. Neem contact op als je iets moet wijzigen.",
+    noEmail: "Ik kan mijn e-mail nu niet openen – ondertekenen zonder code",
   },
 };

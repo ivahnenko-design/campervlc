@@ -1178,11 +1178,25 @@ function SignPage() {
     }
   }
 
-  async function sign() {
+  async function sign(noCode = false) {
     setError(null);
+    // Without the email code (the guest cannot open the mailbox at pickup): the
+    // same checks as before the code is sent; staff are present and have the originals.
+    if (
+      noCode &&
+      (!signature || !allConsents || (contract?.preview && !(contract.readAt || readNow)))
+    ) {
+      setTried(true);
+      setError(!signature ? t.needSignature : t.errors.consent_required);
+      return;
+    }
     setBusy(true);
     try {
-      await post({ action: "sign", code: code.trim(), consents, signature });
+      await post(
+        noCode
+          ? { action: "sign", noCode: true, consents, signature }
+          : { action: "sign", code: code.trim(), consents, signature },
+      );
       setDone(true);
       window.scrollTo({ top: 0 });
     } catch (e) {
@@ -1231,9 +1245,9 @@ function SignPage() {
           {/* For staff, once the device is back: the countersignature is in the admin. */}
           <a
             href={`/admin/contratos?id=${contract.id}`}
-            className="mt-8 inline-block rounded-full border border-border px-4 py-2 text-xs text-muted-foreground"
+            className="mt-10 flex min-h-14 w-full items-center justify-center rounded-xl bg-primary px-4 text-base font-semibold text-primary-foreground"
           >
-            Админка · Admin →
+            Арендодатель: продолжить →
           </a>
         </div>
       </Shell>
@@ -1397,13 +1411,21 @@ function SignPage() {
             <button
               type="button"
               disabled={busy || code.length !== 6}
-              onClick={sign}
+              onClick={() => void sign()}
               className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
             >
               {busy ? t.signing : t.sign}
             </button>
           </div>
         )}
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => void sign(true)}
+          className="mt-5 w-full text-center text-sm text-muted-foreground underline"
+        >
+          {ip.noEmail}
+        </button>
       </Shell>
     );
   }

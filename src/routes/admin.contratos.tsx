@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ActaEditor } from "@/components/admin/ActaEditor";
 import { DocPhotos, OwnerSignature } from "@/components/admin/OwnerSignature";
-import { HandoverPanel, type HandoverDetail } from "@/components/admin/HandoverPanel";
+import { HandoverWizard } from "@/components/admin/HandoverWizard";
 import {
   formFromParsed,
   GmailSetup,
@@ -43,7 +43,8 @@ export const Route = createFileRoute("/admin/contratos")({
 // ── types ───────────────────────────────────────────────────────────────────
 
 type Status = "pending" | "submitted" | "verified" | "guest_signed" | "signed" | "cancelled";
-const IN_PERSON: Status[] = ["submitted", "verified", "guest_signed"];
+/** Not signed by both yet: the pickup wizard is the main action. */
+const OPEN_FLOW: Status[] = ["pending", "submitted", "verified", "guest_signed"];
 
 interface Row {
   id: string;
@@ -70,7 +71,7 @@ interface Row {
   language: string;
 }
 
-interface Detail extends Row, Omit<HandoverDetail, "status" | "id" | "startDate" | "endDate"> {
+interface Detail extends Row {
   note: string;
   expiresAt: number;
   signed: null | {
@@ -162,10 +163,10 @@ const OPTION_KEYS = [
 ];
 
 const STATUS_LABEL: Record<Status, string> = {
-  pending: "Ждёт данных",
-  submitted: "Данные получены",
-  verified: "Сверено",
-  guest_signed: "Клиент подписал",
+  pending: "Не оформлен",
+  submitted: "Данные от клиента",
+  verified: "Идёт выдача",
+  guest_signed: "Ждёт вашей подписи",
   signed: "Подписан",
   cancelled: "Отменён",
 };
@@ -220,6 +221,8 @@ const inputCls =
   "w-full rounded-lg border border-border bg-background px-3 py-2.5 text-base text-foreground outline-none focus:border-primary sm:text-sm";
 const btn =
   "inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm hover:bg-muted";
+const bigBtn =
+  "flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-base font-semibold text-primary-foreground";
 const btnPrimary =
   "inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60";
 
@@ -355,6 +358,8 @@ function Admin() {
   const [importId, setImportId] = useState<string | null>(null);
   // Handover reports: "<contractId>-<kind>" -> draft | signed, and the one open full-screen.
   const [actaStatus, setActaStatus] = useState<Record<string, "draft" | "signed">>({});
+  // The pickup wizard (full screen) of one contract.
+  const [wizard, setWizard] = useState<string | null>(null);
   const [actaOpen, setActaOpen] = useState<{
     contractId: string;
     kind: "checkin" | "checkout";
@@ -525,8 +530,10 @@ function Admin() {
     if (openedFromLink.current || !rows.length) return;
     const id = new URLSearchParams(window.location.search).get("id");
     openedFromLink.current = true;
-    if (!id || !rows.some((r) => r.id === id)) return;
+    const row = id ? rows.find((r) => r.id === id) : null;
+    if (!id || !row) return;
     setTab("contracts");
+    if (OPEN_FLOW.includes(row.status)) return setWizard(id);
     void toggleDetail(id).then(() =>
       requestAnimationFrame(() =>
         document.getElementById(`c-${id}`)?.scrollIntoView({ block: "start" }),
@@ -947,6 +954,25 @@ function Admin() {
     );
   }
 
+  if (wizard) {
+    return (
+      <HandoverWizard
+        api={api}
+        actaApi={actaApi}
+        contractId={wizard}
+        owner={me?.role === "owner"}
+        ownerHasSignature={!!me?.ownerSignature}
+        ownerName={me?.ownerSignerName || ""}
+        onOpenActa={() => setActaOpen({ contractId: wizard, kind: "checkin" })}
+        onPdf={() => void pdf(wizard)}
+        onClose={() => {
+          setWizard(null);
+          void load();
+        }}
+      />
+    );
+  }
+
   return (
     <main className="mx-auto max-w-3xl bg-background px-4 pb-16 pt-6 text-foreground">
       <header className="flex items-center justify-between gap-2">
@@ -999,99 +1025,11 @@ function Admin() {
         </div>
       )}
 
-      {feeds.length > 0 && (
-        <details className="mt-4 rounded-xl border border-border p-3 text-sm">
-          <summary className="cursor-pointer font-semibold">
-            Календарь броней сайта (для Yescapa)
-          </summary>
-          <p className="mt-2 text-muted-foreground">
-            Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона.
-            Никому больше не передавайте — по ней видны даты всех броней.
-            {feeds.length > 1
-              ? " У каждого автодома своя ссылка: вставьте её в объявление этого автодома."
-              : ""}
-          </p>
-          {feeds.map((f) =>
-            f.url ? (
-              <div key={f.id} className="mt-2">
-                {feeds.length > 1 && (
-                  <p className="mb-1 text-xs text-muted-foreground">{f.label}</p>
-                )}
-                <div className="flex gap-2">
-                  <input
-                    readOnly
-                    value={f.url}
-                    className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs"
-                    onFocus={(e) => e.currentTarget.select()}
-                  />
-                  <button
-                    className={btn}
-                    onClick={() => {
-                      void navigator.clipboard?.writeText(f.url || "");
-                      setNotice({ kind: "ok", text: "Ссылка на календарь скопирована." });
-                    }}
-                  >
-                    Копировать
-                  </button>
-                </div>
-              </div>
-            ) : null,
-          )}
-        </details>
-      )}
-
-      {me?.staff && (
-        <details className="mt-4 rounded-xl border border-border p-3 text-sm">
-          <summary className="cursor-pointer font-semibold">Доступ к админке</summary>
-          <p className="mt-2 text-muted-foreground">
-            Только для просмотра. Меняется в Vercel: ADMIN_EMAILS и MANAGER_EMAILS.
-          </p>
-          <ul className="mt-2 space-y-1">
-            {me.staff.admins.map((e) => (
-              <li key={`a-${e}`}>
-                {e} · <span className="text-muted-foreground">владелец, всё</span>
-              </li>
-            ))}
-            {me.staff.managers.map((m) => (
-              <li key={`m-${m.email}`}>
-                {m.email} ·{" "}
-                <span className="text-muted-foreground">
-                  менеджер: {m.vehicleIds.map(vehicleName).join(", ")}
-                </span>
-              </li>
-            ))}
-            {me.staff.token && (
-              <li className="text-muted-foreground">+ общий токен ADMIN_TOKEN (полный доступ)</li>
-            )}
-          </ul>
-        </details>
-      )}
-
-      {me?.role === "owner" && (
-        <OwnerSignature
-          api={api}
-          has={!!me.ownerSignature}
-          name={me.ownerSignerName || "Ivakhnenko Sergii"}
-          onSaved={(ok) =>
-            setNotice(
-              ok
-                ? { kind: "ok", text: "Подпись сохранена." }
-                : { kind: "err", text: "Не удалось сохранить подпись." },
-            )
-          }
-        />
-      )}
-
       <ImportsPanel
         imports={imports}
         onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)}
         onDismiss={(d) => void dismissImport(d)}
       />
-      <GmailSetup
-        setup={importSetup}
-        onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })}
-      />
-
       {upcoming.length > 0 && (
         <section className="mt-5 rounded-xl border border-border p-3">
           <h2 className="text-sm font-semibold">Ближайшие 14 дней</h2>
@@ -1352,98 +1290,92 @@ function Admin() {
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {r.status === "signed"
-                      ? `Подписан ${fmtTs(r.signedAt)}`
+                      ? actaStatus[`${r.id}-checkout`] === "signed"
+                        ? "Аренда завершена: договор и возврат подписаны"
+                        : `Договор подписан ${fmtTs(r.signedAt)}`
                       : r.status === "guest_signed"
-                        ? `Клиент подписал ${fmtTs(r.guestSignedAt ?? null)} — нужна ваша подпись`
+                        ? "Клиент подписал — осталась ваша подпись"
                         : r.status === "verified"
-                          ? `Сверено ${fmtTs(r.verifiedAt ?? null)} — акт выдачи и подпись клиента`
+                          ? "Документы сверены — дальше акт и подпись клиента"
                           : r.status === "submitted"
-                            ? `Данные получены ${fmtTs(r.submittedAt ?? null)} — сверить при выдаче`
+                            ? "Клиент прислал данные и фото документов"
                             : r.status === "pending"
-                              ? r.viewedAt
-                                ? `Клиент открыл ссылку ${fmtTs(r.viewedAt)}`
-                                : "Клиент ещё не открывал ссылку"
+                              ? "Клиент ничего не прислал — данные введёте при выдаче"
                               : `Создан ${fmtTs(r.createdAt)}`}
                   </p>
 
+                  {/* One main action per contract, by where it is in its life. */}
+                  {OPEN_FLOW.includes(r.status) && (
+                    <button className={`${bigBtn} mt-3`} onClick={() => setWizard(r.id)}>
+                      {r.status === "guest_signed"
+                        ? "Поставить мою подпись →"
+                        : r.status === "verified"
+                          ? "Продолжить выдачу →"
+                          : "Оформить выдачу →"}
+                    </button>
+                  )}
+                  {r.status === "signed" && actaStatus[`${r.id}-checkout`] !== "signed" && (
+                    <button
+                      className={`${bigBtn} mt-3`}
+                      onClick={() => setActaOpen({ contractId: r.id, kind: "checkout" })}
+                    >
+                      {actaStatus[`${r.id}-checkout`] === "draft"
+                        ? "Продолжить возврат →"
+                        : "Оформить возврат →"}
+                    </button>
+                  )}
                   <div className="mt-2 flex flex-wrap gap-2">
                     {r.status === "signed" && (
                       <button className={btn} onClick={() => void pdf(r.id)}>
-                        <FileText className="h-4 w-4" /> PDF
+                        <FileText className="h-4 w-4" /> Договор PDF
                       </button>
                     )}
-                    {(r.status === "pending" || r.status === "submitted") && (
-                      <button className={btn} onClick={() => void reissue(r)}>
-                        <RefreshCw className="h-4 w-4" /> Новая ссылка
-                      </button>
+                    {r.phone && r.status !== "cancelled" && (
+                      <a
+                        className={btn}
+                        href={`https://wa.me/${digits(r.phone)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <MessageCircle className="h-4 w-4" /> WhatsApp
+                      </a>
                     )}
-                    {r.status !== "signed" && r.status !== "cancelled" && (
-                      <button className={btn} onClick={() => void cancel(r)}>
-                        <X className="h-4 w-4" /> Отменить
-                      </button>
-                    )}
-                    <button
-                      className={IN_PERSON.includes(r.status) && !d ? btnPrimary : btn}
-                      onClick={() => void toggleDetail(r.id)}
-                    >
-                      {d
-                        ? "Скрыть"
-                        : r.status === "signed"
-                          ? "Данные клиента"
-                          : IN_PERSON.includes(r.status) || r.status === "pending"
-                            ? "Выдача и подписание"
-                            : "История"}
+                    <button className={btn} onClick={() => void toggleDetail(r.id)}>
+                      {d ? "Скрыть" : "Ещё"}
                     </button>
                   </div>
-                  {r.status !== "cancelled" && (
-                    <div className="mt-2 grid grid-cols-2 gap-2">
-                      {(["checkin", "checkout"] as const).map((kind) => {
-                        const st = actaStatus[`${r.id}-${kind}`];
-                        return (
-                          <button
-                            key={kind}
-                            onClick={() => setActaOpen({ contractId: r.id, kind })}
-                            className={`flex min-h-12 flex-col items-start justify-center rounded-xl border px-3 py-1.5 text-left text-sm ${
-                              st === "signed"
-                                ? "border-emerald-600/50 bg-emerald-600/5"
-                                : st === "draft"
-                                  ? "border-amber-500/60 bg-amber-500/5"
-                                  : "border-border"
-                            }`}
-                          >
-                            <span className="flex items-center gap-1.5 font-medium">
-                              <ClipboardCheck className="h-4 w-4" />{" "}
-                              {kind === "checkin" ? "Акт выдачи" : "Акт возврата"}
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                              {st === "signed"
-                                ? "подписан · PDF"
-                                : st === "draft"
-                                  ? "черновик"
-                                  : "нет"}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
 
                   {d === "loading" && <Loader2 className="mt-3 h-4 w-4 animate-spin" />}
                   {d && d !== "loading" && (
                     <div className="mt-3 space-y-3 border-t border-border pt-3 text-sm">
-                      {(d.status === "pending" || IN_PERSON.includes(d.status)) && (
-                        <HandoverPanel
-                          api={api}
-                          detail={d}
-                          actaState={actaStatus[`${d.id}-checkin`]}
-                          owner={me?.role === "owner"}
-                          ownerHasSignature={!!me?.ownerSignature}
-                          ownerName={me?.ownerSignerName || ""}
-                          onOpenActa={() => setActaOpen({ contractId: d.id, kind: "checkin" })}
-                          onChanged={() => void refreshDetail(d.id)}
-                          notify={(kind, text) => setNotice({ kind, text })}
-                        />
-                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {(r.status === "pending" || r.status === "submitted") && (
+                          <button className={btn} onClick={() => void reissue(r)}>
+                            <RefreshCw className="h-4 w-4" /> Новая ссылка клиенту
+                          </button>
+                        )}
+                        {r.status === "signed" && (
+                          <>
+                            <button
+                              className={btn}
+                              onClick={() => setActaOpen({ contractId: r.id, kind: "checkin" })}
+                            >
+                              <ClipboardCheck className="h-4 w-4" /> Акт выдачи
+                            </button>
+                            <button
+                              className={btn}
+                              onClick={() => setActaOpen({ contractId: r.id, kind: "checkout" })}
+                            >
+                              <ClipboardCheck className="h-4 w-4" /> Акт возврата
+                            </button>
+                          </>
+                        )}
+                        {OPEN_FLOW.includes(r.status) && (
+                          <button className={btn} onClick={() => void cancel(r)}>
+                            <X className="h-4 w-4" /> Отменить договор
+                          </button>
+                        )}
+                      </div>
                       {d.signed && (
                         <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
                           {Object.entries(d.signed.data)
@@ -1587,6 +1519,98 @@ function Admin() {
           </ul>
         </section>
       )}
+
+      {/* Rarely needed: everything that is set up once. */}
+      <details className="mt-10 rounded-xl border border-border p-3 text-sm">
+        <summary className="cursor-pointer font-semibold text-muted-foreground">Настройки</summary>
+        {feeds.length > 0 && (
+          <details className="mt-4 rounded-xl border border-border p-3 text-sm">
+            <summary className="cursor-pointer font-semibold">
+              Календарь броней сайта (для Yescapa)
+            </summary>
+            <p className="mt-2 text-muted-foreground">
+              Закрытая ссылка: вставьте её в Yescapa (импорт календаря) или в календарь телефона.
+              Никому больше не передавайте — по ней видны даты всех броней.
+              {feeds.length > 1
+                ? " У каждого автодома своя ссылка: вставьте её в объявление этого автодома."
+                : ""}
+            </p>
+            {feeds.map((f) =>
+              f.url ? (
+                <div key={f.id} className="mt-2">
+                  {feeds.length > 1 && (
+                    <p className="mb-1 text-xs text-muted-foreground">{f.label}</p>
+                  )}
+                  <div className="flex gap-2">
+                    <input
+                      readOnly
+                      value={f.url}
+                      className="w-full rounded-md border border-border bg-background px-2 py-1 text-xs"
+                      onFocus={(e) => e.currentTarget.select()}
+                    />
+                    <button
+                      className={btn}
+                      onClick={() => {
+                        void navigator.clipboard?.writeText(f.url || "");
+                        setNotice({ kind: "ok", text: "Ссылка на календарь скопирована." });
+                      }}
+                    >
+                      Копировать
+                    </button>
+                  </div>
+                </div>
+              ) : null,
+            )}
+          </details>
+        )}
+
+        {me?.staff && (
+          <details className="mt-4 rounded-xl border border-border p-3 text-sm">
+            <summary className="cursor-pointer font-semibold">Доступ к админке</summary>
+            <p className="mt-2 text-muted-foreground">
+              Только для просмотра. Меняется в Vercel: ADMIN_EMAILS и MANAGER_EMAILS.
+            </p>
+            <ul className="mt-2 space-y-1">
+              {me.staff.admins.map((e) => (
+                <li key={`a-${e}`}>
+                  {e} · <span className="text-muted-foreground">владелец, всё</span>
+                </li>
+              ))}
+              {me.staff.managers.map((m) => (
+                <li key={`m-${m.email}`}>
+                  {m.email} ·{" "}
+                  <span className="text-muted-foreground">
+                    менеджер: {m.vehicleIds.map(vehicleName).join(", ")}
+                  </span>
+                </li>
+              ))}
+              {me.staff.token && (
+                <li className="text-muted-foreground">+ общий токен ADMIN_TOKEN (полный доступ)</li>
+              )}
+            </ul>
+          </details>
+        )}
+
+        {me?.role === "owner" && (
+          <OwnerSignature
+            api={api}
+            has={!!me.ownerSignature}
+            name={me.ownerSignerName || "Ivakhnenko Sergii"}
+            onSaved={(ok) =>
+              setNotice(
+                ok
+                  ? { kind: "ok", text: "Подпись сохранена." }
+                  : { kind: "err", text: "Не удалось сохранить подпись." },
+              )
+            }
+          />
+        )}
+
+        <GmailSetup
+          setup={importSetup}
+          onCopied={() => setNotice({ kind: "ok", text: "Код скрипта скопирован." })}
+        />
+      </details>
     </main>
   );
 }

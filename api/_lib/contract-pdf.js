@@ -547,7 +547,12 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   }
   row("Direccion IP", meta.ip || "-");
   row("Dispositivo", meta.userAgent || "-");
-  row("Verificacion", "Codigo de un solo uso enviado al email del Arrendatario");
+  row(
+    "Verificacion",
+    meta.emailCode === false
+      ? "Presencial: identidad comprobada con los documentos originales (sin codigo por email)"
+      : "Codigo de un solo uso enviado al email del Arrendatario",
+  );
   row("Huella SHA-256 contrato", meta.basePdfHash);
   row("Huella SHA-256 firma", meta.signatureHash);
   y -= 4;

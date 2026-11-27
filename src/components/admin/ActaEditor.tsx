@@ -1194,15 +1194,15 @@ export function ActaEditor({
           <section className={`${card} border-primary/40 bg-primary/5`}>
             <p className="text-sm">
               {locked
-                ? "Клиент уже подписал договор с этим актом — изменить нельзя. Подпишите договор в админке."
-                : "Акт выдачи подписывается вместе с договором: сохраняется сам, затем в админке «Выдача и подписание» → «Дать клиенту на подпись»."}
+                ? "Клиент уже подписал договор с этим актом — изменить нельзя."
+                : "Сохраняется само. Подписывать здесь не нужно: акт подписывается вместе с договором."}
             </p>
             <button
               type="button"
               onClick={() => void close()}
               className="mt-2 flex min-h-12 w-full items-center justify-center rounded-xl bg-primary text-base font-semibold text-primary-foreground"
             >
-              Готово — к подписанию
+              Готово — назад к выдаче
             </button>
           </section>
         )}

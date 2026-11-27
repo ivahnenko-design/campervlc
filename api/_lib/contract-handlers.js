@@ -115,6 +115,7 @@ function adminDetail(c) {
       ? { at: c.verification.at, by: c.verification.by, name: c.verification.name, data: c.verification.data, edits: c.verification.edits || [] }
       : null,
     guestSignature: c.guestSignature ? { at: c.guestSignature.at, ip: c.guestSignature.ip, staff: c.guestSignature.staff } : null,
+    staffDraft: c.staffDraft?.data || null,
     audit: (c.audit || []).map(({ t, ev, ip, by }) => ({ t, ev, ...(ip ? { ip } : {}), ...(by ? { by } : {}) })),
   };
 }
@@ -343,12 +344,26 @@ export function createContractHandlers({
         }
         return reply(res, 200, { link: signingLink(token, contract.language), emailSent });
       }
-      if (["verify", "unverify", "kiosk", "countersign", "doc"].includes(action)) {
+      if (["verify", "unverify", "kiosk", "countersign", "doc", "draft"].includes(action)) {
         const found = await store.get(String(body.id || ""));
         if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
         if (!canSee(staff, vehicleOf(found.contract))) return forbidden(res);
         const staffName = owner ? ownerSignerName : String(body.name || "").trim().slice(0, 120) || staff.email || "";
         const t = now();
+        // What staff typed so far at pickup, saved as they type: leaving the screen
+        // (handover report, a call, a reload) must not lose it.
+        if (action === "draft") {
+          if (!OPEN_STATUSES.includes(found.contract.status)) return reply(res, 200, { ok: true, saved: false });
+          const raw = body.data && typeof body.data === "object" ? body.data : {};
+          const data = Object.fromEntries(
+            Object.entries(raw)
+              .filter(([k, v]) => /^[A-Za-z]{2,24}$/.test(k) && typeof v === "string")
+              .slice(0, 30)
+              .map(([k, v]) => [k, v.slice(0, 200)]),
+          );
+          await store.save({ ...found.contract, staffDraft: { at: t, by: staff.email || "admin-token", data } }, { etag: found.etag });
+          return reply(res, 200, { ok: true, saved: true });
+        }
         // Staff photograph the documents themselves (the guest sent nothing before pickup).
         if (action === "doc") {
           if (!OPEN_STATUSES.includes(found.contract.status)) throw new ContractError("not_open", "The data is already checked", 409);
@@ -439,6 +454,7 @@ export function createContractHandlers({
             userAgent: c.guestSignature.userAgent,
             basePdfHash,
             signatureHash: c.guestSignature.signatureHash,
+            emailCode: c.guestSignature.emailCode !== false,
           },
         });
         const signed = markSigned(contractNow, {
@@ -640,11 +656,16 @@ export function createContractHandlers({
         const consents = requireConsents(body.consents);
         const signaturePng = decodeSignaturePng(body.signature);
         const acta = await requireCheckin(c);
-        const checked = checkOtp(c, body.code, { now: t, secret });
-        if (!checked.ok) {
-          if (checked.contract !== c) await store.save(checked.contract, { etag: found.etag });
-          const status = checked.reason === "too_many_attempts" ? 429 : 400;
-          throw new ContractError(checked.reason, `Code check failed: ${checked.reason}`, status);
+        // The email code, unless the guest cannot open the mailbox at pickup: then the
+        // identity rests on the original documents staff have just checked (logged).
+        const noCode = body.noCode === true;
+        if (!noCode) {
+          const checked = checkOtp(c, body.code, { now: t, secret });
+          if (!checked.ok) {
+            if (checked.contract !== c) await store.save(checked.contract, { etag: found.etag });
+            const status = checked.reason === "too_many_attempts" ? 429 : 400;
+            throw new ContractError(checked.reason, `Code check failed: ${checked.reason}`, status);
+          }
         }
         await store.putSignature(c.id, "guest", signaturePng);
         const guestSigned = markGuestSigned(c, {
@@ -657,6 +678,8 @@ export function createContractHandlers({
         });
         // What the guest saw on annex I-A when signing: the PDF is built from this copy.
         guestSigned.guestSignature.acta = { ...actaFields(acta), datetime: acta.datetime || spainWallClock(t) };
+        guestSigned.guestSignature.emailCode = !noCode;
+        if (noCode) guestSigned.audit.push({ t, ev: "signed_without_code", by: staff.email || "admin-token" });
         await store.save(guestSigned, { etag: found.etag });
         return reply(res, 200, { ok: true, id: c.id });
       }
