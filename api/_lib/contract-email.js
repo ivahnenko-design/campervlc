@@ -14,9 +14,9 @@ function esc(v) {
 
 const T = {
   en: {
-    inviteSubject: "Sign your motorhome rental contract",
+    inviteSubject: "Your rental contract: please send your details before pickup",
     inviteBody: (c, link) =>
-      `<p>Hello ${esc(c.guestName)},</p><p>Your rental of the Camper Retreat VLC motorhome (${esc(c.startDate)} → ${esc(c.endDate)}) is confirmed. Please read and sign the rental contract online before pickup. It takes about 5 minutes: you fill in your details and driving licence data, confirm with a one-time code sent to this email and sign with your finger.</p><p><a href="${esc(link)}">Open the contract and sign</a></p><p>The link is personal; please do not share it. Questions: just reply to this email or WhatsApp +34 624 038 085.</p>`,
+      `<p>Hello ${esc(c.guestName)},</p><p>Your rental of the Camper Retreat VLC motorhome (${esc(c.startDate)} → ${esc(c.endDate)}) is confirmed. Before pickup, please read the rental contract and send us your details with photos of your ID and driving licence. It takes about 5 minutes. At pickup we check the details against your original documents and you sign the contract on the spot; the copy signed by both parties then arrives by email.</p><p><a href="${esc(link)}">Open the contract and send my details</a></p><p>The link is personal; please do not share it. Questions: just reply to this email or WhatsApp +34 624 038 085.</p>`,
     codeSubject: (c) => `${c} is your code to sign the rental contract`,
     codeBody: (code) =>
       `<p>Your one-time code to sign the rental contract:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>It is valid for 10 minutes. If you did not request it, ignore this email.</p>`,
@@ -25,9 +25,9 @@ const T = {
       `<p>Hello ${esc(c.guestName)},</p><p>Thank you. Your rental contract is signed and attached as a PDF. Keep it with you during the trip together with your driving licence and ID; you may be asked to show it to the police.</p><p>Camper Retreat VLC</p>`,
   },
   es: {
-    inviteSubject: "Firma tu contrato de alquiler de autocaravana",
+    inviteSubject: "Tu contrato de alquiler: envía tus datos antes de la recogida",
     inviteBody: (c, link) =>
-      `<p>Hola ${esc(c.guestName)},</p><p>Tu alquiler de la autocaravana de Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) está confirmado. Lee y firma el contrato de alquiler online antes de la recogida. Son unos 5 minutos: rellenas tus datos y los de tu permiso de conducir, confirmas con un código de un solo uso que recibirás en este email y firmas con el dedo.</p><p><a href="${esc(link)}">Abrir el contrato y firmar</a></p><p>El enlace es personal; no lo compartas. Dudas: responde a este email o escribe por WhatsApp al +34 624 038 085.</p>`,
+      `<p>Hola ${esc(c.guestName)},</p><p>Tu alquiler de la autocaravana de Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) está confirmado. Antes de la recogida, lee el contrato de alquiler y envíanos tus datos con fotos de tu documento de identidad y de tu permiso de conducir. Son unos 5 minutos. En la recogida comprobamos los datos con tus documentos originales y firmas el contrato allí mismo; después recibirás por email la copia firmada por ambas partes.</p><p><a href="${esc(link)}">Abrir el contrato y enviar mis datos</a></p><p>El enlace es personal; no lo compartas. Dudas: responde a este email o escribe por WhatsApp al +34 624 038 085.</p>`,
     codeSubject: (c) => `${c} es tu código para firmar el contrato`,
     codeBody: (code) =>
       `<p>Tu código de un solo uso para firmar el contrato de alquiler:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Es válido durante 10 minutos. Si no lo has pedido, ignora este email.</p>`,
@@ -36,9 +36,9 @@ const T = {
       `<p>Hola ${esc(c.guestName)},</p><p>Gracias. Tu contrato de alquiler está firmado y va adjunto en PDF. Llévalo contigo durante el viaje junto con tu permiso de conducir y tu documento de identidad; la policía puede pedírtelo.</p><p>Camper Retreat VLC</p>`,
   },
   ru: {
-    inviteSubject: "Подпишите договор аренды автодома",
+    inviteSubject: "Договор аренды: отправьте свои данные до получения автодома",
     inviteBody: (c, link) =>
-      `<p>Здравствуйте, ${esc(c.guestName)}!</p><p>Ваша аренда автодома Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) подтверждена. Пожалуйста, прочитайте и подпишите договор онлайн до получения автодома. Это займёт около 5 минут: вы заполните свои данные и данные водительских прав, подтвердите одноразовым кодом из письма и распишетесь пальцем.</p><p><a href="${esc(link)}">Открыть договор и подписать</a></p><p>Ссылка личная, не передавайте её другим. Вопросы: ответьте на это письмо или напишите в WhatsApp +34 624 038 085.</p>`,
+      `<p>Здравствуйте, ${esc(c.guestName)}!</p><p>Ваша аренда автодома Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) подтверждена. До получения автодома прочитайте, пожалуйста, договор аренды и отправьте нам свои данные с фото паспорта и водительских прав. Это займёт около 5 минут. При получении мы сверим данные с оригиналами документов, и вы подпишете договор на месте; копия, подписанная обеими сторонами, придёт на почту.</p><p><a href="${esc(link)}">Открыть договор и отправить данные</a></p><p>Ссылка личная, не передавайте её другим. Вопросы: ответьте на это письмо или напишите в WhatsApp +34 624 038 085.</p>`,
     codeSubject: (c) => `${c}: код для подписи договора аренды`,
     codeBody: (code) =>
       `<p>Одноразовый код для подписания договора аренды:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Код действует 10 минут. Если вы его не запрашивали, проигнорируйте письмо.</p>`,
@@ -47,9 +47,9 @@ const T = {
       `<p>Здравствуйте, ${esc(c.guestName)}!</p><p>Спасибо. Договор аренды подписан и приложен в виде PDF. Возьмите его в поездку вместе с водительскими правами и документом, удостоверяющим личность: полиция может попросить их показать.</p><p>Camper Retreat VLC</p>`,
   },
   uk: {
-    inviteSubject: "Підпишіть договір оренди автобудинку",
+    inviteSubject: "Договір оренди: надішліть свої дані до отримання автобудинку",
     inviteBody: (c, link) =>
-      `<p>Вітаємо, ${esc(c.guestName)}!</p><p>Вашу оренду автобудинку Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) підтверджено. Будь ласка, прочитайте та підпишіть договір онлайн до отримання автобудинку. Це займе близько 5 хвилин: ви заповните свої дані та дані водійського посвідчення, підтвердите одноразовим кодом з листа й розпишетеся пальцем.</p><p><a href="${esc(link)}">Відкрити договір і підписати</a></p><p>Посилання особисте, не передавайте його іншим. Питання: дайте відповідь на цей лист або напишіть у WhatsApp +34 624 038 085.</p>`,
+      `<p>Вітаємо, ${esc(c.guestName)}!</p><p>Вашу оренду автобудинку Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) підтверджено. До отримання автобудинку прочитайте, будь ласка, договір оренди та надішліть нам свої дані з фото паспорта й водійського посвідчення. Це займе близько 5 хвилин. Під час отримання ми звіримо дані з оригіналами документів, і ви підпишете договір на місці; копія, підписана обома сторонами, надійде на пошту.</p><p><a href="${esc(link)}">Відкрити договір і надіслати дані</a></p><p>Посилання особисте, не передавайте його іншим. Питання: дайте відповідь на цей лист або напишіть у WhatsApp +34 624 038 085.</p>`,
     codeSubject: (c) => `${c}: код для підпису договору оренди`,
     codeBody: (code) =>
       `<p>Одноразовий код для підписання договору оренди:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Код дійсний 10 хвилин. Якщо ви його не запитували, проігноруйте лист.</p>`,
@@ -58,9 +58,9 @@ const T = {
       `<p>Вітаємо, ${esc(c.guestName)}!</p><p>Дякуємо. Договір оренди підписано, він доданий у PDF. Візьміть його в подорож разом з водійським посвідченням і документом, що посвідчує особу: поліція може попросити їх показати.</p><p>Camper Retreat VLC</p>`,
   },
   de: {
-    inviteSubject: "Unterschreibe deinen Mietvertrag für das Wohnmobil",
+    inviteSubject: "Dein Mietvertrag: bitte sende deine Daten vor der Abholung",
     inviteBody: (c, link) =>
-      `<p>Hallo ${esc(c.guestName)},</p><p>Deine Miete des Wohnmobils von Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) ist bestätigt. Bitte lies und unterschreibe den Mietvertrag vor der Abholung online. Das dauert etwa 5 Minuten: Du trägst deine Daten und die Führerscheindaten ein, bestätigst mit einem Einmalcode, den du an diese E-Mail-Adresse bekommst, und unterschreibst mit dem Finger.</p><p><a href="${esc(link)}">Vertrag öffnen und unterschreiben</a></p><p>Der Link ist persönlich, bitte gib ihn nicht weiter. Fragen: Antworte einfach auf diese E-Mail oder schreib per WhatsApp an +34 624 038 085.</p>`,
+      `<p>Hallo ${esc(c.guestName)},</p><p>Deine Miete des Wohnmobils von Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) ist bestätigt. Bitte lies vor der Abholung den Mietvertrag und sende uns deine Daten mit Fotos von Ausweis und Führerschein. Das dauert etwa 5 Minuten. Bei der Abholung prüfen wir die Daten mit deinen Originaldokumenten und du unterschreibst den Vertrag vor Ort; die von beiden Seiten unterschriebene Kopie kommt dann per E-Mail.</p><p><a href="${esc(link)}">Vertrag öffnen und Daten senden</a></p><p>Der Link ist persönlich, bitte gib ihn nicht weiter. Fragen: Antworte einfach auf diese E-Mail oder schreib per WhatsApp an +34 624 038 085.</p>`,
     codeSubject: (c) => `${c} ist dein Code zum Unterschreiben des Mietvertrags`,
     codeBody: (code) =>
       `<p>Dein Einmalcode zum Unterschreiben des Mietvertrags:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Er gilt 10 Minuten. Wenn du ihn nicht angefordert hast, ignoriere diese E-Mail.</p>`,
@@ -69,9 +69,9 @@ const T = {
       `<p>Hallo ${esc(c.guestName)},</p><p>Danke. Dein Mietvertrag ist unterschrieben und als PDF angehängt. Hab ihn während der Reise zusammen mit Führerschein und Ausweis dabei; die Polizei kann danach fragen.</p><p>Camper Retreat VLC</p>`,
   },
   it: {
-    inviteSubject: "Firma il contratto di noleggio del camper",
+    inviteSubject: "Il tuo contratto di noleggio: invia i tuoi dati prima del ritiro",
     inviteBody: (c, link) =>
-      `<p>Ciao ${esc(c.guestName)},</p><p>Il noleggio del camper di Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) è confermato. Leggi e firma online il contratto di noleggio prima del ritiro. Bastano circa 5 minuti: inserisci i tuoi dati e quelli della patente, confermi con un codice monouso che ricevi a questa email e firmi con il dito.</p><p><a href="${esc(link)}">Apri il contratto e firma</a></p><p>Il link è personale, non condividerlo. Domande: rispondi a questa email o scrivici su WhatsApp al +34 624 038 085.</p>`,
+      `<p>Ciao ${esc(c.guestName)},</p><p>Il noleggio del camper di Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) è confermato. Prima del ritiro leggi il contratto di noleggio e inviaci i tuoi dati con le foto del documento d'identità e della patente. Bastano circa 5 minuti. Al ritiro verifichiamo i dati con i documenti originali e firmi il contratto sul posto; poi ricevi via email la copia firmata da entrambe le parti.</p><p><a href="${esc(link)}">Apri il contratto e invia i miei dati</a></p><p>Il link è personale, non condividerlo. Domande: rispondi a questa email o scrivici su WhatsApp al +34 624 038 085.</p>`,
     codeSubject: (c) => `${c} è il tuo codice per firmare il contratto`,
     codeBody: (code) =>
       `<p>Il tuo codice monouso per firmare il contratto di noleggio:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Vale 10 minuti. Se non l'hai richiesto, ignora questa email.</p>`,
@@ -80,9 +80,9 @@ const T = {
       `<p>Ciao ${esc(c.guestName)},</p><p>Grazie. Il contratto di noleggio è firmato e lo trovi in allegato in PDF. Tienilo con te durante il viaggio insieme a patente e documento d'identità; la polizia può chiederlo.</p><p>Camper Retreat VLC</p>`,
   },
   nl: {
-    inviteSubject: "Onderteken je huurcontract voor de camper",
+    inviteSubject: "Je huurcontract: stuur je gegevens vóór het ophalen",
     inviteBody: (c, link) =>
-      `<p>Hallo ${esc(c.guestName)},</p><p>Je huur van de camper van Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) is bevestigd. Lees en onderteken het huurcontract online vóór het ophalen. Het duurt ongeveer 5 minuten: je vult je gegevens en rijbewijsgegevens in, bevestigt met een eenmalige code die je op dit e-mailadres krijgt en ondertekent met je vinger.</p><p><a href="${esc(link)}">Contract openen en ondertekenen</a></p><p>De link is persoonlijk, deel hem niet. Vragen: beantwoord deze e-mail of stuur een WhatsApp naar +34 624 038 085.</p>`,
+      `<p>Hallo ${esc(c.guestName)},</p><p>Je huur van de camper van Camper Retreat VLC (${esc(c.startDate)} → ${esc(c.endDate)}) is bevestigd. Lees vóór het ophalen het huurcontract en stuur ons je gegevens met foto's van je identiteitsbewijs en rijbewijs. Het duurt ongeveer 5 minuten. Bij het ophalen controleren we de gegevens met je originele documenten en onderteken je het contract ter plekke; de door beide partijen ondertekende kopie komt daarna per e-mail.</p><p><a href="${esc(link)}">Contract openen en gegevens sturen</a></p><p>De link is persoonlijk, deel hem niet. Vragen: beantwoord deze e-mail of stuur een WhatsApp naar +34 624 038 085.</p>`,
     codeSubject: (c) => `${c} is je code om het huurcontract te ondertekenen`,
     codeBody: (code) =>
       `<p>Je eenmalige code om het huurcontract te ondertekenen:</p><p style="font-size:26px;letter-spacing:4px"><strong>${esc(code)}</strong></p><p>Hij is 10 minuten geldig. Heb je hem niet aangevraagd, negeer dan deze e-mail.</p>`,
@@ -276,6 +276,17 @@ export async function sendSignedEmails(contract, pdfBytes, deps = {}) {
     }),
   ]);
   return results.map((r) => r.status);
+}
+
+/** Owner: the guest sent the data and the document photos; check them at pickup. */
+export async function sendSubmittedEmail(contract, deps = {}) {
+  const send = deps.send || postToResend;
+  await send({
+    from: FROM,
+    to: ownerOf(contract),
+    subject: `Datos recibidos: ${contract.submission?.data?.fullName || contract.guestName} (${contract.startDate})`,
+    html: `<p>${esc(contract.submission?.data?.fullName || contract.guestName)} (${esc(contract.email)}) ha enviado sus datos y las fotos de sus documentos para la recogida del ${esc(contract.startDate)} ${esc(contract.pickupTime || "")}.</p><p>En la recogida: compara los datos con los documentos originales, rellena el acta de entrega, da el contrato a firmar en tu dispositivo y fírmalo tú: ${esc(siteUrl())}/admin/contratos</p>`,
+  });
 }
 
 /** Owner: pickups in the next 2 days whose contract is still unsigned. One email per camper owner. */

@@ -25,6 +25,10 @@ export default function handler(req, res) {
   if (req.query?.scope === "promo") return promoHandler(req, res);
   if (req.query?.scope === "import") return importHandler(req, res);
   if (req.query?.scope === "acta") return actaHandler(req, res);
-  const isAdmin = req.query?.scope === "admin" || (req.headers && "x-admin-token" in req.headers);
+  // Legacy admin calls carry only the header; the kiosk (guest page on the staff
+  // device) carries the header and a contract token, and goes to the guest handler.
+  const isAdmin =
+    req.query?.scope === "admin" ||
+    (req.headers && "x-admin-token" in req.headers && !req.body?.token && !req.query?.token);
   return isAdmin ? contractHandlers.admin(req, res) : contractHandlers.guest(req, res);
 }

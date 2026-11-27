@@ -1,7 +1,8 @@
 // Wires the contract handlers to the real Blob store, Resend and the site.
 import { createContractStore } from "./contracts.js";
 import { createContractHandlers } from "./contract-handlers.js";
-import { sendCodeEmail, sendSignedEmails, signingLink } from "./contract-email.js";
+import { sendCodeEmail, sendSignedEmails, sendSubmittedEmail, signingLink } from "./contract-email.js";
+import { createActaStore } from "./actas.js";
 import { extractDocFields } from "./doc-extract.js";
 import { getSigningProvider } from "./signing-provider.js";
 import { esc, postToResend, siteUrl } from "./email.js";
@@ -51,6 +52,13 @@ export const contractHandlers = createContractHandlers({
   loadBasePdf,
   listBookings: () => createBlobStore().listBookings(),
   onSigned: checkMemberDiscount,
+  onSubmitted: (contract) => sendSubmittedEmail(contract),
+  actas: createActaStore(),
+  loadDiagram: async (vehicle) => {
+    const res = await fetch(`${siteUrl()}${vehicle.diagram.path}`);
+    if (!res.ok) throw new Error(`Diagram not available (${res.status})`);
+    return new Uint8Array(await res.arrayBuffer());
+  },
   // Document recognition runs only with an Anthropic API key in the environment.
   extractDocs: process.env.ANTHROPIC_API_KEY ? (docs) => extractDocFields(docs) : null,
   imports: createImportStore(),

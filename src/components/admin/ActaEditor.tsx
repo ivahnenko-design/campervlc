@@ -382,7 +382,15 @@ export function ActaEditor({
     void load();
   }, [load]);
 
-  const locked = acta?.status === "signed";
+  // Check-in of a contract not yet signed by both: the report is annex I-A and is
+  // signed with the contract (admin → "Выдача и подписание"); frozen once the guest signed.
+  const withContract =
+    kind === "checkin" &&
+    !!data &&
+    data.contract.status !== "signed" &&
+    data.contract.status !== "cancelled";
+  const locked =
+    acta?.status === "signed" || (withContract && data?.contract.status === "guest_signed");
   const checkin = data?.checkin || null;
 
   // ── autosave ──
@@ -1057,13 +1065,19 @@ export function ActaEditor({
               onChange={(v) => set({ petsOnBoard: v })}
             />
           </div>
-          <h2 className={`${h2} mt-4`}>Заметки</h2>
+          <h2 className={`${h2} mt-4`}>
+            {kind === "checkin" ? "Неисправности внутри и другие заметки" : "Заметки"}
+          </h2>
           <textarea
             className="min-h-24 w-full rounded-xl border border-border bg-background px-3 py-2 text-base"
             value={f.notes}
             maxLength={2000}
             disabled={locked}
-            placeholder="Попадут в PDF (на испанском или английском лучше)"
+            placeholder={
+              kind === "checkin"
+                ? "Словами: что не работает или повреждено внутри. Попадёт в строки «Daños preexistentes» на стр. 14 договора (лучше по-испански или по-английски)"
+                : "Попадут в PDF (на испанском или английском лучше)"
+            }
             onChange={(e) => set({ notes: e.target.value })}
           />
         </section>
@@ -1133,8 +1147,25 @@ export function ActaEditor({
           </section>
         )}
 
+        {withContract && (
+          <section className={`${card} border-primary/40 bg-primary/5`}>
+            <p className="text-sm">
+              {locked
+                ? "Клиент уже подписал договор с этим актом — изменить нельзя. Подпишите договор в админке."
+                : "Акт выдачи подписывается вместе с договором: сохраняется сам, затем в админке «Выдача и подписание» → «Дать клиенту на подпись»."}
+            </p>
+            <button
+              type="button"
+              onClick={() => void close()}
+              className="mt-2 flex min-h-12 w-full items-center justify-center rounded-xl bg-primary text-base font-semibold text-primary-foreground"
+            >
+              Готово — к подписанию
+            </button>
+          </section>
+        )}
+
         {/* ── signatures ── */}
-        {!locked && (
+        {!locked && !withContract && (
           <section className={card}>
             <h2 className={h2}>Подписи</h2>
             <label className="block text-sm text-muted-foreground">
@@ -1169,7 +1200,7 @@ export function ActaEditor({
 
         {error && <p className="rounded-xl bg-red-600/10 p-3 text-sm text-red-600">{error}</p>}
 
-        {!locked && (
+        {!locked && !withContract && (
           <div className="sticky bottom-0 -mx-4 border-t border-border bg-background/95 px-4 py-3 backdrop-blur">
             {missing.length > 0 && (
               <p className="mb-2 text-xs text-muted-foreground">Не хватает: {missing.join(", ")}</p>

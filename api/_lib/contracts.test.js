@@ -25,6 +25,7 @@ import {
 } from "./contracts.js";
 import { VEHICLES } from "../../shared/vehicles.js";
 import { createContractHandlers } from "./contract-handlers.js";
+import { createMemoryActaStore } from "./actas.js";
 import { createOwnProvider, createExternalProvider } from "./signing-provider.js";
 import { pdfText } from "./contract-pdf.js";
 
@@ -158,7 +159,9 @@ test("token authenticates the contract and carries its id", () => {
 });
 
 test("one-time code: wrong guesses are counted and capped, right code passes", () => {
-  const { contract } = createContract(INVITE, { now: 0 });
+  const { contract: fresh } = createContract(INVITE, { now: 0 });
+  assert.throws(() => issueOtp(fresh, { now: 1000, secret: "s" }), (e) => e.code === "not_verified", "no code before the in-person check");
+  const contract = { ...fresh, status: "verified" };
   const { code, contract: c1 } = issueOtp(contract, { now: 1000, secret: "s" });
   assert.throws(() => issueOtp(c1, { now: 2000, secret: "s" }), (e) => e.code === "code_too_soon");
   let cur = c1;
@@ -195,7 +198,8 @@ function res() {
 
 async function setup() {
   const store = createMemoryContractStore();
-  const sent = { invites: [], codes: [], signed: [] };
+  const actas = createMemoryActaStore();
+  const sent = { invites: [], codes: [], signed: [], submitted: [] };
   const base = await PDFDocument.create();
   base.addPage([595, 842]);
   const basePdf = await base.save();
@@ -205,7 +209,9 @@ async function setup() {
     store,
     provider,
     sendCode: async (c, code) => sent.codes.push(code),
-    sendSigned: async (c, pdf) => (sent.signed.push(pdf), ["fulfilled", "fulfilled"]),
+    sendSigned: async (c, pdf, link) => (sent.signed.push({ pdf, link }), ["fulfilled", "fulfilled"]),
+    onSubmitted: async (c) => sent.submitted.push(c.id),
+    actas,
     loadBasePdf: async () => basePdf,
     listBookings: async () => [
       { id: "cs_2", bookingRef: "CR-B", status: "confirmed", startDate: "2027-02-01", endDate: "2027-02-05", guestFirstName: "Bob", guestLastName: "B", guestEmail: "b@x.com", totalWithIva: 500 },
@@ -215,7 +221,7 @@ async function setup() {
     secret: "otp-secret",
     now: () => t,
   });
-  return { h, store, sent, tick: (ms) => (t += ms) };
+  return { h, store, actas, sent, tick: (ms) => (t += ms) };
 }
 
 test("admin endpoint needs the token and is off without it", async () => {
@@ -232,13 +238,17 @@ test("admin endpoint needs the token and is off without it", async () => {
   assert.equal(r3.code, 503);
 });
 
-test("full flow: create, open link, get code, sign, PDF stored, second sign refused", async () => {
-  const { h, store, sent, tick } = await setup();
+const ADMIN = { "x-admin-token": "admin-secret", "content-type": "application/json" };
+const ALL_CHECKS = { name: true, document: true, birthDate: true, docExpiry: true, license: true, licenseB: true, address: true };
+
+test("in person: guest sends data, staff verify, guest signs on the staff device, lessor countersigns", async () => {
+  const { h, store, actas, sent, tick } = await setup();
   const created = res();
   await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret" }, body: INVITE }, created);
   assert.equal(created.code, 201);
   assert.match(created.body.link, /\/sign\//);
   const token = sent.invites[0].token;
+  const id = created.body.id;
 
   const view = res();
   await h.guest({ method: "GET", query: { token } }, view);
@@ -247,25 +257,17 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
   assert.equal("tokenHash" in view.body.contract, false);
 
   const bad = res();
-  await h.guest({ method: "GET", query: { token: `${created.body.id}.${"y".repeat(24)}` } }, bad);
+  await h.guest({ method: "GET", query: { token: `${id}.${"y".repeat(24)}` } }, bad);
   assert.equal(bad.code, 404);
 
-  const asked = res();
-  await h.guest({ method: "POST", body: { token, action: "code" } }, asked);
-  assert.equal(asked.code, 200);
-  const code = sent.codes[0];
-
-  const wrong = res();
-  await h.guest({ method: "POST", headers: {}, body: { token, action: "sign", code: "999999", data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } }, wrong);
-  assert.equal(wrong.code, 400);
-
-  const noConsent = res();
-  await h.guest({ method: "POST", headers: {}, body: { token, action: "sign", code, data: SIGN_DATA, consents: { ...CONSENTS, cardAuthorization: false }, signature: fakePng() } }, noConsent);
-  assert.equal(noConsent.code, 400);
-  assert.equal(noConsent.body.code, "consent_required");
+  // The guest can no longer sign remotely.
+  const remote = res();
+  await h.guest({ method: "POST", body: { token, action: "code" } }, remote);
+  assert.equal(remote.code, 403);
+  assert.equal(remote.body.code, "in_person_required");
 
   const noDocs = res();
-  await h.guest({ method: "POST", headers: {}, body: { token, action: "sign", code, data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } }, noDocs);
+  await h.guest({ method: "POST", headers: {}, body: { token, action: "submit", data: SIGN_DATA } }, noDocs);
   assert.equal(noDocs.code, 400);
   assert.equal(noDocs.body.code, "docs_required");
 
@@ -277,64 +279,148 @@ test("full flow: create, open link, get code, sign, PDF stored, second sign refu
     await h.guest({ method: "POST", body: { token, action: "doc", slot, image: DOC_JPEG } }, up);
     assert.equal(up.code, 200, JSON.stringify(up.body));
   }
-
-  const ownerSig = res();
-  await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret", "content-type": "application/json" }, body: { action: "owner_signature", signature: `data:image/png;base64,${fakePng().split(",")[1] ?? ""}` } }, ownerSig);
-
   const ex = res();
   await h.guest({ method: "POST", body: { token, action: "extract" } }, ex);
-  assert.equal(ex.code, 200);
   assert.equal(ex.body.ok, false, "recognition is off in tests (no extractDocs)");
-
   const read = res();
   await h.guest({ method: "POST", body: { token, action: "read" } }, read);
-  assert.equal(read.code, 200);
-  assert.ok((await store.get(created.body.id)).contract.audit.some((a) => a.ev === "contract_read"));
+  assert.ok((await store.get(id)).contract.audit.some((a) => a.ev === "contract_read"));
+
+  const submit = res();
+  await h.guest({ method: "POST", headers: { "x-forwarded-for": "198.51.100.4" }, body: { token, action: "submit", data: SIGN_DATA } }, submit);
+  assert.equal(submit.code, 200, JSON.stringify(submit.body));
+  assert.equal((await store.get(id)).contract.status, "submitted");
+  assert.deepEqual(sent.submitted, [id]);
+  const again = res();
+  await h.guest({ method: "GET", query: { token } }, again);
+  assert.equal(again.body.contract.submitted.docNumber, SIGN_DATA.docNumber, "the guest may still correct the data");
+
+  // Staff: every item must be ticked against the originals.
+  const half = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "verify", id, data: SIGN_DATA, checks: { name: true } } }, half);
+  assert.equal(half.code, 400);
+  assert.equal(half.body.code, "checks_required");
+  const fixed = { ...SIGN_DATA, docNumber: "AB1234568" };
+  const verify = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "verify", id, data: fixed, checks: ALL_CHECKS } }, verify);
+  assert.equal(verify.code, 200, JSON.stringify(verify.body));
+  assert.equal(verify.body.contract.status, "verified");
+  assert.deepEqual(verify.body.contract.verification.edits.map((e) => e.field), ["docNumber"]);
+  const late = res();
+  await h.guest({ method: "POST", body: { token, action: "submit", data: SIGN_DATA } }, late);
+  assert.equal(late.code, 409, "after the check the guest cannot change the data");
+
+  // Kiosk link: only with the check-in report (mileage + fuel).
+  const noActa = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "kiosk", id } }, noActa);
+  assert.equal(noActa.code, 409);
+  assert.equal(noActa.body.code, "acta_required");
+  const contract = (await store.get(id)).contract;
+  await actas.save({
+    id: `${id}-checkin`, contractId: id, vehicleId: contract.vehicleId, kind: "checkin", status: "draft",
+    datetime: "2026-12-01T10:05", odometerKm: 48210, fuel: 4, checklist: { freshWater: true, keys: true }, marks: [{ id: "m1", x: 0.2, y: 0.1, type: "scratch", note: "rear bumper" }],
+    notes: "Cajón de la cocina roto", petsOnBoard: false, photos: [], staffName: "", guestName: "", audit: [],
+  });
+  const kiosk = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "kiosk", id } }, kiosk);
+  assert.equal(kiosk.code, 200, JSON.stringify(kiosk.body));
+  const kToken = kiosk.body.url.match(/\/sign\/([^?]+)/)[1];
+
+  const kView = res();
+  await h.guest({ method: "GET", query: { token: kToken } }, kView);
+  assert.equal(kView.body.contract.kiosk, true);
+  assert.equal(kView.body.contract.data.docNumber, "AB1234568");
+  assert.equal(kView.body.contract.acta.odometerKm, 48210);
+  const gView = res();
+  await h.guest({ method: "GET", query: { token } }, gView);
+  assert.equal(gView.body.contract.kiosk, undefined, "the guest link does not become a kiosk");
+
+  // The kiosk needs the staff session on the device.
+  const noStaff = res();
+  await h.guest({ method: "POST", headers: {}, body: { token: kToken, action: "code" } }, noStaff);
+  assert.equal(noStaff.code, 403);
+  assert.equal(noStaff.body.code, "staff_session_required");
+  const asked = res();
+  await h.guest({ method: "POST", headers: ADMIN, body: { token: kToken, action: "code" } }, asked);
+  assert.equal(asked.code, 200, JSON.stringify(asked.body));
+  const code = sent.codes[0];
+  const wrong = res();
+  await h.guest({ method: "POST", headers: ADMIN, body: { token: kToken, action: "sign", code: "999999", consents: CONSENTS, signature: fakePng() } }, wrong);
+  assert.equal(wrong.code, 400);
+  const noConsent = res();
+  await h.guest({ method: "POST", headers: ADMIN, body: { token: kToken, action: "sign", code, consents: { ...CONSENTS, cardAuthorization: false }, signature: fakePng() } }, noConsent);
+  assert.equal(noConsent.body.code, "consent_required");
 
   tick(5_000);
-  const ok = res();
-  const req = { method: "POST", headers: { "x-forwarded-for": "203.0.113.7, 10.0.0.1", "user-agent": "TestAgent/1" }, body: { token, action: "sign", code, data: SIGN_DATA, consents: CONSENTS, signature: fakePng() } };
-  await h.guest(req, ok);
-  assert.equal(ok.code, 200, JSON.stringify(ok.body));
-  assert.equal(ok.body.ok, true);
+  const signed = res();
+  await h.guest({ method: "POST", headers: { ...ADMIN, "x-forwarded-for": "203.0.113.7, 10.0.0.1", "user-agent": "TestAgent/1" }, body: { token: kToken, action: "sign", code, consents: CONSENTS, signature: fakePng() } }, signed);
+  assert.equal(signed.code, 200, JSON.stringify(signed.body));
+  let stored = (await store.get(id)).contract;
+  assert.equal(stored.status, "guest_signed");
+  assert.equal(stored.guestSignature.ip, "203.0.113.7");
+  assert.equal(stored.guestSignature.acta.odometerKm, 48210);
+  assert.equal(sent.signed.length, 0, "nothing is sent before the lessor signs");
+  assert.equal(store.pdfs.size, 0);
 
-  const stored = (await store.get(created.body.id)).contract;
+  const reuse = res();
+  await h.guest({ method: "POST", headers: ADMIN, body: { token: kToken, action: "sign", code, consents: CONSENTS, signature: fakePng() } }, reuse);
+  assert.equal(reuse.code, 404, "the kiosk link closes after the signature");
+
+  tick(5_000);
+  const counter = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "countersign", id, signature: fakePng() } }, counter);
+  assert.equal(counter.code, 200, JSON.stringify(counter.body));
+  stored = (await store.get(id)).contract;
   assert.equal(stored.status, "signed");
   assert.match(stored.number, /^\d{8}_[A-Z-]+$/);
   assert.equal(stored.signed.ip, "203.0.113.7");
-  assert.equal(stored.signed.data.docNumber, "AB1234567");
-  assert.ok(store.pdfs.get(created.body.id).length > 1000);
+  assert.equal(stored.signed.data.docNumber, "AB1234568", "the verified data is the signed data");
+  assert.ok(stored.signed.verified.at);
+  assert.ok(stored.signed.owner.signatureHash);
+  assert.ok(store.pdfs.get(id).length > 1000);
   assert.equal(sent.signed.length, 1);
-  const out = await PDFDocument.load(store.pdfs.get(created.body.id));
+  assert.equal(sent.signed[0].link, token, "the copy links to the guest's own booking page");
+  const out = await PDFDocument.load(store.pdfs.get(id));
   assert.equal(out.getPageCount(), 3, "blank contract + signature sheet + document annex");
   assert.deepEqual(Object.keys(stored.signed.docHashes).sort(), ["idFront", "licenseBack", "licenseFront"]);
+  assert.equal((await actas.get(id, "checkin")).acta.status, "signed", "the check-in report is signed with the contract");
+
+  const twice = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "countersign", id, signature: fakePng() } }, twice);
+  assert.equal(twice.code, 409);
 
   const photo = res();
-  await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id: created.body.id, doc: "idFront" } }, photo);
-  assert.equal(photo.code, 200);
+  await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id, doc: "idFront" } }, photo);
   assert.equal(photo.headers["Content-Type"], "image/jpeg");
-
-  const again = res();
-  await h.guest(req, again);
-  assert.equal(again.code, 409);
-
   const dl = res();
-  await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id: created.body.id, pdf: "1" } }, dl);
-  assert.equal(dl.code, 200);
+  await h.admin({ method: "GET", headers: { "x-admin-token": "admin-secret" }, query: { id, pdf: "1" } }, dl);
   assert.equal(dl.headers["Content-Type"], "application/pdf");
 
-  // The same link is the guest's booking page: it shows the signed state and serves the copy.
+  // The guest link is the booking page: signed state and the copy.
   const page = res();
   await h.guest({ method: "GET", query: { token } }, page);
   assert.equal(page.body.contract.status, "signed");
   assert.equal(page.body.contract.signerName, SIGN_DATA.fullName);
   const copy = res();
   await h.guest({ method: "GET", query: { token, pdf: "1" } }, copy);
-  assert.equal(copy.code, 200);
   assert.equal(copy.headers["Content-Type"], "application/pdf");
   const stranger = res();
-  await h.guest({ method: "GET", query: { token: `${created.body.id}.${"z".repeat(24)}`, pdf: "1" } }, stranger);
+  await h.guest({ method: "GET", query: { token: `${id}.${"z".repeat(24)}`, pdf: "1" } }, stranger);
   assert.equal(stranger.code, 404);
+});
+
+test("unverify sends the contract back to the guest's data", async () => {
+  const { h, store, sent } = await setup();
+  const created = res();
+  await h.admin({ method: "POST", headers: { "x-admin-token": "admin-secret" }, body: INVITE }, created);
+  const token = sent.invites[0].token;
+  for (const slot of ["idFront", "licenseFront", "licenseBack"]) await h.guest({ method: "POST", body: { token, action: "doc", slot, image: DOC_JPEG } }, res());
+  await h.guest({ method: "POST", headers: {}, body: { token, action: "submit", data: SIGN_DATA } }, res());
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "verify", id: created.body.id, data: SIGN_DATA, checks: ALL_CHECKS } }, res());
+  const back = res();
+  await h.admin({ method: "POST", headers: ADMIN, body: { action: "unverify", id: created.body.id } }, back);
+  assert.equal(back.code, 200);
+  assert.equal((await store.get(created.body.id)).contract.status, "submitted");
 });
 
 test("resend replaces the link; cancel closes a pending contract", async () => {

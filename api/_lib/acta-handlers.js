@@ -67,6 +67,67 @@ const contractView = (c) => ({
   returnTime: c.returnTime,
 });
 
+/**
+ * Signs a report with both signatures: builds its PDF and stores the files, then
+ * the record (etag guard). Also used by the contract countersignature, where the
+ * check-in report is signed together with the contract (annex I-A).
+ */
+export async function signActa({ actas, loadDiagram = async () => null, contract, kind, by, patch = {}, staffSignature, guestSignature, now = () => Date.now() }) {
+  for (let attempt = 0; ; attempt++) {
+    const found = await actas.get(contract.id, kind);
+    if (!found) throw new ContractError("not_found", "Save the report first", 404);
+    const t = now();
+    const draft = applyPatch(found.acta, patch, { by: by, now: t });
+    const checkin = kind === "checkout" ? (await actas.get(contract.id, "checkin"))?.acta || null : null;
+    requireSignable(draft, { checkin });
+    const vehicle = getVehicle(draft.vehicleId);
+    const diagramBytes = vehicle?.diagram ? await loadDiagram(vehicle).catch(() => null) : null;
+    const thumbs = [];
+    for (const p of draft.photos.slice(0, 12)) {
+      const bytes = await actas.getPhoto(contract.id, kind, p.id, { thumb: true }).catch(() => null);
+      if (bytes) thumbs.push({ bytes, takenAt: p.takenAt });
+    }
+    const signatures = {
+      staff: { name: draft.staffName, at: t, email: by, sha256: sha256(staffSignature) },
+      guest: { name: draft.guestName, at: t, sha256: sha256(guestSignature) },
+    };
+    const signedDraft = { ...draft, signatures };
+    const pdfBytes = await buildActaPdf({
+      acta: signedDraft,
+      checkin,
+      contract,
+      vehicle: vehicleView(contract),
+      diagram: diagramBytes ? { bytes: diagramBytes } : null,
+      staffSignature,
+      guestSignature,
+      photos: thumbs,
+      dayRate: dayRateFor(contract.endDate),
+    });
+    const hash = sha256(pdfBytes);
+    // Files first under names unique to this PDF, then the record with the etag
+    // guard: a second submit loses the race and never replaces the signed files.
+    const base = `${draft.id}-${hash.slice(0, 12)}`;
+    const [pdfPath, staffPath, guestPath] = await Promise.all([
+      actas.putFile(`pdf/${base}.pdf`, pdfBytes, "application/pdf"),
+      actas.putFile(`sig/${base}-staff.png`, staffSignature, "image/png"),
+      actas.putFile(`sig/${base}-guest.png`, guestSignature, "image/png"),
+    ]);
+    const signed = {
+      ...signedDraft,
+      status: "signed",
+      signatures: { staff: { ...signatures.staff, path: staffPath }, guest: { ...signatures.guest, path: guestPath } },
+      pdf: { path: pdfPath, sha256: hash, at: t, size: pdfBytes.length },
+      audit: [...(draft.audit || []), { t, ev: "signed", by: by }],
+    };
+    try {
+      await actas.save(signed, { etag: found.etag });
+      return { signed, pdfBytes };
+    } catch (err) {
+      if (!(err instanceof ActaConflictError) || attempt >= 1) throw err;
+    }
+  }
+}
+
 export function createActaHandler({
   actas, // createActaStore()
   contracts, // createContractStore()
@@ -165,59 +226,7 @@ export function createActaHandler({
     const staffSignature = decodeSignaturePng(body.staffSignature);
     const guestSignature = decodeSignaturePng(body.guestSignature);
     const patch = body.acta ? validateActaPatch(body.acta) : {};
-    for (let attempt = 0; ; attempt++) {
-      const found = await actas.get(contract.id, kind);
-      if (!found) throw new ContractError("not_found", "Save the report first", 404);
-      const t = now();
-      const draft = applyPatch(found.acta, patch, { by: staff.email, now: t });
-      const checkin = kind === "checkout" ? (await actas.get(contract.id, "checkin"))?.acta || null : null;
-      requireSignable(draft, { checkin });
-      const vehicle = getVehicle(draft.vehicleId);
-      const diagramBytes = vehicle?.diagram ? await loadDiagram(vehicle).catch(() => null) : null;
-      const thumbs = [];
-      for (const p of draft.photos.slice(0, 12)) {
-        const bytes = await actas.getPhoto(contract.id, kind, p.id, { thumb: true }).catch(() => null);
-        if (bytes) thumbs.push({ bytes, takenAt: p.takenAt });
-      }
-      const signatures = {
-        staff: { name: draft.staffName, at: t, email: staff.email, sha256: sha256(staffSignature) },
-        guest: { name: draft.guestName, at: t, sha256: sha256(guestSignature) },
-      };
-      const signedDraft = { ...draft, signatures };
-      const pdfBytes = await buildActaPdf({
-        acta: signedDraft,
-        checkin,
-        contract,
-        vehicle: vehicleView(contract),
-        diagram: diagramBytes ? { bytes: diagramBytes } : null,
-        staffSignature,
-        guestSignature,
-        photos: thumbs,
-        dayRate: dayRateFor(contract.endDate),
-      });
-      const hash = sha256(pdfBytes);
-      // Files first under names unique to this PDF, then the record with the etag
-      // guard: a second submit loses the race and never replaces the signed files.
-      const base = `${draft.id}-${hash.slice(0, 12)}`;
-      const [pdfPath, staffPath, guestPath] = await Promise.all([
-        actas.putFile(`pdf/${base}.pdf`, pdfBytes, "application/pdf"),
-        actas.putFile(`sig/${base}-staff.png`, staffSignature, "image/png"),
-        actas.putFile(`sig/${base}-guest.png`, guestSignature, "image/png"),
-      ]);
-      const signed = {
-        ...signedDraft,
-        status: "signed",
-        signatures: { staff: { ...signatures.staff, path: staffPath }, guest: { ...signatures.guest, path: guestPath } },
-        pdf: { path: pdfPath, sha256: hash, at: t, size: pdfBytes.length },
-        audit: [...(draft.audit || []), { t, ev: "signed", by: staff.email }],
-      };
-      try {
-        await actas.save(signed, { etag: found.etag });
-        return { signed, pdfBytes };
-      } catch (err) {
-        if (!(err instanceof ActaConflictError) || attempt >= 1) throw err;
-      }
-    }
+    return signActa({ actas, loadDiagram, contract, kind, by: staff.email, patch, staffSignature, guestSignature, now });
   }
 
   async function emailSigned(contract, acta, pdfBytes, staff) {
@@ -239,6 +248,12 @@ export function createActaHandler({
     const kind = body.kind;
     if (!isKind(kind)) throw new ContractError("bad_kind", "Unknown kind");
     const t = now();
+    // In-person signing: the check-in report is annex I-A of the contract. It is
+    // signed together with the contract, and frozen once the guest has signed.
+    if (kind === "checkin" && contract.status !== "signed" && contract.status !== "cancelled") {
+      if (body.action === "sign") throw new ContractError("acta_with_contract", "The check-in report is signed with the contract", 409);
+      if (contract.status === "guest_signed") throw new ContractError("acta_locked", "The guest has already signed this report", 409);
+    }
 
     if (body.action === "save") {
       const patch = validateActaPatch(body.acta || {});

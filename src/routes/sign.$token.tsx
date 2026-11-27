@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { BookingCabinet, type CabinetContract } from "@/components/BookingCabinet";
@@ -7,6 +7,8 @@ import { CHECK_TEXT } from "@/components/sign-check-text";
 import { readMrz } from "@/components/mrz-reader";
 import { signRuleProblems } from "../../shared/sign-rules.js";
 import { DocScanner, type ScanTexts } from "@/components/DocScanner";
+import { AnnexPreview, type AnnexActa } from "@/components/AnnexPreview";
+import { IN_PERSON_TEXT } from "@/components/in-person-text";
 
 export const Route = createFileRoute("/sign/$token")({
   validateSearch: (s: Record<string, unknown>): { lang?: string } => ({
@@ -25,8 +27,15 @@ type Lang = "es" | "en" | "ru" | "uk" | "de" | "it" | "nl";
 
 interface ContractView {
   id: string;
-  status: "pending" | "signed" | "cancelled";
+  status: "pending" | "submitted" | "verified" | "guest_signed" | "signed" | "cancelled";
   language: string;
+  /** The guest link while the data can still change: what was sent. */
+  submitted?: Record<string, string> | null;
+  /** Kiosk link (signature in person, on the staff device). */
+  kiosk?: boolean;
+  data?: Record<string, string>;
+  verified?: { at: number; name: string };
+  acta?: AnnexActa | null;
   guestName: string;
   startDate: string;
   endDate: string;
@@ -946,6 +955,7 @@ function SignPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [sent, setSent] = useState(false);
   const [uploaded, setUploaded] = useState<Partial<Record<DocSlot, boolean>>>({});
   // After a failed "send code" every missing item is outlined in red.
   const [tried, setTried] = useState(false);
@@ -968,6 +978,7 @@ function SignPage() {
   const t = TEXT[lang];
   const d = DOCS_TEXT[lang];
   const c = CHECK_TEXT[lang];
+  const ip = IN_PERSON_TEXT[lang];
 
   useEffect(() => {
     fetch(`/api/contract?token=${encodeURIComponent(token)}`)
@@ -975,6 +986,13 @@ function SignPage() {
         if (!r.ok) throw new Error("bad");
         const j = (await r.json()) as { contract: ContractView };
         setContract(j.contract);
+        const prev = j.contract.status === "submitted" ? j.contract.submitted : null;
+        if (prev) {
+          // Sent before: the form opens with that data and the photos already on the server.
+          setForm({ ...prev });
+          setUploaded(Object.fromEntries(docSlotsFor(prev.docType).map((k) => [k, true])));
+          return;
+        }
         setForm((f) => ({ ...f, fullName: f.fullName ?? j.contract.guestName }));
         // The admin typed this name; the name read from the passport may replace it.
         autoFilled.current.add("fullName");
@@ -984,15 +1002,33 @@ function SignPage() {
 
   const set = useCallback((k: string, v: string) => setForm((f) => ({ ...f, [k]: v })), []);
   const errText = (code?: string) =>
+    (code === "staff_session_required"
+      ? "Откройте подписание из админки на устройстве, где вы вошли в аккаунт · Open it from the admin on the staff device"
+      : "") ||
+    (code === "not_open" ? ip.notOpen : "") ||
     (d.errors as Record<string, string>)[code || ""] ||
     (c.rules as Record<string, string>)[code || ""] ||
     t.errors[code || ""] ||
     t.errors.default;
 
+  // Kiosk (staff device): staff signed in with the legacy admin token send it too;
+  // with a site account the session cookie goes by itself.
+  const staffHeader = (): Record<string, string> => {
+    if (!contract?.kiosk) return {};
+    try {
+      const k =
+        localStorage.getItem("campervlcAdminToken") ||
+        sessionStorage.getItem("campervlcAdminToken");
+      return k ? { "x-admin-token": k } : {};
+    } catch {
+      return {};
+    }
+  };
+
   async function post(body: Record<string, unknown>) {
     const r = await fetch("/api/contract", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...staffHeader() },
       body: JSON.stringify({ token, ...body }),
     });
     const j = (await r.json().catch(() => ({}))) as { code?: string } & Record<string, unknown>;
@@ -1066,7 +1102,8 @@ function SignPage() {
     setOcr("filled");
   }
 
-  async function askCode() {
+  /** Guest, before pickup: the data and the document photos; the signature happens at pickup. */
+  async function sendData() {
     setError(null);
     const problem = !docsDone
       ? d.needDocs
@@ -1074,11 +1111,7 @@ function SignPage() {
         ? t.fillAll
         : ruleProblems.length
           ? `${c.fixFields} ${c.contact}`
-          : !signature
-            ? t.needSignature
-            : !allConsents
-              ? t.errors.consent_required
-              : null;
+          : null;
     if (problem) {
       setTried(true);
       setError(problem);
@@ -1087,6 +1120,50 @@ function SignPage() {
         const el = document.querySelector<HTMLElement>("[data-missing='true']");
         el?.scrollIntoView({ behavior: "smooth", block: "center" });
         if (el instanceof HTMLInputElement) el.focus({ preventScroll: true });
+      });
+      return;
+    }
+    setBusy(true);
+    try {
+      const data: Record<string, string> = {};
+      for (const k of [
+        ...MAIN_FIELDS,
+        "docType",
+        "extraDriverName",
+        "extraDriverDoc",
+        "extraDriverLicense",
+        "surname",
+      ]) {
+        data[k] = (form[k] || "").trim();
+      }
+      await post({ action: "submit", data });
+      setSent(true);
+      window.scrollTo({ top: 0 });
+    } catch (e) {
+      setError(errText((e as { code?: string }).code));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  /** Kiosk: the guest read the contract and the annex, ticked the consents and drew the signature. */
+  async function askCode() {
+    setError(null);
+    const problem =
+      contract?.preview && !(contract.readAt || readNow)
+        ? t.errors.consent_required
+        : !signature
+          ? t.needSignature
+          : !allConsents
+            ? t.errors.consent_required
+            : null;
+    if (problem) {
+      setTried(true);
+      setError(problem);
+      requestAnimationFrame(() => {
+        document
+          .querySelector<HTMLElement>("[data-missing='true']")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
       });
       return;
     }
@@ -1105,23 +1182,8 @@ function SignPage() {
     setError(null);
     setBusy(true);
     try {
-      const data: Record<string, string> = {};
-      for (const k of [
-        ...MAIN_FIELDS,
-        "docType",
-        "extraDriverName",
-        "extraDriverDoc",
-        "extraDriverLicense",
-        "surname",
-      ]) {
-        data[k] = (form[k] || "").trim();
-      }
-      await post({ action: "sign", code: code.trim(), data, consents, signature });
-      // Reload: the same link now opens the booking page with the signed copy.
-      const r = await fetch(`/api/contract?token=${encodeURIComponent(token)}`);
-      if (r.ok) setContract(((await r.json()) as { contract: ContractView }).contract);
+      await post({ action: "sign", code: code.trim(), consents, signature });
       setDone(true);
-      // The booking page replaces the form: start it from the top.
       window.scrollTo({ top: 0 });
     } catch (e) {
       setError(errText((e as { code?: string }).code));
@@ -1150,18 +1212,206 @@ function SignPage() {
       </Shell>
     );
   }
+  const notice = (title: string, body: string) => (
+    <Shell>
+      <div className="text-center">
+        <CheckCircle className="mx-auto h-10 w-10 text-green-500" />
+        <h1 className="mt-3 font-display text-2xl">{title}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{body}</p>
+      </div>
+    </Shell>
+  );
   if (done) {
     return (
       <Shell>
         <div className="text-center">
           <CheckCircle className="mx-auto h-10 w-10 text-green-500" />
-          <h1 className="mt-3 font-display text-2xl">{t.doneTitle}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{t.doneBody}</p>
+          <h1 className="mt-3 font-display text-2xl">{ip.kioskDoneTitle}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{ip.kioskDoneBody}</p>
+          {/* For staff, once the device is back: the countersignature is in the admin. */}
+          <a
+            href={`/admin/contratos?id=${contract.id}`}
+            className="mt-8 inline-block rounded-full border border-border px-4 py-2 text-xs text-muted-foreground"
+          >
+            Админка · Admin →
+          </a>
         </div>
       </Shell>
     );
   }
-  if (contract.status !== "pending") {
+  if (contract.kiosk && contract.status === "verified") {
+    const shown = MAIN_FIELDS.filter((k) => (contract.data?.[k] || "").trim());
+    return (
+      <Shell>
+        <h1 className="font-display text-2xl">{ip.kioskTitle}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {ip.kioskIntro(contract.verified?.name || "Camper Retreat")}
+        </p>
+        <section className="mt-5 rounded-xl border border-border p-4 text-sm">
+          <h2 className="font-semibold">{t.rental}</h2>
+          <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+            <dt className="text-muted-foreground">{t.pickup}</dt>
+            <dd>
+              {contract.startDate} · {contract.pickupTime}
+            </dd>
+            <dt className="text-muted-foreground">{t.ret}</dt>
+            <dd>
+              {contract.endDate} · {contract.returnTime}
+            </dd>
+            {contract.priceTotal != null && (
+              <>
+                <dt className="text-muted-foreground">{t.price}</dt>
+                <dd>{contract.priceTotal} €</dd>
+              </>
+            )}
+          </dl>
+          {/* With the preview below, its own "Open as PDF" link is the only one. */}
+          {!contract.preview && (
+            <a
+              href={contract.pdfPath}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-block text-primary underline"
+            >
+              {t.openContract}
+            </a>
+          )}
+        </section>
+
+        {contract.preview && (
+          <ContractPreview
+            preview={contract.preview}
+            pdfPath={contract.pdfPath}
+            lang={lang}
+            read={!!contract.readAt || readNow}
+            onRead={markRead}
+          />
+        )}
+
+        <section className="mt-5 rounded-xl border border-border p-4 text-sm">
+          <h2 className="font-semibold">{ip.checkedData}</h2>
+          <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+            <dt className="text-muted-foreground">{t.labels.docType}</dt>
+            <dd>{t.docTypes[contract.data?.docType || ""] || contract.data?.docType}</dd>
+            {shown.map((k) => (
+              <Fragment key={k}>
+                <dt className="text-muted-foreground">
+                  {k === "licenseBSince" ? c.bSinceLabel : t.labels[k]}
+                </dt>
+                <dd className="break-words">{contract.data?.[k]}</dd>
+              </Fragment>
+            ))}
+            {contract.data?.extraDriverName && (
+              <>
+                <dt className="text-muted-foreground">{t.extraDriver}</dt>
+                <dd>
+                  {[
+                    contract.data.extraDriverName,
+                    contract.data.extraDriverDoc,
+                    contract.data.extraDriverLicense,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </dd>
+              </>
+            )}
+          </dl>
+        </section>
+
+        {contract.acta && (
+          <section className="mt-5">
+            <h2 className="font-semibold">{ip.annexTitle}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{ip.annexIntro}</p>
+            <div className="mt-2">
+              <AnnexPreview
+                acta={contract.acta}
+                image={`${contract.preview?.base || "/contracts/v8/page-"}14.webp`}
+                bookingRef={contract.bookingRef}
+              />
+            </div>
+          </section>
+        )}
+
+        <section className="mt-5">
+          <h2 className="font-semibold">{t.signHere}</h2>
+          <div
+            className={`mt-2 rounded-lg ${tried && !signature ? "ring-2 ring-destructive" : ""}`}
+            data-missing={(tried && !signature) || undefined}
+          >
+            <SignaturePad onChange={setSignature} clearLabel={t.clear} />
+          </div>
+        </section>
+
+        <section className="mt-5 space-y-2 text-sm">
+          {Object.entries(t.consents).map(([k, label]) => (
+            <label
+              key={k}
+              className={`flex items-start gap-2 ${tried && !consents[k] ? "rounded-md text-destructive ring-1 ring-destructive" : ""}`}
+              data-missing={(tried && !consents[k]) || undefined}
+            >
+              <input
+                type="checkbox"
+                className="mt-1"
+                checked={!!consents[k]}
+                onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
+              />
+              <span>
+                {k === "languageNotice" ? withConditionsLink(label, t.conditionsLink, lang) : label}
+              </span>
+            </label>
+          ))}
+        </section>
+
+        {error && (
+          <p
+            role="alert"
+            className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          >
+            {error}
+          </p>
+        )}
+
+        {!codeSent ? (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={askCode}
+            className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+          >
+            {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.sendCode}
+          </button>
+        ) : (
+          <div className="mt-5 rounded-xl border border-border p-4">
+            <p className="text-sm">{t.codeSent(codeSent)}</p>
+            <label className="mt-3 block text-sm">
+              <span className="mb-1 block text-muted-foreground">{t.codeLabel}</span>
+              <input
+                className={inputCls}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                maxLength={6}
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+              />
+            </label>
+            <button
+              type="button"
+              disabled={busy || code.length !== 6}
+              onClick={sign}
+              className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+            >
+              {busy ? t.signing : t.sign}
+            </button>
+          </div>
+        )}
+      </Shell>
+    );
+  }
+  if (sent) return notice(ip.sentTitle, ip.sentBody);
+  if (contract.status === "verified" || contract.status === "guest_signed") {
+    return notice(ip.checkedTitle, ip.checkedBody);
+  }
+  if (contract.status !== "pending" && contract.status !== "submitted") {
     return (
       <Shell>
         <p className="text-sm">{t.invalid}</p>
@@ -1172,7 +1422,12 @@ function SignPage() {
   return (
     <Shell>
       <h1 className="font-display text-2xl">{t.title}</h1>
-      <p className="mt-1 text-sm text-muted-foreground">{t.intro}</p>
+      <p className="mt-1 text-sm text-muted-foreground">{ip.intro}</p>
+      {contract.status === "submitted" && (
+        <p className="mt-3 rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-sm">
+          {ip.editHint}
+        </p>
+      )}
 
       <section className="mt-5 rounded-xl border border-border p-4 text-sm">
         <h2 className="font-semibold">{t.rental}</h2>
@@ -1335,38 +1590,6 @@ function SignPage() {
             </div>
           </section>
 
-          <section className="mt-5">
-            <h2 className="font-semibold">{t.signHere}</h2>
-            <div
-              className={`mt-2 rounded-lg ${tried && !signature ? "ring-2 ring-destructive" : ""}`}
-              data-missing={(tried && !signature) || undefined}
-            >
-              <SignaturePad onChange={setSignature} clearLabel={t.clear} />
-            </div>
-          </section>
-
-          <section className="mt-5 space-y-2 text-sm">
-            {Object.entries(t.consents).map(([k, label]) => (
-              <label
-                key={k}
-                className={`flex items-start gap-2 ${tried && !consents[k] ? "rounded-md text-destructive ring-1 ring-destructive" : ""}`}
-                data-missing={(tried && !consents[k]) || undefined}
-              >
-                <input
-                  type="checkbox"
-                  className="mt-1"
-                  checked={!!consents[k]}
-                  onChange={(e) => setConsents((c) => ({ ...c, [k]: e.target.checked }))}
-                />
-                <span>
-                  {k === "languageNotice"
-                    ? withConditionsLink(label, t.conditionsLink, lang)
-                    : label}
-                </span>
-              </label>
-            ))}
-          </section>
-
           {error && (
             <p
               role="alert"
@@ -1375,40 +1598,14 @@ function SignPage() {
               {error}
             </p>
           )}
-
-          {!codeSent ? (
-            <button
-              type="button"
-              disabled={busy}
-              onClick={askCode}
-              className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-            >
-              {busy ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : t.sendCode}
-            </button>
-          ) : (
-            <div className="mt-5 rounded-xl border border-border p-4">
-              <p className="text-sm">{t.codeSent(codeSent)}</p>
-              <label className="mt-3 block text-sm">
-                <span className="mb-1 block text-muted-foreground">{t.codeLabel}</span>
-                <input
-                  className={inputCls}
-                  inputMode="numeric"
-                  autoComplete="one-time-code"
-                  maxLength={6}
-                  value={code}
-                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                />
-              </label>
-              <button
-                type="button"
-                disabled={busy || code.length !== 6}
-                onClick={sign}
-                className="mt-4 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-              >
-                {busy ? t.signing : t.sign}
-              </button>
-            </div>
-          )}
+          <button
+            type="button"
+            disabled={busy}
+            onClick={sendData}
+            className="mt-5 w-full rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+          >
+            {busy ? ip.sending : ip.sendData}
+          </button>
         </>
       )}
     </Shell>

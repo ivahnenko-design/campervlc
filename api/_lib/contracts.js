@@ -2,7 +2,7 @@
 // a signing link with an unguessable token, an email one-time code and an
 // audit trail. Pure logic: the HTTP layer and the email/PDF side effects live
 // in contract-handlers.js so this file can be tested without network.
-import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
+import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
 import { blobStore, list } from "./blob.js";
 import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
 import { EXTRA_LABELS } from "../../shared/acta.js";
@@ -175,7 +175,10 @@ export function createContract(input, { now = Date.now(), provider = "own" } = {
     version: CONTRACT_VERSION,
     provider,
     externalId: null,
-    status: "pending", // pending | signed | cancelled
+    // pending -> submitted (guest sent data + document photos) -> verified (staff
+    // checked them against the originals, in person) -> guest_signed (on the staff
+    // device) -> signed (countersigned by the lessor; PDF built, copies sent).
+    status: "pending",
     tokenHash: sha256(token),
     expiresAt: now + LINK_TTL_MS,
     createdAt: now,
@@ -188,7 +191,7 @@ export function createContract(input, { now = Date.now(), provider = "own" } = {
 
 /** New link for an existing, still unsigned contract (the old link stops working). */
 export function reissueToken(contract, { now = Date.now() } = {}) {
-  if (contract.status !== "pending") throw new ContractError("not_pending", "Contract is not pending", 409);
+  if (!["pending", "submitted"].includes(contract.status)) throw new ContractError("not_pending", "Contract is not pending", 409);
   const token = newToken(contract.id);
   return {
     token,
@@ -203,8 +206,40 @@ export function reissueToken(contract, { now = Date.now() } = {}) {
 }
 
 export function matchesToken(contract, token, now = Date.now()) {
-  if (!contract || !safeEqual(contract.tokenHash, sha256(String(token)))) return false;
-  return contract.status !== "pending" || contract.expiresAt > now;
+  return tokenKind(contract, token, now) !== null;
+}
+
+/**
+ * "guest": the link sent to the guest; "kiosk": the short-lived link opened from
+ * the admin on the staff device, for the signature in person; null: no match.
+ */
+export function tokenKind(contract, token, now = Date.now()) {
+  if (!contract) return null;
+  const h = sha256(String(token));
+  if (safeEqual(contract.tokenHash, h)) return contract.status !== "pending" || contract.expiresAt > now ? "guest" : null;
+  if (contract.kiosk && safeEqual(contract.kiosk.hash, h) && contract.kiosk.exp > now && contract.status === "verified") return "kiosk";
+  return null;
+}
+
+// The guest link is kept sealed with the server secret, so the signed-copy email
+// sent at the countersignature can carry the guest's own booking-page link.
+const sealKey = (secret) => createHash("sha256").update(`contract-link:${secret}`).digest();
+export function sealToken(token, secret) {
+  if (!secret) return null;
+  const iv = randomBytes(12);
+  const c = createCipheriv("aes-256-gcm", sealKey(secret), iv);
+  const enc = Buffer.concat([c.update(String(token), "utf8"), c.final()]);
+  return `${iv.toString("base64url")}.${enc.toString("base64url")}.${c.getAuthTag().toString("base64url")}`;
+}
+export function openToken(sealed, secret) {
+  try {
+    const [iv, enc, tag] = String(sealed || "").split(".");
+    const d = createDecipheriv("aes-256-gcm", sealKey(secret), Buffer.from(iv, "base64url"));
+    d.setAuthTag(Buffer.from(tag, "base64url"));
+    return Buffer.concat([d.update(Buffer.from(enc, "base64url")), d.final()]).toString("utf8");
+  } catch {
+    return null;
+  }
 }
 
 /** What the guest page may see: no hash, no OTP, no audit. */
@@ -255,7 +290,7 @@ const otpHash = (secret, id, code) => createHmac("sha256", secret).update(`${id}
 
 export function issueOtp(contract, { now = Date.now(), secret } = {}) {
   if (!secret) throw new ContractError("secret_missing", "CONTRACT_SECRET or ADMIN_TOKEN is not set", 500);
-  if (contract.status !== "pending") throw new ContractError("not_pending", "Contract is not pending", 409);
+  if (contract.status !== "verified") throw new ContractError("not_verified", "The data has not been checked yet", 409);
   if (contract.otp && now - contract.otp.sentAt < OTP_RESEND_MS) {
     throw new ContractError("code_too_soon", "Wait a minute before asking for another code", 429);
   }
@@ -387,24 +422,121 @@ export function decodeDocJpeg(dataUrl) {
   return bytes;
 }
 
-export function markSigned(contract, { data, consents, signatureHash, pdfHash, basePdfHash, docHashes = {}, ip, userAgent, now = Date.now() }) {
+// ── signing in person ───────────────────────────────────────────────────────
+// 1. submit: the guest sends the data and the document photos from his link.
+// 2. verify: at pickup, staff compare them with the original documents (and may
+//    correct a typo; every change is logged).
+// 3. guest signature on the staff device (kiosk link, email code still required).
+// 4. the lessor countersigns: only then the PDF is built and the copies are sent.
+
+/** Statuses in which the guest may still send or change the data. */
+export const OPEN_STATUSES = ["pending", "submitted"];
+/** Not signed by both parties and not cancelled. */
+export const UNSIGNED_STATUSES = ["pending", "submitted", "verified", "guest_signed"];
+export const KIOSK_TTL_MS = 45 * 60_000;
+
+// What staff tick against the originals; extraDriver only when there is one.
+export const VERIFY_KEYS = ["name", "document", "birthDate", "docExpiry", "license", "licenseB", "address", "extraDriver"];
+export const requiredChecks = (data) => VERIFY_KEYS.filter((k) => k !== "extraDriver" || !!data?.extraDriverName);
+
+const audit = (c, ev, extra = {}) => [...(c.audit || []), { t: extra.t, ev, ...extra }];
+
+export function markSubmitted(contract, { data, docHashes = {}, ip, userAgent, now = Date.now() }) {
+  if (!OPEN_STATUSES.includes(contract.status)) throw new ContractError("not_open", "The data is already being checked", 409);
+  return {
+    ...contract,
+    status: "submitted",
+    submission: { at: now, data, docHashes, ip: clean(ip, 64), userAgent: clean(userAgent, 300) },
+    audit: audit(contract, contract.status === "submitted" ? "resubmitted" : "submitted", { t: now, ip: clean(ip, 64) }),
+  };
+}
+
+/** Staff checked the data against the original documents (in person). */
+export function markVerified(contract, { data, checks = {}, by, name, now = Date.now() }) {
+  if (!["submitted", "verified"].includes(contract.status)) {
+    throw new ContractError("not_submitted", "The guest has not sent the data yet", 409);
+  }
+  const missing = requiredChecks(data).filter((k) => checks[k] !== true);
+  if (missing.length) throw new ContractError("checks_required", `Not checked: ${missing.join(", ")}`);
+  const before = contract.verification?.data || contract.submission?.data || {};
+  const edits = Object.keys({ ...before, ...data })
+    .filter((k) => (before[k] || "") !== (data[k] || ""))
+    .map((k) => ({ field: k, from: before[k] || "", to: data[k] || "" }));
+  return {
+    ...contract,
+    status: "verified",
+    kiosk: null,
+    otp: null,
+    verification: {
+      at: now,
+      by: clean(by, 160),
+      name: clean(name, 120),
+      checks: Object.fromEntries(requiredChecks(data).map((k) => [k, true])),
+      data,
+      edits: [...(contract.verification?.edits || []), ...edits],
+    },
+    audit: audit(contract, "verified", { t: now, by: clean(by, 160), edits: edits.map((e) => e.field) }),
+  };
+}
+
+/** One short-lived link for the guest's signature on the staff device. */
+export function issueKiosk(contract, { by, now = Date.now() } = {}) {
+  if (contract.status !== "verified") throw new ContractError("not_verified", "Check the documents first", 409);
+  const token = newToken(contract.id);
+  return {
+    token,
+    contract: {
+      ...contract,
+      kiosk: { hash: sha256(token), exp: now + KIOSK_TTL_MS, by: clean(by, 160) },
+      audit: audit(contract, "kiosk_opened", { t: now, by: clean(by, 160) }),
+    },
+  };
+}
+
+export function markGuestSigned(contract, { consents, signatureHash, ip, userAgent, staff, now = Date.now() }) {
+  if (contract.status !== "verified") throw new ContractError("not_verified", "Check the documents first", 409);
+  return {
+    ...contract,
+    status: "guest_signed",
+    kiosk: null,
+    otp: null,
+    guestSignature: {
+      at: now,
+      consents,
+      signatureHash,
+      ip: clean(ip, 64),
+      userAgent: clean(userAgent, 300),
+      staff: clean(staff, 160),
+    },
+    audit: audit(contract, "guest_signed", { t: now, ip: clean(ip, 64) }),
+  };
+}
+
+/** The lessor's countersignature: the contract is now signed by both parties. */
+export function markSigned(contract, { pdfHash, basePdfHash, owner, now = Date.now() }) {
+  if (contract.status !== "guest_signed") throw new ContractError("not_guest_signed", "The guest has not signed yet", 409);
+  const g = contract.guestSignature;
   return {
     ...contract,
     status: "signed",
     otp: null,
+    kiosk: null,
     signed: {
       at: now,
-      data,
-      consents,
-      signatureHash,
+      guestAt: g.at,
+      data: contract.verification.data,
+      consents: g.consents,
+      signatureHash: g.signatureHash,
       pdfHash,
       basePdfHash,
-      docHashes,
-      ip: clean(ip, 64),
-      userAgent: clean(userAgent, 300),
+      docHashes: contract.submission?.docHashes || {},
+      ip: g.ip,
+      userAgent: g.userAgent,
+      verified: { at: contract.verification.at, by: contract.verification.by, name: contract.verification.name },
+      owner: { name: clean(owner.name, 120), by: clean(owner.by, 160), signatureHash: owner.signatureHash, at: now },
       pdfPath: `${CONTRACT_PREFIX}${contract.id}.pdf`,
     },
-    audit: [...contract.audit, { t: now, ev: "signed", ip: clean(ip, 64) }],
+    audit: audit(contract, "signed", { t: now, by: clean(owner.by, 160) }),
   };
 }
 
@@ -443,6 +575,12 @@ export function createContractStore({ prefix = CONTRACT_PREFIX } = {}) {
     async getDoc(id, slot) {
       return blobStore.readBuffer(`${prefix}docs/${id}-${slot}.jpg`);
     },
+    async putSignature(id, who, bytes) {
+      await blobStore.putRaw(`${prefix}sig/${id}-${who}.png`, Buffer.from(bytes), { contentType: "image/png" });
+    },
+    async getSignature(id, who) {
+      return blobStore.readBuffer(`${prefix}sig/${id}-${who}.png`);
+    },
     async putOwnerSignature(bytes) {
       await blobStore.putRaw(`${prefix}owner-signature.png`, Buffer.from(bytes), { contentType: "image/png" });
     },
@@ -457,10 +595,18 @@ export function createMemoryContractStore(initial = []) {
   const pdfs = new Map();
   const docs = new Map();
   let ownerSignature = null;
+  const sigs = new Map();
   return {
     rows,
     pdfs,
     docs,
+    sigs,
+    async putSignature(id, who, bytes) {
+      sigs.set(`${id}-${who}`, Buffer.from(bytes));
+    },
+    async getSignature(id, who) {
+      return sigs.get(`${id}-${who}`) || null;
+    },
     async get(id) {
       return rows.has(id) ? { contract: JSON.parse(rows.get(id)), etag: "e" } : null;
     },

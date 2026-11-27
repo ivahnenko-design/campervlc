@@ -5,7 +5,7 @@
 // JSON record.
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { contractPdfPathOf, vehicleView } from "./contracts.js";
-import { EXTRA_LABELS, kmPlanFromExtras, rentalNights } from "../../shared/acta.js";
+import { CHECKLIST, DAMAGE_TYPES, EXTRA_LABELS, kmPlanFromExtras, rentalNights } from "../../shared/acta.js";
 
 const CYR = {
   а: "a", б: "b", в: "v", г: "g", ґ: "g", д: "d", е: "e", є: "ye", ё: "e", ж: "zh", з: "z", и: "i", і: "i", ї: "yi",
@@ -255,6 +255,118 @@ function fillBlanks(pdf, font, contract, data, signedAt) {
   if (spec.kmBoxes) for (const box of spec.kmBoxes[kmPlanFromExtras(contract.extras)]) tick(pages[1], box);
 }
 
+// Annex I-A (handover report) of the blank, filled with the check-in report
+// typed in the admin before the signatures: mileage, fuel, checklist, damage
+// marks on the drawing (same picture as /images/acta/vlc-yearling.png),
+// pre-existing damage in words and both signatures. Boxes from pdftotext -bbox
+// / PyMuPDF of contrato-v8.pdf, top-left origin in points.
+const ACTA_PAGES = {
+  "/contracts/contrato-v8.pdf": {
+    page: 13,
+    booking: [357.8, 403.7, 76.6, 85.8],
+    datetime: [421.5, 471.3, 100.3, 109.8],
+    km: [392.2, 446.6, 113.0, 122.6],
+    fuel: { 1: 384.05, 2: 403.89, 3: 423.74, 4: 443.58, top: 127.9, bottom: 135.6, w: 6.97 },
+    checklistX: 309.74,
+    checklistTops: [152.65, 165.4, 177.4, 190.15, 202.9, 215.65, 227.65, 240.4, 265.15, 277.9, 290.65, 302.65, 315.39, 328.14],
+    drawing: { x0: 36.75, x1: 297.74, top: 99.75, bottom: 425.24 },
+    lines: [467.6, 480.36, 493.11],
+    linesX: [36.75, 384.23],
+    photosYes: [259.23, 266.36, 508.0, 515.9],
+    photosNo: [330.52, 349.05, 505.86, 515.62],
+    petsYes: [488.26, 495.4, 508.0, 515.9],
+    petsNo: [524.9, 532.04, 508.0, 515.9],
+    lessorSig: { x: 118, bottom: 611.5, width: 105 },
+    lesseeSig: { x: 394, bottom: 611.5, width: 105 },
+  },
+};
+
+const MARK_RED = rgb(0.78, 0.1, 0.1);
+
+/** "2026-11-27T14:05" -> "27/11/2026 14:05". */
+const wallText = (v) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2})$/.exec(String(v || ""));
+  return m ? `${m[3]}/${m[2]}/${m[1]} ${m[4]}` : "";
+};
+
+/** The damage in words: numbered marks first, then what staff wrote (interior). */
+export function actaDamageText(acta) {
+  const items = (acta?.marks || []).map(
+    (m, i) => `${i + 1}. ${DAMAGE_TYPES[m.type]?.es || m.type}${m.note ? `: ${m.note}` : ""}`,
+  );
+  const notes = String(acta?.notes || "").trim();
+  if (notes) items.push(`Interior / otros: ${notes}`);
+  return items.length ? items.join("; ") : "Sin daños preexistentes.";
+}
+
+/** @returns {string[]} the lines that did not fit on the annex (for the data sheet) */
+async function fillActaPage(pdf, font, contract, acta, { lesseePng, lessorPng }) {
+  const spec = ACTA_PAGES[contractPdfPathOf(contract)];
+  const page = spec && pdf.getPages()[spec.page];
+  if (!page || !acta) return [];
+  const white = rgb(1, 1, 1);
+  const ink = rgb(0, 0, 0);
+  const cover = ([x0, x1, top, bottom]) =>
+    page.drawRectangle({ x: x0 - 0.5, y: H - bottom, width: x1 - x0 + 1, height: bottom - top, color: white });
+  const write = (box, text, maxX = box[1] + 60) => {
+    const t = pdfText(text);
+    if (!t) return;
+    cover(box);
+    let size = 8.8;
+    while (size > 5.5 && font.widthOfTextAtSize(t, size) > maxX - box[0]) size -= 0.3;
+    page.drawText(t, { x: box[0], y: H - box[3] + 2.2, size, font, color: ink });
+  };
+  const tickAt = (x0, w, top, bottom) => {
+    const size = 8;
+    page.drawText("X", { x: x0 + (w - font.widthOfTextAtSize("X", size)) / 2, y: H - bottom + 1.2, size, font, color: ink });
+  };
+  write(spec.booking, contract.bookingRef || contract.number || "", 405);
+  write(spec.datetime, wallText(acta.datetime), 560);
+  if (Number.isInteger(acta.odometerKm)) write(spec.km, `${acta.odometerKm.toLocaleString("es-ES")} km`, 520);
+  const fx = spec.fuel[acta.fuel];
+  if (fx) tickAt(fx, spec.fuel.w, spec.fuel.top, spec.fuel.bottom);
+  CHECKLIST.forEach((c, i) => {
+    const top = spec.checklistTops[i];
+    if (top != null && acta.checklist?.[c.key] === true) tickAt(spec.checklistX, 6.97, top, top + 7.7);
+  });
+  // Marks on the drawing, numbered like the list below and the admin editor.
+  const d = spec.drawing;
+  (acta.marks || []).forEach((m, i) => {
+    const cx = d.x0 + m.x * (d.x1 - d.x0);
+    const cy = H - (d.top + m.y * (d.bottom - d.top));
+    const label = String(i + 1);
+    page.drawCircle({ x: cx, y: cy, size: 6, color: white, borderColor: MARK_RED, borderWidth: 1.2 });
+    const sym = DAMAGE_TYPES[m.type]?.symbol === "●" ? "" : DAMAGE_TYPES[m.type]?.symbol || "";
+    const tw = font.widthOfTextAtSize(label, 6.5);
+    page.drawText(label, { x: cx - tw / 2, y: cy - 2.3, size: 6.5, font, color: MARK_RED });
+    if (sym) page.drawText(sym, { x: cx + 7, y: cy + 2, size: 7, font, color: MARK_RED });
+  });
+  // Damage in words on the three dotted lines; what does not fit goes to the data sheet.
+  const [lx0, lx1] = spec.linesX;
+  const lines = wrap(font, actaDamageText(acta), 8.3, 540 - lx0);
+  const fits = lines.length <= spec.lines.length ? lines : [...lines.slice(0, spec.lines.length - 1), "(continúa en la hoja de datos / continued on the data sheet)"];
+  spec.lines.forEach((top, i) => {
+    cover([lx0, Math.max(lx1, 540), top, top + 9.8]);
+    if (fits[i]) page.drawText(fits[i], { x: lx0, y: H - top - 9.8 + 2.2, size: 8.3, font, color: ink });
+  });
+  const photos = (acta.photos || []).length;
+  if (photos) {
+    tickAt(spec.photosYes[0], spec.photosYes[1] - spec.photosYes[0], spec.photosYes[2], spec.photosYes[3]);
+    write(spec.photosNo, String(photos), 356);
+  }
+  if (acta.petsOnBoard === true) tickAt(spec.petsYes[0], spec.petsYes[1] - spec.petsYes[0], spec.petsYes[2], spec.petsYes[3]);
+  if (acta.petsOnBoard === false) tickAt(spec.petsNo[0], spec.petsNo[1] - spec.petsNo[0], spec.petsNo[2], spec.petsNo[3]);
+  const sig = async (png, spot) => {
+    if (!png) return;
+    const img = await pdf.embedPng(png);
+    const scale = Math.min(spot.width / img.width, 26 / img.height);
+    page.drawImage(img, { x: spot.x, y: H - spot.bottom, width: img.width * scale, height: img.height * scale });
+  };
+  await sig(lessorPng, spec.lessorSig);
+  await sig(lesseePng, spec.lesseeSig);
+  return lines.length > spec.lines.length ? lines : [];
+}
+
 const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
 
 /**
@@ -268,13 +380,14 @@ const fmtTime = (ms) => new Date(ms).toISOString().replace("T", " ").replace(/\.
  * @param {object} args.meta { signedAt, ip, userAgent, basePdfHash, signatureHash }
  * @returns {Promise<Uint8Array>}
  */
-export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePng, docs = {}, owner = null, meta }) {
+export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePng, docs = {}, owner = null, acta = null, meta }) {
   const pdf = await PDFDocument.load(basePdfBytes);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
   // Filled-in values: bold black, like a typed paper contract.
-  fillBlanks(pdf, bold, contract, data, meta?.signedAt ?? Date.now());
+  fillBlanks(pdf, bold, contract, data, meta?.guestSignedAt ?? meta?.signedAt ?? Date.now());
   await stampSignatureBlock(pdf, bold, contract, data, signaturePng, owner);
+  const actaOverflow = await fillActaPage(pdf, bold, contract, acta, { lesseePng: signaturePng, lessorPng: owner?.signaturePng || null });
   const page = pdf.addPage([595.28, 841.89]);
   const M = 48;
   const W = page.getWidth() - M * 2;
@@ -381,7 +494,18 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
   y = top - 14 - boxH - 30;
 
   text("Registro de la firma", { size: 10.5, f: bold });
-  row("Fecha y hora", fmtTime(meta.signedAt));
+  if (meta.verified) {
+    row(
+      "Verificacion presencial",
+      `${fmtTime(meta.verified.at)} - datos y documentos verificados con los originales por ${meta.verified.name || meta.verified.by}`,
+    );
+  }
+  if (meta.guestSignedAt) {
+    row("Firma del Arrendatario", `${fmtTime(meta.guestSignedAt)} - en presencia del Arrendador, en su dispositivo`);
+    row("Firma del Arrendador", fmtTime(meta.signedAt));
+  } else {
+    row("Fecha y hora", fmtTime(meta.signedAt));
+  }
   if (meta.readAt) {
     row("Lectura del contrato", `${fmtTime(meta.readAt)} - el Arrendatario recorrio el texto completo del contrato en la pagina de firma`);
   }
@@ -395,6 +519,17 @@ export async function buildSignedPdf({ basePdfBytes, contract, data, signaturePn
     "Los datos originales del Arrendatario se conservan en el registro electronico de Camper Retreat S.L. junto con el historial de la operacion. Este documento se envia a ambas partes por email.",
     { size: 8, color: grey },
   );
+
+  if (actaOverflow.length) {
+    const more = pdf.addPage([595.28, 841.89]);
+    let my = more.getHeight() - M;
+    more.drawText("ANEXO I-A (CONTINUACION) - DANOS PREEXISTENTES", { x: M, y: my, size: 12, font: bold, color: ink });
+    my -= 20;
+    for (const l of wrap(font, actaDamageText(acta), 9.5, W)) {
+      more.drawText(l, { x: M, y: my, size: 9.5, font, color: ink });
+      my -= 13;
+    }
+  }
 
   const DOC_TITLES = {
     idFront: "Documento de identidad - anverso",

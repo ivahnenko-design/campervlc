@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ActaEditor } from "@/components/admin/ActaEditor";
 import { DocPhotos, OwnerSignature } from "@/components/admin/OwnerSignature";
+import { HandoverPanel, type HandoverDetail } from "@/components/admin/HandoverPanel";
 import {
   formFromParsed,
   GmailSetup,
@@ -41,7 +42,8 @@ export const Route = createFileRoute("/admin/contratos")({
 
 // ── types ───────────────────────────────────────────────────────────────────
 
-type Status = "pending" | "signed" | "cancelled";
+type Status = "pending" | "submitted" | "verified" | "guest_signed" | "signed" | "cancelled";
+const IN_PERSON: Status[] = ["submitted", "verified", "guest_signed"];
 
 interface Row {
   id: string;
@@ -62,10 +64,13 @@ interface Row {
   createdAt: number;
   viewedAt: number | null;
   signedAt: number | null;
+  submittedAt?: number | null;
+  verifiedAt?: number | null;
+  guestSignedAt?: number | null;
   language: string;
 }
 
-interface Detail extends Row {
+interface Detail extends Row, Omit<HandoverDetail, "status" | "id" | "startDate" | "endDate"> {
   note: string;
   expiresAt: number;
   signed: null | {
@@ -157,12 +162,18 @@ const OPTION_KEYS = [
 ];
 
 const STATUS_LABEL: Record<Status, string> = {
-  pending: "Ждёт подписи",
+  pending: "Ждёт данных",
+  submitted: "Данные получены",
+  verified: "Сверено",
+  guest_signed: "Клиент подписал",
   signed: "Подписан",
   cancelled: "Отменён",
 };
 const STATUS_CLS: Record<Status, string> = {
   pending: "bg-amber-500/15 text-amber-500",
+  submitted: "bg-sky-500/15 text-sky-600",
+  verified: "bg-sky-500/15 text-sky-600",
+  guest_signed: "bg-violet-500/15 text-violet-600",
   signed: "bg-emerald-500/15 text-emerald-500",
   cancelled: "bg-muted text-muted-foreground",
 };
@@ -173,8 +184,16 @@ const EVENT_LABEL: Record<string, string> = {
   viewed: "Клиент открыл ссылку",
   code_sent: "Отправлен код",
   code_wrong: "Неверный код",
-  signed: "Подписан",
+  signed: "Подписан обеими сторонами",
   cancelled: "Отменён",
+  submitted: "Клиент отправил данные",
+  resubmitted: "Клиент исправил данные",
+  contract_read: "Клиент прочитал договор",
+  verified: "Данные сверены с оригиналами",
+  unverified: "Сверка отменена",
+  kiosk_opened: "Открыта подпись на устройстве",
+  guest_signed: "Клиент подписал",
+  docs_read: "Распознавание документов",
 };
 const FIELD_LABEL: Record<string, string> = {
   fullName: "Имя",
@@ -225,10 +244,14 @@ const todayIso = () => new Date().toISOString().slice(0, 10);
 const digits = (s: string) => s.replace(/\D/g, "");
 
 const WA_TEXT: Record<string, (name: string, link: string) => string> = {
-  es: (n, l) => `Hola ${n}, aquí tienes el contrato de alquiler para firmar online (5 min): ${l}`,
-  en: (n, l) => `Hello ${n}, here is your rental contract to sign online (5 min): ${l}`,
-  ru: (n, l) => `Здравствуйте, ${n}! Договор аренды для подписи онлайн (5 минут): ${l}`,
-  uk: (n, l) => `Вітаємо, ${n}! Договір оренди для підпису онлайн (5 хвилин): ${l}`,
+  es: (n, l) =>
+    `Hola ${n}, aquí tienes el contrato de alquiler: léelo y envía tus datos y fotos de tus documentos antes de la recogida (5 min). Lo firmamos juntos en la recogida: ${l}`,
+  en: (n, l) =>
+    `Hello ${n}, here is your rental contract: please read it and send your details and photos of your documents before pickup (5 min). We sign it together at pickup: ${l}`,
+  ru: (n, l) =>
+    `Здравствуйте, ${n}! Договор аренды: прочитайте его и отправьте свои данные и фото документов до получения (5 минут). Подпишем вместе при выдаче: ${l}`,
+  uk: (n, l) =>
+    `Вітаємо, ${n}! Договір оренди: прочитайте його та надішліть свої дані й фото документів до отримання (5 хвилин). Підпишемо разом під час видачі: ${l}`,
 };
 const waLink = (phone: string, lang: string, name: string, link: string) =>
   `https://wa.me/${digits(phone)}?text=${encodeURIComponent((WA_TEXT[lang] || WA_TEXT.en)(name.split(" ")[0], link))}`;
@@ -496,6 +519,22 @@ function Admin() {
     if (phase === "ready") void load();
   }, [phase, load]);
 
+  // Back from the guest's signature on this device (/admin/contratos?id=…): open that contract.
+  const openedFromLink = useRef(false);
+  useEffect(() => {
+    if (openedFromLink.current || !rows.length) return;
+    const id = new URLSearchParams(window.location.search).get("id");
+    openedFromLink.current = true;
+    if (!id || !rows.some((r) => r.id === id)) return;
+    setTab("contracts");
+    void toggleDetail(id).then(() =>
+      requestAnimationFrame(() =>
+        document.getElementById(`c-${id}`)?.scrollIntoView({ block: "start" }),
+      ),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows]);
+
   function loginWithToken(e: React.FormEvent) {
     e.preventDefault();
     const value = (e.currentTarget as HTMLFormElement).querySelector("input")?.value.trim() || "";
@@ -517,7 +556,15 @@ function Admin() {
 
   // ── contracts ──
   const counts = useMemo(() => {
-    const c = { all: rows.length, pending: 0, signed: 0, cancelled: 0 };
+    const c = {
+      all: rows.length,
+      pending: 0,
+      submitted: 0,
+      verified: 0,
+      guest_signed: 0,
+      signed: 0,
+      cancelled: 0,
+    };
     for (const r of rows) c[r.status]++;
     return c;
   }, [rows]);
@@ -533,15 +580,12 @@ function Admin() {
             (v || "").toLowerCase().includes(q),
           ),
       )
-      .sort((a, b) =>
-        a.status === "pending" && b.status !== "pending"
-          ? -1
-          : b.status === "pending" && a.status !== "pending"
-            ? 1
-            : a.startDate < b.startDate
-              ? -1
-              : 1,
-      );
+      .sort((a, b) => {
+        // Unsigned first (closest pickup first), then the rest by date.
+        const open = (s: Status) => s !== "signed" && s !== "cancelled";
+        if (open(a.status) !== open(b.status)) return open(a.status) ? -1 : 1;
+        return a.startDate < b.startDate ? -1 : 1;
+      });
   }, [rows, filter, query]);
 
   const formError = useMemo(() => {
@@ -680,6 +724,16 @@ function Admin() {
     }
     const j = (await res.json()) as { contract: Detail };
     setOpen((o) => ({ ...o, [id]: j.contract }));
+  }
+
+  /** After a step of the in-person signing: the row and its open panel again. */
+  async function refreshDetail(id: string) {
+    const res = await api(`id=${id}&detail=1`);
+    if (res.ok) {
+      const j = (await res.json()) as { contract: Detail };
+      setOpen((o) => ({ ...o, [id]: j.contract }));
+    }
+    await load();
   }
 
   async function pdf(id: string) {
@@ -1233,15 +1287,27 @@ function Admin() {
           )}
 
           <div className="mt-4 flex flex-wrap gap-2 text-sm">
-            {(["all", "pending", "signed", "cancelled"] as const).map((k) => (
-              <button
-                key={k}
-                onClick={() => setFilter(k)}
-                className={`rounded-full border px-3 py-1 ${filter === k ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground"}`}
-              >
-                {k === "all" ? "Все" : STATUS_LABEL[k]} {counts[k]}
-              </button>
-            ))}
+            {(
+              [
+                "all",
+                "pending",
+                "submitted",
+                "verified",
+                "guest_signed",
+                "signed",
+                "cancelled",
+              ] as const
+            )
+              .filter((k) => k === "all" || counts[k] > 0 || k === "pending" || k === "signed")
+              .map((k) => (
+                <button
+                  key={k}
+                  onClick={() => setFilter(k)}
+                  className={`rounded-full border px-3 py-1 ${filter === k ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground"}`}
+                >
+                  {k === "all" ? "Все" : STATUS_LABEL[k]} {counts[k]}
+                </button>
+              ))}
           </div>
           <label className="relative mt-3 block">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -1257,7 +1323,7 @@ function Admin() {
             {visible.map((r) => {
               const d = open[r.id];
               return (
-                <li key={r.id} className="rounded-xl border border-border p-3">
+                <li key={r.id} id={`c-${r.id}`} className="rounded-xl border border-border p-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <p className="font-semibold">{r.guestName}</p>
@@ -1287,11 +1353,17 @@ function Admin() {
                   <p className="mt-1 text-xs text-muted-foreground">
                     {r.status === "signed"
                       ? `Подписан ${fmtTs(r.signedAt)}`
-                      : r.status === "pending"
-                        ? r.viewedAt
-                          ? `Клиент открыл ссылку ${fmtTs(r.viewedAt)}`
-                          : "Клиент ещё не открывал ссылку"
-                        : `Создан ${fmtTs(r.createdAt)}`}
+                      : r.status === "guest_signed"
+                        ? `Клиент подписал ${fmtTs(r.guestSignedAt ?? null)} — нужна ваша подпись`
+                        : r.status === "verified"
+                          ? `Сверено ${fmtTs(r.verifiedAt ?? null)} — акт выдачи и подпись клиента`
+                          : r.status === "submitted"
+                            ? `Данные получены ${fmtTs(r.submittedAt ?? null)} — сверить при выдаче`
+                            : r.status === "pending"
+                              ? r.viewedAt
+                                ? `Клиент открыл ссылку ${fmtTs(r.viewedAt)}`
+                                : "Клиент ещё не открывал ссылку"
+                              : `Создан ${fmtTs(r.createdAt)}`}
                   </p>
 
                   <div className="mt-2 flex flex-wrap gap-2">
@@ -1300,18 +1372,27 @@ function Admin() {
                         <FileText className="h-4 w-4" /> PDF
                       </button>
                     )}
-                    {r.status === "pending" && (
-                      <>
-                        <button className={btn} onClick={() => void reissue(r)}>
-                          <RefreshCw className="h-4 w-4" /> Новая ссылка
-                        </button>
-                        <button className={btn} onClick={() => void cancel(r)}>
-                          <X className="h-4 w-4" /> Отменить
-                        </button>
-                      </>
+                    {(r.status === "pending" || r.status === "submitted") && (
+                      <button className={btn} onClick={() => void reissue(r)}>
+                        <RefreshCw className="h-4 w-4" /> Новая ссылка
+                      </button>
                     )}
-                    <button className={btn} onClick={() => void toggleDetail(r.id)}>
-                      {d ? "Скрыть" : r.status === "signed" ? "Данные клиента" : "История"}
+                    {r.status !== "signed" && r.status !== "cancelled" && (
+                      <button className={btn} onClick={() => void cancel(r)}>
+                        <X className="h-4 w-4" /> Отменить
+                      </button>
+                    )}
+                    <button
+                      className={IN_PERSON.includes(r.status) && !d ? btnPrimary : btn}
+                      onClick={() => void toggleDetail(r.id)}
+                    >
+                      {d
+                        ? "Скрыть"
+                        : r.status === "signed"
+                          ? "Данные клиента"
+                          : IN_PERSON.includes(r.status)
+                            ? "Выдача и подписание"
+                            : "История"}
                     </button>
                   </div>
                   {r.status !== "cancelled" && (
@@ -1350,6 +1431,19 @@ function Admin() {
                   {d === "loading" && <Loader2 className="mt-3 h-4 w-4 animate-spin" />}
                   {d && d !== "loading" && (
                     <div className="mt-3 space-y-3 border-t border-border pt-3 text-sm">
+                      {(d.status === "pending" || IN_PERSON.includes(d.status)) && (
+                        <HandoverPanel
+                          api={api}
+                          detail={d}
+                          actaState={actaStatus[`${d.id}-checkin`]}
+                          owner={me?.role === "owner"}
+                          ownerHasSignature={!!me?.ownerSignature}
+                          ownerName={me?.ownerSignerName || ""}
+                          onOpenActa={() => setActaOpen({ contractId: d.id, kind: "checkin" })}
+                          onChanged={() => void refreshDetail(d.id)}
+                          notify={(kind, text) => setNotice({ kind, text })}
+                        />
+                      )}
                       {d.signed && (
                         <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
                           {Object.entries(d.signed.data)
