@@ -355,6 +355,11 @@ export function HandoverWizard({
     return () => urls.forEach((u) => URL.revokeObjectURL(u));
   }, [load]);
 
+  // Every step opens from the top.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [step]);
+
   // ── autosave of what staff type (server side, survives leaving the screen) ──
   useEffect(() => {
     if (!dirty.current || !open) return;

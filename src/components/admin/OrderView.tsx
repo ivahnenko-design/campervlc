@@ -305,6 +305,11 @@ export function OrderView({
     return () => made.forEach((u) => URL.revokeObjectURL(u));
   }, [load]);
 
+  // Always open from the top (the list may have been scrolled).
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const name = row?.guestName || booking?.guestName || "—";
   const phone = row?.phone || booking?.guestPhone || "";
   const email = row?.email || booking?.guestEmail || "";
