@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ActaEditor } from "@/components/admin/ActaEditor";
 import { DocPhotos, OwnerSignature } from "@/components/admin/OwnerSignature";
 import { HandoverWizard } from "@/components/admin/HandoverWizard";
+import { OrderView } from "@/components/admin/OrderView";
 import {
   formFromParsed,
   GmailSetup,
@@ -17,6 +18,7 @@ import { loadAuth, logout as logoutAccount, openLogin, useAuth } from "@/lib/aut
 import { vehicleByPlate } from "../../shared/vehicles.js";
 import {
   Check,
+  ChevronRight,
   ClipboardCheck,
   Copy,
   FileText,
@@ -358,6 +360,8 @@ function Admin() {
   const [importId, setImportId] = useState<string | null>(null);
   // Handover reports: "<contractId>-<kind>" -> draft | signed, and the one open full-screen.
   const [actaStatus, setActaStatus] = useState<Record<string, "draft" | "signed">>({});
+  // The open order page: a contract id, or "b:<booking id>" for a booking without a contract.
+  const [order, setOrder] = useState<string | null>(null);
   // The pickup wizard (full screen) of one contract.
   const [wizard, setWizard] = useState<string | null>(null);
   const [actaOpen, setActaOpen] = useState<{
@@ -532,14 +536,9 @@ function Admin() {
     openedFromLink.current = true;
     const row = id ? rows.find((r) => r.id === id) : null;
     if (!id || !row) return;
-    setTab("contracts");
-    if (OPEN_FLOW.includes(row.status)) return setWizard(id);
-    void toggleDetail(id).then(() =>
-      requestAnimationFrame(() =>
-        document.getElementById(`c-${id}`)?.scrollIntoView({ block: "start" }),
-      ),
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Back from the guest's signature: straight to the lessor's signature.
+    setOrder(id);
+    if (row.status === "guest_signed") setWizard(id);
   }, [rows]);
 
   function loginWithToken(e: React.FormEvent) {
@@ -803,6 +802,99 @@ function Admin() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // ── orders: every contract + every site booking that has no contract yet ──
+  const orders = useMemo(() => {
+    const today = todayIso();
+    const q = query.trim().toLowerCase();
+    type Order = {
+      key: string;
+      row: Row | null;
+      booking: Booking | null;
+      name: string;
+      start: string;
+      end: string;
+      vehicleId: string;
+      badge: string;
+      badgeCls: string;
+      hint: string;
+      todo: boolean;
+      cancelled: boolean;
+      search: string;
+    };
+    const list: Order[] = [];
+    const used = new Set<string>();
+    for (const r of rows) {
+      const b =
+        bookings.find((x) => x.status !== "cancelled" && contractFor(x)?.id === r.id) || null;
+      if (b) used.add(b.id);
+      const returned = actaStatus[`${r.id}-checkout`] === "signed";
+      const hint =
+        r.status === "signed"
+          ? returned
+            ? "Возврат оформлен"
+            : r.endDate <= today
+              ? "Нужно оформить возврат"
+              : "Договор подписан"
+          : r.status === "guest_signed"
+            ? "Клиент подписал — нужна ваша подпись"
+            : r.status === "verified"
+              ? "Выдача начата — продолжить"
+              : r.status === "submitted"
+                ? "Клиент прислал данные — оформить при выдаче"
+                : r.status === "pending"
+                  ? r.startDate <= today
+                    ? "Нужно оформить договор"
+                    : "Ждём данные от клиента"
+                  : "";
+      list.push({
+        key: r.id,
+        row: r,
+        booking: b,
+        name: r.guestName,
+        start: r.startDate,
+        end: r.endDate,
+        vehicleId: r.vehicleId,
+        badge: returned ? "Завершён" : STATUS_LABEL[r.status],
+        badgeCls: returned ? "bg-muted text-muted-foreground" : STATUS_CLS[r.status],
+        hint,
+        todo:
+          r.status !== "cancelled" &&
+          (r.status !== "signed" ? r.startDate <= today : !returned && r.endDate <= today),
+        cancelled: r.status === "cancelled",
+        search: [r.guestName, r.email, r.bookingRef, r.phone, r.number].join(" ").toLowerCase(),
+      });
+    }
+    for (const b of bookings) {
+      if (used.has(b.id) || contractFor(b)) continue;
+      list.push({
+        key: `b:${b.id}`,
+        row: null,
+        booking: b,
+        name: b.guestName || "—",
+        start: b.startDate,
+        end: b.endDate,
+        vehicleId: b.vehicleId,
+        badge: "Нет договора",
+        badgeCls: "bg-amber-500/15 text-amber-500",
+        hint: `Бронь сайта ${b.bookingRef} · создать договор`,
+        todo: true,
+        cancelled: b.status === "cancelled",
+        search: [b.guestName, b.guestEmail, b.bookingRef, b.guestPhone].join(" ").toLowerCase(),
+      });
+    }
+    const shown = list.filter((o) => !q || o.search.includes(q));
+    const live = shown.filter((o) => !o.cancelled);
+    // Newest date first inside each group, so the page reads as one timeline.
+    const desc = (a: Order, b: Order) => (a.start < b.start ? 1 : -1);
+    return {
+      all: list,
+      future: live.filter((o) => o.start > today).sort(desc),
+      current: live.filter((o) => o.start <= today && o.end >= today).sort(desc),
+      past: live.filter((o) => o.end < today).sort(desc),
+      cancelled: shown.filter((o) => o.cancelled).sort(desc),
+    };
+  }, [rows, bookings, contractFor, actaStatus, query]);
+
   // ── upcoming handovers (next 14 days) ──
   const upcoming = useMemo(() => {
     const today = todayIso();
@@ -973,6 +1065,39 @@ function Admin() {
     );
   }
 
+  const openOrder = order ? orders.all.find((o) => o.key === order) : null;
+  if (order && openOrder) {
+    const r = openOrder.row;
+    return (
+      <OrderView
+        key={order}
+        api={api}
+        actaApi={actaApi}
+        row={r}
+        booking={openOrder.booking}
+        vehicle={showVehicle ? vehicleName(openOrder.vehicleId) : ""}
+        onBack={() => setOrder(null)}
+        onWizard={() => r && setWizard(r.id)}
+        onActa={(kind) => r && setActaOpen({ contractId: r.id, kind })}
+        onPdf={() => r && void pdf(r.id)}
+        onReissue={() => {
+          if (!r) return;
+          setOrder(null);
+          void reissue(r);
+        }}
+        onCancel={() => {
+          if (!r) return;
+          void cancel(r).then(() => setOrder(null));
+        }}
+        onCreateContract={() => {
+          if (!openOrder.booking) return;
+          setOrder(null);
+          contractFromBooking(openOrder.booking);
+        }}
+      />
+    );
+  }
+
   return (
     <main className="mx-auto max-w-3xl bg-background px-4 pb-16 pt-6 text-foreground">
       <header className="flex items-center justify-between gap-2">
@@ -1030,494 +1155,237 @@ function Admin() {
         onUse={(d) => applyParsed(d.parsed, d.id, d.vehicleId)}
         onDismiss={(d) => void dismissImport(d)}
       />
-      {upcoming.length > 0 && (
-        <section className="mt-5 rounded-xl border border-border p-3">
-          <h2 className="text-sm font-semibold">Ближайшие 14 дней</h2>
-          <ul className="mt-2 space-y-1.5 text-sm">
-            {upcoming.map((u, i) => (
-              <li key={i} className="flex flex-wrap items-center gap-x-2">
-                <span className="w-36 shrink-0 whitespace-nowrap text-muted-foreground">
-                  {fmtDay(u.date)}
-                  {u.time ? ` ${u.time}` : ""}
-                </span>
-                <span className={u.kind === "Выдача" ? "font-medium" : ""}>{u.kind}</span>
-                <span>· {u.name}</span>
-                {u.kind === "Выдача" && u.signed === false && (
-                  <span className="text-xs text-amber-500">договор не подписан</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <nav className="mt-5 flex gap-1 rounded-full bg-muted p-1 text-sm">
-        {(
-          [
-            ["contracts", `Договоры (${rows.length})`],
-            [
-              "bookings",
-              `Брони сайта (${bookings.filter((b) => b.status !== "cancelled").length})`,
-            ],
-          ] as const
-        ).map(([k, label]) => (
-          <button
-            key={k}
-            onClick={() => setTab(k)}
-            className={`flex-1 rounded-full px-3 py-1.5 ${tab === k ? "bg-background font-semibold shadow-sm" : "text-muted-foreground"}`}
-          >
-            {label}
-          </button>
-        ))}
-      </nav>
-
-      {tab === "contracts" && (
-        <section className="mt-4">
-          {showYescapa && !showForm && (
-            <div className="mb-3">
-              <YescapaPaste
-                onParsed={(p) => applyParsed(p, null)}
-                onClose={() => setShowYescapa(false)}
-              />
-            </div>
-          )}
-          {!showForm ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              <button className={`${btnPrimary} w-full`} onClick={() => setShowForm(true)}>
-                <Plus className="h-4 w-4" /> Новый договор
-              </button>
-              <button className={`${btn} w-full`} onClick={() => setShowYescapa(true)}>
-                <Plus className="h-4 w-4" /> Заказ с Yescapa (скриншот)
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={create} className="rounded-xl border border-border p-4">
-              <div className="flex items-center justify-between">
-                <h2 className="font-semibold">Новый договор</h2>
-                <button type="button" onClick={() => setShowForm(false)} aria-label="Закрыть">
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {myVehicles.length > 1 && (
-                  <label className="block text-sm sm:col-span-2">
-                    <span className="mb-1 block text-muted-foreground">Автодом *</span>
-                    <select
-                      className={inputCls}
-                      value={form.vehicleId || defaultVehicleId}
-                      onChange={(e) => setForm({ ...form, vehicleId: e.target.value })}
-                    >
-                      {myVehicles.map((v) => (
-                        <option key={v.id} value={v.id}>
-                          {v.city} · {v.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                )}
-                {field("guestName", "Имя клиента *")}
-                {field("email", "E-mail клиента *", "email", { inputMode: "email" })}
-                {field("phone", "Телефон (для WhatsApp)", "tel", {
-                  placeholder: "+34 600 000 000",
-                })}
-                {field("bookingRef", "Номер брони (Yescapa / сайт)")}
-                {field("startDate", "Выдача *", "date")}
-                {field("pickupTime", "Время выдачи", "time")}
-                {field("endDate", "Возврат *", "date")}
-                {field("returnTime", "Время возврата", "time")}
-                {field("priceTotal", "Сумма, € (с НДС)", "number", { inputMode: "decimal" })}
-                <label className="block text-sm">
-                  <span className="mb-1 block text-muted-foreground">Пробег</span>
-                  <select
-                    className={inputCls}
-                    value={
-                      form.extras.includes("km_unlimited")
-                        ? "km_unlimited"
-                        : form.extras.includes("km_200")
-                          ? "km_200"
-                          : ""
-                    }
-                    onChange={(e) =>
-                      setForm({
-                        ...form,
-                        extras: [
-                          ...form.extras.filter((x) => !x.startsWith("km_")),
-                          ...(e.target.value ? [e.target.value] : []),
-                        ],
-                      })
-                    }
-                  >
-                    <option value="">100 км в сутки (включено)</option>
-                    <option value="km_200">200 км в сутки</option>
-                    <option value="km_unlimited">Без ограничения</option>
-                  </select>
-                </label>
-                <fieldset className="text-sm sm:col-span-2">
-                  <legend className="mb-1 text-muted-foreground">Доп. опции</legend>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-                    {OPTION_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-1.5">
-                        <input
-                          type="checkbox"
-                          checked={form.extras.includes(k)}
-                          onChange={(e) =>
-                            setForm({
-                              ...form,
-                              extras: e.target.checked
-                                ? [...form.extras, k]
-                                : form.extras.filter((x) => x !== k),
-                            })
-                          }
-                        />
-                        {EXTRA_LABELS[k]?.ru || k}
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-                <label className="block text-sm">
-                  <span className="mb-1 block text-muted-foreground">Источник</span>
-                  <select
-                    className={inputCls}
-                    value={form.source}
-                    onChange={(e) => setForm({ ...form, source: e.target.value })}
-                  >
-                    <option value="yescapa">Yescapa</option>
-                    <option value="web">Сайт</option>
-                    <option value="other">Другое</option>
-                  </select>
-                </label>
-                <label className="block text-sm sm:col-span-2">
-                  <span className="mb-1 block text-muted-foreground">
-                    Язык письма и страницы подписи
-                  </span>
-                  <select
-                    className={inputCls}
-                    value={form.language}
-                    onChange={(e) => setForm({ ...form, language: e.target.value })}
-                  >
-                    <option value="es">Испанский</option>
-                    <option value="en">Английский</option>
-                    <option value="ru">Русский</option>
-                    <option value="uk">Украинский</option>
-                    <option value="de">Немецкий (страница на английском)</option>
-                    <option value="it">Итальянский (страница на английском)</option>
-                    <option value="nl">Нидерландский (страница на английском)</option>
-                  </select>
-                </label>
-              </div>
-              {form.startDate && form.endDate && form.endDate > form.startDate && (
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {nights(form.startDate, form.endDate)} ноч.
-                </p>
-              )}
-              <button
-                disabled={busy || !!formError}
-                className={`${btnPrimary} mt-4 w-full sm:w-auto`}
-              >
-                {busy ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  "Создать и отправить клиенту"
-                )}
-              </button>
-              {formError && <p className="mt-2 text-xs text-muted-foreground">{formError}</p>}
-            </form>
-          )}
-
-          <div className="mt-4 flex flex-wrap gap-2 text-sm">
-            {(
-              [
-                "all",
-                "pending",
-                "submitted",
-                "verified",
-                "guest_signed",
-                "signed",
-                "cancelled",
-              ] as const
-            )
-              .filter((k) => k === "all" || counts[k] > 0 || k === "pending" || k === "signed")
-              .map((k) => (
-                <button
-                  key={k}
-                  onClick={() => setFilter(k)}
-                  className={`rounded-full border px-3 py-1 ${filter === k ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground"}`}
-                >
-                  {k === "all" ? "Все" : STATUS_LABEL[k]} {counts[k]}
-                </button>
-              ))}
-          </div>
-          <label className="relative mt-3 block">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              className={`${inputCls} pl-9`}
-              placeholder="Поиск: имя, e-mail, телефон, номер брони"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+      <section className="mt-4">
+        {showYescapa && !showForm && (
+          <div className="mb-3">
+            <YescapaPaste
+              onParsed={(p) => applyParsed(p, null)}
+              onClose={() => setShowYescapa(false)}
             />
-          </label>
-
-          <ul className="mt-3 space-y-3">
-            {visible.map((r) => {
-              const d = open[r.id];
-              return (
-                <li key={r.id} id={`c-${r.id}`} className="rounded-xl border border-border p-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="font-semibold">{r.guestName}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {fmtDay(r.startDate)} → {fmtDay(r.endDate)} ·{" "}
-                        {nights(r.startDate, r.endDate)} ноч.
-                        {r.priceTotal != null ? ` · ${r.priceTotal} €` : ""}
-                      </p>
-                    </div>
-                    <Badge status={r.status} />
-                  </div>
-                  {r.number && r.number !== r.id && (
-                    <p className="mt-0.5 font-mono text-xs">№ {r.number}</p>
-                  )}
-                  {r.extras && r.extras.length > 0 && (
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      {r.extras.map((x) => EXTRA_LABELS[x]?.ru || x).join(" · ")}
-                    </p>
-                  )}
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {showVehicle ? `${vehicleName(r.vehicleId)} · ` : ""}
-                    {SOURCE_LABEL[r.source] || r.source}
-                    {r.bookingRef ? ` · ${r.bookingRef}` : ""} · {r.language.toUpperCase()} ·{" "}
-                    {r.email}
-                    {r.phone ? ` · ${r.phone}` : ""}
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {r.status === "signed"
-                      ? actaStatus[`${r.id}-checkout`] === "signed"
-                        ? "Аренда завершена: договор и возврат подписаны"
-                        : `Договор подписан ${fmtTs(r.signedAt)}`
-                      : r.status === "guest_signed"
-                        ? "Клиент подписал — осталась ваша подпись"
-                        : r.status === "verified"
-                          ? "Документы сверены — дальше акт и подпись клиента"
-                          : r.status === "submitted"
-                            ? "Клиент прислал данные и фото документов"
-                            : r.status === "pending"
-                              ? "Клиент ничего не прислал — данные введёте при выдаче"
-                              : `Создан ${fmtTs(r.createdAt)}`}
-                  </p>
-
-                  {/* One main action per contract, by where it is in its life. */}
-                  {OPEN_FLOW.includes(r.status) && (
-                    <button className={`${bigBtn} mt-3`} onClick={() => setWizard(r.id)}>
-                      {r.status === "guest_signed"
-                        ? "Поставить мою подпись →"
-                        : r.status === "verified"
-                          ? "Продолжить выдачу →"
-                          : "Оформить выдачу →"}
-                    </button>
-                  )}
-                  {r.status === "signed" && actaStatus[`${r.id}-checkout`] !== "signed" && (
-                    <button
-                      className={`${bigBtn} mt-3`}
-                      onClick={() => setActaOpen({ contractId: r.id, kind: "checkout" })}
-                    >
-                      {actaStatus[`${r.id}-checkout`] === "draft"
-                        ? "Продолжить возврат →"
-                        : "Оформить возврат →"}
-                    </button>
-                  )}
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {r.status === "signed" && (
-                      <button className={btn} onClick={() => void pdf(r.id)}>
-                        <FileText className="h-4 w-4" /> Договор PDF
-                      </button>
-                    )}
-                    {r.phone && r.status !== "cancelled" && (
-                      <a
-                        className={btn}
-                        href={`https://wa.me/${digits(r.phone)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <MessageCircle className="h-4 w-4" /> WhatsApp
-                      </a>
-                    )}
-                    <button className={btn} onClick={() => void toggleDetail(r.id)}>
-                      {d ? "Скрыть" : "Ещё"}
-                    </button>
-                  </div>
-
-                  {d === "loading" && <Loader2 className="mt-3 h-4 w-4 animate-spin" />}
-                  {d && d !== "loading" && (
-                    <div className="mt-3 space-y-3 border-t border-border pt-3 text-sm">
-                      <div className="flex flex-wrap gap-2">
-                        {(r.status === "pending" || r.status === "submitted") && (
-                          <button className={btn} onClick={() => void reissue(r)}>
-                            <RefreshCw className="h-4 w-4" /> Новая ссылка клиенту
-                          </button>
-                        )}
-                        {r.status === "signed" && (
-                          <>
-                            <button
-                              className={btn}
-                              onClick={() => setActaOpen({ contractId: r.id, kind: "checkin" })}
-                            >
-                              <ClipboardCheck className="h-4 w-4" /> Акт выдачи
-                            </button>
-                            <button
-                              className={btn}
-                              onClick={() => setActaOpen({ contractId: r.id, kind: "checkout" })}
-                            >
-                              <ClipboardCheck className="h-4 w-4" /> Акт возврата
-                            </button>
-                          </>
-                        )}
-                        {OPEN_FLOW.includes(r.status) && (
-                          <button className={btn} onClick={() => void cancel(r)}>
-                            <X className="h-4 w-4" /> Отменить договор
-                          </button>
-                        )}
-                      </div>
-                      {d.signed && (
-                        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-                          {Object.entries(d.signed.data)
-                            .filter(([, v]) => v)
-                            .map(([k, v]) => (
-                              <div key={k} className="contents">
-                                <dt className="text-muted-foreground">{FIELD_LABEL[k] || k}</dt>
-                                <dd className="break-words">{v}</dd>
-                              </div>
-                            ))}
-                          <dt className="text-muted-foreground">IP</dt>
-                          <dd>{d.signed.ip || "—"}</dd>
-                        </dl>
-                      )}
-                      {d.signed?.docs && d.signed.docs.length > 0 && (
-                        <DocPhotos api={api} id={d.id} slots={d.signed.docs} />
-                      )}
-                      <ol className="space-y-0.5 text-xs text-muted-foreground">
-                        {d.audit.map((a, i) => (
-                          <li key={i}>
-                            {fmtTs(a.t)} · {EVENT_LABEL[a.ev] || a.ev}
-                            {a.ip ? ` · ${a.ip}` : ""}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  )}
-                </li>
-              );
-            })}
-            {!visible.length && (
-              <li className="py-6 text-center text-sm text-muted-foreground">
-                {rows.length ? "Ничего не найдено." : "Договоров пока нет."}
-              </li>
-            )}
-          </ul>
-        </section>
-      )}
-
-      {tab === "bookings" && (
-        <section className="mt-4">
-          <div className="flex flex-wrap gap-2 text-sm">
-            {(
-              [
-                ["upcoming", "Предстоящие"],
-                ["past", "Прошедшие"],
-                ["cancelled", "Отменённые"],
-              ] as const
-            ).map(([k, label]) => (
-              <button
-                key={k}
-                onClick={() => setBFilter(k)}
-                className={`rounded-full border px-3 py-1 ${bFilter === k ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground"}`}
-              >
-                {label}
-              </button>
-            ))}
           </div>
-          <ul className="mt-3 space-y-3">
-            {(bFilter === "past" ? [...visibleBookings].reverse() : visibleBookings).map((b) => {
-              const c = contractFor(b);
-              const paidFull = b.remainingAmount <= 0;
-              return (
-                <li key={b.id} className="rounded-xl border border-border p-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="font-semibold">{b.guestName || "—"}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {fmtDay(b.startDate)} → {fmtDay(b.endDate)} · {b.nights} ноч. ·{" "}
-                        {b.totalWithIva} €
-                      </p>
-                    </div>
-                    <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">
-                      {b.bookingRef}
-                      {showVehicle ? ` · ${vehicleName(b.vehicleId)}` : ""}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {paidFull
-                      ? "Оплачено полностью"
-                      : `Предоплата ${b.depositAmount} €, остаток ${b.remainingAmount} € при выдаче`}{" "}
-                    · {b.adults} взр.
-                    {b.children ? ` + ${b.children} дет.` : ""}
-                    {b.pickupTime ? ` · выдача ${b.pickupTime}` : ""}
-                    {b.returnTime ? `, возврат ${b.returnTime}` : ""}
-                  </p>
-                  {b.extraIds.filter((x) => x !== "cleaning_fee").length > 0 && (
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Опции: {b.extraIds.filter((x) => x !== "cleaning_fee").join(", ")}
-                    </p>
-                  )}
-                  {b.message && (
-                    <p className="mt-1 text-xs italic text-muted-foreground">«{b.message}»</p>
-                  )}
-                  <p className="mt-1 text-xs">
-                    Договор:{" "}
-                    {c ? (
-                      <Badge status={c.status} />
-                    ) : (
-                      <span className="text-amber-500">не создан</span>
-                    )}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {!c && b.status !== "cancelled" && (
-                      <button className={btn} onClick={() => contractFromBooking(b)}>
-                        <Plus className="h-4 w-4" /> Создать договор
-                      </button>
-                    )}
-                    {b.guestPhone && (
-                      <a
-                        className={btn}
-                        href={`https://wa.me/${digits(b.guestPhone)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <MessageCircle className="h-4 w-4" /> WhatsApp
-                      </a>
-                    )}
-                    {b.guestEmail && (
-                      <a className={btn} href={`mailto:${b.guestEmail}`}>
-                        E-mail
-                      </a>
-                    )}
-                    {b.paymentIntentId && (
-                      <a
-                        className={btn}
-                        href={`https://dashboard.stripe.com/payments/${b.paymentIntentId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Stripe
-                      </a>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-            {!visibleBookings.length && (
-              <li className="py-6 text-center text-sm text-muted-foreground">Броней нет.</li>
+        )}
+        {!showForm ? (
+          <div className="grid gap-2 sm:grid-cols-2">
+            <button className={`${btnPrimary} w-full`} onClick={() => setShowForm(true)}>
+              <Plus className="h-4 w-4" /> Новый заказ
+            </button>
+            <button className={`${btn} w-full`} onClick={() => setShowYescapa(true)}>
+              <Plus className="h-4 w-4" /> Заказ с Yescapa (скриншот)
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={create} className="rounded-xl border border-border p-4">
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold">Новый договор</h2>
+              <button type="button" onClick={() => setShowForm(false)} aria-label="Закрыть">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {myVehicles.length > 1 && (
+                <label className="block text-sm sm:col-span-2">
+                  <span className="mb-1 block text-muted-foreground">Автодом *</span>
+                  <select
+                    className={inputCls}
+                    value={form.vehicleId || defaultVehicleId}
+                    onChange={(e) => setForm({ ...form, vehicleId: e.target.value })}
+                  >
+                    {myVehicles.map((v) => (
+                      <option key={v.id} value={v.id}>
+                        {v.city} · {v.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {field("guestName", "Имя клиента *")}
+              {field("email", "E-mail клиента *", "email", { inputMode: "email" })}
+              {field("phone", "Телефон (для WhatsApp)", "tel", {
+                placeholder: "+34 600 000 000",
+              })}
+              {field("bookingRef", "Номер брони (Yescapa / сайт)")}
+              {field("startDate", "Выдача *", "date")}
+              {field("pickupTime", "Время выдачи", "time")}
+              {field("endDate", "Возврат *", "date")}
+              {field("returnTime", "Время возврата", "time")}
+              {field("priceTotal", "Сумма, € (с НДС)", "number", { inputMode: "decimal" })}
+              <label className="block text-sm">
+                <span className="mb-1 block text-muted-foreground">Пробег</span>
+                <select
+                  className={inputCls}
+                  value={
+                    form.extras.includes("km_unlimited")
+                      ? "km_unlimited"
+                      : form.extras.includes("km_200")
+                        ? "km_200"
+                        : ""
+                  }
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      extras: [
+                        ...form.extras.filter((x) => !x.startsWith("km_")),
+                        ...(e.target.value ? [e.target.value] : []),
+                      ],
+                    })
+                  }
+                >
+                  <option value="">100 км в сутки (включено)</option>
+                  <option value="km_200">200 км в сутки</option>
+                  <option value="km_unlimited">Без ограничения</option>
+                </select>
+              </label>
+              <fieldset className="text-sm sm:col-span-2">
+                <legend className="mb-1 text-muted-foreground">Доп. опции</legend>
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                  {OPTION_KEYS.map((k) => (
+                    <label key={k} className="flex items-center gap-1.5">
+                      <input
+                        type="checkbox"
+                        checked={form.extras.includes(k)}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            extras: e.target.checked
+                              ? [...form.extras, k]
+                              : form.extras.filter((x) => x !== k),
+                          })
+                        }
+                      />
+                      {EXTRA_LABELS[k]?.ru || k}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <label className="block text-sm">
+                <span className="mb-1 block text-muted-foreground">Источник</span>
+                <select
+                  className={inputCls}
+                  value={form.source}
+                  onChange={(e) => setForm({ ...form, source: e.target.value })}
+                >
+                  <option value="yescapa">Yescapa</option>
+                  <option value="web">Сайт</option>
+                  <option value="other">Другое</option>
+                </select>
+              </label>
+              <label className="block text-sm sm:col-span-2">
+                <span className="mb-1 block text-muted-foreground">
+                  Язык письма и страницы подписи
+                </span>
+                <select
+                  className={inputCls}
+                  value={form.language}
+                  onChange={(e) => setForm({ ...form, language: e.target.value })}
+                >
+                  <option value="es">Испанский</option>
+                  <option value="en">Английский</option>
+                  <option value="ru">Русский</option>
+                  <option value="uk">Украинский</option>
+                  <option value="de">Немецкий (страница на английском)</option>
+                  <option value="it">Итальянский (страница на английском)</option>
+                  <option value="nl">Нидерландский (страница на английском)</option>
+                </select>
+              </label>
+            </div>
+            {form.startDate && form.endDate && form.endDate > form.startDate && (
+              <p className="mt-2 text-sm text-muted-foreground">
+                {nights(form.startDate, form.endDate)} ноч.
+              </p>
             )}
+            <button
+              disabled={busy || !!formError}
+              className={`${btnPrimary} mt-4 w-full sm:w-auto`}
+            >
+              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Создать и отправить клиенту"}
+            </button>
+            {formError && <p className="mt-2 text-xs text-muted-foreground">{formError}</p>}
+          </form>
+        )}
+      </section>
+
+      <label className="relative mt-4 block">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <input
+          className={`${inputCls} pl-9`}
+          placeholder="Поиск: имя, телефон, e-mail, номер брони"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </label>
+
+      {/* ── orders by time: upcoming on top, the current one in the middle, past below ── */}
+      {(
+        [
+          ["future", "Будущие"],
+          ["current", "Сейчас в аренде"],
+          ["past", "Прошедшие"],
+        ] as const
+      ).map(([k, title]) => (
+        <section key={k} id={`orders-${k}`} className="mt-6 scroll-mt-4">
+          <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            {title} <span className="font-normal">{orders[k].length}</span>
+          </h2>
+          {orders[k].length === 0 && (
+            <p className="rounded-xl border border-dashed border-border px-4 py-3 text-sm text-muted-foreground">
+              {k === "current" ? "Сейчас автодом никто не арендует." : "Нет заказов."}
+            </p>
+          )}
+          <ul className="space-y-2">
+            {orders[k].map((o) => (
+              <li key={o.key}>
+                <button
+                  onClick={() => setOrder(o.key)}
+                  className={`flex w-full items-center gap-3 rounded-2xl border p-4 text-left ${k === "current" ? "border-primary bg-primary/10" : "border-border"}`}
+                >
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="truncate text-base font-semibold">{o.name}</span>
+                      <span
+                        className={`shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${o.badgeCls}`}
+                      >
+                        {o.badge}
+                      </span>
+                    </span>
+                    <span className="mt-0.5 block text-sm text-muted-foreground">
+                      {fmtDay(o.start)} → {fmtDay(o.end)} · {nights(o.start, o.end)} ноч.
+                      {showVehicle ? ` · ${vehicleName(o.vehicleId)}` : ""}
+                    </span>
+                    <span
+                      className={`mt-0.5 block text-sm ${o.todo ? "text-amber-500" : "text-muted-foreground"}`}
+                    >
+                      {o.hint}
+                    </span>
+                  </span>
+                  <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
+                </button>
+              </li>
+            ))}
           </ul>
         </section>
+      ))}
+
+      {orders.cancelled.length > 0 && (
+        <details className="mt-6 text-sm">
+          <summary className="cursor-pointer text-muted-foreground">
+            Отменённые ({orders.cancelled.length})
+          </summary>
+          <ul className="mt-2 space-y-2">
+            {orders.cancelled.map((o) => (
+              <li key={o.key}>
+                <button
+                  onClick={() => setOrder(o.key)}
+                  className="flex w-full items-center justify-between rounded-xl border border-border px-4 py-2.5 text-left text-muted-foreground"
+                >
+                  <span className="truncate">
+                    {o.name} · {fmtDay(o.start)}
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
 
       {/* Rarely needed: everything that is set up once. */}
