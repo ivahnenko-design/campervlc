@@ -440,6 +440,29 @@ test("resend replaces the link; cancel closes a pending contract", async () => {
   assert.equal(cancel.code, 200);
 });
 
+test("delete: only a cancelled or TEST contract, with its files", async () => {
+  const { h, store } = await setup();
+  const admin = { "x-admin-token": "admin-secret" };
+  const real = res();
+  await h.admin({ method: "POST", headers: admin, body: INVITE }, real);
+  const no = res();
+  await h.admin({ method: "POST", headers: admin, body: { action: "delete", id: real.body.id } }, no);
+  assert.equal(no.code, 409, "a live contract stays");
+  const t = res();
+  await h.admin({ method: "POST", headers: admin, body: { ...INVITE, guestName: "Ana Ruiz (TEST 2)" } }, t);
+  await store.putDoc(t.body.id, "idFront", Buffer.from("x"));
+  const del = res();
+  await h.admin({ method: "POST", headers: admin, body: { action: "delete", id: t.body.id } }, del);
+  assert.equal(del.code, 200);
+  assert.equal(await store.get(t.body.id), null);
+  assert.equal(await store.getDoc(t.body.id, "idFront"), null);
+  assert.ok(await store.get(real.body.id), "other contracts are untouched");
+  await h.admin({ method: "POST", headers: admin, body: { action: "cancel", id: real.body.id } }, res());
+  const del2 = res();
+  await h.admin({ method: "POST", headers: admin, body: { action: "delete", id: real.body.id } }, del2);
+  assert.equal(del2.code, 200, "a cancelled one can go");
+});
+
 test("providers: own sends the invite, external is a documented stub", async () => {
   const mails = [];
   const own = createOwnProvider({ send: async (m) => mails.push(m) });

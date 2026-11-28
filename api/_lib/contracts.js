@@ -3,7 +3,7 @@
 // audit trail. Pure logic: the HTTP layer and the email/PDF side effects live
 // in contract-handlers.js so this file can be tested without network.
 import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
-import { blobStore, list } from "./blob.js";
+import { blobStore, list, removeByPrefix } from "./blob.js";
 import { DEFAULT_VEHICLE_ID, getVehicle, isActiveVehicleId, vehicleOf } from "../../shared/vehicles.js";
 import { EXTRA_LABELS } from "../../shared/acta.js";
 
@@ -552,6 +552,10 @@ export function createContractStore({ prefix = CONTRACT_PREFIX } = {}) {
     async save(contract, { etag } = {}) {
       await blobStore.put(jsonPath(contract.id), contract, etag ? { ifMatch: etag } : {});
     },
+    /** The record with its PDFs, signatures and document photos. Irreversible. */
+    remove(id) {
+      return removeByPrefix([`${prefix}${id}.`, `${prefix}${id}-`, `${prefix}docs/${id}-`, `${prefix}sig/${id}-`]);
+    },
     async list() {
       const names = [];
       let cursor;
@@ -616,6 +620,10 @@ export function createMemoryContractStore(initial = []) {
     },
     async get(id) {
       return rows.has(id) ? { contract: JSON.parse(rows.get(id)), etag: "e" } : null;
+    },
+    async remove(id) {
+      rows.delete(id);
+      for (const m of [pdfs, docs, sigs]) for (const k of [...m.keys()]) if (k === id || k.startsWith(`${id}-`)) m.delete(k);
     },
     async save(contract) {
       rows.set(contract.id, JSON.stringify(contract));

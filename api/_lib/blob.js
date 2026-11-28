@@ -57,3 +57,19 @@ export function createBlobAccess(blob, initial = "private") {
 
 export const blobStore = createBlobAccess(sdk, process.env.BLOB_ACCESS || "private");
 export const { list } = sdk;
+
+/** Deletes every blob under each prefix; returns how many were removed. */
+export async function removeByPrefix(prefixes) {
+  let n = 0;
+  for (const prefix of prefixes) {
+    let cursor;
+    do {
+      const page = await sdk.list({ prefix, cursor });
+      const urls = page.blobs.map((b) => b.url);
+      if (urls.length) await sdk.del(urls);
+      n += urls.length;
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
+  }
+  return n;
+}

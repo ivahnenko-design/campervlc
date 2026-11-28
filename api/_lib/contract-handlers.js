@@ -321,6 +321,22 @@ export function createContractHandlers({
         await imports.save({ ...d.draft, status: "dismissed" }, { etag: d.etag });
         return reply(res, 200, { ok: true });
       }
+      // Removes a contract with all its files for good. Owner only, and only a
+      // cancelled contract or one marked TEST in the guest name: a real signed
+      // contract is a legal record and stays.
+      if (action === "delete") {
+        if (!owner) return forbidden(res);
+        const found = await store.get(String(body.id || ""));
+        if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });
+        const c = found.contract;
+        if (c.status !== "cancelled" && !/\bTEST\b/.test(c.guestName || "")) {
+          throw new ContractError("not_deletable", "Only a cancelled or TEST contract can be deleted", 409);
+        }
+        if (actas?.removeAll) await actas.removeAll(c.id);
+        await store.remove(c.id);
+        console.log("contract deleted:", c.id, c.number, staff.email || "owner");
+        return reply(res, 200, { ok: true });
+      }
       if (action === "resend" || action === "cancel") {
         const found = await store.get(String(body.id || ""));
         if (!found) return reply(res, 404, { error: "Not found", code: "not_found" });

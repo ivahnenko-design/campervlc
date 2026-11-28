@@ -2,7 +2,7 @@
 // and kind in Vercel Blob, photos and signatures as separate private blobs.
 // Pure validation + storage; HTTP in acta-handlers.js, PDF in acta-pdf.js.
 import { randomBytes } from "node:crypto";
-import { blobStore, list } from "./blob.js";
+import { blobStore, list, removeByPrefix } from "./blob.js";
 import { ContractError } from "./contracts.js";
 import { ACTA_KINDS, CHECKLIST_KEYS, DAMAGE_TYPE_KEYS, kmPlanFromExtras } from "../../shared/acta.js";
 import { EXTRAS } from "../../shared/pricing.js";
@@ -221,6 +221,10 @@ export function createActaStore({ prefix = ACTA_PREFIX } = {}) {
     getPhoto(contractId, kind, id, { thumb = false } = {}) {
       return blobStore.readBuffer(photo(contractId, kind, id, thumb));
     },
+    /** Both reports of a contract with their photos, PDFs and signatures. Irreversible. */
+    removeAll(contractId) {
+      return removeByPrefix(["", "photos/", "pdf/", "sig/"].map((d) => `${prefix}${d}${contractId}-`));
+    },
     async putFile(name, bytes, contentType) {
       await blobStore.putRaw(`${prefix}${name}`, Buffer.from(bytes), { contentType });
       return `${prefix}${name}`;
@@ -263,6 +267,10 @@ export function createMemoryActaStore(initial = []) {
     },
     async getPhoto(contractId, kind, id, { thumb = false } = {}) {
       return files.get(`photos/${key(contractId, kind)}/${id}${thumb ? ".thumb" : ""}.jpg`) || null;
+    },
+    async removeAll(contractId) {
+      for (const k of [...rows.keys()]) if (k.startsWith(`${contractId}-`)) rows.delete(k);
+      for (const k of [...files.keys()]) if (k.split("/").pop().startsWith(`${contractId}-`) || k.includes(`/${contractId}-`)) files.delete(k);
     },
     async putFile(name, bytes) {
       files.set(name, Buffer.from(bytes));
